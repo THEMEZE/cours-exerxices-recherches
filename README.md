@@ -245,3 +245,4 @@ cd ../Quartz5 && npx quartz build --serve               # prévisualisation loca
   fusionner), idempotence vérifiée sur deux exécutions consécutives, lien
   "Sujets liés" confirmé visible dans le HTML final avec les bons hrefs.
 # cours-exerxices-recherches
+# cours-exerxices-recherches
