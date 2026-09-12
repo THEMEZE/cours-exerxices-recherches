@@ -1,0 +1,45 @@
+\TitreNiveauUn{\VAR{sec.numero}. \VAR{sec.titre}}
+
+\VAR{sec.contenu}
+
+\BLOCK{if opts.show_figure and sec.figure}
+    \begin{figure}[h!]\centering
+        \input{\VAR{"figures/tikz/" + sec.figure.ref + ".tex"}}
+        \caption{\VAR{sec.figure.legende}}
+    \end{figure}
+\BLOCK{endif}
+
+\BLOCK{if opts.show_animation_note and sec.animation}
+    \textit{(Animation disponible : \texttt{\VAR{sec.animation.ref|texid}})}
+\BLOCK{endif}
+
+\BLOCK{if sec.remarque}
+    \begin{remarque}
+        \VAR{sec.remarque}
+    \end{remarque}
+\BLOCK{endif}
+
+\BLOCK{if opts.aller_plus_loin_niveaux and sec.aller_plus_loin}
+    \BLOCK{for niveau in opts.aller_plus_loin_niveaux}
+        \BLOCK{if niveau in sec.aller_plus_loin}
+            \begin{allerplusloin}{\VAR{niveau_label(niveau)}}
+                \VAR{sec.aller_plus_loin[niveau]}
+            \end{allerplusloin}
+        \BLOCK{endif}
+    \BLOCK{endfor}
+\BLOCK{endif}
+
+\BLOCK{if sec.encadre}
+    % Encadré générique data-driven -- voir data/SCHEMA.md
+    \EncadreDeux{\VAR{sec.encadre.type}}{\VAR{sec.encadre.titre}}{\VAR{sec.encadre.couleur}}{\VAR{sec.encadre.contenu}}
+\BLOCK{endif}
+
+\BLOCK{if sec.overlay_tikz}
+    % Flèches/annotations rattachées à CETTE section -- voir la même
+    % remarque que pour les questions de TD dans exercice.tex.j2 (rester
+    % au plus près des \tikzmark/\ptFleche référencés pour éviter un
+    % décalage de page).
+    \begin{tikzpicture}[remember picture, overlay]
+        \VAR{sec.overlay_tikz}
+    \end{tikzpicture}
+\BLOCK{endif}

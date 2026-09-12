@@ -1,0 +1,46 @@
+id: physique-ondes-ipsa_cours_chap1
+matiere: physique-ondes-ipsa
+type_doc: cours
+titre: "Chapitre 1 — Ondes mécaniques : introduction"
+sous_titre: "Cours"
+seance: 1
+niveau: [cpge, licence]
+sujets: [ondes-mecaniques]
+
+sections:
+  - titre: "Qu'est-ce qu'une onde ?"
+    contenu: |
+      Une onde est la propagation d'une perturbation dans un milieu, sans
+      transport de matière : chaque point du milieu oscille autour de sa
+      position d'équilibre, et c'est cette oscillation qui se propage,
+      décalée dans le temps, aux points voisins.
+    remarque: |
+      Ne pas confondre la vitesse de propagation de l'onde $c$ (vitesse à
+      laquelle l'information voyage) avec la vitesse d'un point du milieu
+      $v_y = \partial y/\partial t$ (mouvement local, transverse pour une
+      onde sur une corde).
+
+  - titre: "Équation de d'Alembert"
+    contenu: |
+      Pour une corde tendue de masse linéique $\mu$ et de tension $F$, le
+      déplacement transversal $y(x,t)$ obéit à :
+      $$\frac{\partial^2 y}{\partial x^2} = \frac{1}{c^2}\frac{\partial^2 y}{\partial t^2},
+      \qquad c = \sqrt{F/\mu}.$$
+    figure:
+      ref: td1_ex1_corde_t0
+      legende: "Exemple d'onde progressive sinusoïdale sur une corde."
+    aller_plus_loin:
+      master: |
+        Cette équation se généralise en 3D à l'équation de d'Alembert
+        $\Delta \psi = \dfrac{1}{c^2}\partial_t^2\psi$, point de départ de
+        l'électromagnétisme (équation de propagation du champ dans le vide)
+        et de l'acoustique 3D.
+
+  - titre: "Onde plane progressive sinusoïdale"
+    contenu: |
+      Solution particulière très utilisée : $y(x,t) = a\cos(kx - \omega t + \phi)$,
+      avec la relation de dispersion $\omega = kc$ (milieu non dispersif).
+    animation:
+      ref: anim_corde_onde
+      params: {mode: "onde_progressive", lam: 1.0, T: 1.0, xmax: 4}
+      formats: [gif, mp4, frames_pdf]

@@ -1,0 +1,57 @@
+\documentclass[11pt]{article}
+\input{templates/styles/packages}
+
+% --- Extraction des données de la matière ---
+\BLOCK{set matiere_nom = matiere_meta.nom if matiere_meta and matiere_meta.nom else opts.matiere}
+
+% --- Données de l'auteur (injectées via PROFILS dans Python) ---
+\BLOCK{set auteur_nom = auteur.nom}
+\BLOCK{set auteur_email = auteur.email}
+\BLOCK{set auteur_statut = auteur.statut}
+\BLOCK{set auteur_bureau = auteur.bureau}
+
+% --- Extraction des infos d'organisation ---
+\BLOCK{set etablissement_val = opts.etablissement if opts.etablissement else "IPSA"}
+\BLOCK{set promo_val = opts.promo if opts.promo else ""}
+\BLOCK{set annee_val = opts.annee if opts.annee else "2025--2026"}
+
+% --- Calcul des textes d'en-tête et pied de page ---
+\BLOCK{set entete_gauche = (etablissement_val + (" -- " + matiere_nom if matiere_nom else "") + (" -- " + annee_val if annee_val else "")) | upper}
+\BLOCK{set pied_droit = (opts.type_doc | upper) + " -- " + annee_val}
+
+% --- Calcul du pied de page droit ---
+\BLOCK{set pied_droit = (opts.type_doc | upper) + " -- " + now}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+
+% --- En-tête ---
+\lhead{\small\bfseries\color{woodNoyer} \VAR{entete_gauche}}
+\rhead{\small\itshape\color{grayPierre} \VAR{titre_document}}
+
+% --- Pied de page ---
+\lfoot{\small\color{grayBrume} \VAR{auteur_nom} \href{mailto:\VAR{auteur_email}}{\scriptsize\ttfamily <\VAR{auteur_email}>}}
+\cfoot{\small\bfseries\color{grayPierre} \thepage}
+\rfoot{\small\itshape\color{grayPierre} \VAR{pied_droit}}
+
+% --- Style plain (page de garde) ---
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{1.5pt}
+  \renewcommand{\footrulewidth}{0.8pt}
+  \renewcommand{\footrule}{{\color{FooterRuleColor}\hrule width\headwidth height\footrulewidth}}
+  \fancyhead[L]{\small\bfseries\color{woodNoyer} \VAR{entete_gauche}}
+  \fancyhead[R]{\small\itshape\color{grayPierre} \VAR{td.chapitre_cours}}
+  
+  %\fancyfoot[L]{\small\color{grayBrume} \VAR{auteur_nom} \href{mailto:\VAR{auteur_email}}{\scriptsize\ttfamily <\VAR{auteur_email}>}}
+  \fancyfoot[C]{\small\bfseries\color{grayPierre} \thepage}
+  %\fancyfoot[R]{\small\itshape\color{grayPierre} \VAR{pied_droit}}
+}
+
+\title{\VAR{titre_document} \\ 
+%\large\color{woodNoyer} \VAR{matiere_nom}
+}
+\author{\VAR{auteur_nom} -- \VAR{auteur_statut} \BLOCK{if auteur_bureau}(Bureau \VAR{auteur_bureau})\BLOCK{endif}  \href{mailto:\VAR{auteur_email}}{\VAR{auteur_email}}}
+\date{}
+%\date{\VAR{annee_val}}

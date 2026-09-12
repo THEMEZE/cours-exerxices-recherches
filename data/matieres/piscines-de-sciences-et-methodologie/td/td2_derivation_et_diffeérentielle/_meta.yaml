@@ -1,0 +1,11 @@
+id: td2
+titre: "DÉRIVATION ET DIFFÉRENTIELLE (6h) Interprétation en Physique"
+chapitre_cours: ""
+duree_estimee: "6 h"
+seance: 1
+niveau_public: [lycée]
+exercices_ordre:
+  - ex1_derivation_de_fonction_en_physique
+  - ex2_interpretation_differentielle
+  - ex3_derivées_de_fonctions_composees
+  - ex4_différentielle_logarithmique

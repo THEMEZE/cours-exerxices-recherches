@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>__APP_TITLE__ — QCM en direct</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Ccircle cx='64' cy='64' r='60' fill='__COLOR_ROUTE_URLENC__'/%3E%3Cpath d='M64 48c-8-7-22-7-32-3v40c10-4 24-4 32 3c8-7 22-7 32-3V45c-10-4-24-4-32 3z' fill='none' stroke='white' stroke-width='4'/%3E%3Cpath d='M24 64c6-14 12 14 18 0s12-14 18 0 12-14 18 0 12-14 18 0' fill='none' stroke='__COLOR_HAPPY_URLENC__' stroke-width='4.5'/%3E%3C/svg%3E">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:wght@400;600;800&display=swap');
+
+  :root{
+    --bg:__COLOR_FOND__;
+    --ink:#16323F;
+    --card:#FFFFFF;
+    --road:__COLOR_ROUTE__;
+    --happy:__COLOR_HAPPY__;
+    --neutral:__COLOR_NEUTRAL__;
+    --sad:__COLOR_SAD__;
+    --shadow: 0 6px 0 rgba(22,50,63,0.15);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 12% 8%, color-mix(in srgb, var(--happy) 12%, transparent), transparent 40%),
+      radial-gradient(circle at 90% 85%, color-mix(in srgb, var(--neutral) 14%, transparent), transparent 45%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Nunito Sans', system-ui, sans-serif;
+    min-height:100vh;
+    padding:20px 16px 60px;
+  }
+  h1,h2,h3,.display{ font-family:'Fredoka', system-ui, sans-serif; }
+
+  .wrap{max-width:720px;margin:0 auto;}
+
+  .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px;}
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand .logo{width:38px;height:38px;flex:none;}
+  .brand h1{font-size:1.25rem;margin:0;letter-spacing:.2px;}
+  .brand small{display:block;font-size:.7rem;font-weight:600;color:#4d6b78;letter-spacing:.5px;text-transform:uppercase;}
+
+  .modebtn{
+    border:2px solid var(--road); background:var(--card); color:var(--road);
+    font-family:'Fredoka',sans-serif; font-weight:600; font-size:.85rem;
+    padding:8px 14px; border-radius:999px; cursor:pointer; box-shadow: 0 3px 0 var(--road);
+  }
+  .modebtn:active{ transform: translateY(2px); box-shadow:none; }
+
+  /* ---------- route / progression signature ---------- */
+  .road-wrap{ position:relative; margin: 6px 0 22px; }
+  .road-svg{ width:100%; height:64px; display:block; }
+  .mascot{ transition: left .6s cubic-bezier(.34,1.56,.64,1); position:absolute; top:2px; width:46px; height:46px; }
+  #mascotFace{ width:100%; height:100%; }
+  #mascotFace svg{ width:100%; height:100%; display:block; }
+  #mascotFace.bounce-once{ animation: bounce .5s ease; }
+
+  .card{
+    background:var(--card); border-radius:22px; padding:22px 20px;
+    box-shadow: var(--shadow); margin-bottom:18px; border: 2px solid rgba(27,58,75,0.06);
+  }
+
+  .tag{
+    display:inline-block; font-family:'Fredoka',sans-serif; font-size:.72rem; font-weight:600;
+    text-transform:uppercase; letter-spacing:.6px; padding:4px 10px; border-radius:999px;
+    background:var(--road); color:#fff; margin-bottom:10px;
+  }
+  .tag.debut{background:var(--happy);}
+  .tag.milieu{background:var(--neutral); color:#4a3400;}
+  .tag.fin{background:var(--sad);}
+
+  .qtext{font-size:1.15rem; font-weight:800; margin: 6px 0 16px; line-height:1.4;}
+
+  .choices{display:flex; flex-direction:column; gap:10px;}
+  .choice{
+    display:flex; align-items:center; gap:10px; text-align:left;
+    border:2px solid #D7E6E6; background:#fff; border-radius:16px; padding:14px 16px;
+    font-family:'Nunito Sans',sans-serif; font-weight:600; font-size:1rem; color:var(--ink);
+    cursor:pointer; box-shadow: 0 3px 0 #D7E6E6;
+  }
+  .choice:active{ transform: translateY(2px); box-shadow:none; }
+  .choice .bullet{
+    flex:none; width:26px; height:26px; border-radius:50%; border:2px solid #C7D8D8;
+    display:flex; align-items:center; justify-content:center; font-size:.8rem; font-weight:800; color:#6f8b8b;
+  }
+  .choice.picked-correct{ border-color:var(--happy); background:color-mix(in srgb, var(--happy) 14%, white); }
+  .choice.picked-incorrect{ border-color:var(--sad); background:color-mix(in srgb, var(--sad) 12%, white); }
+  .choice.picked-neutral{ border-color:var(--neutral); background:color-mix(in srgb, var(--neutral) 16%, white); }
+  .choice.disabled{ pointer-events:none; opacity:.75; }
+
+  .feedback{ display:flex; gap:14px; align-items:center; margin-top:18px; padding:16px; border-radius:16px; }
+  .feedback.correct{ background:color-mix(in srgb, var(--happy) 14%, white); }
+  .feedback.incorrect{ background:color-mix(in srgb, var(--sad) 12%, white); }
+  .feedback.neutral{ background:color-mix(in srgb, var(--neutral) 16%, white); }
+  .feedback svg{ width:56px; height:56px; flex:none; animation: bounce .55s ease; }
+  .feedback p{ margin:0; font-weight:700; }
+  @keyframes bounce{ 0%{transform:scale(.4) rotate(-8deg);} 60%{transform:scale(1.12) rotate(4deg);} 100%{transform:scale(1) rotate(0);} }
+
+  .waiting{ text-align:center; padding:36px 10px; color:#4d6b78; font-weight:700; }
+  .waiting .pulse{ width:16px;height:16px;border-radius:50%; background:var(--neutral); margin:0 auto 14px; animation:pulse 1.4s infinite; }
+  @keyframes pulse{ 0%,100%{opacity:.3; transform:scale(.8);} 50%{opacity:1; transform:scale(1.15);} }
+
+  .stat-row{display:flex; align-items:center; gap:10px; margin:8px 0; font-weight:700; font-size:.92rem;}
+  .stat-bar-bg{flex:1; height:14px; background:#EDEFEF; border-radius:999px; overflow:hidden;}
+  .stat-bar{height:100%; border-radius:999px;}
+  .stat-count{width:34px; text-align:right; font-variant-numeric: tabular-nums;}
+
+  .qr-box{ display:flex; flex-direction:column; align-items:center; gap:10px; padding:20px; }
+  #qrcode img, #qrcode canvas{ border-radius:12px; }
+
+  select, button.primary{
+    font-family:'Fredoka',sans-serif; font-weight:600; font-size:.95rem;
+    border-radius:14px; border:2px solid var(--road); padding:10px 14px; background:#fff; color:var(--road);
+  }
+  button.primary{ background:var(--road); color:#fff; cursor:pointer; box-shadow: 0 4px 0 #0e232e; width:100%; margin-top:12px;}
+  button.primary:active{ transform:translateY(3px); box-shadow:none; }
+  button.ghost{
+    font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:.8rem; color:#4d6b78;
+    background:none; border:none; text-decoration:underline; cursor:pointer; padding:6px;
+  }
+
+  .muted{color:#4d6b78; font-size:.85rem;}
+  .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
+  .footer-note{font-size:.75rem; color:#5c7885; text-align:center; margin-top:26px; line-height:1.5;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="var(--happy)"/>__LOGO_INNER_SVG__</svg>
+      <div>
+        <h1>__APP_TITLE__</h1>
+        <small>__APP_SUBTITLE__</small>
+      </div>
+    </div>
+    <button class="modebtn" id="modeToggle">Vue enseignant</button>
+  </div>
+
+  <div class="road-wrap">
+    <svg class="road-svg" viewBox="0 0 700 64" preserveAspectRatio="none">
+      <path d="M0 40 C 90 0, 180 64, 270 32 S 450 0, 540 32 S 650 56, 700 24" fill="none" stroke="#CFE3E3" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 14"/>
+    </svg>
+    <div class="mascot" id="mascot" style="left:0%;"><div id="mascotFace"></div></div>
+  </div>
+
+  <div id="app"></div>
+
+  <div class="footer-note">
+    Réponse anonyme : aucun compte, aucune donnée nominative. Un identifiant
+    aléatoire est créé sur cet appareil pour éviter de voter deux fois et
+    suivre ta progression au fil des séances — il n'est lié ni à ton nom ni à
+    ton adresse e-mail.
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   DONNÉES QCM — injectées depuis data/qcm/*.yaml par web/build_qcm_artifact.py
+   ===================================================================== */
+const QCM_DATA = __QCM_DATA_JSON__;
+
+/* =====================================================================
+   Mascotte (3 humeurs) — SVG inline, ton "road trip" content/neutre/pas content
+   ===================================================================== */
+const MASCOT_SVG = {
+  neutral: `<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#F5B942"/><circle cx="16" cy="20" r="3" fill="#16323F"/><circle cx="32" cy="20" r="3" fill="#16323F"/><line x1="15" y1="31" x2="33" y2="31" stroke="#16323F" stroke-width="3" stroke-linecap="round"/></svg>`,
+  correct: `<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#3FA796"/><circle cx="16" cy="19" r="3" fill="#16323F"/><circle cx="32" cy="19" r="3" fill="#16323F"/><path d="M14 28 Q24 40 34 28" stroke="#16323F" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`,
+  incorrect: `<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#E8604C"/><circle cx="16" cy="20" r="3" fill="#16323F"/><circle cx="32" cy="20" r="3" fill="#16323F"/><path d="M14 33 Q24 23 34 33" stroke="#16323F" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`,
+};
+function mascotIcon(mood){ return MASCOT_SVG[mood] || MASCOT_SVG.neutral; }
+
+const MOMENT_LABEL = {debut:"Réveil de début de cours", milieu:"Pause réveil", fin:"Synthèse de fin de cours"};
+
+/* =====================================================================
+   Utilitaires stockage — deux backends interchangeables :
+     1) window.storage (artifact Claude.ai) si disponible
+     2) sinon, API REST du petit serveur Flask auto-hébergeable
+        (web/server/app.py, pensé pour un Raspberry Pi) : /api/kv/...
+   Le reste du code (tout ce qui suit) ne sait pas lequel des deux tourne.
+   ===================================================================== */
+const HAS_ARTIFACT_STORAGE = (typeof window.storage !== 'undefined' && window.storage !== null);
+const API_BASE = ''; // même origine que la page (le serveur Flask sert aussi le HTML)
+
+async function storageGetSafe(key, shared){
+  if(HAS_ARTIFACT_STORAGE){
+    try{ const r = await window.storage.get(key, shared); return r ? r.value : null; }
+    catch(e){ return null; }
+  }
+  try{
+    const res = await fetch(`${API_BASE}/api/kv/${encodeURIComponent(key)}?shared=${shared?1:0}`, {credentials:'include'});
+    if(!res.ok) return null;
+    const data = await res.json();
+    return data.value;
+  }catch(e){ return null; }
+}
+async function storageSet(key, value, shared){
+  const strValue = typeof value === "string" ? value : JSON.stringify(value);
+  if(HAS_ARTIFACT_STORAGE){
+    try{ await window.storage.set(key, strValue, shared); return true; }
+    catch(e){ console.error("storage.set failed", key, e); return false; }
+  }
+  try{
+    await fetch(`${API_BASE}/api/kv/${encodeURIComponent(key)}`, {
+      method:'POST', credentials:'include',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({value: strValue, shared: !!shared}),
+    });
+    return true;
+  }catch(e){ console.error("storage.set (fetch) failed", key, e); return false; }
+}
+async function storageListSafe(prefix, shared){
+  if(HAS_ARTIFACT_STORAGE){
+    try{ const r = await window.storage.list(prefix, shared); return r ? r.keys : []; }
+    catch(e){ return []; }
+  }
+  try{
+    const res = await fetch(`${API_BASE}/api/kv-list?prefix=${encodeURIComponent(prefix)}&shared=${shared?1:0}`, {credentials:'include'});
+    if(!res.ok) return [];
+    const data = await res.json();
+    return data.keys || [];
+  }catch(e){ return []; }
+}
+async function storageDeleteSafe(key, shared){
+  if(HAS_ARTIFACT_STORAGE){
+    try{ await window.storage.delete(key, shared); }catch(e){}
+    return;
+  }
+  try{
+    await fetch(`${API_BASE}/api/kv/${encodeURIComponent(key)}?shared=${shared?1:0}`, {method:'DELETE', credentials:'include'});
+  }catch(e){}
+}
+function uuid(){
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c=>{
+    const r = Math.random()*16|0, v = c==='x'?r:(r&0x3|0x8); return v.toString(16);
+  });
+}
+async function getDeviceId(){
+  let id = await storageGetSafe('device_id', false);
+  if(!id){ id = uuid(); await storageSet('device_id', id, false); }
+  return id;
+}
+
+/* =====================================================================
+   Progression (position sur la route) — proportion de QCM répondus PAR CET
+   ÉLÈVE. L'HUMEUR de la mascotte (voir plus bas) est séparée : elle reflète
+   les statistiques de la CLASSE en direct, pas la progression personnelle.
+   ===================================================================== */
+async function updateMascotProgress(){
+  const hist = await storageGetSafe('historique', false);
+  let done = 0;
+  try{ done = hist ? JSON.parse(hist).length : 0; }catch(e){ done = 0; }
+  const total = QCM_DATA.length || 1;
+  const pct = Math.min(96, Math.round((done/total)*96));
+  const el = document.getElementById('mascot');
+  if(el) el.style.left = pct + '%';
+}
+
+/* =====================================================================
+   Humeur de la mascotte en direct, basée sur les stats de la classe pour
+   le QCM actuellement diffusé (≥60% de bonnes réponses -> contente,
+   <35% -> pas contente, entre les deux ou pas de QCM en cours -> neutre).
+   Boucle indépendante de la vue (élève ou enseignant) : la mascotte réagit
+   pareil des deux côtés.
+   ===================================================================== */
+let currentMascotMood = null;
+
+function setMascotFace(mood){
+  if(mood === currentMascotMood) return;
+  currentMascotMood = mood;
+  const el = document.getElementById('mascotFace');
+  if(!el) return;
+  el.innerHTML = mascotIcon(mood);
+  el.classList.remove('bounce-once');
+  void el.offsetWidth; // force le navigateur à relancer l'animation
+  el.classList.add('bounce-once');
+}
+
+async function computeQcmStats(qcmId){
+  const keys = await storageListSafe('resp:' + qcmId + ':', true);
+  const counts = {correct: 0, incorrect: 0, neutre: 0};
+  for(const k of keys){
+    const raw = await storageGetSafe(k, true);
+    try{
+      const v = JSON.parse(raw);
+      if(v && counts[v.status] !== undefined) counts[v.status]++;
+    }catch(e){}
+  }
+  return {...counts, total: keys.length};
+}
+
+function moodFromStats(stats){
+  if(!stats || stats.total === 0) return 'neutral';
+  const rate = stats.correct / stats.total;
+  if(rate >= 0.6) return 'correct';
+  if(rate < 0.35) return 'incorrect';
+  return 'neutral';
+}
+
+async function refreshHeaderMascotMood(){
+  const liveId = await storageGetSafe('current_qcm_id', true);
+  if(!liveId){ setMascotFace('neutral'); return; }
+  const stats = await computeQcmStats(liveId);
+  setMascotFace(moodFromStats(stats));
+}
+
+/* =====================================================================
+   VUE ÉLÈVE
+   ===================================================================== */
+let currentPollTimer = null;
+
+async function renderEleve(){
+  clearInterval(currentPollTimer);
+  const app = document.getElementById('app');
+  app.innerHTML = '<div class="waiting"><div class="pulse"></div>En attente d\'un QCM lancé par l\'enseignant…</div>';
+  await updateMascotProgress();
+
+  const poll = async () => {
+    const liveId = await storageGetSafe('current_qcm_id', true);
+    const qcm = QCM_DATA.find(q => q.id === liveId);
+    if(!qcm){
+      app.innerHTML = '<div class="waiting"><div class="pulse"></div>En attente d\'un QCM lancé par l\'enseignant…</div>';
+      return;
+    }
+    const deviceId = await getDeviceId();
+    const already = await storageGetSafe('answered_' + qcm.id, false);
+    app.innerHTML = renderQcmCard(qcm, already);
+    attachChoiceHandlers(qcm, deviceId, already);
+  };
+  await poll();
+  currentPollTimer = setInterval(poll, 3000);
+}
+
+function renderQcmCard(qcm, alreadyStatus){
+  const choicesHtml = qcm.choix.map(c => `
+    <button class="choice" data-choice="${c.id}">
+      <span class="bullet">${c.id.toUpperCase()}</span>
+      <span>${c.texte}</span>
+    </button>`).join('');
+  let feedbackHtml = '';
+  if(alreadyStatus){
+    feedbackHtml = feedbackBlock(alreadyStatus, qcm);
+  }
+  return `
+    <div class="card">
+      <span class="tag ${qcm.moment}">${MOMENT_LABEL[qcm.moment] || qcm.moment}</span>
+      <div class="qtext">${qcm.question}</div>
+      <div class="choices" id="choicesList">${choicesHtml}</div>
+      <div id="feedbackSlot">${feedbackHtml}</div>
+    </div>`;
+}
+
+function feedbackBlock(status, qcm){
+  const text = status === 'correct' ? qcm.feedback.correct
+             : status === 'neutre' ? qcm.feedback.neutre
+             : qcm.feedback.incorrect;
+  const cls = status === 'correct' ? 'correct' : status === 'neutre' ? 'neutral' : 'incorrect';
+  const mood = status === 'correct' ? 'correct' : status === 'neutre' ? 'neutral' : 'incorrect';
+  return `<div class="feedback ${cls}">${mascotIcon(mood)}<p>${text}</p></div>`;
+}
+
+function attachChoiceHandlers(qcm, deviceId, already){
+  if(already) {
+    document.querySelectorAll('.choice').forEach(b => b.classList.add('disabled'));
+    return;
+  }
+  document.querySelectorAll('.choice').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      document.querySelectorAll('.choice').forEach(b => b.classList.add('disabled'));
+      const choiceId = btn.getAttribute('data-choice');
+      const choice = qcm.choix.find(c => c.id === choiceId);
+      const status = choice.correct ? 'correct' : (choice.neutre ? 'neutre' : 'incorrect');
+      btn.classList.add(status === 'correct' ? 'picked-correct' : status === 'neutre' ? 'picked-neutral' : 'picked-incorrect');
+
+      await storageSet('resp:' + qcm.id + ':' + deviceId, {choice: choiceId, status, ts: Date.now()}, true);
+      await storageSet('answered_' + qcm.id, status, false);
+
+      const histRaw = await storageGetSafe('historique', false);
+      let hist = [];
+      try{ hist = histRaw ? JSON.parse(histRaw) : []; }catch(e){ hist = []; }
+      hist.push({qcm_id: qcm.id, moment: qcm.moment, status, ts: Date.now()});
+      await storageSet('historique', hist, false);
+
+      document.getElementById('feedbackSlot').innerHTML = feedbackBlock(status, qcm);
+      await updateMascotProgress();
+    });
+  });
+}
+
+/* =====================================================================
+   VUE ENSEIGNANT
+   ===================================================================== */
+let statsPollTimer = null;
+
+function renderProf(){
+  clearInterval(currentPollTimer);
+  clearInterval(statsPollTimer);
+  const app = document.getElementById('app');
+  const options = QCM_DATA.map(q => `<option value="${q.id}">[${MOMENT_LABEL[q.moment]}] ${q.question.slice(0,46)}…</option>`).join('');
+  app.innerHTML = `
+    <div class="card qr-box">
+      <div id="qrcode"></div>
+      <p class="muted">Les étudiant·e·s scannent ce QR code une seule fois par séance — le QCM affiché change automatiquement quand un nouveau QCM est lancé.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0;">📊 Résultats en direct</h3>
+      <p class="muted">Cette vue est ouverte à tout le monde, sans mot de passe : un·e étudiant·e curieux·se peut aussi cliquer sur "Vue enseignant" pour voir comment la classe s'en sort.</p>
+      <p class="muted" id="liveStatus"></p>
+      <div id="statsBox" class="muted">Sélectionne un QCM ci-dessous.</div>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0;">🎛️ Piloter le QCM</h3>
+      <div class="row">
+        <select id="qcmSelect" style="flex:1;">${options}</select>
+        <button class="primary" id="launchBtn" style="width:auto;">Lancer sur les téléphones</button>
+      </div>
+      <button class="ghost" id="stopBtn">Arrêter la diffusion</button>
+      <button class="ghost" id="resetBtn">Réinitialiser les réponses de ce QCM</button>
+    </div>
+  `;
+
+  new QRCode(document.getElementById('qrcode'), {
+    text: window.location.href, width: 176, height: 176,
+    colorDark: "#16323F", colorLight: "#ffffff",
+  });
+
+  const select = document.getElementById('qcmSelect');
+  document.getElementById('launchBtn').addEventListener('click', async () => {
+    await storageSet('current_qcm_id', select.value, true);
+    refreshLiveStatus();
+    watchStats(select.value);
+  });
+  document.getElementById('stopBtn').addEventListener('click', async () => {
+    await storageSet('current_qcm_id', '', true);
+    refreshLiveStatus();
+  });
+  document.getElementById('resetBtn').addEventListener('click', async () => {
+    const qid = select.value;
+    const keys = await storageListSafe('resp:' + qid + ':', true);
+    for(const k of keys){ await storageDeleteSafe(k, true); }
+    watchStats(qid);
+  });
+  select.addEventListener('change', () => watchStats(select.value));
+
+  refreshLiveStatus();
+  watchStats(select.value);
+}
+
+async function refreshLiveStatus(){
+  const liveId = await storageGetSafe('current_qcm_id', true);
+  const el = document.getElementById('liveStatus');
+  if(!el) return;
+  const qcm = QCM_DATA.find(q => q.id === liveId);
+  el.textContent = qcm ? ('🔴 En direct : ' + qcm.question) : 'Aucun QCM diffusé actuellement.';
+}
+
+function watchStats(qcmId){
+  clearInterval(statsPollTimer);
+  const render = async () => {
+    const qcm = QCM_DATA.find(q => q.id === qcmId);
+    const box = document.getElementById('statsBox');
+    if(!qcm || !box) return;
+    const keys = await storageListSafe('resp:' + qcm.id + ':', true);
+    const counts = {}; qcm.choix.forEach(c => counts[c.id] = 0);
+    for(const k of keys){
+      const raw = await storageGetSafe(k, true);
+      try{ const v = JSON.parse(raw); if(v && counts[v.choice] !== undefined) counts[v.choice]++; }catch(e){}
+    }
+    const total = keys.length || 1;
+    box.innerHTML = `<p><strong>${keys.length}</strong> réponse(s)</p>` + qcm.choix.map(c => {
+      const n = counts[c.id] || 0;
+      const pct = Math.round(100*n/total);
+      const color = c.correct ? 'var(--happy)' : (c.neutre ? 'var(--neutral)' : 'var(--sad)');
+      return `<div class="stat-row">
+        <span style="width:150px;">${c.texte.slice(0,22)}</span>
+        <div class="stat-bar-bg"><div class="stat-bar" style="width:${pct}%; background:${color};"></div></div>
+        <span class="stat-count">${n}</span>
+      </div>`;
+    }).join('');
+  };
+  render();
+  statsPollTimer = setInterval(render, 3000);
+}
+
+/* =====================================================================
+   Bascule Prof / Élève
+   ===================================================================== */
+document.getElementById('modeToggle').addEventListener('click', () => {
+  const isProf = document.getElementById('modeToggle').dataset.mode === 'prof';
+  setMode(!isProf);
+});
+
+function setMode(prof){
+  const btn = document.getElementById('modeToggle');
+  btn.dataset.mode = prof ? 'prof' : 'eleve';
+  btn.textContent = prof ? 'Vue étudiant' : 'Vue enseignant';
+  if(prof) renderProf(); else renderEleve();
+}
+
+setMascotFace('neutral'); // état initial, avant la première statistique connue
+refreshHeaderMascotMood();
+setInterval(refreshHeaderMascotMood, 4000); // indépendant de la vue élève/enseignant
+
+setMode(false); // par défaut : vue élève (celle que le QR code doit ouvrir)
+</script>
+</body>
+</html>

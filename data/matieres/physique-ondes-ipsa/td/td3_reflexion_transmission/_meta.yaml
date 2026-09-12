@@ -1,0 +1,8 @@
+id: td3
+titre: "Coefficients de réflexion et transmission, impédance"
+chapitre_cours: "Chap. 3 — Interfaces entre deux milieux"
+seance: 4
+niveau_public: [cpge, licence]
+exercices_ordre:
+  - ex1_corde_non_homogene
+  - ex2_impedance_acoustique

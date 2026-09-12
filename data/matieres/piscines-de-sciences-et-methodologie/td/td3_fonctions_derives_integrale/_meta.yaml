@@ -1,0 +1,11 @@
+id: td3
+titre: "FONCTIONS, DERIVES, INTEGRALE (4h) Description mathématique du mouvement à 1D"
+chapitre_cours: ""
+duree_estimee: "4 h"
+seance: 1
+niveau_public: [lycée]
+exercices_ordre:
+  - ex1_position_deplacement
+  - ex2_chute_libre
+  - ex3_equations_de_mouvement
+  - ex4_mouvement_rectiligne_uniformement_accelere

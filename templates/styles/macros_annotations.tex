@@ -1,0 +1,96 @@
+% ============================================================
+% macros_annotations.tex — \ptFleche et style de flèches annotées
+%
+% \ptFleche{nom}{contenu} : place CONTENU normalement (dans une équation,
+% typiquement) tout en le nommant "nom" pour pouvoir y tracer une flèche
+% ensuite depuis un tikzpicture[overlay] séparé. Contrairement à
+% \tikzmark{nom} (repère invisible AUTOUR d'un texte existant),
+% \ptFleche ENVELOPPE le contenu -- pratique pour annoter un terme d'une
+% équation (\begin{eqnarray}...\ptFleche{LL}{$\operator{H}$}...\end{eqnarray})
+% sans avoir à répéter le terme deux fois.
+%
+% ⚠️ Comme pour overlay_tikz : place le tikzpicture qui DESSINE les
+% flèches juste après le bloc qui contient les \ptFleche référencés
+% (même question/section), jamais en fin d'exercice -- sinon risque de
+% décalage de page (bug réel rencontré, voir data/SCHEMA.md).
+% ============================================================
+\usetikzlibrary{arrows}   % pour le style de pointe "Computer Modern Rightarrow"
+
+% Notation opérateur (physique quantique) : \operator{H} -> Ĥ
+\newcommand{\operator}[1]{\hat{#1}}
+
+\newcommand{\ptFleche}[2]{\tikz[remember picture, baseline=(#1.base)]{\node[inner sep=0pt, outer sep=0pt] (#1) {#2};}}
+
+
+% ------------------------------------------------------------------
+% 1. CONTRÔLE PRÉCIS DES MARGES (geometry)
+% ------------------------------------------------------------------
+
+\geometry{
+  a4paper,
+  top=1.8cm,         % Marge supérieure
+  bottom=1.8cm,      % Marge inférieure
+  left=1.5cm,        % Marge gauche
+  right=1.5cm,       % Marge droite
+  headheight=14pt,   % Hauteur réservée à l'en-tête (évite les warnings fancyhdr)
+  headsep=0.6cm,     % Distance entre l'en-tête et le corps du texte
+  footskip=0.8cm     % Distance entre le corps du texte et le pied de page
+}
+
+% ------------------------------------------------------------------
+% 2. COULEURS DES LIENS (\ref, citations, URL)
+% ------------------------------------------------------------------
+\definecolor{MyLinkColor}{HTML}{1565C0}  % Couleur pour les \ref, TOC, etc.
+\definecolor{MyCiteColor}{HTML}{2E7D32}  % Couleur pour les citations biblio
+\definecolor{MyUrlColor}{HTML}{B71C1C}   % Couleur pour les hyperliens http/https
+
+\hypersetup{
+  colorlinks=true,         % Active la coloration des liens (au lieu des cadres)
+  linkcolor=MyLinkColor,   % Appliqué aux \ref{}, \pageref{}, sommaire, etc.
+  citecolor=MyCiteColor,   % Appliqué aux \cite{}
+  urlcolor=MyUrlColor,     % Appliqué aux \url{} et \href{}
+  pdfborder={0 0 0}        % Supprime tout encadré résiduel
+}
+
+% ------------------------------------------------------------------
+% 3. EN-TÊTE ET PIED DE PAGE AVEC LIGNES PERSONNALISÉES (fancyhdr)
+% ------------------------------------------------------------------
+
+% 2. CONFIGURATION CRUCIALES : Recalculer la largeur pour ajuster les traits
+\fancyhfoffset[L,R]{0pt} % Aligne exactement les traits sur le texte
+\setlength{\headwidth}{\textwidth} % Force la largeur du trait à suivre les marges
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{} % Réinitialise les en-têtes et pieds de page
+
+% --- Couleurs et épaisseurs des lignes
+\definecolor{HeaderRuleColor}{HTML}{4A7AA4} % Couleur du trait du haut
+\definecolor{FooterRuleColor}{HTML}{7A7A7A} % Couleur du trait du bas
+
+\renewcommand{\headrulewidth}{1.5pt} % Épaisseur du trait en haut
+\renewcommand{\footrulewidth}{0.8pt} % Épaisseur du trait en bas
+
+% Coloration dynamique des filet/lignes supérieur et inférieur
+\renewcommand{\headrule}{{\color{HeaderRuleColor}\hrule width\headwidth height\headrulewidth \vspace{-\headrulewidth}}}
+\renewcommand{\footrule}{{\color{FooterRuleColor}\hrule width\headwidth height\footrulewidth}}
+
+% --- Contenu de l'en-tête (Header)
+\fancyhead[L]{\small\bfseries\color{woodNoyer} Mon Cours / Mon TD}
+\fancyhead[R]{\small\itshape\color{grayPierre} Année 2025–2026}
+
+% --- Contenu du pied de page (Footer)
+\fancyfoot[L]{\small\color{grayBrume} Université / Établissement}
+\fancyfoot[C]{\small\color{grayPierre} \thepage} % Numéro de page
+\fancyfoot[R]{\small\color{grayBrume} Module : Physique des Ondes}
+
+% --- Appliquer également le style aux pages de garde / début de chapitre
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{1.5pt} % 0pt Pas de ligne en haut sur la page de titre
+  \renewcommand{\footrulewidth}{0.8pt}
+  \renewcommand{\footrule}{{\color{FooterRuleColor}\hrule width\headwidth height\footrulewidth}}
+  \fancyfoot[L]{\small\color{grayBrume} Université / Établissement}
+  \fancyfoot[C]{\small\color{grayPierre} \thepage} % Numéro de page
+  \fancyfoot[R]{\small\color{grayBrume} Module : Physique des Ondes}
+}

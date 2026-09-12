@@ -1,0 +1,33 @@
+- id: dev1_qcm_debut1
+  td: dev1
+  moment: debut
+  lie_a: dev1_ex1
+  difficulte: facile
+  sujets: [agregation-mathematiques]
+  question: "Un développement d'agrégation dure typiquement combien de temps à l'oral ?"
+  explication: "Cadrage indicatif -- vérifie toujours le format exact de ton concours et de ton jury."
+  choix:
+    - {id: a, texte: "5 à 10 minutes", correct: false}
+    - {id: b, texte: "15 minutes", correct: true}
+    - {id: c, texte: "45 minutes", correct: false}
+    - {id: d, texte: "Je ne sais pas encore", correct: false, neutre: true}
+  feedback:
+    correct: "Exactement, un développement se présente en général en 15 minutes."
+    incorrect: "Un peu court ou un peu long -- un développement, c'est en général 15 minutes."
+    neutre: "Aucun souci, c'est une info à retenir pour le jour J."
+
+- id: dev1_qcm_fin1
+  td: dev1
+  moment: fin
+  lie_a: dev1_ex1
+  difficulte: moyen
+  sujets: [agregation-mathematiques]
+  question: "Dans la rédaction d'un développement, que faut-il annoncer AVANT de rédiger la preuve complète ?"
+  choix:
+    - {id: a, texte: "Rien, on rédige directement", correct: false}
+    - {id: b, texte: "Le plan de la démonstration en 2-3 grandes étapes", correct: true}
+    - {id: c, texte: "La liste de tous les théorèmes du cours", correct: false, neutre: true}
+  feedback:
+    correct: "Bien vu -- annoncer le plan aide le jury à suivre, et toi à structurer ta rédaction."
+    incorrect: "Repense à la structure attendue : plan annoncé, puis rédaction étape par étape."
+    neutre: "Pas tout à fait -- l'essentiel est d'annoncer le PLAN, pas de tout lister."

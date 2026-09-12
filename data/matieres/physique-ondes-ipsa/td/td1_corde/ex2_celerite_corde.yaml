@@ -1,0 +1,69 @@
+id: td1_ex2
+intitule: "Célérité d’une onde sur une corde homogène"
+td: td1
+facultatif: false
+seance: 1
+cours_rattache:
+  - chap1.celerite_corde
+  - chap1.reflexion_transmission
+
+metadonnees:
+  duree_estimee: "25 min"
+  difficulte: 2 # Sur une échelle de 1 à 5
+  type_exercice: "Application directe du cours"
+  indispensable: true
+
+enonce_intro: |
+  Deux cordes ont été nouées ensemble au point $O$ et leurs autres extrémités
+  ont été attachées à deux supports rigides. La première corde est soumise à
+  une tension de $400$ N. Les longueurs et masses linéiques des deux cordes
+  sont : $L_1 = 3$ m, $L_2 = 2$ m, $\mu_1 = 1.4\times10^{-4}$ kg·m$^{-1}$,
+  $\mu_2 = 2.8\times10^{-4}$ kg·m$^{-1}$.
+
+figure:
+  ref: td1_ex2_cordes_nouees
+  legende: "Cordes nouées au point O."
+  scale: 0.8
+  label: "fig:cordes_nouees"
+
+questions:
+  - id: q1
+    enonce: |
+      Simultanément, de chaque extrémité est envoyée une impulsion vers $O$.
+      Quelle est celle qui atteint $O$ la première ?
+
+    coup_de_pouce:
+      - titre: "Calcul des vitesses et durées"
+        texte: |
+          Calculez la vitesse de propagation dans chaque corde avec $c_i = \sqrt{F/\mu_i}$
+          (la tension $F$ est identique de chaque côté), puis comparez les temps de parcours $t_i = L_i / c_i$.
+
+    correction:
+      - titre: "Résultat synthétique"
+        texte: |
+          $c_1 \approx 1690$ m/s, $c_2 \approx 1195$ m/s ; $t_1 = L_1/c_1 \approx 1.78$ ms, $t_2 = L_2/c_2 \approx 1.67$ ms.
+          C'est l'impulsion provenant de la **corde 2** qui atteint le point $O$ en premier.
+
+    solution:
+      - titre: "Calculs détaillés pas à pas"
+        texte: |
+          \begin{itemize}[label = $\bullet$]
+            \item \underline{\em \bf Corde 1 :}
+              \begin{itemize}[label = $\circ$]
+                \item {\bf Célérité :} $c_1 = \sqrt{\dfrac{F}{\mu_1}} = \sqrt{\dfrac{400}{1.4\times 10^{-4}}} \approx 1690\ \text{m/s}$.
+                \item {\bf Durée du trajet :} $t_1 = \dfrac{L_1}{c_1} = \dfrac{3}{1690} \approx 1.78\times 10^{-3}\ \text{s} = 1.78\ \text{ms}$.
+              \end{itemize}
+            \item \underline{\em \bf Corde 2 :}
+              \begin{itemize}[label = $\circ$]
+                \item {\bf Célérité :} $c_2 = \sqrt{\dfrac{F}{\mu_2}} = \sqrt{\dfrac{400}{2.8\times 10^{-4}}} \approx 1195\ \text{m/s}$.
+                \item {\bf Durée du trajet :} $t_2 = \dfrac{L_2}{c_2} = \dfrac{2}{1195} \approx 1.67\times 10^{-3}\ \text{s} = 1.67\ \text{ms}$.
+              \end{itemize}
+          \end{itemize}
+
+          Puisque $t_2 < t_1$, l'impulsion sur la corde 2 met moins de temps à parcourir la distance $L_2$ et atteint le nœud $O$ en premier.
+
+    aller_plus_loin:
+      - niveau: licence
+        titre: "Que se passe-t-il au nœud O ?"
+        texte: |
+          Lorsque l'impulsion atteint la jonction $O$, une partie de l'onde est transmise dans l'autre corde et une partie est réfléchie. C'est l'objet de l'étude des coefficients de réflexion et de transmission (TD 3).

@@ -1,0 +1,134 @@
+# ============================================================
+# data/graph/sujets.yaml — base de données des sujets et de leurs liens
+#
+# Chaque SUJET correspond à une page Quartz (quartz_path = chemin dans
+# content/, sans .md). Un sujet peut être traité par plusieurs matières
+# (ex: "ondes-mecaniques" est traité à la fois par le cours IPSA et,
+# plus tard, par une leçon d'agrégation) -- c'est pour ça que le lien
+# matière -> sujet se fait via `sujets:` dans _matiere.yaml (plusieurs
+# matières peuvent pointer vers le même sujet), alors que ce fichier
+# décrit le graphe ENTRE sujets, indépendamment des matières.
+#
+# Chaque LIEN a :
+#   - poids : entre -1 et 1.
+#       > 0  = les sujets s'éclairent mutuellement (plus proche de 1 = lien fort)
+#       < 0  = sujets qui s'opposent / se distinguent utilement (ex: deux
+#              formalismes concurrents pour le même problème) -- rare, mais
+#              utile pour noter "attention à ne pas confondre"
+#       0    = lien neutre/faible, à ne pas afficher par défaut
+#   - type : associe | parent
+#       "parent" : `de` est le sujet PARENT, `a` est le SOUS-SUJET (enfant).
+#                  Génère un classement "sous-sujets" / "sujet parent"
+#                  distinct de la liste "voir aussi".
+#       "associe" : lien libre, non hiérarchique (ex: prérequis conceptuel,
+#                  proximité de méthode, application croisée...).
+#
+# Utilisé par web/build_subject_links.py pour injecter automatiquement
+# une section "## 🔗 Sujets liés" dans les pages Quartz concernées (voir
+# ce script pour le mécanisme d'injection, qui ne touche jamais le
+# contenu écrit à la main autour de cette section).
+# ============================================================
+
+sujets:
+  - id: ondes-mecaniques
+    nom: "Ondes mécaniques"
+    quartz_path: physique/ipsa-ondes
+
+  - id: ondes-acoustiques
+    nom: "Ondes acoustiques"
+    quartz_path: physique/ipsa-ondes
+
+  - id: reflexion-transmission
+    nom: "Réflexion / transmission, impédance"
+    quartz_path: physique/ipsa-ondes
+
+  - id: agregation-physique
+    nom: "Agrégation de physique"
+    quartz_path: physique/agregation-physique
+
+  - id: agregation-mathematiques
+    nom: "Agrégation de mathématiques"
+    quartz_path: mathematiques/agregation-mathematiques
+
+  - id: gravitation-quantique
+    nom: "Gravitation quantique"
+    quartz_path: physique/gravitation-quantique
+
+  - id: supergravite
+    nom: "Supergravité"
+    quartz_path: physique/supergravite
+
+  - id: theorie-m
+    nom: "Théorie M"
+    quartz_path: physique/theorie-m
+
+  - id: theorie-du-tout
+    nom: "Théorie du tout"
+    quartz_path: physique/theorie-du-tout
+
+  - id: integrabilite-quantique
+    nom: "Intégrabilité quantique"
+    quartz_path: mathematiques/integrabilite-quantique
+
+  - id: bethe-ansatz
+    nom: "Bethe ansatz"
+    quartz_path: mathematiques/bethe-ansatz
+
+liens:
+  # --- Hiérarchies (parent -> sous-sujet) ---
+  - de: theorie-m
+    a: supergravite
+    poids: 0.9
+    type: parent
+    note: "La supergravité D=11 est la limite basse énergie de la théorie M."
+
+  - de: theorie-du-tout
+    a: theorie-m
+    poids: 0.7
+    type: parent
+
+  - de: theorie-du-tout
+    a: gravitation-quantique
+    poids: 0.7
+    type: parent
+
+  - de: integrabilite-quantique
+    a: bethe-ansatz
+    poids: 0.85
+    type: parent
+    note: "L'ansatz de Bethe est historiquement le premier exemple de méthode d'intégrabilité quantique."
+
+  # --- Associations libres ---
+  - de: ondes-mecaniques
+    a: ondes-acoustiques
+    poids: 0.6
+    type: associe
+    note: "Même formalisme d'onde de d'Alembert, milieu différent (corde vs fluide)."
+
+  - de: ondes-acoustiques
+    a: reflexion-transmission
+    poids: 0.5
+    type: associe
+
+  - de: ondes-mecaniques
+    a: reflexion-transmission
+    poids: 0.5
+    type: associe
+
+  - de: gravitation-quantique
+    a: supergravite
+    poids: 0.5
+    type: associe
+    note: "Deux approches distinctes à la quantification de la gravité, à ne pas confondre."
+
+  - de: agregation-physique
+    a: ondes-mecaniques
+    poids: 0.4
+    type: associe
+    note: "Les ondes sont un grand classique de leçon d'agrégation."
+
+  - de: bethe-ansatz
+    a: agregation-mathematiques
+    poids: 0.1
+    type: associe
+    note: "Lien faible -- à ce stade juste une note, pas encore de contenu commun réel."

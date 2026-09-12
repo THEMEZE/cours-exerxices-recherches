@@ -1,0 +1,175 @@
+id: td3_ex1
+intitule: "Position, déplacement, vitesse et accélération"
+td: td3
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - chap3.cinematique_1d
+
+metadonnees:
+  duree_estimee: "60 min"
+  difficulte: 1
+  type_exercice: "Application"
+  indispensable: true
+
+enonce_intro: |
+  Ce premier exercice pose les bases de la description mathématique du mouvement à une dimension (cinématique 1D) sur un axe $(Ox)$.
+
+prerequis:
+  - titre: "Cinématique scalaire"
+    texte: |
+      Savoir dériver et intégrer des fonctions temporelles simples ($\cos, \sin$, polynômes).
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Définitions fondamentales de cinématique"
+    texte: |
+      Maitriser les formes différentielles et intégrales liant $x(t)$, $v_x(t)$ et $a_x(t)$, ainsi que l'interprétation de leurs signes.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Clarification des concepts cinématiques"
+    texte: |
+      Insister sur la distinction entre référentiel et repère, entre normes et grandeurs algébriques, et sur les conditions d'un mouvement uniforme.
+
+coup_de_pouce:
+  - titre: "Signes cinématiques"
+    texte: |
+      Le signe d'une vitesse algébrique indique le sens de déplacement, tandis que l'accélération dépend du sens de la force nette ou de la variation de vitesse.
+
+point_cours:
+  - titre: "Relations cinématiques fondamentales"
+    texte: |
+      * $v_x(t) = \frac{\mathrm{d}x}{\mathrm{d}t} = \dot{x}(t)$
+      * $a_x(t) = \frac{\mathrm{d}v_x}{\mathrm{d}t} = \frac{\mathrm{d}^2 x}{\mathrm{d}t^2} = \ddot{x}(t)$
+      * $x(t) = x_0 + \int_{0}^{t} v_x(u) \, \mathrm{d}u$
+      * $v_x(t) = v_{x,0} + \int_{0}^{t} a_x(u) \, \mathrm{d}u$
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Confusion vitesse/accélération"
+    texte: |
+      Confondre "accélérer" avec "accélération positive". Le mouvement est accéléré si $v_x \cdot a_x > 0$ et ralenti si $v_x \cdot a_x < 0$.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Trajectoires curvilignes"
+    texte: |
+      Pour la question 2.b, dessiner un mouvement circulaire uniforme pour bien montrer que la norme de la vitesse peut être constante sans que la trajectoire ne soit rectiligne.
+
+bilan:
+  - titre: "Synthèse"
+    texte: |
+      La cinématique 1D repose sur l'aller-retour entre position, vitesse et accélération via la dérivation et l'intégration.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Repère de Frénet"
+    texte: |
+      Extension des notions de vitesse et d'accélération aux mouvements 2D/3D (accélérations tangentielle et normale).
+
+questions:
+  - id: q1
+    parent: "1"
+    enonce: |
+      **Notions fondamentales**
+
+      \begin{enumerate}[label=\alph*)]
+        \item Expliquer la différence entre un référentiel et un repère. Citer quelques exemples.
+        \item Définitions : forme différentielle et dérivée
+          \begin{itemize}[label=$\bullet$]
+            \item Représenter sur un schéma l'axe $(Ox)$ et la position de $M$ à différents instants $t$, séparés par un intervalle de temps identique.
+            \item Rappeler la définition du déplacement $\Delta x$, de la vitesse moyenne $v_{x,\text{moy}}(t)$ et de l'accélération moyenne $a_{x,\text{moy}}(t)$ entre $t_1$ et $t_2 = t_1 + \Delta t$.
+            \item Rappeler la définition du déplacement élémentaire $\mathrm{d}x$, de la vitesse instantanée $v_x(t)$ et de l'accélération $a_x(t)$.
+          \end{itemize}
+        \item Distinction entre grandeurs algébriques et normes :
+          \begin{itemize}[label=$\bullet$]
+            \item Différence entre $v_x(t)$ et $v(t) = \|\vec{v}(t)\|$ ? Dans quel cas sont-elles égales ?
+            \item Interpréter physiquement le signe de $x(t)$, $\mathrm{d}x$, $v_x(t)$ et $a_x(t)$.
+            \item Préciser le signe de $v_x$ et $a_x$ si le mobile se déplace vers les $x$ croissants en accélérant, puis vers les $x$ décroissants en ralentissant.
+          \end{itemize}
+        \item Forme intégrale :
+          \begin{itemize}[label=$\bullet$]
+            \item Exprimer $x(t)$ à partir de $v_x(t)$ et $x_0 = x(0)$.
+            \item Exprimer $v_x(t)$ à partir de $a_x(t)$ et $v_x(0)$.
+          \end{itemize}
+      \end{enumerate}
+
+    solution:
+      - titre: "Résolution des notions fondamentales"
+        texte: |
+          \begin{enumerate}[label=\alph*)]
+            \item Un **référentiel** est un solide de référence auquel est liée une horloge. Un **repère** est un système d'axes mathématiques muni d'une origine $O$ et de vecteurs unitaires liant la géométrie au référentiel. *Exemples* : Référentiel terrestre (repère cartésien attaché au laboratoire), référentiel géocentrique.
+            \item 
+              \begin{itemize}[label=$\bullet$]
+                \item $\Delta x = x(t_2) - x(t_1)$ ; $v_{x,\text{moy}} = \frac{\Delta x}{\Delta t}$ ; $a_{x,\text{moy}} = \frac{\Delta v_x}{\Delta t}$.
+                \item $\mathrm{d}x = v_x(t)\mathrm{d}t$ ; $v_x(t) = \frac{\mathrm{d}x}{\mathrm{d}t}$ ; $a_x(t) = \frac{\mathrm{d}v_x}{\mathrm{d}t} = \frac{\mathrm{d}^2 x}{\mathrm{d}t^2}$.
+              \end{itemize}
+            \item 
+              \begin{itemize}[label=$\bullet$]
+                \item $v_x(t)$ est une grandeur algébrique (peut être négative), tandis que $v(t) = |v_x(t)| \ge 0$. Elles sont égales si le mouvement s'effectue dans le sens des $x$ positifs ($v_x \ge 0$).
+                \item $x(t)$ : position à droite ($>0$) ou à gauche ($<0$) de l'origine $O$. $\mathrm{d}x$ et $v_x(t)$ : déplacement vers les $x$ croissants ($>0$) ou décroissants ($<0$). $a_x(t)$ : accélération orientée vers les $x$ positifs ($>0$) ou négatifs ($<0$).
+                \item Vers les $x$ croissants en accélérant : $v_x > 0$ et $a_x > 0$.
+                \item Vers les $x$ décroissants en ralentissant : $v_x < 0$ et $a_x > 0$ (car $v_x \cdot a_x < 0$).
+              \end{itemize}
+            \item 
+              \begin{itemize}[label=$\bullet$]
+                \item $x(t) = x_0 + \int_{0}^{t} v_x(u)\,\mathrm{d}u$
+                \item $v_x(t) = v_x(0) + \int_{0}^{t} a_x(u)\,\mathrm{d}u$
+              \end{itemize}
+          \end{enumerate}
+
+  - id: q2
+    parent: "2"
+    enonce: |
+      **Mouvements particuliers**
+
+      \begin{enumerate}[label=\alph*)]
+        \item Décrire les caractéristiques d'un mouvement rectiligne uniforme (MRU).
+        \item Un mouvement uniforme est-il toujours rectiligne ? Justifier par un exemple.
+        \item Décrire les caractéristiques d'un mouvement rectiligne uniformément accéléré (MRUA).
+      \end{enumerate}
+
+    solution:
+      - titre: "Résolution sur les mouvements particuliers"
+        texte: |
+          \begin{enumerate}[label=\alph*)]
+            \item **MRU** : Trajectoire droite, $a_x(t) = 0$, $v_x(t) = \text{Cte}$, $x(t) = v_x t + x_0$.
+            \item **Non**. Un mouvement uniforme signifie seulement que la norme de la vitesse est constante ($v = \text{Cte}$). Exemple : le Mouvement Circulaire Uniforme (MCU) où la direction du vecteur vitesse varie en permanence (accélération non nulle).
+            \item **MRUA** : Trajectoire droite, $a_x(t) = a_0 = \text{Cte}$, $v_x(t) = a_0 t + v_0$, $x(t) = \frac{1}{2}a_0 t^2 + v_0 t + x_0$.
+          \end{enumerate}
+
+  - id: q3
+    parent: "3"
+    enonce: |
+      En août 2009, Usain Bolt a parcouru 100 m en 9,58 s.
+      
+      \begin{enumerate}[label=\alph*)]
+        \item Quelle était sa vitesse moyenne ?
+        \item Serait-il en infraction dans une zone limitée à $30\text{ km}\cdot\text{h}^{-1}$ ?
+      \end{enumerate}
+
+    solution:
+      - titre: "Résolution Usain Bolt"
+        texte: |
+          \begin{enumerate}[label=\alph*)]
+            \item $v_{\text{moy}} = \frac{\Delta x}{\Delta t} = \frac{100}{9,58} \approx 10,44\text{ m}\cdot\text{s}^{-1}$.
+            \item En $\text{km}\cdot\text{h}^{-1}$ : $10,44 \times 3,6 = 37,58\text{ km}\cdot\text{h}^{-1}$. $37,58 > 30$, il serait donc en infraction.
+          \end{enumerate}
+
+  - id: q4
+    parent: "4"
+    enonce: |
+      Déterminer l'accélération moyenne dans chacun des trois cas :
+
+      \begin{enumerate}[label=\alph*)]
+        \item Airbus A320 : du repos à $300\text{ km}\cdot\text{h}^{-1}$ en $50\text{ s}$.
+        \item Rafale : de $230\text{ km}\cdot\text{h}^{-1}$ à l'arrêt en $4\text{ s}$.
+        \item Capsule d'entraînement : atteint $1440\text{ km}\cdot\text{h}^{-1}$ en $2\text{ s}$.
+      \end{enumerate}
+
+    solution:
+      - titre: "Calculs d'accélérations moyennes"
+        texte: |
+          \begin{enumerate}[label=\alph*)]
+            \item $v = \frac{300}{3,6} = 83,33\text{ m}\cdot\text{s}^{-1} \implies a_{\text{moy}} = \frac{83,33 - 0}{50} = 1,67\text{ m}\cdot\text{s}^{-2}$.
+            \item $v = \frac{230}{3,6} = 63,89\text{ m}\cdot\text{s}^{-1} \implies a_{\text{moy}} = \frac{0 - 63,89}{4} = -15,97\text{ m}\cdot\text{s}^{-2}$.
+            \item $v = \frac{1440}{3,6} = 400\text{ m}\cdot\text{s}^{-1} \implies a_{\text{moy}} = \frac{400 - 0}{2} = 200\text{ m}\cdot\text{s}^{-2}$.
+          \end{enumerate}

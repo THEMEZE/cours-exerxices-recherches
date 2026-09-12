@@ -1,0 +1,103 @@
+id: td1_ex5
+intitule: "Expérience de Melde, oscillations forcées d'une corde, résonance"
+td: td1
+facultatif: true
+seance: 1
+cours_rattache:
+  - chap1.oscillations_forcees
+  - chap1.impedance_resonance
+
+metadonnees:
+  duree_estimee: "25 min"
+  difficulte: 2 # Sur une échelle de 1 à 5
+  type_exercice: "Application directe du cours"
+  indispensable: true
+  
+enonce_intro: |
+  Une corde $OA$ de longueur $\ell = 50\text{ cm}$ et $\mu = 0.02\text{ kg}\cdot\text{m}^{-1}$ est tendue avec $F = 50\text{ N}$. Un vibreur impose en $x=0$ : $y(0,t) = a e^{j\omega t}$. On pose $k = \omega\sqrt{\mu/F}$. La corde est fixée en $x=\ell$.
+
+# figure:
+#   ref: td1_ex5_melde
+#   legende: "Corde de Melde en régime forcé."
+#   scale: 0.8
+#   label: "fig:melde"
+
+questions:
+  - id: q1
+    enonce: |
+      Établir en régime forcé l'équation $y(x,t)$ du mouvement de la corde en tout point $M(x)$ à l'instant $t$. Conclusion.
+
+    coup_de_pouce:
+      - titre: "Forme complexe"
+        texte: |
+          Cherchez une solution complexe $\underline{y}(x,t) = \underline{Y}(x)e^{j\omega t}$ vérifiant $\underline{Y}(0) = a$ et $\underline{Y}(\ell) = 0$.
+
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $y(x,t) = a \dfrac{\sin(k(\ell-x))}{\sin(k\ell)} \cos(\omega t)$ (en partie réelle).
+          L'onde complexe établie est une onde stationnaire forcée par le vibreur.
+
+    solution:
+      - titre: "Résolution complète"
+        texte: |
+          En régime sinusoïdal forcé à la pulsation $\omega$, on pose $\underline{y}(x,t) = \underline{Y}(x) e^{j\omega t}$.
+          L'équation de d'Alembert impose : $\dfrac{d^2\underline{Y}}{dx^2} + k^2 \underline{Y} = 0 \implies \underline{Y}(x) = C_1 \cos(kx) + C_2 \sin(kx)$.
+          
+          - Condition en $x=\ell$ : $\underline{Y}(\ell) = 0 \implies C_1 \cos(k\ell) + C_2 \sin(k\ell) = 0 \implies C_1 = -C_2 \tan(k\ell)$.
+          - Ainsi : $\underline{Y}(x) = C_2 \left[\sin(kx) - \tan(k\ell)\cos(kx)\right] = C_2 \dfrac{\sin(k(x-\ell))}{\cos(k\ell)}$.
+          - Condition en $x=0$ : $\underline{Y}(0) = a \implies -C_2 \tan(k\ell) = a \implies C_2 = -a \cot(k\ell)$.
+          
+          On obtient : $\underline{Y}(x) = a \dfrac{\sin(k(\ell-x))}{\sin(k\ell)}$.
+          **Conclusion :** Le mouvement est celui d'une onde stationnaire d'amplitude spatiale $A(x) = a \left|\dfrac{\sin(k(\ell-x))}{\sin(k\ell)}\right|$.
+
+  - id: q2
+    enonce: |
+      Pour les fréquences $f < f_1$, seul existe un nœud de vibration en $A$. Calculer $f_1$.
+
+    coup_de_pouce:
+      - titre: "Fréquence limite"
+        texte: |
+          $f_1$ correspond à la fréquence pour laquelle la demi-longueur d'onde égale la longueur de la corde ($\ell = \lambda/2$).
+
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $c = 50\text{ m/s} \implies f_1 = \dfrac{c}{2\ell} = 50\text{ Hz}$.
+
+    solution:
+      - titre: "Application numérique"
+        texte: |
+          $c = \sqrt{\dfrac{F}{\mu}} = \sqrt{\dfrac{50}{0.02}} = 50\text{ m/s}$.
+          La première fréquence de résonance (fondamental) est $f_1 = \dfrac{c}{2\ell} = \dfrac{50}{2 \times 0.50} = 50\text{ Hz}$.
+
+  - id: q3
+    enonce: |
+      Pour les fréquences $f \ge f_1$, calculer l'amplitude des ventres de vibration. Pour quelles fréquences observe-t-on la résonance d'amplitude ?
+
+    coup_de_pouce:
+      - titre: "Dénominateur nul"
+        texte: |
+          L'amplitude devient infinie (en l'absence d'amortissement) quand le dénominateur $\sin(k\ell)$ s'annule.
+
+    correction:
+      - titre: "Résultat"
+        texte: |
+          Amplitude d'un ventre : $A_v = \dfrac{a}{|\sin(k\ell)|}$.
+          Résonance d'amplitude si $\sin(k\ell) = 0$, soit $f = N f_1 = N \times 50\text{ Hz}$ ($N \in \mathbb{N}^*$).
+
+    solution:
+      - titre: "Analyse de la résonance"
+        texte: |
+          Les ventres de vibration correspondent aux maxima du sinus au numérateur ($|\sin(k(\ell-x))| = 1$).
+          L'amplitude au niveau des ventres est donc :
+          $$A_{\text{ventre}} = \frac{a}{|\sin(k\ell)|}$$
+          Le phénomène de résonance d'amplitude a lieu lorsque le dénominateur tend vers zéro :
+          $$\sin(k\ell) = 0 \implies k\ell = N\pi \implies \frac{2\pi f}{c}\ell = N\pi \implies f = N \frac{c}{2\ell} = N f_1$$
+          On observe la résonance pour toutes les fréquences harmoniques $f_N = N \times 50\text{ Hz}$ ($50\text{ Hz}, 100\text{ Hz}, 150\text{ Hz}, \dots$).
+
+    aller_plus_loin:
+      - niveau: licence
+        titre: "Prise en compte de l'amortissement"
+        texte: |
+          En réalité, les frottements fluides introduisent une partie imaginaire à la vitesse de propagation $c$, ce qui borne l'amplitude à la résonance à une valeur finie inversement proportionnelle au coefficient d'amortissement.

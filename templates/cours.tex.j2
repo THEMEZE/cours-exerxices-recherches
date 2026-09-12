@@ -1,0 +1,14 @@
+\BLOCK{include "preamble.tex.j2"}
+
+\begin{document}
+\maketitle
+\vspace{-1.5cm}
+\begin{center}\small \VAR{cours.sous_titre|default("Cours")}\end{center}
+\bigskip
+
+\BLOCK{for sec in cours.sections}
+    \BLOCK{include "section.tex.j2"}
+    \bigskip
+\BLOCK{endfor}
+
+\end{document}

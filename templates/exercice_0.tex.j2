@@ -1,0 +1,233 @@
+\BLOCK{macro render_figure(obj, in_box=false)}
+    \BLOCK{if opts.show_figure and obj.figure}
+        \BLOCK{set fig_list = [obj.figure] if obj.figure is mapping else obj.figure}
+        \BLOCK{for fig in fig_list}
+            \BLOCK{if in_box}
+                \begin{center}
+                    \nopagebreak
+                    \BLOCK{if fig.scale}
+                        \scalebox{\VAR{fig.scale}}{
+                    \BLOCK{endif}
+                        \input{\VAR{"figures/tikz/" + fig.ref + ".tex"}}
+                    \BLOCK{if fig.scale}}\BLOCK{endif}
+                    \BLOCK{if fig.legende}
+                        \captionof{figure}{\VAR{fig.legende}}
+                        \BLOCK{if fig.label}\label{\VAR{fig.label}}\BLOCK{endif}
+                    \BLOCK{endif}
+                \end{center}
+            \BLOCK{else}
+                \begin{figure}[h!]
+                    \centering
+                    \BLOCK{if fig.scale}
+                        \scalebox{\VAR{fig.scale}}{
+                    \BLOCK{endif}
+                        \input{\VAR{"figures/tikz/" + fig.ref + ".tex"}}
+                    \BLOCK{if fig.scale}}\BLOCK{endif}
+                    \BLOCK{if fig.legende}
+                        \caption{\VAR{fig.legende}}
+                        \BLOCK{if fig.label}\label{\VAR{fig.label}}\BLOCK{endif}
+                    \BLOCK{endif}
+                \end{figure}
+            \BLOCK{endif}
+        \BLOCK{endfor}
+    \BLOCK{endif}
+\BLOCK{endmacro}
+
+\BLOCK{macro render_animation(q)}
+    \BLOCK{if opts.show_animation_note and q.animation}
+        \BLOCK{set anim_list = [q.animation] if ex.animation is mapping else q.animation}
+        \BLOCK{for anim in anim_list}
+            \par\smallskip\textit{(Animation disponible : \texttt{\VAR{anim.ref|texid}})}
+        \BLOCK{endfor}
+    \BLOCK{endif}
+\BLOCK{endmacro}
+
+\BLOCK{macro render_question(q)}
+    \VAR{q.enonce}
+
+    %{# --- FIGURE ET ANIMATION AU NIVEAU DE LA QUESTION --- #} #
+    \VAR{render_figure(q)}
+
+    \VAR{render_animation(q)}
+
+
+    %{# --- COUPS DE POUCE (Supporte String simple ou Liste d'objets) --- #} #
+    \BLOCK{if opts.show_coup_de_pouce and q.coup_de_pouce}
+        \BLOCK{if q.coup_de_pouce is string}
+            %{# Ancien format : simple chaîne de caractères #} #
+            \begin{coupdepouce}
+                \VAR{q.coup_de_pouce}
+            \end{coupdepouce}
+        \BLOCK{else}
+            %{# Nouveau format : liste d'objets avec titre, cours, figure, animation #} #
+            \BLOCK{for cdp in q.coup_de_pouce}
+                \begin{coupdepouce}\BLOCK{if cdp.titre}[\VAR{cdp.titre}]\BLOCK{endif}
+                    \VAR{cdp.texte}
+
+                    \BLOCK{if cdp.cours_rattache}
+                        \par\smallskip\textit{\small Cours rattaché : \VAR{cdp.cours_rattache|join(", ")}}
+                    \BLOCK{endif}
+
+                    %{# --- FIGURE ET ANIMATION AU NIVEAU DU COUP DE POUSE --- #} #
+                    \VAR{render_figure(cdp , in_box=true)}
+
+                    \VAR{render_animation(cdp)}
+
+                \end{coupdepouce}
+            \BLOCK{endfor}
+        \BLOCK{endif}
+    \BLOCK{endif}
+
+    
+
+    %{# --- CORRECTIONS (Supporte String simple ou Liste d'objets) --- #} #
+    \BLOCK{if opts.show_correction and q.correction}
+        \BLOCK{if q.correction is string}
+            %{# Ancien format : simple chaîne de caractères #} #
+            \begin{correction}
+                \VAR{q.correction}
+            \end{correction}
+        \BLOCK{else}
+            %{# Nouveau format : liste d'objets avec titre, cours, figure, animation #} #
+            \BLOCK{for cor in q.correction}
+                \begin{correction}\BLOCK{if cor.titre}[\VAR{cor.titre}]\BLOCK{endif}
+                    \VAR{cor.texte}
+
+                    \BLOCK{if cor.cours_rattache}
+                        \par\smallskip\textit{\small Cours rattaché : \VAR{cor.cours_rattache|join(", ")}}
+                    \BLOCK{endif}
+
+                    %{# --- FIGURE ET ANIMATION AU NIVEAU DU CORRECTION --- #} #
+                    \VAR{render_figure(cor, in_box=true)}
+
+                    \VAR{render_animation(cor)}
+
+                \end{correction}
+            \BLOCK{endfor}
+        \BLOCK{endif}
+    \BLOCK{endif}
+
+    %{# --- SOLUTIONS DÉTAILLÉES (Supporte String simple ou Liste d'objets) --- #} #
+    \BLOCK{if opts.show_solution and q.solution}
+        \BLOCK{if q.solution is string}
+            %{# Ancien format : simple chaîne de caractères #} #
+            \begin{solutiondetaillee}
+                \VAR{q.solution}
+            \end{solutiondetaillee}
+        \BLOCK{else}
+            %{# Nouveau format : liste d'objets avec titre, cours, figure, animation #} #
+            \BLOCK{for sol in q.solution}
+                \begin{solutiondetaillee}\BLOCK{if sol.titre}[\VAR{sol.titre}]\BLOCK{endif}
+                    \VAR{sol.texte}
+
+                    \BLOCK{if sol.cours_rattache}
+                        \par\smallskip\textit{\small Cours rattaché : \VAR{sol.cours_rattache|join(", ")}}
+                    \BLOCK{endif}
+
+                    %{# --- FIGURE ET ANIMATION AU NIVEAU DU CORRECTION --- #} #
+                    \VAR{render_figure(sol, in_box=true)}
+
+                    \VAR{render_animation(sol)}
+
+                \end{solutiondetaillee}
+            \BLOCK{endfor}
+        \BLOCK{endif}
+    \BLOCK{endif}
+
+    %{# --- ALLER PLUS LOIN (Supporte Dictionnaire par niveau ou Liste d'objets) --- #} #
+    \BLOCK{if opts.aller_plus_loin_niveaux and q.aller_plus_loin}
+        \BLOCK{if q.aller_plus_loin is mapping}
+            \# %{# Ancien format : dictionnaire {niveau: texte} #} #
+            \BLOCK{for niveau in opts.aller_plus_loin_niveaux}
+                \BLOCK{if niveau in q.aller_plus_loin}
+                    \begin{allerplusloin}[\VAR{niveau_label(niveau)}]
+                        \VAR{q.aller_plus_loin[niveau]}
+                    \end{allerplusloin}
+                \BLOCK{endif}
+            \BLOCK{endfor}
+        \BLOCK{else}
+            %{# Nouveau format : liste d'objets [{niveau: ..., titre: ..., texte: ...}] #} #
+            \BLOCK{for apl in q.aller_plus_loin}
+                \BLOCK{if apl.niveau in opts.aller_plus_loin_niveaux}
+                    \begin{allerplusloin}[\VAR{niveau_label(apl.niveau)}\BLOCK{if apl.titre} -- \VAR{apl.titre}\BLOCK{endif}]
+                        \VAR{apl.texte}
+
+                        \BLOCK{if apl.cours_rattache}
+                            \par\smallskip\textit{\small Cours rattaché : \VAR{apl.cours_rattache|join(", ")}}
+                        \BLOCK{endif}
+
+                        %{# --- FIGURE ET ANIMATION AU NIVEAU DU CORRECTION --- #} #
+                        \VAR{render_figure(apl, in_box=true)}
+
+                        \VAR{render_animation(apl)}
+
+
+                    \end{allerplusloin}
+                \BLOCK{endif}
+            \BLOCK{endfor}
+        \BLOCK{endif}
+    \BLOCK{endif}
+
+    %{# --- ENCADRÉ GÉNÉRIQUE DATA-DRIVEN --- #} #
+    \BLOCK{if q.encadre}
+        % Encadré générique data-driven (style \EncadreDeux repris du #
+        % Dossier scientifique) : q.encadre = {type, titre, couleur, contenu} #
+        % -- voir data/SCHEMA.md. Pour \EncadreUn (3 paramètres) ou tout #
+        % autre besoin, écrire directement du LaTeX brut dans un champ #
+        % enonce/correction/solution -- toujours possible, voir SCHEMA.md. #
+        \EncadreDeux{\VAR{q.encadre.type}}{\VAR{q.encadre.titre}}{\VAR{q.encadre.couleur}}{\VAR{q.encadre.contenu}} 
+    \BLOCK{endif}
+
+    %{# --- OVERLAY TIKZ AU NIVEAU QUESTION --- #}
+    \BLOCK{if q.overlay_tikz and opts.show_solution}
+        % Flèches/annotations rattachées à CETTE question précisément (et non #
+        % à la fin de l'exercice) -- essentiel pour que les \tikzmark/\ptFleche #
+        % référencés restent sur la même page que ce bloc tikzpicture : un #
+        % \draw en fin d'exercice peut se retrouver sur une AUTRE page si #
+        % l'exercice est long, et pointer vers des coordonnées fantômes #
+        % (bug réel rencontré et corrigé -- voir data/SCHEMA.md). #
+        \begin{tikzpicture}[remember picture, overlay]
+            \VAR{q.overlay_tikz}
+        \end{tikzpicture}
+    \BLOCK{endif}
+\BLOCK{endmacro}
+
+\TitreNiveauUn{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
+
+\VAR{ex.enonce_intro}
+
+\VAR{render_figure(ex)}
+
+\VAR{render_animation(ex)}
+
+
+\begin{enumerate}[label=\arabic*.]
+\BLOCK{for item in ex.contenu}
+    \BLOCK{if item.kind == 'intro'}
+        \VAR{item.enonce}
+    \BLOCK{elif item.kind == 'single'}
+        \item \VAR{render_question(item)}
+    \BLOCK{elif item.kind == 'group'}
+        \item
+        \begin{enumerate}[label=\alph*)]
+        \BLOCK{for sub in item.subquestions}
+            \item \VAR{render_question(sub)}
+        \BLOCK{endfor}
+        \end{enumerate}
+    \BLOCK{endif}
+\BLOCK{endfor}
+\end{enumerate}
+
+\BLOCK{if ex.overlay_tikz and opts.show_solution}
+    % ⚠️ overlay_tikz au niveau EXERCICE (pas question) : placé ici, en fin #
+    % d'exercice -- si l'exercice est long (plusieurs questions/pages), les #
+    % marques \tikzmark/\ptFleche référencées peuvent se retrouver sur une #
+    % page DIFFÉRENTE de ce bloc, ce qui casse le calcul de position (bug #
+    % réel rencontré, voir data/SCHEMA.md). Préférer `overlay_tikz` au #
+    % niveau d'une QUESTION précise (voir render_question ci-dessus) -- #
+    % ce niveau exercice reste utile pour de courts exercices tenant sur #
+    % une seule page. #
+    \begin{tikzpicture}[remember picture, overlay]
+        \VAR{ex.overlay_tikz}
+    \end{tikzpicture}
+\BLOCK{endif}

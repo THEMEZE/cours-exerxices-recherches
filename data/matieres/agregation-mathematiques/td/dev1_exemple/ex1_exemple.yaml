@@ -1,0 +1,20 @@
+id: dev1_ex1
+intitule: "Exemple de développement (gabarit)"
+td: dev1
+facultatif: false
+seance: 1
+cours_rattache:
+  - agregation-mathematiques
+
+enonce_intro: |
+  *(Gabarit d'exemple : à remplacer par un vrai développement, ex. théorème
+  de Weierstrass, méthode de Newton, théorème de Dirichlet...)*
+
+questions:
+  - id: q1
+    enonce: "Énoncer le résultat à démontrer."
+    coup_de_pouce: "Pense à bien identifier les hypothèses minimales."
+    correction: "..."
+    solution: |
+      Structure typique d'un développement : énoncé précis, plan de preuve
+      en 2-3 étapes, puis rédaction complète de chaque étape.

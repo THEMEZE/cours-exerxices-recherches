@@ -1,0 +1,33 @@
+id: td2_ex3
+intitule: "Onde stationnaire, tube de Kundt fermé (à faire à la maison)"
+td: td2
+facultatif: true
+seance: 3
+cours_rattache:
+  - chap2.ondes_stationnaires_acoustiques
+  - chap2.reflexion_extremite_fermee
+
+enonce_intro: |
+  Même dispositif que l'exercice 2, mais le tube est ouvert en $x=0$ et
+  fermé en $x=L$. Déplacement réfléchi : $\Psi_R(x,t)=-A_I e^{i(\omega t-k(2L-x))}$.
+
+questions:
+  - id: q1
+    enonce: "Justifier ce signe moins par un schéma."
+    coup_de_pouce: "Une extrémité fermée (paroi rigide) impose un nœud de déplacement : le déplacement doit s'annuler en $x=L$, d'où le changement de signe à la réflexion."
+
+  - id: q2
+    enonce: "Montrer que $\\Psi(x,t)=2iA_I\\sin(k(L-x))e^{i(\\omega t-kL)}$. Justifier le nom d'onde stationnaire."
+    coup_de_pouce: "Même démarche qu'à l'exercice 2 : sommez $\\Psi_I+\\Psi_R$."
+
+  - id: q3
+    enonce: "La dilatation $\\theta(x,t)=\\Delta V/V$ vérifie $\\tilde\\theta=\\partial\\Psi/\\partial x$. En déduire son expression."
+    coup_de_pouce: "Dérivez simplement l'expression de $\\Psi(x,t)$ trouvée en 2)."
+
+  - id: q4
+    enonce: "Fréquences $f_n$ de résonance en dilatation, en fonction de $n\\in\\mathbb{N}^*$, $c$, $L$."
+    coup_de_pouce: "Extrémité ouverte (x=0) : ventre de déplacement / nœud de pression-dilatation. Extrémité fermée (x=L) : nœud de déplacement / ventre de dilatation. C'est la configuration \"quart d'onde\"."
+    correction: "$f_n=(2n-1)\\,c/(4L)$, $n\\in\\mathbb{N}^*$ (harmoniques impairs seulement)."
+
+  - id: q5
+    enonce: "Position des maxima/minima de dilatation ; représenter jusqu'à la 3e harmonique (n=4)."

@@ -1,0 +1,9 @@
+id: td2
+titre: "Propagation des ondes sonores dans un fluide"
+chapitre_cours: "Chap. 2 — Ondes acoustiques"
+seance: 3
+niveau_public: [cpge, licence]
+exercices_ordre:
+  - ex1_celerite_fluide
+  - ex2_kundt_ouvert
+  - ex3_kundt_ferme

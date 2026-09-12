@@ -1,0 +1,312 @@
+\BLOCK{macro render_figure(obj, in_box=false)}
+    \BLOCK{if opts.show_figure and obj.figure}
+        \BLOCK{set fig_list = [obj.figure] if obj.figure is mapping else obj.figure}
+        \BLOCK{for fig in fig_list}
+            \BLOCK{if in_box}
+                \begin{center}
+                    \nopagebreak
+                    \BLOCK{if fig.scale}
+                        \scalebox{\VAR{fig.scale}}{
+                    \BLOCK{endif}
+                        \input{\VAR{"figures/tikz/" + fig.ref + ".tex"}}
+                    \BLOCK{if fig.scale}}\BLOCK{endif}
+                    \BLOCK{if fig.legende}
+                        \captionof{figure}{\VAR{fig.legende}}
+                        \BLOCK{if fig.label}\label{\VAR{fig.label}}\BLOCK{endif}
+                    \BLOCK{endif}
+                \end{center}
+            \BLOCK{else}
+                \begin{figure}[h!]
+                    \centering
+                    \BLOCK{if fig.scale}
+                        \scalebox{\VAR{fig.scale}}{
+                    \BLOCK{endif}
+                        \input{\VAR{"figures/tikz/" + fig.ref + ".tex"}}
+                    \BLOCK{if fig.scale}}\BLOCK{endif}
+                    \BLOCK{if fig.legende}
+                        \caption{\VAR{fig.legende}}
+                        \BLOCK{if fig.label}\label{\VAR{fig.label}}\BLOCK{endif}
+                    \BLOCK{endif}
+                \end{figure}
+            \BLOCK{endif}
+        \BLOCK{endfor}
+    \BLOCK{endif}
+\BLOCK{endmacro}
+
+\BLOCK{macro render_animation(q)}
+    \BLOCK{if opts.show_animation_note and q.animation}
+        \BLOCK{set anim_list = [q.animation] if ex.animation is mapping else q.animation}
+        \BLOCK{for anim in anim_list}
+            \par\smallskip\textit{(Animation disponible : \texttt{\VAR{anim.ref|texid}})}
+        \BLOCK{endfor}
+    \BLOCK{endif}
+\BLOCK{endmacro}
+
+%{# ============================================================================== #}
+%{# MACRO INTERNE : Rend le contenu d'un objet (titre, texte, cours, figure, anim)  #}
+%{# ============================================================================== #}
+\BLOCK{macro render_block_list(item, env_name, header_title="")}
+    \begin{\VAR{env_name}}\BLOCK{if header_title}[\VAR{header_title}]\BLOCK{endif}
+        \VAR{item.texte if item.texte is defined else item}
+
+        \BLOCK{if item.cours_rattache}
+            \par\smallskip\textit{\small Cours rattaché : \VAR{item.cours_rattache|join(", ")}}
+        \BLOCK{endif}
+
+        \VAR{render_figure(item, in_box=true)}
+        \VAR{render_animation(item)}
+    \end{\VAR{env_name}}
+\BLOCK{endmacro}
+
+%{# ============================================================================== #}
+%{# MACRO GÉNÉRIQUE : Gère l'affichage universel des encadrés (CDP, Cor, Sol, APL) #}
+%{# ============================================================================== #}
+\BLOCK{macro render_section(show_flag, data, env_name, is_apl=false)}
+    \BLOCK{if show_flag and data}
+        \BLOCK{if data is string}
+            %{# Format simple : chaîne de caractères brute #}
+            \begin{\VAR{env_name}}
+                \VAR{data}
+            \end{\VAR{env_name}}
+        \BLOCK{elif is_apl and data is mapping}
+            %{# "Aller plus loin" Ancien format : dictionnaire {niveau: texte} #}
+            \BLOCK{for niveau in show_flag}
+                \BLOCK{if niveau in data}
+                    \begin{\VAR{env_name}}[\VAR{niveau_label(niveau)}]
+                        \VAR{data[niveau]}
+                    \end{\VAR{env_name}}
+                \BLOCK{endif}
+            \BLOCK{endfor}
+        \BLOCK{else}
+            %{# Nouveau format : Liste d'objets structurés #}
+            \BLOCK{for item in data}
+                \BLOCK{if is_apl}
+                    %{# Traitement spécifique pour "Aller plus loin" avec filtre par niveau #}
+                    \BLOCK{if item.niveau in show_flag}
+                        \BLOCK{set title = niveau_label(item.niveau) + (' -- ' + item.titre if item.titre else '')}
+                        \VAR{render_block_list(item, env_name, header_title=title)}
+                    \BLOCK{endif}
+                \BLOCK{else}
+                    %{# Traitement standard (Coup de pouce, Correction, Solution) #}
+                    \VAR{render_block_list(item, env_name, header_title=item.titre|default(""))}
+                \BLOCK{endif}
+            \BLOCK{endfor}
+        \BLOCK{endif}
+    \BLOCK{endif}
+\BLOCK{endmacro}
+
+%{# ============================================================================== #}
+%{# MACRO QUESTION PRINCIPALE                                                       #}
+%{# ============================================================================== #}
+\BLOCK{macro render_question(q)}
+    \VAR{q.enonce}
+
+    %{# --- FIGURES ET ANIMATIONS --- #}
+    \VAR{render_figure(q)}
+    \VAR{render_animation(q)}
+
+    %{# --- ENCADRÉS STRUCTURÉS (Factorisés via render_section) --- #}
+    \VAR{render_section(opts.show_prerequis, q.prerequis, 'prerequis')}
+    \VAR{render_section(opts.show_objectifs_pedagogiques_etudiants, q.objectifs_pedagogiques_etudiants, 'objectifspedagogiquesetudiants')}
+    \VAR{render_section(opts.show_objectifs_pedagogiques_enseignants, q.objectifs_pedagogiques_enseignants, 'objectifspedagogiquesenseignants')}
+    \VAR{render_section(opts.show_point_cours, q.point_cours, 'pointcours')}
+    \VAR{render_section(opts.show_coup_de_pouce, q.coup_de_pouce, 'coupdepouce')}
+    \VAR{render_section(opts.show_correction, q.correction, 'correction')}
+    \VAR{render_section(opts.show_solution, q.solution, 'solutiondetaillee')}
+    \VAR{render_section(opts.show_remarques_pedagogiques_ecueils_classiques, q.remarques_pedagogiques_ecueils_classiques, 'remarquespedagogiquesecueilsclassiques')}
+    \VAR{render_section(opts.show_remarques_pedagogiques_conseils_animation, q.remarques_pedagogiques_conseils_animation, 'remarquespedagogiquesconseilsanimation')}
+    \VAR{render_section(opts.show_bilan, q.bilan, 'bilan')}
+    \VAR{render_section(opts.aller_plus_loin_niveaux, q.aller_plus_loin, 'allerplusloin', is_apl=true)}
+
+
+    %{# --- ENCADRÉ GÉNÉRIQUE DATA-DRIVEN --- #}
+    \BLOCK{if q.encadre}
+        \EncadreDeux{\VAR{q.encadre.type}}{\VAR{q.encadre.titre}}{\VAR{q.encadre.couleur}}{\VAR{q.encadre.contenu}} 
+    \BLOCK{endif}
+
+    %{# --- OVERLAY TIKZ AU NIVEAU QUESTION --- #}
+    \BLOCK{if q.overlay_tikz and opts.show_solution}
+        \begin{tikzpicture}[remember picture, overlay]
+            \VAR{q.overlay_tikz}
+        \end{tikzpicture}
+    \BLOCK{endif}
+\BLOCK{endmacro}
+
+% ============================================================
+% NIVEAU 1
+% ============================================================
+
+
+
+\BLOCK{if opts.show_metadonnees and ex.metadonnees}
+\TitreNiveauUn[
+  \BLOCK{if ex.metadonnees.indispensable}
+    indispensable=\VAR{ex.metadonnees.indispensable},
+  \BLOCK{endif}
+  \BLOCK{if ex.metadonnees.difficulte}
+    difficulte=\VAR{ex.metadonnees.difficulte},
+  \BLOCK{endif}
+  \BLOCK{if ex.metadonnees.duree_estimee}
+    duree={\VAR{ex.metadonnees.duree_estimee}},
+  \BLOCK{endif}
+  \BLOCK{if ex.metadonnees.type_exercice}
+    type={\VAR{ex.metadonnees.type_exercice}}
+  \BLOCK{endif}
+]{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
+\BLOCK{else}
+\TitreNiveauUn{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
+\BLOCK{endif}
+
+
+\BLOCK{if false}
+
+\TitreNiveauUnOld{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
+
+
+
+
+% ============================================================
+% NIVEAU 2
+% ============================================================
+
+\TitreNiveauDeuxOld{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
+
+\BLOCK{if opts.show_metadonnees and ex.metadonnees}
+
+\TitreNiveauDeux[
+  \BLOCK{if ex.metadonnees.indispensable}
+    indispensable=\VAR{ex.metadonnees.indispensable},
+  \BLOCK{endif}
+  \BLOCK{if ex.metadonnees.difficulte}
+    difficulte=\VAR{ex.metadonnees.difficulte},
+  \BLOCK{endif}
+  \BLOCK{if ex.metadonnees.duree_estimee}
+    duree={\VAR{ex.metadonnees.duree_estimee}},
+  \BLOCK{endif}
+  \BLOCK{if ex.metadonnees.type_exercice}
+    type={\VAR{ex.metadonnees.type_exercice}}
+  \BLOCK{endif}
+]{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
+\BLOCK{else}
+\TitreNiveauDeux{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
+\BLOCK{endif}
+
+
+
+% ============================================================
+% NIVEAU 3
+% ============================================================
+
+\TitreNiveauTroisOld{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
+
+\BLOCK{if opts.show_metadonnees and ex.metadonnees}
+\TitreNiveauTrois[
+  \BLOCK{if ex.metadonnees.indispensable}
+    indispensable=\VAR{ex.metadonnees.indispensable},
+  \BLOCK{endif}
+  \BLOCK{if ex.metadonnees.difficulte}
+    difficulte=\VAR{ex.metadonnees.difficulte},
+  \BLOCK{endif}
+  \BLOCK{if ex.metadonnees.duree_estimee}
+    duree={\VAR{ex.metadonnees.duree_estimee}},
+  \BLOCK{endif}
+  \BLOCK{if ex.metadonnees.type_exercice}
+    type={\VAR{ex.metadonnees.type_exercice}}
+  \BLOCK{endif}
+]{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
+\BLOCK{else}
+\TitreNiveauTrois{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
+\BLOCK{endif}
+
+
+% ============================================================
+% NIVEAU 4
+% ============================================================
+
+\TitreNiveauQuatreOld{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
+
+\BLOCK{if opts.show_metadonnees and ex.metadonnees}
+\TitreNiveauQuatre[
+  \BLOCK{if ex.metadonnees.indispensable}
+    indispensable=\VAR{ex.metadonnees.indispensable},
+  \BLOCK{endif}
+  \BLOCK{if ex.metadonnees.difficulte}
+    difficulte=\VAR{ex.metadonnees.difficulte},
+  \BLOCK{endif}
+  \BLOCK{if ex.metadonnees.duree_estimee}
+    duree={\VAR{ex.metadonnees.duree_estimee}},
+  \BLOCK{endif}
+  \BLOCK{if ex.metadonnees.type_exercice}
+    type={\VAR{ex.metadonnees.type_exercice}}
+  \BLOCK{endif}
+]{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
+\BLOCK{else}
+\TitreNiveauQuatre{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
+\BLOCK{endif}
+
+
+% ============================================================
+% NIVEAU 5
+% ============================================================
+
+\TitreNiveauCinqOld{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
+
+\BLOCK{if opts.show_metadonnees and ex.metadonnees}
+\TitreNiveauCinq[
+  \BLOCK{if ex.metadonnees.indispensable}
+    indispensable=\VAR{ex.metadonnees.indispensable},
+  \BLOCK{endif}
+  \BLOCK{if ex.metadonnees.difficulte}
+    difficulte=\VAR{ex.metadonnees.difficulte},
+  \BLOCK{endif}
+  \BLOCK{if ex.metadonnees.duree_estimee}
+    duree={\VAR{ex.metadonnees.duree_estimee}},
+  \BLOCK{endif}
+  \BLOCK{if ex.metadonnees.type_exercice}
+    type={\VAR{ex.metadonnees.type_exercice}}
+  \BLOCK{endif}
+]{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
+\BLOCK{else}
+\TitreNiveauCinq{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
+\BLOCK{endif}
+\BLOCK{endif}
+
+
+\VAR{ex.enonce_intro}
+
+\VAR{render_figure(ex)}
+\VAR{render_animation(ex)}
+
+\VAR{render_section(opts.show_prerequis, ex.prerequis, 'prerequis')}
+\VAR{render_section(opts.show_objectifs_pedagogiques_etudiants, ex.objectifs_pedagogiques_etudiants, 'objectifspedagogiquesetudiants')}
+\VAR{render_section(opts.show_objectifs_pedagogiques_enseignants, ex.objectifs_pedagogiques_enseignants, 'objectifspedagogiquesenseignants')}
+\VAR{render_section(opts.show_point_cours, ex.point_cours, 'pointcours')}
+\VAR{render_section(opts.show_coup_de_pouce, ex.coup_de_pouce, 'coupdepouce')}
+
+\begin{enumerate}[label=\arabic*.]
+\BLOCK{for item in ex.contenu}
+    \BLOCK{if item.kind == 'intro'}
+        \VAR{item.enonce}
+    \BLOCK{elif item.kind == 'single'}
+        \item \VAR{render_question(item)}
+    \BLOCK{elif item.kind == 'group'}
+        \item hhhhhhhhhhhhh
+        \begin{enumerate}[label=\alph*)]
+        \BLOCK{for sub in item.subquestions}
+            \item \VAR{render_question(sub)}
+        \BLOCK{endfor}
+        \end{enumerate}
+    \BLOCK{endif}
+\BLOCK{endfor}
+\end{enumerate}
+
+\VAR{render_section(opts.show_remarques_pedagogiques_ecueils_classiques, ex.remarques_pedagogiques_ecueils_classiques, 'remarquespedagogiquesecueilsclassiques')}
+\VAR{render_section(opts.show_remarques_pedagogiques_conseils_animation, ex.remarques_pedagogiques_conseils_animation, 'remarquespedagogiquesconseilsanimation')}
+\VAR{render_section(opts.show_bilan, ex.bilan, 'bilan')}
+\VAR{render_section(opts.aller_plus_loin_niveaux, ex.aller_plus_loin, 'allerplusloin', is_apl=true)}
+
+\BLOCK{if ex.overlay_tikz and opts.show_solution}
+    \begin{tikzpicture}[remember picture, overlay]
+        \VAR{ex.overlay_tikz}
+    \end{tikzpicture}
+\BLOCK{endif}

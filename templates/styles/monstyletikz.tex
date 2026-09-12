@@ -1,0 +1,492 @@
+% monstyle.tex - Style & Fonctions pour TikZ
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{anyfontsize}
+\usepackage{bm}
+\usetikzlibrary{3d, perspective}
+\usetikzlibrary{arrows.meta, calc, positioning}
+\usetikzlibrary{hobby} % <-- indispensable pour use Hobby shortcut
+
+% --- Palette de Couleurs (Style Mer de Fermi) ---
+\definecolor{colorOne}{HTML}{443E46}   % Anthracite principal (texte, axes)
+\definecolor{colorTwo}{HTML}{FFFFFF}   % Blanc
+\definecolor{colorThree}{HTML}{908CA4} % Gris-bleu (grille, repères)
+\definecolor{colorFour}{HTML}{57659E}  % Bleu indigo (courbe 1, deltas)
+\definecolor{colorFive}{HTML}{C57284}  % Rose/Magenta doux
+\definecolor{colorSix}{HTML}{FF5B69}   % Rouge/Corail vif (courbe 2, points)
+\definecolor{colorGold}{HTML}{FFD700}
+
+% Raccourcis pour les couleurs
+\def\colorOne{colorOne}
+\def\colorTwo{colorTwo}
+\def\colorThree{colorThree}
+\def\colorFour{colorFour}
+\def\colorFive{colorFive}
+\def\colorSix{colorSix}
+\def\colorGold{colorGold}
+
+% Définition des couleurs avec les codes HTML
+\definecolor{colorOne}{HTML}{443E46}
+%\definecolor{colorTwo}{HTML}{F6DEB8}
+\definecolor{colorTwo}{HTML}{FFFFFF}
+
+\definecolor{colorThree}{HTML}{908CA4}
+\definecolor{colorFour}{HTML}{57659E}
+\definecolor{colorFive}{HTML}{C57284}
+\definecolor{colorSix}{HTML}{FF5B69}
+
+% Raccourcis pour les couleurs
+\def\colorOne{colorOne}
+\def\colorTwo{colorTwo}
+\def\colorThree{colorThree}
+\def\colorFour{colorFour}
+\def\colorFive{colorFive}
+\def\colorSix{colorSix}
+
+% --- Style Global TikZ ---
+\tikzset{
+    every picture/.style={
+        color=colorOne,
+        font=\fontsize{12pt}{14pt}\selectfont\bfseries
+    },
+    fermi axis/.style={
+        thick,
+        line width=0.6ex,
+        ->,
+        >=Stealth,
+        color=colorOne
+    },
+    wave primary/.style={
+        line width=0.8ex,
+        color=colorFour
+    },
+    wave secondary/.style={
+        line width=0.8ex,
+        color=colorSix
+    }
+}
+
+% --- Commande de Grille Personnalisée ---
+% Usage : \drawgrid{xmin}{xmax}{ymin}{ymax}[pas]
+% \newcommand{\drawgrid}[4][1]{
+%     \begin{scope}[opacity=0.25]
+%         \draw[very thin, color=colorThree, step=0.2*#1] (#1*#1 - #1, #3) grid (#2, #4);
+%         \draw[thin, color=colorThree, step=#1] (#1*#1 - #1, #3) grid (#2, #4);
+%     \end{scope}
+% }
+
+% --- Commande d'Axes Typés ---
+\newcommand{\drawCustomAxes}[4]{
+    % #1=xmin, #2=xmax, #3=ymin, #4=ymax
+    \draw[fermi axis] (#1, 0) -- (#2, 0) node[pos=1.01, below, color=colorOne] {\huge $x$};
+    \draw[fermi axis] (0, #3) -- (0, #4) node[pos=1.01, left, color=colorOne] {\huge $y$};
+}
+
+% Définition de la fonction pour générer la grille
+% #1 = xmin
+% #2 = xmax
+% #3 = ymin
+% #4 = ymax
+% #5 = échelle X
+% #6 = échelle Y
+\newcommand{\drawgrid}[6]{%
+
+    \begin{scope}[
+        opacity=0.2,
+        xscale=#5,
+        yscale=#6
+    ]
+
+        % Grille principale
+        \draw[
+            very thin,
+            gray
+        ]
+        (#1,#3)
+        grid
+        (#2,#4);
+
+        % Sous-grille
+        \draw[
+            very thin,
+            gray
+        ]
+        (#1,#3)
+        grid[
+            step=0.1
+        ]
+        (#2,#4);
+
+        % Axe X
+        \draw[
+            thick,
+            line width=0.8ex,
+            ->,
+            >=Stealth,
+            black
+        ]
+        (#1,#3)
+        --
+        (#2,#3);
+
+        % Graduations X
+        \foreach \x in {#1,...,#2} {
+            \draw[
+                line width=0.8ex
+            ]
+            (\x,#3-0.1)
+            --
+            (\x,#3+0.1);
+
+            \node[
+                below
+            ]
+            at (\x,#3)
+            {\x};
+        }
+
+        % Axe Y
+        \draw[
+            thick,
+            line width=0.8ex,
+            ->,
+            >=Stealth,
+            black
+        ]
+        (#1,#3)
+        --
+        (#1,#4);
+
+        % Graduations Y
+        \foreach \y in {#3,...,#4} {
+            \draw[
+                line width=0.8ex
+            ]
+            (#1-0.1,\y)
+            --
+            (#1+0.1,\y);
+
+            \node[
+                left
+            ]
+            at (#1,\y)
+            {\y};
+        }
+
+    \end{scope}
+}
+
+
+\newcommand{\Axex}[1][$x$]{ % "x" est la valeur par défaut de #1
+    \draw
+        (-10, 0) edge[thick, line width=0.8ex, ->, >=Triangle, color=\colorThree] 
+        node[shift = {(0,1)} , pos=1.01, below]{ \huge #1 } (10, 0)
+        ;
+}
+
+\newcommand{\Axetheta}[1][$\theta$]{
+	\draw
+		(-10, 0 ) edge [thick,line width=0.8ex,->,>=Triangle , color = \colorThree ]node [pos=1.01,right]{\huge #1 } ( 10  , 0 )
+	;
+}
+
+\newcommand{\Axedensity}[1][$n$]{
+	\draw
+		(0, -1 ) edge [thick,line width=0.8ex,->,>=Triangle , color = \colorThree ]node [pos=1.01,left  ]{\huge #1 } ( 0  , 6 )
+	;
+}
+
+\newcommand{\Axedistribution}[1][$\nu$]{
+	\draw
+		(0, -1 ) edge [thick,line width=0.8ex,->,>=Triangle , color = \colorThree ]node [pos=1.01,left  ]{\huge #1 } ( 0  , 6 )
+	;
+}
+
+\newcommand{\Axesphase}[2][$x$]{
+	\Axex[#1]
+	\begin{scope}[rotate = 90]
+		\Axetheta[#2]	
+	\end{scope}
+}
+
+\newcommand{\Axesdensity}[2][$x$]{
+	\Axex[#1]
+	\Axedensity[#2]
+}
+
+\newcommand{\Axesdistribution}[2][\theta]{
+	\Axetheta[#1]
+	\Axedistribution[#2]
+}
+
+\newcommand{\Axetemps}[1][Deformation]{
+	\draw 
+		(-5 , 0 ) edge [line width=2.8ex, color=\colorOne ]( 0, 0)
+		(43 , 0 ) edge [line width=2.8ex, color=\colorOne , ->, >=Triangle] node[pos = 1.0 , right , scale = 2 ] { \fontsize{60pt}{720pt}\selectfont $\tilde{t}$} ( 50 , 0)
+		( 0 , 1 ) edge [line width=2.0ex, color=\colorOne ] ( 0 , -1 )  
+		( 43 , 1 ) edge [line width=2.0ex, color=\colorOne ] ( 43 , -1 ) 
+		(0 , 0) edge[<->, > = stealth, line width=2.8ex, color=\colorOne ]  node [ rectangle , midway, fill = white , scale = 2 ] {\fontsize{600pt}{720pt}\selectfont \bf  #1}(43, 0)  
+	;
+
+}
+
+\newcommand{\Palette}[1][\colorOne]{
+	\clip[decorate, decoration={random steps, segment length=3pt, amplitude=3pt}]
+        	(-1,-1) rectangle (1,1);
+	\draw[fill=#1 , color = #1 ] (-2,-2) rectangle (2,2);
+}
+
+% Graduation ordonné
+
+\newcommand{\GraduationYMm}[2]{
+	\foreach \r in {1,...,9} {
+		\draw 
+			({-0.25 * 0.5 * (cos(3.14*0.2*\r r)^2 + 1)}, #1*#2 - #2 + 0.1*#2*\r) 
+			edge [thick, line width=0.3ex, color=\colorOne] 
+			({0.25 * 0.5 * (cos(3.14*0.2*\r r)^2 + 1)}, #1*#2 - #2 + 0.1*#2*\r);
+	}
+}
+
+\newcommand{\GraduationYCm}[4]{% #1: min, #2: max, #3: liste
+  \foreach \R in {#1,...,#2} {
+    \pgfmathparse{#3[\R-(#1)]} % index dans la liste
+    \let\labelText\pgfmathresult
+
+    \draw[color=\colorThree]
+      (-0.3, \R*#4)
+      edge [thick, line width=0.5ex, color=\colorOne]
+      node [pos=-0.0, left]{\Large \labelText}
+      (0.3, \R*#4);
+
+    %\GraduationYMm{\R}{#4}
+  }
+
+  % Graduation supplémentaire à #2 + 3
+  \pgfmathparse{#2 + 1}
+  \edef\extendedPosition{\pgfmathresult}
+  %\GraduationYMm{\extendedPosition}{#4}
+}
+
+
+
+\newcommand{\GraduationXMm}[2]{
+	\foreach \r in {1,...,9} {
+		\draw 
+			( #1*#2 - #2 + 0.1*#2*\r,{-0.25 * 0.5 * (cos(3.14*0.2*\r r)^2 + 1)}) 
+			edge [thick, line width=0.3ex, color=\colorOne] 
+			( #1*#2 - #2 + 0.1*#2*\r,{0.25 * 0.5 * (cos(3.14*0.2*\r r)^2 + 1)});
+	}
+}
+
+\newcommand{\GraduationXCm}[4]{% #1: min, #2: max, #3: liste
+  \foreach \R in {#1,...,#2} {
+    \pgfmathparse{#3[\R-(#1)]} % index dans la liste
+    \let\labelText\pgfmathresult
+
+    \draw[color=\colorThree]
+      (\R*#4,-0.3)
+      edge [thick, line width=0.5ex, color=\colorOne]
+      node [pos=-0.0, below]{\Large \labelText}
+      (\R*#4,0.3);
+
+    %\GraduationXMm{\R}{#4}
+  }
+
+  % Graduation supplémentaire à #2 + 3
+  \pgfmathparse{#2 + 1}
+  \edef\extendedPosition{\pgfmathresult}
+  %\GraduationXMm{\extendedPosition}{#4}
+}
+
+\newcommand{\GraduationsY}[6]{%
+    % Force l'expansion de la liste
+    \edef\graduationsList{#1}%
+
+    \foreach \position/\labelLeft/\labelRight in \graduationsList {%
+
+        % Calcul de la position réelle
+        \pgfmathsetmacro{\posY}{\position * #2}%
+
+        % Trait de graduation
+        \draw[
+            thick,
+            line width=#4,
+            color=#5
+        ]
+        (-#3,\posY)
+        --
+        (#3,\posY);
+
+        % Label gauche
+        \ifx\labelLeft\empty
+        \else
+            \node[
+                left
+            ] at (-#3*1.5,\posY)
+            {#6 \labelLeft};
+        \fi
+
+        % Label droit
+        \ifx\labelRight\empty
+        \else
+            \node[
+                right
+            ] at (#3*1.5,\posY)
+            {#6 \labelRight};
+        \fi
+    }%
+}
+
+\newcommand{\GraduationsX}[6]{%
+    % Force l'expansion de la liste
+    \edef\graduationsList{#1}%
+
+    \foreach \position/\labelBottom/\labelTop in \graduationsList {%
+
+        % Calcul de la position réelle
+        \pgfmathsetmacro{\posX}{\position * #2}%
+
+        % Trait de graduation
+        \draw[
+            thick,
+            line width=#4,
+            color=#5
+        ]
+        (\posX,-#3)
+        --
+        (\posX,#3);
+
+        % Label bas
+        \ifx\labelBottom\empty
+        \else
+            \node[
+                below
+            ] at (\posX,-#3*1.5)
+            {#6 \labelBottom};
+        \fi
+
+        % Label haut
+        \ifx\labelTop\empty
+        \else
+            \node[
+                above
+            ] at (\posX,#3*1.5)
+            {#6 \labelTop};
+        \fi
+    }%
+}
+
+% Définition de la fonction pour générer la grille
+\newcommand{\backgrowngrid}[9]{
+
+
+	\begin{scope}[xscale = #5 , yscale = #6 ]
+
+
+    	% Paramètres : #1=xmin, #3=xmax, #2=ymin, #4=ymax
+    	%\clip[scale = 0.95 , decorate, decoration={random steps, segment length=0.1 cm, amplitude=0.2cm}](#1 , #2 ) rectangle ( #3 , #4 ) ;
+    	\pgfmathparse{#1-1}  
+    	\let\valXmin\pgfmathresult
+    	\pgfmathparse{#2-1}  
+    	\let\valYmin\pgfmathresult
+    	\pgfmathparse{#3+1}  
+    	\let\valXmax\pgfmathresult
+    	\pgfmathparse{#4+1}  
+    	\let\valYmax\pgfmathresult
+
+    	\draw[fill = #7, opacity = 0.1]  (\valXmin , \valYmin ) rectangle ( \valXmax , \valYmax ) ;
+
+   	 	% Grille principale en cm
+    	\draw[very thin, line width = #9 ,  color = #8] (\valXmin , \valYmin ) grid ( \valXmax , \valYmax ); % Grille de base (#5 cm , #6 cm )
+
+
+    \end{scope}
+
+
+}
+
+
+
+% ============================================================
+% Figures TikZ
+% ============================================================
+
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{etoolbox}
+
+
+% ------------------------------------------------------------
+% Contenu d'une figure TikZ
+% ------------------------------------------------------------
+% #1 = ref
+% #2 = scale
+%
+% Si scale est vide :
+%     \input{figures/tikz/xxx.tex}
+%
+% Sinon :
+%     \scalebox{scale}{\input{...}}
+
+\newcommand{\InsertTikzFigureContent}[2]{%
+    \ifstrempty{#2}{%
+        \input{figures/tikz/#1.tex}%
+    }{%
+        \scalebox{#2}{%
+            \input{figures/tikz/#1.tex}%
+        }%
+    }%
+}
+
+
+% ------------------------------------------------------------
+% Figure normale
+% ------------------------------------------------------------
+% #1 = ref
+% #2 = scale
+% #3 = légende
+% #4 = label
+
+\newcommand{\InsertTikzFigureNormal}[4]{%
+    \begin{figure}[h!]
+        \centering
+
+        \InsertTikzFigureContent{#1}{#2}
+
+        \ifstrempty{#3}{}{%
+            \caption{#3}%
+        }
+
+        \ifstrempty{#4}{}{%
+            \label{#4}%
+        }
+
+    \end{figure}%
+}
+
+
+% ------------------------------------------------------------
+% Figure dans un encadré
+% ------------------------------------------------------------
+% #1 = ref
+% #2 = scale
+% #3 = légende
+% #4 = label
+
+\newcommand{\InsertTikzFigureInline}[4]{%
+    \begin{center}
+        \nopagebreak
+
+        \InsertTikzFigureContent{#1}{#2}
+
+        \ifstrempty{#3}{}{%
+            \captionof{figure}{#3}%
+        }
+
+        \ifstrempty{#4}{}{%
+            \label{#4}%
+        }
+
+    \end{center}%
+}

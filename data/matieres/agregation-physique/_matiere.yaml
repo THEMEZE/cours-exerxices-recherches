@@ -1,0 +1,7 @@
+id: agregation-physique
+nom: "Préparation Agrégation de Physique"
+niveau: [agregation]
+description: >
+  Leçons et plans détaillés en vue de l'agrégation de physique.
+quartz_namespace: physique/agregation-physique
+sujets: [agregation-physique]

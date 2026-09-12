@@ -1,0 +1,38 @@
+% Corde a t = T/8 : translation de lambda/8 vers les x croissants
+\begin{tikzpicture}[scale=1]
+    \def\lam{4}
+    \def\amp{1}
+    \def\shift{0.5} % lambda/8
+    \draw[->] (-0.3,0) -- (8.5,0) node[right] {$x$};
+    \draw[->] (0,-1.5) -- (0,1.5) node[above] {$y$};
+    \draw[thick, gray!50, domain=0:8, samples=200, smooth]
+        plot (\x, {\amp*sin(2*180/\lam*\x)});
+    \draw[thick, red, domain=0:8, samples=200, smooth]
+        plot (\x, {\amp*sin(2*180/\lam*(\x-\shift))});
+\end{tikzpicture}
+
+\begin{tikzpicture}[scale=1]
+    \def\lam{4}
+    \def\amp{1.2}
+    \def\shift{0.5} % lambda/8
+
+    % 1. Grille stylisée (arrière-plan)
+    \drawgrid{-1}{9}{-2}{2}
+
+    % 2. Axes au style "Mer de Fermi"
+    \draw[fermi axis] (-0.5, 0) -- (8.8, 0) node[pos=1.02, below] {\huge $x$};
+    \draw[fermi axis] (0, -1.8) -- (0, 1.8) node[pos=1.02, left] {\huge $y$};
+
+    % 3. Courbe 1 (Signal original) -> Bleu Indigo (colorFour)
+    \draw[wave primary, domain=0:8, samples=200, smooth]
+        plot (\x, {\amp*sin(2*180/\lam*\x)});
+
+    % 4. Courbe 2 (Signal déphasé) -> Rouge Corail (colorSix)
+    \draw[wave secondary, domain=0:8, samples=200, smooth]
+        plot (\x, {\amp*sin(2*180/\lam*(\x-\shift))});
+
+    % 5. Légende / Annotations harmonisées
+    \node[color=colorFour, right] at (4.5, 1.4) {$\psi_1(x)$};
+    \node[color=colorSix, right] at (6.0, -1.4) {$\psi_2(x - \delta)$};
+
+\end{tikzpicture}

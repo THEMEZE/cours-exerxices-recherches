@@ -1,0 +1,27 @@
+id: agregation-physique_cours_oscillateurs
+matiere: agregation-physique
+type_doc: cours
+titre: "Leçon — Oscillateurs mécaniques, portrait de phase"
+sous_titre: "Leçon d'agrégation (exemple / gabarit à compléter)"
+niveau: [agregation]
+sujets: [agregation-physique, ondes-mecaniques]
+
+sections:
+  - titre: "Introduction, motivation, plan"
+    contenu: |
+      *(Gabarit d'exemple : à remplacer par ton propre plan de leçon.)*
+      Rappeler pourquoi le sujet est central (nombreux systèmes physiques se
+      ramènent à un oscillateur au premier ordre), annoncer le plan.
+    remarque: |
+      Une leçon d'agrégation dure typiquement 40-45 min : viser 3 parties
+      max, avec 1 à 2 expériences illustratives par partie.
+
+  - titre: "Oscillateur harmonique non amorti"
+    contenu: |
+      Équation $\ddot x + \omega_0^2 x = 0$, solution générale, énergie
+      conservée, portrait de phase (ellipses).
+    aller_plus_loin:
+      doctorat: |
+        Lien avec les systèmes hamiltoniens intégrables : l'oscillateur
+        harmonique est l'exemple le plus simple de système intégrable à un
+        degré de liberté (action-angle immédiat).

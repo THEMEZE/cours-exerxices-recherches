@@ -1,0 +1,237 @@
+id: td1_ex5
+intitule: "L'analyse dimensionnelle comme outil de prédiction"
+td: td1
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - chap1.???
+
+metadonnees:
+  duree_estimee: "25 min"
+  difficulte: 1 # Sur une échelle de 1 à 5
+  type_exercice: "Révision"
+  indispensable: false
+
+enonce_intro: |
+  L’analyse des dimensions d’un problème complexe permet de prédire la forme d’une loi physique.
+
+
+prerequis : 
+  - titre: |
+
+    texte: |
+
+
+objectifs_pedagogiques_etudiants :
+  - titre: |
+
+    texte: |
+      
+
+objectifs_pedagogiques_enseignants :
+  - titre: |
+
+    texte: |
+
+coup_de_pouce: 
+      
+    - titre: |
+        Méthodologie 
+      texte: |
+        {\bf Méthode pour déterminer une relation par analyse dimensionnelle.}\\
+
+        \begin{enumerate}[label = (\roman*)]
+          \item Lister les grandeurs dont peut dépendre la grandeur recherchée $X$
+          \item Exprimer $X$ en fonction des autres grandeurs $A$,$B$,$C$ :
+          $$
+          X = k A^\alpha B^\beta C^\gamma \quad \text{où $k$ est une constante sans dimension}
+          $$
+          \item Écrire l’équation aux dimensions de la relation :
+          $$
+          [X] = k [A]^\alpha [B]^\beta [C]^\gamma 
+          $$
+          \item Préciser les dimensions des grandeurs de chaque côté de l’égalité.
+          \item En déduire le système d’équations vérifié par $\alpha$, $\beta$, $\gamma$.
+          \item Résoudre le système et conclure sur l’expression de $X$.
+        \end{enumerate}
+      
+
+point_cours :
+  - titre: |
+
+    texte: |
+
+
+
+
+remarques_pedagogiques_ecueils_classiques: 
+  - titre: |
+  
+    texte: |
+      
+remarques_pedagogiques_conseils_animation: 
+  - titre: |
+
+    texte: |
+      
+
+bilan: 
+  - titre: |
+
+    texte: |
+
+
+aller_plus_loin: 
+  - niveau: lycee
+
+    titre: |
+
+    texte: |
+
+
+  - niveau: prepa
+    titre: |
+
+    texte: |
+      
+
+  - niveau: licence
+    titre: |
+
+    texte: |
+     
+
+  - niveau: master
+    titre: |
+
+    texte: |
+      
+
+
+questions:
+
+  - id: q1
+
+    enonce: |
+      {\bf Loi de Stokes.}\\
+
+      La loi de Stokes donne la force de frottement sur une sphère en déplacement dans un fluide. L’expérience montre que la force subie par une sphère immergée dans un fluide dépend :
+
+      \begin{itemize}[label=$\bullet$]
+        \item du coefficient de viscosité $\eta$ du fluide, d’unités : $Pa.s$ (pascal seconde)
+        \item du rayon $r$ de la sphère,
+        \item de la vitesse $v$ de la sphère par rapport au fluide.
+      \end{itemize}
+
+      \begin{enumerate}[label=\alph*)]
+        \item Indiquer si les grandeurs physiques citées dans l’énoncé sont des grandeurs fondamentales ou dérivées et donner leur dimension.
+        \item En supposant que la force $F$ s’écrit en fonction des autres grandeurs sous cette forme :
+        $$
+        F= k\eta^\alpha r^\beta v^\gamma, \quad  \text{où $k$ est une constante sans dimension,}
+        $$
+        écrire l’équation aux dimensions reliant la dimension $[F]$ à celle des autres grandeurs.
+        \item Préciser les dimensions des grandeurs en dimensions de base de chaque côté de l’égalité.
+        \item Résoudre le système d’équations pour trouver les valeurs de $\alpha$, $\beta$ et $\gamma$.
+        \item Conclure sur l’expression de la force $F$.
+        \item Peut on déterminer la valeur de la constante $k$ par analyse dimensionnelle ?
+      \end{enumerate}
+
+    
+    coup_de_pouce: 
+      
+      - titre: |
+
+        texte: |
+          On écrit $X = k * A^\alpha * B^\beta * C^\gamma$. L'égalité des puissances de $M$, $L$,$T$ de chaque côté génère un système linéaire sur $\alpha$, $\beta$, $\gamma$.
+
+
+    solution: 
+
+      - titre: |
+          
+
+        texte : |
+
+          \begin{enumerate}[label=\alph*)]
+            \item 
+              %\vspace{-0.5cm}
+              \begin{itemize}[label=$\bullet$]
+                \item  la force : $[F] = M * L * T^{-2}$ (grandeur dérivée)
+                \item  la distance : $[r] = L$ (grandeur fondamental)
+                \item  la vitesse : $[v] = L * T^{-1}$ (grandeur dérivée)
+                \item  du coefficient de viscosité $\eta$ du fluide : $[\eta] = M * L^{-1} * T^{-1} $ (grandeur dérivée) .
+              \end{itemize}
+            \item[b) et c)] $M^1 * L^1 * T^{-2} = [F] = \overbrace{(M * L^{-1} * T^{-1})^\alpha}^{[\eta^\alpha]} * \overbrace{L^\beta}^{[r^\beta]}* \overbrace{(L * T^{-1})^\gamma}^{[v^\gamma]} = M^\alpha * L^{(\beta - \alpha + \gamma)} * T^{-(\alpha + \gamma )} $ donc :
+            \item[d)] 
+            $$
+            \alpha = 1 ; \quad \beta - \alpha + \gamma = 1; \quad  \alpha + \gamma  = 2 
+            $$
+            Donc 
+            $$
+            \alpha = \beta = \gamma = 1.
+            $$
+            \item[e)] 
+            $$
+            F = k  \eta  r v
+            $$
+            \item[f)] $k$ ne peut pas être déterminé uniquement par l'analyse dimensionnelle.
+
+
+
+          \end{enumerate}
+
+  - id: q2
+
+    enonce: |
+      {\bf (${}^\ast$) Période $\bm{T}$ des oscillations d’un pendule simple}\\
+
+      Soit un pendule simple constitué d’une masse $m$ accrochée à l’extrémité d’un fil de longueur $\ell$. L’étude s’effectue dans le référentiel terrestre où le champ de pesanteur est $\vec{g}$ .
+
+      \begin{enumerate}[label=\alph*)]
+        \item Énumérer les grandeurs et dimensions qui interviennent dans le problème.
+        \item Déterminer l’expression de la période $T$ par analyse dimensionnelle. {\em Appliquer la méthode !} 
+      \end{enumerate}
+
+    
+    coup_de_pouce: 
+      
+      - titre: |
+
+        texte: |
+          Si la dimension d'une grandeur n'apparaît pas dans le membre de gauche, son exposant correspondant dans le système doit être égal à 0.
+
+
+    solution: 
+
+      - titre: |
+          
+
+        texte : |
+
+          \begin{enumerate}[label=\alph*)]
+            \item 
+              %\vspace{-0.5cm}
+              \begin{itemize}[label=$\bullet$]
+                \item  la masse $m$ : $[m] = M $ (grandeur fondamental)
+                \item  la longueur $\ell$ : $[\ell] = L$ (grandeur fondamental)
+                \item  la pesanteur $g$ : $[g] = L * T^{-2} = [a]$  une accélération (grandeur dérivée)
+              \end{itemize}
+            \item Pour $T = k ~m^\alpha ~  ~\ell^\beta g^\gamma$ donc  
+            $$
+            M^{0} * L^{0} * T^1 = [T] = \overbrace{M^\alpha}^{[m^\alpha]} * \overbrace{L^\beta}^{[\ell^\beta]}* \overbrace{(L * T^{-2})^\gamma}^{[g^\gamma]} = M^\alpha * L^{(\beta + \gamma)} * T^{-2*\gamma} 
+            $$ 
+            Donc 
+            $$
+            \alpha = 0 ; \quad \beta + \gamma = 0; \quad  2 * \gamma  = -1 
+            $$
+            Donc 
+            $$
+            \alpha = 0; \quad  \beta = 1/2 ; \quad \gamma = -1/2.
+            $$
+            Donc
+            $$
+            T = k  \sqrt{\frac{\ell}{g}}
+            $$
+          \end{enumerate}
+     

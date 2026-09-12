@@ -1,0 +1,385 @@
+id: td1_ex2
+intitule: "Grandeurs Dérivées : Équation au dimensions , dimension et unités dérivées (composées)"
+td: td1
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - chap1.???
+
+metadonnees:
+  duree_estimee: "25 min"
+  difficulte: 1 # Sur une échelle de 1 à 5
+  type_exercice: "Révision"
+  indispensable: false
+
+enonce_intro: |
+
+
+prerequis : 
+  - titre: |
+
+    texte: |
+
+
+objectifs_pedagogiques_etudiants :
+  - titre: |
+
+    texte: |
+      
+
+objectifs_pedagogiques_enseignants :
+  - titre: |
+
+    texte: |
+      
+point_cours :
+  - titre: |
+
+    texte: |
+
+
+remarques_pedagogiques_ecueils_classiques: 
+  - titre: |
+  
+    texte: |
+      
+remarques_pedagogiques_conseils_animation: 
+  - titre: |
+
+    texte: |
+      
+
+bilan: 
+  - titre: |
+
+    texte: |
+
+
+aller_plus_loin: 
+  - niveau: lycee
+
+    titre: |
+
+    texte: |
+
+
+  - niveau: prepa
+    titre: |
+
+    texte: |
+      
+
+  - niveau: licence
+    titre: |
+
+    texte: |
+     
+
+  - niveau: master
+    titre: |
+
+    texte: |
+      
+
+
+questions:
+
+
+  - id: q1_intro
+
+    enonce: |
+      %{\bf Notions de cours S.I.} 
+
+    point_cours: 
+      - titre: |
+
+        texte: |
+
+    is_intro_only: true 
+
+  - id: q1a
+
+    parent: "1"
+
+    enonce: |
+      Définir la notion de grandeur dérivée (ou composée) et citer quelques exemples.
+    
+    point_cours: 
+      - titre: |
+
+        texte: |
+              
+    solution:
+      - titre: |
+
+        texte: |
+          Une grandeur dérivée s'exprime à partir des grandeurs fondamentales.
+
+  - id: q1b
+
+    parent: "1"
+
+    enonce: |
+      Qu’appelle t’on équation aux dimensions d’une grandeur dérivée ?
+    
+    point_cours: 
+      - titre: |
+
+        texte: |
+              
+    solution:
+      - titre: |
+
+        texte: |
+          L'équation aux dimensions s'écrit $[X] ~ = ~ L^a ~ M^b ~ T^c ~ I^d ~ \Theta^e ~ N^f ~ J^g$
+
+  - id: q1c
+
+    parent: "1"
+
+    enonce: |
+      La vitesse est elle une grandeur dérivée ?
+    
+    point_cours: 
+      - titre: |
+
+        texte: |
+              
+    solution:
+      - titre: |
+
+        texte: |
+          Oui, la vitesse dépend de la longueur et du temps.
+
+  - id: q1d
+
+    parent: "1"
+
+    enonce: |
+      A partir d’une relation définissant la vitesse, établir son équation aux dimensions. Conclure sur la dimension de la vitesse.
+    
+    point_cours: 
+      - titre: |
+
+        texte: |
+              
+    solution:
+      - titre: |
+
+        texte: |
+          ${\displaystyle v = \frac{dx}{dt}}$ donc $[v] = [x]/[t] = L * T^{-1}$.
+
+  - id: q1e
+
+    parent: "1"
+
+    enonce: |
+      Connaissant l’unité de la vitesse, peut on retrouver sa dimension ?
+    
+    point_cours: 
+      - titre: |
+
+        texte: |
+              
+    solution:
+      - titre: |
+
+        texte: |
+          Oui, $m/s$ correspond bien à $L * T^{-1}$.
+
+  - id: q2
+
+    enonce: |
+      {\bf Équation aux dimensions d’une grandeur à partir de sa relation de définition.}\\
+
+      On considère les grandeurs dérivées dans le tableau 3. Établir leur équation aux dimensions et l’exprimer en unités S.I.
+
+    coup_de_pouce: 
+      
+      - titre: |
+
+        texte: |
+          Méthode pour établir l’équation aux dimensions d’une grandeur :
+          \begin{itemize}
+            \item exprimer la grandeur à l’aide d’une formule simple ou une relation de définition
+            \item exprimer les dimensions des grandeurs intervenant dans la formule précédente
+            \item conclure sur la dimension de la grandeur recherchée
+          \end{itemize}
+
+    solution: 
+
+      - titre: |
+
+        texte : |
+
+          %\begingroup
+          % Sauvegarde de la taille actuelle
+          %\makeatletter
+          %\let\oldfontsize\@currsize
+          %\makeatother
+          $$
+          {%
+          %\fontsize{5pt}{10pt}\selectfont
+          \begin{array}{l l l l}
+          \textbf{Grandeur} & \textbf{Formule / Définition} & \textbf{Dimension} & \textbf{Unités S.I. et autres} \\
+          \hline
+          \textbf{Longueur} & L & \mathsf{L} & \text{m} \\
+          \textbf{Surface} & S = H \times L & \mathsf{L}^2 & \text{m}^2 \\
+          \textbf{Volume} & V = S \times H & \mathsf{L}^3 & \text{m}^3 \\
+          \hline
+          \textbf{Temps} & t & \mathsf{T} & \text{s} \\
+          \textbf{Fréquence} & f = \frac{1}{T} & \mathsf{T}^{-1} & \text{Hz} \quad (\text{s}^{-1}) \\
+          \textbf{Vitesse} & { v = \frac{\text{d}x}{\text{d}t}} & \mathsf{L}\ast\mathsf{T}^{-1} & \text{m}\cdot\text{s}^{-1} \\
+          \textbf{Accélération} & a = \frac{\text{d}v}{\text{d}t} & \mathsf{L}\ast\mathsf{T}^{-2} & \text{m}\cdot\text{s}^{-2} \\
+          \hline
+          \textbf{Masse} & m & \mathsf{M} & \text{kg} \\
+          \textbf{Force} & F = m \times a & \mathsf{M}\ast\mathsf{L}\ast\mathsf{T}^{-2} & \text{N} \quad (\text{kg}\cdot\text{m}\cdot\text{s}^{-2}) \\
+          \textbf{Énergie / Travail} & E = F \times d & \mathsf{M}\ast\mathsf{L}^2\ast\mathsf{T}^{-2} & \text{J} \quad (\text{kg}\cdot\text{m}^2\cdot\text{s}^{-2}) \\
+          \textbf{Pression} & P = \frac{F}{S} & \mathsf{M}\ast\mathsf{L}^{-1}\ast\mathsf{T}^{-2} & \text{Pa} \quad (\text{kg}\cdot\text{m}^{-1}\cdot\text{s}^{-2})
+          \end{array}
+          }
+          $$
+          % Retour à la taille précédente
+          %\oldfontsize
+          %\endgroup
+          
+          \begin{center}
+            \text{\textbf{Table 3 :} Savoir retrouver rapidement la dimension et l’unité SI d’une grandeur dérivée}
+          \end{center}
+
+  - id: q3
+
+    enonce: |
+      {\bf Équation aux dimensions d’une grandeur à partir de son unité.}\\
+
+      Trouver l’équation aux dimensions d’une grandeur peut se faire simplement en analysant son unité si on la connaît.
+      À partir des unités S.I. fournies ($m\cdot s^{-1}$, $m^3$, $kg\cdot m^{-3}$, $kg\cdot mol^{-1}$, $m^3\cdot kg^{-1}$), identifier la grandeur physique correspondante et son équation aux dimensions.
+
+    coup_de_pouce: 
+      
+      - titre: |
+
+        texte: |
+
+    point_cours: 
+
+      - titre: |
+
+        texte: |
+    
+          L'unité S.I. traduit directement la dimension : m donne L, kg donne M, s donne T, mol donne N.
+          
+
+    solution: 
+
+      - titre: |
+
+        texte : |
+
+          {
+          %\fontsize{20pt}{10pt}\selectfont
+          $$
+          \begin{array}{lll}
+          \textbf{Grandeur} & \textbf{Dimension} & \textbf{Unité} \\
+          \hline
+          \textbf{Vitesse} & \mathsf{L}\ast\mathsf{T}^{-1} & \text{m} \cdot \text{s}^{-1}  \\
+          \textbf{Volume} & \mathsf{L}^3 & \text{m}^3 \\
+          \textbf{Masse volumique} & \mathsf{M} \ast \mathsf{L}^{-3} & \text{kg} \cdot \text{m}^{-3}  \\
+          \textbf{Masse molaire} & \mathsf{M} \ast \mathsf{N}^{-1} & \text{kg} \cdot \text{mol}^{-1}\\
+          \textbf{Volume massique} & \mathsf{L}^3 \ast \mathsf{M}^{-1} & \text{m}^3 \cdot \text{kg}^{-1}
+          \end{array}
+          $$
+          }
+          \begin{center}
+            \text{\textbf{Table 4 :} Savoir retrouver rapidement la dimension d’une grandeur connaissant son unité !!}
+          \end{center}
+
+  - id: q4
+
+    enonce: |
+      {\bf Unités dérivées et conversion.}\\
+
+      Convertir les grandeurs suivantes dans l'unité demandée : (a) $8*10^{-6} ~ m^2$ en $\mu m^2$ ; (b) $0,0087 ~ m^3$ en $cm^3$ ; (c) $540 ~ mm^3$ en $m^3$ ; (d) $1 ~ L$ en $m^3$ ; (e) $380 ~ km/h$ en $m/s$ ; (f) $340 ~ m/s$ en $km/h$ ; (g) $3*10^8 ~ m/s$ en $km/h$ ; (h) $940*10^6 ~ km/an$ en $km/h$
+
+    
+    point_cours: 
+
+      - titre: |
+
+        texte: |
+          Pour élever une conversion au carré ou au cube, la puissance de 10 associée au préfixe est également élevée à cette puissance : $(10^{-3} ~ m)^3 = 10^{-9} ~ m^3$.
+
+
+    coup_de_pouce: 
+      
+      - titre: |
+
+        texte: |
+          Exemple, pour convertir : $3\,\mathrm{cm}^2$ en  $m^2$  sachant que $1\,\mathrm{cm}=10^{-2}\,\mathrm{m}$ :
+
+          \[
+          3\,\mathrm{cm}^2 \underset{3 \times \,10^{-4} ~ m^2 }{\xrightarrow{ \mathrm{cm}^2 ~ = ~  ( 10^{-2} ~ m  )^2 ~ = ~ 10^{-4} ~ m^2 }}
+          3\, 10^{-4}\,\mathrm{m}^2
+          \]
+
+      - titre: |
+
+        texte: |
+          Une brique de lait de $1,\mathrm{L}$ fait à peu près $1,\mathrm{dm} \times 1,\mathrm{dm} \times 1,\mathrm{dm} = 1,\mathrm{dm}^3$.
+
+          Or,
+
+          $$
+          1\,\mathrm{m}^3
+          = (10\,\mathrm{dm}) \times (10\,\mathrm{dm}) \times (10\,\mathrm{dm})
+          = (10\,\mathrm{dm})^3
+          = 10^3\,\mathrm{dm}^3.
+          $$
+
+          Donc, dans un mètre cube, il y a $1000,\mathrm{L}$.
+
+          Dans une pipette, on voit que les graduations sont généralement de l'ordre de $1\,\mathrm{cm}^3$, ce qui correspond à $1\,\mathrm{mL}$.
+
+
+
+          
+
+    solution: 
+
+      - titre: |
+
+        texte : |
+
+          {\fontsize{10pt}{10pt}\selectfont
+          \[
+          \begin{array}{rrclcrrcl}
+          \textbf{(a)} & 8 \times 10^{-6}\,\mathrm{m}^2
+          & = & 8 \times 10^{6}\,\mu\mathrm{m}^2
+          && \textbf{(e)} & 380\,\mathrm{km}\cdot\mathrm{h}^{-1}
+          & = & 1{,}06 \times 10^{2}\,\mathrm{m}\cdot\mathrm{s}^{-1}
+          \\[2mm]
+
+          \textbf{(b)} & 0{,}0087\,\mathrm{m}^3
+          & = & 8{,}7 \times 10^{3}\,\mathrm{cm}^3
+          && \textbf{(f)} & 340\,\mathrm{m}\cdot\mathrm{s}^{-1}
+          & = & 1{,}22 \times 10^{3}\,\mathrm{km}\cdot\mathrm{h}^{-1}
+          \\[2mm]
+
+          \textbf{(c)} & 540\,\mathrm{mm}^3
+          & = & 5{,}4 \times 10^{-7}\,\mathrm{m}^3
+          && \textbf{(g)} & 3 \times 10^{8}\,\mathrm{m}\cdot\mathrm{s}^{-1}
+          & = & 1{,}08 \times 10^{9}\,\mathrm{km}\cdot\mathrm{h}^{-1}
+          \\[2mm]
+
+          \textbf{(d)} & 1\,\mathrm{L}
+          & = & 1 \times 10^{-3}\,\mathrm{m}^3
+          && \textbf{(h)} & 940 \times 10^{6}\,\mathrm{km}\cdot\mathrm{an}^{-1}
+          & = & 1{,}07 \times 10^{5}\,\mathrm{km}\cdot\mathrm{h}^{-1}
+          \end{array}
+          \]
+          }
+
+          \begin{center}
+          \textbf{Table 4 :} Savoir retrouver rapidement la dimension d’une grandeur connaissant son unité !!
+          \end{center}

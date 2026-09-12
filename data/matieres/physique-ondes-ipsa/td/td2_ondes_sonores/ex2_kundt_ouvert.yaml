@@ -1,0 +1,40 @@
+id: td2_ex2
+intitule: "Onde stationnaire, tube de Kundt ouvert"
+td: td2
+facultatif: false
+seance: 3
+cours_rattache:
+  - chap2.ondes_stationnaires_acoustiques
+  - chap2.reflexion_extremite_ouverte
+
+enonce_intro: |
+  Un haut-parleur en $x=0$ émet une onde acoustique dans un tube d'air de
+  longueur $L$, ouvert aux deux extrémités ($x=0$ et $x=L$). Déplacement
+  incident $\Psi_I(x,t)=A_I e^{i(\omega t - kx)}$, avec $k=\omega/c$. À la
+  réflexion en $x=L$ (extrémité ouverte), le déplacement réfléchi s'écrit
+  $\Psi_R(x,t)=A_I e^{i(\omega t - k(2L-x))}$.
+
+questions:
+  - id: q1
+    enonce: "Justifier cette expression du déplacement réfléchi par un schéma."
+    coup_de_pouce: "Une extrémité ouverte est un ventre de déplacement (pas de nœud) : le déplacement n'est pas inversé au retour, contrairement à une réflexion sur paroi rigide."
+
+  - id: q2
+    enonce: |
+      Montrer que le déplacement résultant s'écrit
+      $\Psi(x,t)=2A_I\cos\big(k(L-x)\big)e^{i(\omega t-kL)}$. Justifier le nom d'onde stationnaire.
+    coup_de_pouce: "Sommez $\\Psi_I+\\Psi_R$ et factorisez ; une onde stationnaire a un profil spatial et une évolution temporelle qui se séparent (le terme $\\cos(k(L-x))$ ne dépend pas de $t$)."
+    correction: "$\\Psi(x,t)=\\Psi_I+\\Psi_R=2A_I\\cos(k(L-x))e^{i(\\omega t - kL)}$ : l'amplitude spatiale $\\cos(k(L-x))$ est fixe dans le temps, seule la phase temporelle oscille -- onde stationnaire."
+
+  - id: q3
+    enonce: "Exprimer la surpression acoustique (notation complexe) $\\tilde p(x,t)=-\\dfrac{1}{\\chi_S}\\dfrac{\\partial\\Psi}{\\partial x}$."
+    coup_de_pouce: "Dérivez simplement l'expression de $\\Psi(x,t)$ trouvée en 2) par rapport à $x$."
+
+  - id: q4
+    enonce: "En déduire les fréquences $f_n$ de résonance en surpression, en fonction de $n\\in\\mathbb{N}^*$, $c$ et $L$."
+    coup_de_pouce: "Un tube ouvert-ouvert a un ventre de déplacement (donc un nœud de surpression) à chaque extrémité : condition analogue à une corde fixée aux deux bouts mais sur la pression."
+    correction: "$f_n = n\\,c/(2L)$, $n\\in\\mathbb{N}^*$."
+
+  - id: q5
+    enonce: "Positions des maxima/minima de surpression ; représenter graphiquement jusqu'à la 3e harmonique (n=4)."
+    coup_de_pouce: "Les nœuds de pression sont aux extrémités ouvertes, les ventres au milieu des segments -- comme les nœuds/ventres de déplacement pour une corde fixée."

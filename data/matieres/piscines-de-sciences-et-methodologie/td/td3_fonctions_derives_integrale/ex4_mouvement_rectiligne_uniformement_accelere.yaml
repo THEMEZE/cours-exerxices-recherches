@@ -1,0 +1,136 @@
+id: td3_ex4
+intitule: "Mouvement rectiligne uniformément accéléré (MRUA)"
+td: td3
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - chap3.cinematique_1d
+
+metadonnees:
+  duree_estimee: "45 min"
+  difficulte: 2
+  type_exercice: "Application"
+  indispensable: true
+
+enonce_intro: |
+  Exercices pratiques sur l'utilisation des équations cinématiques du MRUA dans des contextes réels (avion, camion, voiture).
+
+prerequis:
+  - titre: "Équations du MRUA"
+    texte: |
+      $x(t) = \frac{1}{2}a t^2 + v_0 t + x_0$ et $v(t) = a t + v_0$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Résolution de problèmes kinématiques réels"
+    texte: |
+      Savoir manipuler le système de 2 équations à 2 inconnues pour trouver des distances, durées ou accélérations.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Représentations graphiques"
+    texte: |
+      Assurer la maîtrise du tracé des courbes $x(t)$, $v(t)$, $a(t)$ et la compréhension de leur allure.
+
+coup_de_pouce:
+  - titre: "Formule intemporelle"
+    texte: |
+      On peut aussi utiliser la relation $v_B^2 - v_A^2 = 2 a (x_B - x_A)$ pour éviter de calculer explicitement le temps.
+
+point_cours:
+  - titre: "Système MRUA"
+    texte: |
+      $\begin{cases} v(t) = a t + v_0 \\ x(t) = \frac{1}{2}a t^2 + v_0 t + x_0 \end{cases}$
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Conversion d'unités"
+    texte: |
+      Toujours convertir les vitesses de $\text{km}\cdot\text{h}^{-1}$ vers $\text{m}\cdot\text{s}^{-1}$ en divisant par $3,6$.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Allure des courbes"
+    texte: |
+      Demander aux étudiants d'identifier les pentes des tangentes sur $x(t)$ pour faire le lien direct avec la droite $v(t)$.
+
+bilan:
+  - titre: "Synthèse"
+    texte: |
+      La parfaite maîtrise des équations horaires du MRUA est primordiale pour la mécanique du point.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Distance de sécurité"
+    texte: |
+      Calcul des distances de freinage incluant le temps de réaction du conducteur.
+
+questions:
+  - id: q1
+    parent: "1"
+    enonce: |
+      Un avion commence sa course au repos ($v_A = 0$) en $A$. Il décolle $30\text{ s}$ plus tard en $B$ avec une accélération constante $a$. La distance $AB = 900\text{ m}$.
+
+      \begin{enumerate}[label=\alph*)]
+        \item Calculer l'accélération $a$.
+        \item Calculer la vitesse de décollage $v_B$.
+      \end{enumerate}
+
+    solution:
+      - titre: "Résolution avion"
+        texte: |
+          \begin{enumerate}[label=\alph*)]
+            \item $x(t) = \frac{1}{2}a t^2 \implies 900 = \frac{1}{2} a (30)^2 = 450 a \implies a = \frac{900}{450} = 2\text{ m}\cdot\text{s}^{-2}$.
+            \item $v_B = a t = 2 \times 30 = 60\text{ m}\cdot\text{s}^{-1}$ (soit $216\text{ km}\cdot\text{h}^{-1}$).
+          \end{enumerate}
+
+  - id: q2
+    parent: "2"
+    enonce: |
+      Un camion parcourt $164\text{ m}$ en $8\text{ s}$ lors d'une décélération constante de $0,5\text{ m}\cdot\text{s}^{-2}$.
+
+      \begin{enumerate}[label=\alph*)]
+        \item Calculer sa vitesse initiale.
+        \item Calculer sa vitesse finale.
+        \item Calculer la distance parcourue pendant le premier intervalle de $0,6\text{ s}$.
+      \end{enumerate}
+
+    solution:
+      - titre: "Résolution camion"
+        texte: |
+          \begin{enumerate}[label=\alph*)]
+            \item $a = -0,5\text{ m}\cdot\text{s}^{-2}$. $x(t) = \frac{1}{2}a t^2 + v_0 t \implies 164 = \frac{1}{2}(-0,5)(8)^2 + v_0(8) \implies 164 = -16 + 8 v_0 \implies v_0 = 22,5\text{ m}\cdot\text{s}^{-1}$.
+            \item $v_{\text{finale}} = a t + v_0 = -0,5(8) + 22,5 = 18,5\text{ m}\cdot\text{s}^{-1}$.
+            \item $x(0,6) = \frac{1}{2}(-0,5)(0,6)^2 + 22,5(0,6) = -0,09 + 13,5 = 13,41\text{ m}$.
+          \end{enumerate}
+
+  - id: q3
+    parent: "3"
+    enonce: |
+      Une voiture a une vitesse $v_A = 50\text{ km}\cdot\text{h}^{-1}$ au point $A$ et subit une accélération de $a = 3\text{ m}\cdot\text{s}^{-2}$.
+
+      \begin{enumerate}[label=\alph*)]
+        \item Calculer le temps mis pour atteindre le point $B$ situé à $50\text{ m}$ de $A$.
+        \item Calculer la vitesse au point $B$.
+      \end{enumerate}
+
+    solution:
+      - titre: "Résolution voiture"
+        texte: |
+          \begin{enumerate}[label=\alph*)]
+            \item $v_A = \frac{50}{3,6} \approx 13,89\text{ m}\cdot\text{s}^{-1}$. Equation de position : $1,5 t^2 + 13,89 t - 50 = 0$.
+                  $\Delta = (13,89)^2 - 4(1,5)(-50) \approx 192,9 + 300 = 492,9 \implies \sqrt{\Delta} \approx 22,20$.
+                  $t = \frac{-13,89 + 22,20}{3} \approx 2,77\text{ s}$.
+            \item $v_B = a t + v_A = 3(2,77) + 13,89 = 22,20\text{ m}\cdot\text{s}^{-1}$ (soit $\approx 79,9\text{ km}\cdot\text{h}^{-1}$).
+          \end{enumerate}
+
+  - id: q4
+    parent: "4"
+    enonce: |
+      Tracer et commenter les caractéristiques des courbes $x(t)$, $v_x(t)$ et $a_x(t)$ pour les trois mouvements.
+
+    solution:
+      - titre: "Allure des courbes MRUA"
+        texte: |
+          \begin{itemize}[label=$\bullet$]
+            \item **$a_x(t)$** : Droite horizontale d'ordonnée égale à l'accélération constante.
+            \item **$v_x(t)$** : Droite affine de pente $a_x$ et d'ordonnée à l'origine $v_0$.
+            \item **$x(t)$** : Parabole orientée vers le haut ($a_x > 0$) ou vers le bas ($a_x < 0$), avec une tangente en $t=0$ de pente égale à $v_0$.
+          \end{itemize}

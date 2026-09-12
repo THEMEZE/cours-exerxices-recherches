@@ -1,0 +1,18 @@
+id: agregation-mathematiques
+nom: "Préparation Agrégation de Mathématiques"
+niveau: [agregation]
+description: >
+  Développements et exercices en vue de l'agrégation de mathématiques.
+quartz_namespace: mathematiques/agregation-mathematiques
+sujets: [agregation-mathematiques]
+
+theme:
+  titre_app: "Réveil de Maths"
+  sous_titre_app: "Agrégation de mathématiques"
+  logo: sigma
+  couleurs:
+    route: "#4A2545"
+    happy: "#6FBF73"
+    neutral: "#F2B84B"
+    sad: "#D14E5C"
+    fond: "#F5EEF6"

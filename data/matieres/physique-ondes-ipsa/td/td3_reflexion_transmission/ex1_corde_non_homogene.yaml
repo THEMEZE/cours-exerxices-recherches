@@ -1,0 +1,78 @@
+id: td3_ex1
+intitule: "Corde non homogène, jonction entre deux cordes"
+td: td3
+facultatif: false
+seance: 4
+cours_rattache:
+  - chap3.reflexion_transmission_corde
+  - chap3.impedance_mecanique
+
+enonce_intro: |
+  Deux cordes de longueur $L$ et de masses linéiques $\mu_1$ et $\mu_2=\alpha\mu_1$
+  sont attachées en $O$ ($x=0$), tendues avec une force $F$. Une onde incidente
+  sinusoïdale d'amplitude $A_I$ et de pulsation $\omega$ arrive en $O$ en
+  provenance des $x$ décroissants, donnant naissance à une onde réfléchie
+  ($x$ croissants) et une onde transmise ($x$ décroissants).
+
+figure:
+  ref: td3_ex1_corde_double
+  legende: "Jonction entre deux cordes de masses linéiques différentes."
+
+questions:
+  - id: q1
+    enonce: "Donner l'expression d'une onde incidente $y_i(x,t)$ se déplaçant vers les $x$ décroissants, d'amplitude $A_I$, de déphasage $\\phi=0$."
+    coup_de_pouce: "Une onde progressive vers les $x$ décroissants s'écrit $\\cos(\\omega t + kx)$ (le signe + devant $kx$ est ce qui inverse le sens de propagation)."
+    correction: "$y_i(x,t)=A_I\\cos(\\omega t + k_1 x)$."
+
+  - id: q2
+    enonce: "Donner l'expression de l'onde réfléchie $y_r(x,t)$ (vers les $x$ croissants), d'amplitude $A_R$."
+    correction: "$y_r(x,t)=A_R\\cos(\\omega t - k_1 x)$."
+
+  - id: q3
+    enonce: "Donner l'expression de l'onde transmise $y_t(x,t)$ (vers les $x$ décroissants), d'amplitude $A_T$."
+    correction: "$y_t(x,t)=A_T\\cos(\\omega t + k_2 x)$."
+
+  - id: q4
+    enonce: "Relation entre $k$, $\\omega$, $c$ pour chaque corde (nom de cette relation) ? Exprimer $k_1$ en fonction de $k_2$ et $\\alpha$."
+    coup_de_pouce: "Relation de dispersion $\\omega=kc$ avec $c=\\sqrt{F/\\mu}$ propre à chaque corde ; même $\\omega$ des deux côtés (continuité temporelle en $O$)."
+    correction: "Relation de dispersion. $k_1=\\omega/c_1=\\omega\\sqrt{\\mu_1/F}$ et $k_2=\\omega\\sqrt{\\mu_2/F}=\\omega\\sqrt{\\alpha\\mu_1/F}$, donc $k_1=k_2/\\sqrt{\\alpha}$."
+
+  - id: q5
+    enonce: "Exprimer les déplacements $y_1(x,t)$ (corde 1, $x<0$) et $y_2(x,t)$ (corde 2, $x>0$)."
+    correction: "$y_1=y_i+y_r=A_I\\cos(\\omega t+k_1x)+A_R\\cos(\\omega t-k_1x)$ ; $y_2=y_t=A_T\\cos(\\omega t+k_2x)$."
+
+  - id: q6
+    enonce: "Écrire la continuité du déplacement en $x=0$. Traduire en termes de $A_I$, $A_R$, $A_T$."
+    coup_de_pouce: "$y_1(0,t)=y_2(0,t)$ à tout instant $t$."
+    correction: "$A_I+A_R=A_T$."
+
+  - id: q7
+    enonce: "La continuité de la force donne $\\partial y_1/\\partial x|_{x=0}=\\partial y_2/\\partial x|_{x=0}$. Traduire cette relation."
+    coup_de_pouce: "Dérivez $y_1$ et $y_2$ par rapport à $x$, puis évaluez en $x=0$ ; les cosinus deviennent des sinus qui s'annulent sauf le terme en $x$ dérivé, attention aux signes de $k_1$ dans $y_i$ et $y_r$."
+    correction: "$k_1(A_I - A_R) = k_2 A_T$."
+
+  - id: q8
+    enonce: "En déduire $r=A_R/A_I$ et $t=A_T/A_I$ en fonction de $\\alpha$. Exprimer $r$, $t$ en fonction des impédances $Z_1$, $Z_2$."
+    coup_de_pouce: "Combinez les deux relations de continuité (q6 et q7) comme un système linéaire en $A_R,A_T$. Impédance d'une corde : $Z=\\mu c=\\sqrt{F\\mu}$."
+    correction: |
+      $r=\dfrac{k_1-k_2}{k_1+k_2}=\dfrac{1-\sqrt{\alpha}}{1+\sqrt{\alpha}}$,
+      $t=\dfrac{2k_1}{k_1+k_2}=\dfrac{2}{1+\sqrt{\alpha}}$. En impédance :
+      $r=\dfrac{Z_1-Z_2}{Z_1+Z_2}$, $t=\dfrac{2Z_1}{Z_1+Z_2}$.
+    solution: |
+      Des questions 6 et 7 : $A_I+A_R=A_T$ et $k_1(A_I-A_R)=k_2A_T$. En
+      substituant $A_T$ de la première dans la seconde :
+      \begin{eqnarray}
+        k_1(A_I - A_R) &=& k_2(A_I+A_R) \nonumber\\
+        A_I(k_1-k_2) &=& A_R(k_1+k_2) \nonumber\\
+        r = \frac{A_R}{A_I} &=& \frac{k_1-k_2}{k_1+k_2}.
+      \end{eqnarray}
+      Avec $k_1=k_2/\sqrt{\alpha}$ (question 4), on divise numérateur et
+      dénominateur par $k_2$ : $r=\dfrac{1/\sqrt\alpha - 1}{1/\sqrt\alpha+1}=\dfrac{1-\sqrt\alpha}{1+\sqrt\alpha}$.
+      Puis $t=1+r=\dfrac{2}{1+\sqrt\alpha}$. Comme $Z=\mu c=\sqrt{F\mu}\propto\sqrt{\mu}\propto 1/k$
+      à $\omega$ fixé (car $k=\omega\sqrt{\mu/F}$), on a $k_1/k_2=Z_2/Z_1$, ce qui
+      redonne bien $r=(Z_1-Z_2)/(Z_1+Z_2)$ et $t=2Z_1/(Z_1+Z_2)$.
+
+  - id: q9
+    enonce: "Commenter le cas $\\alpha=1$."
+    coup_de_pouce: "Si $\\alpha=1$, les deux cordes sont identiques : il n'y a plus vraiment de jonction."
+    correction: "$\\alpha=1 \\Rightarrow r=0,\\ t=1$ : pas de réflexion, l'onde incidente est intégralement transmise -- cohérent, la corde est alors homogène (pas d'interface)."

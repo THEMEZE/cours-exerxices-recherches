@@ -1,0 +1,2648 @@
+% ============================================================
+% theme_academique.tex — DA reprise de "Dossier scientifique"
+%
+% Palette de couleurs, barres de titre (section/sous-section/.../
+% sous-paragraphe) et boîtes à bande colorée (\EncadreUn, \EncadreDeux)
+% reprises quasi telles quelles de tex/commands.tex du Dossier
+% scientifique fourni. Les boîtes pédagogiques du projet (coup de pouce,
+% correction, solution détaillée, remarque, aller plus loin) sont
+% redéfinies avec ce même langage visuel plutôt qu'avec l'ancien style
+% "titre plein + fond teinté" (conservé dans theme_simple.tex).
+%
+% Nécessite (déjà chargés par packages.tex) : tikz, tcolorbox[most],
+% et en plus ici : titlesec, varwidth.
+% ============================================================
+\usepackage{titlesec}
+\usepackage{varwidth}
+
+% ------------------------------------------------------------------
+% Palette (reprise du Dossier scientifique)
+% ------------------------------------------------------------------
+\definecolor{colorStitre}{RGB}{140,0,0}       % section    -- rouge sombre
+\definecolor{colorSStitre}{RGB}{190,140,140}  % sous-section -- rose poussiéreux
+\definecolor{colorSSStitre}{RGB}{140,140,140} % sous-sous-section -- gris
+
+\definecolor{Prune}{RGB}{99,0,60}
+\definecolor{woodNoyer}{HTML}{3A2A1F}
+\definecolor{woodChene}{HTML}{4A3628}
+\definecolor{greenForet}{HTML}{0B3D2E}
+\definecolor{greenSapin}{HTML}{0F4C3A}
+\definecolor{grayPierre}{HTML}{4A4A4A}
+\definecolor{grayBrume}{HTML}{7A7A7A}
+\definecolor{headerblue}{HTML}{1565C0}
+\definecolor{colorOchre}{HTML}{C98A2C}        % ajout : accent chaud pour le "coup de pouce"
+
+% ============================================================
+% COULEURS DES BLOCS PÉDAGOGIQUES
+% ============================================================
+
+% Prérequis : couleur terre / brun chaud
+\definecolor{colorPrerequis}{HTML}{8B5E3C}
+
+% Objectifs pédagogiques étudiants : bleu pédagogique
+\definecolor{colorObjectifsPedagogiquesEtudiants}{HTML}{1565C0}
+
+% Objectifs pédagogiques enseignants : prune / violet institutionnel
+\definecolor{colorObjectifsPedagogiquesEnseignants}{HTML}{63365C}
+
+% Point de cours : vert forêt
+\definecolor{colorPointCours}{HTML}{0F4C3A}
+
+% Remarques pédagogiques / écueils classiques : ocre
+\definecolor{colorRemarquesPedagogiquesEcueilsClassiques}{HTML}{C98A2C}
+
+% Remarques pédagogiques / conseils d'animation : bleu-gris
+\definecolor{colorRemarquesPedagogiquesConseilsAnimation}{HTML}{57659E}
+
+% Bilan : gris anthracite
+\definecolor{colorBilan}{HTML}{4A4A4A}
+
+% Palette numérotée (colorOne..colorSix) pour les annotations \ptFleche
+% libres (voir templates/styles/macros_annotations.tex) -- reprise dans
+% l'esprit du Dossier scientifique, à réutiliser/étendre à volonté.
+\definecolor{colorOne}{HTML}{8C0000}
+\definecolor{colorTwo}{HTML}{0F4C3A}
+\definecolor{colorThree}{HTML}{1565C0}
+\definecolor{colorFour}{HTML}{57659E}
+\definecolor{colorFive}{HTML}{4A3628}
+\definecolor{colorSix}{HTML}{2E7D5B}
+
+% ============================================================
+% TITRES PÉDAGOGIQUES AVEC MÉTADONNÉES
+% ============================================================
+
+\usepackage{etoolbox}
+
+\usetikzlibrary{
+  positioning,
+  arrows.meta,
+  shapes.geometric,
+  calc
+}
+
+
+% ============================================================
+% CLÉS DES MÉTADONNÉES
+% ============================================================
+
+\pgfkeys{
+  /TitrePedagogique/.is family,
+  /TitrePedagogique/indispensable/.initial=false,
+  /TitrePedagogique/difficulte/.initial=,
+  /TitrePedagogique/duree/.initial=,
+  /TitrePedagogique/type/.initial=
+}
+
+
+% ============================================================
+% PARAMÈTRES VISUELS DES MÉTADONNÉES
+% ============================================================
+
+\newcommand{\TitreMetaTailleType}{7.5pt}
+\newcommand{\TitreMetaInterligneType}{9pt}
+
+% Boîte et longueur utilisées pour MESURER la largeur réelle du bloc
+% de métadonnées (flèche + étoiles + point + durée) et garantir que
+% le trait gauche est toujours au moins aussi long que ce bloc (voir
+% \TitrePedagogiqueAvecMeta). Déclarées une seule fois ici (pas dans
+% la macro, sinon erreur "already defined" au 2e appel).
+\newsavebox{\TitreMetaBox}
+\newlength{\TitreBarGaucheNominale}
+\newlength{\TitreBarGaucheLongueur}
+% Boîte et longueur dédiées à la mesure de la largeur RÉELLE du
+% titre (voir \TitrePedagogiqueAvecMeta) : on évite \sbox0/\wd0 (le
+% registre de boîte global n°0, potentiellement réutilisé en
+% coulisses par d'autres packages comme tcolorbox) au profit d'une
+% boîte nommée. On stocke aussi le résultat dans un VRAI registre de
+% longueur (\newlength) plutôt que dans une macro \def contenant
+% \wd0 : le package calc (chargé par animate.sty) réécrit
+% \addtolength/\setlength pour comprendre des expressions comme
+% "0.5\linewidth", mais échoue à développer une macro qui contient
+% elle-même une primitive \wd0 cachée -> "Illegal unit of measure"
+% / "Package calc Error". Un \newlength classique, lui, est toujours
+% géré nativement, sans ambiguïté.
+\newsavebox{\TitreMesureTitre}
+\newlength{\TitreLargeurEffLen}
+
+% Boîte et longueur pour le cas "étoiles déplacées dans la barre
+% DROITE" (voir plus bas : si le titre est trop long pour tenir sur
+% une ligne, les étoiles quittent la barre gauche -- où restent
+% flèche/point/durée -- pour se loger dans la barre droite, ce qui
+% laisse le titre libre de passer sur plusieurs lignes).
+\newsavebox{\TitreMetaBoxDroite}
+\newlength{\TitreBarDroiteLongueur}
+% Drapeaux (booléens TeX NATIFS, \newif) lus/positionnés par
+% \TitrePedagogiqueAvecMeta et \TitreMetaBarreGauche.
+%
+% ⚠️ BUG CORRIGÉ : ces drapeaux étaient auparavant stockés comme des
+% chaînes "true"/"false" et testés/positionnés via
+% \ifstrequal{...}{true}{\def\Drapeau{false}}{...}. Ce motif s'est
+% avéré NE PAS persister de façon fiable (la valeur revenait à son
+% défaut peu après avoir été positionnée) -- c'est très probablement
+% ce qui empêchait aussi bien la flèche "indispensable" que le
+% déplacement des étoiles de fonctionner. Un \newif est un vrai
+% conditionnel TeX (\iftrue/\iffalse en interne), sans ce genre
+% d'ambiguïté : on l'utilise maintenant partout où on testait
+% auparavant un drapeau "maison".
+\newif\ifTitrePedTropLong
+\newif\ifTitrePedEtoilesGauche
+\TitrePedEtoilesGauchetrue % défaut : étoiles à gauche (cas normal)
+\newif\ifTitrePedIndispensable
+
+
+% ⚠️ BUG CORRIGÉ (3e tentative) : mettre \ExplSyntaxOn / \ExplSyntaxOff
+% À L'INTÉRIEUR du corps de \newcommand{...}{...} ne sert à RIEN :
+% \newcommand tokénise (découpe en unités lexicales) tout son corps
+% UNE SEULE FOIS, au moment de la DÉFINITION -- pas à chaque appel.
+% Au moment de cette définition, les catcodes normaux étaient actifs
+% (pas ceux d'expl3), donc "\tl_set:Nn" a été découpé en "\tl"
+% (commande inconnue) + les caractères littéraux "_","s","e","t",...
+% Un \ExplSyntaxOn PLACÉ DANS le corps arrive trop tard : le corps
+% est déjà figé en tokens séparés, l'exécuter plus tard ne les
+% "refusionne" pas. Il faut englober la DÉFINITION ELLE-MÊME (tout
+% le \newcommand{...}{...}) entre \ExplSyntaxOn et \ExplSyntaxOff.
+\ExplSyntaxOn
+
+\tl_new:N \g_titrepedagogique_cles_tl
+
+% Tampon réutilisé pour construire le texte de clés déjà 100%
+% développé (voir \TitrePedagogiqueAppliquerCles ci-dessous).
+\newcommand{\TitrePedagogiqueClesTmp}{}
+
+\newcommand{\TitrePedagogiqueAppliquerCles}[1]{%
+  \begingroup
+    % \tl_trim_spaces:N retire l'espace/retour à la ligne que le
+    % générateur .tex.j2 laisse en tête de liste (juste après le "["
+    % du template) -- sinon pgfkeys échoue sur " indispensable" (avec
+    % un espace) comme au tout premier essai.
+    \tl_set:Nn \g_titrepedagogique_cles_tl {#1}
+    \tl_trim_spaces:N \g_titrepedagogique_cles_tl
+    % \xdef (edef + global) : on construit ICI, dans ce groupe, le
+    % texte final "/TitrePedagogique/.cd,indispensable=True,..."
+    % ENTIÈREMENT développé (plus aucune macro cachée dedans), et on
+    % le rend global (\xdef) pour qu'il survive à la fermeture du
+    % groupe juste en dessous.
+    \xdef\TitrePedagogiqueClesTmp{/TitrePedagogique/.cd,\g_titrepedagogique_cles_tl}%
+  \endgroup
+  % \expandafter\pgfkeys\expandafter{\TitrePedagogiqueClesTmp} :
+  % \TitrePedagogiqueClesTmp est une macro TeX "plate" déjà 100%
+  % développée -- ce double \expandafter garantit que pgfkeys reçoit
+  % directement les caractères bruts (avec de vraies virgules au
+  % niveau top) AVANT même de commencer à lire son argument -- donc
+  % son découpage par virgule fonctionne normalement, exactement
+  % comme pour n'importe quel \pgfkeys{texte écrit à la main}.
+  \expandafter\pgfkeys\expandafter{\TitrePedagogiqueClesTmp}%
+}
+
+\ExplSyntaxOff
+
+
+% ============================================================
+% ÉLÉMENTS "PATH" (à dessiner À L'INTÉRIEUR d'une scène TikZ déjà
+% ouverte, sans créer leur propre \tikz{...}). Chaque élément est
+% dessiné en partant de x=0 = son BORD GAUCHE, et est centré
+% verticalement sur y=0. C'est le fait que TOUS les éléments soient
+% tracés dans la MÊME scène, sur le MÊME y=0, qui garantit
+% l'alignement parfait entre flèche / étoiles / point / durée / trait.
+% ============================================================
+
+% --- Flèche "Indispensable" ---------------------------------------
+%
+%   →
+%
+% #1 = Hauteur utile \HUtile (= hauteur totale de la flèche)
+%
+% ⚠️ Le facteur "1.5" ci-dessous (longueur de la flèche par rapport
+% à sa hauteur) est repris tel quel dans \TitreMetaBarreGauche pour
+% avancer le curseur \XCur après la flèche. Si tu changes ce 1.5
+% ICI, pense à le changer aussi là-bas (sinon même bug que les
+% étoiles : chevauchement avec l'élément suivant).
+\newcommand{\TitreIndispensableDansBarrePath}[1]{%
+  \pgfmathsetmacro{\ArrowLen}{#1*1.5}%
+  \draw[
+    -{Latex[length=#1 pt, width=#1 pt]},
+    color=white,
+    line width={#1*0.4},
+    line cap=round
+  ]
+    (0,0) -- (\ArrowLen pt, 0);
+}
+
+% --- Étoiles de difficulté ------------------------------------------
+%
+%   ★ ★ ☆ ☆ ☆
+%
+% #1 = Niveau (1 à 5)
+% #2 = Couleur des étoiles pleines (= couleur du titre / de la barre)
+% #3 = Hauteur utile \HUtile (= taille "slot" de chaque étoile ;
+%       la taille RÉELLEMENT dessinée est légèrement plus petite,
+%       voir \TitreEtoileTailleFacteur ci-dessous)
+%
+% IMPORTANT : cette macro calcule et EXPOSE elle-même la largeur
+% totale occupée (\TitreEtoilesLargeur), à partir du MÊME facteur
+% d'espacement que celui utilisé pour le dessin. Comme ça, si tu
+% changes \TitreEtoilesEspacementFacteur, la largeur suit
+% automatiquement : plus jamais de désynchronisation avec ce qui
+% vient après (la durée) -> c'est ce qui causait le chevauchement.
+\newcommand{\TitreEtoilesDansBarrePath}[3]{%
+  % Distance (en unités de \HUtile) entre les CENTRES de deux
+  % étoiles consécutives. -> SEULE valeur à modifier pour changer
+  % l'espacement entre étoiles.
+  \def\TitreEtoilesEspacementFacteur{2.00}%
+  % Taille RÉELLE de chaque étoile = ce facteur * \HUtile (facteur
+  % légèrement < 1 pour compenser le fait que la forme "star" de
+  % TikZ déborde un peu de sa boîte "minimum size" à cause de ses
+  % pointes -> évite que les étoiles dépassent du trait).
+  \def\TitreEtoileTailleFacteur{0.85}%
+
+  \foreach \i in {1,...,5}{%
+    \pgfmathsetmacro{\XPos}{(\i-1)*(#3*\TitreEtoilesEspacementFacteur)}%
+    \pgfmathsetmacro{\TailleEtoile}{#3*\TitreEtoileTailleFacteur}%
+    \ifnum\i>#1
+      % Étoile vide : contour blanc, intérieur blanc
+      \node[
+        star, star points=5, star point ratio=.50, rounded corners=0.2pt,
+        minimum size=\TailleEtoile pt, inner sep=0pt, outer sep=0pt,
+        draw=white, fill=white, line width=0.4pt, rotate=180
+      ] at (\XPos pt, 0) {};
+    \else
+      % Étoile pleine : contour blanc, remplie de la couleur du titre
+      \node[
+        star, star points=5, star point ratio=.50, rounded corners=0.2pt,
+        minimum size=\TailleEtoile pt, inner sep=0pt, outer sep=0pt,
+        draw=white, fill=#2, line width=0.4pt, rotate=180
+      ] at (\XPos pt, 0) {};
+    \fi
+  }%
+
+  % Largeur totale du bloc = position de la dernière étoile (centre)
+  % + sa propre taille "slot" (#3, pas la taille réduite, pour garder
+  % une marge visuelle propre après la 5e étoile).
+  \pgfmathsetmacro{\TitreEtoilesLargeurTmp}{4*(#3*\TitreEtoilesEspacementFacteur) + #3}%
+  \xdef\TitreEtoilesLargeur{\TitreEtoilesLargeurTmp}%
+}
+
+% --- Séparateur (point) ---------------------------------------------
+%
+%   •
+%
+% #1 = Épaisseur de la barre (ex: 0.3cm)
+% Diamètre du point = 20% de l'épaisseur de la barre -> rayon = 10%
+\newcommand{\TitreSeparateurDansBarrePath}[1]{%
+  \pgfmathsetmacro{\Rayon}{#1*0.1}%
+  \fill[white] (\Rayon pt, 0) circle (\Rayon pt);
+}
+
+
+% ============================================================
+% MÉTADONNÉES INCRUSTÉES DANS LA BARRE GAUCHE
+% ============================================================
+%
+% Schéma global de la barre gauche, tout est sur le même axe y=0 :
+%
+%   trait ───────────────────────────────
+%          →   ★ ★ ☆ ☆ ☆   •  25 min
+%
+\newcommand{\TitreMetaBarreGauche}[2]{%
+  % #1 = Couleur de fond de la barre (utilisée pour les étoiles pleines)
+  % #2 = Épaisseur de la barre (ex: 0.3cm)
+
+  \edef\TitreTmpInd{\pgfkeysvalueof{/TitrePedagogique/indispensable}}%
+  % DIAGNOSTIC TEMPORAIRE -- à retirer une fois le bug de la flèche
+  % résolu. Regarde dans le fichier .log la ligne "DIAGNOSTIC
+  % indispensable=[...]" : si tu vois autre chose que "True" ou
+  % "true" entre les crochets (ex: un espace, un retour à la ligne,
+  % "1", etc.), ça nous dira exactement quoi comparer en plus.
+  \typeout{DIAGNOSTIC indispensable=[\TitreTmpInd]}%
+  \edef\TitreTmpDiff{\pgfkeysvalueof{/TitrePedagogique/difficulte}}%
+  \edef\TitreTmpDuree{\pgfkeysvalueof{/TitrePedagogique/duree}}%
+
+  % --------------------------------------------------------------
+  % Test "indispensable = vrai" ROBUSTE face à la casse.
+  %
+  % ⚠️ L'ancien code faisait :
+  %     \lowercase{\edef\TitreTmpInd{\TitreTmpInd}}
+  % ... ce qui ne fonctionne PAS : \lowercase ne lit que les
+  % caractères LITTÉRALEMENT présents dans son argument, pas le
+  % contenu caché à l'intérieur d'une macro. Comme Jinja/Python
+  % écrit souvent "True"/"False" (majuscule) pour un booléen, la
+  % comparaison à "true" échouait silencieusement -> la flèche ne
+  % s'affichait jamais. On teste maintenant explicitement les
+  % variantes usuelles, et on stocke le résultat dans un vrai
+  % booléen TeX (\ifTitrePedIndispensable) plutôt que dans une
+  % chaîne "true"/"false" re-testée ensuite via \ifstrequal -- ce
+  % second motif s'est avéré ne pas persister de façon fiable.
+  % --------------------------------------------------------------
+  \TitrePedIndispensablefalse
+  \ifstrequal{\TitreTmpInd}{true}{\TitrePedIndispensabletrue}{}%
+  \ifstrequal{\TitreTmpInd}{True}{\TitrePedIndispensabletrue}{}%
+  \ifstrequal{\TitreTmpInd}{1}{\TitrePedIndispensabletrue}{}%
+  % DIAGNOSTIC TEMPORAIRE
+  \typeout{DIAGNOSTIC IndispensableBool=[\ifTitrePedIndispensable true\else false\fi]}%
+
+  % Hauteur utile COMMUNE à la flèche, aux étoiles et à la durée.
+  %
+  % ⚠️ BUG CORRIGÉ : l'ancienne formule "épaisseur - 1mm" devient
+  % NÉGATIVE dès que la barre est plus fine que 1mm -- c'est le cas
+  % des niveaux 4 (0.12cm) et surtout 5 (0.08cm). Une longueur de
+  % flèche négative fait planter en interne le calcul de la pointe
+  % TikZ "Latex[...]" -> "Package PGF Math Error: 1/0.0". On passe
+  % donc à une hauteur PROPORTIONNELLE (facteur de l'épaisseur),
+  % qui reste TOUJOURS positive quelle que soit l'épaisseur.
+  \pgfmathsetmacro{\HUtile}{#2*0.8}%
+
+  \hbox{%
+    \hspace{0.4em}% Marge gauche dans la barre
+    % baseline=0pt : le y=0 de CETTE scène coïncide avec la ligne de
+    % base courante -> c'est ce point qui sera ensuite réutilisé par
+    % \TitrePedagogiqueAvecMeta pour aligner tout le monde sur y=0.
+    \tikz[baseline=0pt]{%
+      \pgfmathsetmacro{\XCur}{0}% curseur horizontal courant
+
+      % --- 1. Flèche "Indispensable" ----------------------------
+      %   →
+      \ifTitrePedIndispensable
+        \begin{scope}[xshift=\XCur pt]
+          \TitreIndispensableDansBarrePath{\HUtile}%
+        \end{scope}
+        \pgfmathsetmacro{\XCur}{\XCur + 1.5*\HUtile + 0.5*\HUtile}%
+      \fi
+
+      % --- 2. Étoiles de difficulté ---------------------------------
+      %   ★ ★ ☆ ☆ ☆
+      % \ifTitrePedEtoilesGauche : positionné par
+      % \TitrePedagogiqueAvecMeta. Si le titre est trop long pour
+      % tenir sur une ligne, il vaut faux -- les étoiles sont alors
+      % dessinées dans la barre DROITE à la place (voir
+      % \TitreMetaBarreDroite), et on saute tout ce bloc ici (donc
+      % le point+durée qui suit s'enchaîne directement après la
+      % flèche, sans "trou" pour des étoiles absentes).
+      \ifTitrePedEtoilesGauche
+      \ifx\TitreTmpDiff\empty\else
+        \begin{scope}[xshift=\XCur pt]
+          \TitreEtoilesDansBarrePath{\TitreTmpDiff}{#1}{\HUtile}%
+        \end{scope}
+        % \TitreEtoilesLargeur vient d'être calculée PAR
+        % \TitreEtoilesDansBarrePath elle-même (voir plus haut) :
+        % toujours synchronisée avec l'espacement réellement utilisé.
+        % Espace entre la fin du bloc étoiles et le point de séparation,
+        % en unités de \HUtile. -> C'est ICI qu'il faut augmenter la
+        % valeur si tu veux encore plus d'écart avant le point/la durée.
+        \def\TitreEspaceEtoilesPoint{1.2}%
+        \pgfmathsetmacro{\XCur}{\XCur + \TitreEtoilesLargeur + \TitreEspaceEtoilesPoint*\HUtile}%
+      \fi
+      \fi
+
+      % --- 3. Séparateur (point) puis durée -----------------------------
+      %   •  25 min
+      \ifx\TitreTmpDuree\empty\else
+        \begin{scope}[xshift=\XCur pt]
+          \TitreSeparateurDansBarrePath{#2}%
+        \end{scope}
+        \pgfmathsetmacro{\DiamPoint}{#2*0.2}%
+        \pgfmathsetmacro{\XCur}{\XCur + \DiamPoint + 0.35*\HUtile}%
+        \node[
+          anchor=west, inner sep=0pt, outer sep=0pt,
+          font={\fontsize{\HUtile pt}{\HUtile pt}\selectfont\bfseries},
+          text=white
+        ] at (\XCur pt, 0) {\TitreTmpDuree};%
+      \fi
+    }%
+    \hspace{0.2em}%
+  }%
+}
+
+
+% ============================================================
+% MÉTADONNÉES INCRUSTÉES DANS LA BARRE DROITE (étoiles seules)
+% ============================================================
+%
+% N'est utilisée QUE quand le titre est trop long pour tenir sur une
+% ligne (voir \TitrePedagogiqueAvecMeta) : les étoiles quittent alors
+% la barre gauche pour se loger ici, dans la barre droite, ce qui
+% libère de la place à gauche et laisse le titre passer sur
+% plusieurs lignes sans être davantage comprimé.
+%
+%   trait ─────────
+%          ★ ★ ☆ ☆ ☆
+%
+\newcommand{\TitreMetaBarreDroite}[2]{%
+  % #1 = Couleur de fond de la barre (utilisée pour les étoiles pleines)
+  % #2 = Épaisseur de la barre (ex: 0.3cm)
+  \edef\TitreTmpDiffDroite{\pgfkeysvalueof{/TitrePedagogique/difficulte}}%
+  \pgfmathsetmacro{\HUtile}{#2*0.8}%
+  \hbox{%
+    \hspace{0.2em}%
+    \tikz[baseline=0pt]{%
+      \ifx\TitreTmpDiffDroite\empty\else
+        \TitreEtoilesDansBarrePath{\TitreTmpDiffDroite}{#1}{\HUtile}%
+      \fi
+    }%
+    \hspace{0.4em}%
+  }%
+}
+
+
+% ============================================================
+% TYPE D'EXERCICE
+% ============================================================
+
+\newcommand{\TitreMetaType}[1]{%
+  \edef\TitreTmpType{\pgfkeysvalueof{/TitrePedagogique/type}}%
+  \ifx\TitreTmpType\empty\else
+    \par\vspace{0.15ex}%
+    {\centering
+      \fontsize{\TitreMetaTailleType}{\TitreMetaInterligneType}\selectfont
+      \itshape
+      \textcolor{#1}{\TitreTmpType}%
+      \par
+    }%
+  \fi
+}
+
+
+% ============================================================
+% TITRE PÉDAGOGIQUE GÉNÉRIQUE
+% ============================================================
+
+\newcommand{\TitrePedagogiqueAvecMeta}[7]{%
+  % #1 = couleur
+  % #2 = police du titre (ex: \fontsize{15}{17}\selectfont\bfseries)
+  % #3 = largeur MAXIMALE du titre (au-delà, retour à la ligne)
+  % #4 = épaisseur des barres
+  % #5 = distance entre barre et titre
+  % #6 = espace vertical après le titre
+  % #7 = texte du titre
+
+  % --------------------------------------------------------------
+  % Le titre a-t-il BESOIN de passer à la ligne ? (comparaison de sa
+  % largeur naturelle, SUR UNE SEULE LIGNE, sans limite, à #3). Sert
+  % à décider où vont les étoiles (voir \TitreEtoilesGaucheOui juste
+  % en dessous) : \hbox n'ayant pas de limite de largeur, c'est la
+  % seule façon fiable de savoir si le texte "voudrait" tenir sur une
+  % ligne ou pas, indépendamment de la largeur repliée qu'on calcule
+  % juste après avec varwidth.
+  % --------------------------------------------------------------
+  \sbox{\TitreMesureTitre}{\hbox{#2#7}}%
+  \ifdim\wd\TitreMesureTitre>#3
+    \TitrePedTropLongtrue
+  \else
+    \TitrePedTropLongfalse
+  \fi
+  % DIAGNOSTIC TEMPORAIRE
+  \typeout{DIAGNOSTIC TitreTropLong=[\ifTitrePedTropLong true\else false\fi] largeurTitreNat=[\the\wd\TitreMesureTitre] largeurMax=[\the\dimexpr#3\relax]}%
+
+  % Étoiles à gauche (cas normal) sauf si le titre est trop long :
+  % dans ce cas elles migrent vers la barre DROITE (voir
+  % \TitreMetaBarreDroite plus bas) pour ne pas comprimer davantage
+  % un titre qui a de toute façon déjà besoin de plusieurs lignes.
+  \ifTitrePedTropLong
+    \TitrePedEtoilesGauchefalse
+  \else
+    \TitrePedEtoilesGauchetrue
+  \fi
+
+  % --------------------------------------------------------------
+  % Largeur RÉELLE du titre.
+  %
+  % ⚠️ CHANGEMENT : l'ancienne mesure utilisait \hbox{#2 #7}, qui ne
+  % peut JAMAIS retourner à la ligne (largeur infinie) -- elle ne
+  % pouvait donc que dire "tient en une ligne ?" oui/non, jamais
+  % calculer la largeur réelle d'un titre qui doit passer sur 2+
+  % lignes (elle retombait alors bêtement sur #3, la largeur MAX,
+  % même si le texte replié aurait pu tenir dans moins large).
+  %
+  % \varwidth{#3} (package déjà chargé dans le projet) résout ça
+  % nativement : il replie le texte dans la limite #3 si besoin,
+  % et renvoie la largeur la plus ÉTROITE qui contient le résultat
+  % (= largeur naturelle si une seule ligne suffit, ou largeur de la
+  % ligne repliée la plus longue sinon). \TitreLargeurEffLen suit
+  % donc TOUJOURS la largeur réelle du bloc de texte, qu'il tienne
+  % sur une ou plusieurs lignes -> le trait s'ajuste bien dans tous
+  % les cas, plus besoin du \ifdim de comparaison à #3.
+  % --------------------------------------------------------------
+  \sbox{\TitreMesureTitre}{\begin{varwidth}{#3}#2#7\end{varwidth}}%
+  \setlength{\TitreLargeurEffLen}{\wd\TitreMesureTitre}%
+  % DIAGNOSTIC TEMPORAIRE
+  \typeout{DIAGNOSTIC LargeurEffLen(varwidth)=[\the\TitreLargeurEffLen] largeurMax(#3)=[\the\dimexpr#3\relax]}%
+
+  % --------------------------------------------------------------
+  % Mesure du bloc de métadonnées, ELLE AUSSI avant l'ouverture du
+  % tikzpicture principal (comme le titre juste au-dessus).
+  %
+  % ⚠️ BUG CORRIGÉ : \TitreMetaBarreGauche crée SA PROPRE scène TikZ
+  % interne (\tikz[baseline=0pt]{...}). La mesurer via \sbox AU
+  % MILIEU d'un tikzpicture déjà ouvert (comme c'était fait avant,
+  % dans l'étape 3 plus bas) empile une scène TikZ dans une boîte
+  % PENDANT qu'une autre est activement en train de dessiner : ça
+  % perturbe la pile de polices interne de pgf et la fait boucler à
+  % l'infini -> "TeX capacity exceeded" sur \pgf@selectfontorig. En
+  % la mesurant ICI, hors de tout tikzpicture actif (exactement
+  % comme pour le titre), on évite ce conflit.
+  \sbox{\TitreMetaBox}{\TitreMetaBarreGauche{#1}{#4}}%
+
+  % Mesure de la boîte "étoiles pour la barre droite", SEULEMENT si
+  % elles y ont été déplacées (titre trop long) ET qu'il y a
+  % effectivement une difficulté à afficher (sinon rien à mesurer).
+  \edef\TitreTmpDiffCheck{\pgfkeysvalueof{/TitrePedagogique/difficulte}}%
+  % DIAGNOSTIC TEMPORAIRE
+  \typeout{DIAGNOSTIC difficulte=[\TitreTmpDiffCheck] EtoilesGaucheOui=[\ifTitrePedEtoilesGauche true\else false\fi]}%
+  \ifTitrePedTropLong
+    \ifx\TitreTmpDiffCheck\empty\else
+      \sbox{\TitreMetaBoxDroite}{\TitreMetaBarreDroite{#1}{#4}}%
+    \fi
+  \fi
+
+  \noindent
+  \begin{tikzpicture}[baseline=(title.base)]
+
+    % --------------------------------------------------------
+    % 1. TITRE PRINCIPAL
+    % --------------------------------------------------------
+    %        |<-#5->[ TITRE ]<-#5->|
+    %
+    % Ancre par défaut = "center" : title est donc centré
+    % verticalement sur y=0, et title.west/east collent au texte
+    % réel grâce à \TitreLargeurEffLen.
+    \node[
+      inner sep=0pt,
+      outer sep=0pt,
+      align=center,
+      text width=\TitreLargeurEffLen,
+      font=#2,
+      text=#1
+    ] (title) at (0.5\linewidth,0) {#7};
+
+
+    % --------------------------------------------------------
+    % 2. TYPE D'EXERCICE (Sous le titre)
+    % --------------------------------------------------------
+    \node[
+      below=0.25ex of title.south,
+      inner sep=0pt,
+      outer sep=0pt,
+      text width=#3,
+      align=center
+    ] (type) {%
+      \TitreMetaType{#1}%
+    };
+
+
+    % --------------------------------------------------------
+    % 3. BARRE GAUCHE (trait + métadonnées incrustées)
+    % --------------------------------------------------------
+    %
+    %  trait ───────────────────────  [ TITRE ]
+    %   →  ★★☆☆☆   • 25 min     <-->
+    %                             #5
+    %
+    % IMPORTANT : le trait doit être AU MOINS aussi long que le bloc
+    % de métadonnées, sinon la fin du bloc (flèche, étoiles, point,
+    % durée -> tout est dessiné en BLANC) déborde sur le fond
+    % blanc/transparent de la page et devient invisible. On mesure
+    % donc la largeur RÉELLE du bloc (\TitreMetaBox) et on prend le
+    % maximum entre cette largeur et la longueur "nominale" (celle
+    % qui amène pile jusqu'au titre).
+
+    % Largeur "nominale" du trait gauche = distance entre le bord
+    % gauche (x=0) et le bord gauche du titre, moins l'espace #5.
+    % Le titre est centré sur 0.5\linewidth avec une largeur
+    % \TitreLargeurEffLen -> son bord gauche est à
+    % 0.5\linewidth - 0.5\TitreLargeurEffLen.
+    \setlength{\TitreBarGaucheNominale}{0.5\linewidth}%
+    \addtolength{\TitreBarGaucheNominale}{-0.5\TitreLargeurEffLen}%
+    \addtolength{\TitreBarGaucheNominale}{-#5}%
+
+    % Largeur réelle du bloc de métadonnées : déjà mesurée plus haut,
+    % AVANT l'ouverture de ce tikzpicture (voir \TitreMetaBox) --
+    % on ne la remesure pas ici, on compare juste au trait nominal.
+    \ifdim\wd\TitreMetaBox>\TitreBarGaucheNominale
+      \setlength{\TitreBarGaucheLongueur}{\wd\TitreMetaBox}%
+    \else
+      \setlength{\TitreBarGaucheLongueur}{\TitreBarGaucheNominale}%
+    \fi
+    \pgfmathsetmacro{\BarGaucheLongueurPt}{\TitreBarGaucheLongueur/1pt}%
+
+    \draw[
+      color=#1,
+      line width=#4,
+      line cap=rect
+    ] (0,0) -- (\BarGaucheLongueurPt pt, 0);
+
+    % anchor=base west : force le y=0 INTERNE de \TitreMetaBarreGauche
+    % (fixé par \tikz[baseline=0pt] dans cette macro) à coïncider
+    % EXACTEMENT avec le y=0 de cette scène-ci -> même axe que le
+    % trait et que le centre du titre, quel que soit le contenu.
+    % On réutilise directement la boîte déjà mesurée (\usebox), pas
+    % besoin de redessiner le contenu une seconde fois.
+    \node[
+      anchor=base west,
+      inner sep=0pt,
+      outer sep=0pt
+    ] at (0,0) {\usebox{\TitreMetaBox}};
+
+
+    % --------------------------------------------------------
+    % 4. BARRE DROITE (trait plein, ou étoiles si déplacées ici)
+    % --------------------------------------------------------
+    %
+    %  [ TITRE ]      trait ──────────────────
+    %            <-->
+    %             #5
+    %
+    %  -- ou, si le titre est trop long (étoiles déplacées) --
+    %
+    %  [ TITRE  ]     trait ─────
+    %  (2 lignes) <-->  ★ ★ ☆ ☆ ☆
+    \path let \p1 = (title.east) in
+      coordinate (barRightStart) at (\x1 + #5, 0);
+
+    \ifTitrePedTropLong
+      \ifx\TitreTmpDiffCheck\empty
+        % titre trop long mais rien à afficher (pas de difficulté) :
+        % trait droit normal, rien de spécial à faire.
+        \draw[color=#1, line width=#4, line cap=rect] (barRightStart) -- (\linewidth,0);
+      \else
+        % Étoiles déplacées dans la barre droite : même logique que la
+        % barre gauche (trait au moins aussi long que le contenu réel,
+        % voir plus haut) -- comme le titre est centré, la longueur
+        % "nominale" du côté droit est la MÊME que \TitreBarGaucheNominale
+        % (symétrie du centrage), pas besoin de la recalculer.
+        \ifdim\wd\TitreMetaBoxDroite>\TitreBarGaucheNominale
+          \setlength{\TitreBarDroiteLongueur}{\wd\TitreMetaBoxDroite}%
+        \else
+          \setlength{\TitreBarDroiteLongueur}{\TitreBarGaucheNominale}%
+        \fi
+        \pgfmathsetmacro{\BarDroiteLongueurPt}{\TitreBarDroiteLongueur/1pt}%
+
+        \draw[color=#1, line width=#4, line cap=rect]
+          (barRightStart) -- ($(barRightStart)+(\BarDroiteLongueurPt pt,0)$);
+
+        \node[anchor=base west, inner sep=0pt, outer sep=0pt]
+          at (barRightStart) {\usebox{\TitreMetaBoxDroite}};
+      \fi
+    \else
+      \draw[
+        color=#1,
+        line width=#4,
+        line cap=rect
+      ] (barRightStart) -- (\linewidth,0);
+    \fi%
+
+  \end{tikzpicture}
+
+  \par
+  \vspace{#6}
+}
+
+
+% ============================================================
+% COMMANDES NIVEAUX 1 À 5
+% ============================================================
+
+\NewDocumentCommand{\TitreNiveauUn}{O{}m}{%
+  \pgfkeys{/TitrePedagogique/indispensable=false, /TitrePedagogique/difficulte=, /TitrePedagogique/duree=, /TitrePedagogique/type=}%
+  \TitrePedagogiqueAppliquerCles{#1}%
+  \TitrePedagogiqueAvecMeta{colorStitre}{\fontsize{15}{17}\selectfont\bfseries}{0.65\linewidth}{0.3cm}{0.4cm}{0.35cm}{#2}%
+}
+
+\NewDocumentCommand{\TitreNiveauDeux}{O{}m}{%
+  \pgfkeys{/TitrePedagogique/indispensable=false, /TitrePedagogique/difficulte=, /TitrePedagogique/duree=, /TitrePedagogique/type=}%
+  \TitrePedagogiqueAppliquerCles{#1}%
+  \TitrePedagogiqueAvecMeta{colorSStitre}{\fontsize{12}{14}\selectfont\bfseries}{0.65\linewidth}{0.22cm}{0.3cm}{0.30cm}{#2}%
+}
+
+\NewDocumentCommand{\TitreNiveauTrois}{O{}m}{%
+  \pgfkeys{/TitrePedagogique/indispensable=false, /TitrePedagogique/difficulte=, /TitrePedagogique/duree=, /TitrePedagogique/type=}%
+  \TitrePedagogiqueAppliquerCles{#1}%
+  \TitrePedagogiqueAvecMeta{colorSSStitre}{\fontsize{10}{12}\selectfont\bfseries}{0.65\linewidth}{0.16cm}{0.2cm}{0.25cm}{#2}%
+}
+
+\NewDocumentCommand{\TitreNiveauQuatre}{O{}m}{%
+  \pgfkeys{/TitrePedagogique/indispensable=false, /TitrePedagogique/difficulte=, /TitrePedagogique/duree=, /TitrePedagogique/type=}%
+  \TitrePedagogiqueAppliquerCles{#1}%
+  \TitrePedagogiqueAvecMeta{colorSSStitre}{\fontsize{10}{12}\selectfont\itshape}{0.65\linewidth}{0.12cm}{0.15cm}{0.20cm}{#2}%
+}
+
+\NewDocumentCommand{\TitreNiveauCinq}{O{}m}{%
+  \pgfkeys{/TitrePedagogique/indispensable=false, /TitrePedagogique/difficulte=, /TitrePedagogique/duree=, /TitrePedagogique/type=}%
+  \TitrePedagogiqueAppliquerCles{#1}%
+  \TitrePedagogiqueAvecMeta{grayBrume}{\fontsize{9}{11}\selectfont\itshape}{0.65\linewidth}{0.08cm}{0.10cm}{0.15cm}{#2}%
+}
+
+
+
+
+
+% ----------------------------------------------------------
+
+\newcommand{\TitreNiveauUnOld}[1]{%
+  \noindent\begin{tikzpicture}
+    \node[inner sep=0pt, align=center, font=\fontsize{15}{17}\selectfont\bfseries,
+      color=colorStitre] (title) at (0.5\linewidth,0) {
+      \begin{varwidth}{0.85\linewidth}\centering #1\end{varwidth}
+    };
+    \draw[colorStitre, line width=0.3cm] (0,0) -- ([xshift=-0.5cm]title.west);
+    \draw[colorStitre, line width=0.3cm] ([xshift=0.5cm]title.east) -- (\linewidth,0);
+  \end{tikzpicture}
+  \par\vspace{0.35cm}
+}
+
+\newcommand{\TitreNiveauDeuxOld}[1]{%
+  \noindent\begin{tikzpicture}
+    \node[inner sep=0pt, align=center, font=\fontsize{12}{14}\selectfont\bfseries,
+      color=colorSStitre] (title) at (0.5\linewidth,0) {
+      \begin{varwidth}{0.85\linewidth}\centering #1\end{varwidth}
+    };
+    \draw[colorSStitre, line width=0.15cm] (0,0) -- ([xshift=-0.3cm]title.west);
+    \draw[colorSStitre, line width=0.15cm] ([xshift=0.3cm]title.east) -- (\linewidth,0);
+  \end{tikzpicture}
+  \par\vspace{0.3cm}
+}
+
+\newcommand{\TitreNiveauTroisOld}[1]{%
+  \noindent\begin{tikzpicture}
+    \node[inner sep=0pt, align=center, font=\fontsize{10}{12}\selectfont\bfseries,
+      color=colorSSStitre] (title) at (0.5\linewidth,0) {
+      \begin{varwidth}{0.85\linewidth}\centering #1\end{varwidth}
+    };
+    \draw[colorSSStitre, line width=0.10cm] (0,0) -- ([xshift=-0.2cm]title.west);
+    \draw[colorSSStitre, line width=0.10cm] ([xshift=0.2cm]title.east) -- (\linewidth,0);
+  \end{tikzpicture}
+  \par\vspace{0.25cm}
+}
+
+% Niveaux 4 et 5 : pas dans le fichier d'origine -- extrapolés dans le
+% même esprit (barre de plus en plus fine, texte de plus en plus léger).
+\newcommand{\TitreNiveauQuatreOld}[1]{%
+  \noindent{\color{colorSSStitre}\rule{0.4cm}{0.06cm}}\ %
+  \textit{\fontsize{10}{12}\selectfont #1}
+  \par\vspace{0.2cm}
+}
+
+\newcommand{\TitreNiveauCinqOld}[1]{%
+  \noindent{\color{grayBrume}\rule{0.25cm}{0.04cm}}\ %
+  \textit{\fontsize{9}{11}\selectfont\color{grayBrume} #1}
+  \par\vspace{0.15cm}
+}
+
+% ------------------------------------------------------------------
+% \EncadreUn{titre vertical}{couleur}{contenu} et
+% \EncadreDeux{titre vertical (centre)}{petit label (bas)}{couleur}{contenu}
+% -- repris tels quels du Dossier scientifique. Disponibles pour tout
+% usage libre dans les champs `enonce`/`correction`/`solution`/... du YAML.
+% ------------------------------------------------------------------
+\newcommand{\EncadreUn}[3]{%
+  \begin{tcolorbox}[
+      enhanced, notitle, colback=white, colbacklower=white,
+      frame hidden, boxrule=0pt, sharp corners,
+      borderline west={4pt}{0pt}{#2}, left=6mm, fontupper=\sffamily,
+      overlay={
+          \fill[#2] (frame.south west) rectangle ([xshift=4pt]frame.north west);
+          \node[rotate=90, anchor=center, font=\sffamily\bfseries\small, text=white]
+            at ([xshift=2pt]frame.west |- frame.center) {#1};
+        }
+    ]
+    #3
+  \end{tcolorbox}
+}
+
+\newcommand{\EncadreDeux}[4]{%
+  \begin{tcolorbox}[
+      enhanced, notitle, colback=white, colbacklower=white,
+      frame hidden, boxrule=0pt, sharp corners,
+      borderline west={4pt}{0pt}{#3}, left=7mm, fontupper=\sffamily,
+      overlay={
+          \fill[#3] (frame.south west) rectangle ([xshift=4pt]frame.north west);
+          \node[rotate=90, anchor=south, font=\sffamily\bfseries, text=#3]
+            at ([xshift=2pt]frame.west) {#2};
+          \node[rotate=90, anchor=center, font=\sffamily\bfseries\small, text=white]
+            at ([xshift=2pt]frame.west |- frame.center) {#1};
+        }
+    ]
+    #4
+  \end{tcolorbox}
+}
+
+% ============================================================
+% Environnement générique
+% ============================================================
+
+\NewDocumentEnvironment{encadrestylezero}{mmm}
+{%
+  \begin{tcolorbox}[
+    %float, % <-- Rend la tcolorbox elle-même flottante
+    enhanced,
+    notitle,
+    colback=#3!5,
+    colbacklower=white,
+    frame hidden,
+    boxrule=0pt,
+    sharp corners,
+    borderline west={4pt}{0pt}{#3},
+    left=7mm,
+    fontupper=\sffamily,
+    overlay={%
+      % Bande verticale
+      \fill[#3]
+        (frame.south west)
+        rectangle
+        ([xshift=4pt]frame.north west);
+
+      % Étiquette
+      \node[
+        rotate=90,
+        anchor=south,
+        font={\sffamily\bfseries\fontsize{5pt}{6pt}\selectfont},
+        text=#3,
+        inner sep=0pt
+      ] at ([xshift=-3pt]frame.west)
+      {#2};
+
+      % Titre
+      \node[
+        rotate=90,
+        anchor=center,
+        font={\sffamily\bfseries\small\fontsize{5pt}{6pt}\selectfont},
+        text=white,
+        inner sep=0pt
+      ] at ([xshift=2pt]frame.west |- frame.center)
+      {#1};
+    }
+  ]
+}
+{%
+  \end{tcolorbox}%
+}
+
+
+\NewDocumentEnvironment{encadrestyle}{mmm}
+{%
+  \begingroup
+  %
+  \begin{tcolorbox}[
+    enhanced,
+    notitle,
+    colback=#3!5,
+    colbacklower=white,
+    frame hidden,
+    boxrule=0pt,
+    sharp corners,
+    borderline west={4pt}{0pt}{#3},
+    left=7mm,
+    fontupper=\sffamily,
+    overlay={%
+      %
+      \fill[#3]
+        (frame.south west)
+        rectangle
+        ([xshift=4pt]frame.north west);
+
+      %
+      \node[
+        rotate=90,
+        anchor=south,
+        font=\sffamily\bfseries,
+        text=#3,
+        inner sep=0pt
+      ] at ([xshift=-3pt]frame.west)
+      {%
+        \begingroup
+        \fontsize{5pt}{6pt}\selectfont
+        #2%
+        \endgroup
+      };
+
+      %
+      \node[
+        rotate=90,
+        anchor=center,
+        font=\sffamily\bfseries,
+        text=white,
+        inner sep=0pt
+      ] at ([xshift=2pt]frame.west |- frame.center)
+      {%
+        \begingroup
+        \fontsize{5pt}{6pt}\selectfont
+        #1%
+        \endgroup
+      };
+    }
+  ]%
+}
+{%
+  \end{tcolorbox}%
+  \endgroup
+}
+
+% ============================================================
+% Environnements pédagogiques
+% ============================================================
+
+
+\NewDocumentEnvironment{prerequis}{o}
+{%
+  \IfNoValueTF{#1}
+    {\begin{encadrestyle}{Prérequis}{}{colorOchre}}
+    {\begin{encadrestyle}{Prérequis}{#1}{colorOchre}}
+}
+{%
+  \end{encadrestyle}%
+}
+
+\NewDocumentEnvironment{objectifspedagogiquesetudiants}{o}
+{%
+  \IfNoValueTF{#1}
+    {\begin{encadrestyle}{Objectifs pédagogiques (étudiants)}{}{colorObjectifsPedagogiquesEtudiants}}
+    {\begin{encadrestyle}{Objectifs pédagogiques (étudiants)}{#1}{colorObjectifsPedagogiquesEtudiants}}
+}
+{%
+  \end{encadrestyle}%
+}
+
+\NewDocumentEnvironment{objectifspedagogiquesenseignants}{o}
+{%
+  \IfNoValueTF{#1}
+    {\begin{encadrestyle}{Objectifs pédagogiques (enseignants)}{}{colorObjectifsPedagogiquesEnseignants}}
+    {\begin{encadrestyle}{Objectifs pédagogiques (enseignants)}{#1}{colorObjectifsPedagogiquesEnseignants}}
+}
+{%
+  \end{encadrestyle}%
+}
+
+\NewDocumentEnvironment{pointcours}{o}
+{%
+  \IfNoValueTF{#1}
+    {\begin{encadrestyle}{Point de cours}{}{colorPointCours}}
+    {\begin{encadrestyle}{Point de cours}{#1}{colorPointCours}}
+}
+{%
+  \end{encadrestyle}%
+}
+
+\NewDocumentEnvironment{coupdepouce}{o}
+{%
+  \IfNoValueTF{#1}
+    {\begin{encadrestyle}{Coup de pouce}{}{colorOchre}}
+    {\begin{encadrestyle}{Coup de pouce}{#1}{colorOchre}}
+}
+{%
+  \end{encadrestyle}%
+}
+
+
+\NewDocumentEnvironment{correction}{o}
+{%
+  \IfNoValueTF{#1}
+    {\begin{encadrestyle}{Correction}{}{greenSapin}}
+    {\begin{encadrestyle}{Correction}{#1}{greenSapin}}
+}
+{%
+  \end{encadrestyle}%
+}
+
+
+\NewDocumentEnvironment{solutiondetaillee}{o}
+{%
+  \IfNoValueTF{#1}
+    {\begin{encadrestyle}{Solution détaillée}{}{grayPierre}}
+    {\begin{encadrestyle}{Solution détaillée}{#1}{grayPierre}}
+}
+{%
+  \end{encadrestyle}%
+}
+
+
+\NewDocumentEnvironment{remarque}{o}
+{%
+  \IfNoValueTF{#1}
+    {\begin{encadrestyle}{Remarque}{}{headerblue}}
+    {\begin{encadrestyle}{Remarque}{#1}{headerblue}}
+}
+{%
+  \end{encadrestyle}%
+}
+
+\NewDocumentEnvironment{remarquespedagogiquesecueilsclassiques}{o}
+{%
+  \IfNoValueTF{#1}
+    {\begin{encadrestyle}{Remarques pédagogiques (écueils classiques)}{}{colorRemarquesPedagogiquesEcueilsClassiques}}
+    {\begin{encadrestyle}{Remarques pédagogiques (écueils classiques)}{#1}{colorRemarquesPedagogiquesEcueilsClassiques}}
+}
+{%
+  \end{encadrestyle}%
+}
+
+\NewDocumentEnvironment{remarquespedagogiquesconseilsanimation}{o}
+{%
+  \IfNoValueTF{#1}
+    {\begin{encadrestyle}{Remarques pédagogiques (conseils d'animation)}{}{colorRemarquesPedagogiquesConseilsAnimation}}
+    {\begin{encadrestyle}{Remarques pédagogiques (conseils d'animation)}{#1}{colorRemarquesPedagogiquesConseilsAnimation}}
+}
+{%
+  \end{encadrestyle}%
+}
+
+\NewDocumentEnvironment{bilan}{o}
+{%
+  \IfNoValueTF{#1}
+    {\begin{encadrestyle}{Bilan}{}{colorBilan}}
+    {\begin{encadrestyle}{Bilan}{#1}{colorBilan}}
+}
+{%
+  \end{encadrestyle}%
+}
+
+
+\NewDocumentEnvironment{allerplusloin}{o}
+{%
+  \IfNoValueTF{#1}
+    {\begin{encadrestyle}{Aller plus loin}{}{Prune}}
+    {\begin{encadrestyle}{Aller plus loin}{#1}{Prune}}
+}
+{%
+  \end{encadrestyle}%
+}
+
+
+% % ============================================================
+% % TITRES PÉDAGOGIQUES AVEC MÉTADONNÉES
+% % ============================================================
+
+% \usepackage{etoolbox}
+
+% \usetikzlibrary{
+%   positioning,
+%   arrows.meta,
+%   shapes.geometric
+% }
+
+
+% % ============================================================
+% % CLÉS DES MÉTADONNÉES
+% % ============================================================
+
+% % IMPORTANT :
+% % On donne ici le chemin COMPLET à chaque clé.
+% %
+% % Cela évite toute ambiguïté avec :
+% %
+% %   indispensable/.initial
+% %
+% % et garantit que les clés appartiennent bien à la famille
+% % /TitrePedagogique.
+
+% \pgfkeys{
+%   /TitrePedagogique/.is family,
+%   /TitrePedagogique/indispensable/.initial=false,
+%   /TitrePedagogique/difficulte/.initial=,
+%   /TitrePedagogique/duree/.initial=,
+%   /TitrePedagogique/type/.initial=
+% }
+
+
+% % ============================================================
+% % PARAMÈTRES VISUELS DES MÉTADONNÉES
+% % ============================================================
+
+% % Ces paramètres sont modifiés automatiquement par
+% % \TitrePedagogiqueAvecMeta.
+% %
+% % Ils permettent de régler séparément :
+% %
+% %   - taille des étoiles
+% %   - taille de la flèche
+% %   - taille de la durée
+% %   - taille du type
+% %   - espacement entre les éléments
+
+% \newcommand{\TitreMetaTailleEtoile}{0.78em}
+% \newcommand{\TitreMetaEchelleEtoile}{0.78}
+% \newcommand{\TitreMetaTailleDuree}{8pt}
+% \newcommand{\TitreMetaInterligneDuree}{9.5pt}
+% \newcommand{\TitreMetaTailleType}{7.5pt}
+% \newcommand{\TitreMetaInterligneType}{9pt}
+
+% \newcommand{\TitreMetaEspaceFlecheEtoiles}{0.65em}
+% \newcommand{\TitreMetaEspaceEtoilesDuree}{0.65em}
+% \newcommand{\TitreMetaEspaceAvantFleche}{0.15em}
+% \newcommand{\TitreMetaEspaceApresDuree}{0.15em}
+
+
+% % ============================================================
+% % ÉTOILES DE DIFFICULTÉ
+% % ============================================================
+
+% % #1 = niveau de difficulté (1 à 5)
+% % #2 = couleur
+% %
+% % Les étoiles sont volontairement un peu espacées afin de ne
+% % pas donner l'impression d'un seul bloc.
+% %
+% % Elles utilisent la même couleur que la barre et le titre.
+
+% \newcommand{\TitreEtoiles}[2]{%
+%   \tikz[
+%     baseline=-0.35ex,
+%     x=\TitreMetaEchelleEtoile em,
+%     y=\TitreMetaEchelleEtoile em,
+%   ]{%
+%     \foreach \i in {1,...,5}{%
+%       \ifnum\i>#1
+%         % Étoile vide
+%         \node[
+%           star,
+%           star points=5,
+%           star point ratio=.50,
+%           corner radius=0.5pt,
+%           rounded corners=1.5pt, % Ajuste l'arrondi des coins (ex: 1.5pt)
+%           minimum size=\TitreMetaTailleEtoile,
+%           inner sep=0.05pt,
+%           outer sep=0pt,
+%           draw=#2,
+%           fill=white,
+%           line width=1.2pt,      % Ajuste l'épaisseur du trait (ex: 1.2pt)
+%           rotate=180
+%         ] at ({(\i-1)*2.2},0) {};
+%       \else
+%         % Étoile pleine
+%         \node[
+%           star,
+%           star points=5,
+%           star point ratio=.50,
+%           corner radius=1.5pt,
+%           rounded corners=1.5pt, % Ajuste l'arrondi des coins (ex: 1.5pt)
+%           minimum size=\TitreMetaTailleEtoile,
+%           inner sep=0.05pt,
+%           outer sep=0pt,
+%           draw=#2,
+%           fill=#2,
+%           line width=1.2pt,      % Ajuste l'épaisseur du trait (ex: 1.2pt)
+%           rotate=180
+%         ] at ({(\i-1)*2.2},0) {};
+%       \fi
+%     }%
+%   }%
+% }
+
+
+% % ============================================================
+% % FLÈCHE "INDISPENSABLE"
+% % ============================================================
+
+% % #1 = couleur
+% %
+% % Flèche volontairement petite et fine.
+% % Elle est entièrement dessinée en TikZ.
+
+% \newcommand{\TitreIndispensable}[1]{%
+%   \tikz[
+%     baseline=-0.35ex
+%   ]{%
+%     \draw[
+%       -{Latex[
+%         length=1.55cm,
+%         width=1.15cm
+%       ]
+%       },
+%       color=#1,
+%       line width=0.65cm,
+%     ]
+%       (0,0) -- (0.95em,0);
+%   }%
+% }
+
+
+% % ============================================================
+% % SÉPARATEUR
+% % ============================================================
+
+% % Petit point entre les étoiles et la durée.
+
+% \newcommand{\TitreSeparateur}[1]{%
+%   \tikz[
+%     baseline=-0.35ex
+%   ]{%
+%     \fill[
+%       #1
+%     ]
+%       (0,0)
+%       circle (0.20ex);
+%   }%
+% }
+
+
+% % ============================================================
+% % MÉTADONNÉES SUR LA LIGNE DU TITRE
+% % ============================================================
+
+% % Cette macro ne connaît PAS la couleur.
+% % La couleur lui est transmise explicitement par
+% % \TitrePedagogiqueAvecMeta.
+% %
+% % Ordre :
+% %
+% %   →   ★★☆☆☆   • 25 min
+% %
+% % Tous les éléments utilisent la même couleur que le titre.
+
+% \newcommand{\TitreMetaInline}[1]{%
+
+%   % ----------------------------------------------------------
+%   % Récupération des valeurs
+%   % ----------------------------------------------------------
+
+%   \edef\TitreTmpInd{%
+%     \pgfkeysvalueof{/TitrePedagogique/indispensable}%
+%   }%
+
+%   \edef\TitreTmpDiff{%
+%     \pgfkeysvalueof{/TitrePedagogique/difficulte}%
+%   }%
+
+%   \edef\TitreTmpDuree{%
+%     \pgfkeysvalueof{/TitrePedagogique/duree}%
+%   }%
+
+
+%   % ----------------------------------------------------------
+%   % Normalisation de True / TRUE / true
+%   % ----------------------------------------------------------
+
+%   \lowercase{\edef\TitreTmpInd{\TitreTmpInd}}%
+
+
+%   % ----------------------------------------------------------
+%   % INDICATEUR "INDISPENSABLE"
+%   % ----------------------------------------------------------
+
+%   \ifstrequal{\TitreTmpInd}{true}{%
+%     %
+%     % Petite flèche
+%     %
+%     \TitreIndispensable{#1}%
+%     \hspace{\TitreMetaEspaceFlecheEtoiles}%
+%   }{}%
+
+
+%   % ----------------------------------------------------------
+%   % DIFFICULTÉ
+%   % ----------------------------------------------------------
+
+%   \ifx\TitreTmpDiff\empty
+%     % Pas de difficulté : rien
+%   \else
+%     %
+%     % Étoiles
+%     %
+%     \TitreEtoiles{\TitreTmpDiff}{#1}%
+%     %
+%     \hspace{\TitreMetaEspaceEtoilesDuree}%
+%   \fi
+
+
+%   % ----------------------------------------------------------
+%   % DURÉE
+%   % ----------------------------------------------------------
+
+%   \ifx\TitreTmpDuree\empty
+%     % Pas de durée : rien
+%   \else
+%     %
+%     % Petit point
+%     %
+%     \TitreSeparateur{#1}%
+%     %
+%     \hspace{0.40em}%
+%     %
+%     % Durée
+%     %
+%     {\fontsize{\TitreMetaTailleDuree}
+%              {\TitreMetaInterligneDuree}
+%      \selectfont
+%      \textcolor{#1}{\TitreTmpDuree}%
+%     }%
+%     %
+%     \hspace{\TitreMetaEspaceApresDuree}%
+%   \fi
+% }
+
+
+% % ============================================================
+% % TYPE D'EXERCICE
+% % ============================================================
+
+% % Le type est placé sous le titre.
+% %
+% % Il utilise la même couleur que la barre et le titre,
+% % mais avec une taille plus petite et une graisse légère.
+
+% \newcommand{\TitreMetaType}[1]{%
+
+%   \edef\TitreTmpType{%
+%     \pgfkeysvalueof{/TitrePedagogique/type}%
+%   }%
+
+%   \ifx\TitreTmpType\empty
+%     % Aucun type : rien
+%   \else
+
+%     \par
+%     \vspace{0.15ex}%
+
+%     {\centering
+%       \fontsize{\TitreMetaTailleType}
+%                {\TitreMetaInterligneType}
+%       \selectfont
+%       \itshape
+%       \textcolor{#1}{\TitreTmpType}%
+%       \par
+%     }%
+
+%   \fi
+% }
+
+
+% % ============================================================
+% % TITRE PÉDAGOGIQUE GÉNÉRIQUE
+% % ============================================================
+
+% % #1 = couleur
+% % #2 = taille du titre
+% % #3 = largeur maximale du titre
+% % #4 = épaisseur des barres
+% % #5 = distance entre barre et titre
+% % #6 = espace vertical après le titre
+% % #7 = titre
+
+% % \newcommand{\TitreNiveauUnOld}[1]{%
+% %   \noindent\begin{tikzpicture}
+% %     \node[inner sep=0pt, align=center, font=\fontsize{15}{17}\selectfont\bfseries,
+% %       color=colorStitre] (title) at (0.5\linewidth,0) {
+% %       \begin{varwidth}{0.85\linewidth}\centering #1\end{varwidth}
+% %     };
+% %     \draw[colorStitre, line width=0.3cm] (0,0) -- ([xshift=-0.5cm]title.west);
+% %     \draw[colorStitre, line width=0.3cm] ([xshift=0.5cm]title.east) -- (\linewidth,0);
+% %   \end{tikzpicture}
+% %   \par\vspace{0.35cm}
+% % }
+
+% \newcommand{\TitrePedagogiqueAvecMeta}[7]{%
+
+%   % ----------------------------------------------------------
+%   % PARAMÈTRES VISUELS
+%   % ----------------------------------------------------------
+%   %
+%   % Ces paramètres peuvent être changés ici globalement.
+%   %
+%   % Ils sont volontairement indépendants de la taille du titre.
+
+%   \renewcommand{\TitreMetaTailleEtoile}{0.78em}
+%   \renewcommand{\TitreMetaEchelleEtoile}{0.78}
+
+%   \renewcommand{\TitreMetaTailleDuree}{8pt}
+%   \renewcommand{\TitreMetaInterligneDuree}{9.5pt}
+
+%   \renewcommand{\TitreMetaTailleType}{7.5pt}
+%   \renewcommand{\TitreMetaInterligneType}{9pt}
+
+
+%   % ----------------------------------------------------------
+%   % DÉBUT DU TITRE
+%   % ----------------------------------------------------------
+
+%   \noindent
+%   \begin{tikzpicture}[
+%     baseline=(title.base)
+%   ]
+
+%     % --------------------------------------------------------
+%     % TITRE PRINCIPAL
+%     % --------------------------------------------------------
+%     %
+%     % Les métadonnées apparaissent AVANT le titre sur la même
+%     % ligne.
+%     %
+%     % Exemple :
+%     %
+%     %   → ★★☆☆☆ • 25 min   Exercice 1. ...
+%     %
+%     % Le titre et toutes les métadonnées utilisent #1.
+
+%     \node[
+%       inner sep=0pt,
+%       outer sep=0pt,
+%       align=center,
+%       text width=#3,
+%       font=#2,
+%       text=#1,
+%       % draw=ellipse,
+%       % opacity=0.5,
+%     ] (title) at (0.5\linewidth,0) {%
+%       %
+%       % Métadonnées
+%       %
+%       {\fontsize{8pt}{9.5pt}\selectfont
+%         \TitreMetaInline{#1}%
+%       }%
+%       %
+%       % Petit espace avant le titre
+%       %
+%       \hspace{0.15em}%
+%       %
+%       % Titre
+%       %
+%       #7%
+%     };
+
+
+%     % --------------------------------------------------------
+%     % TYPE D'EXERCICE
+%     % --------------------------------------------------------
+%     %
+%     % Il est placé sous le titre et centré.
+%     %
+%     % Exemple :
+%     %
+%     %                     Application directe du cours
+
+%     \node[
+%       below=0.25ex of title.south,
+%       inner sep=0pt,
+%       outer sep=0pt,
+%       text width=#3,
+%       align=center,
+%       % draw=ellipse,
+%       % opacity=0.5,
+%     ] (type) {%
+%       \TitreMetaType{#1}%
+%     };
+
+
+%     % --------------------------------------------------------
+%     % BARRE GAUCHE
+%     % --------------------------------------------------------
+%     %
+%     % Épaisseur conservée de la version originale.
+
+%     \draw[
+%       color=#1,
+%       line width=#4,
+%     ]
+%       (0,0)
+%       --
+%       ([xshift=-#5]title.west);
+
+
+%     % --------------------------------------------------------
+%     % BARRE DROITE
+%     % --------------------------------------------------------
+
+%     \draw[
+%       color=#1,
+%       line width=#4,
+%     ]
+%       ([xshift=#5]title.east)
+%       --
+%       (\linewidth,0);
+
+%   \end{tikzpicture}
+
+%   \par
+%   \vspace{#6}
+% }
+
+
+% % ============================================================
+% % NIVEAU 1
+% % ============================================================
+
+% \NewDocumentCommand{\TitreNiveauUn}{O{}m}{%
+
+%   % ----------------------------------------------------------
+%   % Valeurs par défaut
+%   % ----------------------------------------------------------
+
+%   \pgfkeys{
+%     /TitrePedagogique/indispensable=false,
+%     /TitrePedagogique/difficulte=,
+%     /TitrePedagogique/duree=,
+%     /TitrePedagogique/type=
+%   }%
+
+%   % ----------------------------------------------------------
+%   % Valeurs fournies par l'utilisateur
+%   % ----------------------------------------------------------
+
+%   \pgfkeys{
+%     /TitrePedagogique/.cd,
+%     #1
+%   }%
+
+%   % ----------------------------------------------------------
+%   % Rendu
+%   %
+%   % Épaisseur originale : 0.3 cm
+%   % ----------------------------------------------------------
+
+%   \TitrePedagogiqueAvecMeta
+%     {colorStitre}
+%     {\fontsize{15}{17}\selectfont\bfseries}
+%     {0.85\linewidth}
+%     {0.3cm}
+%     {0.5cm}
+%     {0.35cm}
+%     {#2}%
+% }
+
+
+% % ============================================================
+% % NIVEAU 2
+% % ============================================================
+
+% \NewDocumentCommand{\TitreNiveauDeux}{O{}m}{%
+
+%   \pgfkeys{
+%     /TitrePedagogique/indispensable=false,
+%     /TitrePedagogique/difficulte=,
+%     /TitrePedagogique/duree=,
+%     /TitrePedagogique/type=
+%   }%
+
+%   \pgfkeys{
+%     /TitrePedagogique/.cd,
+%     #1
+%   }%
+
+%   % Épaisseur originale : 0.15 cm
+
+%   \TitrePedagogiqueAvecMeta
+%     {colorSStitre}
+%     {\fontsize{12}{14}\selectfont\bfseries}
+%     {0.85\linewidth}
+%     {0.15cm}
+%     {0.3cm}
+%     {0.30cm}
+%     {#2}%
+% }
+
+
+% % ============================================================
+% % NIVEAU 3
+% % ============================================================
+
+% \NewDocumentCommand{\TitreNiveauTrois}{O{}m}{%
+
+%   \pgfkeys{
+%     /TitrePedagogique/indispensable=false,
+%     /TitrePedagogique/difficulte=,
+%     /TitrePedagogique/duree=,
+%     /TitrePedagogique/type=
+%   }%
+
+%   \pgfkeys{
+%     /TitrePedagogique/.cd,
+%     #1
+%   }%
+
+%   % Épaisseur originale : 0.10 cm
+
+%   \TitrePedagogiqueAvecMeta
+%     {colorSSStitre}
+%     {\fontsize{10}{12}\selectfont\bfseries}
+%     {0.85\linewidth}
+%     {0.10cm}
+%     {0.2cm}
+%     {0.25cm}
+%     {#2}%
+% }
+
+
+% % ============================================================
+% % NIVEAU 4
+% % ============================================================
+
+% \NewDocumentCommand{\TitreNiveauQuatre}{O{}m}{%
+
+%   \pgfkeys{
+%     /TitrePedagogique/indispensable=false,
+%     /TitrePedagogique/difficulte=,
+%     /TitrePedagogique/duree=,
+%     /TitrePedagogique/type=
+%   }%
+
+%   \pgfkeys{
+%     /TitrePedagogique/.cd,
+%     #1
+%   }%
+
+%   % Épaisseur originale : 0.06 cm
+
+%   \TitrePedagogiqueAvecMeta
+%     {colorSSStitre}
+%     {\fontsize{10}{12}\selectfont\itshape}
+%     {0.85\linewidth}
+%     {0.06cm}
+%     {0.15cm}
+%     {0.20cm}
+%     {#2}%
+% }
+
+
+% % ============================================================
+% % NIVEAU 5
+% % ============================================================
+
+% \NewDocumentCommand{\TitreNiveauCinq}{O{}m}{%
+
+%   \pgfkeys{
+%     /TitrePedagogique/indispensable=false,
+%     /TitrePedagogique/difficulte=,
+%     /TitrePedagogique/duree=,
+%     /TitrePedagogique/type=
+%   }%
+
+%   \pgfkeys{
+%     /TitrePedagogique/.cd,
+%     #1
+%   }%
+
+%   % Épaisseur originale : 0.04 cm
+
+%   \TitrePedagogiqueAvecMeta
+%     {grayBrume}
+%     {\fontsize{9}{11}\selectfont\itshape}
+%     {0.85\linewidth}
+%     {0.04cm}
+%     {0.10cm}
+%     {0.15cm}
+%     {#2}%
+% }
+
+
+% % ------------------------------------------------------------------
+% % Barres de titre à 5 niveaux (section -> sous-paragraphe), reprises du
+% % Dossier scientifique pour les 3 premiers niveaux, complétées dans le
+% % même esprit pour les 2 niveaux les plus fins (non fournis à l'origine).
+% %
+% % Volontairement PAS branchées sur \titleformat{\section}/... : nos
+% % documents utilisent une numérotation "maison" (Exercice N, Section N)
+% % gérée par les données, pas par les compteurs LaTeX -- brancher sur
+% % \titleformat créerait un double numérotage. \TitreNiveauUn{...}
+% % s'utilise directement à la place d'un \subsection*{...}.
+% % ------------------------------------------------------------------
+
+% % ============================================================
+% % ÉTOILES DE DIFFICULTÉ
+% % ============================================================
+
+% \newcommand{\EtoilesDifficulte}[1]{%
+%   \begin{tikzpicture}[
+%     baseline=-0.35ex,
+%     etoile/.style={
+%       inner sep=0pt,
+%       outer sep=0pt,
+%       font=\fontsize{7.5}{7.5}\selectfont
+%     }
+%   ]
+%     \foreach \i in {1,...,5}{%
+%       \ifnum\i>#1
+%         \node[
+%           etoile,
+%           text=grayBrume
+%         ] at ({(\i-1)*0.85em},0) {$\star$};
+%       \else
+%         \node[
+%           etoile,
+%           text=colorOchre
+%         ] at ({(\i-1)*0.85em},0) {$\star$};
+%       \fi
+%     }%
+%   \end{tikzpicture}%
+% }
+
+% % ============================================================
+% % MÉTADONNÉES D'EXERCICE
+% % ============================================================
+
+% \newcommand{\MetaExercice}[4]{%
+%   % #1 = indispensable (true/false)
+%   % #2 = difficulté
+%   % #3 = durée
+%   % #4 = type d'exercice
+%   %
+%   \begin{tikzpicture}[
+%     baseline,
+%     meta/.style={
+%       inner sep=0pt,
+%       outer sep=0pt,
+%       font=\fontsize{7.5}{9}\selectfont
+%     }
+%   ]
+
+%     % --------------------------------------------------------
+%     % Ligne supérieure : indispensable + difficulté + durée
+%     % --------------------------------------------------------
+
+%     \ifstrequal{#1}{true}{%
+%       % Flèche indispensable
+%       \node[
+%         meta,
+%         text=colorStitre
+%       ] (indispensable) {$\boldsymbol{\rightarrow}$};
+
+%       \node[
+%         meta,
+%         right=0.25em of indispensable,
+%         text=colorStitre,
+%         font=\fontsize{7.5}{9}\selectfont\bfseries
+%       ] (important) {indispensable};
+%     }{%
+%       \node[meta] (important) {};
+%     }
+
+%     % Difficulté
+%     \node[
+%       meta,
+%       right=0.8em of important
+%     ] (difficulte) {%
+%       \EtoilesDifficulte{#2}%
+%     };
+
+%     % Durée
+%     \node[
+%       meta,
+%       right=0.8em of difficulte,
+%       text=grayPierre
+%     ] (duree) {$\bullet$~#3};
+
+%   \end{tikzpicture}
+
+%   % ----------------------------------------------------------
+%   % Type d'exercice
+%   % ----------------------------------------------------------
+
+%   \if\relax\detokenize{#4}\relax
+%   \else
+%     \par
+%     {\color{grayBrume}%
+%       \fontsize{7.5}{9}\selectfont
+%       \textit{#4}%
+%     }%
+%   \fi
+% }
+
+% % ============================================================
+% % AFFICHAGE DES MÉTADONNÉES
+% % ============================================================
+
+% \newcommand{\AfficherMetaTitre}[4]{%
+%   % #1 = indispensable
+%   % #2 = difficulté
+%   % #3 = durée
+%   % #4 = type
+
+%   \pgfkeys{
+%     /TitrePedagogique,
+%     indispensable=#1,
+%     difficulte=#2,
+%     duree={#3},
+%     type={#4}
+%   }
+
+%   % ----------------------------------------------------------
+%   % Ligne des métadonnées
+%   % ----------------------------------------------------------
+
+%   \ifstrequal{\pgfkeysvalueof{/TitrePedagogique/difficulte}}{}{}{%
+%     \par
+%     \begin{center}
+%       \begin{tikzpicture}[
+%         baseline=-0.25ex
+%       ]
+
+%         \node[
+%           inner sep=0pt,
+%           outer sep=0pt
+%         ] (stars) {%
+%           \EtoilesDifficulte{
+%             \pgfkeysvalueof{/TitrePedagogique/difficulte}
+%           }%
+%         };
+
+%         \ifstrequal{\pgfkeysvalueof{/TitrePedagogique/duree}}{}{}{%
+%           \node[
+%             right=0.8em of stars,
+%             inner sep=0pt,
+%             outer sep=0pt,
+%             font=\fontsize{7.5}{9}\selectfont,
+%             text=grayPierre
+%           ] (duree) {%
+%             $\bullet$~\pgfkeysvalueof{/TitrePedagogique/duree}%
+%           };
+%         }%
+
+%       \end{tikzpicture}
+%     \end{center}
+%   }%
+
+%   % ----------------------------------------------------------
+%   % Type d'exercice
+%   % ----------------------------------------------------------
+
+%   \ifstrequal{\pgfkeysvalueof{/TitrePedagogique/type}}{}{}{%
+%     \par
+%     \begin{center}
+%       {\color{grayBrume}%
+%         \fontsize{7.5}{9}\selectfont
+%         \textit{\pgfkeysvalueof{/TitrePedagogique/type}}%
+%       }%
+%     \end{center}
+%   }%
+% }
+
+% % ============================================================
+% % MÉTADONNÉES DES TITRES PÉDAGOGIQUES
+% % ============================================================
+
+% \pgfkeys{
+%   /TitrePedagogique/.is family,
+%   /TitrePedagogique,
+%   indispensable/.initial=false,
+%   difficulte/.initial=,
+%   duree/.initial=,
+%   type/.initial=
+% }
+
+
+% % ============================================================
+% % TITRE PÉDAGOGIQUE GÉNÉRIQUE
+% % ============================================================
+
+% \newcommand{\TitrePedagogique}[7][]{%
+%   % #1 = options / métadonnées
+%   % #2 = taille police
+%   % #3 = interligne
+%   % #4 = couleur
+%   % #5 = épaisseur barre
+%   % #6 = marge horizontale de la barre
+%   % #7 = titre
+
+%   \pgfkeys{
+%     /TitrePedagogique,
+%     indispensable=false,
+%     difficulte=,
+%     duree=,
+%     type=
+%   }
+
+%   \pgfkeys{/TitrePedagogique,#1}
+
+%   \noindent
+%   \begin{tikzpicture}
+
+%     % --------------------------------------------------------
+%     % Titre
+%     % --------------------------------------------------------
+
+%     \node[
+%       inner sep=0pt,
+%       align=center,
+%       font=\fontsize{#2}{#3}\selectfont\bfseries,
+%       color=#4
+%     ] (title) at (0.5\linewidth,0) {%
+%       \begin{varwidth}{0.85\linewidth}
+%         \centering
+%         #7
+%       \end{varwidth}
+%     };
+
+%     % --------------------------------------------------------
+%     % Barre gauche
+%     % --------------------------------------------------------
+
+%     \draw[
+%       color=#4,
+%       line width=#5
+%     ]
+%       (0,0)
+%       --
+%       ([xshift=-#6]title.west);
+
+%     % --------------------------------------------------------
+%     % Barre droite
+%     % --------------------------------------------------------
+
+%     \draw[
+%       color=#4,
+%       line width=#5
+%     ]
+%       ([xshift=#6]title.east)
+%       --
+%       (\linewidth,0);
+
+%     % --------------------------------------------------------
+%     % Flèche "indispensable"
+%     % --------------------------------------------------------
+%     %
+%     % Elle est directement dessinée dans la barre gauche.
+%     %
+
+%     \ifstrequal{\pgfkeysvalueof{/TitrePedagogique/indispensable}}{true}{%
+%       \draw[
+%         color=#4,
+%         line width=0.8pt,
+%         -{Latex[length=2.2mm,width=1.5mm]}
+%       ]
+%         ([xshift=0.08cm]title.west)
+%         --
+%         ([xshift=-0.38cm]title.west);
+%     }{}%
+
+%   \end{tikzpicture}
+
+%   % ----------------------------------------------------------
+%   % Métadonnées sous le titre
+%   % ----------------------------------------------------------
+
+%   \ifstrequal{\pgfkeysvalueof{/TitrePedagogique/difficulte}}{}{}{%
+%     \AfficherMetaTitre
+%       {\pgfkeysvalueof{/TitrePedagogique/indispensable}}
+%       {\pgfkeysvalueof{/TitrePedagogique/difficulte}}
+%       {\pgfkeysvalueof{/TitrePedagogique/duree}}
+%       {\pgfkeysvalueof{/TitrePedagogique/type}}
+%   }%
+
+%   \par\vspace{0.35cm}
+% }
+
+% \newcommand{\TitreNiveauUn}[2][]{%
+%   \TitrePedagogique[
+%     #1
+%   ]{15}{17}{colorStitre}{0.3cm}{0.5cm}{#2}%
+% }
+
+% \newcommand{\TitreNiveauDeux}[2][]{%
+%   \TitrePedagogique[
+%     #1
+%   ]{12}{14}{colorSStitre}{0.15cm}{0.3cm}{#2}%
+% }
+
+% \newcommand{\TitreNiveauTrois}[2][]{%
+%   \TitrePedagogique[
+%     #1
+%   ]{10}{12}{colorSSStitre}{0.10cm}{0.2cm}{#2}%
+% }
+
+% \newcommand{\TitreNiveauQuatre}[2][]{%
+
+%   \pgfkeys{
+%     /TitrePedagogique,
+%     indispensable=false,
+%     difficulte=,
+%     duree=,
+%     type=
+%   }
+
+%   \pgfkeys{/TitrePedagogique,#1}
+
+%   \noindent
+%   \begin{tikzpicture}
+
+%     % Petite barre
+%     \draw[
+%       color=colorSSStitre,
+%       line width=0.06cm
+%     ]
+%       (0,0) -- (0.4cm,0);
+
+%     % Titre
+%     \node[
+%       anchor=west,
+%       inner sep=0pt,
+%       outer sep=0pt,
+%       text=colorSSStitre,
+%       font=\itshape\fontsize{10}{12}\selectfont
+%     ] at (0.55cm,0) {#2};
+
+%     % Flèche indispensable
+%     \ifstrequal{\pgfkeysvalueof{/TitrePedagogique/indispensable}}{true}{%
+%       \draw[
+%         color=colorSSStitre,
+%         line width=0.7pt,
+%         -{Latex[length=2mm,width=1.4mm]}
+%       ]
+%         (-0.05cm,0)
+%         --
+%         (0.32cm,0);
+%     }{}%
+
+%   \end{tikzpicture}
+
+%   \AfficherMetaTitre
+%     {\pgfkeysvalueof{/TitrePedagogique/indispensable}}
+%     {\pgfkeysvalueof{/TitrePedagogique/difficulte}}
+%     {\pgfkeysvalueof{/TitrePedagogique/duree}}
+%     {\pgfkeysvalueof{/TitrePedagogique/type}}
+
+%   \par\vspace{0.2cm}
+% }
+
+% \newcommand{\TitreNiveauCinq}[2][]{%
+
+%   \pgfkeys{
+%     /TitrePedagogique,
+%     indispensable=false,
+%     difficulte=,
+%     duree=,
+%     type=
+%   }
+
+%   \pgfkeys{/TitrePedagogique,#1}
+
+%   \noindent
+%   \begin{tikzpicture}
+
+%     % Petite barre
+%     \draw[
+%       color=grayBrume,
+%       line width=0.04cm
+%     ]
+%       (0,0) -- (0.25cm,0);
+
+%     % Titre
+%     \node[
+%       anchor=west,
+%       inner sep=0pt,
+%       outer sep=0pt,
+%       text=grayBrume,
+%       font=\itshape\fontsize{9}{11}\selectfont
+%     ] at (0.4cm,0) {#2};
+
+%     % Flèche indispensable
+%     \ifstrequal{\pgfkeysvalueof{/TitrePedagogique/indispensable}}{true}{%
+%       \draw[
+%         color=grayBrume,
+%         line width=0.6pt,
+%         -{Latex[length=1.8mm,width=1.2mm]}
+%       ]
+%         (-0.05cm,0)
+%         --
+%         (0.18cm,0);
+%     }{}%
+
+%   \end{tikzpicture}
+
+%   \AfficherMetaTitre
+%     {\pgfkeysvalueof{/TitrePedagogique/indispensable}}
+%     {\pgfkeysvalueof{/TitrePedagogique/difficulte}}
+%     {\pgfkeysvalueof{/TitrePedagogique/duree}}
+%     {\pgfkeysvalueof{/TitrePedagogique/type}}
+
+%   \par\vspace{0.15cm}
+% }
+
+
+
+
+
+
+% \newcommand{\TitreNiveauUn}[2][]{%
+
+%   \noindent
+%   \begin{tikzpicture}
+
+%     % --------------------------------------------------------
+%     % Titre
+%     % --------------------------------------------------------
+
+%     \node[
+%       inner sep=0pt,
+%       align=center,
+%       font=\fontsize{15}{17}\selectfont\bfseries,
+%       color=colorStitre
+%     ] (title) at (0.5\linewidth,0) {%
+%       \begin{varwidth}{0.85\linewidth}
+%         \centering
+%         #2
+%       \end{varwidth}
+%     };
+
+%     % --------------------------------------------------------
+%     % Barres latérales
+%     % --------------------------------------------------------
+
+%     \draw[
+%       color=colorStitre,
+%       line width=0.3cm
+%     ]
+%       (0,0)
+%       --
+%       ([xshift=-0.5cm]title.west);
+
+%     \draw[
+%       color=colorStitre,
+%       line width=0.3cm
+%     ]
+%       ([xshift=0.5cm]title.east)
+%       --
+%       (\linewidth,0);
+
+%   \end{tikzpicture}
+
+%   \par\vspace{0.35cm}
+
+% }
+
+
+
+
+
+% \newcommand{\EncadreStyle}[4]{%
+%   \begin{tcolorbox}[
+%       enhanced,
+%       notitle,
+%       colback=white,
+%       colbacklower=white,
+%       frame hidden,
+%       boxrule=0pt,
+%       sharp corners,
+%       borderline west={4pt}{0pt}{#3},
+%       left=7mm,
+%       fontupper=\sffamily,
+%       overlay={%
+%           % Bande verticale
+%           \fill[#3]
+%           (frame.south west) rectangle
+%           ([xshift=4pt]frame.north west);
+
+%           \node[
+%             rotate=90,
+%             anchor=south,
+%             font=\sffamily\bfseries,
+%             text=#3
+%           ] at ([xshift=2pt]frame.west) {#2};
+
+%           % Texte vertical (titre)
+%           \node[
+%             rotate=90,
+%             anchor=center,
+%             font=\sffamily\bfseries\small,
+%             text=white
+%           ] at ([xshift=2pt]frame.west |- frame.center)
+%           {#1};
+
+%         }
+%     ]
+%     % contenu
+%     %\textcolor{#3}{\sffamily\textbf{#1}}\\
+%     #4
+%   \end{tcolorbox}
+% }
+
+% ------------------------------------------------------------------
+
+% ============================================================
+% Style général des encadrés
+% ============================================================
+
+% \NewDocumentCommand{\EncadreStyle}{mmmm}{%
+%   \begin{tcolorbox}[
+%       enhanced,
+%       notitle,
+%       colback=white,
+%       colbacklower=white,
+%       frame hidden,
+%       boxrule=0pt,
+%       sharp corners,
+%       borderline west={4pt}{0pt}{#3},
+%       left=7mm,
+%       fontupper=\sffamily,
+%       overlay={%
+%           % Bande verticale
+%           \fill[#3]
+%           (frame.south west) rectangle
+%           ([xshift=4pt]frame.north west);
+
+%           % Étiquette
+%           \node[
+%             rotate=90,
+%             anchor=south,
+%             font=\sffamily\bfseries,
+%             text=#3
+%           ] at ([xshift=2pt]frame.west) {#2};
+
+%           % Titre vertical
+%           \node[
+%             rotate=90,
+%             anchor=center,
+%             font=\sffamily\bfseries\small,
+%             text=white
+%           ] at ([xshift=2pt]frame.west |- frame.center)
+%           {#1};
+%       }
+%   ]
+%   #4
+%   \end{tcolorbox}%
+% }
+
+% \NewDocumentCommand{\EncadreStyle}{mmmm}{%
+%   \def\EncadreTitre{#1}%
+%   \def\EncadreEtiquette{#2}%
+%   \def\EncadreCouleur{#3}%
+%   \def\EncadreContenu{#4}%
+
+%   \begin{tcolorbox}[
+%     enhanced,
+%     notitle,
+%     colback=white,
+%     colbacklower=white,
+%     frame hidden,
+%     boxrule=0pt,
+%     sharp corners,
+%     borderline west={4pt}{0pt}{\EncadreCouleur},
+%     left=7mm,
+%     fontupper=\sffamily,
+%     overlay={%
+%       % Bande verticale
+%       \fill[\EncadreCouleur]
+%         (frame.south west)
+%         rectangle
+%         ([xshift=4pt]frame.north west);
+
+%       % Étiquette
+%       \node[
+%         rotate=90,
+%         anchor=south,
+%         font=\sffamily\bfseries,
+%         text=\EncadreCouleur
+%       ] at ([xshift=2pt]frame.west)
+%       {\EncadreEtiquette};
+
+%       % Titre vertical
+%       \node[
+%         rotate=90,
+%         anchor=center,
+%         font=\sffamily\bfseries\small,
+%         text=black
+%       ] at ([xshift=2pt]frame.west |- frame.center)
+%       {\EncadreTitre};
+%     }
+%   ]
+
+%   \EncadreContenu
+
+%   \end{tcolorbox}%
+% }
+
+
+% ============================================================
+% Environnements
+% ============================================================
+
+% \NewDocumentEnvironment{coupdepouce}{o +b}
+%   {%
+%     \IfNoValueTF{#1}
+%       {%
+%         \EncadreStyle
+%           {Coup de pouce}
+%           {}
+%           {colorOchre}
+%           {#2}%
+%       }
+%       {%
+%         \EncadreStyle
+%           {Coup de pouce}
+%           {#1}
+%           {colorOchre}
+%           {#2}%
+%       }%
+%   }
+%   {}
+
+
+% \NewDocumentEnvironment{correction}{o +b}
+%   {%
+%     \IfNoValueTF{#1}
+%       {%
+%         \EncadreStyle
+%           {Correction}
+%           {}
+%           {greenSapin}
+%           {#2}%
+%       }
+%       {%
+%         \EncadreStyle
+%           {Correction}
+%           {#1}
+%           {greenSapin}
+%           {#2}%
+%       }%
+%   }
+%   {}
+
+
+% \NewDocumentEnvironment{solutiondetaillee}{o +b}
+%   {%
+%     \IfNoValueTF{#1}
+%       {%
+%         \EncadreStyle
+%           {Solution détaillée}
+%           {}
+%           {grayPierre}
+%           {#2}%
+%       }
+%       {%
+%         \EncadreStyle
+%           {Solution détaillée}
+%           {#1}
+%           {grayPierre}
+%           {#2}%
+%       }%
+%   }
+%   {}
+
+
+% \NewDocumentEnvironment{remarque}{o +b}
+%   {%
+%     \IfNoValueTF{#1}
+%       {%
+%         \EncadreStyle
+%           {Remarque}
+%           {}
+%           {headerblue}
+%           {#2}%
+%       }
+%       {%
+%         \EncadreStyle
+%           {Remarque}
+%           {#1}
+%           {headerblue}
+%           {#2}%
+%       }%
+%   }
+%   {}
+
+
+% % ============================================================
+% % Aller plus loin
+% % #1 = niveau
+% % ============================================================
+
+% \NewDocumentEnvironment{allerplusloin}{o +b}
+%   {%
+%     \IfNoValueTF{#1}
+%       {%
+%         \EncadreStyle
+%           {Aller plus loin}
+%           {}
+%           {Prune}
+%           {#2}%
+%       }
+%       {%
+%         \EncadreStyle
+%           {Aller plus loin (#1)}
+%           {(#1)}
+%           {Prune}
+%           {#2}%
+%       }%
+%   }
+%   {}
+
+
+
+% ============================================================
+% Environnement générique
+% ============================================================
+
+% \NewDocumentEnvironment{encadrestyle}{mmm}
+% {%
+%   \begin{tcolorbox}[
+%     %float, % <-- Rend la tcolorbox elle-même flottante
+%     enhanced,
+%     notitle,
+%     colback=#3!5,
+%     colbacklower=white,
+%     frame hidden,
+%     boxrule=0pt,
+%     sharp corners,
+%     borderline west={4pt}{0pt}{#3},
+%     left=7mm,
+%     fontupper=\sffamily,
+%     overlay={%
+%       % Bande verticale
+%       \fill[#3]
+%         (frame.south west)
+%         rectangle
+%         ([xshift=4pt]frame.north west);
+
+%       % Étiquette
+%       \node[
+%         rotate=90,
+%         anchor=south,
+%         font=\sffamily\bfseries\fontsize{5pt}{1pt}\selectfont\bfseries,
+%         text=#3,
+%         inner sep=0pt
+%       ] at ([xshift=-3pt]frame.west)
+%       {#2};
+
+%       % Titre
+%       \node[
+%         rotate=90,
+%         anchor=center,
+%         font=\sffamily\bfseries\small\fontsize{5pt}{10pt}\selectfont\bfseries,
+%         text=white,
+%         inner sep=0pt
+%       ] at ([xshift=2pt]frame.west |- frame.center)
+%       {#1};
+%     }
+%   ]
+% }
+% {%
+%   \end{tcolorbox}%
+% }
+
+
+% % ============================================================
+% % Environnements pédagogiques
+% % ============================================================
+
+
+% \NewDocumentEnvironment{prerequis}{o}
+% {%
+%   \IfNoValueTF{#1}
+%     {\begin{encadrestyle}{Prérequis}{}{colorOchre}}
+%     {\begin{encadrestyle}{Prérequis}{#1}{colorOchre}}
+% }
+% {%
+%   \end{encadrestyle}%
+% }
+
+% \NewDocumentEnvironment{objectifspedagogiquesetudiants}{o}
+% {%
+%   \IfNoValueTF{#1}
+%     {\begin{encadrestyle}{Objectifs pédagogiques (étudiants)}{}{colorObjectifsPedagogiquesEtudiants}}
+%     {\begin{encadrestyle}{Objectifs pédagogiques (étudiants)}{#1}{colorObjectifsPedagogiquesEtudiants}}
+% }
+% {%
+%   \end{encadrestyle}%
+% }
+
+% \NewDocumentEnvironment{objectifspedagogiquesenseignants}{o}
+% {%
+%   \IfNoValueTF{#1}
+%     {\begin{encadrestyle}{Objectifs pédagogiques (enseignants)}{}{colorObjectifsPedagogiquesEnseignants}}
+%     {\begin{encadrestyle}{Objectifs pédagogiques (enseignants)}{#1}{colorObjectifsPedagogiquesEnseignants}}
+% }
+% {%
+%   \end{encadrestyle}%
+% }
+
+% \NewDocumentEnvironment{pointcours}{o}
+% {%
+%   \IfNoValueTF{#1}
+%     {\begin{encadrestyle}{Point de cours}{}{colorPointCours}}
+%     {\begin{encadrestyle}{Point de cours}{#1}{colorPointCours}}
+% }
+% {%
+%   \end{encadrestyle}%
+% }
+
+% \NewDocumentEnvironment{coupdepouce}{o}
+% {%
+%   \IfNoValueTF{#1}
+%     {\begin{encadrestyle}{Coup de pouce}{}{colorOchre}}
+%     {\begin{encadrestyle}{Coup de pouce}{#1}{colorOchre}}
+% }
+% {%
+%   \end{encadrestyle}%
+% }
+
+
+% \NewDocumentEnvironment{correction}{o}
+% {%
+%   \IfNoValueTF{#1}
+%     {\begin{encadrestyle}{Correction}{}{greenSapin}}
+%     {\begin{encadrestyle}{Correction}{#1}{greenSapin}}
+% }
+% {%
+%   \end{encadrestyle}%
+% }
+
+
+% \NewDocumentEnvironment{solutiondetaillee}{o}
+% {%
+%   \IfNoValueTF{#1}
+%     {\begin{encadrestyle}{Solution détaillée}{}{grayPierre}}
+%     {\begin{encadrestyle}{Solution détaillée}{#1}{grayPierre}}
+% }
+% {%
+%   \end{encadrestyle}%
+% }
+
+
+% \NewDocumentEnvironment{remarque}{o}
+% {%
+%   \IfNoValueTF{#1}
+%     {\begin{encadrestyle}{Remarque}{}{headerblue}}
+%     {\begin{encadrestyle}{Remarque}{#1}{headerblue}}
+% }
+% {%
+%   \end{encadrestyle}%
+% }
+
+% \NewDocumentEnvironment{remarquespedagogiquesecueilsclassiques}{o}
+% {%
+%   \IfNoValueTF{#1}
+%     {\begin{encadrestyle}{Remarques pédagogiques (écueils classiques)}{}{colorRemarquesPedagogiquesEcueilsClassiques}}
+%     {\begin{encadrestyle}{Remarques pédagogiques (écueils classiques)}{#1}{colorRemarquesPedagogiquesEcueilsClassiques}}
+% }
+% {%
+%   \end{encadrestyle}%
+% }
+
+% \NewDocumentEnvironment{remarquespedagogiquesconseilsanimation}{o}
+% {%
+%   \IfNoValueTF{#1}
+%     {\begin{encadrestyle}{Remarques pédagogiques (conseils d'animation)}{}{colorRemarquesPedagogiquesConseilsAnimation}}
+%     {\begin{encadrestyle}{Remarques pédagogiques (conseils d'animation)}{#1}{colorRemarquesPedagogiquesConseilsAnimation}}
+% }
+% {%
+%   \end{encadrestyle}%
+% }
+
+% \NewDocumentEnvironment{bilan}{o}
+% {%
+%   \IfNoValueTF{#1}
+%     {\begin{encadrestyle}{Bilan}{}{colorBilan}}
+%     {\begin{encadrestyle}{Bilan}{#1}{colorBilan}}
+% }
+% {%
+%   \end{encadrestyle}%
+% }
+
+
+% \NewDocumentEnvironment{allerplusloin}{o}
+% {%
+%   \IfNoValueTF{#1}
+%     {\begin{encadrestyle}{Aller plus loin}{}{Prune}}
+%     {\begin{encadrestyle}{Aller plus loin}{#1}{Prune}}
+% }
+% {%
+%   \end{encadrestyle}%
+% }
+
+
+
+% ------------------------------------------------------------------
+
+% ------------------------------------------------------------------
+% Boîtes pédagogiques du projet : bande colorée à gauche + petite
+% étiquette colorée AU-DESSUS (pas de texte pivoté à l'intérieur de la
+% boîte) -- contrairement à \EncadreUn/\EncadreDeux, qui pivotent le
+% titre DANS la bande, ces boîtes sont souvent courtes (1-2 lignes) et
+% le texte pivoté s'est avéré illisible/coupé en pratique (testé et
+% corrigé pendant le développement -- voir le rendu avant/après dans le
+% message de livraison). Le rendu ci-dessous reste robuste quelle que
+% soit la hauteur du contenu.
+% ------------------------------------------------------------------
+% \newcommand{\etiquettebox}[2]{%
+%   {\color{#1}\rule{3pt}{10pt}}\,\textbf{\textsf{\small\color{#1}#2}}\\[3pt]%
+% }
+
+% \newenvironment{coupdepouce}
+%   {\etiquettebox{colorOchre}{Coup de pouce}%
+%    \begin{tcolorbox}[enhanced, notitle, colback=colorOchre!6, frame hidden,
+%      boxrule=0pt, sharp corners, borderline west={3pt}{0pt}{colorOchre},
+%      left=8pt, right=8pt, top=5pt, bottom=5pt]}
+%   {\end{tcolorbox}}
+
+% \newenvironment{correction}
+%   {\etiquettebox{greenSapin}{Correction}%
+%    \begin{tcolorbox}[enhanced, notitle, colback=greenSapin!5, frame hidden,
+%      boxrule=0pt, sharp corners, borderline west={3pt}{0pt}{greenSapin},
+%      left=8pt, right=8pt, top=5pt, bottom=5pt]}
+%   {\end{tcolorbox}}
+
+% \newenvironment{solutiondetaillee}
+%   {\etiquettebox{grayPierre}{Solution détaillée}%
+%    \begin{tcolorbox}[enhanced, notitle, colback=grayPierre!5, frame hidden,
+%      boxrule=0pt, sharp corners, borderline west={3pt}{0pt}{grayPierre},
+%      left=8pt, right=8pt, top=5pt, bottom=5pt]}
+%   {\end{tcolorbox}}
+
+% \newenvironment{remarque}
+%   {\etiquettebox{headerblue}{Remarque}%
+%    \begin{tcolorbox}[enhanced, notitle, colback=headerblue!5, frame hidden,
+%      boxrule=0pt, sharp corners, borderline west={3pt}{0pt}{headerblue},
+%      left=8pt, right=8pt, top=5pt, bottom=5pt]}
+%   {\end{tcolorbox}}
+
+% % allerplusloin garde son paramètre (niveau), affiché entre parenthèses
+% % après le label principal.
+% \newenvironment{allerplusloin}[1]
+%   {\etiquettebox{Prune}{Aller plus loin (#1)}%
+%    \begin{tcolorbox}[enhanced, notitle, colback=Prune!4, frame hidden,
+%      boxrule=0pt, sharp corners, borderline west={3pt}{0pt}{Prune},
+%      left=8pt, right=8pt, top=5pt, bottom=5pt]}
+%   {\end{tcolorbox}}

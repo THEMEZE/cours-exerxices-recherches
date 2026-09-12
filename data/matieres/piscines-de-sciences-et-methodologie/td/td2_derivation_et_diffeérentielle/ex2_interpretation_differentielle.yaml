@@ -1,0 +1,213 @@
+id: td2_ex2
+intitule: |
+  Interprétation de la différentielle : petite variation $\&$ calcul d'incertitude
+td: td2
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - chap2.derivation_et_differentielle
+
+metadonnees:
+  duree_estimee: "50 min"
+  difficulte: 2
+  type_exercice: |
+    Compréhension $\&$ Application
+  indispensable: true
+
+enonce_intro: |
+  Cet exercice vise à comprendre le lien géométrique et physique entre la variation exacte d'une fonction $\Delta f$ et sa différentielle $\mathrm{d}f$, puis à appliquer cette notion à l'approximation des petites variations et au calcul d'incertitude.
+
+prerequis:
+  - titre: "Différentielle d'une fonction d'une variable"
+    texte: |
+      Savoir que $\mathrm{d}f = f'(x) \mathrm{d}x$ et comprendre la notion de développement limité d'ordre 1.
+
+objectifs_pedagogiques_etudiants:
+  - titre: |
+      Distinguer $\Delta f$ et $\mathrm{d}f$
+    texte: |
+      Comprendre que $\mathrm{d}f$ est l'approximation linéaire de la variation réelle $\Delta f$ pour de petits accroissements $\mathrm{d}x$.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Sens géométrique de la différentielle"
+    texte: |
+      Faire le lien graphique entre la tangente (représentée par $\mathrm{d}f$) et la courbe de la fonction (représentée par $\Delta f$).
+
+coup_de_pouce:
+  - titre: |
+      Différence entre $\Delta S$ et $\mathrm{d}S$
+    texte: |
+      Développe $S(x+\mathrm{d}x) = (x+\mathrm{d}x)^2$ pour faire apparaître la différence entre la variation exacte et la partie linéaire.
+
+point_cours:
+  - titre: "Définition de la différentielle"
+    texte: |
+      Pour une fonction $f(x)$ dérivable, la différentielle s'écrit :
+      $$\mathrm{d}f = f'(x) \mathrm{d}x$$
+      Pour un accroissement fini $\Delta x = \mathrm{d}x$ petit :
+      $$\Delta f = f(x+\Delta x) - f(x) \approx \mathrm{d}f$$
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: |
+      Confusion entre $\mathrm{d}x$ et $\Delta x$
+    texte: |
+      Penser que $\Delta S$ et $\mathrm{d}S$ sont égaux quel que soit $\mathrm{d}x$, en oubliant les termes d'ordre supérieur en $(\mathrm{d}x)^2$.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Illustration géométrique du carré"
+    texte: |
+      Dessiner un carré de côté $x$ augmenté de $\mathrm{d}x$ pour montrer physiquement la bande linéaire $2x\mathrm{d}x$ et le petit coin $(\mathrm{d}x)^2$.
+
+bilan:
+  - titre: "Portée de la différentielle"
+    texte: |
+      La différentielle permet d'estimer très facilement les petites variations et les incertitudes absolues sans recalculer la fonction complète.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Développement de Taylor"
+    texte: |
+      Rattacher $\Delta f - \mathrm{d}f$ au reste de Taylor $f''(x) \frac{(\mathrm{d}x)^2}{2} + o((\mathrm{d}x)^2)$.
+
+questions:
+  - id: q1_a
+    parent: "1"
+    enonce: |
+      La surface $S$ d'un carré de côté $x$ est donnée par $S(x) = x^2$. Déterminer la dérivée de $S$ par rapport à $x$, qu'on notera $\frac{\mathrm{d}S}{\mathrm{d}x}$. Vérifier l'homogénéité du résultat.
+    point_cours:
+      - titre: "Homogénéité d'une dérivée"
+        texte: |
+          La dimension d'une dérivée est le quotient de la dimension de la fonction par celle de la variable.
+    coup_de_pouce:
+      - titre: "Vérification des dimensions"
+        texte: |
+          Une surface $S$ est en $\text{m}^2$, un côté $x$ est en $\text{m}$.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $$\frac{\mathrm{d}S}{\mathrm{d}x} = 2x$$
+          *Homogénéité* : $[S] = L^2$, $[x] = L \implies \left[\frac{\mathrm{d}S}{\mathrm{d}x}\right] = \frac{L^2}{L} = L$. De même, $[2x] = L$. Le résultat est bien homogène.
+
+  - id: q1_b
+    parent: "1"
+    enonce: |
+      En déduire la différentielle $\mathrm{d}S$.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $$\mathrm{d}S = 2x \mathrm{d}x$$
+
+  - id: q1_c
+    parent: "1"
+    enonce: |
+      Exprimer la variation $\Delta S = S(x+\mathrm{d}x) - S(x)$.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $$\Delta S = (x+\mathrm{d}x)^2 - x^2 = x^2 + 2x\mathrm{d}x + (\mathrm{d}x)^2 - x^2$$
+          $$\Delta S = 2x\mathrm{d}x + (\mathrm{d}x)^2$$
+
+  - id: q1_d
+    parent: "1"
+    enonce: |
+      Comparer $\Delta S$ et $\mathrm{d}S$ : les représenter sur la figure. Calculer pour $x = 10\text{ m}$ avec : $\mathrm{d}x = 3\text{ m}$, $\mathrm{d}x = 0,5\text{ m}$ et $\mathrm{d}x = 0,1\text{ m}$.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $$\Delta S - \mathrm{d}S = (\mathrm{d}x)^2$$
+          Géométriquement, $\mathrm{d}S = 2x\mathrm{d}x$ représente la surface de deux bandes rectangulaires de bordure, tandis que $(\mathrm{d}x)^2$ est la surface du petit carré d'angle.
+          
+          Pour $x = 10\text{ m}$ :
+          * Pour $\mathrm{d}x = 3\text{ m}$ : $\mathrm{d}S = 60\text{ m}^2$, $\Delta S = 69\text{ m}^2$. Écart = $9\text{ m}^2$.
+          * Pour $\mathrm{d}x = 0,5\text{ m}$ : $\mathrm{d}S = 10\text{ m}^2$, $\Delta S = 10,25\text{ m}^2$. Écart = $0,25\text{ m}^2$.
+          * Pour $\mathrm{d}x = 0,1\text{ m}$ : $\mathrm{d}S = 2\text{ m}^2$, $\Delta S = 2,01\text{ m}^2$. Écart = $0,01\text{ m}^2$.
+
+  - id: q1_e
+    parent: "1"
+    enonce: |
+      Commenter l'égalité $\Delta S \approx \mathrm{d}S$ et interpréter.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          Lorsque $\mathrm{d}x \ll x$, le terme d'ordre deux $(\mathrm{d}x)^2$ devient négligeable devant le terme linéaire $2x\mathrm{d}x$. La différentielle est une approximation linéaire de la variation réelle.
+
+  - id: q1_f
+    parent: "1"
+    enonce: |
+      Soit la mesure du côté $a$ d'un carré : $a = 2,5 \pm 0,1\text{ cm}$. Calculer la surface $S$ du carré et déterminer son incertitude $\Delta S$ :
+      * soit en exprimant la valeur maximale et minimale de $S$
+      * soit par la méthode différentielle ($\Delta S \approx \mathrm{d}S$).
+    solution:
+      - titre: "Résolution"
+        texte: |
+          Valeur centrale : $S = a^2 = 2,5^2 = 6,25\text{ cm}^2$.
+          
+          * **Méthode des extrema** :
+            $S_{\max} = 2,6^2 = 6,76\text{ cm}^2$
+            $S_{\min} = 2,4^2 = 5,76\text{ cm}^2$
+            $\Delta S = \frac{S_{\max} - S_{\min}}{2} = 0,50\text{ cm}^2$.
+          
+          * **Méthode différentielle** :
+            $\Delta S \approx \mathrm{d}S = 2a \Delta a = 2 \times 2,5 \times 0,1 = 0,50\text{ cm}^2$.
+          
+          *Résultat* : $S = (6,3 \pm 0,5)\text{ cm}^2$.
+
+  - id: q2_a
+    parent: "2"
+    enonce: |
+      Soit la position $z(t) = 1 - 2t^2$ (en cm) d'une particule sur un axe $Oz$ en fonction du temps $t$ (en s). Calculer la dérivée $\frac{\mathrm{d}z}{\mathrm{d}t} = \dot{z}$.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $$\dot{z}(t) = \frac{\mathrm{d}z}{\mathrm{d}t} = -4t \quad (\text{en cm}\cdot\text{s}^{-1})$$
+
+  - id: q2_b
+    parent: "2"
+    enonce: |
+      En déduire l'expression de $\mathrm{d}z$ en fonction de $t$ et $\mathrm{d}t$.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $$\mathrm{d}z = -4t \mathrm{d}t$$
+
+  - id: q2_c
+    parent: "2"
+    enonce: |
+      Exprimer la différence $z(t+\mathrm{d}t) - z(t)$ et comparer avec $\mathrm{d}z$.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $$z(t+\mathrm{d}t) - z(t) = [1 - 2(t+\mathrm{d}t)^2] - [1 - 2t^2] = -4t\mathrm{d}t - 2(\mathrm{d}t)^2$$
+          D'où :
+          $$z(t+\mathrm{d}t) - z(t) = \mathrm{d}z - 2(\mathrm{d}t)^2$$
+
+  - id: q2_d
+    parent: "2"
+    enonce: |
+      Dans quelles conditions peut-on écrire $z(t+\mathrm{d}t) - z(t) = \mathrm{d}z$ ? Donner une interprétation de la différentielle $\mathrm{d}z$ et de la dérivée $\dot{z}$.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          Cette égalité approchée est valable si $\mathrm{d}t \ll t$, rendant le terme $-2(\mathrm{d}t)^2$ négligeable devant $-4t\mathrm{d}t$.
+          * $\dot{z}$ représente la **vitesse instantanée** de la particule.
+          * $\mathrm{d}z$ représente le **déplacement élémentaire** sur un intervalle de temps très court $\mathrm{d}t$.
+
+  - id: q2_e
+    parent: "2"
+    enonce: |
+      Tracer la courbe représentant $z$ en fonction de $t$ puis représenter sur le graphique la différence $z(t+\mathrm{d}t)-z(t)$ et la différentielle $\mathrm{d}z$ à un instant $t$ fixé et pour une durée $\mathrm{d}t$ donnée.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          Sur le graphe $z(t)$, la différence $z(t+\mathrm{d}t) - z(t)$ mesure le déplacement vertical sur la courbe parabole, tandis que $\mathrm{d}z$ se mesure le long de la tangente au point d'abscisse $t$.
+
+  - id: q2_f
+    parent: "2"
+    enonce: |
+      Déterminer la dérivée seconde $\ddot{z}$ et interpréter.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $$\ddot{z}(t) = \frac{\mathrm{d}^2 z}{\mathrm{d}t^2} = -4 \quad (\text{en cm}\cdot\text{s}^{-2})$$
+          $\ddot{z}$ représente **l'accélération** de la particule. Elle est constante et négative.

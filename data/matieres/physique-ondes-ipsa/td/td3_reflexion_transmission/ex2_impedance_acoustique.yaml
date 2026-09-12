@@ -1,0 +1,36 @@
+id: td3_ex2
+intitule: "Interface entre deux milieux, notion d'impédance acoustique"
+td: td3
+facultatif: false
+seance: 4
+cours_rattache:
+  - chap3.impedance_acoustique
+  - chap3.coefficients_energie
+
+enonce_intro: |
+  Une onde ultrasonore plane progressive sinusoïdale de fréquence
+  $f=500$ kHz se propage dans l'air ($x<0$) et rencontre l'interface
+  air-aluminium en $x=0$. Données : $\rho_{air}=1.3$ kg/m$^3$,
+  $\rho_{alu}=2700$ kg/m$^3$, $c_{air}=340$ m/s, $c_{alu}=5110$ m/s.
+
+figure:
+  ref: td3_ex2_interface_air_alu
+  legende: "Interface air / aluminium en x = 0."
+
+questions:
+  - id: q1
+    enonce: "Calculer les impédances acoustiques $Z_1$ (air) et $Z_2$ (aluminium). Le système est-il adapté en impédance ?"
+    coup_de_pouce: "Impédance acoustique caractéristique : $Z=\\rho c$."
+    correction: |
+      $Z_1=\rho_{air}c_{air}=1.3\times340\approx442$ kg·m$^{-2}$·s$^{-1}$ (rayl).
+      $Z_2=\rho_{alu}c_{alu}=2700\times5110\approx1.38\times10^7$ rayl.
+      $Z_2\gg Z_1$ : le système est très mal adapté en impédance.
+
+  - id: q2
+    enonce: "Calculer le pourcentage d'énergie transmise dans l'aluminium (coefficients en énergie R et T). Interpréter."
+    coup_de_pouce: "Coefficient de réflexion en énergie $R=\\left(\\dfrac{Z_1-Z_2}{Z_1+Z_2}\\right)^2$, et $T=1-R=\\dfrac{4Z_1Z_2}{(Z_1+Z_2)^2}$."
+    correction: |
+      $R\approx\left(\dfrac{442-1.38\times10^7}{442+1.38\times10^7}\right)^2\approx0.9999$ (quasi tout est réfléchi).
+      $T=1-R\approx1.3\times10^{-4}$, soit environ $0.013\%$ de l'énergie transmise :
+      un fort désaccord d'impédance réfléchit presque toute l'onde -- c'est le
+      principe utilisé en échographie (gel de couplage) pour éviter cette perte.

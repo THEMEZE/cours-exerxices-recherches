@@ -1,0 +1,174 @@
+id: td2_ex1
+intitule: "Dérivation de fonctions en physique"
+td: td2
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - chap2.derivation_et_differentielle
+
+metadonnees:
+  duree_estimee: "20 min"
+  difficulte: 1
+  type_exercice: "Application"
+  indispensable: true
+
+enonce_intro: |
+  En Physique, les variables et les fonctions changent souvent de nom, d'où l'intérêt d'utiliser la notation différentielle lors du calcul de dérivées. De plus, les fonctions contiennent des paramètres (grandeurs constantes) souvent représentés par des lettres : il faut donc bien distinguer variables et paramètres.
+  Notation en Physique sur les dérivées par rapport au temps $t$ : la dérivée $\frac{\mathrm{d}x}{\mathrm{d}t}$ se note $\dot{x}$.
+
+prerequis:
+  - titre: "Dérivées usuelles et règles de dérivation"
+    texte: |
+      Connaître les dérivées des fonctions usuelles ($\ln$, $\cos$, $\sin$, puissances) et la règle de dérivation des fonctions composées $(g \circ f)' = (g' \circ f) \cdot f'$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Maîtriser la notation différentielle"
+    texte: |
+      Identifier clairement la variable d'intégration/dérivation par rapport aux paramètres constants et pratiquer la notation temporelle $\dot{x}$.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Démystifier les notations physiques"
+    texte: |
+      Habituer les étudiants à dériver par rapport à d'autres variables que $x$ ($t$, $\theta$) et à manipuler les paramètres littéraux sans les confondre avec la variable.
+
+coup_de_pouce:
+  - titre: "Identification des variables"
+    texte: |
+      Repère la variable entre parenthèses (ex. $f(x) \implies x$ est la variable, $g(t) \implies t$ est la variable). Tout le reste est considéré comme constant.
+
+point_cours:
+  - titre: "Notation différentielle et notation pointée"
+    texte: |
+      La dérivée d'une fonction $f(x)$ par rapport à sa variable $x$ se note $\frac{\mathrm{d}f}{\mathrm{d}x}(x)$.
+      En physique, pour une fonction dépendant du temps $t$, la dérivée temporelle première se note $\frac{\mathrm{d}x}{\mathrm{d}t} = \dot{x}$, et la dérivée seconde $\frac{\mathrm{d}^2 x}{\mathrm{d}t^2} = \ddot{x}$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Erreur de paramètre"
+    texte: |
+      Traiter les constantes (comme $\omega$, $R$, $a$, $b$) comme des variables et essayer de leur appliquer la règle de dérivation d'un produit.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Rappel sur la chaîne de dérivation"
+    texte: |
+      Insister sur la dérivation des fonctions composées comme $\cos(u(t))$ dont la dérivée est $-u'(t)\sin(u(t))$.
+
+bilan:
+  - titre: "Synthèse"
+    texte: |
+      La dérivée en physique suit les mêmes règles mathématiques, mais l'attention doit se porter sur le statut de chaque lettre (variable ou paramètre).
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Dérivées partielles"
+    texte: |
+      Introduction à la dérivation par rapport à une variable lorsque la fonction en comporte plusieurs : $\frac{\partial f}{\partial x}$.
+
+questions:
+  - id: q1_a
+    parent: "1"
+    enonce: |
+      Déterminer la dérivée de $f(x) = k \ln(x)$ avec $k$ constant.
+    point_cours:
+      - titre: |
+          Dérivée de $\ln(x)$
+        texte: |
+          $\frac{\mathrm{d}}{\mathrm{d}x}(\ln x) = \frac{1}{x}$.
+    coup_de_pouce:
+      - titre: "Facteur constant"
+        texte: |
+          Le paramètre $k$ est en facteur, il reste inchangé lors de la dérivation.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $$\frac{\mathrm{d}f}{\mathrm{d}x} = k \cdot \frac{1}{x} = \frac{k}{x}$$
+
+  - id: q1_b
+    parent: "1"
+    enonce: |
+      Déterminer la dérivée de $g(t) = R \cos(2\omega t)$ avec $R$ et $\omega$ constants.
+    point_cours:
+      - titre: |
+          Dérivée de $\cos(ut)$
+        texte: |
+          $\frac{\mathrm{d}}{\mathrm{d}t}(\cos(ut)) = -u \sin(ut)$.
+    coup_de_pouce:
+      - titre: "Variable temporelle"
+        texte: |
+          La variable est $t$. La fonction interne est $u(t) = 2\omega t$, sa dérivée par rapport à $t$ est $2\omega$.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $$\dot{g}(t) = \frac{\mathrm{d}g}{\mathrm{d}t} = R \cdot (-2\omega \sin(2\omega t)) = -2 R \omega \sin(2\omega t)$$
+
+  - id: q1_c
+    parent: "1"
+    enonce: |
+      Déterminer la dérivée de $h(t) = \sin^2(\omega t)$ avec $\omega$ constant.
+    point_cours:
+      - titre: |
+          Dérivée de $u^n$
+        texte: |
+          $\frac{\mathrm{d}}{\mathrm{d}t}(u(t)^n) = n \cdot u'(t) \cdot u(t)^{n-1}$.
+    coup_de_pouce:
+      - titre: "Composition multiple"
+        texte: |
+          Pose $u(t) = \sin(\omega t)$. Alors $h(t) = u(t)^2$.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $$\dot{h}(t) = \frac{\mathrm{d}h}{\mathrm{d}t} = 2 \cdot \sin(\omega t) \cdot \frac{\mathrm{d}}{\mathrm{d}t}(\sin(\omega t)) = 2 \cdot \sin(\omega t) \cdot (\omega \cos(\omega t))$$
+          En utilisant la formule trigonométrique $2\sin(x)\cos(x) = \sin(2x)$ :
+          $$\dot{h}(t) = \omega \sin(2\omega t)$$
+
+  - id: q1_d
+    parent: "1"
+    enonce: |
+      Déterminer la dérivée de $r(\theta) = a \cos(\theta) + b \sin(\theta)$ avec $a$ et $b$ constants.
+    point_cours:
+      - titre: "Dérivée par rapport à un angle"
+        texte: |
+          $\frac{\mathrm{d}}{\mathrm{d}\theta}(\cos\theta) = -\sin\theta$ et $\frac{\mathrm{d}}{\mathrm{d}\theta}(\sin\theta) = \cos\theta$.
+    coup_de_pouce:
+      - titre: |
+          Variable $\theta$
+        texte: |
+          Ici la variable est $\theta$. On dérive chaque terme indépendamment.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $$\frac{\mathrm{d}r}{\mathrm{d}\theta} = -a \sin(\theta) + b \cos(\theta)$$
+
+  - id: q1_e
+    parent: "1"
+    enonce: |
+      Déterminer la dérivée de $x(t) = a \cos(\alpha t^2)$ avec $a$ et $\alpha$ constants.
+    point_cours:
+      - titre: "Fonction composée cosinus"
+        texte: |
+          $\frac{\mathrm{d}}{\mathrm{d}t}(\cos(u(t))) = -u'(t) \sin(u(t))$.
+    coup_de_pouce:
+      - titre: "Dérivée de l'argument"
+        texte: |
+          L'argument est $u(t) = \alpha t^2$, dont la dérivée temporelle est $u'(t) = 2\alpha t$.
+    solution:
+      - titre: "Résolution"
+        texte: 
+          $$\dot{x}(t) = \frac{\mathrm{d}x}{\mathrm{d}t} = a \cdot (-2\alpha t \sin(\alpha t^2)) = -2 a \alpha t \sin(\alpha t^2)$$
+
+  - id: q1_f
+    parent: "1"
+    enonce: |
+      Déterminer la dérivée de $z(t) = a t^2 - b t$ avec $a$ et $b$ constants.
+    point_cours:
+      - titre: "Dérivée d'un polynôme"
+        texte: |
+          $\frac{\mathrm{d}}{\mathrm{d}t}(t^n) = n t^{n-1}$.
+    coup_de_pouce:
+      - titre: "Dérivation terme à terme"
+        texte: |
+          Applique la règle de puissance sur chaque terme en $t$.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $$\dot{z}(t) = \frac{\mathrm{d}z}{\mathrm{d}t} = 2a t - b$$

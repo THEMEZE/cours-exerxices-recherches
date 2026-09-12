@@ -1,0 +1,171 @@
+id: td1_ex4
+intitule: "Corde fixée à ses deux extrémités et ondes stationnaires"
+td: td1
+facultatif: false
+seance: 1
+cours_rattache:
+  - chap1.separation_variables
+  - chap1.ondes_stationnaires
+  - chap1.modes_propres
+
+metadonnees:
+  duree_estimee: "25 min"
+  difficulte: 2 # Sur une échelle de 1 à 5
+  type_exercice: "Application directe du cours"
+  indispensable: true
+
+enonce_intro: |
+  Une corde homogène, de masse linéique $\mu$ et de longueur $L$, est fixée en ses deux extrémités $A(x=0)$ et $B(x=L)$. La corde de tension $F$, écartée de sa position d'équilibre, est abandonnée à l'instant $t=0$. Le déplacement transversal $y(x,t)$ obéit à l'équation de d'Alembert :
+  $$\frac{\partial^2 y}{\partial x^2} = \frac{\mu}{F} \frac{\partial^2 y}{\partial t^2}$$
+
+questions:
+  - id: q1
+    enonce: |
+      On admet la solution particulière $y(x,t) = f(x)\cdot g(t)$ (séparation des variables).
+      Montrer que $y(x,t) = A\cos(kx+\varphi)\cos(\omega t+\phi)$.
+      Quelle relation existe-t-il entre $k$, $\omega$ et la célérité $c$ ? (Relation de dispersion).
+
+    coup_de_pouce:
+      - titre: "Méthode de séparation"
+        texte: |
+          Injectez $y(x,t) = f(x)g(t)$ dans l'équation d'onde, séparez les termes en $x$ et en $t$ pour égaler chaque membre à une constante négative $-k^2$.
+
+    correction:
+      - titre: "Résultat"
+        texte: |
+          On obtient $f''(x) + k^2 f(x) = 0$ et $g''(t) + \omega^2 g(t) = 0$.
+          La relation de dispersion est $\omega = c\cdot k$ avec $c = \sqrt{F/\mu}$.
+
+    solution:
+      - titre: "Démonstration complète"
+        texte: |
+          En injectant $y(x,t) = f(x)g(t)$ dans l'équation d'onde :
+          $$f''(x)g(t) = \frac{1}{c^2}f(x)g''(t) \implies \frac{f''(x)}{f(x)} = \frac{1}{c^2}\frac{g''(t)}{g(t)} = -k^2$$
+          On obtient deux équations différentielles harmoniques :
+          1. $f''(x) + k^2 f(x) = 0 \implies f(x) = C_1\cos(kx+\varphi)$
+          2. $g''(t) + \omega^2 g(t) = 0 \implies g(t) = C_2\cos(\omega t+\phi)$
+          
+          Par produit, $y(x,t) = A\cos(kx+\varphi)\cos(\omega t+\phi)$ avec $A = C_1 C_2$.
+          La constante de séparation impose la relation de dispersion : $\omega = c\cdot k$, soit $k = \dfrac{\omega}{c}$ avec $c = \sqrt{\dfrac{F}{\mu}}$.
+
+  - id: q2
+    enonce: |
+      Montrer que les fréquences de vibration sont des multiples entiers d'une fréquence fondamentale $f_1$ ($f_N = N f_1$). Exprimer $f_1$ en fonction de $F$, $L$ et $\mu$.
+
+    coup_de_pouce:
+      - titre: "Conditions aux limites"
+        texte: |
+          Appliquez les conditions aux limites $y(0,t) = 0$ et $y(L,t) = 0$ pour déterminer $k$ puis $f_N$.
+
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $f_N = N f_1$ avec $f_1 = \dfrac{1}{2L}\sqrt{\dfrac{F}{\mu}}$.
+
+    solution:
+      - titre: "Calcul détaillé"
+        texte: |
+          - En $x=0$ : $y(0,t) = 0 \implies \cos(\varphi) = 0 \implies \varphi = \dfrac{\pi}{2} [\pi]$, donc $f(x) \propto \sin(kx)$.
+          - En $x=L$ : $y(L,t) = 0 \implies \sin(kL) = 0 \implies kL = N\pi \quad (N \in \mathbb{N}^*)$.
+          
+          Comme $k = \dfrac{2\pi f}{c}$, on a $\dfrac{2\pi f_N}{c} L = N\pi \implies f_N = N \dfrac{c}{2L}$.
+          Le fondamental ($N=1$) s'écrit $f_1 = \dfrac{c}{2L} = \dfrac{1}{2L}\sqrt{\dfrac{F}{\mu}}$, d'où $f_N = N f_1$.
+
+  - id: q3
+    enonce: |
+      Application : Pour la 3ème corde de guitare ($\ell = 63$ cm, $\rho = 1200\text{ kg}\cdot\text{m}^{-3}$, $S = 0.42\text{ mm}^2$), calculer la tension $F$ pour $f_1 = 147$ Hz.
+
+    coup_de_pouce:
+      - titre: "Masse linéique"
+        texte: |
+          Calculez d'abord $\mu = \rho\cdot S$, puis isolez $F$ dans la formule de $f_1$.
+
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $\mu = 5.04\times 10^{-4}\text{ kg/m}$, $F \approx 17.3\text{ N}$.
+
+    solution:
+      - titre: "Application numérique"
+        texte: |
+          $\mu = \rho S = 1200 \times (0.42\times 10^{-6}) = 5.04\times 10^{-4}\text{ kg/m}$.
+          De $f_1 = \dfrac{1}{2\ell}\sqrt{\dfrac{F}{\mu}}$, on tire $F = \mu (2\ell f_1)^2$.
+          $$F = 5.04\times 10^{-4} \times (2 \times 0.63 \times 147)^2 \approx 17.3\text{ N}$$
+
+  - id: q4
+    enonce: |
+      Exprimer, en fonction de la longueur $L$, les longueurs d'ondes possibles $\lambda_N$.
+
+    coup_de_pouce:
+      - titre: |
+          Relation $k_N$ et $\lambda_N$
+        texte: |
+          Utilisez $k_N = \dfrac{2\pi}{\lambda_N} = \dfrac{N\pi}{L}$.
+
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $\lambda_N = \dfrac{2L}{N}$ pour $N \ge 1$.
+
+    solution:
+      - titre: "Détail"
+        texte: |
+          Comme $k_N L = N\pi$ et $k_N = \dfrac{2\pi}{\lambda_N}$, on obtient immédiatement :
+          $$\lambda_N = \frac{2L}{N}$$
+
+  - id: q5
+    enonce: |
+      Exprimer $y_N(x,t)$ pour le mode $N$. Préciser le nombre et la position des nœuds et des ventres. Distance entre 2 ventres / 2 nœuds ?
+
+    coup_de_pouce:
+      - titre: "Positions récurrencielles"
+        texte: |
+          Les nœuds annulent le sinus ($\sin(k_N x) = 0$), les ventres le maximisent ($|\sin(k_N x)| = 1$).
+
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $y_N(x,t) = A_N \sin\left(\dfrac{N\pi}{L}x\right)\cos(\omega_N t + \phi_N)$.
+          $N+1$ nœuds en $x_n = n\dfrac{L}{N}$ ($n \in [0, N]$).
+          $N$ ventres en $x_v = \left(n+\dfrac{1}{2}\right)\dfrac{L}{N}$ ($n \in [0, N-1]$).
+          Distance entre deux nœuds ou deux ventres consécutifs : $\dfrac{\lambda_N}{2} = \dfrac{L}{N}$.
+
+    solution:
+      - titre: "Analyse structurée"
+        texte: |
+          - **Forme du mode $N$ :** $y_N(x,t) = A_N \sin\left(\dfrac{N\pi x}{L}\right)\cos(\omega_N t + \phi_N)$.
+          - **Nœuds ($y_N = 0$) :** $\dfrac{N\pi x}{L} = n\pi \implies x_n = n\dfrac{L}{N}$ avec $n \in \{0, 1, \dots, N\}$. Il y a $N+1$ nœuds.
+          - **Ventres ($|y_N| = A_N$) :** $\dfrac{N\pi x}{L} = \left(n+\dfrac{1}{2}\right)\pi \implies x_v = \left(n+\dfrac{1}{2}\right)\dfrac{L}{N}$ avec $n \in \{0, \dots, N-1\}$. Il y a $N$ ventres.
+          - **Distance inter-nœuds / inter-ventres :** $d = \dfrac{L}{N} = \dfrac{\lambda_N}{2}$.
+
+  - id: q6
+    enonce: "Dessiner la corde pour $N=1$ et $N=4$."
+
+    coup_de_pouce:
+      - titre: "Représentation"
+        texte: "$N=1$ présente 1 fuseau (0 nœud interne), $N=4$ présente 4 fuseaux (3 nœuds internes)."
+
+    correction:
+      - titre: "Allure"
+        texte: |
+          - **$N=1$** : Une demi-onde entre $0$ et $L$ (1 ventre au centre $x=L/2$).
+          - **$N=4$** : Deux ondes complètes entre $0$ et $L$ (4 ventres, nœuds en $0, L/4, L/2, 3L/4, L$).
+
+    solution:
+      - titre: "Tracé schématique"
+        texte: |
+          \begin{itemize}
+            \item $N=1$ (Fondamental) : \texttt{A (---) B} (1 seul fuseau de longueur $L$).
+            \item $N=4$ (Harmonique 4) : \texttt{A ()()()() B} (4 fuseaux de longueur $L/4$).
+          \end{itemize}
+
+    aller_plus_loin:
+      - niveau: prepa
+        titre: "De la corde à la physique quantique"
+        texte: |
+          La quantification des modes propres d'une corde fixe ($k_N = N\pi/L$) est formellement identique à la quantification des niveaux d'énergie d'une particule dans un puits de potentiel infini en mécanique quantique.
+
+      - niveau: licence
+        titre: "Analyse spectrale et séries de Fourier"
+        texte: |
+          Une déformation initiale quelconque $y(x,0)$ se décompose comme une somme infinie de modes propres $\sum y_N(x,t)$ via la décomposition en séries de Fourier.

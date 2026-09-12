@@ -1,0 +1,63 @@
+id: recherche-integrabilite-quantique_cours_intro_bethe
+matiere: recherche-integrabilite-quantique
+type_doc: cours
+titre: "Notes — Introduction à l'ansatz de Bethe"
+sous_titre: "Notes de recherche (gabarit à compléter)"
+niveau: [doctorat]
+sujets: [bethe-ansatz, integrabilite-quantique]
+
+sections:
+  - titre: "Motivation"
+    contenu: |
+      *(Gabarit d'exemple.)* La chaîne de Heisenberg XXX est le premier
+      système où Bethe a proposé sa méthode (1931) pour diagonaliser
+      l'hamiltonien exactement.
+    remarque: "Point de départ classique : article original de Bethe (1931), Zeitschrift für Physik."
+
+  - titre: "Équations de Bethe (forme coordonnée)"
+    contenu: |
+      *(À compléter : dérivation des équations de Bethe pour la chaîne XXX,
+      ansatz sous forme d'onde plane pour les magnons.)*
+    aller_plus_loin:
+      doctorat: |
+        Lien avec l'équation de Yang-Baxter et l'ansatz de Bethe algébrique
+        (formulation plus moderne, via la matrice R).
+
+  - titre: "Modèle de Lieb-Liniger (gaz de bosons 1D en interaction contact)"
+    contenu: |
+      Un autre système intégrable classique, résolu par ansatz de Bethe :
+      \begin{eqnarray}\label{eq.LL}
+        \ptFleche{LL}{$\operator{H}$} & = &
+          {\color{colorFour} \underbrace{\frac{\hbar^2}{2m} \sum_{i=1}^{\ptFleche{Nombre}{$N$}}
+          \operator{\partial}_{x_i}^2}_{\text{Cinétique}}}
+          + {\color{colorSix} \underbrace{\ptFleche{motg}{$g$}
+          \sum_{1 \leq i < j \leq N} \operator{\delta}(x_i - x_j)}_{\text{Interaction}}} ,
+      \end{eqnarray}
+    overlay_tikz: |
+      % Exemple d'annotation \ptFleche + flèches "Computer Modern Rightarrow"
+      % -- placé au niveau de LA SECTION qui contient les \ptFleche
+      % référencés (LL, Nombre, motg), donc garanti sur la même page.
+      \draw[opacity=1]
+        (LL) edge[line width=0.4ex, color=colorOne,
+          arrows={Computer Modern Rightarrow[sharp,length=0.2cm]-},
+          out=180, in=0] node[pos=1, left]{\color{colorOne}\fontsize{8pt}{10pt}\selectfont\bfseries Hamiltonien}
+        ($(LL) + (-2.5cm,0.0cm)$);
+      \draw[opacity=1]
+        (Nombre) edge[line width=0.2ex, color=colorFour,
+          arrows={Computer Modern Rightarrow[sharp,length=0.1cm]-},
+          out=10, in=180] node[pos=1, right]{\color{colorFour}\fontsize{7pt}{9pt}\selectfont\bfseries nombre d'atomes}
+        ($(Nombre) + (1cm,0.15cm)$);
+      \draw[opacity=1]
+        (motg) edge[line width=0.2ex, color=colorSix,
+          arrows={Computer Modern Rightarrow[sharp,length=0.1cm]-},
+          out=-120, in=0] node[pos=1, left]{\color{colorSix}\fontsize{7pt}{9pt}\selectfont\bfseries force de répulsion 1D}
+        ($(motg) + (-0.75cm,-1.25cm)$);
+    encadre:
+      type: "Formalisme"
+      titre: |
+        {\bf \textsf{Lieb-Liniger} \textsf{(LL)}}
+      couleur: "woodChene"
+      contenu: |
+        Le paramètre sans dimension $\gamma = mg/(\hbar^2 n)$ (avec $n=N/L$
+        la densité) contrôle le régime physique : $\gamma \ll 1$ (quasi
+        condensat), $\gamma \gg 1$ (régime de Tonks-Girardeau, "fermionisation").

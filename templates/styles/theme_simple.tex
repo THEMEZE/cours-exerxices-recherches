@@ -1,0 +1,40 @@
+% ============================================================
+% theme_simple.tex — style de boîte d'origine (titre plein, fond teinté)
+%
+% Conservé tel quel pour pouvoir revenir en arrière facilement : dans
+% templates/styles/packages.tex, remplacer
+%   \input{templates/styles/theme_academique}
+% par
+%   \input{templates/styles/theme_simple}
+% pour retrouver ce style.
+% ============================================================
+\newtcolorbox{coupdepouce}{
+  colback=yellow!8, colframe=yellow!55!black,
+  title={\small\bfseries Coup de pouce}, fonttitle=\bfseries,
+  boxrule=0.5pt, arc=2pt, left=6pt, right=6pt, top=3pt, bottom=3pt
+}
+\newtcolorbox{allerplusloin}[1]{
+  colback=blue!5, colframe=blue!45!black,
+  title={\small\bfseries Aller plus loin --- #1}, fonttitle=\bfseries,
+  boxrule=0.5pt, arc=2pt, left=6pt, right=6pt, top=3pt, bottom=3pt
+}
+\newtcolorbox{correction}{
+  colback=green!5, colframe=green!35!black,
+  title={\small\bfseries Correction (résultat)}, fonttitle=\bfseries,
+  boxrule=0.5pt, arc=2pt, left=6pt, right=6pt, top=3pt, bottom=3pt
+}
+\newtcolorbox{remarque}{
+  colback=blue!4, colframe=blue!40!black,
+  title={\small\bfseries Remarque}, fonttitle=\bfseries,
+  boxrule=0.5pt, arc=2pt, left=6pt, right=6pt, top=3pt, bottom=3pt
+}
+\newtcolorbox{solutiondetaillee}{
+  colback=gray!5, colframe=gray!45!black,
+  title={\small\bfseries Solution détaillée}, fonttitle=\bfseries,
+  boxrule=0.5pt, arc=2pt, left=6pt, right=6pt, top=3pt, bottom=3pt
+}
+
+% Style de titre de niveau 1/2 utilisé par exercice.tex.j2/section.tex.j2
+% quand ce thème est actif : un simple \subsection* en gras.
+\newcommand{\TitreNiveauUn}[1]{\subsection*{#1}}
+\newcommand{\TitreNiveauDeux}[1]{\subsubsection*{#1}}

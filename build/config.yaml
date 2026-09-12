@@ -1,0 +1,322 @@
+profils:
+  IPSA:
+    nom: "Guillaume THÉMÈZE"
+    email: "guillaume.themeze@ipsa.fr"
+    statut: ""
+    bureau: ""
+  LPTMS:
+    nom: "Guillaume THÉMÈZE"
+    email: "guillaume.themeze@universite-paris-saclay.fr"
+    statut: "Chercheur en Physique Théorique"
+    bureau: "Bât. 510"
+  DEFAULT:
+    nom: "Guillaume THÉMÈZE"
+    email: "contact@themeze.fr"
+    statut: "Ingénieur & Enseignant"
+    bureau: ""
+
+
+
+# Chaque entrée = un PDF généré.
+#   matiere       : dossier dans data/matieres/<matiere>/
+#   type_doc      : "td" | "tp" | "cours" (défaut "td")
+#   doc           : nom du document
+#   auteur        : (optionnel) surcharge l'auteur du document
+#   etablissement : (optionnel) ex: IPSA, Sorbonne, etc.
+#   promo         : (optionnel) ex: A2, L3, M1
+#   annee         : (optionnel) ex: 2025-2026
+
+targets:
+
+  # ---------------- Physique des ondes (IPSA) ----------------
+  - name: td1_test_Ph110
+    titre: "TD 1 -- Propagation des ondes mécaniques sur une corde -- Test"
+    matiere: piscines-de-sciences-et-methodologie
+    type_doc: td
+    doc: td1_grandeurs_physiques
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: true
+    show_objectifs_pedagogiques_etudiants: true
+    show_objectifs_pedagogiques_enseignants: true
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: true
+    show_remarques_pedagogiques_conseils_animation: true
+    show_bilan: true
+    aller_plus_loin_niveaux: [licence]
+
+  - name: td1_test_Ph110
+    titre: "TD 2 -- DÉRIVATION ET DIFFÉRENTIELLE (4h) Interprétation en Physique -- Test"
+    matiere: piscines-de-sciences-et-methodologie
+    type_doc: td
+    doc: td2_derivation_et_diffeérentielle
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: true
+    show_objectifs_pedagogiques_etudiants: true
+    show_objectifs_pedagogiques_enseignants: true
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: true
+    show_remarques_pedagogiques_conseils_animation: true
+    show_bilan: true
+    aller_plus_loin_niveaux: [licence]
+
+  - name: td1_test_Ph110_0
+    titre: "TD 2 -- DÉRIVATION ET DIFFÉRENTIELLE (4h) Interprétation en Physique -- Test"
+    matiere: piscines-de-sciences-et-methodologie
+    type_doc: td
+    doc: td3_fonctions_derives_integrale
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: true
+    show_objectifs_pedagogiques_etudiants: true
+    show_objectifs_pedagogiques_enseignants: true
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: true
+    show_remarques_pedagogiques_conseils_animation: true
+    show_bilan: true
+    aller_plus_loin_niveaux: [licence]
+
+  - name: td1_enonce
+    titre: "TD 1 -- Propagation des ondes mécaniques sur une corde"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td1_corde
+    etablissement: IPSA
+    promo: A2
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_figure: true
+    show_animation_note: false
+    show_prerequis: false
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: false
+    show_coup_de_pouce: false
+    show_correction: false
+    show_solution: false
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td1_corrige
+    titre: "TD 1 -- Propagation des ondes mécaniques sur une corde -- Corrigé"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td1_corde
+    etablissement: IPSA
+    promo: A2
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: false 
+    show_figure: false
+    show_animation_note: true
+    show_prerequis: true
+    show_objectifs_pedagogiques_etudiants: true
+    show_objectifs_pedagogiques_enseignants: true
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: true
+    show_remarques_pedagogiques_conseils_animation: true
+    show_bilan: true
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master, doctorat]
+
+  - name: td1_test
+    titre: "TD 1 -- Propagation des ondes mécaniques sur une corde -- Test"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td1_corde
+    etablissement: IPSA
+    promo: A2
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: false
+    show_prerequis: false
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: false
+    show_coup_de_pouce: false
+    show_correction: false
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td1_ex1_fiche
+    titre: "Fiche -- Corde de nylon"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td1_corde
+    exercices: [ex1_corde_nylon]
+    etablissement: IPSA
+    promo: A2
+    annee: "2025-2026"
+    show_figure: true
+    show_animation_note: true
+    show_coup_de_pouce: true
+    show_correction: true
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master, doctorat]
+
+  - name: td1_ex1_coup_de_pouce
+    titre: "TD 1 Ex.1 -- Coup de pouce (sans corrigé)"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td1_corde
+    exercices: [ex1_corde_nylon]
+    etablissement: IPSA
+    promo: A2
+    show_figure: true
+    show_animation_note: false
+    show_coup_de_pouce: true
+    show_correction: false
+    show_solution: false
+    aller_plus_loin_niveaux: []
+
+  - name: td1_ex1_solution_detaillee
+    titre: "TD 1 Ex.1 -- Solution détaillée (à projeter en fin de séance)"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td1_corde
+    exercices: [ex1_corde_nylon]
+    etablissement: IPSA
+    promo: A2
+    show_figure: true
+    show_animation_note: true
+    show_coup_de_pouce: false
+    show_correction: true
+    show_solution: true
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master, doctorat]
+
+  - name: td2_enonce
+    titre: "TD 2 -- Propagation des ondes sonores dans un fluide"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td2_ondes_sonores
+    etablissement: IPSA
+    promo: A2
+    show_figure: true
+    show_animation_note: false
+    show_coup_de_pouce: false
+    show_correction: false
+    show_solution: false
+    aller_plus_loin_niveaux: []
+
+  - name: td2_corrige
+    titre: "TD 2 -- Corrigé"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td2_ondes_sonores
+    etablissement: IPSA
+    promo: A2
+    show_figure: true
+    show_animation_note: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master, doctorat]
+
+  - name: td3_enonce
+    titre: "TD 3 -- Coefficients de réflexion et transmission, impédance"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td3_reflexion_transmission
+    etablissement: IPSA
+    promo: A2
+    show_figure: true
+    show_animation_note: false
+    show_coup_de_pouce: false
+    show_correction: false
+    show_solution: false
+    aller_plus_loin_niveaux: []
+
+  - name: td3_corrige
+    titre: "TD 3 -- Corrigé"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td3_reflexion_transmission
+    etablissement: IPSA
+    promo: A2
+    show_figure: true
+    show_animation_note: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    aller_plus_loin_niveaux: [licence, master]
+
+  - name: cours_chap1
+    titre: "Chapitre 1 -- Ondes mécaniques : introduction"
+    matiere: physique-ondes-ipsa
+    type_doc: cours
+    doc: chap1_intro
+    etablissement: IPSA
+    promo: A2
+    show_figure: true
+    show_animation_note: true
+    aller_plus_loin_niveaux: [licence, master]
+
+  # ---------------- Exemples pour les autres matières ----------------
+
+  - name: agregation_physique_lecon_oscillateurs
+    titre: "Agrégation physique -- Leçon : Oscillateurs mécaniques"
+    matiere: agregation-physique
+    type_doc: cours
+    doc: lecon_oscillateurs
+    etablissement: Université
+    promo: Agrégation
+    show_figure: true
+    show_animation_note: true
+    aller_plus_loin_niveaux: [doctorat]
+
+  - name: agregation_maths_dev1
+    titre: "Agrégation mathématiques -- Développement 1 (gabarit)"
+    matiere: agregation-mathematiques
+    type_doc: td
+    doc: dev1_exemple
+    etablissement: Université
+    promo: Agrégation
+    show_figure: true
+    show_animation_note: false
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    aller_plus_loin_niveaux: []
+
+  - name: recherche_intro_bethe
+    titre: "Recherche -- Introduction à l'ansatz de Bethe"
+    matiere: recherche-integrabilite-quantique
+    type_doc: cours
+    doc: intro_bethe
+    etablissement: LPTMS
+    show_figure: true
+    show_animation_note: false
+    aller_plus_loin_niveaux: [doctorat]

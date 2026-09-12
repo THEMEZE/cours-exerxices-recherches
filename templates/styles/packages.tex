@@ -1,0 +1,42 @@
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{amsmath, amssymb, graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc, positioning, arrows.meta, decorations.pathmorphing}
+\usepackage{animate}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{caption} % Indispensable pour \captionof
+\usepackage{geometry}
+\usepackage{titling}
+\usepackage{enumitem}
+
+\setlength{\droptitle}{-2em} % Ajuste la valeur (-2em, -3em, etc.)
+\usetikzlibrary{positioning}
+
+
+
+% ------------------------------------------------------------------
+% Thème visuel (couleurs, barres de titre, boîtes) -- voir
+% templates/styles/theme_academique.tex. Pour revenir à l'ancien style
+% (titre plein, fond teinté), remplacer par theme_simple.
+% ------------------------------------------------------------------
+\input{templates/styles/theme_academique}
+\input{templates/styles/macros_annotations}
+\input{templates/styles/monstyletikz} % <-- Pour les figures TikZ avec style "Mer de Fermi"
+
+% ------------------------------------------------------------------
+% \tikzmark{nom} : pose un point-repère invisible n'importe où dans le
+% texte (question, coup de pouce, correction, solution...). Utiliser
+% ensuite `overlay_tikz` au niveau de l'exercice pour tracer une flèche
+% \draw[->] (nom1) to[bend left] (nom2); -- fonctionne même entre deux
+% tcolorbox différentes, et même d'une page à l'autre (LaTeX se souvient
+% de la position grâce à `remember picture`, qui a besoin de 2 passes
+% pdflatex -- déjà fait par build/build.py).
+% ------------------------------------------------------------------
+\newcommand{\tikzmark}[1]{\tikz[remember picture,overlay,baseline]
+  \node[inner sep=0pt,outer sep=0pt] (#1) {};}

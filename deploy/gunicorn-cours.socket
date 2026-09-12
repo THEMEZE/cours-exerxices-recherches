@@ -1,0 +1,11 @@
+[Unit]
+Description=Socket Gunicorn pour l'appli QCM du cours d'ondes
+
+[Socket]
+ListenStream=/run/gunicorn-cours.sock
+SocketUser=www-data
+SocketGroup=www-data
+SocketMode=0660
+
+[Install]
+WantedBy=sockets.target

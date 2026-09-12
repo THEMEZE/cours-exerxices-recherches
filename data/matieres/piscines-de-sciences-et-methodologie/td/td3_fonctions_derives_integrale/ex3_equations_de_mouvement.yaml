@@ -1,0 +1,129 @@
+id: td3_ex3
+intitule: "Équations de mouvement"
+td: td3
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - chap3.cinematique_1d
+
+metadonnees:
+  duree_estimee: "45 min"
+  difficulte: 2
+  type_exercice: "Application"
+  indispensable: true
+
+enonce_intro: |
+  Exercices d'application directe sur le passage entre position $x(t)$, vitesse $v_x(t)$ et accélération $a_x(t)$ par dérivation et intégration avec conditions initiales.
+
+prerequis:
+  - titre: "Dérivation et intégration de polynômes"
+    texte: |
+      $\frac{\mathrm{d}}{\mathrm{d}t}(t^n) = n t^{n-1}$ et $\int t^n \mathrm{d}t = \frac{t^{n+1}}{n+1} + \text{Cte}$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Déterminer les équations horaires"
+    texte: |
+      Trouver les instants particuliers d'arrêt ou de changement de sens de mouvement.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Analyse de graphes cinématiques"
+    texte: |
+      Relier le sens de variation des courbes $x(t)$, $v(t)$, $a(t)$ aux phases d'accélération ou de décélération.
+
+coup_de_pouce:
+  - titre: "Recherche des extrémums"
+    texte: |
+      La vitesse s'annule là où la position $x(t)$ atteint un extremum local ($\frac{\mathrm{d}x}{\mathrm{d}t} = 0$).
+
+point_cours:
+  - titre: "Phases du mouvement"
+    texte: |
+      * $v_x \cdot a_x > 0 \implies$ Le mouvement est accéléré.
+      * $v_x \cdot a_x < 0 \implies$ Le mouvement est ralenti.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Changement de sens"
+    texte: |
+      Ne pas confondre s'arrêter temporairement ($v_x = 0$) avec être au repos définitif.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Constantes d'intégration"
+    texte: |
+      Bien faire repérer $x_0$ et $v_0$ aux étudiants dès la lecture des énoncés d'intégration.
+
+bilan:
+  - titre: "Synthèse"
+    texte: |
+      Les intégrations successives nécessitent la connaissance de deux conditions initiales pour déterminer complètement la trajectoire.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Accélération variable"
+    texte: |
+      Étude du 'jerk' (dérivée première de l'accélération) en ingénierie des transports.
+
+questions:
+  - id: q1
+    parent: "1"
+    enonce: |
+      Soit une particule de position $x(t) = 6t^2 - t^3$ (en m).
+      
+      \begin{enumerate}[label=\alph*)]
+        \item Déterminer $v_x(t)$ et $a_x(t)$.
+        \item Décrire le mouvement entre $t=0$ et $t=2\text{ s}$.
+        \item Décrire le mouvement entre $t=2\text{ s}$ et $t=4\text{ s}$.
+        \item Décrire le mouvement entre $t=4\text{ s}$ et $t=6\text{ s}$.
+        \item Décrire le mouvement après $t=6\text{ s}$.
+      \end{enumerate}
+
+    solution:
+      - titre: "Résolution question 1"
+        texte: |
+          \begin{enumerate}[label=\alph*)]
+            \item $v_x(t) = 12t - 3t^2\text{ m}\cdot\text{s}^{-1}$ ; $a_x(t) = 12 - 6t\text{ m}\cdot\text{s}^{-2}$.
+            \item $0 < t < 2\text{ s}$ : $v_x > 0$ et $a_x > 0 \implies$ le mobile se déplace vers les $x$ croissants en **accélérant**.
+            \item $2 < t < 4\text{ s}$ : $v_x > 0$ et $a_x < 0 \implies$ le mobile avance toujours vers les $x$ croissants mais en **décélérant**.
+            \item $4 < t < 6\text{ s}$ : à $t=4\text{ s}$, $v_x=0$. Pour $4 < t < 6\text{ s}$, $v_x < 0$ et $a_x < 0 \implies$ le mobile a fait demi-tour et se déplace vers les $x$ négatifs en **accélérant**.
+            \item $t > 6\text{ s}$ : $x(t) < 0$, $v_x < 0$, $a_x < 0 \implies$ poursuite du mouvement vers les $x$ négatifs en **accélérant**.
+          \end{enumerate>
+
+  - id: q2
+    parent: "2"
+    enonce: |
+      Soit la position $x(t) = t^3 - 6t^2 - 15t + 40$ (en m).
+      
+      \begin{enumerate}[label=\alph*)]
+        \item Déterminer l'instant où la vitesse s'annule.
+        \item Calculer la position à cet instant.
+        \item Calculer l'accélération à cet instant.
+      \end{enumerate}
+
+    solution:
+      - titre: "Résolution question 2"
+        texte: |
+          \begin{enumerate}[label=\alph*)]
+            \item $v_x(t) = 3t^2 - 12t - 15$. On cherche $v_x(t)=0 \implies 3(t^2 - 4t - 5) = 0 \implies (t-5)(t+1) = 0$. Comme $t \ge 0$, l'instant cherché est $t = 5\text{ s}$.
+            \item $x(5) = 5^3 - 6(5)^2 - 15(5) + 40 = 125 - 150 - 75 + 40 = -60\text{ m}$.
+            \item $a_x(t) = 6t - 12 \implies a_x(5) = 6(5) - 12 = 18\text{ m}\cdot\text{s}^{-2}$.
+          \end{enumerate}
+
+  - id: q3
+    parent: "3"
+    enonce: |
+      L'accélération d'une particule est $a(t) = 12t - 6$ ($\text{m}\cdot\text{s}^{-2}$). À $t=0$, $v_0 = 4\text{ m}\cdot\text{s}^{-1}$ et $x_0 = -3\text{ m}$.
+
+      \begin{enumerate}[label=\alph*)]
+        \item Déterminer l'expression de $v(t)$.
+        \item Déterminer l'expression de $x(t)$.
+        \item Déterminer l'instant où la vitesse s'annule.
+      \end{enumerate}
+
+    solution:
+      - titre: "Résolution question 3"
+        texte: |
+          \begin{enumerate}[label=\alph*)]
+            \item $v(t) = \int (12t - 6)\mathrm{d}t = 6t^2 - 6t + v_0 = 6t^2 - 6t + 4\text{ m}\cdot\text{s}^{-1}$.
+            \item $x(t) = \int (6t^2 - 6t + 4)\mathrm{d}t = 2t^3 - 3t^2 + 4t + x_0 = 2t^3 - 3t^2 + 4t - 3\text{ m}$.
+            \item $v(t) = 0 \implies 6t^2 - 6t + 4 = 0 \implies 3t^2 - 3t + 2 = 0$. Le discriminant $\Delta = 9 - 24 = -15 < 0$. **La vitesse ne s'annule jamais** sur $\mathbb{R}$.
+          \end{enumerate}

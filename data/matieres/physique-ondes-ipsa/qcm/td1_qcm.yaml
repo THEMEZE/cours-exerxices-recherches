@@ -1,0 +1,45 @@
+- id: td1_qcm_debut1
+  td: td1
+  moment: debut
+  lie_a: null
+  question: "Sur une corde de guitare, qu'est-ce qui change la hauteur (la fréquence) du son quand on serre la clé d'accordage ?"
+  animation: {ref: anim_corde_onde, formats: [gif]}
+  choix:
+    - {id: a, texte: "On augmente la tension F de la corde", correct: true}
+    - {id: b, texte: "On change la couleur de la corde", correct: false}
+    - {id: c, texte: "Je ne sais pas encore", correct: false, neutre: true}
+  feedback:
+    correct: "Exactement : c = sqrt(F/mu). Augmenter F augmente c, donc la fréquence."
+    incorrect: "Pas tout à fait : on va le voir dans l'exercice 1, avec la formule c = sqrt(F/mu)."
+    neutre: "Aucun souci, c'est exactement l'objet du TD d'aujourd'hui !"
+
+- id: td1_qcm_milieu1
+  td: td1
+  moment: milieu
+  lie_a: td1_ex4
+  question: "Sur une corde fixée à ses deux extrémités, en un noeud de vibration, l'amplitude du mouvement est..."
+  animation: {ref: anim_corde_stationnaire, formats: [gif]}
+  choix:
+    - {id: a, texte: "Maximale", correct: false}
+    - {id: b, texte: "Toujours nulle", correct: true}
+    - {id: c, texte: "Ca dépend du mode N", correct: false}
+    - {id: d, texte: "Je ne sais pas encore", correct: false, neutre: true}
+  feedback:
+    correct: "Oui ! Un noeud est par définition un point immobile, quel que soit le mode N."
+    incorrect: "Relisez la question 5 de l'exercice 4 : un noeud est un point où y(x,t) = 0 pour tout t."
+    neutre: "On y revient tout de suite avec l'exercice 4."
+
+- id: td1_qcm_fin1
+  td: td1
+  moment: fin
+  lie_a: null
+  question: "Si on double la tension F d'une corde (sans rien changer d'autre), la célérité c des ondes est multipliée par..."
+  choix:
+    - {id: a, texte: "2", correct: false}
+    - {id: b, texte: "sqrt(2) ≈ 1.41", correct: true}
+    - {id: c, texte: "4", correct: false}
+    - {id: d, texte: "Je ne sais pas encore", correct: false, neutre: true}
+  feedback:
+    correct: "Bravo, c = sqrt(F/mu) donc c est proportionnelle à sqrt(F)."
+    incorrect: "Repartez de c = sqrt(F/mu) : doubler F multiplie c par sqrt(2), pas par 2."
+    neutre: "A revoir avant le prochain TD : c'est le résultat clé de la séance."

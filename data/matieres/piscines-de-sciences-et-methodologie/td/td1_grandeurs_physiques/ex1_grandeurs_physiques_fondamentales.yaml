@@ -1,0 +1,190 @@
+id: td1_ex1
+intitule: "Grandeurs physiques fondamentales : dimensions et unités de base"
+td: td1
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - chap1.???
+
+metadonnees:
+  duree_estimee: "25 min"
+  difficulte: 1 # Sur une échelle de 1 à 5
+  type_exercice: "Révision"
+  indispensable: false
+
+enonce_intro: |
+
+
+prerequis : 
+  - titre: |
+
+    texte: |
+
+
+objectifs_pedagogiques_etudiants :
+  - titre: |
+
+    texte: |
+      
+
+objectifs_pedagogiques_enseignants :
+  - titre: |
+
+    texte: |
+      
+point_cours :
+  - titre: |
+
+    texte: |
+
+
+remarques_pedagogiques_ecueils_classiques: 
+  - titre: |
+  
+    texte: |
+      
+remarques_pedagogiques_conseils_animation: 
+  - titre: |
+
+    texte: |
+      
+
+bilan: 
+  - titre: |
+
+    texte: |
+
+
+aller_plus_loin: 
+  - niveau: lycee
+
+    titre: |
+
+    texte: |
+
+
+  - niveau: prepa
+    titre: |
+
+    texte: |
+      
+
+  - niveau: licence
+    titre: |
+
+    texte: |
+     
+
+  - niveau: master
+    titre: |
+
+    texte: |
+      
+
+
+questions:
+
+  - id: q1
+
+    enonce: |
+      {\bf Dimensions fondamentales et unités de base S.I.} \\
+
+      Remplir le tableau récapitulatif des 7 grandeurs fondamentales du Système International (S.I.) avec leur dimension, leur unité de base et le symbole associé.
+    
+    point_cours: 
+      - titre: |
+
+        texte: |
+          Les 7 dimensions fondamentales s'écrivent en majuscules sans italique : [L], [M], [T], [I], [$\Theta$], [N], [J]. L'unité S.I. de masse est le kilogramme (kg) et non le gramme.
+    
+    solution:
+      - titre: |
+          Grandeurs fondamentales
+
+        texte: |
+          {
+          %\fontsize{10pt}{10pt}\selectfont
+          $$
+          \begin{array}{rclll}
+            % &&&\text{\small Symbole unité de base} \\
+            \textbf{Dimension fondamentale} & \textbf{Symbole} & \textbf{Unité} & \textbf{S.I.} & \textbf{Autres unités de base} \\
+            \hline
+            \textbf{Longueur} & \textbf{L} & \textbf{Mètre} & \textbf{m} & \textbf{km, cm, mm} \\
+            \textbf{Masse} & \textbf{M} & \textbf{Kilogramme} & \textbf{kg} & \textbf{g, mg, t} \\
+            \textbf{Temps} & \textbf{T} & \textbf{Seconde} & \textbf{s} & \textbf{min, h} \\
+            \textbf{Intensité électrique} & \textbf{I} & \textbf{Ampère} & \textbf{A} & \textbf{mA, }\bm{\mu}\textbf{A} \\
+            \textbf{Température }(thermodynamique) & \bm{\Theta} & \textbf{Kelvin} & \textbf{K} & \mathbf{^\circ C} \\
+            \textbf{Quantité de matière} & \textbf{N} & \textbf{Mole} & \textbf{mol} & \textbf{mmol, }\bm{\mu}\textbf{mol} \\
+            \textbf{Intensité lumineuse} & \textbf{J} & \textbf{Candela} & \textbf{cd} & 
+          \end{array}
+          $$
+          }
+          \begin{center}
+            \text{\textbf{Table 1 :} Les dimensions et unités S.I. des grandeurs fondamentales : à connaître par } $\bm{\heartsuit}$
+          \end{center}
+      # tableau:
+      #   - { dimension: "Longueur", symbole: "L", unite: "Mètre", symbole_unite: "m" }
+      #   - { dimension: "Masse", symbole: "M", unite: "Kilogramme", symbole_unite: "kg" }
+      #   - { dimension: "Temps", symbole: "T", unite: "Seconde", symbole_unite: "s" }
+      #   - { dimension: "Intensité électrique", symbole: "I", unite: "Ampère", symbole_unite: "A" }
+      #   - { dimension: "Température thermodynamique", symbole: "Theta", unite: "Kelvin", symbole_unite: "K" }
+      #   - { dimension: "Quantité de matière", symbole: "N", unite: "Mole", symbole_unite: "mol" }
+      #   - { dimension: "Intensité lumineuse", symbole: "J", unite: "Candela", symbole_unite: "cd" }
+
+  - id: q2
+
+    enonce: |
+     {\bf L’unité et ses multiples : conversion }\\
+
+     Effectuer les conversions suivantes en exprimant le résultat final en notation scientifique : (a) 3 nm en m ; (b) 420 km en mm ; (c) 0,18 kg en mg ; (d) 0,5 t en g ; (e) 1 h 12 min en s ; (f) 510 s en min.
+
+    point_cours: 
+      
+      - titre: |
+
+        texte: |
+          {
+          %\fontsize{4pt}{10pt}\selectfont
+          $$
+          \begin{array}{r|ccccc||ccccc|ccccccc}
+            \textbf{Facteur} & 10^9 & 10^6 & 10^3 & 10^2 & 10^1 & 10^{-1} & 10^{-2} & 10^{-3} & 10^{-6} & 10^{-9} & 10^{-12} & 10^{-15} & 10^{-18} & 10^{-21} & 10^{-24} & 10^{-27} & 10^{-30}  \\
+            \textbf{Non} & \text{giga} & \text{méga} & \text{kilo} & \text{hecto}  & \text{déca} & \text{déca} & \text{centi} & \text{mili} & \text{micro}  & \text{nano} & \text{pico} & \text{fento} & \text{atto} & \text{zepto} & \text{yocto} & \text{ronto} & \text{quecto} \\
+            \textbf{Symbole } & \text{G} & \text{M} & \text{k} & \text{h} & \text{da} &  \text{d} &  \text{c}  & \text{m} & \bm{\mu} & \text{n} & \text{p} & \text{f} & \text{a}
+          \end{array}
+          $$
+          }
+          \begin{center}
+            \text{\textbf{Table 2 :} L’unité et ses multiples - nom, symbole et facteur : à connaître par } $\bm{\heartsuit}$
+          \end{center}
+          
+
+      - titre: |
+
+        texte: |
+          La notation scientifique s'écrit $a * 10^n$ avec $1 \leq a \leq 10$. Pour convertir un préfixe, on le remplace par sa valeur en puissance de $10$ (ex. $\text{nano} = 10^{-9}$, $\text{kilo} = 10^3$).
+
+    solution: 
+
+      - titre: |
+
+        texte : |
+
+          {
+          %\fontsize{8pt}{10pt}\selectfont
+          $$
+          \begin{array}{rrclcrrclcrrcl}
+            \text{(a)} & 3~nm & = & 3 * 10^{-9}~m && \text{(c)} & 0,18~kg & = & 1,8 * 10^5~mg && \text{(e)} &  1 ~ h ~ 12 ~ min & = & 4,32 * 10^3 ~ s \\
+            \text{(b)} & 420 ~ km & = & 4,20 * 10^8 ~ mm && \text{(d)} & 0,5 ~ t & = & 5 * 10^5 ~ g && \text{(f)} &  510 ~ s & = & 8,5 * 10^0 ~ min
+          \end{array}
+          $$
+          }
+
+
+  #     conversions:
+  #       a: "3 nm = 3 * 10^-9 m"
+  #       b: "420 km = 4,20 * 10^8 mm"
+  #       c: "0,18 kg = 1,8 * 10^5 mg"
+  #       d: "0,5 t = 5 * 10^5 g"
+  #       e: "1 h 12 min = 4,32 * 10^3 s"
+  #       f: "510 s = 8,5 * 10^0 min"

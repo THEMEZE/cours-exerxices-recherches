@@ -1,0 +1,22 @@
+id: physique-ondes-ipsa
+nom: "Physique des ondes"
+niveau: [cpge, licence]
+description: >
+  Cours d'ondes mécaniques et acoustiques enseigné à l'IPSA (aéronautique).
+quartz_namespace: physique/ipsa-ondes
+sujets: [ondes-mecaniques, ondes-acoustiques, reflexion-transmission]
+
+# Thème visuel de l'appli QCM (web/qcm_app_template.html) pour cette
+# matière -- voir web/README_QCM.md pour la liste des logos disponibles
+# et le détail de chaque couleur. Toutes les clés sont optionnelles : ce
+# qui n'est pas précisé prend la valeur par défaut du template.
+theme:
+  titre_app: "Réveil d'Ondes"
+  sous_titre_app: "Physique des ondes · IPSA"
+  logo: onde
+  couleurs:
+    route: "#1B3A4B"
+    happy: "#3FA796"
+    neutral: "#F5B942"
+    sad: "#E8604C"
+    fond: "#EAF4F4"

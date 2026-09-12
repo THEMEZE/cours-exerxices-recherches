@@ -1,0 +1,54 @@
+# ============================================================
+# .gitignore — cours-ondes-ipsa
+#
+# Même logique que RodTrip : le dépôt Git ne contient QUE le code
+# (data/*.yaml, templates, scripts .py, contenu source .tex des
+# figures) -- jamais les fichiers générés (PDF, animations, figures
+# rendues, build Quartz). Ces artefacts sont régénérés SUR le
+# Raspberry Pi par tools/Raspberry/update_code.sh à chaque déploiement.
+#
+# Pourquoi : ça garde le dépôt petit (les PDF/GIF grossissent vite et
+# GitHub a des limites de taille), et ça évite les conflits Git sur
+# des fichiers binaires générés.
+# ============================================================
+
+# --- Python ---
+__pycache__/
+*.pyc
+venv/
+.venv/
+*.egg-info/
+
+# --- PDF générés (build/build.py) ---
+build/generated/
+build/output/*.pdf
+
+# --- Animations générées (animations/generate_all.py) ---
+animations/outputs/
+
+# --- Figures web pré-rendues (figures/render_web.py) ---
+web/public/figures/
+figures/.render_tmp/
+
+# --- Exports site (web/export_json.py, web/export_markdown.py) ---
+web/public/data/
+web/public/quartz_content/
+
+# --- QCM : app générée + base SQLite locale au Pi ---
+build/output/qcm_app.html
+web/server/qcm_data.sqlite3
+
+# --- Notebooks générés ---
+notebooks/generated/
+
+# --- Quartz (si le dossier Quartz 5 vit dans ce repo) ---
+Quartz5/public/
+Quartz5/node_modules/
+Quartz5/.quartz-cache/
+
+# --- État local (profil de visibilité actif sur CE Pi, pas versionné) ---
+web/.current_profile
+
+# --- Divers ---
+.DS_Store
+*.log

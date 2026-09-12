@@ -1,0 +1,92 @@
+{
+  "td1_enonce": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td1_corde",
+    "pdf": "td1_enonce.pdf"
+  },
+  "td1_corrige": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td1_corde",
+    "pdf": "td1_corrige.pdf"
+  },
+  "td1_ex1_fiche": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td1_corde",
+    "pdf": "td1_ex1_fiche.pdf"
+  },
+  "td1_ex1_solution_detaillee": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td1_corde",
+    "pdf": "td1_ex1_solution_detaillee.pdf"
+  },
+  "td2_enonce": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td2_ondes_sonores",
+    "pdf": "td2_enonce.pdf"
+  },
+  "td2_corrige": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td2_ondes_sonores",
+    "pdf": "td2_corrige.pdf"
+  },
+  "td3_enonce": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td3_reflexion_transmission",
+    "pdf": "td3_enonce.pdf"
+  },
+  "td3_corrige": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td3_reflexion_transmission",
+    "pdf": "td3_corrige.pdf"
+  },
+  "cours_chap1": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "cours",
+    "doc": "chap1_intro",
+    "pdf": "cours_chap1.pdf"
+  },
+  "agregation_physique_lecon_oscillateurs": {
+    "matiere": "agregation-physique",
+    "type_doc": "cours",
+    "doc": "lecon_oscillateurs",
+    "pdf": "agregation_physique_lecon_oscillateurs.pdf"
+  },
+  "agregation_maths_dev1": {
+    "matiere": "agregation-mathematiques",
+    "type_doc": "td",
+    "doc": "dev1_exemple",
+    "pdf": "agregation_maths_dev1.pdf"
+  },
+  "td1_ex1_coup_de_pouce": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td1_corde",
+    "pdf": "td1_ex1_coup_de_pouce.pdf"
+  },
+  "recherche_intro_bethe": {
+    "matiere": "recherche-integrabilite-quantique",
+    "type_doc": "cours",
+    "doc": "intro_bethe",
+    "pdf": "recherche_intro_bethe.pdf"
+  },
+  "td1_test": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td1_corde",
+    "pdf": "td1_test.pdf"
+  },
+  "td1_test_Ph110": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td2_derivation_et_diffeérentielle",
+    "pdf": "td1_test_Ph110.pdf"
+  }
+}

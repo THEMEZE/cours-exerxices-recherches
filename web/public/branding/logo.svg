@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- Badge de fond -->
+  <circle cx="64" cy="64" r="60" fill="#16323F"/>
+  <circle cx="64" cy="64" r="60" fill="none" stroke="#8C0000" stroke-width="3"/>
+
+  <!-- Livre ouvert (cours / savoir) -->
+  <path d="M64 48c-8-7-22-7-32-3v40c10-4 24-4 32 3c8-7 22-7 32-3V45c-10-4-24-4-32 3z"
+        fill="none" stroke="#FFFFFF" stroke-width="3.4" stroke-linejoin="round"/>
+  <path d="M64 48v40" stroke="#FFFFFF" stroke-width="3"/>
+
+  <!-- Onde traversant le livre (physique / sciences) -->
+  <path d="M24 64c6-14 12 14 18 0s12-14 18 0 12-14 18 0 12-14 18 0"
+        fill="none" stroke="#3FA796" stroke-width="3.6" stroke-linecap="round"/>
+</svg>

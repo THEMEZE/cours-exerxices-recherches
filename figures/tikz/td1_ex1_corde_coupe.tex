@@ -1,0 +1,1252 @@
+
+\begin{tikzpicture}[use Hobby shortcut]
+
+    % ============================================================
+    % PARAMETRES GENERAUX
+    % ============================================================
+
+    \def\longueur{3.0}
+    \def\dx{0.18}
+    \def\dy{0.10}
+
+    % ============================================================
+    % TITRE
+    % ============================================================
+
+    \node[
+        color=\colorOne,
+        align=center
+    ] at (5,10.5)
+    {
+        \fontsize{25pt}{30pt}\selectfont
+        Pourquoi peut-on écrire
+        $\displaystyle \mu=\rho\,S$ ?
+    };
+
+
+    % ============================================================
+    % 1. CORDE NON HOMOGENE
+    % ============================================================
+
+    \begin{scope}[shift={(1.7,5.2)}]
+
+        % Titre
+        \node[
+            color=\colorOne,
+            align=center
+        ] at (0,3.0)
+        {
+            \fontsize{16pt}{20pt}\selectfont
+            \textbf{1. Section non homogène}
+        };
+
+        % --------------------------------------------------------
+        % Direction de la corde
+        % --------------------------------------------------------
+
+        \draw[
+            dashed,
+            color=\colorThree,
+            line width=0.2ex
+        ]
+        (-1.5,-1.0) -- (3.5,1.8);
+
+        % --------------------------------------------------------
+        % Sections successives avec taille variable
+        % et densité variable
+        % --------------------------------------------------------
+
+        \foreach \i in {12,...,0}
+        {
+
+            % Position dans la direction diagonale
+            \pgfmathsetmacro{\xshift}{\i*\dx}
+            \pgfmathsetmacro{\yshift}{\i*\dy}
+
+            % Taille légèrement irrégulière
+            \pgfmathsetmacro{\s}{1.15-0.018*\i}
+
+            % Variation de couleur :
+            % cœur clair -> extérieur rouge
+            \pgfmathsetmacro{\c}{10+6*\i}
+
+            \begin{scope}[
+                shift={(\xshift,\yshift)},
+                scale=\s
+            ]
+
+                % Section irrégulière
+                \draw[
+                    closed,
+                    fill=colorFive!\c!colorTwo,
+                    fill opacity=0.90,
+                    draw=colorOne,
+                    line width=0.18ex
+                ]
+                (0,-1.00)
+                .. (0.85,-1.10)
+                .. (1.25,-0.40)
+                .. (1.10,0.55)
+                .. (0.45,1.00)
+                .. (-0.35,0.85)
+                .. (-1.10,0.40)
+                .. (-1.25,-0.35)
+                .. (-0.70,-0.95)
+                -- cycle;
+
+            \end{scope}
+        }
+
+        % --------------------------------------------------------
+        % Indication rho(x,y)
+        % --------------------------------------------------------
+
+        \node[
+            color=\colorSix,
+            fill=white,
+            fill opacity=0.85,
+            text opacity=1,
+            inner sep=4pt,
+            align=center
+        ]
+        at (0,-2.0)
+        {
+            \fontsize{13pt}{16pt}\selectfont
+            $\rho=\rho(x,y)$
+        };
+
+        % --------------------------------------------------------
+        % Fleche vers formule
+        % --------------------------------------------------------
+
+        \draw[
+            color=\colorFour,
+            line width=0.35ex,
+            ->,
+            >=Stealth
+        ]
+        (0,-1.5)
+        to[out=-90,in=180]
+        (1.0,-2.8);
+
+        % Formule
+        \node[
+            color=\colorFour,
+            align=left
+        ]
+        at (2.2,-2.9)
+        {
+            \fontsize{12pt}{15pt}\selectfont
+            $\displaystyle
+            \mu
+            =
+            \iint_S
+            \rho(x,y)\,dS$
+        };
+
+    \end{scope}
+
+
+    % ============================================================
+    % 2. CORDE HOMOGENE - SECTION NON CIRCULAIRE
+    % ============================================================
+
+    \begin{scope}[shift={(5.0,5.2)}]
+
+        % Titre
+        \node[
+            color=\colorOne,
+            align=center
+        ] at (0,3.0)
+        {
+            \fontsize{16pt}{20pt}\selectfont
+            \textbf{2. Section homogène}\\
+            \textbf{non circulaire}
+        };
+
+        % --------------------------------------------------------
+        % Axe de la corde
+        % --------------------------------------------------------
+
+        \draw[
+            dashed,
+            color=\colorThree,
+            line width=0.2ex
+        ]
+        (-1.5,-1.0) -- (3.5,1.8);
+
+        % --------------------------------------------------------
+        % Empilement de sections elliptiques
+        % --------------------------------------------------------
+
+        \foreach \i in {15,...,0}
+        {
+
+            \pgfmathsetmacro{\xshift}{\i*\dx}
+            \pgfmathsetmacro{\yshift}{\i*\dy}
+
+            \begin{scope}[
+                shift={(\xshift,\yshift)}
+            ]
+
+                % Ellipse représentant la section
+                \draw[
+                    fill=colorFour!20!colorTwo,
+                    fill opacity=0.85,
+                    draw=colorFour,
+                    line width=0.25ex
+                ]
+                (0,0)
+                ellipse
+                [
+                    x radius=1.15,
+                    y radius=0.75
+                ];
+
+            \end{scope}
+        }
+
+        % --------------------------------------------------------
+        % Demi-axes a et b
+        % --------------------------------------------------------
+
+        \draw[
+            <->,
+            >=Stealth,
+            color=\colorOne,
+            line width=0.25ex
+        ]
+        (-1.55,-0.75)
+        --
+        (-1.55,0.75)
+        node[
+            midway,
+            left,
+            color=\colorOne
+        ]
+        {
+            \fontsize{13pt}{16pt}\selectfont
+            $2a$
+        };
+
+        \draw[
+            <->,
+            >=Stealth,
+            color=\colorOne,
+            line width=0.25ex
+        ]
+        (-1.15,-1.10)
+        --
+        (1.15,-1.10)
+        node[
+            midway,
+            below,
+            color=\colorOne
+        ]
+        {
+            \fontsize{13pt}{16pt}\selectfont
+            $2b$
+        };
+
+        % --------------------------------------------------------
+        % Homogeneite
+        % --------------------------------------------------------
+
+        \node[
+            color=\colorFour,
+            fill=white,
+            fill opacity=0.85,
+            text opacity=1,
+            inner sep=4pt
+        ]
+        at (0,-2.0)
+        {
+            \fontsize{13pt}{16pt}\selectfont
+            $\rho(x,y)=\rho=\text{constante}$
+        };
+
+        % --------------------------------------------------------
+        % Formule
+        % --------------------------------------------------------
+
+        \draw[
+            color=\colorFour,
+            line width=0.35ex,
+            ->,
+            >=Stealth
+        ]
+        (0,-1.5)
+        to[out=-90,in=180]
+        (0.9,-2.8);
+
+        \node[
+            color=\colorFour,
+            align=left
+        ]
+        at (2.0,-2.9)
+        {
+            \fontsize{12pt}{15pt}\selectfont
+            $\displaystyle
+            \mu
+            =
+            \rho\,S$
+            \\[0.15cm]
+            $\displaystyle
+            S=\pi ab$
+        };
+
+    \end{scope}
+
+
+    % ============================================================
+    % 3. CORDE HOMOGENE - SECTION CIRCULAIRE
+    % ============================================================
+
+    \begin{scope}[shift={(8.7,5.2)}]
+
+        % Titre
+        \node[
+            color=\colorOne,
+            align=center
+        ] at (0,3.0)
+        {
+            \fontsize{16pt}{20pt}\selectfont
+            \textbf{3. Section homogène}\\
+            \textbf{circulaire}
+        };
+
+        % --------------------------------------------------------
+        % Axe de la corde
+        % --------------------------------------------------------
+
+        \draw[
+            dashed,
+            color=\colorThree,
+            line width=0.2ex
+        ]
+        (-1.5,-1.0) -- (3.5,1.8);
+
+        % --------------------------------------------------------
+        % Empilement des sections circulaires
+        % --------------------------------------------------------
+
+        \foreach \i in {15,...,0}
+        {
+
+            \pgfmathsetmacro{\xshift}{\i*\dx}
+            \pgfmathsetmacro{\yshift}{\i*\dy}
+
+            \begin{scope}[
+                shift={(\xshift,\yshift)}
+            ]
+
+                \draw[
+                    fill=colorGold!30!colorTwo,
+                    fill opacity=0.85,
+                    draw=colorFour,
+                    line width=0.25ex
+                ]
+                (0,0)
+                circle
+                [radius=1.0];
+
+            \end{scope}
+        }
+
+        % --------------------------------------------------------
+        % Diametre
+        % --------------------------------------------------------
+
+        \draw[
+            <->,
+            >=Stealth,
+            color=\colorOne,
+            line width=0.25ex
+        ]
+        (-1.45,-1.0)
+        --
+        (-1.45,1.0)
+        node[
+            midway,
+            left
+        ]
+        {
+            \fontsize{14pt}{17pt}\selectfont
+            $d$
+        };
+
+        % --------------------------------------------------------
+        % Homogeneite
+        % --------------------------------------------------------
+
+        \node[
+            color=\colorFour,
+            fill=white,
+            fill opacity=0.85,
+            text opacity=1,
+            inner sep=4pt
+        ]
+        at (0,-2.0)
+        {
+            \fontsize{13pt}{16pt}\selectfont
+            $\rho(x,y)=\rho=\text{constante}$
+        };
+
+        % --------------------------------------------------------
+        % Formules finales
+        % --------------------------------------------------------
+
+        \draw[
+            color=\colorFour,
+            line width=0.35ex,
+            ->,
+            >=Stealth
+        ]
+        (0,-1.5)
+        to[out=-90,in=180]
+        (0.8,-2.8);
+
+        \node[
+            color=\colorFour,
+            align=left
+        ]
+        at (2.0,-2.9)
+        {
+            \fontsize{12pt}{15pt}\selectfont
+            $\displaystyle
+            S
+            =
+            \frac{\pi d^2}{4}$
+            \\[0.15cm]
+            $\displaystyle
+            \boxed{
+            \mu
+            =
+            \rho
+            \frac{\pi d^2}{4}
+            }$
+        };
+
+    \end{scope}
+
+
+    % ============================================================
+    % FLECHES LOGIQUES ENTRE LES TROIS CAS
+    % ============================================================
+
+    \draw[
+        ->,
+        >=Stealth,
+        color=\colorSix,
+        line width=0.55ex
+    ]
+    (3.0,5.0)
+    --
+    (3.8,5.0);
+
+    \node[
+        color=\colorSix,
+        align=center
+    ]
+    at (3.4,5.45)
+    {
+        \fontsize{10pt}{12pt}\selectfont
+        matériau\\homogène
+    };
+
+
+    \draw[
+        ->,
+        >=Stealth,
+        color=\colorSix,
+        line width=0.55ex
+    ]
+    (6.6,5.0)
+    --
+    (7.5,5.0);
+
+    \node[
+        color=\colorSix,
+        align=center
+    ]
+    at (7.05,5.45)
+    {
+        \fontsize{10pt}{12pt}\selectfont
+        section\\circulaire
+    };
+
+
+    % ============================================================
+    % CHAINE LOGIQUE FINALE
+    % ============================================================
+
+    \node[
+        draw=\colorFour,
+        line width=0.25ex,
+        rounded corners=5pt,
+        fill=colorFour!8!white,
+        align=center,
+        text width=14cm,
+        inner sep=10pt,
+        color=\colorOne
+    ]
+    at (5.0,0.5)
+    {
+        \fontsize{15pt}{20pt}\selectfont
+        \[
+        \mu
+        =
+        \iint_S
+        \rho(x,y)\,dS
+        \quad
+        \xrightarrow[\text{matériau homogène}]{\rho=\text{constante}}
+        \quad
+        \mu=\rho S
+        \quad
+        \xrightarrow[\text{section circulaire}]{S=\pi d^2/4}
+        \quad
+        \boxed{
+        \mu
+        =
+        \rho\frac{\pi d^2}{4}
+        }
+        \]
+    };
+
+\end{tikzpicture}
+
+
+\begin{tikzpicture}
+
+% ============================================================
+% PARAMETRES
+% ============================================================
+
+% Direction de la longueur de la corde
+\def\dx{0.18}
+\def\dy{0.10}
+
+% Style commun des trois cordes
+\tikzset{
+    corde contour/.style={
+        line width=0.25ex,
+        color=\colorOne
+    }
+}
+
+% ============================================================
+% TITRE
+% ============================================================
+
+\node[
+    color=\colorOne,
+    align=center
+]
+at (5,10.7)
+{
+    \fontsize{24pt}{28pt}\selectfont
+    \textbf{De la masse volumique à la masse linéique}
+};
+
+% ============================================================
+% ============================================================
+% 1. CORDE NON HOMOGENE
+% ============================================================
+% ============================================================
+
+\begin{scope}[shift={(1.8,6.0)}]
+
+    % --------------------------------------------------------
+    % Titre
+    % --------------------------------------------------------
+
+    \node[
+        color=\colorOne,
+        align=center
+    ]
+    at (0,2.7)
+    {
+        \fontsize{15pt}{18pt}\selectfont
+        \textbf{1. Section non homogène}
+    };
+
+
+    % --------------------------------------------------------
+    % Axe de la corde
+    % --------------------------------------------------------
+
+    \draw[
+        dashed,
+        color=\colorThree,
+        line width=0.2ex
+    ]
+    (-1.7,-1.1)
+    --
+    (3.7,1.9);
+
+
+    % --------------------------------------------------------
+    % Couches successives
+    %
+    % Chaque couche possède :
+    % - une position différente
+    % - une taille différente
+    % - une couleur différente
+    %
+    % Cela représente une densité non uniforme
+    % --------------------------------------------------------
+
+    \foreach \i in {18,...,0}
+    {
+
+        % Position de chaque section
+        \pgfmathsetmacro{\xshift}{\i*\dx}
+        \pgfmathsetmacro{\yshift}{\i*\dy}
+
+        % Taille :
+        % le bout visible est légèrement plus grand
+        \pgfmathsetmacro{\rx}{1.15-0.008*\i}
+        \pgfmathsetmacro{\ry}{0.90-0.006*\i}
+
+        % Variation de couleur
+        \pgfmathsetmacro{\mix}{10+4*\i}
+
+        \begin{scope}[
+            shift={(\xshift,\yshift)}
+        ]
+
+            % Section irrégulière
+            %
+            % Ici on n'utilise PAS Hobby.
+            % On ferme simplement avec -- cycle.
+
+            \path[
+                fill=colorSix!\mix!colorTwo,
+                fill opacity=0.90,
+                corde contour
+            ]
+            (0,-\ry)
+            .. controls
+                (0.70*\rx,-1.10*\ry)
+                and
+                (1.20*\rx,-0.45*\ry)
+            ..
+            (1.05*\rx,0.40*\ry)
+
+            .. controls
+                (0.85*\rx,1.05*\ry)
+                and
+                (0.30*\rx,1.15*\ry)
+            ..
+            (-0.20*\rx,0.95*\ry)
+
+            .. controls
+                (-0.90*\rx,0.90*\ry)
+                and
+                (-1.25*\rx,0.30*\ry)
+            ..
+            (-1.10*\rx,-0.35*\ry)
+
+            .. controls
+                (-0.90*\rx,-0.95*\ry)
+                and
+                (-0.40*\rx,-1.10*\ry)
+            ..
+            (0,-\ry)
+
+            -- cycle;
+
+        \end{scope}
+    }
+
+
+    % --------------------------------------------------------
+    % Densite variable
+    % --------------------------------------------------------
+
+    \node[
+        color=\colorSix,
+        fill=white,
+        rounded corners=2pt,
+        inner sep=5pt
+    ]
+    at (0,-1.8)
+    {
+        \fontsize{14pt}{16pt}\selectfont
+        $\rho=\rho(x,y)$
+    };
+
+
+    % --------------------------------------------------------
+    % Formule generale
+    % --------------------------------------------------------
+
+    \node[
+        color=\colorOne,
+        align=center
+    ]
+    at (0,-3.0)
+    {
+        \fontsize{13pt}{16pt}\selectfont
+        $\displaystyle
+        \mu
+        =
+        \iint_S
+        \rho(x,y)\,dS$
+    };
+
+\end{scope}
+
+
+% ============================================================
+% ============================================================
+% 2. CORDE HOMOGENE
+% SECTION NON CIRCULAIRE
+% ============================================================
+% ============================================================
+
+\begin{scope}[shift={(5.0,6.0)}]
+
+    % --------------------------------------------------------
+    % Titre
+    % --------------------------------------------------------
+
+    \node[
+        color=\colorOne,
+        align=center
+    ]
+    at (0,2.7)
+    {
+        \fontsize{15pt}{18pt}\selectfont
+        \textbf{2. Section homogène}\\
+        \textbf{non circulaire}
+    };
+
+
+    % --------------------------------------------------------
+    % Axe de la corde
+    % --------------------------------------------------------
+
+    \draw[
+        dashed,
+        color=\colorThree,
+        line width=0.2ex
+    ]
+    (-1.7,-1.1)
+    --
+    (3.7,1.9);
+
+
+    % --------------------------------------------------------
+    % Corde :
+    % empilement d'ellipses identiques
+    % --------------------------------------------------------
+
+    \foreach \i in {18,...,0}
+    {
+
+        \pgfmathsetmacro{\xshift}{\i*\dx}
+        \pgfmathsetmacro{\yshift}{\i*\dy}
+
+        \begin{scope}[
+            shift={(\xshift,\yshift)}
+        ]
+
+            \path[
+                fill=colorFour!25!white,
+                fill opacity=0.90,
+                corde contour
+            ]
+            (0,0)
+            ellipse[
+                x radius=1.15,
+                y radius=0.75
+            ];
+
+        \end{scope}
+    }
+
+
+    % --------------------------------------------------------
+    % Axes de la section
+    % --------------------------------------------------------
+
+    \draw[
+        <->,
+        >=Stealth,
+        color=\colorOne,
+        line width=0.22ex
+    ]
+    (-1.55,-0.75)
+    --
+    (-1.55,0.75)
+
+    node[
+        midway,
+        left
+    ]
+    {
+        \fontsize{12pt}{14pt}\selectfont
+        $2a$
+    };
+
+
+    \draw[
+        <->,
+        >=Stealth,
+        color=\colorOne,
+        line width=0.22ex
+    ]
+    (-1.15,-1.05)
+    --
+    (1.15,-1.05)
+
+    node[
+        midway,
+        below
+    ]
+    {
+        \fontsize{12pt}{14pt}\selectfont
+        $2b$
+    };
+
+
+    % --------------------------------------------------------
+    % Homogeneite
+    % --------------------------------------------------------
+
+    \node[
+        color=\colorFour,
+        fill=white,
+        rounded corners=2pt,
+        inner sep=5pt
+    ]
+    at (0,-1.8)
+    {
+        \fontsize{13pt}{15pt}\selectfont
+        $\rho(x,y)=\rho=\mathrm{constante}$
+    };
+
+
+    % --------------------------------------------------------
+    % Formules
+    % --------------------------------------------------------
+
+    \node[
+        color=\colorOne,
+        align=center
+    ]
+    at (0,-3.0)
+    {
+        \fontsize{13pt}{16pt}\selectfont
+        $\displaystyle
+        \mu=\rho S$
+
+        \vspace{0.1cm}
+
+        $\displaystyle
+        S=\pi ab$
+    };
+
+\end{scope}
+
+
+% ============================================================
+% ============================================================
+% 3. CORDE HOMOGENE
+% SECTION CIRCULAIRE
+% ============================================================
+% ============================================================
+
+\begin{scope}[shift={(8.5,6.0)}]
+
+    % --------------------------------------------------------
+    % Titre
+    % --------------------------------------------------------
+
+    \node[
+        color=\colorOne,
+        align=center
+    ]
+    at (0,2.7)
+    {
+        \fontsize{15pt}{18pt}\selectfont
+        \textbf{3. Section homogène}\\
+        \textbf{circulaire}
+    };
+
+
+    % --------------------------------------------------------
+    % Axe de la corde
+    % --------------------------------------------------------
+
+    \draw[
+        dashed,
+        color=\colorThree,
+        line width=0.2ex
+    ]
+    (-1.7,-1.1)
+    --
+    (3.7,1.9);
+
+
+    % --------------------------------------------------------
+    % Corde circulaire
+    % --------------------------------------------------------
+
+    \foreach \i in {18,...,0}
+    {
+
+        \pgfmathsetmacro{\xshift}{\i*\dx}
+        \pgfmathsetmacro{\yshift}{\i*\dy}
+
+        \begin{scope}[
+            shift={(\xshift,\yshift)}
+        ]
+
+            \path[
+                fill=colorGold!35!white,
+                fill opacity=0.90,
+                corde contour
+            ]
+            (0,0)
+            circle[
+                radius=1
+            ];
+
+        \end{scope}
+    }
+
+
+    % --------------------------------------------------------
+    % Diametre d
+    % --------------------------------------------------------
+
+    \draw[
+        <->,
+        >=Stealth,
+        color=\colorOne,
+        line width=0.22ex
+    ]
+    (-1.40,-1.0)
+    --
+    (-1.40,1.0)
+
+    node[
+        midway,
+        left
+    ]
+    {
+        \fontsize{15pt}{18pt}\selectfont
+        $d$
+    };
+
+
+    % --------------------------------------------------------
+    % Centre
+    % --------------------------------------------------------
+
+    \fill[
+        color=\colorSix
+    ]
+    (0,0)
+    circle[
+        radius=0.06
+    ];
+
+
+    % --------------------------------------------------------
+    % Rayon
+    % --------------------------------------------------------
+
+    \draw[
+        color=\colorSix,
+        line width=0.25ex,
+        ->
+    ]
+    (0,0)
+    --
+    (0.75,0.65)
+
+    node[
+        midway,
+        above,
+        color=\colorSix
+    ]
+    {
+        \fontsize{11pt}{13pt}\selectfont
+        $R$
+    };
+
+
+    % --------------------------------------------------------
+    % Homogeneite
+    % --------------------------------------------------------
+
+    \node[
+        color=\colorFour,
+        fill=white,
+        rounded corners=2pt,
+        inner sep=5pt
+    ]
+    at (0,-1.8)
+    {
+        \fontsize{13pt}{15pt}\selectfont
+        $\rho(x,y)=\rho=\mathrm{constante}$
+    };
+
+
+    % --------------------------------------------------------
+    % Resultat
+    % --------------------------------------------------------
+
+    \node[
+        color=\colorOne,
+        align=center
+    ]
+    at (0,-3.0)
+    {
+        \fontsize{13pt}{16pt}\selectfont
+        $\displaystyle
+        S
+        =
+        \pi R^2
+        =
+        \frac{\pi d^2}{4}$
+    };
+
+\end{scope}
+
+
+% ============================================================
+% FLECHES DE PROGRESSION
+% ============================================================
+
+\draw[
+    ->,
+    >=Stealth,
+    line width=0.5ex,
+    color=\colorSix
+]
+(3.2,6.2)
+--
+(3.75,6.2);
+
+\node[
+    color=\colorSix,
+    align=center
+]
+at (3.48,6.65)
+{
+    \fontsize{9pt}{11pt}\selectfont
+    matériau\\homogène
+};
+
+
+\draw[
+    ->,
+    >=Stealth,
+    line width=0.5ex,
+    color=\colorSix
+]
+(6.75,6.2)
+--
+(7.30,6.2);
+
+\node[
+    color=\colorSix,
+    align=center
+]
+at (7.02,6.65)
+{
+    \fontsize{9pt}{11pt}\selectfont
+    section\\circulaire
+};
+
+
+% ============================================================
+% RESULTAT FINAL
+% ============================================================
+
+\node[
+    draw=\colorFour,
+    line width=0.3ex,
+    rounded corners=8pt,
+    fill=colorFour!8!white,
+    text width=15cm,
+    align=center,
+    inner sep=8pt,
+    color=\colorOne
+]
+at (5,1.0)
+{
+    \fontsize{16pt}{20pt}\selectfont
+    \textbf{Cas de la corde en nylon de l'exercice}
+
+    \vspace{0.25cm}
+
+    \[
+        \boxed{
+            \mu
+            =
+            \rho S
+            =
+            \rho\frac{\pi d^2}{4}
+        }
+    \]
+};
+
+
+% ============================================================
+% LEGENDE
+% ============================================================
+
+\node[
+    color=\colorThree,
+    align=center
+]
+at (5,-0.3)
+{
+    \fontsize{11pt}{14pt}\selectfont
+    L'homogénéité permet d'écrire
+    $\mu=\rho S$ ;
+    la forme circulaire permet de calculer
+    $S=\pi d^2/4$.
+};
+
+\end{tikzpicture}
+
+
+
+
+
+
+
+\begin{tikzpicture}[use Hobby shortcut]
+
+	%\fill[fill=\colorFour , decoration={random steps,segment length=2mm} , decorate , closed] (-1,-1) -- (-1,11) --(11,11) -- (11,-1)-- cycle ;
+	%\fill[fill=\colorFour ] (0,0) -- (0,10)  -- (10,0) ;
+
+	\begin{scope}[shift={(4.5,5)} , scale = 1.0]
+		%\draw[fill= black ] (-5,-5) rectangle + (10 , 10) ;
+		\newcommand{\curve}{(-2,-1) .. (1,-2) .. (2,2) .. (0,1)}
+
+        \pgfmathsetmacro{\dx}{0.1}
+        \pgfmathsetmacro{\dy}{0.1}
+		\foreach \i in {0,...,5} { % 50 couches
+				\pgfmathsetmacro{\s}{0.2 + 0.5*\i}
+				\pgfmathsetmacro{\c}{2*\i}   % mélange de 0% à 98%
+                \pgfmathsetmacro{\xshift}{1.0*\i}
+                \pgfmathsetmacro{\yshift}{-0.5*\i}
+                %\draw[closed, scale=\s, fill=colorSix!\c!colorTwo, draw=colorSix!\c!colorTwo , shift={(\xshift,\yshift)}] \curve -- cycle;
+	
+				\draw[closed, scale=\s, fill=none, draw=colorSix , shift={(\xshift,\yshift)}] \curve -- cycle;
+			}
+
+		\begin{scope}[shift={(-4.5,1)} , scale = 1.0]
+			\draw[fill=\colorFour , opacity = 0.5 , draw = none  ]
+			(1.9,0) rectangle (9.85, 0.5 )
+			;
+			\draw[line width=0.5ex, color=\colorFour , dashed]
+			(2,0) -- (9.75,0)
+			(2,0.5) -- (9.75,0.5)
+			;
+			\draw[color=\colorFour]
+			(10,0) edge[<->, line width=0.1ex , ultra thick] node[pos= 0.5 , right]{\fontsize{25pt}{16pt}\selectfont $\delta \theta$} (10,0.5)
+			;
+			\begin{scope}%[overlay]
+				\node[] (point) at (4,0.1) {};
+				\draw[  opacity = 1 ]
+				(point) edge[line width=0.4ex ,color = \colorFour ,arrows = {Computer Modern Rightarrow[sharp ,length=0.2cm]-} , out = 90 , in = 180  ]node[pos=1, right , font = \fontsize{12pt}{16pt}\selectfont]{\color{colorFour} \fontsize{20}{10}\selectfont \bfseries \begin{tabular}{c} $\displaystyle \int dx \rho ( x , \theta ; t ) \, \delta \theta = \Pi(\theta) \, \delta \theta  $  \\[0.2cm] \textbf{est conservée} \end{tabular} }($(point) + (2.0cm,2.0cm)$)
+				;
+			\end{scope}
+		\end{scope}
+
+	\end{scope}
+
+	\node[draw = none , fill=none, minimum width=3cm, minimum height=2cm, align=center, \colorTwo]
+	at (5,4) {\fontsize{20pt}{16pt}\selectfont $\rho(x , \theta ; t )$};
+	%\node[draw = none , fill=none, minimum width=3cm, minimum height=2cm, align=center, \colorTwo] 
+	%    at (8,1.5) {\fontsize{20pt}{16pt}\selectfont $\nu = 0 $};
+
+	% \node[draw = none , fill=none, minimum width=3cm, minimum height=2cm, align=center , \colorTwo , rotate = 40] 
+	%     at (5,4.5) {\fontsize{20pt}{16pt}\selectfont $\nu = 1$};
+
+	%    \draw[ ]
+	%    		%(8,6.5) edge[line width=0.3ex, color=\colorThree , dashed ] node [pos = 0 , below ,\colorThree ]{\fontsize{10pt}{16pt}\selectfont $x_2$} (8,9)
+	%    		%(8,7.25) edge[line width=0.3ex, color=\colorThree , ->] node [pos = 1 , below ,\colorThree ]{\fontsize{10pt}{16pt}\selectfont $v^{\mathrm{eff}}_{[\rho ]}(\theta_+)$}(9,7.25) 
+	%    		(3,1.5) edge[line width=0.5ex, color=\colorGold!50!\colorThree , dashed ] node [pos = 0 , below ,\colorGold!50!\colorThree]{\fontsize{15pt}{16pt}\selectfont $x_1$}(3,6)
+	%    		(3,5.4) edge[line width=0.5ex, color=\colorGold!50!\colorThree , ->] node [pos = 1 , below ,\colorGold!50!\colorThree]{\fontsize{15pt}{16pt}\selectfont $v^{\mathrm{eff}}_{[\rho  ]}(\theta_-)$}(2.0,5.4) 
+	%    ;
+
+	% Axe horizontal (gamma)
+	\draw[ line width=0.8ex, color=\colorOne , ->]
+	(-0.5,0) -- (10.5,0)
+	node[shift = {(0,0)} , pos=0.5, below] {\fontsize{40pt}{19pt}\selectfont $x$};
+
+	% Axe vertical (t)
+	\draw[ line width=0.8ex, color=\colorOne , ->]
+	(0,-0.5) -- (0,10.5)
+	node[ shift = {(0,0)} , pos=0.5, above, rotate=90] {\fontsize{40pt}{19pt}\selectfont $\theta$};
+
+	\drawgrid{-2}{11}{-2}{2}{1}{1};
+\end{tikzpicture}
+
+
+\begin{tikzpicture}[3d view={120}{15}, scale=1.5]
+
+    % Couleurs personnalisées pour donner du relief à la corde
+    \definecolor{ropeLight}{HTML}{D2B48C}
+    \definecolor{ropeDark}{HTML}{8B5A2B}
+    \definecolor{ropeCut}{HTML}{EEDC82}
+
+    % ==========================================
+    % 1. CORPS DE LA CORDE (Cylindre principal)
+    % ==========================================
+    % Face arrière (fond de la corde)
+    \draw[fill=ropeDark, draw=ropeDark!80!black] (0,0,0) circle (1);
+    
+    % Longueur de la corde (lignes de fuite)
+    \draw[left color=ropeDark, right color=ropeLight, draw=ropeDark!50] 
+        (0,1,0) -- (0,1,4) 
+        arc[start angle=90, end angle=270, radius=1] 
+        -- (0,-1,0) 
+        arc[start angle=270, end angle=90, radius=1];
+
+    % ==========================================
+    % 2. COUPE 3D (Plan avant à z=4)
+    % ==========================================
+    \begin{scope}[canvas is xy plane at z=4]
+        
+        % Fond de la section coupée
+        \draw[fill=ropeDark!60, draw=black, thick] (0,0) circle (1);
+        
+        % Toron 1 (Haut)
+        \draw[fill=ropeCut, draw=ropeDark] (0, 0.4) circle (0.45);
+        \draw[ropeDark!70, thin] (0, 0.4) circle (0.35);
+        \draw[ropeDark!70, thin] (0, 0.4) circle (0.2);
+        
+        % Toron 2 (Bas Gauche)
+        \draw[fill=ropeCut, draw=ropeDark] (-0.35, -0.2) circle (0.45);
+        \draw[ropeDark!70, thin] (-0.35, -0.2) circle (0.35);
+        \draw[ropeDark!70, thin] (-0.35, -0.2) circle (0.2);
+        
+        % Toron 3 (Bas Droite)
+        \draw[fill=ropeCut, draw=ropeDark] (0.35, -0.2) circle (0.45);
+        \draw[ropeDark!70, thin] (0.35, -0.2) circle (0.35);
+        \draw[ropeDark!70, thin] (0.35, -0.2) circle (0.2);
+        
+        % Petit toron central de remplissage (optionnel)
+        \draw[fill=ropeDark, draw=ropeDark] (0,0) circle (0.15);
+        
+    \end{scope}
+
+    % ==========================================
+    % 3. EFFET DE SERRAGE (Hachures extérieures)
+    % ==========================================
+    % Ajoute des lignes courbes sur le cylindre pour simuler la torsion de la corde
+    \foreach \z in {0.5, 1.2, 1.9, 2.6, 3.3} {
+        \draw[ropeDark!40, thick] (0,1,\z) to[out=-60, in=120] (0,-1,\z+0.4);
+    }
+
+\end{tikzpicture}

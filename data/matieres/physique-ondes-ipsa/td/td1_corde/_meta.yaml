@@ -1,0 +1,13 @@
+id: td1
+titre: "Propagation des ondes mécaniques sur une corde"
+chapitre_cours: "Chap. 1 — Équation d’onde de d’Alembert : corde vibrante"
+seance: 1
+niveau_public: [cpge, licence]
+exercices_ordre:
+  - ex0_alembert
+  - ex1_corde_nylon
+  - ex2_celerite_corde
+  - ex3_equation_ondes
+  - ex4_corde_fixee
+  - ex5_melde
+  - ex6_stationaire_libre

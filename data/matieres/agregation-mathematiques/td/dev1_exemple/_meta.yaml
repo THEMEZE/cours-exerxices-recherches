@@ -1,0 +1,7 @@
+id: dev1
+titre: "Développement — exemple (gabarit à compléter)"
+chapitre_cours: "Développements — Agrégation"
+seance: 1
+niveau_public: [agregation]
+exercices_ordre:
+  - ex1_exemple

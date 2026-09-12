@@ -1,0 +1,134 @@
+id: td2_ex4
+intitule: |
+  Différentielle logarithmique
+td: td2
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - chap2.derivation_et_differentielle
+
+metadonnees:
+  duree_estimee: "40 min"
+  difficulte: 2
+  type_exercice: |
+    Méthode $\&$ Calcul
+  indispensable: true
+
+enonce_intro: |
+  La méthode de la différentielle logarithmique est un outil puissant pour calculer la variation relative ou l'incertitude relative d'une grandeur donnée sous forme de produits, quotients ou puissances.
+  Rappel : $\mathrm{d}(\ln f) = \frac{\mathrm{d}f}{f}$.
+
+prerequis:
+  - titre: "Propriétés du logarithme népérien"
+    texte: |
+      $\ln(ab) = \ln a + \ln b$, $\ln(a/b) = \ln a - \ln b$, $\ln(a^n) = n \ln a$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Maîtriser la méthode logarithmique"
+    texte: |
+      Calculer facilement $\frac{\mathrm{d}f}{f}$, $\delta f$ et l'incertitude absolue $\Delta f$ pour des fonctions multi-variables.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Incertitudes sur les produits et quotients"
+    texte: |
+      Démontrer l'intérêt du logarithme pour transformer les produits/quotients en sommes simples avant de passer aux incertitudes.
+
+coup_de_pouce:
+  - titre: |
+      Passage aux incertitudes $\Delta$
+    texte: |
+      Pour obtenir l'incertitude maximale $\Delta f$, remplace tous les $\mathrm{d}$ par des $\Delta$ et mets **tous les signes en valeur absolue (+)**.
+
+point_cours:
+  - titre: "Méthode de la différentielle logarithmique"
+    texte: |
+      1. Écrire $f(x,y,\dots)$.
+      2. Prendre le logarithme : $\ln f$.
+      3. Utiliser les propriétés du $\ln$ pour réécrire les termes.
+      4. Prendre la différentielle : $\mathrm{d}(\ln f) = \frac{\mathrm{d}f}{f}$.
+      5. Application aux petites variations $\delta f$ : remplacer $\mathrm{d}$ par $\delta$.
+      6. Application au calcul d'incertitudes $\Delta f$ : remplacer $\mathrm{d}$ par $\Delta$ en comptant chaque terme d'une somme positivement.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Oubli de la majoration dans l'incertitude"
+    texte: |
+      Conserver des signes moins dans la formule d'incertitude $\Delta f$. Une incertitude s'ajoute toujours au pire des cas.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: |
+      Distinction $\delta f$ vs $\Delta f$
+    texte: |
+      Bien préciser que $\delta f$ conserve les signes (variation algébrique pouvant se compenser) alors que $\Delta f$ représente le pire cas (incertitude toujours positive).
+
+bilan:
+  - titre: "Synthèse"
+    texte: |
+      La différentielle logarithmique est la méthode de référence en TP de physique pour déterminer les incertitudes composées.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Incertitudes quadratiques"
+    texte: |
+      Comparer la méthode des incertitudes maximales à la combinaison quadratique $\left(\frac{\Delta f}{f}\right)^2 = \sum \left(\frac{\Delta x_i}{x_i}\right)^2$.
+
+questions:
+  - id: q1
+    parent: "1"
+    enonce: |
+      Compléter l'exemple ci-dessous pour la fonction $f(x,y) = \frac{x^2}{y}$ en suivant la méthode :
+      * $f(x,y) = \frac{x^2}{y} \implies \ln f = \ln\left(\frac{x^2}{y}\right) = \dots$
+      * $\mathrm{d}\ln f = \mathrm{d}(2\ln x - \dots) = 2 \mathrm{d}\ln x - \dots = \dots \implies \frac{\mathrm{d}f}{f} = \dots$ et $\mathrm{d}f = \dots$
+      * Petite variation de $f$ : $\delta f = \dots$
+      * Incertitude relative : $\frac{\Delta f}{f} = \dots$ et absolue : $\Delta f = \dots$
+    solution:
+      - titre: "Résolution"
+        texte: |
+          * **Logarithme** : $\ln f = \ln(x^2) - \ln(y) = 2\ln x - \ln y$
+          * **Différentielle** : $\mathrm{d}\ln f = 2 \mathrm{d}(\ln x) - \mathrm{d}(\ln y) = 2 \frac{\mathrm{d}x}{x} - \frac{\mathrm{d}y}{y}$
+          * **Calcul de $\frac{\mathrm{d}f}{f}$ et $\mathrm{d}f$** :
+            $$\frac{\mathrm{d}f}{f} = 2 \frac{\mathrm{d}x}{x} - \frac{\mathrm{d}y}{y}$$
+            $$\mathrm{d}f = f \left(2 \frac{\mathrm{d}x}{x} - \frac{\mathrm{d}y}{y}\right) = \frac{x^2}{y} \left(2 \frac{\mathrm{d}x}{x} - \frac{\mathrm{d}y}{y}\right) = \frac{2x}{y}\mathrm{d}x - \frac{x^2}{y^2}\mathrm{d}y$$
+          * **Petite variation** : $\delta f = \frac{x^2}{y} \left(2 \frac{\delta x}{x} - \frac{\delta y}{y}\right) = \frac{2x}{y}\delta x - \frac{x^2}{y^2}\delta y$
+          * **Incertitudes** :
+            $$\text{Relative : } \frac{\Delta f}{f} = 2 \frac{\Delta x}{x} + \frac{\Delta y}{y}$$
+            $$\text{Absolue : } \Delta f = \frac{x^2}{y} \left(2 \frac{\Delta x}{x} + \frac{\Delta y}{y}\right) = \frac{2x}{y}\Delta x + \frac{x^2}{y^2}\Delta y$$
+
+  - id: q2_a
+    parent: "2"
+    enonce: |
+      Calculer la variation $\delta f$ et l'incertitude absolue $\Delta f$ pour la fonction $f(x) = x^2$ par la méthode logarithmique.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          1. $\ln f = 2\ln x$
+          2. $\frac{\mathrm{d}f}{f} = 2 \frac{\mathrm{d}x}{x}$
+          3. Variation : $\delta f = 2 x \delta x$
+          4. Incertitude relative : $\frac{\Delta f}{f} = 2 \frac{\Delta x}{x}$
+          5. Incertitude absolue : $\Delta f = 2 x \Delta x$
+
+  - id: q2_b
+    parent: "2"
+    enonce: |
+      Calculer la variation $\delta f$ et l'incertitude absolue $\Delta f$ pour la fonction $f(x,y) = xy$ par la méthode logarithmique.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          1. $\ln f = \ln x + \ln y$
+          2. $\frac{\mathrm{d}f}{f} = \frac{\mathrm{d}x}{x} + \frac{\mathrm{d}y}{y}$
+          3. Variation : $\delta f = y \delta x + x \delta y$
+          4. Incertitude relative : $\frac{\Delta f}{f} = \frac{\Delta x}{x} + \frac{\Delta y}{y}$
+          5. Incertitude absolue : $\Delta f = y \Delta x + x \Delta y$
+
+  - id: q2_c
+    parent: "2"
+    enonce: |
+      Calculer la variation $\delta f$ et l'incertitude absolue $\Delta f$ pour la fonction $f(x,y,z) = \frac{xy}{z}$ par la méthode logarithmique.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          1. $\ln f = \ln x + \ln y - \ln z$
+          2. $\frac{\mathrm{d}f}{f} = \frac{\mathrm{d}x}{x} + \frac{\mathrm{d}y}{y} - \frac{\mathrm{d}z}{z}$
+          3. Variation : $\delta f = \frac{xy}{z} \left(\frac{\delta x}{x} + \frac{\delta y}{y} - \frac{\delta z}{z}\right)$
+          4. Incertitude relative : $\frac{\Delta f}{f} = \frac{\Delta x}{x} + \frac{\Delta y}{y} + \frac{\Delta z}{z}$
+          5. Incertitude absolue : $\Delta f = \frac{xy}{z} \left(\frac{\Delta x}{x} + \frac{\Delta y}{y} + \frac{\Delta z}{z}\right) = \frac{y}{z}\Delta x + \frac{x}{z}\Delta y + \frac{xy}{z^2}\Delta z$

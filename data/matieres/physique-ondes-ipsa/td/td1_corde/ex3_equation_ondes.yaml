@@ -1,0 +1,164 @@
+id: td1_ex3
+intitule: "Équation des cordes vibrantes et onde progressive"
+td: td1
+facultatif: false
+seance: 1
+cours_rattache:
+  - chap1.equation_onde
+  - chap1.onde_progressive
+  - chap1.pfd_element_corde
+
+metadonnees:
+  duree_estimee: "25 min"
+  difficulte: 2 # Sur une échelle de 1 à 5
+  type_exercice: "Application directe du cours"
+  indispensable: true
+
+enonce_intro: |
+  Une corde homogène et inextensible, de masse linéique $\mu$, est tendue
+  horizontalement (suivant l'axe $Ox$) avec une tension $F$ constante. La corde,
+  déplacée de sa position d'équilibre en $x=0$, acquiert un mouvement décrit
+  à l'instant $t$ par le déplacement $y(x,t)$ quasi vertical.
+
+  À l'instant $t$, la tension $\vec{T}(x,t)$ exercée par la partie droite sur la
+  partie gauche fait un angle petit $\alpha(x,t)$ avec l'axe horizontal. On néglige
+  les forces de pesanteur. Le déplacement transversal $y(x,t)$ obéit à l'équation :
+  $$\dfrac{\partial^2 y}{\partial x^2} = \dfrac{1}{c^2}\dfrac{\partial^2 y}{\partial t^2}$$
+
+questions:
+  - id: q1
+    enonce: |
+      Quelle est la nature de l'onde $y(x,t)$ créée par la perturbation sur la corde ?
+      Soyez aussi précis que possible. Exprimer la célérité $c$ de l'onde en fonction de $F$ et de $\mu$.
+
+    coup_de_pouce:
+      - titre: "Nature de l'onde et PFD"
+        texte: |
+          Réfléchissez à la direction du déplacement $y$ par rapport à la direction de propagation $x$.
+          Pour exprimer $c$, appliquez le PFD projeté transversalement sur un tronçon $[x, x+dx]$.
+
+    correction:
+      - titre: "Synthèse"
+        texte: |
+          Il s'agit d'une **onde plane transversale progressive** se propageant le long de l'axe $Ox$.
+          La célérité vaut $c = \sqrt{F/\mu}$.
+
+    solution:
+      - titre: "Démonstration complète"
+        texte: |
+          \begin{itemize}
+            \item {\bf Nature :} Le déplacement particulaire $y(x,t)$ est perpendiculaire à l'axe de propagation $Ox$ : l'onde est donc **transversale**. En l'absence d'obstacles, elle est **plane et progressive**.
+            \item {\bf Expression de $c$ :} Le PFD appliqué sur un tronçon $[x, x+dx]$ de masse $dm = \mu\,dx$ s'écrit en projection verticale :
+            $$\mu\,dx\,\frac{\partial^2 y}{\partial t^2} = F\sin\alpha(x+dx,t) - F\sin\alpha(x,t)$$
+            Pour de petits angles, $\sin\alpha \approx \tan\alpha = \dfrac{\partial y}{\partial x}$. Ainsi :
+            $$\mu\,dx\,\frac{\partial^2 y}{\partial t^2} \approx F\left[\frac{\partial y}{\partial x}(x+dx,t) - \frac{\partial y}{\partial x}(x,t)\right] = F\,\frac{\partial^2 y}{\partial x^2}\,dx$$
+            En simplifiant par $dx$, on identifie à l'équation de d'Alembert $\dfrac{\partial^2 y}{\partial x^2} = \dfrac{1}{c^2}\dfrac{\partial^2 y}{\partial t^2}$ avec $c = \sqrt{\dfrac{F}{\mu}}$.
+          \end{itemize}
+
+  - id: q2
+    enonce: |
+      Comment est modifiée l'équation d'onde si on ne néglige plus le poids de la corde ?
+
+    coup_de_pouce:
+      - titre: "Ajout de la pesanteur"
+        texte: |
+          Le poids du tronçon $dm\cdot g = \mu\,g\,dx$ s'ajoute vers le bas dans le bilan des forces transversales.
+
+    correction:
+      - titre: "Nouvelle équation"
+        texte: |
+          $\dfrac{\partial^2 y}{\partial x^2} - \dfrac{\mu g}{F} = \dfrac{1}{c^2}\dfrac{\partial^2 y}{\partial t^2}$ (ou l'apparition d'un terme source lié au poids).
+
+    solution:
+      - titre: "Établissement"
+        texte: |
+          En incluant le poids $\vec{dP} = -\mu g\,dx\,\vec{e}_y$, le PFD projeté donne :
+          $$\mu\,dx\,\frac{\partial^2 y}{\partial t^2} = F\,\frac{\partial^2 y}{\partial x^2}\,dx - \mu g\,dx$$
+          En divisant par $F\,dx$, on obtient :
+          $$\frac{\partial^2 y}{\partial x^2} - \frac{\mu g}{F} = \frac{1}{c^2}\frac{\partial^2 y}{\partial t^2}$$
+          Ce terme constant déforme la position d'équilibre (la corde prend la forme d'une chaînette/parabole au repos), mais n'affecte pas la vitesse de propagation $c$ des petites perturbations autour de cette position d'équilibre.
+
+  - id: q3_intro
+    enonce: |
+      Une corde vibrante très longue, de masse linéique $\mu = 0.12$ kg/m et de tension $F = 20$ N,
+      est le siège d'une onde progressive sinusoïdale transversale d'amplitude $a = 2$ mm et de longueur d'onde $\lambda = 0.25$ m.
+    is_intro_only: true
+
+  - id: q3a
+    parent: "3"
+    enonce: "Dans ce cas, calculer la vitesse de propagation $c$ de l'onde."
+    coup_de_pouce:
+      - titre: "Calcul direct"
+        texte: |
+          Appliquez la formule $c = \sqrt{F/\mu}$ avec les valeurs numériques de la question.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $c = \sqrt{20 / 0.12} \approx 12.9\ \text{m/s}$.
+    solution:
+      - titre: "Application numérique"
+        texte: |
+          $c = \sqrt{\dfrac{F}{\mu}} = \sqrt{\dfrac{20}{0.12}} = \sqrt{166.67} \approx 12.91\ \text{m/s}$.
+
+  - id: q3b
+    parent: "3"
+    enonce: "Calculer la vitesse transversale maximale d'un élément de corde. Que remarquez-vous ?"
+    coup_de_pouce:
+      - titre: "Vitesse particulaire vs célérité"
+        texte: |
+          L'onde s'écrit $y(x,t) = a\cos(kx - \omega t + \phi)$. La vitesse transversale est $v_y = \partial_t y$. Son maximum est $v_{\text{max}} = a\omega$ avec $\omega = 2\pi c / \lambda$.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $v_{\text{max}} = a\omega = a\dfrac{2\pi c}{\lambda} \approx 2\cdot 10^{-3} \times \dfrac{2\pi \times 12.91}{0.25} \approx 0.65\ \text{m/s}$.
+          On remarque que $v_{\text{max}} \ll c$ ($0.65\ \text{m/s} \ll 12.91\ \text{m/s}$).
+    solution:
+      - titre: "Détail du calcul"
+        texte: |
+          La vitesse d'un point de la corde est $v_y(x,t) = \dfrac{\partial y}{\partial t} = a\omega \sin(kx - \omega t + \phi)$.
+          L'amplitude maximale de cette vitesse est $v_{\text{max}} = a\,\omega$.
+          Comme $\omega = 2\pi f = \dfrac{2\pi c}{\lambda}$ :
+          $$v_{\text{max}} = a \frac{2\pi c}{\lambda} = 2\times 10^{-3} \times \frac{2\pi \times 12.91}{0.25} \approx 0.649\ \text{m/s}$$
+          **Remarque :** La vitesse maximale de déplacement de la matière ($0.65$ m/s) est très inférieure à la vitesse de propagation du signal/de l'onde $c$ ($12.91$ m/s).
+
+  - id: q3c
+    parent: "3"
+    enonce: "Calculer la composante transversale maximale de la tension en un point quelconque de la corde."
+    coup_de_pouce:
+      - titre: "Projection de la tension"
+        texte: |
+          La composante transversale de la tension est $T_y = F\sin\alpha \approx F \dfrac{\partial y}{\partial x}$.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $T_{y,\text{max}} = F\,k\,a = F\dfrac{2\pi}{\lambda}a = 20 \times \dfrac{2\pi}{0.25} \times 2\cdot 10^{-3} \approx 1.01\ \text{N}$.
+    solution:
+      - titre: "Détail du calcul"
+        texte: |
+          $T_y(x,t) = F \frac{\partial y}{\partial x} = -F\,k\,a \sin(kx - \omega t + \phi)$.
+          Son module maximal vaut :
+          $$T_{y,\text{max}} = F\,k\,a = F \frac{2\pi}{\lambda} a = 20 \times \frac{2\pi}{0.25} \times 2\times 10^{-3} \approx 1.005\ \text{N}$$
+
+  - id: q3d
+    parent: "3"
+    enonce: |
+      Quelle est la phase de l'onde lorsque ces deux maxima (vitesse et tension transversale) sont atteints ?
+      Calculer le déplacement correspondant $y(x,t)$ de l'élément de corde.
+    coup_de_pouce:
+      - titre: "Analyse des fonctions sinus / cosinus"
+        texte: |
+          Examinez la phase $\Phi(x,t) = kx - \omega t + \phi$ lorsque $\sin\Phi(x,t) = \pm 1$. Que vaut $\cos\Phi(x,t)$ à cet instant ?
+    correction:
+      - titre: "Résultat"
+        texte: |
+          Phase : $\Phi = \pi/2 [\pi]$.
+          Déplacement correspondant : $y(x,t) = 0$ (la corde passe par sa position d'équilibre).
+    solution:
+      - titre: "Raisonnement pas à pas"
+        texte: |
+          $v_y$ et $T_y$ sont toutes deux proportionnelles à $\sin(kx - \omega t + \phi)$.
+          Leur valeur maximale en module est atteinte quand $|\sin(kx - \omega t + \phi)| = 1$, soit pour une phase :
+          $$\Phi(x,t) = kx - \omega t + \phi = \frac{\pi}{2} \quad [\pi]$$
+          À cet instant, le cosinus est nul ($\cos\Phi = 0$), d'où :
+          $$y(x,t) = a\cos\Phi(x,t) = 0$$
+          Les maxima de vitesse transversale et de tension transversale ont lieu simultanément au moment où l'élément de corde passe par sa position d'équilibre ($y=0$).

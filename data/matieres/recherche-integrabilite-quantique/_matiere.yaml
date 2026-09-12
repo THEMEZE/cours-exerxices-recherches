@@ -1,0 +1,8 @@
+id: recherche-integrabilite-quantique
+nom: "Recherche personnelle — Intégrabilité quantique"
+niveau: [doctorat]
+description: >
+  Notes de recherche personnelle sur l'intégrabilité quantique et l'ansatz
+  de Bethe.
+quartz_namespace: mathematiques/integrabilite-quantique
+sujets: [integrabilite-quantique, bethe-ansatz]

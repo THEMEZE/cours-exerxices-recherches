@@ -1,0 +1,307 @@
+id: td1_ex3
+intitule: "Homogénéité et Analyse Dimensinnelle"
+td: td1
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - chap1.???
+
+metadonnees:
+  duree_estimee: "25 min"
+  difficulte: 1 # Sur une échelle de 1 à 5
+  type_exercice: "Révision"
+  indispensable: false
+
+enonce_intro: |
+
+
+prerequis : 
+  - titre: |
+
+    texte: |
+
+
+objectifs_pedagogiques_etudiants :
+  - titre: |
+
+    texte: |
+      
+
+objectifs_pedagogiques_enseignants :
+  - titre: |
+
+    texte: |
+      
+point_cours :
+  - titre: |
+
+    texte: |
+
+
+remarques_pedagogiques_ecueils_classiques: 
+  - titre: |
+  
+    texte: |
+      
+remarques_pedagogiques_conseils_animation: 
+  - titre: |
+
+    texte: |
+      
+
+bilan: 
+  - titre: |
+
+    texte: |
+
+
+aller_plus_loin: 
+  - niveau: lycee
+
+    titre: |
+
+    texte: |
+
+
+  - niveau: prepa
+    titre: |
+
+    texte: |
+      
+
+  - niveau: licence
+    titre: |
+
+    texte: |
+     
+
+  - niveau: master
+    titre: |
+
+    texte: |
+      
+
+
+questions:
+
+
+  - id: q1_intro
+
+    enonce: |
+      %{\bf Notions de cours S.I.} \\
+      %Répondre aux questions de cours relatives à l'homogénéité
+      %(a) Définir une équation homogène. (b) Une équation homogène est-elle forcément vraie ? (c) Une équation non homogène peut-elle être vraie ? (d) Quelles sont les règles d'addition/soustraction ? (e) De multiplication/division ? (f) Quelle est la dimension d'une dérivée df/dx ? (g) Quelle est la dimension des fonctions transcendentales (exp, cos, ln) et de leurs arguments ?
+
+    point_cours: 
+      - titre: |
+
+        texte: |
+
+          L'addition/soustraction impose des termes de même dimension. Les arguments des fonctions usuelles (exp, cos, sin, ln) doivent être strictement sans dimension ([x] = 1).
+
+    is_intro_only: true 
+
+  - id: q1a
+
+    parent: "1"
+
+    enonce: |
+      Définir la notion d’homogénéité.
+    
+    point_cours: 
+      - titre: |
+
+        texte: |
+              
+    solution:
+      - titre: |
+
+        texte: |
+          Une équation est homogène si tous ses termes ont la même dimension.
+
+  - id: q1b
+
+    parent: "1"
+
+    enonce: |
+      Une équation homogène est elle nécessairement vraie ?
+    
+    point_cours: 
+      - titre: |
+
+        texte: |
+              
+    solution:
+      - titre: |
+
+        texte: |
+          Non, elle peut être physiquement fausse à cause d'un facteur numérique.
+
+
+  - id: q1c
+
+    parent: "1"
+
+    enonce: |
+      Une équation non homogène est elle nécessairement fausse ?
+    
+    point_cours: 
+      - titre: |
+
+        texte: |
+              
+    solution:
+      - titre: |
+
+        texte: |
+          Oui, une équation non homogène est toujours fausse.
+
+
+  - id: q1d
+
+    parent: "1"
+
+    enonce: |
+      Dans quels cas, peut on additionner/soustraire des grandeurs entre elles ?
+    
+    point_cours: 
+      - titre: |
+
+        texte: |
+              
+    solution:
+      - titre: |
+
+        texte: |
+          On ne peut additionner que des grandeurs de même dimension.
+
+  - id: q1e
+
+    parent: "1"
+
+    enonce: |
+      Dans quels cas, peut on multiplier/diviser des grandeurs entre elles ?
+    
+    point_cours: 
+      - titre: |
+
+        texte: |
+              
+    solution:
+      - titre: |
+
+        texte: |
+          On peut multiplier ou diviser des grandeurs de dimensions différentes.
+
+  - id: q1f
+
+    parent: "1"
+
+    enonce: |
+      Quelle est la dimension de la dérivée d’une grandeur par rapport à une variable ?
+    
+    point_cours: 
+      - titre: |
+
+        texte: |
+              
+    solution:
+      - titre: |
+
+        texte: |
+          $[df/dx] = [f] / [x]$.
+
+  - id: q1g
+
+    parent: "1"
+
+    enonce: |
+      Que peut on dire de la dimension des fonctions mathématiques $\exp(x)$ , $\cos(x)$ , $\ln(x)$ ? Et de leur argument ?
+    
+    point_cours: 
+      - titre: |
+
+        texte: |
+              
+    solution:
+      - titre: |
+
+        texte: |
+          Les fonctions transcendentales et leurs arguments sont adimensionnels $([f] = 1, [x] = 1)$.
+
+  - id: q2
+
+    enonce: |
+      {\bf L’analyse dimensionnelle pour vérifier l’homogénéité.}\\
+
+      \begin{enumerate}[label=\alph*)]
+        \item Soit $x$, la coordonnée donnant la position d’un mobile sur un axe, $v$ sa vitesse et $a$ son accélération, vérifier si les équations suivantes sont homogènes :
+          $$
+            x = a t,\quad  x = \frac{1}2 a t^2 + v*t, \quad \text{et }  x = \frac{v^2}{2 a}.
+          $$
+        \item La vitesse $v$ d’une particule varie avec le temps $t$ selon : $v= At+ Bt^2$.
+          Quelles sont les dimensions des constantes $A$ et $B$ ?
+        \item La position $x$ d’une particule varie avec le temps $t$ selon : $x= R cos(\omega t+ \varphi )$. \\
+          Quelles sont les dimensions des constantes $R$ , $\omega$  et $\varphi$ ?
+        \item Vérifier l’homogénéité de l’énergie potentielle de pesanteur : $\mathcal{E}_p = mgz$.
+      \end{enumerate}
+
+    
+    coup_de_pouce: 
+      
+      - titre: |
+
+        texte: |
+
+
+    solution: 
+
+      - titre: |
+
+        texte : |
+
+          \begin{enumerate}[label=\alph*)]
+            \item 
+            \begin{enumerate}[label=\roman*)]
+              \item $x = a t$
+              \vspace{-1cm}
+                \begin{itemize}[label=$\bullet$]
+                  \item {\bf analyse : } $[x] = L$ est une longueur  alors que $[a*t] = \overbrace{L*T^{-2}}^{[a]}*\overbrace{T}^{[t]} =  L*T^{-1} = [v]$ est une vitesse 
+                  \item {\bf Donc : } Non-homogène \\
+                \end{itemize}
+                \vspace{-0.5cm}
+              \item ${\displaystyle x = \frac{1}2a t^2 + v t} $ 
+                \vspace{-0.5cm}
+                \begin{itemize}[label=$\bullet$]
+                  \item {\bf analyse : } $[x] = L$ est une longueur, $[a*t^2] = \overbrace{L*T^{-2}}^{[a]}*\overbrace{T^2}^{[t^2]} =  L = [x]$ et $v*t = \overbrace{L*T^{-1}}^{[v]}*\overbrace{T}^{[t]} =  L = [x] $   
+                  \item {\bf Donc : } homogène à une longueur \\
+                \end{itemize}
+              \item ${\displaystyle x = \frac{v^2}{2a}} $ 
+                \vspace{-0.5cm}
+                \begin{itemize}[label=$\bullet$]
+                  \item {\bf analyse : } $[x] = L$ est une longueur, $\left [\frac{v^2}{2*a} \right ] = \frac{\overbrace{(L*T^{-1})^2 }^{[v]^2}}{2 \underbrace{L*T^{-2}}_{[a]} } =  L = [x]$  
+                  \vspace{-0.5cm}
+                  \item {\bf Donc : } homogène à une longueur
+                \end{itemize}
+            \end{enumerate}
+            \item $ [v] = L * T^{-1} $  et $v= At+ Bt^2$ donc $\left [ At \right ] = \left [ Bt^2 \right ]  = [v]  = L * T^{-1}  $
+              \begin{itemize}[label=$\bullet$]
+                \item ${\displaystyle [A] = \frac{\overbrace{L * T^{-1}}^{[v]} }{ \underbrace{T}_{[t]}}  } = L * T^{-2} = [a]$ une accélération.
+                \item ${\displaystyle [B] = \frac{\overbrace{L * T^{-1}}^{[v]} }{ \underbrace{T^2}_{[t]^2}}  } = L * T^{-3} $
+              \end{itemize}
+            \item $L = [x] = R \overbrace{\cos(\underbrace{\omega t + \varphi}_{[1]})}^{[1]}$ 
+              \begin{itemize}[label=$\bullet$]
+                \item ${\displaystyle [R] = \frac{\overbrace{L}^{[x]} }{ \underbrace{[1]}_{[\cos(\omega t + \varphi)]}  } = L  = [x] }$ est une longueur.
+                \item ${\displaystyle [\omega] = \frac{\overbrace{[1]}^{[\omega t + \phi ]} }{ \underbrace{T}_{[t]}  } = T^{-1} }$ est une pulsation.
+                \item ${\displaystyle [\varphi] = [1] }$ est sans dimesntion 
+              \end{itemize}
+            \item 
+              \begin{itemize}[label=$\bullet$]
+                \item ${\displaystyle [\mathcal{E}_p] = M * L^2 * T^{-2}] }$ est une énergie.
+                \item ${\displaystyle [mgz] = \overbrace{M}^{[m]}*\overbrace{L*T^{-2}}^{[g]}* \overbrace{L}^{[z]} = M * L^2 * T^{-2} }$ est une énergie.
+              \end{itemize}
+              donc $\mathcal{E}_p = mgz$ est bien homogène a une énergie 
+          \end{enumerate}
+
+  

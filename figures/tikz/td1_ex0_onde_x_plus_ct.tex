@@ -1,0 +1,280 @@
+\begin{tikzpicture}
+
+    % ============================================================
+    % ÉCHELLES ET PARAMÈTRES
+    % ============================================================
+
+    \pgfmathsetmacro{\echelleY}{1.5}
+    \pgfmathsetmacro{\echelleX}{1.25}
+
+    \def\lam{4}
+    \def\amp{1}
+
+    % Deux instants :
+    % Le profil se déplace vers les x décroissants
+    \def\xUn{6.5}
+    \def\DeltaX{2.5}
+    \pgfmathsetmacro{\xDeux}{\xUn-\DeltaX}
+
+    \def\phi{-90}
+
+    % ============================================================
+    % CLIP
+    % ============================================================
+
+    \clip
+        (-1.5*\echelleX,-2.3*\echelleY)
+        rectangle
+        (11.0*\echelleX,2.3*\echelleY);
+
+    % ============================================================
+    % GRILLE
+    % ============================================================
+
+    \backgrowngrid
+        {-1}{-2}{10}{2}
+        {\echelleX}{\echelleY}
+        {\colorThree!50!\colorTwo}
+        {\colorTwo}
+        {0.5ex}
+
+    % ============================================================
+    % ÉQUATION
+    % ============================================================
+
+    \node[
+        fill=\colorThree!25!\colorTwo,
+        rounded corners=6pt,
+        inner sep=8pt,
+        font=\sffamily\bfseries\fontsize{18pt}{22pt}\selectfont,
+        text=\colorOne
+    ]
+    at (4.5*\echelleX,1.85*\echelleY)
+    {
+        $\bm{y(x,t)=g(x+ct)}$
+    };
+
+    % ============================================================
+    % PROFIL À t_1
+    % ============================================================
+
+    \draw[
+        line width=0.8ex,
+        color=\colorFour,
+        domain=-1:10,
+        samples=250,
+        smooth
+    ]
+    plot
+    (
+        \x*\echelleX,
+        {
+            \echelleY*\amp*
+            cos(360/\lam*\x+\phi)
+        }
+    );
+
+    % ============================================================
+    % PROFIL À t_2
+    %
+    % g(x+c t_2) = g((x+c t_1)+Delta x)
+    %
+    % Donc translation vers la GAUCHE
+    % ============================================================
+
+    \draw[
+        line width=0.8ex,
+        color=\colorSix,
+        domain=-1:10,
+        samples=250,
+        smooth
+    ]
+    plot
+    (
+        \x*\echelleX,
+        {
+            \echelleY*\amp*
+            cos(360/\lam*(\x+\DeltaX)+\phi)
+        }
+    );
+
+    % ============================================================
+    % POSITION DES POINTS IDENTIFIABLES
+    % ============================================================
+
+    \pgfmathsetmacro{\xPUn}{\xUn*\echelleX}
+    \pgfmathsetmacro{\xPDeux}{\xDeux*\echelleX}
+
+    \pgfmathsetmacro{\yP}{
+        \echelleY*\amp*
+        cos(360/\lam*\xUn+\phi)
+    }
+
+    % Point P à t_1
+    \fill[
+        color=\colorFour
+    ]
+    (\xPUn,\yP)
+    circle (0.14cm);
+
+    \node[
+        above right,
+        font=\sffamily\bfseries\fontsize{15pt}{18pt}\selectfont,
+        text=\colorFour
+    ]
+    at (\xPUn,\yP)
+    {$P_1$};
+
+    % Point P à t_2
+    \fill[
+        color=\colorSix
+    ]
+    (\xPDeux,\yP)
+    circle (0.14cm);
+
+    \node[
+        above left,
+        font=\sffamily\bfseries\fontsize{15pt}{18pt}\selectfont,
+        text=\colorSix
+    ]
+    at (\xPDeux,\yP)
+    {$P_2$};
+
+    % ============================================================
+    % PROJECTIONS
+    % ============================================================
+
+    \draw[
+        dashed,
+        line width=0.45ex,
+        color=\colorFour
+    ]
+    (\xPUn,\yP)
+    -- (\xPUn,0);
+
+    \draw[
+        dashed,
+        line width=0.45ex,
+        color=\colorSix
+    ]
+    (\xPDeux,\yP)
+    -- (\xPDeux,0);
+
+    % ============================================================
+    % DÉPLACEMENT DU POINT VERS LA GAUCHE
+    % ============================================================
+
+    \draw[
+        ->,
+        >=Latex,
+        line width=0.8ex,
+        color=\colorOne
+    ]
+    (\xPUn,0.85*\echelleY)
+    --
+    node[
+        midway,
+        above,
+        fill=\colorTwo,
+        inner sep=3pt,
+        font=\sffamily\bfseries\fontsize{14pt}{17pt}\selectfont,
+        text=\colorOne
+    ]
+    {
+        $\Delta x=-c(t_2-t_1)$
+    }
+    (\xPDeux,0.85*\echelleY);
+
+    % ============================================================
+    % LÉGENDE DES DEUX PROFILS
+    % ============================================================
+
+    \draw[
+        line width=0.8ex,
+        color=\colorFour
+    ]
+    (0.2*\echelleX,-1.55*\echelleY)
+    --
+    (1.0*\echelleX,-1.55*\echelleY)
+    node[
+        right,
+        text=\colorFour,
+        font=\sffamily\bfseries\fontsize{13pt}{16pt}\selectfont
+    ]
+    {$t=t_1$};
+
+    \draw[
+        line width=0.8ex,
+        color=\colorSix
+    ]
+    (3.2*\echelleX,-1.55*\echelleY)
+    --
+    (4.0*\echelleX,-1.55*\echelleY)
+    node[
+        right,
+        text=\colorSix,
+        font=\sffamily\bfseries\fontsize{13pt}{16pt}\selectfont
+    ]
+    {$t=t_2>t_1$};
+
+    % ============================================================
+    % AXE X
+    % ============================================================
+
+    \draw
+    (-1.3*\echelleX,0)
+    edge[
+        thick,
+        line width=0.8ex,
+        ->,
+        >=Triangle,
+        color=\colorOne
+    ]
+    node[
+        pos=1,
+        right,
+        font=\sffamily\bfseries\fontsize{16pt}{18pt}\selectfont,
+        text=\colorOne
+    ]
+    {$x$}
+    (10.8*\echelleX,0);
+
+    % ============================================================
+    % AXE Y
+    % ============================================================
+
+    \draw
+    (0,-2.0*\echelleY)
+    edge[
+        thick,
+        line width=0.8ex,
+        ->,
+        >=Triangle,
+        color=\colorOne
+    ]
+    node[
+        pos=1,
+        above,
+        font=\sffamily\bfseries\fontsize{16pt}{18pt}\selectfont,
+        text=\colorOne
+    ]
+    {$y$}
+    (0,2.1*\echelleY);
+
+    % ============================================================
+    % CONCLUSION GRAPHIQUE
+    % ============================================================
+
+    \node[
+        fill=\colorSix!15!\colorTwo,
+        rounded corners=5pt,
+        inner sep=7pt,
+        font=\sffamily\bfseries\fontsize{15pt}{18pt}\selectfont,
+        text=\colorSix
+    ]
+    at (7.0*\echelleX,-1.55*\echelleY)
+    {
+        propagation vers les $\bm{x}$ décroissants
+    };
+
+\end{tikzpicture}

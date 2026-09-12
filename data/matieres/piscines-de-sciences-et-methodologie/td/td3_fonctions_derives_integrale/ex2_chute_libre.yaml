@@ -1,0 +1,137 @@
+id: td3_ex2
+intitule: "Chute libre : expérience et modèle"
+td: td3
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - chap3.cinematique_1d
+
+metadonnees:
+  duree_estimee: "60 min"
+  difficulte: 2
+  type_exercice: |
+    Modélisation $\&$ Expérimentation
+  indispensable: true
+
+enonce_intro: |
+  Étude expérimentale puis théorique du mouvement de chute libre d'une bille de billard lâchée sans vitesse initiale. Le référentiel terrestre est supposé galiléen.
+
+prerequis:
+  - titre: "Principe fondamental de la dynamique (PFD)"
+    texte: |
+      $\sum \vec{F} = m \vec{a}$ et intégration des équations différentielles simples.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Confrontation expérience / modèle"
+    texte: |
+      Savoir exploiter une série de données expérimentales pour retrouver la valeur de l'intensité de la pesanteur $g$.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Analyse cinématique d'une chute libre"
+    texte: |
+      Montrer l'équivalence entre l'analyse graphique de données réelles et l'intégration théorique de la loi de Newton.
+
+coup_de_pouce:
+  - titre: "Repère pour la chute"
+    texte: |
+      Orienter l'axe vertical vers le bas permet d'avoir $a_x = +g$ et d'éliminer les signes moins.
+
+point_cours:
+  - titre: "Chute libre à 1D"
+    texte: |
+      Seule la force de pesanteur $\vec{P} = m\vec{g}$ s'applique. L'accélération subie par le corps est égale à $\vec{a} = \vec{g}$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Sens des axes et signe de g"
+    texte: |
+      Si l'axe est orienté vers le haut, $a_x = -g$ ; si l'axe est orienté vers le bas, $a_x = +g$.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Linéarisation $x(t^2)$"
+    texte: |
+      Expliquer pourquoi tracer $x$ en fonction de $t^2$ donne une droite dont la pente est $\frac{1}{2}g$.
+
+bilan:
+  - titre: "Synthèse"
+    texte: |
+      La chute libre en l'absence de frottements est un mouvement rectiligne uniformément accéléré de constante $g$.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Frottements fluides"
+    texte: |
+      Ajout de forces de frottement en $-k v$ ou $-k v^2$ menant à l'apparition d'une vitesse limite.
+
+questions:
+  - id: q1
+    parent: "1"
+    enonce: |
+      **Étude expérimentale**
+
+      Une bille est photographiée toutes les $\tau = 1/30\text{ s}$.
+
+      \begin{enumerate}[label=\alph*)]
+        \item Compléter le tableau de relevés des positions $x(t)$ et vitesses moyennes $v_x(t)$.
+        \item Représenter $x(t)$ : comment évolue $x$ au cours du temps ?
+        \item Représenter $x(t^2)$ et en déduire une expression mathématique de $x(t)$.
+        \item Représenter $v_x(t)$ et donner son expression mathématique.
+        \item Déterminer par le calcul $v_x(t)$ à partir de l'expression de $x(t)$.
+        \item Déterminer l'accélération $a_x(t)$ graphiquement puis par le calcul. Qualifier le mouvement.
+      \end{enumerate}
+
+    solution:
+      - titre: "Résolution expérimentale"
+        texte: |
+          \begin{enumerate}[label=\alph*)]
+            \item Positions : $x(0)=0\text{ m}$, $x(\tau) \approx 0,005\text{ m}$, $x(2\tau) \approx 0,022\text{ m}$, $x(3\tau) \approx 0,049\text{ m}$, $x(4\tau) \approx 0,087\text{ m}$.
+            \item $x(t)$ présente une forme paraboloïdale : la position augmente de plus en plus vite.
+            \item $x(t^2)$ est une droite passant par l'origine de pente $k \approx 4,9\text{ m}\cdot\text{s}^{-2} \implies x(t) = k t^2$.
+            \item $v_x(t)$ est une droite linéaire : $v_x(t) = a t$ avec $a \approx 9,8\text{ m}\cdot\text{s}^{-2}$.
+            \item Par calcul : $v_x(t) = \frac{\mathrm{d}x}{\mathrm{d}t} = 2k t = 9,8 t\text{ m}\cdot\text{s}^{-1}$.
+            \item $a_x = \frac{\mathrm{d}v_x}{\mathrm{d}t} \approx 9,8\text{ m}\cdot\text{s}^{-2} = \text{Cte}$. Le mouvement est **rectiligne uniformément accéléré (MRUA)**.
+          \end{enumerate}
+
+  - id: q2
+    parent: "2"
+    enonce: |
+      **Modélisation théorique**
+
+      Une masse $m$ est en chute libre sans vitesse initiale dans le champ $\vec{g}$.
+
+      \begin{enumerate}[label=\alph*)]
+        \item Définir un repère adapté.
+        \item Bilan des forces.
+        \item Appliquer le PFD et déduire l'accélération.
+        \item Intégrer pour obtenir $v_x(t)$ et $x(t)$.
+        \item Estimer l'intensité de la pesanteur $g$ depuis l'étude expérimentale.
+      \end{enumerate}
+
+    solution:
+      - titre: "Résolution théorique"
+        texte: |
+          \begin{enumerate}[label=\alph*)]
+            \item Repère axe vertical $(Ox)$ dirigé vers le bas, origine $O$ au point de lâcher.
+            \item Seul le poids $\vec{P} = m\vec{g}$ s'exerce (frottements négligés).
+            \item PFD : $m\vec{a} = m\vec{g} \implies \vec{a} = \vec{g} \implies a_x = g$.
+            \item $v_x(t) = g t + v_{x,0} = g t$ ; $x(t) = \frac{1}{2}g t^2 + x_0 = \frac{1}{2}g t^2$.
+            \item Par identification avec $x(t) = k t^2$ où $k \approx 4,9\text{ m}\cdot\text{s}^{-2}$, on a $g = 2k \approx 9,8\text{ m}\cdot\text{s}^{-2}$.
+          \end{enumerate}
+
+  - id: q3
+    parent: "3"
+    enonce: |
+      **Applications**
+
+      \begin{enumerate}[label=\alph*)]
+        \item Une pierre tombe dans un puits et touche l'eau après $1,5\text{ s}$. Déterminer la profondeur du puits et la vitesse d'impact ($g = 9,81\text{ m}\cdot\text{s}^{-2}$).
+        \item Calculer la durée de chute lors d'une tombe d'une chaise haute de $0,5\text{ m}$.
+      \end{enumerate>
+
+    solution:
+      - titre: "Calculs d'applications"
+        texte: |
+          \begin{enumerate}[label=\alph*)]
+            \item Profondeur $h = \frac{1}{2}g t^2 = 0,5 \times 9,81 \times 1,5^2 \approx 11,04\text{ m}$. Vitesse $v = g t = 9,81 \times 1,5 \approx 14,72\text{ m}\cdot\text{s}^{-1}$.
+            \item $h = \frac{1}{2}g t^2 \implies t = \sqrt{\frac{2h}{g}} = \sqrt{\frac{2 \times 0,5}{9,81}} \approx 0,32\text{ s}$.
+          \end{enumerate}

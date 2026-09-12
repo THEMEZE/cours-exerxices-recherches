@@ -1,0 +1,53 @@
+id: td2_ex1
+intitule: "Célérité d'une onde acoustique dans un fluide parfait"
+td: td2
+facultatif: false
+seance: 3
+cours_rattache:
+  - chap2.compressibilite
+  - chap2.celerite_son
+
+enonce_intro: |
+  Le fluide considéré est de l'air, modélisé comme un fluide parfait, de
+  rapport des capacités calorifiques $\gamma = C_P/C_V = 1.4$. Masse molaire
+  $M = 29$ g/mol, température $T = 293$ K, $R = 8.32$ J·mol$^{-1}$·K$^{-1}$.
+  On rappelle le coefficient de compressibilité $\chi = -\dfrac{1}{V}\dfrac{\partial V}{\partial P}$.
+
+questions:
+  - id: q1
+    enonce: |
+      On suppose que lors du passage de l'onde acoustique, le fluide subit
+      une transformation isotherme. En le modélisant comme un gaz parfait,
+      montrer que $c_T = \sqrt{RT/M}$.
+    coup_de_pouce: |
+      Pour un gaz parfait en transformation isotherme, $PV=$ cte à $T$ fixé,
+      donc $\chi_T = 1/P$. La célérité du son vérifie en général $c=\sqrt{1/(\rho\chi)}$.
+    correction: "$c_T=\\sqrt{RT/M}$."
+    solution: |
+      Pour un gaz parfait isotherme, $PV=nRT$ donne $\left(\dfrac{\partial V}{\partial P}\right)_T=-\dfrac{nRT}{P^2}=-\dfrac{V}{P}$,
+      donc $\chi_T=1/P$. La relation générale de propagation acoustique
+      $c^2=1/(\rho\chi)$ (établie en cours) donne alors, avec $\rho=M/V_m=MP/(RT)$ :
+      \begin{eqnarray}
+        c_T^2 &=& \frac{1}{\rho\,\chi_T} = \frac{P}{\rho} = \frac{P}{MP/(RT)} = \frac{RT}{M} \nonumber\\
+        c_T &=& \sqrt{\frac{RT}{M}}.
+      \end{eqnarray}
+
+  - id: q2
+    enonce: "Calculer $c_T$ numériquement. Est-ce en accord avec la mesure expérimentale (≈340 m/s) ? Conclure."
+    coup_de_pouce: "Attention aux unités SI : $M$ en kg/mol."
+    correction: "$c_T=\\sqrt{8.32\\times293/0.029}\\approx290$ m/s -- sous-estime la valeur mesurée (≈340 m/s)."
+
+  - id: q3
+    enonce: "À quel type de transformation correspond alors la propagation de l'onde sonore ? Définir cette transformation."
+    coup_de_pouce: "L'écart avec l'isotherme suggère une transformation trop rapide pour un échange de chaleur : pensez à l'adiabatique réversible (isentropique)."
+    correction: "Transformation adiabatique réversible (isentropique) : rapide devant les temps d'échange thermique, sans échange de chaleur ni irréversibilité."
+
+  - id: q4
+    enonce: "Montrer que pour ce type de transformation, $c_S=\\sqrt{\\gamma RT/M}$. Calculer numériquement et commenter."
+    coup_de_pouce: "Pour une transformation isentropique d'un gaz parfait, $PV^\\gamma=$ cte, donc $\\chi_S=1/(\\gamma P)$."
+    correction: "$c_S=\\sqrt{\\gamma RT/M}\\approx343$ m/s -- en excellent accord avec la mesure."
+
+  - id: q5
+    enonce: "Comparer la vitesse du son au niveau de la mer et au sommet de l'Everest (densité de l'air environ 3 fois plus faible, composition chimique identique)."
+    coup_de_pouce: "$c_S=\\sqrt{\\gamma P/\\rho}$ ; à composition chimique et température fixées, comment $P/\\rho$ varie-t-il avec l'altitude ?"
+    correction: "À température égale, $c_S=\\sqrt{\\gamma RT/M}$ ne dépend pas de $\\rho$ ni de $P$ séparément, seulement de $T$ : la vitesse du son est quasiment la même (elle varie surtout avec la température, qui baisse en altitude, donc $c$ diminue légèrement -- pas d'un facteur 3)."

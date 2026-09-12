@@ -1,0 +1,221 @@
+id: td1_ex1
+intitule: "Corde de nylon"
+td: td1
+facultatif: false
+seance: 1
+cours_rattache:
+  - chap1.masse_lineique
+  - chap1.celerite_corde
+  - chap1.onde_plane_progressive
+
+metadonnees:
+  duree_estimee: "25 min"
+  difficulte: 2 # Sur une échelle de 1 à 5
+  type_exercice: "Application directe du cours"
+  indispensable: true
+
+enonce_intro: |
+  Une corde de nylon de diamètre $d = 1$ mm est tendue par une force
+  extérieure de module $F = 50$ N.
+
+figure:
+  - ref: td1_ex1_corde_t0
+    legende: "Allure de la corde à $t=0$."
+    scale: 0.6  # Facteur d'échelle (ex: 0.8 pour 80%)
+    label: "fig:cordet0"  # Label pour le \ref{}
+
+animation:
+  ref: anim_corde_onde
+  params: {mode: "onde_progressive", lam: 1.0, T: 1.0, xmax: 4}
+  formats: [gif, mp4, frames_pdf]
+  scale: 0.8  # Facteur d'échelle (ex: 0.8 pour 80%)
+  label: "fig:corde_t0"  # Label pour le \ref{}
+
+questions:
+  - id: q1
+    enonce: |
+      Calculer la masse linéique $\mu$ de la corde, sachant que la masse
+      volumique du nylon est de \tikzmark{rho_src}$950$ kg/m$^3$\tikzmark{rho_src_end}. Calculer la vitesse de
+      propagation $c$ des ondes transversales sur cette corde.
+
+    coup_de_pouce:
+      - titre: "Indication géométrique"
+        texte: |
+          $\mu = \rho\,S$ avec $S=\pi d^2/4$ la section de la corde.
+        # cours_rattache: ["chap1.masse_lineique"]
+        figure:
+          - ref: td1_ex1_corde_t0
+            legende: "Coupe transversale de la corde"
+            scale: 0.2  # Facteur d'échelle (ex: 0.8 pour 80%)
+            label: "fig:cordet0"  # Label pour le \ref{}
+
+      - titre: "Relation dynamique"
+        texte: |
+          La vitesse des ondes transverses sur une corde tendue est $c=\sqrt{F/\mu}$. (relation de d'Alembert, vue en cours).
+        # cours_rattache: ["chap1.celerite_corde", "chap1.onde_plane_progressive"]
+        # animation:
+        #   ref: anim_corde_onde
+        #   params: {mode: "onde_progressive", lam: 1.0}
+        #   formats: [gif, mp4]
+
+
+    correction:
+      - titre: "Méthode directe"
+        texte: |
+          $\mu = \rho\,S = \rho\,\dfrac{\pi d^2}{4} \approx 7.46\times10^{-4}\ \text{kg/m}.$
+          $c=\sqrt{F/\mu}=\sqrt{50/7.46\times10^{-4}}\approx 259\ \text{m/s}.$
+      - titre: "Tettetetet"
+        texte: |
+          tetetetetet teste ici néna zamane 
+
+    solution:
+      - titre: "Rédaction pas à pas"
+        texte: |
+          On part de $\mu=\rho S$ avec $S=\pi d^2/4$ la section circulaire du fil,
+          où $\rho=\tikzmark{rho_sol}950$ kg/m$^3$ est la donnée de l'énoncé
+          \tikzmark{rho_sol_end}.
+          Application numérique : $S=\pi(10^{-3})^2/4=7.85\times10^{-7}$ m$^2$, donc
+          $\mu=950\times7.85\times10^{-7}\approx7.46\times10^{-4}$ kg/m.
+          La relation de d'Alembert, démontrée en cours à partir du PFD appliqué à
+          un élément de corde, donne $c=\sqrt{F/\mu}$. Application numérique :
+          $c=\sqrt{50/7.46\times10^{-4}}\approx259$ m/s. On vérifie que l'unité
+          est bien homogène à une vitesse : $[\sqrt{F/\mu}]=\sqrt{\text{N/(kg/m)}}=\text{m/s}$.
+        # figure:
+        #   ref: calcul_section_sch
+        #   legende: "Schéma d'application numérique"
+      - titre: "Tettetetet"
+        texte: |
+          fao mi coze encore oubien lébon 
+
+    aller_plus_loin:
+      - niveau: lycee
+        titre: "Analogie musicale"
+        texte: |
+          Analogie avec les cordes de guitare : plus une corde est tendue ou
+          fine, plus la note produite est aiguë (fréquence plus grande).
+        # cours_rattache: ["acoustique.musique"]
+
+      - niveau: prepa
+        titre: "Analyse dimensionnelle"
+        texte: |
+          Retrouver $c=\sqrt{F/\mu}$ par analyse dimensionnelle
+          ($[F]=$ kg·m·s$^{-2}$, $[\mu]=$ kg·m$^{-1}$).
+
+      - niveau: licence
+        titre: "Démonstration PFD"
+        texte: |
+          Redémontrer $c=\sqrt{F/\mu}$ à partir du PFD appliqué à un élément de corde $[x,x+dx]$ (cf. exercice 3).
+        # figure:
+        #   ref: pfd_element_corde
+        #   legende: |
+        #     Bilan des forces sur un tronçon $[x, x+dx]$
+
+      - niveau: master
+        titre: "Modèle de dispersion"
+        texte: |
+          Discuter la limite du modèle de corde idéale (sans raideur de
+          flexion) et l'apparition de dispersion pour une corde "raide"
+          (câble métallique épais).
+
+    overlay_tikz: |
+      \draw[-{Latex[length=2.5mm]}, thick, gray, dashed, bend left=25]
+        ($(rho_src)!0.5!(rho_src_end)$) to node[midway, sloped, above, font=\tiny, black]
+        {réutilisée ici} ($(rho_sol)!0.5!(rho_sol_end)$);
+
+  - id: q2_intro
+    enonce: |
+      On suppose qu'une onde plane transversale se propage sur la corde dans
+      le sens des $x$ croissants. À l'instant $t=0$, la corde a l'allure
+      donnée sur la figure ci-dessus.
+    is_intro_only: true
+
+  - id: q2a
+    parent: "2"
+    enonce: "Quelle est la longueur d'onde $\\lambda$ de l'onde se propageant sur la corde ?"
+    coup_de_pouce:
+      - titre: "Graphique"
+        texte: "Lisez directement $\\lambda$ sur la figure (distance entre deux motifs identiques)."
+    correction:
+      - titre: "Lecture"
+        texte: |
+          $\lambda = 4\text{cm}$ m (lecture graphique directe sur la figure \ref{fig:cordet0}).
+    
+    solution:
+      - titre: "Lecture"
+        texte: |
+          $\lambda = 4\text{cm}$ m (lecture graphique directe sur la figure \ref{fig:cordet0}).
+
+  - id: q2b
+    parent: "2"
+    enonce: "Quelle est sa période temporelle $T$ ?"
+    coup_de_pouce:
+      - titre: "Relation célérité-période"
+        texte: "Utilisez $c=\\lambda/T$ avec la célérité trouvée en 1."
+    correction:
+      - titre: "Calcul de T"
+        texte: "$T=\\lambda/c\\approx 1/259\\approx 1.55\\times10^{-4}$ s."
+
+    solution:
+      - titre: "Calcul de T"
+        texte: "$T=\\lambda/c\\approx 1/259\\approx 1.55\\times10^{-4}$ s."
+
+  - id: q2c
+    parent: "2"
+    enonce: "Quel est le temps nécessaire pour que la phase en un point donné varie de $60°$ ?"
+    coup_de_pouce:
+      - titre: "Proportionnalité de phase"
+        texte: |
+          Une variation de phase de $2\\pi$ (ou $360^\circ$) correspond à une durée $T$.
+    correction:
+      - titre: "Calcul de durée"
+        texte: "$\\Delta t = \\dfrac{60}{360}T \\approx 2.6\\times10^{-5}$ s."
+    solution:
+      - titre: "Calcul de durée"
+        texte: "$\\Delta t = \\dfrac{60}{360}T \\approx 2.6\\times10^{-5}$ s."
+
+  - id: q2d
+    parent: "2"
+    enonce: "Dessiner l'allure de la corde à l'instant $t=T/8$."
+    coup_de_pouce:
+      - titre: "Décalage spatial"
+        texte: "Un décalage temporel $T/8$ correspond à un décalage spatial de $\\lambda/8$ dans le sens de propagation."
+        # figure:
+        #   - ref: td1_ex1_corde_t_t8
+        #     legende: "Allure de la corde à $t = T/8$."
+        #     scale: 0.2  # Facteur d'échelle (ex: 0.8 pour 80%)
+        #     label: "fig:???"  # Label pour le \ref{}
+    correction:
+      - titre: "Interpretation graphique"
+        texte: "La corde de la figure 1 est translatée de $\\lambda/8$ vers les $x$ croissants."
+    solution:
+      - titre: "Interpretation graphique"
+        texte: "La corde de la figure 1 est translatée de $\\lambda/8$ vers les $x$ croissants."
+
+  - id: q2e
+    parent: "2"
+    enonce: "Donner la loi $y(x,t)$."
+    coup_de_pouce:
+      - titre: "Forme générale"
+        texte: "Une onde plane progressive sinusoïdale se propageant vers les $x$ croissants s'écrit $y(x,t)=a\\cos(kx-\\omega t+\\phi)$."
+    correction:
+      - titre: "Expression"
+        texte: "$y(x,t) = a\\cos\\!\\big(k(x-ct)+\\phi\\big)$ avec $k=2\\pi/\\lambda$, $a$ et $\\phi$ fixés par la figure 1."
+
+    solution:
+      - titre: "Expression"
+        texte: "$y(x,t) = a\\cos\\!\\big(k(x-ct)+\\phi\\big)$ avec $k=2\\pi/\\lambda$, $a$ et $\\phi$ fixés par la figure 1."
+
+
+  - id: q2f
+    parent: "2"
+    enonce: "Quelle est la vitesse du point $P$ de la corde à l'instant $t=0$ ?"
+    coup_de_pouce:
+      - titre: "Vitesse particulaire vs célérité"
+        texte: "La vitesse transversale d'un point est $\\partial y/\\partial t$, à ne pas confondre avec la célérité $c$ de l'onde."
+    correction:
+      - titre: "Derivation temporel"
+        texte: "$v_y(x_P,0) = \\partial_t y(x_P,0) = a\\,\\omega\\sin(kx_P+\\phi)$, lue sur la pente de la courbe en $x_P$."
+
+    solution:
+      - titre: "Derivation temporel"
+        texte: "$v_y(x_P,0) = \\partial_t y(x_P,0) = a\\,\\omega\\sin(kx_P+\\phi)$, lue sur la pente de la courbe en $x_P$."

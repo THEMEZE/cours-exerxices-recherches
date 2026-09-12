@@ -1,0 +1,13 @@
+id: td1
+titre: "GRANDEURS PHYSIQUES  Dimensions, unités et analyse dimensionnelle"
+chapitre_cours: ""
+duree_estimee: "6 h"
+seance: 1
+niveau_public: [lycée]
+exercices_ordre:
+  - ex1_grandeurs_physiques_fondamentales
+  - ex2_grandeurs_derivees_equation_aux_dimensions_et_conversions
+  - ex3_homogeneite_et_analyse_dimensieonnelle
+  - ex4_loi_et_constantes_fondamentales_en_physiques
+  - ex5_analyse_dimensinnelle_comme_prediction
+  - ex6_grandeurs_numeriques

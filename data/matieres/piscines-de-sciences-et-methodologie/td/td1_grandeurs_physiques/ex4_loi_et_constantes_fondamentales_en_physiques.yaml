@@ -1,0 +1,307 @@
+id: td1_ex4
+intitule: "Lois et Constantes Fondamentales en physiques"
+td: td1
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - chap1.???
+
+metadonnees:
+  duree_estimee: "25 min"
+  difficulte: 1 # Sur une échelle de 1 à 5
+  type_exercice: "Révision"
+  indispensable: false
+
+enonce_intro: |
+  L’objectif de l’exercice est d’utiliser l’analyse dimensionnelle afin de déterminer la dimension de constante intervenant dans les lois physiques.
+
+
+prerequis : 
+  - titre: |
+
+    texte: |
+
+
+objectifs_pedagogiques_etudiants :
+  - titre: |
+
+    texte: |
+      
+
+objectifs_pedagogiques_enseignants :
+  - titre: |
+
+    texte: |
+      
+point_cours :
+  - titre: |
+
+    texte: |
+
+
+remarques_pedagogiques_ecueils_classiques: 
+  - titre: |
+  
+    texte: |
+      
+remarques_pedagogiques_conseils_animation: 
+  - titre: |
+
+    texte: |
+      
+
+bilan: 
+  - titre: |
+
+    texte: |
+
+
+aller_plus_loin: 
+  - niveau: lycee
+
+    titre: |
+
+    texte: |
+
+
+  - niveau: prepa
+    titre: |
+
+    texte: |
+      
+
+  - niveau: licence
+    titre: |
+
+    texte: |
+     
+
+  - niveau: master
+    titre: |
+
+    texte: |
+      
+
+
+questions:
+
+  - id: q1
+
+    enonce: |
+      {\bf Constante de la gravitation universelle $\mathcal{G}$.}\\
+
+      La force d’attraction qui s’exerce entre deux points matériels, de masse $m$ et $m'$ , séparés par une distance $r$, est donnée, en module, par la loi d’interaction gravitationnelle de Newton :
+      $$
+      F = \mathcal{G} \frac{m m'}{r^2}.
+      $$
+
+      \begin{enumerate}[label=\alph*)]
+        \item Donner les dimensions des différentes grandeurs physiques de la formule.
+        \item Écrire l’équation aux dimensions et en déduire la dimension de la constante universelle de la gravitation $\mathcal{G}$. Donner son unité dans le S.I. (Système International).
+        \item Peut-on calculer sa valeur numérique ? \\
+        {\em Remarque}  : la constante $\mathcal{G}$ a été mesurée directement la première fois par Henry Cavendish en 1798 au moyen de sa balance de torsion et il trouva une valeur de $6,6 10^{-11}$ S.I. (à des erreurs expérimentales près)
+      \end{enumerate}
+
+    
+    coup_de_pouce: 
+      
+      - titre: |
+
+        texte: |
+          En isolant la constante dans l'équation de la loi physique, on détermine sa dimension globale : $[\mathcal{G}] = [F] * [r]^2 / ([m] * [m'])$.
+
+
+    solution: 
+
+      - titre: |
+          Dimmension de $[\mathcal{G}]$
+
+        texte : |
+
+          \begin{enumerate}[label=\alph*)]
+            \item 
+              %\vspace{-0.5cm}
+              \begin{itemize}[label=$\bullet$]
+                \item  la force : $[F] = M * L * T^{-2}$ 
+                \item  les masse : $[m] = [m'] = M$ 
+                \item  la distance : $[r] = L$.
+                \item  la constante universelle de la gravitation : $[\mathcal{G}] = ??? $.
+              \end{itemize}
+            \item En isolant la formule il vien que $\mathcal{G} = F \frac{r^2}{mm'}$ donc 
+              \begin{itemize}[label=$\bullet$]
+                \item ${\displaystyle [\mathcal{G}] = \overbrace{M * L * T^{-2}}^{[F]} \frac{\overbrace{L^2}^{[r^2]} }{ \underbrace{M^2}_{[mm']}}  } = M^{-1} * L^3 * T^{-2} $ .
+                \item son utité est donnée en $kg^{-1} \cdot m^3 \cdot s^{-2} $
+              \end{itemize}
+
+
+          \end{enumerate}
+
+      - titre: |
+          valeur de $\mathcal{G}$
+
+        texte : |
+
+          \begin{enumerate}[label=\alph*)]
+
+            \item[c)] L'analyse dimensionnelle ne donne pas la valeur numérique de $G$. Pour la déterminer, on utilise un protocole expérimental reposant sur la balance de torsion de Cavendish :
+
+              \begin{itemize}[label=$\bullet$]
+                \item \textbf{Dispositif :} On accroche deux masses identiques $m$ aux deux extrémités d'une tige horizontale rigide de longueur $L$.
+                \item \textbf{Suspension :} La tige est suspendue en son centre par un fil vertical très fin dont on connaît la constante de torsion $C$. Le poids de la tige est négligeable devant celui des masses $m$.
+                \item \textbf{Interactions :} On approche deux grosses masses identiques $m'$ ($m' \gg m$) à une distance $r$ de chaque masse $m$, disposées de façon symétrique par rapport au centre du fil.
+                \item \textbf{Mise en mouvement :} La force d'attraction gravitationnelle exercée par chaque masse $m'$ sur la masse $m$ voisine s'écrit :
+                $$F = G \frac{m m'}{r^2}$$
+                \item \textbf{Équilibre des couples :} Ces forces créent un couple gravitationnel $\mathcal{M}_{\text{grav}} = F \cdot L$ qui fait tourner la tige d'un angle $\theta$. Le fil se tord jusqu'à ce que le couple de rappel de torsion $\mathcal{M}_{\text{torsion}} = C \cdot \theta$ équilibre le couple gravitationnel :
+                $$G \frac{m m'}{r^2} L = C \theta \implies G = \frac{C \theta r^2}{m m' L}$$
+                \item \textbf{Mesure de l'angle :} L'angle de déviation $\theta$ est mesuré très précisément au moyen d'un rayon lumineux réfléchi par un miroir solidaire du fil vertical.
+                \item \textbf{Réduction des erreurs :} On répète l'expérience en plaçant les masses $m'$ de l'autre côté de la tige pour observer une déviation en sens opposé (angle $2\theta$), permettant de s'affranchir des erreurs d'alignement initial.
+              \end{itemize}
+            \end{enumerate}
+
+          En 1798 Henry Cavendish mesure $6,6 10^{-11} ~kg^{-1} \cdot m^3 \cdot s^{-2}$. Et aujourd'hui ma mesure la plus précise est $(6,67430 \mp 0,00015)~  10^{-11} ~kg^{-1} \cdot m^3 \cdot s^{-2}$.
+
+
+    aller_plus_loin: 
+
+      - niveau: licence
+        titre: |
+          Remarques $\&$ Précautions expérimentales
+        texte: |
+          \begin{enumerate}
+                \item \textbf{Isolation aérodynamique et thermique :} 
+                Les forces gravitationnelles en jeu sont extrêmement faibles (de l'ordre de $10^{-9}\text{ N}$). Le moindre courant d'air, flux de convection thermique ou différence de température modifie le résultat. Le dispositif doit être placé sous une cloche transparente étanche.
+
+                \item \textbf{Mesure optique de l'angle (Amplification) :} 
+                L'angle de déviation $\theta$ est très petit. Il est mesuré sans contact mécanique au moyen d'un miroir fixe solidaire du fil vertical : un faisceau lumineux (ou laser) envoyé sur le miroir est dévié d'un angle $2\theta$ sur une règle graduée éloignée.
+
+                \item \textbf{Gestion des oscillations (Régime dynamique) :} 
+                Le système se comporte comme un oscillateur harmonique très peu amorti de période propre $T_0 = 2\pi \sqrt{\frac{J}{C}}$ (où $J = 2m(L/2)^2 = \frac{1}{2}mL^2$ est le moment d'inertie). Au lieu d'attendre l'extinction des oscillations qui prend plusieurs heures, on détermine l'angle d'équilibre $\theta$ en calculant la moyenne des positions extrêmes d'oscillation.
+
+                \item \textbf{Corrections géométriques (Attraction croisée) :} 
+                Chaque grosse masse $m'$ attire fortement la petite masse $m$ voisine, mais exerce aussi une attraction résiduelle plus faible sur la masse $m$ située à l'autre extrémité de la tige. Une correction géométrique sur la distance doit être appliquée pour les calculs de haute précision.
+
+                \item \textbf{Effets parasites électrostatiques et magnétiques :} 
+                Les masses et le châssis doivent être reliés à la terre ou constitués de matériaux amagnétiques (plomb, laiton) pour éviter que des forces électrostatiques ou magnétiques ne masquent l'interaction gravitationnelle.
+              \end{enumerate}
+          
+  - id: q2
+
+    enonce: |
+      {\bf (${}^*$) Constante diélectrique $\bm{\varepsilon_0}$} (ou permittivité du vide)\\
+
+      Coulomb énonce la loi d’interaction électrostatique en 1785 : la force qui s’exerce entre deux charges électriques $q$ et $q'$ , séparées par une distance $r$, est donnée par
+      $$
+      F = \frac{1}{4 \pi \varepsilon_0 } \frac{q q'}{r^2}.
+      $$
+
+      \begin{enumerate}[label=\alph*)]
+        \item Donner les dimensions des différentes grandeurs physiques de la formule.
+        \item Écrire l’équation aux dimensions et en déduire la dimension de la constante diélectrique. Donner son unité dans le S.I.
+      \end{enumerate}
+
+    
+    coup_de_pouce: 
+      
+      - titre: |
+
+        texte: |
+          En isolant la constante dans l'équation de la loi physique, on détermine sa dimension globale : $[\varepsilon_0] = 1 / [F] * [q] * [q']/ [r]^2 $.
+
+          L'intensité électrique I est une dimension de base. La charge q s'exprime comme q = I * t, d'où [q] = I * T.
+
+
+    solution: 
+
+      - titre: |
+          Dimmension de $[\mathcal{G}]$
+
+        texte : |
+
+          \begin{enumerate}[label=\alph*)]
+            \item 
+              %\vspace{-0.5cm}
+              \begin{itemize}[label=$\bullet$]
+                \item  la force : $[F] = M * L * T^{-2}$ 
+                \item  les charge : $[m] = [m'] = I * T $ 
+                \item  la distance : $[r] = L$.
+                \item  la constante diélectrique : $[\varepsilon_0] = ??? $.
+              \end{itemize}
+            \item En isolant la formule il vien que $\varepsilon_0 = q * q' / (4 * \pi * F * r^2)$ donc 
+              \begin{itemize}[label=$\bullet$]
+                \item ${\displaystyle [\varepsilon_0] = \overbrace{M^{-1} * L^{-1} * T^{2}}^{[F]^{-1}} \frac{ \overbrace{I^2 * T^2}^{[qq']}}{\underbrace{L^2}_{[r^2]} } = M^{-1} * L^{-3} * T^4 * I^2  } $ .
+                \item son utité est donnée en $kg^{-1}\cdot m^{-3}\cdot s^4\cdot A^2$.
+              \end{itemize}
+
+
+          \end{enumerate}
+
+
+    aller_plus_loin: 
+
+      - niveau: licence
+        titre: |
+          
+        texte: |
+          $\varepsilon_0 = \frac{ 10^7}{ 4 \pi c^2 } = 8,854~187\times 10^{-12} ~\overbrace{kg^{-1}\cdot m^{-3}\cdot s^4\cdot A^2}^{F/m}$  
+
+  - id: q3
+
+    enonce: |
+      {\bf (${}^*$) Constante des gaz parfait $\bm{R}$} \\
+
+      La loi des gaz parfait relie le volume $V$, la pression $P$ et la température $T$ de $n$ moles de gaz :
+      $$
+      PV = n RT.
+      $$
+
+      \begin{enumerate}[label=\alph*)]
+        \item Donner les dimensions des différentes grandeurs physiques de la formule.
+        \item Écrire l’équation aux dimensions et en déduire la dimension de la constante des gaz parfait $R$. Donner son unité dans le S.I.
+      \end{enumerate}
+
+    
+    coup_de_pouce: 
+      
+      - titre: |
+
+        texte: |
+          Le produit de la pression par le volume $P * V$ représente une dimension d'énergie :$M * L^2 * T^{-2}$.
+
+
+    solution: 
+
+      - titre: |
+          Dimmension de $[\mathcal{G}]$
+
+        texte : |
+
+          \begin{enumerate}[label=\alph*)]
+            \item 
+              %\vspace{-0.5cm}
+              \begin{itemize}[label=$\bullet$]
+                \item  la pression : $[P] = [F]/[S] = M * L^{-1} * T^{-2}$ 
+                \item  la force : $[F] = M * L * T^{-2}$ 
+                \item  le volume : $[V] = L^3$ 
+                \item  la quantitée de matière : $[n] = N $ 
+                \item  la température: $[T] = K$.
+                \item  la constante des gaz parfait : $[R] = ??? $.
+              \end{itemize}
+            \item En isolant la formule il vien que $R = PV/(nT)$ donc 
+              \begin{itemize}[label=$\bullet$]
+                \item ${\displaystyle [R] =  \frac{ \overbrace{M * L^{-1} * T^{-2}}^{[P]} * \overbrace{L^3}^{[V]} }{ \underbrace{mol}_{[N]} * \underbrace{\Theta}_{[T]} } = M * L^2 * T^{-2} * \Theta^{-1} * N^{-1} } $ .
+                \item son utité est donnée en $J \cdot K^{-1} \cdot mol^{-1}$ (ou $kg \cdot m^2 \cdot s^{-2} \cdot K^{-1} \cdot mol^{-1}$ ).
+              \end{itemize}
+
+
+          \end{enumerate}
+
+
+    aller_plus_loin: 
+
+      - niveau: licence
+        titre: |
+          
+        texte: |
+          $R = N_A * k_B = 8,314 ~ J \cdot mol^{-1} \cdot K^{-1} $   
+          

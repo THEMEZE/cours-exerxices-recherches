@@ -1,0 +1,49 @@
+# Profils de visibilité pour le SITE (JSON + Markdown Quartz).
+# Même principe que build/config.yaml, mais réutilisable par plusieurs TD
+# d'un coup (le site republie tous les TD selon le même profil, alors que
+# les PDF sont généralement une cible par TD/besoin).
+#
+# Workflow typique sur le Raspberry Pi :
+#   1. AVANT chaque séance : `--profile avant_seance` -> publie l'énoncé nu.
+#   2. APRÈS la séance      : `--profile corrige_complet` -> republie avec
+#      corrections + solutions détaillées + aller plus loin.
+#   (Automatisable avec une tâche cron qui change de profil à une heure fixe,
+#   ou à la main juste après le cours -- voir web/README.md.)
+
+profiles:
+
+  avant_seance:
+    show_figure: true
+    show_animation_note: true
+    show_coup_de_pouce: true
+    show_correction: false
+    show_solution: false
+    aller_plus_loin_niveaux: []
+    pdf_suffix: enonce   # -> /pdfs/<td_id>_enonce.pdf (voir build/config.yaml)
+
+  pendant_seance_avec_indices:
+    show_figure: true
+    show_animation_note: true
+    show_coup_de_pouce: true
+    show_correction: false
+    show_solution: false
+    aller_plus_loin_niveaux: [lycee]
+    pdf_suffix: enonce
+
+  corrige_resultats_seuls:
+    show_figure: true
+    show_animation_note: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: false
+    aller_plus_loin_niveaux: [lycee, cpge]
+    pdf_suffix: corrige
+
+  corrige_complet:
+    show_figure: true
+    show_animation_note: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    aller_plus_loin_niveaux: [lycee, cpge, licence, master, doctorat]
+    pdf_suffix: corrige
