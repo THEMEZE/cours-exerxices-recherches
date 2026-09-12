@@ -22,6 +22,7 @@ venv/
 # --- PDF générés (build/build.py) ---
 build/generated/
 build/output/*.pdf
+build/output/*.html
 
 # --- Animations générées (animations/generate_all.py) ---
 animations/outputs/
@@ -52,3 +53,26 @@ web/.current_profile
 # --- Divers ---
 .DS_Store
 *.log
+
+
+# ============================================================
+# Dossier à ignorer complètement
+# ============================================================
+mon_dossier/
+
+# ============================================================
+# Fichiers LaTeX temporaires / compilation
+# ============================================================
+*.aux
+*.log
+*.out
+
+# ============================================================
+# PDF
+# ============================================================
+*.pdf
+
+# ============================================================
+# Fichiers .tex uniquement dans un dossier particulier
+# ============================================================
+mon_dossier/**/*.tex
