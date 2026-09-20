@@ -9,77 +9,738 @@ cours_rattache:
 
 metadonnees:
   duree_estimee: "25 min"
-  difficulte: 1 # Sur une échelle de 1 à 5
+  difficulte: 2 # Sur une échelle de 1 à 5
   type_exercice: "Révision"
-  indispensable: false
+  indispensable: true
 
 enonce_intro: |
 
 
 prerequis : 
+
   - titre: |
+      
 
     texte: |
+      \begin{itemize}[label = $\bullet$]
+        \item {\bf  Grandeurs fondamentales du S.I.}
+          \begin{itemize}[label = $\circ$]
+            \item Connaître les principales grandeurs fondamentales du Système international : longueur, masse, temps et quantité de matière, ainsi que leurs unités respectives : mètre (m), kilogramme (kg), seconde (s) et mole (mol).).
+          \end{itemize}
+        \item {\bf Relations entre grandeurs physiques}
+          \begin{itemize}[label = $\circ$]
+            \item Savoir utiliser une relation simple entre grandeurs physiques, notamment une relation de définition comme $v=\frac{\mathrm{d}x}{\mathrm{d}t}$,
+      $\rho=\frac{m}{V}$ ou $F=ma$.
+          \end{itemize}
+        \item {\bf Puissances de dix et préfixes}
+          \begin{itemize}[label = $\circ$]
+            \item Maîtriser les puissances de dix et les principaux préfixes du S.I. (kilo, centi, milli, micro...) afin de pouvoir effectuer des conversions
+      d'unités.
+          \end{itemize}
+        \item {\bf Conversions d'unités}
+          \begin{itemize}[label = $\circ$]
+            \item Savoir convertir une grandeur d'une unité à une autre et comprendre qu'une conversion de surface ou de volume doit également tenir compte de la puissance associée à l'unité.
+          \end{itemize}
+      \end{itemize}
+
+
+  # - titre: |
+  #     Grandeurs fondamentales du S.I.
+
+  #   texte: |
+  #     Connaître les principales grandeurs fondamentales du Système international :
+  #     longueur, masse, temps et quantité de matière, ainsi que leurs unités
+  #     respectives : mètre (m), kilogramme (kg), seconde (s) et mole (mol).
+
+  # - titre: |
+  #     Relations entre grandeurs physiques
+
+  #   texte: |
+  #     Savoir utiliser une relation simple entre grandeurs physiques, notamment
+  #     une relation de définition comme $v=\frac{\mathrm{d}x}{\mathrm{d}t}$,
+  #     $\rho=\frac{m}{V}$ ou $F=ma$.
+
+  # - titre: |
+  #     Puissances de dix et préfixes
+
+  #   texte: |
+  #     Maîtriser les puissances de dix et les principaux préfixes du S.I.
+  #     (kilo, centi, milli, micro...) afin de pouvoir effectuer des conversions
+  #     d'unités.
+
+  # - titre: |
+  #     Conversions d'unités
+
+  #   texte: |
+  #     Savoir convertir une grandeur d'une unité à une autre et comprendre
+  #     qu'une conversion de surface ou de volume doit également tenir compte
+  #     de la puissance associée à l'unité.
 
 
 objectifs_pedagogiques_etudiants :
+
   - titre: |
 
     texte: |
-      
+      \begin{itemize}[label = $\bullet$]
+        \item {\bf  Identifier une grandeur dérivée}
+          \begin{itemize}[label = $\circ$]
+            \item Reconnaître qu'une grandeur dérivée est définie à partir d'une ou plusieurs grandeurs fondamentales et identifier quelques exemples usuels : vitesse, accélération, surface, volume, masse volumique, force, énergie et pression.
+          \end{itemize}
+        \item {\bf Établir une équation aux dimensions}
+          \begin{itemize}[label = $\circ$]
+            \item Savoir déterminer la dimension d'une grandeur physique à partir de sa relation de définition en utilisant les dimensions des grandeurs fondamentales..
+          \end{itemize}
+        \item {\bf Retrouver une dimension à partir d'une unité}
+          \begin{itemize}[label = $\circ$]
+            \item Savoir analyser une unité S.I. composée pour retrouver la grandeur physique correspondante et son équation aux dimensions.
+          \end{itemize}
+        \item {\bf Relier dimension et unité}
+          \begin{itemize}[label = $\circ$]
+            \item Comprendre la correspondance entre les dimensions fondamentales et les unités S.I. et savoir passer de l'une à l'autre.
+          \end{itemize}
+        \item {\bf Effectuer des conversions}
+          \begin{itemize}[label = $\circ$]
+            \item Savoir convertir correctement des unités de longueur, de surface, de volume et de vitesse, notamment entre $\mathrm{km/h}$ et $\mathrm{m/s}$.
+          \end{itemize}
+      \end{itemize}
+
+  # - titre: |
+  #     Identifier une grandeur dérivée
+
+  #   texte: |
+  #     Reconnaître qu'une grandeur dérivée est définie à partir d'une ou plusieurs
+  #     grandeurs fondamentales et identifier quelques exemples usuels :
+  #     vitesse, accélération, surface, volume, masse volumique, force, énergie
+  #     et pression.
+
+  # - titre: |
+  #     Établir une équation aux dimensions
+
+  #   texte: |
+  #     Savoir déterminer la dimension d'une grandeur physique à partir de sa
+  #     relation de définition en utilisant les dimensions des grandeurs
+  #     fondamentales.
+
+  # - titre: |
+  #     Retrouver une dimension à partir d'une unité
+
+  #   texte: |
+  #     Savoir analyser une unité S.I. composée pour retrouver la grandeur
+  #     physique correspondante et son équation aux dimensions.
+
+  # - titre: |
+  #     Relier dimension et unité
+
+  #   texte: |
+  #     Comprendre la correspondance entre les dimensions fondamentales et les
+  #     unités S.I. et savoir passer de l'une à l'autre.
+
+  # - titre: |
+  #     Effectuer des conversions
+
+  #   texte: |
+  #     Savoir convertir correctement des unités de longueur, de surface,
+  #     de volume et de vitesse, notamment entre $\mathrm{km/h}$ et
+  #     $\mathrm{m/s}$.
+
 
 objectifs_pedagogiques_enseignants :
+
   - titre: |
+      
 
     texte: |
-      
+      \begin{itemize}[label = $\bullet$]
+        \item {\bf Consolider les bases du S.I.}
+          \begin{itemize}[label = $\circ$]
+            \item Vérifier que les étudiants maîtrisent les grandeurs et unités fondamentales nécessaires à la suite du cours de physique.
+          \end{itemize}
+        \item {\bf Faire distinguer dimension et unité}
+          \begin{itemize}[label = $\circ$]
+            \item Insister sur la différence entre une dimension, par exemple $\mathsf{L}\mathsf{T}^{-1}$, et une unité, par exemple $\mathrm{m}\cdot\mathrm{s}^{-1}$.
+          \end{itemize}
+        \item {\bf Installer une méthode systématique}
+          \begin{itemize}[label = $\circ$]
+            \item Faire utiliser une démarche reproductible : partir de la relation de définition, remplacer chaque grandeur par sa dimension, simplifier les puissances et conclure sur la dimension recherchée.
+          \end{itemize}
+        \item {\bf Vérifier la maîtrise des conversions}
+          \begin{itemize}[label = $\circ$]
+            \item Repérer les difficultés liées aux conversions de surfaces et de volumes, ainsi qu'aux conversions de vitesses. Faire expliciter les facteurs de conversion plutôt que de privilégier l'apprentissage de règles isolées.
+          \end{itemize}
+        \item {\bf Préparer l'analyse dimensionnelle}
+          \begin{itemize}[label = $\circ$]
+            \item Utiliser les exercices comme une première familiarisation avec l'analyse dimensionnelle, qui pourra ensuite être mobilisée pour vérifier la cohérence d'une relation physique.
+          \end{itemize}
+      \end{itemize}
+
+  # - titre: |
+  #     Consolider les bases du S.I.
+
+  #   texte: |
+  #     Vérifier que les étudiants maîtrisent les grandeurs et unités
+  #     fondamentales nécessaires à la suite du cours de physique.
+
+  # - titre: |
+  #     Faire distinguer dimension et unité
+
+  #   texte: |
+  #     Insister sur la différence entre une dimension, par exemple
+  #     $\mathsf{L}\mathsf{T}^{-1}$, et une unité, par exemple
+  #     $\mathrm{m}\cdot\mathrm{s}^{-1}$.
+
+  # - titre: |
+  #     Installer une méthode systématique
+
+  #   texte: |
+  #     Faire utiliser une démarche reproductible :
+  #     partir de la relation de définition, remplacer chaque grandeur par
+  #     sa dimension, simplifier les puissances et conclure sur la dimension
+  #     recherchée.
+
+  # - titre: |
+  #     Vérifier la maîtrise des conversions
+
+  #   texte: |
+  #     Repérer les difficultés liées aux conversions de surfaces et de volumes,
+  #     ainsi qu'aux conversions de vitesses. Faire expliciter les facteurs de
+  #     conversion plutôt que de privilégier l'apprentissage de règles isolées.
+
+  # - titre: |
+  #     Préparer l'analyse dimensionnelle
+
+  #   texte: |
+  #     Utiliser les exercices comme une première familiarisation avec
+  #     l'analyse dimensionnelle, qui pourra ensuite être mobilisée pour
+  #     vérifier la cohérence d'une relation physique.
+
+
 point_cours :
   - titre: |
+      
 
     texte: |
+      \begin{itemize}[label = $\bullet$]
+        \item {\bf Grandeurs fondamentales et grandeurs dérivées}
+          \begin{itemize}[label = $\circ$]
+            \item Les grandeurs fondamentales du S.I. sont indépendantes les unes des autres. Les grandeurs dérivées sont définies à partir de ces grandeurs fondamentales par des relations mathématiques.
 
+            Exemples :
+            $[v]=\mathsf{L}\mathsf{T}^{-1}$,
+            $[S]=\mathsf{L}^2$,
+            $[V]=\mathsf{L}^3$,
+            $[\rho]=\mathsf{M}\mathsf{L}^{-3}$.
+          \end{itemize}
+        \item {\bf Équation aux dimensions}
+          \begin{itemize}[label = $\circ$]
+            \item Une grandeur physique $X$ peut s'écrire sous la forme
+
+              \[
+              [X]=\mathsf{L}^a\mathsf{M}^b\mathsf{T}^c
+              \mathsf{I}^d\mathsf{\Theta}^e\mathsf{N}^f\mathsf{J}^g.
+              \]
+
+              L'équation aux dimensions permet de caractériser la nature
+              dimensionnelle d'une grandeur indépendamment du système d'unités utilisé.
+          \end{itemize}
+        \item {\bf Retrouver une dimension à partir d'une relation}
+          \begin{itemize}[label = $\circ$]
+            \item Pour déterminer la dimension d'une grandeur, on part d'une relation
+              connue puis on remplace chaque grandeur par sa dimension.
+
+              Par exemple, avec $v=\frac{\mathrm{d}x}{\mathrm{d}t}$ :
+
+              \[
+              [v]=\frac{[x]}{[t]}
+              =\frac{\mathsf{L}}{\mathsf{T}}
+              =\mathsf{L}\mathsf{T}^{-1}.
+              \]
+          \end{itemize}
+        \item {\bf Dimension et unité S.I.}
+          \begin{itemize}[label = $\circ$]
+            \item  L'unité S.I. permet également de retrouver la dimension correspondante :
+              $\mathrm{m}\leftrightarrow\mathsf{L}$,
+              $\mathrm{kg}\leftrightarrow\mathsf{M}$,
+              $\mathrm{s}\leftrightarrow\mathsf{T}$,
+              $\mathrm{mol}\leftrightarrow\mathsf{N}$.
+
+              Ainsi, $\mathrm{kg}\cdot\mathrm{m}^{-3}$ correspond à
+              $\mathsf{M}\mathsf{L}^{-3}$.
+          \end{itemize}
+        \item {\bf Conversions de surfaces et de volumes}
+          \begin{itemize}[label = $\circ$]
+            \item Lorsqu'une unité est élevée au carré ou au cube, le facteur de conversion
+              doit également être élevé au carré ou au cube.
+
+              Par exemple :
+
+              \[
+              1\,\mathrm{cm}^2=(10^{-2}\,\mathrm{m})^2
+              =10^{-4}\,\mathrm{m}^2
+              \]
+
+              et
+
+              \[
+              1\,\mathrm{cm}^3=(10^{-2}\,\mathrm{m})^3
+              =10^{-6}\,\mathrm{m}^3.
+              \]
+          \end{itemize}
+        \item {\bf Conversion des vitesses}
+          \begin{itemize}[label = $\circ$]
+            \item Lorsqu'une unité est élevée au carré ou au cube, le facteur de conversion
+              doit également être élevé au carré ou au cube.
+
+              Par exemple :
+
+              \[
+              1\,\mathrm{cm}^2=(10^{-2}\,\mathrm{m})^2
+              =10^{-4}\,\mathrm{m}^2
+              \]
+
+              et
+
+              \[
+              1\,\mathrm{cm}^3=(10^{-2}\,\mathrm{m})^3
+              =10^{-6}\,\mathrm{m}^3.
+              \]
+          \end{itemize}
+      \end{itemize}
+
+  # - titre: |
+  #     Grandeurs fondamentales et grandeurs dérivées
+
+  #   texte: |
+  #     Les grandeurs fondamentales du S.I. sont indépendantes les unes des
+  #     autres. Les grandeurs dérivées sont définies à partir de ces grandeurs
+  #     fondamentales par des relations mathématiques.
+
+  #     Exemples :
+  #     $[v]=\mathsf{L}\mathsf{T}^{-1}$,
+  #     $[S]=\mathsf{L}^2$,
+  #     $[V]=\mathsf{L}^3$,
+  #     $[\rho]=\mathsf{M}\mathsf{L}^{-3}$.
+
+  # - titre: |
+  #     Équation aux dimensions
+
+  #   texte: |
+  #     Une grandeur physique $X$ peut s'écrire sous la forme
+
+  #     \[
+  #     [X]=\mathsf{L}^a\mathsf{M}^b\mathsf{T}^c
+  #     \mathsf{I}^d\mathsf{\Theta}^e\mathsf{N}^f\mathsf{J}^g.
+  #     \]
+
+  #     L'équation aux dimensions permet de caractériser la nature
+  #     dimensionnelle d'une grandeur indépendamment du système d'unités utilisé.
+
+  # - titre: |
+  #     Retrouver une dimension à partir d'une relation
+
+  #   texte: |
+  #     Pour déterminer la dimension d'une grandeur, on part d'une relation
+  #     connue puis on remplace chaque grandeur par sa dimension.
+
+  #     Par exemple, avec $v=\frac{\mathrm{d}x}{\mathrm{d}t}$ :
+
+  #     \[
+  #     [v]=\frac{[x]}{[t]}
+  #     =\frac{\mathsf{L}}{\mathsf{T}}
+  #     =\mathsf{L}\mathsf{T}^{-1}.
+  #     \]
+
+  # - titre: |
+  #     Dimension et unité S.I.
+
+  #   texte: |
+  #     L'unité S.I. permet également de retrouver la dimension correspondante :
+  #     $\mathrm{m}\leftrightarrow\mathsf{L}$,
+  #     $\mathrm{kg}\leftrightarrow\mathsf{M}$,
+  #     $\mathrm{s}\leftrightarrow\mathsf{T}$,
+  #     $\mathrm{mol}\leftrightarrow\mathsf{N}$.
+
+  #     Ainsi, $\mathrm{kg}\cdot\mathrm{m}^{-3}$ correspond à
+  #     $\mathsf{M}\mathsf{L}^{-3}$.
+
+  # - titre: |
+  #     Conversions de surfaces et de volumes
+
+  #   texte: |
+  #     Lorsqu'une unité est élevée au carré ou au cube, le facteur de conversion
+  #     doit également être élevé au carré ou au cube.
+
+  #     Par exemple :
+
+  #     \[
+  #     1\,\mathrm{cm}^2=(10^{-2}\,\mathrm{m})^2
+  #     =10^{-4}\,\mathrm{m}^2
+  #     \]
+
+  #     et
+
+  #     \[
+  #     1\,\mathrm{cm}^3=(10^{-2}\,\mathrm{m})^3
+  #     =10^{-6}\,\mathrm{m}^3.
+  #     \]
+
+  # - titre: |
+  #     Conversion des vitesses
+
+  #   texte: |
+  #     Pour les vitesses :
+
+  #     \[
+  #     1\,\mathrm{km/h}
+  #     =\frac{1000\,\mathrm{m}}{3600\,\mathrm{s}}
+  #     =\frac{1}{3{,}6}\,\mathrm{m/s}.
+  #     \]
+
+  #     Donc, pour passer de $\mathrm{km/h}$ à $\mathrm{m/s}$,
+  #     on divise par $3{,}6$, et pour passer de $\mathrm{m/s}$ à
+  #     $\mathrm{km/h}$, on multiplie par $3{,}6$.
 
 remarques_pedagogiques_ecueils_classiques: 
   - titre: |
-  
-    texte: |
-      
-remarques_pedagogiques_conseils_animation: 
-  - titre: |
+      Écueils classiques
 
     texte: |
-      
+      \begin{itemize}[label = $\bullet$]
+        \item {\bf Confusion entre dimension et unité}
+          \begin{itemize}[label = $\circ$]
+            \item Les étudiants confondent fréquemment la dimension d'une grandeur
+              et son unité.
+
+              Rappeler que $\mathsf{L}\mathsf{T}^{-1}$ est une dimension,
+              tandis que $\mathrm{m}\cdot\mathrm{s}^{-1}$ est une unité.
+          \end{itemize}
+
+        \item {\bf Confusion entre grandeur fondamentale et dérivée}
+          \begin{itemize}[label = $\circ$]
+            \item Faire expliciter la relation qui définit la grandeur afin
+              d'identifier les grandeurs fondamentales dont elle dépend.
+          \end{itemize}
+
+        \item {\bf Erreurs sur les surfaces et les volumes}
+          \begin{itemize}[label = $\circ$]
+            \item Une erreur classique consiste à appliquer directement le facteur
+              de conversion de longueur à une surface ou à un volume.
+
+              Rappeler que si $1\,\mathrm{cm}=10^{-2}\,\mathrm{m}$ alors
+
+              \[
+              1\,\mathrm{cm}^2=10^{-4}\,\mathrm{m}^2
+              \]
+
+              et
+
+              \[
+              1\,\mathrm{cm}^3=10^{-6}\,\mathrm{m}^3.
+              \]
+          \end{itemize}
+
+        \item {\bf Erreurs de conversion des vitesses}
+          \begin{itemize}[label = $\circ$]
+            \item Les étudiants retiennent parfois uniquement la règle
+              « diviser par $3{,}6$ » sans comprendre son origine.
+
+              Faire revenir aux conversions fondamentales :
+
+              \[
+              1\,\mathrm{km}=1000\,\mathrm{m}
+              \qquad\text{et}\qquad
+              1\,\mathrm{h}=3600\,\mathrm{s}.
+              \]
+          \end{itemize}
+
+        \item {\bf Mélange entre notation dimensionnelle et calcul numérique}
+          \begin{itemize}[label = $\circ$]
+            \item Faire distinguer les deux étapes :
+              déterminer d'abord la dimension littéralement, puis effectuer
+              éventuellement l'application numérique avec les unités appropriées.
+          \end{itemize}
+
+        \item {\bf Erreurs sur les puissances de dix}
+          \begin{itemize}[label = $\circ$]
+            \item Vérifier systématiquement les signes et les exposants lors
+              des conversions, en particulier pour les unités au carré et au cube.
+          \end{itemize}
+      \end{itemize}
+
+
+remarques_pedagogiques_conseils_animation: 
+  - titre: |
+      Conseils pour l'animation
+
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+        \item {\bf Partir d'exemples familiers}
+          \begin{itemize}[label = $\circ$]
+            \item Commencer par la vitesse, le volume ou la masse volumique,
+              grandeurs dont les relations de définition sont généralement
+              déjà connues.
+
+            \item Les utiliser pour faire émerger progressivement la notion
+              de grandeur dérivée.
+          \end{itemize}
+
+        \item {\bf Faire verbaliser la méthode}
+          \begin{itemize}[label = $\circ$]
+            \item Demander aux étudiants d'énoncer chaque étape avant le calcul :
+              « Quelle est la relation ? », « Quelles sont les dimensions connues ? »,
+              « Que devient la dimension recherchée ? ».
+          \end{itemize}
+
+        \item {\bf Faire comparer dimension et unité}
+          \begin{itemize}[label = $\circ$]
+            \item Utiliser volontairement des exemples comme
+              $\mathsf{L}\mathsf{T}^{-1}$ et
+              $\mathrm{m}\cdot\mathrm{s}^{-1}$ pour faire apparaître
+              leur correspondance sans les confondre.
+          \end{itemize}
+
+        \item {\bf Utiliser les erreurs de conversion}
+          \begin{itemize}[label = $\circ$]
+            \item Lors des conversions, proposer une valeur erronée et demander
+              aux étudiants d'identifier l'origine de l'erreur.
+
+            \item Faire notamment ressortir les puissances associées aux
+              surfaces et aux volumes.
+          \end{itemize}
+
+        \item {\bf Faire contrôler les résultats}
+          \begin{itemize}[label = $\circ$]
+            \item Encourager les étudiants à vérifier systématiquement qu'une
+              unité finale est cohérente avec la grandeur recherchée.
+
+            \item Cette habitude prépare directement à l'utilisation de
+              l'analyse dimensionnelle.
+          \end{itemize}
+      \end{itemize}
+
 
 bilan: 
   - titre: |
+      Bilan
 
     texte: |
+      \begin{itemize}[label = $\bullet$]
+        \item {\bf Grandeurs dérivées}
+          \begin{itemize}[label = $\circ$]
+            \item Une grandeur dérivée est construite à partir des grandeurs
+              fondamentales du S.I.
+
+            \item Son équation aux dimensions peut être obtenue à partir
+              de sa relation de définition.
+          \end{itemize}
+
+        \item {\bf Méthode essentielle}
+          \begin{itemize}[label = $\circ$]
+            \item Pour déterminer une dimension :
+              partir de la relation de définition, remplacer les grandeurs
+              par leurs dimensions, effectuer les opérations sur les puissances
+              puis simplifier.
+          \end{itemize}
+
+        \item {\bf Dimension et unité}
+          \begin{itemize}[label = $\circ$]
+            \item Une même dimension peut être associée à une unité S.I. donnée.
+
+            \item Par exemple, la vitesse possède la dimension
+              $\mathsf{L}\mathsf{T}^{-1}$ et s'exprime en
+              $\mathrm{m}\cdot\mathrm{s}^{-1}$.
+          \end{itemize}
+
+        \item {\bf Conversions}
+          \begin{itemize}[label = $\circ$]
+            \item Pour les surfaces et les volumes, le facteur de conversion
+              doit être élevé respectivement au carré ou au cube.
+
+            \item Pour les vitesses :
+
+              \[
+              1\,\mathrm{m/s}=3{,}6\,\mathrm{km/h}.
+              \]
+          \end{itemize}
+      \end{itemize}
+
+# remarques_pedagogiques_ecueils_classiques: 
+#   - titre: |
+#       Confusion entre dimension et unité
+
+#     texte: |
+#       Les étudiants confondent fréquemment la dimension d'une grandeur et
+#       son unité. Rappeler que $\mathsf{L}\mathsf{T}^{-1}$ est une dimension,
+#       tandis que $\mathrm{m}\cdot\mathrm{s}^{-1}$ est une unité
+
+#   - titre: |
+#       Confusion entre dimension et unité
+
+#     texte: |
+#       Les étudiants confondent fréquemment la dimension d'une grandeur et
+#       son unité. Rappeler que $\mathsf{L}\mathsf{T}^{-1}$ est une dimension,
+#       tandis que $\mathrm{m}\cdot\mathrm{s}^{-1}$ est une unité.
+
+#   - titre: |
+#       Confusion entre grandeur fondamentale et dérivée
+
+#     texte: |
+#       Faire expliciter la relation qui définit la grandeur afin d'identifier
+#       les grandeurs fondamentales dont elle dépend.
+
+#   - titre: |
+#       Erreurs sur les surfaces et les volumes
+
+#     texte: |
+#       Une erreur classique consiste à appliquer directement le facteur de
+#       conversion de longueur à une surface ou un volume.
+
+#       Rappeler que si $1\,\mathrm{cm}=10^{-2}\,\mathrm{m}$ alors
+#       $1\,\mathrm{cm}^2=10^{-4}\,\mathrm{m}^2$ et
+#       $1\,\mathrm{cm}^3=10^{-6}\,\mathrm{m}^3$.
+
+#   - titre: |
+#       Erreurs de conversion des vitesses
+
+#     texte: |
+#       Les étudiants retiennent parfois uniquement la règle « diviser par 3,6 »
+#       sans comprendre son origine. Faire revenir à
+#       $1\,\mathrm{km}=1000\,\mathrm{m}$ et $1\,\mathrm{h}=3600\,\mathrm{s}$.
+
+#   - titre: |
+#       Mélange entre notation dimensionnelle et calcul numérique
+
+#     texte: |
+#       Faire distinguer les deux étapes : déterminer d'abord la dimension
+#       littéralement, puis effectuer éventuellement l'application numérique
+#       avec les unités appropriées.
+
+#   - titre: |
+#       Puissances de dix
+
+#     texte: |
+#       Vérifier systématiquement les signes et les exposants lors des
+#       conversions, en particulier pour les unités au carré et au cube.
+
+
+# remarques_pedagogiques_conseils_animation: 
+#   - titre: |
+#       Partir d'exemples familiers
+
+#     texte: |
+#       Commencer par la vitesse, le volume ou la masse volumique, grandeurs
+#       dont les relations de définition sont généralement déjà connues.
+#       Les utiliser pour faire émerger la notion de grandeur dérivée.
+
+#   - titre: |
+#       Faire verbaliser la méthode
+
+#     texte: |
+#       Demander aux étudiants d'énoncer chaque étape avant le calcul :
+#       « Quelle est la relation ? », « Quelles sont les dimensions connues ? »,
+#       « Que devient la dimension recherchée ? ».
+
+#   - titre: |
+#       Faire comparer dimension et unité
+
+#     texte: |
+#       Utiliser volontairement des exemples comme
+#       $\mathsf{L}\mathsf{T}^{-1}$ et $\mathrm{m}\cdot\mathrm{s}^{-1}$
+#       pour faire apparaître leur correspondance sans les confondre.
+
+#   - titre: |
+#       Utiliser les erreurs de conversion
+
+#     texte: |
+#       Lors des conversions, proposer une valeur erronée et demander aux
+#       étudiants d'identifier l'origine de l'erreur. Cette démarche permet
+#       notamment de faire ressortir les puissances associées aux surfaces
+#       et aux volumes.
+
+#   - titre: |
+#       Faire contrôler les résultats
+
+#     texte: |
+#       Encourager les étudiants à vérifier systématiquement qu'une unité finale
+#       est cohérente avec la grandeur recherchée. Cette habitude prépare
+#       directement à l'utilisation de l'analyse dimensionnelle.
+
+
+# bilan: 
+#   - titre: |
+#       À retenir
+
+#     texte: |
+#       Une grandeur dérivée est construite à partir des grandeurs fondamentales
+#       du S.I. Son équation aux dimensions peut être obtenue à partir de sa
+#       relation de définition.
+
+#   - titre: |
+#       Méthode essentielle
+
+#     texte: |
+#       Pour déterminer une dimension :
+#       partir de la relation de définition, remplacer les grandeurs par leurs
+#       dimensions, effectuer les opérations sur les puissances puis simplifier.
+
+#   - titre: |
+#       Dimension et unité
+
+#     texte: |
+#       Une même dimension peut être associée à une unité S.I. donnée.
+#       Par exemple, la vitesse possède la dimension
+#       $\mathsf{L}\mathsf{T}^{-1}$ et s'exprime en
+#       $\mathrm{m}\cdot\mathrm{s}^{-1}$.
+
+#   - titre: |
+#       Conversions
+
+#     texte: |
+#       Pour les surfaces et les volumes, le facteur de conversion doit être
+#       élevé respectivement au carré ou au cube. Pour les vitesses,
+#       $1\,\mathrm{m/s}=3{,}6\,\mathrm{km/h}$.
 
 
 aller_plus_loin: 
   - niveau: lycee
 
     titre: |
+      Vérifier la cohérence d'une formule
 
     texte: |
-
+      Utiliser les dimensions pour vérifier qu'une relation physique est
+      homogène. Par exemple, comparer les dimensions des deux membres d'une
+      équation avant de rechercher une valeur numérique.
 
   - niveau: prepa
+
     titre: |
+      Analyse dimensionnelle
 
     texte: |
-      
+      Utiliser l'analyse dimensionnelle pour retrouver la forme possible
+      d'une relation physique à partir des grandeurs pertinentes et de leurs
+      dimensions.
 
   - niveau: licence
+
     titre: |
+      Système international et unités dérivées
 
     texte: |
-     
+      Étudier plus systématiquement les sept grandeurs fondamentales du S.I.
+      et les unités dérivées associées. Relier les dimensions des grandeurs
+      mécaniques aux unités telles que le newton, le joule, le watt et le pascal.
 
   - niveau: master
+
     titre: |
+      Analyse dimensionnelle et lois d'échelle
 
     texte: |
+      Étendre l'analyse dimensionnelle aux lois d'échelle et à la recherche
+      de nombres sans dimension. Cette approche permet notamment de comparer
+      différents régimes physiques et de construire des modèles réduits.
       
 
 
@@ -89,111 +750,184 @@ questions:
   - id: q1_intro
 
     enonce: |
-      %{\bf Notions de cours S.I.} 
+      {\bf Notions de cours S.I.}\\
+      
+      \begin{enumerate}[label=\alph*)]
+        \item Définir la notion de grandeur dérivée (ou composée) et citer quelques exemples.
+        \item Qu’appelle t’on équation aux dimensions d’une grandeur dérivée ?
+        \item La vitesse est elle une grandeur dérivée ?
+        \item A partir d’une relation définissant la vitesse, établir son équation aux dimensions. Conclure sur la dimension de la vitesse.\\
+        \item Connaissant l’unité de la vitesse, peut on retrouver sa dimension ?
+      \end{enumerate}
 
-    point_cours: 
+    correction :
       - titre: |
 
         texte: |
 
-    is_intro_only: true 
+          \begin{enumerate}[label=\alph*)]
+            \item Une {\bf grandeur dérivée} s'exprime à partir des grandeurs fondamentales.
+                Exemple : le volume $[V] = L^3$ ; la vitesse : $[v] = L * T^{-1}$ 
+            \item L'équation aux dimensions s'écrit $[X] ~ = ~ L^a ~ M^b ~ T^c ~ I^d ~ \Theta^e ~ N^f ~ J^g$ 
+            \item Oui, la vitesse dépend de la longueur et du temps.
+            \item ${\displaystyle v = \frac{dx}{dt}}$ donc $[v] = [x]/[t] = L * T^{-1}$.
+            \item Oui, $m/s$ correspond bien à $L * T^{-1}$.
+          \end{enumerate}
 
-  - id: q1a
-
-    parent: "1"
-
-    enonce: |
-      Définir la notion de grandeur dérivée (ou composée) et citer quelques exemples.
-    
-    point_cours: 
-      - titre: |
-
-        texte: |
-              
     solution:
       - titre: |
 
         texte: |
-          Une grandeur dérivée s'exprime à partir des grandeurs fondamentales.
+          
 
-  - id: q1b
+          Une {\bf grandeur dérivée} (ou composée) est une grandeur physique définie à partir des grandeurs de base du Système international (SI) — comme la longueur, la masse ou le temps — en utilisant des relations mathématiques (multiplications ou divisions).
+          Par opposition aux sept grandeurs de base qui sont indépendantes, les grandeurs dérivées s'expriment à l'aide d'une équation aux dimensions qui combine ces grandeurs fondamentales.
 
-    parent: "1"
+          $$\begin{array}{l l l l} \textbf{Grandeur} & \textbf{Formule / Définition} & \textbf{Dimension} & \textbf{Unités S.I. et autres} \\ \hline \textbf{Vitesse} & v = \frac{d}{t} & \mathsf{L}\ast\mathsf{T}^{-1} & \text{m}\cdot\text{s}^{-1} \\ \textbf{Surface (Aire)} & S = L \times l & \mathsf{L}^2 & \text{m}^2 \\ \textbf{Volume} & V = L \times l \times h & \mathsf{L}^3 & \text{m}^3 \\ \textbf{Masse volumique} & \rho = \frac{m}{V} & \mathsf{M}\ast\mathsf{L}^{-3} & \text{kg}\cdot\text{m}^{-3} \\ \hline \textbf{Force} & F = m \times a & \mathsf{M}\ast\mathsf{L}\ast\mathsf{T}^{-2} & \text{N} \quad (\text{kg}\cdot\text{m}\cdot\text{s}^{-2}) \\ \textbf{Pression} & P = \frac{F}{S} & \mathsf{M}\ast\mathsf{L}^{-1}\ast\mathsf{T}^{-2} & \text{Pa} \quad (\text{kg}\cdot\text{m}^{-1}\cdot\text{s}^{-2}) \\ \textbf{Énergie / Travail} & E = F \times d & \mathsf{M}\ast\mathsf{L}^2\ast\mathsf{T}^{-2} & \text{J} \quad (\text{kg}\cdot\text{m}^2\cdot\text{s}^{-2}) \\ \textbf{Puissance} & P = \frac{E}{t} & \mathsf{M}\ast\mathsf{L}^2\ast\mathsf{T}^{-3} & \text{W} \quad (\text{kg}\cdot\text{m}^2\cdot\text{s}^{-3}) \end{array}$$
 
-    enonce: |
-      Qu’appelle t’on équation aux dimensions d’une grandeur dérivée ?
+
+    #is_intro_only: true 
+
+  # - id: q1a
+
+  #   parent: "1"
+
+  #   enonce: |
+  #     Définir la notion de grandeur dérivée (ou composée) et citer quelques exemples.
     
-    point_cours: 
-      - titre: |
+  #   point_cours: 
+  #     - titre: |
 
-        texte: |
+  #       texte: |
+
+  #   correction :
+  #     - titre: |
+
+  #       texte: |
+  #         Une {\bf grandeur dérivée} s'exprime à partir des grandeurs fondamentales.\\
+
+  #         Vitesse, Volume.
               
-    solution:
-      - titre: |
+  #   solution:
+  #     - titre: |
 
-        texte: |
-          L'équation aux dimensions s'écrit $[X] ~ = ~ L^a ~ M^b ~ T^c ~ I^d ~ \Theta^e ~ N^f ~ J^g$
+  #       texte: |
+          
 
-  - id: q1c
+  #         Une {\bf grandeur dérivée} (ou composée) est une grandeur physique définie à partir des grandeurs de base du Système international (SI) — comme la longueur, la masse ou le temps — en utilisant des relations mathématiques (multiplications ou divisions).
+  #         Par opposition aux sept grandeurs de base qui sont indépendantes, les grandeurs dérivées s'expriment à l'aide d'une équation aux dimensions qui combine ces grandeurs fondamentales.
 
-    parent: "1"
+  #         $$\begin{array}{l l l l} \textbf{Grandeur} & \textbf{Formule / Définition} & \textbf{Dimension} & \textbf{Unités S.I. et autres} \\ \hline \textbf{Vitesse} & v = \frac{d}{t} & \mathsf{L}\ast\mathsf{T}^{-1} & \text{m}\cdot\text{s}^{-1} \\ \textbf{Surface (Aire)} & S = L \times l & \mathsf{L}^2 & \text{m}^2 \\ \textbf{Volume} & V = L \times l \times h & \mathsf{L}^3 & \text{m}^3 \\ \textbf{Masse volumique} & \rho = \frac{m}{V} & \mathsf{M}\ast\mathsf{L}^{-3} & \text{kg}\cdot\text{m}^{-3} \\ \hline \textbf{Force} & F = m \times a & \mathsf{M}\ast\mathsf{L}\ast\mathsf{T}^{-2} & \text{N} \quad (\text{kg}\cdot\text{m}\cdot\text{s}^{-2}) \\ \textbf{Pression} & P = \frac{F}{S} & \mathsf{M}\ast\mathsf{L}^{-1}\ast\mathsf{T}^{-2} & \text{Pa} \quad (\text{kg}\cdot\text{m}^{-1}\cdot\text{s}^{-2}) \\ \textbf{Énergie / Travail} & E = F \times d & \mathsf{M}\ast\mathsf{L}^2\ast\mathsf{T}^{-2} & \text{J} \quad (\text{kg}\cdot\text{m}^2\cdot\text{s}^{-2}) \\ \textbf{Puissance} & P = \frac{E}{t} & \mathsf{M}\ast\mathsf{L}^2\ast\mathsf{T}^{-3} & \text{W} \quad (\text{kg}\cdot\text{m}^2\cdot\text{s}^{-3}) \end{array}$$
+  # - id: q1b
 
-    enonce: |
-      La vitesse est elle une grandeur dérivée ?
+  #   parent: "1"
+
+  #   enonce: |
+  #     Qu’appelle t’on équation aux dimensions d’une grandeur dérivée ?
     
-    point_cours: 
-      - titre: |
+  #   point_cours: 
+  #     - titre: |
 
-        texte: |
+  #       texte: |
               
-    solution:
-      - titre: |
+  #   solution:
+  #     - titre: |
 
-        texte: |
-          Oui, la vitesse dépend de la longueur et du temps.
+  #       texte: |
+  #         L'équation aux dimensions s'écrit $[X] ~ = ~ L^a ~ M^b ~ T^c ~ I^d ~ \Theta^e ~ N^f ~ J^g$
+  # - id: q1c
 
-  - id: q1d
+  #   parent: "1"
 
-    parent: "1"
-
-    enonce: |
-      A partir d’une relation définissant la vitesse, établir son équation aux dimensions. Conclure sur la dimension de la vitesse.
+  #   enonce: |
+  #     La vitesse est elle une grandeur dérivée ?
     
-    point_cours: 
-      - titre: |
+  #   point_cours: 
+  #     - titre: |
 
-        texte: |
+  #       texte: |
               
-    solution:
-      - titre: |
+  #   solution:
+  #     - titre: |
 
-        texte: |
-          ${\displaystyle v = \frac{dx}{dt}}$ donc $[v] = [x]/[t] = L * T^{-1}$.
+  #       texte: |
+  #         Oui, la vitesse dépend de la longueur et du temps.
+  # - id: q1d
 
-  - id: q1e
+  #   parent: "1"
 
-    parent: "1"
-
-    enonce: |
-      Connaissant l’unité de la vitesse, peut on retrouver sa dimension ?
+  #   enonce: |
+  #     A partir d’une relation définissant la vitesse, établir son équation aux dimensions. Conclure sur la dimension de la vitesse.
     
-    point_cours: 
-      - titre: |
+  #   point_cours: 
+  #     - titre: |
 
-        texte: |
+  #       texte: |
               
-    solution:
-      - titre: |
+  #   solution:
+  #     - titre: |
 
-        texte: |
-          Oui, $m/s$ correspond bien à $L * T^{-1}$.
+  #       texte: |
+  #         ${\displaystyle v = \frac{dx}{dt}}$ donc $[v] = [x]/[t] = L * T^{-1}$.
+  # - id: q1e
+
+  #   parent: "1"
+
+  #   enonce: |
+  #     Connaissant l’unité de la vitesse, peut on retrouver sa dimension ?
+    
+  #   point_cours: 
+  #     - titre: |
+
+  #       texte: |
+              
+  #   solution:
+  #     - titre: |
+
+  #       texte: |
+  #         Oui, $m/s$ correspond bien à $L * T^{-1}$.
 
   - id: q2
 
     enonce: |
       {\bf Équation aux dimensions d’une grandeur à partir de sa relation de définition.}\\
 
-      On considère les grandeurs dérivées dans le tableau 3. Établir leur équation aux dimensions et l’exprimer en unités S.I.
+      On considère les grandeurs dérivées dans le tableau ci-dessous. Établir leur équation aux dimensions et l’exprimer en unités S.I.
+
+      %\begingroup
+          % Sauvegarde de la taille actuelle
+          %\makeatletter
+          %\let\oldfontsize\@currsize
+          %\makeatother
+          $$
+          {%
+          %\fontsize{5pt}{10pt}\selectfont
+          \begin{array}{l l l l}
+          \textbf{Grandeur} & \textbf{Formule / Définition} & \textbf{Dimension} & \textbf{Unités S.I. et autres} \\
+          \hline
+          \textbf{Longueur} & L & \mathsf{L} & \text{m} \\
+          \textbf{Surface} & S = H \times L & \mathsf{L}^2 & \text{m}^2 \\
+          \textbf{Volume} &  & &  \\
+          \hline
+          \textbf{Temps} &  &  &  \\
+          \textbf{Fréquence} &  &  \\
+          \textbf{Vitesse} &  &  &  \\
+          \textbf{Accélération} &  &  & \\
+          \hline
+          \textbf{Masse} &  & &  \\
+          \textbf{Force} &  \\
+          \textbf{Énergie / Travail} &  \\
+          \textbf{Pression} & 
+          \end{array}
+          }
+          $$
+          % Retour à la taille précédente
+          %\oldfontsize
+          %\endgroup
+          
+          \begin{center}
+            \text{\textbf{Table 3 :} Savoir retrouver rapidement la dimension et l’unité SI d’une grandeur dérivée}
+          \end{center}
 
     coup_de_pouce: 
       
@@ -201,7 +935,7 @@ questions:
 
         texte: |
           Méthode pour établir l’équation aux dimensions d’une grandeur :
-          \begin{itemize}
+          \begin{itemize}[label=$\bullet$]
             \item exprimer la grandeur à l’aide d’une formule simple ou une relation de définition
             \item exprimer les dimensions des grandeurs intervenant dans la formule précédente
             \item conclure sur la dimension de la grandeur recherchée
@@ -256,11 +990,21 @@ questions:
       Trouver l’équation aux dimensions d’une grandeur peut se faire simplement en analysant son unité si on la connaît.
       À partir des unités S.I. fournies ($m\cdot s^{-1}$, $m^3$, $kg\cdot m^{-3}$, $kg\cdot mol^{-1}$, $m^3\cdot kg^{-1}$), identifier la grandeur physique correspondante et son équation aux dimensions.
 
-    coup_de_pouce: 
-      
-      - titre: |
+        {
+          %\fontsize{20pt}{10pt}\selectfont
+          $$
+          \begin{array}{lll}
+          \textbf{Grandeur} & \textbf{Dimension} & \textbf{Unité} \\
+          \hline
+          \textbf{Vitesse} & \mathsf{L}\ast\mathsf{T}^{-1} & \text{m} \cdot \text{s}^{-1}  \\
+          \textbf{Volume} &  \\
+          \textbf{Masse volumique} &   \\
+          \textbf{Masse molaire} & \\
+          \textbf{Volume massique} & 
+          \end{array}
+          $$
+          }
 
-        texte: |
 
     point_cours: 
 
@@ -302,6 +1046,50 @@ questions:
 
       Convertir les grandeurs suivantes dans l'unité demandée : (a) $8*10^{-6} ~ m^2$ en $\mu m^2$ ; (b) $0,0087 ~ m^3$ en $cm^3$ ; (c) $540 ~ mm^3$ en $m^3$ ; (d) $1 ~ L$ en $m^3$ ; (e) $380 ~ km/h$ en $m/s$ ; (f) $340 ~ m/s$ en $km/h$ ; (g) $3*10^8 ~ m/s$ en $km/h$ ; (h) $940*10^6 ~ km/an$ en $km/h$
 
+      {
+          %\fontsize{10pt}{10pt}\selectfont
+
+          \tikzset{
+              pointillesPerso/.style={
+              % dotted,
+              % line width=2pt,
+              % line cap=round,
+              % dash pattern=on 1pt off 1pt on 1pt off 1pt
+              line width=1.5pt,
+              line cap=round,
+              dash pattern=on 0pt off 3.5pt
+            }
+          }
+          \[
+          \begin{array}{rrclcrrcl}
+          \textbf{(a)} & 8 \times 10^{-6}\,\mathrm{m}^2
+          & = &  \tikz[baseline=-0.5ex]\draw[pointillesPerso] (0,0) -- (2,0); \,\,\mu\mathrm{m}^2
+          && \textbf{(e)} & 380\,\mathrm{km}\cdot\mathrm{h}^{-1}
+          & = & \tikz[baseline=-0.5ex]\draw[pointillesPerso] (0,0) -- (2,0); \,\,\mathrm{m}\cdot\mathrm{s}^{-1}
+          \\[2mm]
+
+          \textbf{(b)} & 0{,}0087\,\mathrm{m}^3
+          & = & \tikz[baseline=-0.5ex]\draw[pointillesPerso] (0,0) -- (2,0);\,\, \mathrm{cm}^3
+          && \textbf{(f)} & 340\,\mathrm{m}\cdot\mathrm{s}^{-1}
+          & = & \tikz[baseline=-0.5ex]\draw[pointillesPerso] (0,0) -- (2,0);\,\, \mathrm{km}\cdot\mathrm{h}^{-1}
+          \\[2mm]
+
+          \textbf{(c)} & 540\,\mathrm{mm}^3
+          & = & \tikz[baseline=-0.5ex]\draw[pointillesPerso] (0,0) -- (2,0);\,\, \mathrm{m}^3
+          && \textbf{(g)} & 3 \times 10^{8}\,\mathrm{m}\cdot\mathrm{s}^{-1}
+          & = & \tikz[baseline=-0.5ex]\draw[pointillesPerso] (0,0) -- (2,0);\,\, \mathrm{km}\cdot\mathrm{h}^{-1}
+          \\[2mm]
+
+          \textbf{(d)} & 1\,\mathrm{L}
+          & = & \tikz[baseline=-0.5ex]\draw[pointillesPerso] (0,0) -- (2,0);\,\, \mathrm{m}^3
+          && \textbf{(h)} & 940 \times 10^{6}\,\mathrm{km}\cdot\mathrm{an}^{-1}
+          & = & \tikz[baseline=-0.5ex]\draw[pointillesPerso] (0,0) -- (2,0);\,\, \mathrm{km}\cdot\mathrm{h}^{-1}
+          \end{array}
+          \]
+
+        \bigskip
+      }
+
     
     point_cours: 
 
@@ -326,7 +1114,7 @@ questions:
       - titre: |
 
         texte: |
-          Une brique de lait de $1,\mathrm{L}$ fait à peu près $1,\mathrm{dm} \times 1,\mathrm{dm} \times 1,\mathrm{dm} = 1,\mathrm{dm}^3$.
+          Une brique de lait de $1\, \mathrm{L}$ fait à peu près $1\, \mathrm{dm} \times 1,\mathrm{dm} \times 1\, \mathrm{dm} = 1,\mathrm{dm}^3$.
 
           Or,
 
@@ -337,11 +1125,41 @@ questions:
           = 10^3\,\mathrm{dm}^3.
           $$
 
-          Donc, dans un mètre cube, il y a $1000,\mathrm{L}$.
+          Donc, dans un mètre cube, il y a $1000\, \mathrm{L}$.
 
           Dans une pipette, on voit que les graduations sont généralement de l'ordre de $1\,\mathrm{cm}^3$, ce qui correspond à $1\,\mathrm{mL}$.
 
+        figure:
 
+          - ref: brique_lait
+            legende: |
+              
+            scale: 0.7
+            label: 
+
+      - titre: |
+          Conversion des vitesses ($\mathrm{km/h}$ en $\mathrm{m/s}$)
+
+        texte: |
+          Pour comprendre la conversion entre $\mathrm{km/h}$ et $\mathrm{m/s}$ :
+
+          Il y a $60\,\mathrm{min}$ dans $1\,\mathrm{h}$ et $60\,\mathrm{s}$ dans $1\,\mathrm{min}$, donc $3600\,\mathrm{s}$ dans $1\,\mathrm{h}$.
+
+          $$
+          1\,\mathrm{km/h} = \frac{1}{60}\,\mathrm{km/min} = \frac{1}{60 \times 60}\,\mathrm{km/s} = \frac{1}{3600}\,\mathrm{km/s}
+          $$
+
+          De plus, sachant qu'il y a $1000\,\mathrm{m}$ dans $1\,\mathrm{km}$ :
+
+          $$
+          1\,\mathrm{km/h} = \frac{1000\,\mathrm{m}}{3600\,\mathrm{s}} = \frac{1}{3{,}6}\,\mathrm{m/s}
+          $$
+
+          En résumé :
+          \begin{itemize}[label=$\bullet$]
+          \item Pour passer de {\bf $\mathrm{km/h}$ à $\mathrm{m/s}$}, on divise par $3{,}6$.
+          \item Pour passer de {\bf $\mathrm{m/s}$ à $\mathrm{km/h}$}, on multiplie par $3{,}6$.
+          \end{itemize}
 
           
 
@@ -351,7 +1169,8 @@ questions:
 
         texte : |
 
-          {\fontsize{10pt}{10pt}\selectfont
+          {
+          %\fontsize{10pt}{10pt}\selectfont
           \[
           \begin{array}{rrclcrrcl}
           \textbf{(a)} & 8 \times 10^{-6}\,\mathrm{m}^2

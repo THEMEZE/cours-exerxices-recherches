@@ -7,6 +7,15 @@
 %\begin{center}\small (Chapitre de cours : \VAR{td.chapitre_cours})\end{center}
 \bigskip
 
+\bigskip
+
+\BLOCK{set ex = td}
+\BLOCK{set titre_exercice = false}
+\BLOCK{include "exercice.tex.j2"}
+
+\bigskip
+
+\BLOCK{set titre_exercice = true}
 \BLOCK{for ex in exercices}
     \BLOCK{include "exercice.tex.j2"}
     \bigskip

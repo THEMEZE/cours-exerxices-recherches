@@ -221,9 +221,9 @@ Le champ `poids` sert aujourd'hui à :
 python3 build/build.py                              # PDF
 python3 figures/render_web.py                        # SVG des figures
 python3 animations/generate_all.py --no-latex          # GIF/MP4
-python3 web/export_markdown.py --profile avant_seance --out ../Quartz5/content
-python3 web/build_subject_links.py --quartz-content ../Quartz5/content
-cd ../Quartz5 && npx quartz build --serve               # prévisualisation locale, http://localhost:8080
+python3 web/export_markdown.py --profile avant_seance --out ../Quartz5-cours-exerxices-recherches/content
+python3 web/build_subject_links.py --quartz-content ../Quartz5-cours-exerxices-recherches/content
+cd ../Quartz5-cours-exerxices-recherches && npx quartz build --serve               # prévisualisation locale, http://localhost:8080
 ```
 
 ## 6. Ce qui a été réellement testé dans cette session

@@ -1,0 +1,11 @@
+id: td4
+titre: "VECTEURS EN PHYSIQUE (4h)"
+chapitre_cours: ""
+duree_estimee: "4 h"
+seance: 1
+niveau_public: [lycée]
+exercices_ordre:
+  - ex1_tir_horizontal_et_cinematique_2D
+  - ex2_vecteurs_forces_projection_et_composantes
+  - ex3_equilibre_et_traction_d_une_automobile_en_panne
+  - ex4_alphabet_grec_et_notations_en_sciences_physiques

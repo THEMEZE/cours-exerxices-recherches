@@ -10,7 +10,7 @@ cours_rattache:
 
 metadonnees:
   duree_estimee: "25 min"
-  difficulte: 2 # Sur une échelle de 1 à 5
+  difficulte: 4 # Sur une échelle de 1 à 5
   type_exercice: "Application directe du cours"
   indispensable: true
 
@@ -40,19 +40,174 @@ questions:
     correction:
       - titre: "Synthèse"
         texte: |
-          Il s'agit d'une **onde plane transversale progressive** se propageant le long de l'axe $Ox$.
+          Il s'agit d'une {\bf onde plane transversale progressive} se propageant le long de l'axe $Ox$.
           La célérité vaut $c = \sqrt{F/\mu}$.
 
     solution:
       - titre: "Démonstration complète"
         texte: |
-          \begin{itemize}
-            \item {\bf Nature :} Le déplacement particulaire $y(x,t)$ est perpendiculaire à l'axe de propagation $Ox$ : l'onde est donc **transversale**. En l'absence d'obstacles, elle est **plane et progressive**.
-            \item {\bf Expression de $c$ :} Le PFD appliqué sur un tronçon $[x, x+dx]$ de masse $dm = \mu\,dx$ s'écrit en projection verticale :
-            $$\mu\,dx\,\frac{\partial^2 y}{\partial t^2} = F\sin\alpha(x+dx,t) - F\sin\alpha(x,t)$$
-            Pour de petits angles, $\sin\alpha \approx \tan\alpha = \dfrac{\partial y}{\partial x}$. Ainsi :
-            $$\mu\,dx\,\frac{\partial^2 y}{\partial t^2} \approx F\left[\frac{\partial y}{\partial x}(x+dx,t) - \frac{\partial y}{\partial x}(x,t)\right] = F\,\frac{\partial^2 y}{\partial x^2}\,dx$$
-            En simplifiant par $dx$, on identifie à l'équation de d'Alembert $\dfrac{\partial^2 y}{\partial x^2} = \dfrac{1}{c^2}\dfrac{\partial^2 y}{\partial t^2}$ avec $c = \sqrt{\dfrac{F}{\mu}}$.
+          \begin{itemize}[label=$\bullet$]
+            \item {\bf Nature :} Le déplacement particulaire $y(x,t)$ est perpendiculaire à l'axe de propagation $Ox$ : l'onde est donc {\bf transversale}. En l'absence d'obstacles, elle est {\bf plane et progressive et linéaire}.
+            
+          \end{itemize}
+
+      - titre: "Démonstration complète"
+        texte: |
+          \begin{itemize}[label=$\bullet$]
+            \item {\bf Expression de $c$ :} On applique un PFD au tronçon de corde compris entre les points $A=(x,y(x,t))$ et $B=(x+dx,y(x+dx,t))$. 
+            \begin{itemize}[label=$\circ$] 
+              \item Le référentiel du laboratoire est supposé galiléen. 
+              \item Le système est le tronçon $AB$, de longueur $d\ell$ et de masse $dm=\mu\,d\ell$. Pour $dx\to0$, \[ dy=y(x+dx,t)-y(x,t) =\partial_x y(x,t)\,dx+o(dx), \] d'où \[ d\ell =\sqrt{dx^2+dy^2} =|dx|\sqrt{1+\left(\frac{dy}{dx}\right)^2} =|dx|\sqrt{1+\left(\partial_x y\right)^2+o(1)}. \] Dans l'approximation des faibles pentes $\left|\partial_x y\right|\ll1$, \[ d\ell =|dx|\left[ 1+\frac12\left(\partial_x y\right)^2 +o\!\left(\left(\partial_x y\right)^2\right) \right] \underset{(\partial_x y)^2\ll1}{=} |dx|\left[1+o(1)\right] \underset{(\partial_x y)^2\ll1}{\simeq} |dx|. \] En prenant $dx>0$, on obtient finalement \[ \boxed{d\ell\underset{(\partial_x y)^2\ll1}{\simeq}dx}, \qquad \boxed{dm=\mu\,d\ell\underset{(\partial_x y)^2\ll1}{\simeq}\mu\,dx}. \] 
+            \end{itemize}
+
+            \item Le poids du tronçon de la corde est négligé. Le système et sous mis aux force de tension $\vec{T}(x, t )$ et  $\vec{T}(x + dx, t )$ tel que 
+            $$
+            \vec{T}(x, t ) = F \left ( \begin{array}{c} - \cos\alpha(x,t) \\ -\sin\alpha(x,t) \end{array} \right )_{\vec{e}_x , \vec{e}_y }, \quad \vec{T}(x + dx , t ) = F \left ( \begin{array}{c} \cos\alpha(x+ dx,t) \\ \sin\alpha(x+ dx,t) \end{array} \right )_{\vec{e}_x , \vec{e}_y }.
+            $$
+
+            $$
+            d m\, \left ( \begin{array}{c} \frac{\partial^2 x}{\partial t^2} \\ \frac{\partial^2 y}{\partial t^2} \end{array} \right )_{\vec{e}_x , \vec{e}_y } = \overbrace{F \left ( \begin{array}{c} - \cos\alpha(x,t) \\ -\sin\alpha(x,t) \end{array} \right )_{\vec{e}_x , \vec{e}_y }}^{\vec{T}(x, t )} + \overbrace{F \left ( \begin{array}{c} \cos\alpha(x+ dx,t) \\ \sin\alpha(x+ dx,t) \end{array} \right )_{\vec{e}_x , \vec{e}_y }}^{\vec{T}(x + dx, t )}
+            $$
+
+        
+          
+          \end{itemize}
+
+        figure:
+          ref: td1_ex3_PhV212_Demo
+          legende: " "
+          scale: 0.7
+          label: "fig:???"
+
+      - titre: "Démonstration complète"
+        texte: |
+          \begin{itemize}[label=$\bullet$]
+            
+
+            \item {\bf PFD projeté sur $\vec e_x$ :}
+            Le PFD appliqué au tronçon $[x,x+dx]$, de masse $dm=\mu\,dx$, donne
+            \[
+              \mu\,dx\,\frac{\partial^2 x}{\partial t^2}
+              =
+              F\cos\alpha(x+dx,t)-F\cos\alpha(x,t).
+            \]
+            Pour de petits angles,
+            \[
+              \cos\alpha
+              =1-\frac{\alpha^2}{2}+o(\alpha^2)
+              \underset{|\alpha|\ll1}{=}
+              1-\frac{\alpha^2}{2}+o(\alpha^2),
+            \]
+            d'où
+            \[
+              F\cos\alpha(x+dx,t)-F\cos\alpha(x,t)
+              =
+              -\frac{F}{2}
+              \left[
+                \alpha^2(x+dx,t)-\alpha^2(x,t)
+              \right]
+              +o(\alpha^2).
+            \]
+            Or, dans l'approximation des faibles pentes,
+            \[
+              \tan\alpha=\frac{\partial y}{\partial x}
+              \qquad\Longrightarrow\qquad
+              \alpha
+              \underset{|\alpha|\ll1}{=}
+              \frac{\partial y}{\partial x}
+              +o\!\left(\frac{\partial y}{\partial x}\right).
+            \]
+            Ainsi, la composante longitudinale des forces est d'ordre
+            \[
+              O\!\left(\left(\frac{\partial y}{\partial x}\right)^2\right),
+            \]
+            et donc négligeable devant les termes d'ordre $1$ dans l'approximation linéaire :
+            \[
+              \boxed{
+              \frac{\partial^2 x}{\partial t^2}
+              \underset{|\partial_x y|\ll1}{=}
+              O\!\left((\partial_x y)^2\right)
+              }.
+            \]
+            Le mouvement longitudinal est donc négligé à l'ordre $1$ ; on ne conserve que le mouvement transverse.
+
+          \end{itemize}
+
+        
+      - titre: "Démonstration complète"
+        texte: |
+          \begin{itemize}[label=$\bullet$]
+            
+
+            \item {\bf PFD projeté sur $\vec e_y$ :}
+            La projection verticale du PFD donne
+            \[
+              \mu\,dx\,\frac{\partial^2 y}{\partial t^2}
+              =
+              F\sin\alpha(x+dx,t)-F\sin\alpha(x,t).
+            \]
+            Pour $|\alpha|\ll1$,
+            \[
+              \sin\alpha
+              =\alpha+o(\alpha)
+              \underset{|\alpha|\ll1}{=}
+              \tan\alpha+o(\alpha)
+              =
+              \frac{\partial y}{\partial x}
+              +o\!\left(\frac{\partial y}{\partial x}\right).
+            \]
+            On obtient alors, à l'ordre $1$,
+            \[
+              \mu\,dx\,\frac{\partial^2 y}{\partial t^2}
+              \underset{|\partial_x y|\ll1}{=}
+              F\left[
+                \frac{\partial y}{\partial x}(x+dx,t)
+                -
+                \frac{\partial y}{\partial x}(x,t)
+              \right]
+              +o(dx).
+            \]
+            Or
+            \[
+              \frac{\partial y}{\partial x}(x+dx,t)
+              -
+              \frac{\partial y}{\partial x}(x,t)
+              =
+              \frac{\partial^2y}{\partial x^2}\,dx+o(dx),
+            \]
+            d'où
+            \[
+              \mu\,dx\,\frac{\partial^2 y}{\partial t^2}
+              =
+              F\,\frac{\partial^2y}{\partial x^2}\,dx
+              +o(dx).
+            \]
+            En divisant par $dx$ et en prenant la limite $dx\to0$,
+            \[
+              \boxed{
+              \frac{\partial^2y}{\partial t^2}
+              =
+              \frac{F}{\mu}\frac{\partial^2y}{\partial x^2}
+              }.
+            \]
+            En identifiant avec l'équation de d'Alembert
+            \[
+              \frac{\partial^2y}{\partial t^2}
+              =
+              c^2\frac{\partial^2y}{\partial x^2},
+            \]
+            on obtient finalement
+            \[
+              \boxed{c=\sqrt{\frac{F}{\mu}}}.
+            \]
+
+
+            
+            %Le PFD appliqué sur un tronçon $[x, x+dx]$ de masse $dm = \mu\,dx$ s'écrit en projection verticale :
+            %$$\mu\,dx\,\frac{\partial^2 y}{\partial t^2} = F\sin\alpha(x+dx,t) - F\sin\alpha(x,t)$$
+            %Pour de petits angles, $\sin\alpha \approx \tan\alpha = \dfrac{\partial y}{\partial x}$. Ainsi :
+            %$$\mu\,dx\,\frac{\partial^2 y}{\partial t^2} \approx F\left[\frac{\partial y}{\partial x}(x+dx,t) - \frac{\partial y}{\partial x}(x,t)\right] = F\,\frac{\partial^2 y}{\partial x^2}\,dx$$
+            %En simplifiant par $dx$, on identifie à l'équation de d'Alembert $\dfrac{\partial^2 y}{\partial x^2} = \dfrac{1}{c^2}%\dfrac{\partial^2 y}{\partial t^2}$ avec $c = \sqrt{\dfrac{F}{\mu}}$.
           \end{itemize}
 
   - id: q2
@@ -77,6 +232,12 @@ questions:
           En divisant par $F\,dx$, on obtient :
           $$\frac{\partial^2 y}{\partial x^2} - \frac{\mu g}{F} = \frac{1}{c^2}\frac{\partial^2 y}{\partial t^2}$$
           Ce terme constant déforme la position d'équilibre (la corde prend la forme d'une chaînette/parabole au repos), mais n'affecte pas la vitesse de propagation $c$ des petites perturbations autour de cette position d'équilibre.
+
+        figure:
+          ref: td1_ex3_PhV212_Demo_poidg
+          legende: " "
+          scale: 0.7
+          label: "fig:???"
 
   - id: q3_intro
     enonce: |

@@ -1,0 +1,104 @@
+id: td_meca_ex3
+intitule: "Équilibre et traction d'une automobile en panne"
+td: td_statique
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - mecanique.statique_du_point
+
+metadonnees:
+  duree_estimee: "20 min"
+  difficulte: 1
+  type_exercice: "Application"
+  indispensable: false
+
+enonce_intro: |
+  Une automobile en panne est tirée par deux câbles $AB$ et $AC$ exerçant des tensions $\vec{T}_{AB}$ et $\vec{T}_{AC}$. La force résultante $\vec{R}$ doit être appliquée strictement le long de l'axe longitudinal du véhicule (axe $Ox$).
+
+prerequis:
+  - titre: "Projections trigonométriques"
+    texte: |
+      Savoir projeter des forces de traction concourantes pour former des équations d'équilibre ou de résultante.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Analyse de symétrie de forces"
+    texte: |
+      Utiliser les conditions de symétrie géométrique pour simplifier la résolution des problèmes de statique/traction.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Condition de guidage"
+    texte: |
+      Montrer l'application concrète d'une contrainte géométrique (déplacement rectiligne imposé) sur les forces de traction.
+
+coup_de_pouce:
+  - titre: "Annulation de la composante transversale"
+    texte: |
+      Puisque la résultante est purement axiale, la somme des composantes perpendiculaires à l'axe du véhicule doit être nulle ($R_y = 0$).
+
+point_cours:
+  - titre: "Résultante de forces concourantes"
+    texte: |
+      Deux forces de même norme inclinées d'un même angle $\alpha$ par rapport à un axe ont une résultante portée par cet axe égale à $R = 2 T \cos\alpha$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Confusion entre angle total et demi-angle"
+    texte: |
+      Prendre garde à bien identifier si l'angle fourni est l'angle entre les deux câbles ou l'angle par rapport à l'axe central.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Optimisation de l'angle"
+    texte: |
+      Faire constater graphiquement que plus l'angle $\alpha$ augmente, plus la force utile $R$ diminue pour une même tension dans les câbles.
+
+bilan:
+  - titre: "Bilan statique"
+    texte: |
+      La traction est maximale lorsque l'angle de tirage $\alpha$ est le plus petit possible ($\cos\alpha \to 1$).
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Équilibre avec frottement solide"
+    texte: |
+      Prendre en compte le coefficient de frottement statique $\mu_s$ des pneus de l'automobile sur le sol.
+
+questions:
+  - id: q3_1a
+    parent: "1"
+    enonce: |
+      Pour $T_{AB} = 2{,}2\text{ kN}$ et $\alpha = 25^\circ$, quelle doit être la tension $T_{AC}$ pour que la résultante soit axiale ?
+    solution:
+      - titre: "Tension dans le câble AC"
+        texte: |
+          Par symétrie transversale ($R_y = 0$), $T_{AC} \sin(\beta) = T_{AB} \sin(\alpha)$.
+          Comme $\beta = \alpha = 25^\circ$, on obtient :
+          $$T_{AC} = T_{AB} = 2{,}2\text{ kN}$$
+
+  - id: q3_1b
+    parent: "1"
+    enonce: |
+      Calculer la norme de la résultante $\vec{R}$ dans ce premier cas.
+    solution:
+      - titre: "Norme de la résultante"
+        texte: |
+          $$R = 2 \cdot T_{AB} \cos(\alpha) = 2 \times 2{,}2 \times \cos(25^\circ) \approx 3{,}99\text{ kN}$$
+
+  - id: q3_2a
+    parent: "2"
+    enonce: |
+      Dans un second cas où $T_{AB} = 3{,}0\text{ kN}$ et $R = 4{,}8\text{ kN}$, que vaut $T_{AC}$ ?
+    solution:
+      - titre: "Tension AC (Cas 2)"
+        texte: |
+          Toujours par symétrie de la ligne d'action axiale :
+          $$T_{AC} = T_{AB} = 3{,}0\text{ kN}$$
+
+  - id: q3_2b
+    parent: "2"
+    enonce: |
+      Déterminer la valeur de l'angle d'inclinaison $\alpha$ dans ce second cas.
+    solution:
+      - titre: "Calcul de l'angle alpha"
+        texte: |
+          $$R = 2 T_{AB} \cos(\alpha) \implies \cos(\alpha) = \frac{R}{2 T_{AB}} = \frac{4{,}8}{6{,}0} = 0{,}8$$
+          $$\alpha = \arccos(0{,}8) \approx 36{,}87^\circ$$

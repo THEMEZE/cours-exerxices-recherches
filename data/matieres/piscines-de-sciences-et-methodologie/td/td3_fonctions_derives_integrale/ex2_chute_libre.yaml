@@ -65,7 +65,7 @@ aller_plus_loin:
 
 questions:
   - id: q1
-    parent: "1"
+    #parent: "1"
     enonce: |
       **Étude expérimentale**
 
@@ -93,7 +93,7 @@ questions:
           \end{enumerate}
 
   - id: q2
-    parent: "2"
+    #parent: "2"
     enonce: |
       **Modélisation théorique**
 
@@ -119,14 +119,14 @@ questions:
           \end{enumerate}
 
   - id: q3
-    parent: "3"
+    #parent: "3"
     enonce: |
       **Applications**
 
       \begin{enumerate}[label=\alph*)]
         \item Une pierre tombe dans un puits et touche l'eau après $1,5\text{ s}$. Déterminer la profondeur du puits et la vitesse d'impact ($g = 9,81\text{ m}\cdot\text{s}^{-2}$).
         \item Calculer la durée de chute lors d'une tombe d'une chaise haute de $0,5\text{ m}$.
-      \end{enumerate>
+      \end{enumerate}
 
     solution:
       - titre: "Calculs d'applications"

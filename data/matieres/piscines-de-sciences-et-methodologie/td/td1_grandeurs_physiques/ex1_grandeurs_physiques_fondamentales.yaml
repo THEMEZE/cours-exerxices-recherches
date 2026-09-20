@@ -11,76 +11,370 @@ metadonnees:
   duree_estimee: "25 min"
   difficulte: 1 # Sur une échelle de 1 à 5
   type_exercice: "Révision"
-  indispensable: false
+  indispensable: true
 
 enonce_intro: |
 
 
 prerequis : 
   - titre: |
-
+      Grandeurs physiques et unités
     texte: |
+      \begin{itemize}[label = $\bullet$]
+      \item {\bf  Grandeurs physiques et unités}
+        \begin{itemize}[label = $\circ$]
+          \item Savoir qu'une grandeur physique est exprimée à l'aide d'une valeur numérique et d'une unité. 
+          \item Connaître les unités usuelles de longueur, masse et temps (m, kg, s) et savoir les utiliser dans un calcul.
+        \end{itemize}
+      \item {\bf Système international d'unités}
+        \begin{itemize}[label = $\circ$]
+          \item  Avoir été familiarisé avec le Système international d'unités (S.I.) et avec la notion d'unité de mesure.
+          \item  Savoir qu'une unité peut être exprimée à l'aide de multiples et sous-multiples décimaux.
+        \end{itemize}
+      \end{itemize}
+
+  # - titre: |
+  #     Système international d'unités
+  #   texte: |
+  #     Avoir été familiarisé avec le Système international d'unités (S.I.) et avec la notion d'unité de mesure.
+  #     Savoir qu'une unité peut être exprimée à l'aide de multiples et sous-multiples décimaux.
 
 
 objectifs_pedagogiques_etudiants :
   - titre: |
-
+      Identifier les grandeurs fondamentales
     texte: |
-      
+      \begin{itemize}[label = $\bullet$]
+        \item {\bf  Identifier les grandeurs fondamentales}
+          \begin{itemize}[label = $\circ$]
+            \item Identifier les sept grandeurs physiques fondamentales du Système international et associer à chacune sa dimension, son unité de base et son symbole.
+          \end{itemize}
+        \item {\bf Maîtriser les unités du S.I.}
+          \begin{itemize}[label = $\circ$]
+            \item  Connaître les sept unités de base du Système international : mètre, kilogramme, seconde, ampère, kelvin, mole et candela.
+          \end{itemize}
+        \item {\bf Effectuer des conversions}
+          \begin{itemize}[label = $\circ$]
+            \item  Utiliser les préfixes du Système international pour convertir une grandeur d'une unité à une autre et exprimer le résultat en notation scientifique.
+          \end{itemize}
+        \item {\bf Manipuler les puissances de dix}
+          \begin{itemize}[label = $\circ$]
+            \item  Utiliser correctement les puissances de dix associées aux multiples et sous-multiples des unités.
+          \end{itemize}
+      \end{itemize}
 
+
+  # - titre: |
+  #     Identifier les grandeurs fondamentales
+  #   texte: |
+  #     Identifier les sept grandeurs physiques fondamentales du Système international et associer à chacune sa dimension, son unité de base et son symbole.
+
+  # - titre: |
+  #     Maîtriser les unités du S.I.
+  #   texte: |
+  #     Connaître les sept unités de base du Système international : mètre, kilogramme, seconde, ampère, kelvin, mole et candela.
+
+  # - titre: |
+  #     Effectuer des conversions
+  #   texte: |
+  #     Utiliser les préfixes du Système international pour convertir une grandeur d'une unité à une autre et exprimer le résultat en notation scientifique.
+
+  # - titre: |
+  #     Manipuler les puissances de dix
+  #   texte: |
+  #     Utiliser correctement les puissances de dix associées aux multiples et sous-multiples des unités.
+
+      
 objectifs_pedagogiques_enseignants :
-  - titre: |
 
+  - titre: |
+      Vérifier les connaissances fondamentales
     texte: |
-      
+      \begin{itemize}[label = $\bullet$]
+        \item {\bf  Vérifier les connaissances fondamentales}
+          \begin{itemize}[label = $\circ$]
+            \item Vérifier que les étudiants connaissent les sept grandeurs fondamentales du S.I., leurs dimensions et leurs unités de base.
+          \end{itemize}
+        \item {\bf Repérer les difficultés de conversion}
+          \begin{itemize}[label = $\circ$]
+            \item  Identifier les erreurs liées aux préfixes, aux puissances de dix et aux changements d'unités.
+          \end{itemize}
+        \item {\bf Installer les conventions du S.I.}
+          \begin{itemize}[label = $\circ$]
+            \item  S'assurer que les étudiants utilisent correctement les symboles et les unités du Système international, notamment le kilogramme comme unité de base de la masse.
+          \end{itemize}
+      \end{itemize}
+
+  # - titre: |
+  #     Vérifier les connaissances fondamentales
+  #   texte: |
+  #     Vérifier que les étudiants connaissent les sept grandeurs fondamentales du S.I., leurs dimensions et leurs unités de base.
+
+  # - titre: |
+  #     Repérer les difficultés de conversion
+  #   texte: |
+  #     Identifier les erreurs liées aux préfixes, aux puissances de dix et aux changements d'unités.
+
+  # - titre: |
+  #     Installer les conventions du S.I.
+  #   texte: |
+  #     S'assurer que les étudiants utilisent correctement les symboles et les unités du Système international, notamment le kilogramme comme unité de base de la masse.
+
+
 point_cours :
-  - titre: |
 
+  - titre: |
+      
     texte: |
+      \begin{itemize}[label = $\bullet$]
+        \item {\bf  Les sept grandeurs fondamentales du S.I.}
+          \begin{itemize}[label = $\circ$]
+            \item Le Système international repose sur sept grandeurs fondamentales : longueur, masse, temps, intensité électrique, température thermodynamique, quantité de matière et intensité lumineuse.
+          \end{itemize}
+        \item {\bf Les unités de base}
+          \begin{itemize}[label = $\circ$]
+            \item  Les unités de base correspondantes sont respectivement le mètre (m), le kilogramme (kg), la seconde (s), l'ampère (A), le kelvin (K), la mole (mol) et la candela (cd).
+          \end{itemize}
+        \item {\bf Préfixes et puissances de dix}
+          \begin{itemize}[label = $\circ$]
+            \item  Les multiples et sous-multiples des unités sont exprimés à l'aide de préfixes associés à des puissances de dix : kilo = $10^3$, milli = $10^{-3}$, micro = $10^{-6}$, nano = $10^{-9}$, etc.
+          \end{itemize}
+      \end{itemize}
+
+  # - titre: |
+  #     Les sept grandeurs fondamentales du S.I.
+  #   texte: |
+  #     Le Système international repose sur sept grandeurs fondamentales : longueur, masse, temps, intensité électrique, température thermodynamique, quantité de matière et intensité lumineuse.
+
+  # - titre: |
+  #     Les unités de base
+  #   texte: |
+  #     Les unités de base correspondantes sont respectivement le mètre (m), le kilogramme (kg), la seconde (s), l'ampère (A), le kelvin (K), la mole (mol) et la candela (cd).
+
+  # - titre: |
+  #     Préfixes et puissances de dix
+  #   texte: |
+  #     Les multiples et sous-multiples des unités sont exprimés à l'aide de préfixes associés à des puissances de dix : kilo = $10^3$, milli = $10^{-3}$, micro = $10^{-6}$, nano = $10^{-9}$, etc.
 
 
 remarques_pedagogiques_ecueils_classiques: 
-  - titre: |
-  
-    texte: |
-      
-remarques_pedagogiques_conseils_animation: 
-  - titre: |
 
-    texte: |
+  - titre: |
       
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+        \item {\bf  Confusion entre dimension et unité}
+          \begin{itemize}[label = $\circ$]
+            \item Les étudiants peuvent confondre la dimension d'une grandeur avec son unité. Par exemple, la longueur a pour dimension L et pour unité de base le mètre (m).
+          \end{itemize}
+        \item {\bf Erreur sur l'unité de masse}
+          \begin{itemize}[label = $\circ$]
+            \item Vérifier que les étudiants utilisent le kilogramme (kg), et non le gramme (g), comme unité de base du S.I.
+          \end{itemize}
+        \item {\bf Erreurs de puissances de dix}
+          \begin{itemize}[label = $\circ$]
+            \item Les conversions impliquant plusieurs préfixes peuvent entraîner des erreurs de signe ou d'exposant. Faire vérifier systématiquement le facteur de conversion.
+          \end{itemize}
+        \item {\bf Confusion entre symbole et nom}
+          \begin{itemize}[label = $\circ$]
+            \item Être attentif à l'utilisation correcte des symboles des unités : m, kg, s, A, K, mol et cd
+          \end{itemize}
+      \end{itemize}
+
+
+  # - titre: |
+  #     Confusion entre dimension et unité
+  #   texte: |
+  #     Les étudiants peuvent confondre la dimension d'une grandeur avec son unité. Par exemple, la longueur a pour dimension L et pour unité de base le mètre (m).
+
+  # - titre: |
+  #     Erreur sur l'unité de masse
+  #   texte: |
+  #     Vérifier que les étudiants utilisent le kilogramme (kg), et non le gramme (g), comme unité de base du S.I.
+
+  # - titre: |
+  #     Erreurs de puissances de dix
+  #   texte: |
+  #     Les conversions impliquant plusieurs préfixes peuvent entraîner des erreurs de signe ou d'exposant. Faire vérifier systématiquement le facteur de conversion.
+
+  # - titre: |
+  #     Confusion entre symbole et nom
+  #   texte: |
+  #     Être attentif à l'utilisation correcte des symboles des unités : m, kg, s, A, K, mol et cd.
+
+
+remarques_pedagogiques_conseils_animation: 
+
+  - titre: |
+      
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+        \item {\bf  Faire émerger les connaissances}
+          \begin{itemize}[label = $\circ$]
+            \item Commencer par demander aux étudiants de citer spontanément les grandeurs fondamentales et leurs unités avant de compléter ou corriger collectivement.
+          \end{itemize}
+        \item {\bf Justifier les conversions}
+          \begin{itemize}[label = $\circ$]
+            \item Lors des conversions, demander aux étudiants d'expliciter le préfixe utilisé et la puissance de dix correspondante plutôt que de se limiter au résultat numérique.
+          \end{itemize}
+        \item {\bf Insister sur les ordres de grandeur}
+          \begin{itemize}[label = $\circ$]
+            \item Faire vérifier la cohérence du résultat obtenu en comparant les unités de départ et d'arrivée et l'ordre de grandeur attendu.
+          \end{itemize}
+      \end{itemize}
+
+
+  # - titre: |
+  #     Faire émerger les connaissances
+  #   texte: |
+  #     Commencer par demander aux étudiants de citer spontanément les grandeurs fondamentales et leurs unités avant de compléter ou corriger collectivement.
+
+  # - titre: |
+  #     Justifier les conversions
+  #   texte: |
+  #     Lors des conversions, demander aux étudiants d'expliciter le préfixe utilisé et la puissance de dix correspondante plutôt que de se limiter au résultat numérique.
+
+  # - titre: |
+  #     Insister sur les ordres de grandeur
+  #   texte: |
+  #     Faire vérifier la cohérence du résultat obtenu en comparant les unités de départ et d'arrivée et l'ordre de grandeur attendu.
+
 
 bilan: 
-  - titre: |
 
+  - titre: |
+      
     texte: |
+      \begin{itemize}[label = $\bullet$]
+        \item {\bf Connaissances à retenir}
+          \begin{itemize}[label = $\circ$]
+            \item Les étudiants doivent connaître les sept grandeurs fondamentales du S.I., leurs dimensions et leurs unités de base.
+          \end{itemize}
+        \item {\bf Compétences à retenir}
+          \begin{itemize}[label = $\circ$]
+            \item Les étudiants doivent savoir utiliser les préfixes du S.I., effectuer des conversions d'unités et manipuler les puissances de dix.
+          \end{itemize}
+        \item {\bf Points de vigilance}
+          \begin{itemize}[label = $\circ$]
+            \item Une attention particulière doit être portée à la distinction entre dimension et unité, au kilogramme comme unité de base de la masse et au signe des puissances de dix lors des conversions.
+          \end{itemize}
+      \end{itemize}
+      
+  # - titre: |
+  #     Connaissances à retenir
+  #   texte: |
+  #     Les étudiants doivent connaître les sept grandeurs fondamentales du S.I., leurs dimensions et leurs unités de base.
+
+  # - titre: |
+  #     Compétences à retenir
+  #   texte: |
+  #     Les étudiants doivent savoir utiliser les préfixes du S.I., effectuer des conversions d'unités et manipuler les puissances de dix.
+
+  # - titre: |
+  #     Points de vigilance
+  #   texte: |
+  #     Une attention particulière doit être portée à la distinction entre dimension et unité, au kilogramme comme unité de base de la masse et au signe des puissances de dix lors des conversions.
 
 
 aller_plus_loin: 
   - niveau: lycee
 
     titre: |
+      Analyse dimensionnelle et vérification d'homogénéité
 
     texte: |
+      Au lycée, la distinction essentielle réside dans l'utilisation de l'analyse dimensionnelle pour vérifier la cohérence d'une formule physique. Une équation doit obligatoirement être {\bf homogène}  : les termes de chaque côté de l'égalité doivent posséder la même dimension.\\
+
+      En associant à chaque grandeur fondamentale son symbole dimensionnel ($\mathsf{L}$ pour la longueur, $\mathsf{M}$ pour la masse, $\mathsf{T}$ pour le temps, $\mathsf{I}$ pour l'intensité), on détermine la dimension d'une grandeur dérivée. Par exemple, la force étant définie par $F = m \cdot a$, sa dimension s'écrit $[F] = \mathsf{M} \cdot \mathsf{L} \cdot \mathsf{T}^{-2}$. L'unité dérivée correspondante (le newton) équivaut donc à des $\text{kg}\cdot\text{m}\cdot\text{s}^{-2}$.
 
 
   - niveau: prepa
     titre: |
+      Le théorème de Vaschy-Buckingham ($\bm{\pi}$) et la réduction adimensionnelle
 
     texte: |
-      
+      En classe préparatoire, l'analyse dimensionnelle devient un outil prédictif puissant grâce au {\bf théorème de Vaschy-Buckingham}  (ou théorème $\bm{\pi}$). Il stipule que tout problème physique reliant $n$ variables physiques exprimées à partir de $k$ dimensions fondamentales indépendantes peut être réécrit sous la forme d'une relation entre $n - k$ variables adimensionnelles (notées $\pi_1, \pi_2, \dots$).
+
+      Cette méthode permet de déterminer la forme d'une loi physique à une constante multiplicative près, sans résoudre d'équation différentielle. Elle jette également les bases de la {\bf similitude mécanique}  : pour fabriquer une maquette à échelle réduite (aéronautique, hydrodynamique) qui se comporte exactement comme le modèle réel, il suffit de conserver les mêmes nombres adimensionnels (comme le nombre de Reynolds $\mathcal{R}e$ ou de Froude $\mathcal{F}r$).
+
 
   - niveau: licence
     titre: |
+      La refonte du Système International (2019) : la fixation des constantes fondamentales
 
     texte: |
-     
+      En licence, on étudie la métrologie moderne et la révision majeure du SI entrée en vigueur le 20 mai 2019. Historiquement, les unités fondamentales étaient définies par des étalons matériels (comme le prototype international du kilogramme) ou des expériences spécifiques.
+
+      Désormais, {\bf le SI est entièrement construit en fixant la valeur numérique exacte de 7 constantes fondamentales} de la nature :
+      
+      \begin{itemize}[label = $\bullet$]
+        \item La fréquence de transition hyperfine du césium 133 ($\Delta \nu_{\text{Cs}}$)
+        \item La vitesse de la lumière dans le vide ($c$)
+        \item La constante de Planck ($h$)
+        \item La charge élémentaire ($e$)
+        \item La constante de Boltzmann ($k$)
+        \item Le nombre d'Avogadro ($N_A$)
+        \item L'efficacité lumineuse d'une radiation monochromatique ($K_{\text{cd}}$)
+      \end{itemize}
+
+      Les 7 unités fondamentales (m, kg, s, A, K, mol, cd) — et par extension toutes les unités dérivées — sont maintenant déduites directement de ces constantes universelles.
+
 
   - niveau: master
     titre: |
+      Systèmes d'unités naturels et adimensionnement en théorie quantique des champs
 
     texte: |
-      
+      Au niveau master, la distinction rigide entre grandeurs fondamentales et dérivées s'estompe au profit des {\bf systèmes d'unités naturels} (unités de Planck, unités atomiques, ou unités relativistes $c = \hbar = k_B = 1$).
+
+      En physique des hautes énergies et en théorie quantique des champs, fixer $c = 1$ et $\hbar = 1$ revient à rendre la vitesse et l'action adimensionnelles. Par conséquent, toutes les grandeurs physiques (masse, temps, longueur, énergie) s'expriment en fonction d'une seule dimension fondamentale : {\bf l'énergie } (généralement mesurée en $\text{eV}$).
+
+      \begin{itemize}[label = $\bullet$]
+        \item Une longueur $[L]$ devient homogène à une énergie inverse $[E]^{-1}$ (longueur de de Broglie).
+        \item Un temps $[T]$ devient également homogène à $[E]^{-1}$.
+        \item Une masse $[M]$ devient directement homogène à une énergie $[E]$.
+      \end{itemize}
+
+      Cette approche simplifie drastiquement les équations covariantes (comme les équations de Dirac ou de Klein-Gordon) et met en évidence la géométrie fondamentale de l'espace-temps et du vide quantique.
+
+  - niveau: master
+
+    titre: |
+      Complétude du SI, grandeurs adimensionnelles et frontières métrologiques
+
+    texte: |
+      En physique, {\bf toutes les unités mesurables peuvent être dérivées des 7 unités fondamentales} du Système international ($\mathsf{M}, \mathsf{L}, \mathsf{T}, \mathsf{I}, \Theta, \mathsf{N}, \mathsf{J}$). Le SI forme un système théoriquement complet et cohérent, capable de couvrir l'intégralité des phénomènes physiques connus (mécanique, thermodynamique, électromagnétisme, chimie et photométrie).\\
+
+      Cependant, l'analyse métrologique impose de nuancer ce principe selon trois axes fondamentaux :\\
+
+      \begin{enumerate}[label=\arabic*.]
+
+      \item {\bf Les grandeurs adimensionnelles (de dimension $\mathsf{1}$)}
+      Certaines grandeurs physiques ne possèdent aucune dimension fondamentale. Elles résultent systématiquement du rapport de deux grandeurs de même nature, ce qui annule leurs unités dimensionnelles :
+
+      \begin{itemize}[label = $\bullet$]
+        \item {\bf L'angle plan (Radian — $\text{rad}$) :} défini comme le rapport de la longueur d'un arc de cercle par son rayon ($\text{m}\cdot\text{m}^{-1} = 1$).
+        \item {\bf L'angle solide (Stéradian — $\text{sr}$) :} défini par le rapport d'une surface projetée sur le carré du rayon ($\text{m}^2\cdot\text{m}^{-2} = 1$).
+        \item {\bf Les ratios et grandeurs de comptage :} l'indice de réfraction $n = \frac{c}{v}$ (rapport de deux vitesses), le nombre de tours, ou encore les fractions massiques et molaires.
+      \end{itemize}
+
+      \item {\bf Les unités hors SI usuel (historiques, impériales et spécialisées)}
+      Une multitude d'unités n'appartiennent pas au SI strict de façon décimale ou directe. Elles mesurent pourtant les mêmes dimensions fondamentales et s'y ramènent par conversion exacte ou expérimentale :
+
+      \begin{itemize}[label = $\bullet$]
+        \item {\bf Unités de temps usuelles :} la minute ($60\text{ s}$) et l'heure ($3\ 600\text{ s}$), basées sur les découpages historiques du cycle terrestre.
+        \item {\bf Système impérial / anglo-saxon :} le pouce ($0{,}0254\text{ m}$), le mile ($1\ 609{,}34\text{ m}$), le gallon ou la livre.
+        \item {\bf Unités spécialisées par domaine :} l'électronvolt ($\text{eV}$, énergie à l'échelle atomique), l'unité astronomique ($\text{ua}$, distance dans le système solaire) ou le bar ($\text{bar} = 10^5\text{ Pa}$, pression).
+      \end{itemize}
+
+      \item {\bf Les grandeurs hors de la physique pure (Information et Économie)} 
+      Dès qu'on sort de la physique classique, certaines unités reposent sur des axiomes totalement indépendants des dimensions $\mathsf{M, L, T}$ :
+
+      \begin{itemize}[label = $\bullet$]
+        \item {\bf L'information (Bit, Octet) :} le bit mesure l'alternance d'un état logique ($0$ ou $1$) ou une quantité d'entropie d'information selon Shannon. Bien qu'il se matérialise sur des supports physiques, le bit en tant que concept mathématique ne dérive d'aucune unité du SI.
+        \item {\bf La monnaie (Euro, Dollar) :} unité de valeur économique et d'échange purement conventionnelle, sans aucun lien dimensionnel avec le monde physique. 
+      \end{itemize}
+      \end{enumerate}    
 
 
 questions:
@@ -91,12 +385,16 @@ questions:
       {\bf Dimensions fondamentales et unités de base S.I.} \\
 
       Remplir le tableau récapitulatif des 7 grandeurs fondamentales du Système International (S.I.) avec leur dimension, leur unité de base et le symbole associé.
+
     
-    point_cours: 
+    coup_de_pouce: 
+
       - titre: |
 
         texte: |
-          Les 7 dimensions fondamentales s'écrivent en majuscules sans italique : [L], [M], [T], [I], [$\Theta$], [N], [J]. L'unité S.I. de masse est le kilogramme (kg) et non le gramme.
+          Les 7 dimensions fondamentales s'écrivent en majuscules sans italique : [L], [M], [T], [I], [$\Theta$], [N], [J]. \\
+          
+          L'unité S.I. de masse est le kilogramme (kg) et non le gramme.
     
     solution:
       - titre: |
@@ -149,7 +447,7 @@ questions:
           $$
           \begin{array}{r|ccccc||ccccc|ccccccc}
             \textbf{Facteur} & 10^9 & 10^6 & 10^3 & 10^2 & 10^1 & 10^{-1} & 10^{-2} & 10^{-3} & 10^{-6} & 10^{-9} & 10^{-12} & 10^{-15} & 10^{-18} & 10^{-21} & 10^{-24} & 10^{-27} & 10^{-30}  \\
-            \textbf{Non} & \text{giga} & \text{méga} & \text{kilo} & \text{hecto}  & \text{déca} & \text{déca} & \text{centi} & \text{mili} & \text{micro}  & \text{nano} & \text{pico} & \text{fento} & \text{atto} & \text{zepto} & \text{yocto} & \text{ronto} & \text{quecto} \\
+            \textbf{Non} & \text{giga} & \text{méga} & \text{kilo} & \text{hecto}  & \text{déca} & \text{déci} & \text{centi} & \text{mili} & \text{micro}  & \text{nano} & \text{pico} & \text{fento} & \text{atto} & \text{zepto} & \text{yocto} & \text{ronto} & \text{quecto} \\
             \textbf{Symbole } & \text{G} & \text{M} & \text{k} & \text{h} & \text{da} &  \text{d} &  \text{c}  & \text{m} & \bm{\mu} & \text{n} & \text{p} & \text{f} & \text{a}
           \end{array}
           $$
@@ -163,6 +461,23 @@ questions:
 
         texte: |
           La notation scientifique s'écrit $a * 10^n$ avec $1 \leq a \leq 10$. Pour convertir un préfixe, on le remplace par sa valeur en puissance de $10$ (ex. $\text{nano} = 10^{-9}$, $\text{kilo} = 10^3$).
+
+
+    coup_de_pouce: 
+
+      - titre: |
+
+        texte: |
+          $$
+          420 ~ km \, = \, \overbrace{4,20 * 10^2}^{420} * \overbrace{ 10^6 ~ mm}^{km} \, = \, 4,20 * 10^8 ~ mm. 
+          $$
+
+          $1 ~ min \, = \, 60~s \quad $  et  $ \quad 1 ~ h \, =  \,60 ~ min \, = \, \overbrace{3,6 * 10^3 }^{60*60} ~ s $ 
+
+          $$
+          1 ~ h ~ 12 ~ min \, = \,  \overbrace{3,6 * 10^3 }^{1 ~ h} s + \overbrace{0,72 * 10^3 }^{12 ~ min} s \, = \,  4,32 * 10^3 ~ s
+          $$ 
+
 
     solution: 
 

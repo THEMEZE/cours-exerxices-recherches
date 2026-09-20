@@ -8,79 +8,1105 @@ cours_rattache:
   - chap1.???
 
 metadonnees:
-  duree_estimee: "25 min"
-  difficulte: 1 # Sur une échelle de 1 à 5
+  duree_estimee: "35 min"
+  difficulte: 2 # Sur une échelle de 1 à 5
   type_exercice: "Révision"
-  indispensable: false
+  indispensable: true
 
 enonce_intro: |
   L’objectif de l’exercice est d’utiliser l’analyse dimensionnelle afin de déterminer la dimension de constante intervenant dans les lois physiques.
 
 
-prerequis : 
+prerequis:
   - titre: |
-
+      Grandeurs physiques et unités
     texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Grandeurs physiques}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Savoir identifier les grandeurs physiques
+            intervenant dans une relation.
+
+          \item Distinguer les grandeurs fondamentales
+            des grandeurs dérivées.
+
+          \item Connaître les dimensions de base :
+            masse $M$, longueur $L$, temps $T$,
+            intensité électrique $I$, température $\Theta$
+            et quantité de matière $N$.
+
+        \end{itemize}
+
+        \item {\bf Unités du Système international}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Connaître les unités SI de la masse,
+            de la longueur et du temps.
+
+          \item Savoir exprimer une grandeur physique
+            dans les unités du Système international.
+
+          \item Connaître les unités dérivées :
+            newton, joule et pascal.
+
+        \end{itemize}
+
+        \item {\bf Analyse dimensionnelle}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Savoir déterminer la dimension d'une
+            grandeur physique à partir de sa définition.
+
+          \item Savoir manipuler les dimensions
+            lors d'un produit ou d'un quotient.
+
+          \item Savoir utiliser les puissances
+            d'une grandeur dans une expression dimensionnelle.
+
+        \end{itemize}
+
+        \item {\bf Manipulation algébrique}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Savoir isoler une constante dans
+            une équation physique.
+
+          \item Savoir effectuer des transformations
+            algébriques sur une relation littérale.
+
+        \end{itemize}
+
+      \end{itemize}
 
 
-objectifs_pedagogiques_etudiants :
+objectifs_pedagogiques_etudiants:
   - titre: |
-
+      Identifier les grandeurs physiques
     texte: |
-      
+      \begin{itemize}[label = $\bullet$]
 
-objectifs_pedagogiques_enseignants :
+        \item {\bf Identification des grandeurs}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Identifier les grandeurs physiques
+            présentes dans une loi physique.
+
+          \item Distinguer les variables physiques
+            des constantes intervenant dans une relation.
+
+          \item Associer chaque grandeur à sa dimension
+            et à son unité SI.
+
+        \end{itemize}
+
+      \end{itemize}
+
   - titre: |
-
+      Déterminer les dimensions d'une constante
     texte: |
-      
-point_cours :
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Mise en équation}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Écrire l'équation aux dimensions
+            d'une loi physique.
+
+          \item Isoler une constante dans une relation
+            afin de déterminer sa dimension.
+
+          \item Exprimer la dimension de la constante
+            en fonction des dimensions fondamentales.
+
+        \end{itemize}
+
+        \item {\bf Application aux lois physiques}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Déterminer la dimension de la constante
+            de gravitation universelle $\mathcal{G}$.
+
+          \item Déterminer la dimension de la permittivité
+            du vide $\varepsilon_0$.
+
+          \item Déterminer la dimension de la constante
+            des gaz parfaits $R$.
+
+        \end{itemize}
+
+      \end{itemize}
+
   - titre: |
-
+      Relier dimensions et unités SI
     texte: |
+      \begin{itemize}[label = $\bullet$]
 
+        \item {\bf Conversion dimensionnelle}
 
-remarques_pedagogiques_ecueils_classiques: 
+        \begin{itemize}[label=$\circ$]
+
+          \item Passer d'une dimension fondamentale
+            à l'unité SI correspondante.
+
+          \item Exprimer une constante en unités SI
+            à partir de sa dimension.
+
+          \item Vérifier la cohérence dimensionnelle
+            d'un résultat.
+
+        \end{itemize}
+
+      \end{itemize}
+
   - titre: |
-  
+      Comprendre les limites de l'analyse dimensionnelle
     texte: |
-      
-remarques_pedagogiques_conseils_animation: 
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Interprétation physique}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Comprendre que l'analyse dimensionnelle
+            ne permet pas de déterminer une valeur numérique
+            de constante.
+
+          \item Distinguer une détermination dimensionnelle
+            d'une détermination expérimentale.
+
+          \item Identifier les informations supplémentaires
+            nécessaires pour mesurer une constante physique.
+
+        \end{itemize}
+
+      \end{itemize}
+
+
+objectifs_pedagogiques_enseignants:
   - titre: |
-
+      Vérifier les prérequis en analyse dimensionnelle
     texte: |
-      
+      \begin{itemize}[label = $\bullet$]
 
-bilan: 
+        \item {\bf Évaluation des connaissances initiales}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Vérifier la maîtrise des dimensions
+            fondamentales du Système international.
+
+          \item Identifier les difficultés liées
+            aux produits et quotients de dimensions.
+
+          \item Vérifier la capacité à isoler
+            une grandeur dans une relation physique.
+
+        \end{itemize}
+
+      \end{itemize}
+
   - titre: |
-
+      Faire acquérir une méthode générale
     texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Méthode de résolution}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Faire identifier les grandeurs
+            présentes dans la loi physique.
+
+          \item Faire déterminer les dimensions
+            de chaque grandeur.
+
+          \item Faire isoler la constante recherchée.
+
+          \item Faire effectuer les calculs
+            dimensionnels étape par étape.
+
+          \item Faire vérifier la cohérence du résultat
+            avec l'unité SI.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Développer le raisonnement physique
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Analyse et interprétation}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Faire distinguer une loi physique
+            de la valeur numérique de ses constantes.
+
+          \item Montrer que des lois issues de domaines
+            différents peuvent être étudiées
+            avec une même méthode dimensionnelle.
+
+          \item Introduire les liens entre les constantes
+            physiques et les protocoles expérimentaux.
+
+        \end{itemize}
+
+      \end{itemize}
 
 
-aller_plus_loin: 
+point_cours:
+  - titre: |
+      Dimensions fondamentales
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Dimensions de base}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Masse : $[m] = M$.
+
+          \item Longueur : $[r] = L$.
+
+          \item Temps : $[t] = T$.
+
+          \item Intensité électrique : $[I] = I$.
+
+          \item Température thermodynamique : $[T] = \Theta$.
+
+          \item Quantité de matière : $[n] = N$.
+
+        \end{itemize}
+
+        \item {\bf Grandeurs dérivées}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Force :
+            $[F] = M L T^{-2}$.
+
+          \item Surface :
+            $[S] = L^2$.
+
+          \item Volume :
+            $[V] = L^3$.
+
+          \item Pression :
+            $[P] = M L^{-1} T^{-2}$.
+
+          \item Énergie :
+            $[E] = M L^2 T^{-2}$.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Règles de calcul dimensionnel
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Produits et quotients}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Les dimensions se multiplient
+            lors d'un produit de grandeurs.
+
+          \item Les dimensions se divisent
+            lors d'un quotient de grandeurs.
+
+          \item Une puissance agit sur l'ensemble
+            des exposants dimensionnels.
+
+        \end{itemize}
+
+        \item {\bf Addition et soustraction}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item L'addition et la soustraction
+            ne sont possibles qu'entre grandeurs
+            de même dimension.
+
+          \item Les termes additionnés dans une relation
+            physique doivent avoir une dimension identique.
+
+        \end{itemize}
+
+        \item {\bf Constantes numériques}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Les nombres purs, tels que $4\pi$,
+            sont sans dimension.
+
+          \item Une constante numérique sans dimension
+            ne modifie pas la dimension globale
+            d'une expression.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Constante de gravitation universelle
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Loi de Newton}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item La force gravitationnelle s'écrit :
+
+            \[
+              F = \mathcal{G}\frac{m m'}{r^2}.
+            \]
+
+          \item Les dimensions des grandeurs sont :
+
+            \[
+              [F] = M L T^{-2},
+              \qquad [m] = [m'] = M,
+              \qquad [r] = L.
+            \]
+
+        \end{itemize}
+
+        \item {\bf Dimension de la constante}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Isoler la constante :
+
+            \[
+              \mathcal{G} = \frac{F r^2}{m m'}.
+            \]
+
+          \item Déterminer sa dimension :
+
+            \[
+              [\mathcal{G}]
+              = M^{-1}L^3T^{-2}.
+            \]
+
+          \item Son unité SI est :
+
+            \[
+              \mathrm{kg}^{-1}\,\mathrm{m}^3\,\mathrm{s}^{-2}.
+            \]
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Permittivité du vide
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Loi de Coulomb}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item La force électrostatique s'écrit :
+
+            \[
+              F = \frac{1}{4\pi\varepsilon_0}
+              \frac{q q'}{r^2}.
+            \]
+
+          \item La charge électrique vérifie :
+
+            \[
+              [q] = I T.
+            \]
+
+        \end{itemize}
+
+        \item {\bf Dimension de la constante}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Isoler la permittivité :
+
+            \[
+              \varepsilon_0
+              = \frac{q q'}{4\pi F r^2}.
+            \]
+
+          \item Déterminer sa dimension :
+
+            \[
+              [\varepsilon_0]
+              = M^{-1}L^{-3}T^4I^2.
+            \]
+
+          \item Son unité SI est :
+
+            \[
+              \mathrm{kg}^{-1}\,\mathrm{m}^{-3}\,
+              \mathrm{s}^4\,\mathrm{A}^2.
+            \]
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Constante des gaz parfaits
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Loi des gaz parfaits}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item La loi des gaz parfaits s'écrit :
+
+            \[
+              PV = nRT.
+            \]
+
+          \item Les dimensions des grandeurs sont :
+
+            \[
+              [P] = M L^{-1}T^{-2},
+              \quad [V] = L^3,
+              \quad [n] = N,
+              \quad [T] = \Theta.
+            \]
+
+        \end{itemize}
+
+        \item {\bf Dimension de la constante}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Isoler la constante :
+
+            \[
+              R = \frac{PV}{nT}.
+            \]
+
+          \item Déterminer sa dimension :
+
+            \[
+              [R] = M L^2 T^{-2}\Theta^{-1}N^{-1}.
+            \]
+
+          \item Son unité SI est :
+
+            \[
+              \mathrm{J\,K^{-1}\,mol^{-1}}.
+            \]
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Limites de l'analyse dimensionnelle
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Détermination dimensionnelle}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item L'analyse dimensionnelle permet
+            de déterminer la dimension d'une constante.
+
+          \item Elle permet de vérifier la cohérence
+            dimensionnelle d'une relation physique.
+
+          \item Elle ne permet pas de déterminer
+            la valeur numérique d'une constante.
+
+        \end{itemize}
+
+        \item {\bf Détermination expérimentale}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item La valeur numérique d'une constante
+            doit être obtenue par une mesure expérimentale
+            ou une relation physique supplémentaire.
+
+          \item La constante gravitationnelle $\mathcal{G}$
+            peut être déterminée expérimentalement
+            à l'aide d'une balance de torsion.
+
+        \end{itemize}
+
+      \end{itemize}
+
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: |
+      Confusion entre dimension et unité
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Dimension}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Rappeler que $M$, $L$ et $T$
+            représentent des dimensions fondamentales.
+
+          \item Une dimension ne doit pas être confondue
+            avec une unité telle que le kilogramme ou le mètre.
+
+        \end{itemize}
+
+        \item {\bf Unité SI}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Vérifier que l'étudiant sait passer
+            de la dimension à l'unité SI.
+
+          \item Insister sur la distinction entre
+            une écriture en dimensions fondamentales
+            et une écriture en unités dérivées.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Erreurs dans les puissances dimensionnelles
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Puissance d'une grandeur}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Vérifier que la puissance $r^2$
+            donne bien $[r^2] = L^2$.
+
+          \item Vérifier que les exposants négatifs
+            sont correctement manipulés lors d'un quotient.
+
+          \item Rappeler que :
+
+            \[
+              \frac{1}{L^2} = L^{-2}.
+            \]
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Erreurs d'algèbre
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Isolement de la constante}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Vérifier que l'étudiant isole correctement
+            la constante avant de calculer sa dimension.
+
+          \item Identifier les erreurs de positionnement
+            des facteurs au numérateur et au dénominateur.
+
+          \item Faire vérifier l'expression finale
+            en réinjectant la constante dans la loi initiale.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Confusion entre masse et quantité de matière
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Grandeurs distinctes}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item La masse possède la dimension $M$.
+
+          \item La quantité de matière possède la dimension $N$.
+
+          \item Ne pas confondre la masse $m$
+            et la quantité de matière $n$.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Interprétation excessive de l'analyse dimensionnelle
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Valeur numérique}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Rappeler que la dimension d'une constante
+            ne détermine pas sa valeur numérique.
+
+          \item Distinguer la détermination d'une unité
+            de la mesure expérimentale d'une constante.
+
+        \end{itemize}
+
+      \end{itemize}
+
+
+remarques_pedagogiques_conseils_animation:
+  - titre: |
+      Introduction et mobilisation des prérequis
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Questionnement initial}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Demander aux étudiants quelles sont
+            les dimensions de la force, de la masse
+            et de la longueur.
+
+          \item Faire rappeler les règles de calcul
+            dimensionnel avant de commencer.
+
+          \item Questionner les étudiants sur la différence
+            entre une dimension et une unité.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Résolution guidée de la première question
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Loi de gravitation}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Faire identifier les grandeurs physiques
+            présentes dans la loi de Newton.
+
+          \item Demander aux étudiants de déterminer
+            les dimensions de chaque grandeur.
+
+          \item Faire isoler la constante $\mathcal{G}$
+            avant toute opération dimensionnelle.
+
+          \item Comparer les différentes méthodes
+            de calcul proposées par les étudiants.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Progression vers les autres constantes
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Transfert de méthode}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Demander aux étudiants de réutiliser
+            la méthode pour la permittivité du vide.
+
+          \item Faire expliciter la dimension de la charge
+            électrique à partir de $q = It$.
+
+          \item Pour la loi des gaz parfaits,
+            rappeler la dimension de l'énergie
+            associée au produit $PV$.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Vérification collective
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Analyse des résultats}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Faire comparer les dimensions
+            obtenues par les étudiants.
+
+          \item Demander une vérification
+            de la cohérence des unités SI.
+
+          \item Faire expliciter les erreurs
+            plutôt que de donner immédiatement
+            le résultat final.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Ouverture expérimentale
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Constantes physiques}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Questionner les étudiants :
+            « Comment déterminer la valeur numérique
+            d'une constante ? »
+
+          \item Introduire le principe de la balance
+            de torsion de Cavendish.
+
+          \item Distinguer une prédiction dimensionnelle
+            d'une détermination expérimentale.
+
+        \end{itemize}
+
+      \end{itemize}
+
+
+bilan:
+  - titre: |
+      Méthode générale à retenir
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Étapes de résolution}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Identifier les grandeurs physiques
+            présentes dans la relation.
+
+          \item Déterminer la dimension de chaque grandeur.
+
+          \item Isoler la constante recherchée.
+
+          \item Remplacer les grandeurs par leurs dimensions.
+
+          \item Simplifier les puissances des dimensions
+            fondamentales.
+
+          \item Déduire l'unité SI de la constante.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Résultats essentiels
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Constante de gravitation}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Dimension :
+
+            \[
+              [\mathcal{G}] = M^{-1}L^3T^{-2}.
+            \]
+
+          \item Unité SI :
+
+            \[
+              \mathrm{kg}^{-1}\,\mathrm{m}^3\,\mathrm{s}^{-2}.
+            \]
+
+        \end{itemize}
+
+        \item {\bf Permittivité du vide}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Dimension :
+
+            \[
+              [\varepsilon_0] = M^{-1}L^{-3}T^4I^2.
+            \]
+
+        \end{itemize}
+
+        \item {\bf Constante des gaz parfaits}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Dimension :
+
+            \[
+              [R] = M L^2T^{-2}\Theta^{-1}N^{-1}.
+            \]
+
+          \item Unité SI :
+
+            \[
+              \mathrm{J\,K^{-1}\,mol^{-1}}.
+            \]
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Limites de la méthode
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Analyse dimensionnelle}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Permet de vérifier la cohérence
+            d'une loi physique.
+
+          \item Permet de déterminer la dimension
+            d'une constante.
+
+          \item Ne permet pas de déterminer
+            la valeur numérique d'une constante
+            sans information supplémentaire.
+
+        \end{itemize}
+
+      \end{itemize}
+
+
+aller_plus_loin:
   - niveau: lycee
-
     titre: |
-
+      Vérification dimensionnelle de lois physiques
     texte: |
+      \begin{itemize}[label = $\bullet$]
 
+        \item {\bf Application à la mécanique}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Vérifier la cohérence dimensionnelle
+            de la relation $v = d/t$.
+
+          \item Vérifier la dimension de l'énergie
+            cinétique :
+
+            \[
+              E_c = \frac{1}{2}mv^2.
+            \]
+
+          \item Déterminer la dimension de la constante
+            de raideur $k$ dans la loi de Hooke :
+
+            \[
+              F = kx.
+            \]
+
+        \end{itemize}
+
+        \item {\bf Analyse d'une relation}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Vérifier qu'une relation est homogène.
+
+          \item Identifier les termes qui ne peuvent
+            pas être additionnés en raison de dimensions
+            différentes.
+
+        \end{itemize}
+
+      \end{itemize}
 
   - niveau: prepa
     titre: |
-
+      Analyse dimensionnelle et lois d'échelle
     texte: |
-      
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Détermination d'une loi physique}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Utiliser l'analyse dimensionnelle
+            pour proposer une dépendance fonctionnelle
+            entre plusieurs grandeurs physiques.
+
+          \item Étudier la période d'un pendule simple
+            à partir de la longueur $l$ et de l'accélération
+            de la pesanteur $g$.
+
+          \item Identifier les limites de l'analyse
+            dimensionnelle lorsque plusieurs
+            grandeurs sans dimension interviennent.
+
+        \end{itemize}
+
+        \item {\bf Théorème de Buckingham}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Introduire le principe du théorème
+            de Buckingham $\Pi$.
+
+          \item Construire des groupes sans dimension
+            à partir de grandeurs physiques.
+
+          \item Utiliser les groupes sans dimension
+            pour étudier des lois d'échelle.
+
+        \end{itemize}
+
+      \end{itemize}
 
   - niveau: licence
     titre: |
-
+      Constantes physiques et systèmes d'unités
     texte: |
-     
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Relations entre constantes}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Étudier la relation entre la constante
+            des gaz parfaits et la constante de Boltzmann :
+
+            \[
+              R = N_A k_B.
+            \]
+
+          \item Vérifier la cohérence dimensionnelle
+            de cette relation.
+
+          \item Distinguer les grandeurs molaires
+            des grandeurs microscopiques.
+
+        \end{itemize}
+
+        \item {\bf Expérience de Cavendish}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Étudier le principe de fonctionnement
+            d'une balance de torsion.
+
+          \item Déterminer l'expression de la constante
+            gravitationnelle à partir de l'équilibre
+            des couples.
+
+          \item Identifier les sources d'incertitudes
+            expérimentales dans la mesure de $\mathcal{G}$.
+
+        \end{itemize}
+
+        \item {\bf Systèmes d'unités}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Comparer les unités de la constante
+            gravitationnelle dans différents systèmes
+            d'unités.
+
+          \item Comprendre le rôle des constantes physiques
+            dans la définition des unités SI.
+
+        \end{itemize}
+
+      \end{itemize}
 
   - niveau: master
     titre: |
-
+      Gravitation, relativité et constantes fondamentales
     texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Gravitation newtonienne}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Étudier la loi de gravitation universelle
+            dans le cadre de la mécanique classique.
+
+          \item Relier la constante gravitationnelle
+            aux dimensions des grandeurs de la loi de Newton.
+
+        \end{itemize}
+
+        \item {\bf Relativité générale}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Introduire le rôle de la constante
+            gravitationnelle dans les équations d'Einstein :
+
+            \[
+              G_{\mu\nu}
+              = \frac{8\pi\mathcal{G}}{c^4}T_{\mu\nu}.
+            \]
+
+          \item Vérifier la cohérence dimensionnelle
+            des termes de l'équation.
+
+          \item Relier les dimensions de $\mathcal{G}$
+            et de $c$ aux grandeurs intervenant
+            dans la relativité générale.
+
+        \end{itemize}
+
+        \item {\bf Gravitation quantique}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Introduire les dimensions de Planck
+            à partir de $\hbar$, $\mathcal{G}$ et $c$.
+
+          \item Définir la longueur de Planck :
+
+            \[
+              \ell_{\mathrm P}
+              = \sqrt{\frac{\hbar\mathcal{G}}{c^3}}.
+            \]
+
+          \item Définir le temps de Planck :
+
+            \[
+              t_{\mathrm P}
+              = \sqrt{\frac{\hbar\mathcal{G}}{c^5}}.
+            \]
+
+          \item Comprendre le rôle des constantes fondamentales
+            dans la construction d'échelles physiques.
+
+        \end{itemize}
+
+      \end{itemize}
       
 
 
@@ -123,24 +1149,53 @@ questions:
             \item 
               %\vspace{-0.5cm}
               \begin{itemize}[label=$\bullet$]
-                \item  la force : $[F] = M * L * T^{-2}$ 
-                \item  les masse : $[m] = [m'] = M$ 
-                \item  la distance : $[r] = L$.
-                \item  la constante universelle de la gravitation : $[\mathcal{G}] = ??? $.
+                \item[\textcolor{\colorOne}{$\bullet$}] {\color{\colorOne} la force : $[F] = M * L * T^{-2}$}
+                \item[\textcolor{\colorFour}{$\bullet$}] {\color{\colorFour} les masses : $[m] = [m'] = M$}
+                \item[\textcolor{\colorFive}{$\bullet$}] {\color{\colorFive} la distance : $[r] = L$}
+                \item[\textcolor{\colorSix}{$\bullet$}] {\color{\colorSix} la constante universelle de la gravitation :
+                $[\mathcal{G}] = ??? $}
               \end{itemize}
-            \item En isolant la formule il vien que $\mathcal{G} = F \frac{r^2}{mm'}$ donc 
+              \bigskip
+              $$
+              \ptFleche{Force}{$ \displaystyle \color{\colorOne} F$} = \ptFleche{Gravi}{$ \displaystyle \color{\colorSix} \mathcal{G}$}  \frac{\ptFleche{Massesmm}{$ \displaystyle \color{\colorFour} m m'$}}{\ptFleche{Distance}{$ \displaystyle \color{\colorFive} r^2$} }.
+              $$
+              \begin{tikzpicture}[overlay,remember picture]
+                \draw[  opacity = 1 ]
+                  (Force) edge[line width=0.2ex ,color = colorOne ,arrows = -{Computer Modern Rightarrow[sharp ,length=0.1cm]},  , out = 110 , in = 0  ]node[pos=1, left]{\color{colorOne} \fontsize{6pt}{10pt}\selectfont \bfseries  $[F] = M * L * T^{-2}$  }($(Force) + (-1.05cm,0.45cm)$)
+                ;
+
+                \draw[  opacity = 1 ]
+                (Gravi) edge[line width=0.2ex ,color = colorSix ,arrows = -{Computer Modern Rightarrow[sharp ,length=0.1cm]},  , out = -70 , in = 180  ]node[pos=1, draw = none , right=0.00cm , rectangle  , shift = {(0.00cm , -0.0cm)} ]{\color{colorSix} \fontsize{6pt}{4}\selectfont \bfseries $\displaystyle [\mathcal{G}] = ??? $ }($(Gravi) + (2.0cm,-0.95cm)$)
+                ;
+
+                \draw[  opacity = 1 ]
+                (Massesmm) edge[line width=0.2ex ,color = colorFour ,arrows = -{Computer Modern Rightarrow[sharp ,length=0.1cm]},  , out = 70 , in = 180  ]node[pos=1, draw = none , right=0.00cm , rectangle  , shift = {(0.00cm , -0.0cm)} ]{\color{colorFour} \fontsize{6pt}{4}\selectfont \bfseries $\displaystyle [m] = [m'] = M $ }($(Massesmm) + (1.0cm,0.65cm)$)
+                ;
+
+                \draw[  opacity = 1 ]
+                (Distance) edge[line width=0.2ex ,color = colorFive ,arrows = -{Computer Modern Rightarrow[sharp ,length=0.1cm]},  , out = -10 , in = 180  ]node[pos=1, draw = none , right=0.00cm , rectangle  , shift = {(0.00cm , -0.0cm)} ]{\color{colorFive} \fontsize{6pt}{4}\selectfont \bfseries $\displaystyle [r] = L $ }($(Distance) + (1.0cm,-0.05cm)$)
+                ;
+
+
+              \end{tikzpicture}
+
+              
+            \item En isolant la formule il vient que $ {\displaystyle {\color{\colorSix} \mathcal{G}} = {\color{\colorOne} F}  \frac{\color{\colorFive}r^2}{ \color{\colorFour} mm'}}$ donc 
               \begin{itemize}[label=$\bullet$]
-                \item ${\displaystyle [\mathcal{G}] = \overbrace{M * L * T^{-2}}^{[F]} \frac{\overbrace{L^2}^{[r^2]} }{ \underbrace{M^2}_{[mm']}}  } = M^{-1} * L^3 * T^{-2} $ .
-                \item son utité est donnée en $kg^{-1} \cdot m^3 \cdot s^{-2} $
+                \item ${\displaystyle {\color{\colorSix}[\mathcal{G}]}  = {\color{\colorOne} \overbrace{M * L * T^{-2}}^{[F]}} \frac{{\color{\colorFive} \overbrace{L^2}^{[r^2]}}}{{\color{\colorFour}\underbrace{M^2}_{[mm']}}}  } = {\color{\colorSix} M^{-1} * L^3 * T^{-2}} $ .
+                \item son unité est donnée en ${\color{\colorSix} kg^{-1} \cdot m^3 \cdot s^{-2}} $
               \end{itemize}
 
+            \item[c)] L'analyse dimensionnelle ne donne pas la valeur numérique de $G$.
 
           \end{enumerate}
 
-      - titre: |
-          valeur de $\mathcal{G}$
+    aller_plus_loin: 
 
-        texte : |
+      - niveau: licence
+        titre: |
+          valeur de $\mathcal{G}$
+        texte: |
 
           \begin{enumerate}[label=\alph*)]
 
@@ -159,11 +1214,94 @@ questions:
               \end{itemize}
             \end{enumerate}
 
-          En 1798 Henry Cavendish mesure $6,6 10^{-11} ~kg^{-1} \cdot m^3 \cdot s^{-2}$. Et aujourd'hui ma mesure la plus précise est $(6,67430 \mp 0,00015)~  10^{-11} ~kg^{-1} \cdot m^3 \cdot s^{-2}$.
+          En 1798 Henry Cavendish mesure $6,6\times10^{-11}~\mathrm{kg}^{-1}\,\mathrm{m}^3\,\mathrm{s}^{-2}$. Et aujourd'hui la mesure la plus précise est $(6,67430 \pm 0,00015)\times10^{-11}~\mathrm{kg}^{-1}\,\mathrm{m}^3\,\mathrm{s}^{-2}$.
+          
+      - niveau: master
+        titre: |
+          Équilibre des couples
+        texte: |
+          \begin{itemize}[label=$\bullet$]
+            \item \textbf{Équilibre des couples :}
+              La tige est suspendue en son centre $O$ par le fil de torsion ($O$ est donc le baricentre de la tige, On applique donc le Théorème du moment cinétique barycentrique (TMC*) sur la tige).
+              On note $L$ la longueur totale de la tige. Les deux petites masses
+              $m$ sont donc situées aux extrémités $A$ et $B$, avec
+              \[
+                OA=OB=\frac{L}{2}.
+              \]
 
+              La force gravitationnelle exercée par chacune des grosses masses $m'$
+              sur la petite masse $m$ située à proximité vaut
+              \[
+                F=G\frac{m m'}{r^2}.
+              \]
 
-    aller_plus_loin: 
+              Calculons le moment de ces forces par rapport au point $O$.
+              Pour la force appliquée en $A$ :
+              \[
+                \vec{\mathcal M}_O(\vec F_A)
+                =
+                \overrightarrow{OA}\times\vec F_A.
+              \]
 
+              Dans la configuration considérée, la force est perpendiculaire à la
+              tige, de sorte que
+              \[
+                \left\|\vec{\mathcal M}_O(\vec F_A)\right\|
+                =
+                OA\,F
+                =
+                \frac{L}{2}F.
+              \]
+
+              La force appliquée à l'autre extrémité $B$ produit un moment de même
+              sens :
+              \[
+                \left\|\vec{\mathcal M}_O(\vec F_B)\right\|
+                =
+                \frac{L}{2}F.
+              \]
+
+              Le moment gravitationnel total par rapport à $O$ est donc
+              \[
+                \mathcal M_{\mathrm{grav}}
+                =
+                \frac{L}{2}F+\frac{L}{2}F
+                =
+                FL
+                =
+                G\frac{m m'}{r^2}L.
+              \]
+
+              Le fil de torsion exerce en $O$ un couple de rappel
+              \[
+                \mathcal M_{\mathrm{torsion}}=-C\theta.
+              \]
+
+              À l'équilibre, la somme des moments par rapport à $O$ est nulle :
+              \[
+                \sum \mathcal M_O=0.
+              \]
+
+              Ainsi,
+              \[
+                G\frac{m m'}{r^2}L-C\theta=0,
+              \]
+              d'où
+              \[
+                \boxed{
+                G=\frac{C\theta r^2}{m m'L}
+                }.
+              \]
+          \end{itemize}
+
+        figure:
+
+          - ref: Cavendish_exp
+            legende: |
+              
+            scale: 0.7
+            label:
+            
       - niveau: licence
         titre: |
           Remarques $\&$ Précautions expérimentales
@@ -184,6 +1322,204 @@ questions:
                 \item \textbf{Effets parasites électrostatiques et magnétiques :} 
                 Les masses et le châssis doivent être reliés à la terre ou constitués de matériaux amagnétiques (plomb, laiton) pour éviter que des forces électrostatiques ou magnétiques ne masquent l'interaction gravitationnelle.
               \end{enumerate}
+
+
+      - niveau: master
+        titre: |
+          De la force gravitationnelle à la courbure de l'espace-temps
+        texte: |
+
+          Dans le modèle de Newton, la gravitation est décrite comme une force
+          attractive exercée entre deux masses :
+          \[
+            F = \mathcal{G}\frac{m m'}{r^2}.
+          \]
+
+          Cette description est extrêmement efficace dans le domaine classique.
+          Cependant, en relativité générale, la gravitation n'est plus décrite
+          comme une force au sens newtonien : elle est interprétée comme une
+          propriété géométrique de l'espace-temps.
+
+          \begin{enumerate}[label=\alph*)]
+
+            \item[a)] \textbf{De la force à la géométrie.}
+
+            En relativité générale, ce n'est pas uniquement la masse qui intervient
+            comme source de la gravitation. Le tenseur énergie-impulsion
+            $T_{\mu\nu}$, qui contient notamment la densité d'énergie, la quantité
+            de mouvement, la pression et les contraintes, est relié à la courbure
+            de l'espace-temps par les équations d'Einstein :
+            \[
+              G_{\mu\nu}
+              =
+              \frac{8\pi G}{c^4}T_{\mu\nu}.
+            \]
+
+            Autrement dit, la matière et l'énergie influencent la géométrie de
+            l'espace-temps, et cette géométrie détermine à son tour le mouvement
+            des corps.
+
+            \begin{center}
+              \textit{« La matière dit à l'espace-temps comment se courber,
+              et l'espace-temps dit à la matière comment se déplacer. »}
+            \end{center}
+
+            \textit{Référence : Einstein Online, Max Planck Institute for
+            Gravitational Physics, « The curvature of spacetime ».}
+
+          \end{enumerate}
+
+      - niveau: master
+        titre: |
+          Pourquoi les corps tombent-ils ?
+        texte: |
+
+          \begin{enumerate}[label=\alph*)]
+
+            \item[b)] \textbf{Pourquoi les corps tombent-ils ?}
+
+            Un corps en chute libre ne subit pas nécessairement une force
+            gravitationnelle au sens newtonien. En relativité générale, il suit
+            une géodésique de l'espace-temps, c'est-à-dire une trajectoire
+            déterminée par la géométrie locale de celui-ci.
+
+            Cette interprétation est liée au principe d'équivalence :
+            localement, un observateur en chute libre ne peut pas distinguer son
+            mouvement d'un mouvement inertiel dans une région sans gravitation.
+
+            \textit{Référence : Einstein Online, Max Planck Institute for
+            Gravitational Physics, « The equivalence principle ».}
+
+            \item[c)] \textbf{Et le poids ?}
+
+            Cette distinction permet de comprendre pourquoi un astronaute en
+            orbite ressent l'apesanteur alors qu'il se trouve toujours dans le
+            champ gravitationnel terrestre.
+
+            L'astronaute est en chute libre et suit approximativement une
+            géodésique. À l'inverse, un objet posé sur une table est empêché de
+            suivre librement sa géodésique par la force de contact exercée par
+            la table.
+
+            Le « poids » que nous ressentons lorsque nous sommes debout est donc
+            associé à la force de contact qui nous empêche de tomber librement,
+            et non à une force gravitationnelle ressentie directement comme une
+            poussée.
+
+            \textit{Référence : Einstein Online, Max Planck Institute for
+            Gravitational Physics, « Falling freely ».}
+
+          \end{enumerate}
+
+      - niveau: master
+        titre: |
+          Masse inertielle et masse gravitationnelle.
+        texte: |
+
+          \begin{enumerate}[label=\alph*)]
+            \item[d)] \textbf{Masse inertielle et masse gravitationnelle.}
+
+            Dans la mécanique classique, on distingue la masse inertielle, qui
+            intervient dans la relation
+            \[
+              \vec{F}=m_{\mathrm{i}}\vec{a},
+            \]
+            et la masse gravitationnelle, qui intervient dans l'interaction
+            gravitationnelle.
+
+            L'égalité entre ces deux masses constitue le contenu expérimental
+            du principe d'équivalence faible. En relativité générale, cette
+            propriété devient un principe fondamental de la théorie : localement,
+            tous les corps en chute libre suivent la même géométrie gravitationnelle,
+            indépendamment de leur composition.
+
+            Il faut cependant éviter de dire que « seule la masse courbe
+            l'espace-temps ». Dans les équations d'Einstein, c'est le tenseur
+            énergie-impulsion $T_{\mu\nu}$ qui joue le rôle de source.
+
+            \textit{Référence : Einstein Online, Max Planck Institute for
+            Gravitational Physics, « The equivalence principle ».}
+
+            \item[e)] \textbf{Retour à la loi de Newton.}
+
+            Dans la limite des champs gravitationnels faibles et des vitesses
+            petites devant $c$, les équations de la relativité générale
+            conduisent à la loi de Newton :
+            \[
+              F = G\frac{m m'}{r^2}.
+            \]
+
+            La force gravitationnelle newtonienne doit donc être comprise comme
+            une approximation de la description relativiste dans son domaine
+            de validité.
+
+            \textit{Référence : Einstein Online, Max Planck Institute for
+            Gravitational Physics, « Newtonian limit of general relativity ».}
+
+          \end{enumerate} 
+      - niveau: master
+        titre: |
+          Gravitation et interactions quantiques.
+        texte: |
+          \begin{enumerate}[label=\alph*)]
+            \item[f)] \textbf{Gravitation et interactions quantiques.}
+
+            Une différence fondamentale apparaît lorsqu'on compare la gravitation
+            à l'électromagnétisme.
+
+            L'électromagnétisme est décrit par une théorie quantique des champs.
+            Son boson médiateur est le photon, qui possède un spin
+            \[
+              s=1.
+            \]
+
+            L'interaction électromagnétique peut être attractive ou répulsive :
+            deux charges électriques de même signe se repoussent, tandis que deux
+            charges de signes opposés s'attirent.
+
+            Une éventuelle description quantique perturbative de la gravitation
+            fait apparaître une particule hypothétique appelée \emph{graviton},
+            qui serait un boson de spin
+            \[
+              s=2.
+            \]
+
+            Le graviton n'a cependant jamais été observé expérimentalement.
+            Il est donc important de distinguer son statut théorique de celui
+            du photon, qui est une particule expérimentalement établie.
+
+            \textit{Référence : CERN, « The Standard Model ».}
+
+            \item[g)] \textbf{Les interactions fondamentales.}
+
+            Il est donc incorrect de dire que « toutes les forces sont
+            électromagnétiques ». La physique actuelle distingue quatre
+            interactions fondamentales :
+            \[
+              \boxed{
+              \text{gravitationnelle},
+              \quad
+              \text{électromagnétique},
+              \quad
+              \text{faible},
+              \quad
+              \text{forte}.
+              }
+            \]
+
+            Les interactions électromagnétique, faible et forte sont décrites
+            dans le cadre du Modèle standard de la physique des particules.
+            La gravitation est décrite par la relativité générale et n'est pas
+            intégrée au Modèle standard.
+
+            La recherche d'une théorie quantique de la gravitation permettant
+            de réunir ces deux descriptions constitue encore un problème ouvert
+            de la physique fondamentale.
+
+            \textit{Référence : CERN, « The Standard Model ».}
+
+          \end{enumerate}
+
           
   - id: q2
 
@@ -214,7 +1550,7 @@ questions:
     solution: 
 
       - titre: |
-          Dimmension de $[\mathcal{G}]$
+          Dimmension de $[\varepsilon_0]$
 
         texte : |
 
@@ -222,17 +1558,41 @@ questions:
             \item 
               %\vspace{-0.5cm}
               \begin{itemize}[label=$\bullet$]
-                \item  la force : $[F] = M * L * T^{-2}$ 
-                \item  les charge : $[m] = [m'] = I * T $ 
-                \item  la distance : $[r] = L$.
-                \item  la constante diélectrique : $[\varepsilon_0] = ??? $.
+                \item[\textcolor{\colorOne}{$\bullet$}] {\color{\colorOne} la force : $[F] = M * L * T^{-2}$}
+                \item[\textcolor{\colorFour}{$\bullet$}] {\color{\colorFour} les charges : $[q] = [q'] = I * T $}
+                \item[\textcolor{\colorFive}{$\bullet$}] {\color{\colorFive} la distance : $[r] = L$}
+                \item[\textcolor{\colorSix}{$\bullet$}] {\color{\colorSix} la constante diélectrique : $[\varepsilon_0] = ???$ }
               \end{itemize}
-            \item En isolant la formule il vien que $\varepsilon_0 = q * q' / (4 * \pi * F * r^2)$ donc 
-              \begin{itemize}[label=$\bullet$]
-                \item ${\displaystyle [\varepsilon_0] = \overbrace{M^{-1} * L^{-1} * T^{2}}^{[F]^{-1}} \frac{ \overbrace{I^2 * T^2}^{[qq']}}{\underbrace{L^2}_{[r^2]} } = M^{-1} * L^{-3} * T^4 * I^2  } $ .
-                \item son utité est donnée en $kg^{-1}\cdot m^{-3}\cdot s^4\cdot A^2$.
-              \end{itemize}
+              \bigskip
+              $$
+              \ptFleche{Force}{$ \displaystyle \color{\colorOne} F$} = \frac{1}{4\pi \ptFleche{Gravi}{$ \displaystyle \color{\colorSix} \varepsilon_0$}}  \frac{\ptFleche{Massesmm}{$ \displaystyle \color{\colorFour} q q'$}}{\ptFleche{Distance}{$ \displaystyle \color{\colorFive} r^2$} }.
+              $$
+              \begin{tikzpicture}[overlay,remember picture]
+                \draw[  opacity = 1 ]
+                  (Force) edge[line width=0.2ex ,color = colorOne ,arrows = -{Computer Modern Rightarrow[sharp ,length=0.1cm]},  , out = 110 , in = 0  ]node[pos=1, left]{\color{colorOne} \fontsize{6pt}{10pt}\selectfont \bfseries  $[F] = M * L * T^{-2}$  }($(Force) + (-1.05cm,0.45cm)$)
+                ;
 
+                \draw[  opacity = 1 ]
+                (Gravi) edge[line width=0.2ex ,color = colorSix ,arrows = -{Computer Modern Rightarrow[sharp ,length=0.1cm]},  , out = -70 , in = 180  ]node[pos=1, draw = none , right=0.00cm , rectangle  , shift = {(0.00cm , -0.0cm)} ]{\color{colorSix} \fontsize{6pt}{4}\selectfont \bfseries $\displaystyle [\varepsilon_0] = ??? $ }($(Gravi) + (2.0cm,-0.95cm)$)
+                ;
+
+                \draw[  opacity = 1 ]
+                (Massesmm) edge[line width=0.2ex ,color = colorFour ,arrows = -{Computer Modern Rightarrow[sharp ,length=0.1cm]},  , out = 70 , in = 180  ]node[pos=1, draw = none , right=0.00cm , rectangle  , shift = {(0.00cm , -0.0cm)} ]{\color{colorFour} \fontsize{6pt}{4}\selectfont \bfseries $\displaystyle [q] = [q'] = I*T $ }($(Massesmm) + (1.0cm,0.65cm)$)
+                ;
+
+                \draw[  opacity = 1 ]
+                (Distance) edge[line width=0.2ex ,color = colorFive ,arrows = -{Computer Modern Rightarrow[sharp ,length=0.1cm]},  , out = -10 , in = 180  ]node[pos=1, draw = none , right=0.00cm , rectangle  , shift = {(0.00cm , -0.0cm)} ]{\color{colorFive} \fontsize{6pt}{4}\selectfont \bfseries $\displaystyle [r] = L $ }($(Distance) + (1.0cm,-0.05cm)$)
+                ;
+
+
+              \end{tikzpicture}
+
+              
+            \item En isolant la formule il vient que $ {\displaystyle {\color{\colorSix} \varepsilon_0} =  \frac{1}{4 \pi} \frac{{ \color{\colorFour} mm'} }{{\color{\colorOne} F} {\color{\colorFive}r^2} } }$ donc 
+              \begin{itemize}[label=$\bullet$]
+                \item ${\displaystyle {\color{\colorSix}[\varepsilon_0]}  = {\color{\colorOne} \overbrace{M^{-1} * L^{-1} * T^{2}}^{[F^{-1}]}} \frac{ {\color{\colorFour} \overbrace{I^2*T^2}^{[qq']} } }{ {\color{\colorFive} \underbrace{L^2}_{[r^2]} } } = {\color{\colorSix} M^{-1} * L^{-3} * T^4 * I^2}} $ .
+                \item son unité est donnée en ${\color{\colorSix} kg^{-1}\cdot m^{-3}\cdot s^4\cdot A^2} $
+              \end{itemize}
 
           \end{enumerate}
 
@@ -243,7 +1603,7 @@ questions:
         titre: |
           
         texte: |
-          $\varepsilon_0 = \frac{ 10^7}{ 4 \pi c^2 } = 8,854~187\times 10^{-12} ~\overbrace{kg^{-1}\cdot m^{-3}\cdot s^4\cdot A^2}^{F/m}$  
+          $\varepsilon_0 = \frac{ 10^7}{ 4 \pi c^2 }\, F\cdot m\cdot s^{-2} = 8,854~187\times 10^{-12} ~{\color{colorSix} \overbrace{kg^{-1}\cdot m^{-3}\cdot s^4\cdot A^2}^{F/m}}$  
 
   - id: q3
 
@@ -296,6 +1656,58 @@ questions:
 
           \end{enumerate}
 
+          \begin{enumerate}[label=\alph*)]
+            \item 
+              %\vspace{-0.5cm}
+              \begin{itemize}[label=$\bullet$]
+                \item[\textcolor{\colorOne}{$\bullet$}] {\color{\colorOne} la pression : $[P] = [F]/[S] = M * L^{-1} * T^{-2}$}
+                \item[\textcolor{\colorFour}{$\bullet$}] {\color{\colorFour} le volume : $[V] = L^3$}
+                \item[\textcolor{\colorFive}{$\bullet$}] {\color{\colorFive} la quantitée de matière : $[n] = N$}
+                \item[\textcolor{\colorThree}{$\bullet$}] {\color{\colorThree} la température : $[T] = K$}
+                \item[\textcolor{\colorSix}{$\bullet$}] {\color{\colorSix} la constante des gaz parfait : $[R] = ??? $ }
+              \end{itemize}
+              \bigskip
+              $$
+              \ptFleche{Force}{$ \displaystyle \color{\colorOne} P$} \ptFleche{Massesmm}{$ \displaystyle \color{\colorFour} V$}  =  \ptFleche{Distance}{$ \displaystyle \color{\colorFive} n$} \ptFleche{Gravi}{$ \displaystyle \color{\colorSix} R$} \ptFleche{Temp}{$ \displaystyle \color{\colorThree} T$}
+              $$
+              \begin{tikzpicture}[overlay,remember picture]
+                \draw[  opacity = 1 ]
+                  (Force) edge[line width=0.2ex ,color = colorOne ,arrows = -{Computer Modern Rightarrow[sharp ,length=0.1cm]},  , out = 110 , in = 0  ]node[pos=1, left]{\color{colorOne} \fontsize{6pt}{10pt}\selectfont \bfseries  $[P] = M * L^{-1} * T^{-2}$  }($(Force) + (-1.05cm,0.45cm)$)
+                ;
+
+                \draw[  opacity = 1 ]
+                (Gravi) edge[line width=0.2ex ,color = colorSix ,arrows = -{Computer Modern Rightarrow[sharp ,length=0.1cm]},  , out = -70 , in = 180  ]node[pos=1, draw = none , right=0.00cm , rectangle  , shift = {(0.00cm , -0.0cm)} ]{\color{colorSix} \fontsize{6pt}{4}\selectfont \bfseries $\displaystyle [R] = ??? $ }($(Gravi) + (2.0cm,-0.65cm)$)
+                ;
+
+                \draw[  opacity = 1 ]
+                (Massesmm) edge[line width=0.2ex ,color = colorFour ,arrows = -{Computer Modern Rightarrow[sharp ,length=0.1cm]},  , out = 70 , in = 180  ]node[pos=1, draw = none , right=0.00cm , rectangle  , shift = {(0.00cm , -0.0cm)} ]{\color{colorFour} \fontsize{6pt}{4}\selectfont \bfseries $\displaystyle [V] = L^3 $ }($(Massesmm) + (1.0cm,0.65cm)$)
+                ;
+
+                \draw[  opacity = 1 ]
+                (Temp) edge[line width=0.2ex ,color = colorThree ,arrows = -{Computer Modern Rightarrow[sharp ,length=0.1cm]},  , out = 10 , in = 180  ]node[pos=1, draw = none , right=0.00cm , rectangle  , shift = {(0.00cm , -0.0cm)} ]{\color{colorThree} \fontsize{6pt}{4}\selectfont \bfseries $\displaystyle [T] = K$ }($(Temp) + (1.0cm,0.05cm)$)
+                ;
+
+                \draw[  opacity = 1 ]
+                (Distance) edge[line width=0.2ex ,color = colorFive ,arrows = -{Computer Modern Rightarrow[sharp ,length=0.1cm]},  , out = -90 , in = 180  ]node[pos=1, draw = none , right=0.00cm , rectangle  , shift = {(0.00cm , -0.0cm)} ]{\color{colorFive} \fontsize{6pt}{4}\selectfont \bfseries $\displaystyle [n] = N $ }($(Distance) + (1.0cm,-0.95cm)$)
+                ;
+
+
+              \end{tikzpicture}
+
+              
+            \item En isolant la formule il vient que $ {\displaystyle {\color{\colorSix} \varepsilon_0} =  \frac{1}{4 \pi} \frac{{ \color{\colorFour} mm'} }{{\color{\colorOne} F} {\color{\colorFive}r^2} } }$ donc 
+              \begin{itemize}[label=$\bullet$]
+                \item ${\displaystyle {\color{\colorSix}[\varepsilon_0]}  = {\color{\colorOne} \overbrace{M^{-1} * L^{-1} * T^{2}}^{[F^{-1}]}} \frac{ {\color{\colorFour} \overbrace{I^2*T^2}^{[qq']} } }{ {\color{\colorFive} \underbrace{L^2}_{[r^2]} } } = {\color{\colorSix} M^{-1} * L^{-3} * T^4 * I^2}} $ .
+                \item son unité est donnée en ${\color{\colorSix} kg^{-1}\cdot m^{-3}\cdot s^4\cdot A^2} $
+              \end{itemize}
+            \item En isolant la formule il vien que ${\displaystyle {\color{\colorSix} R}  = \frac{{\color{\colorOne} P} {\color{\colorFour} V } }{ {\color{\colorFive} n} {\color{\colorThree} T }}}$ donc 
+              \begin{itemize}[label=$\bullet$]
+                \item ${\displaystyle {\color{\colorSix} [R]}  =  \frac{ {\color{\colorOne} \overbrace{M * L^{-1} * T^{-2}}^{[P]}}  * {\color{\colorFour} \overbrace{L^3}^{[V]}}  }{ {\color{\colorFive} \underbrace{N}_{[n]} } * {\color{\colorThree} \underbrace{\Theta}_{[T]}} } = {\color{\colorSix} M * L^2 * T^{-2} * \Theta^{-1} * N^{-1} } } $ .
+                \item son utité est donnée en ${\color{\colorSix}J \cdot K^{-1} \cdot mol^{-1}} $ (ou ${\color{\colorSix} kg \cdot m^2 \cdot s^{-2} \cdot K^{-1} \cdot mol^{-1}} $ ).
+              \end{itemize}
+
+          \end{enumerate}
+
 
     aller_plus_loin: 
 
@@ -303,5 +1715,5 @@ questions:
         titre: |
           
         texte: |
-          $R = N_A * k_B = 8,314 ~ J \cdot mol^{-1} \cdot K^{-1} $   
+          $R = N_A \cdot k_B = 8,314 ~ {\color{colorSix} \text{J} \cdot \text{mol}^{-1} \cdot \text{K}^{-1} }$ avec $N_A = 6,022 \times 10^{23} ~ \text{mol}^{-1}$ (nombre d'Avogadro) et $k_B = 1,380 \times 10^{-23} ~ \text{J} \cdot \text{K}^{-1}$ (constante de Boltzmann)
           

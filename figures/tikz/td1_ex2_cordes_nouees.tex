@@ -1,7 +1,33 @@
 \begin{tikzpicture}[scale=1]
-    \draw[thick] (-3,0) -- (0,0) node[midway, above] {corde 1, $L_1$, $\mu_1$};
-    \draw[thick] (0,0) -- (2,0) node[midway, above] {corde 2, $L_2$, $\mu_2$};
-    \fill (0,0) circle (2pt) node[below] {$O$};
-    \draw[fill=gray] (-3.2,-0.3) rectangle (-3,0.3);
-    \draw[fill=gray] (2,-0.3) rectangle (2.2,0.3);
+    \draw[thick,line width=1.5ex, color=colorFour] (-6,0) -- (0,0) node[midway, above] {corde 1, $L_1$, $\mu_1$};
+    \draw[thick,line width=1.5ex, color=colorSix] (0,0) -- (4,0) node[midway, above] {corde 2, $L_2$, $\mu_2$};
+    \fill[color=colorOne] (0,0) circle (0.2cm) node[below=0.5cm] {$O$};
+
+    \draw[,
+        line width=1.5ex, 
+        %color=none, 
+        draw = none, 
+        fill=colorSix!20,
+        pattern={Lines[
+            angle=45,
+            distance=1ex,
+            line width=0.5ex
+        ]},
+        pattern color=colorOne ]  
+    (-6.4,-0.6) rectangle (-6,0.6);
+
+    \draw[,
+        line width=1.5ex, color=colorOne, 
+        draw = none, 
+        fill=colorSix!20,
+        pattern={Lines[
+            angle=45,
+            distance=1ex,
+            line width=0.5ex
+        ]},
+        pattern color=colorOne ]  
+    (4,-0.6) rectangle (4.4,0.6);
+
+    \draw[color=colorOne, line width=1.5ex] (-6,-0.6) -- (-6,0.6);
+    \draw[color=colorOne, line width=1.5ex] (4,-0.6) -- (4,0.6);
 \end{tikzpicture}

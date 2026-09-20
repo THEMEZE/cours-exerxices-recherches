@@ -136,7 +136,7 @@
 % NIVEAU 1
 % ============================================================
 
-
+\BLOCK{if titre_exercice}
 
 \BLOCK{if opts.show_metadonnees and ex.metadonnees}
 \TitreNiveauUn[
@@ -271,6 +271,8 @@
 \BLOCK{endif}
 \BLOCK{endif}
 
+\BLOCK{endif}
+
 
 \VAR{ex.enonce_intro}
 
@@ -283,6 +285,7 @@
 \VAR{render_section(opts.show_point_cours, ex.point_cours, 'pointcours')}
 \VAR{render_section(opts.show_coup_de_pouce, ex.coup_de_pouce, 'coupdepouce')}
 
+\BLOCK{if ex.questions}
 \begin{enumerate}[label=\arabic*.]
 \BLOCK{for item in ex.contenu}
     \BLOCK{if item.kind == 'intro'}
@@ -290,7 +293,7 @@
     \BLOCK{elif item.kind == 'single'}
         \item \VAR{render_question(item)}
     \BLOCK{elif item.kind == 'group'}
-        \item hhhhhhhhhhhhh
+        \item 
         \begin{enumerate}[label=\alph*)]
         \BLOCK{for sub in item.subquestions}
             \item \VAR{render_question(sub)}
@@ -299,6 +302,7 @@
     \BLOCK{endif}
 \BLOCK{endfor}
 \end{enumerate}
+\BLOCK{endif}
 
 \VAR{render_section(opts.show_remarques_pedagogiques_ecueils_classiques, ex.remarques_pedagogiques_ecueils_classiques, 'remarquespedagogiquesecueilsclassiques')}
 \VAR{render_section(opts.show_remarques_pedagogiques_conseils_animation, ex.remarques_pedagogiques_conseils_animation, 'remarquespedagogiquesconseilsanimation')}

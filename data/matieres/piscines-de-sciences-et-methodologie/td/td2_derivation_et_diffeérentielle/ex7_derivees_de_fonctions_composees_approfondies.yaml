@@ -1,0 +1,193 @@
+id: td2_ex7
+intitule: |
+  Dérivées de fonctions composées : approfondissement (taux liés)
+td: td2
+facultatif: true
+seance: 1
+
+cours_rattache:
+  - chap2.derivation_et_differentielle
+
+metadonnees:
+  duree_estimee: "50 min"
+  difficulte: 3
+  type_exercice: "Entraînement"
+  indispensable: false
+
+enonce_intro: |
+  Cet exercice prolonge l'exercice 3. On utilise la règle de la chaîne avec plusieurs niveaux de composition, puis dans des problèmes de \textbf{taux liés} : plusieurs grandeurs dépendent du temps et sont reliées entre elles par une relation géométrique.
+
+  Règle de la chaîne à plusieurs niveaux : si $f = f(v)$, $v = v(u)$ et $u = u(t)$, alors
+  $$\frac{\mathrm{d}f}{\mathrm{d}t} = \frac{\mathrm{d}f}{\mathrm{d}v}\cdot\frac{\mathrm{d}v}{\mathrm{d}u}\cdot\frac{\mathrm{d}u}{\mathrm{d}t}.$$
+
+prerequis:
+  - titre: "Exercices 1, 3 et 5"
+    texte: |
+      Règle de la chaîne, notation pointée, dérivées usuelles.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Décomposer, relier, calculer"
+    texte: |
+      Décomposer une fonction en couches, exprimer la relation entre les grandeurs d'un problème, puis dériver cette relation par rapport au temps.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Taux liés"
+    texte: |
+      Faire passer les étudiants de « calculer une dérivée » à « modéliser une situation dont les grandeurs varient en même temps » : ballon qui gonfle, échelle qui glisse, pendule.
+
+coup_de_pouce:
+  - titre: "Méthode pour un problème de taux liés"
+    texte: |
+      \begin{enumerate}[label=\arabic*)]
+        \item Identifier les grandeurs qui varient avec $t$ et la relation qui les lie.
+        \item Dériver cette relation par rapport à $t$ (règle de la chaîne).
+        \item Remplacer les valeurs numériques \textbf{après} avoir dérivé.
+      \end{enumerate}
+
+point_cours:
+  - titre: "Dérivée par rapport à $t$ d'une relation"
+    texte: |
+      Si deux grandeurs $x(t)$ et $y(t)$ sont liées par $F(x,y)=\text{constante}$, dériver cette relation par rapport à $t$ relie leurs vitesses de variation $\dot{x}$ et $\dot{y}$. Par exemple $\dfrac{\mathrm{d}(x^2)}{\mathrm{d}t} = 2x\dot{x}$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Remplacer trop tôt"
+    texte: |
+      Substituer une valeur numérique (par exemple $r = 5\ \text{cm}$) avant de dériver : la grandeur devient alors une constante et la dérivée est nulle.
+  - titre: "Oubli d'un facteur de la chaîne"
+    texte: |
+      Dans une chaîne à trois niveaux, il y a trois facteurs à multiplier.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Interprétation physique"
+    texte: |
+      Pour l'échelle, faire discuter le signe et la divergence de $\dot{y}$ quand le pied s'approche de $x = L$. Le modèle (échelle rigide, contact permanent) cesse d'être valable avant.
+
+bilan:
+  - titre: "Synthèse"
+    texte: |
+      Dans tous ces problèmes, on écrit la relation entre les grandeurs, on la dérive par rapport au temps, et on lit un taux à partir des autres.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Différentielle totale"
+    texte: |
+      Pour $F(x,y)$, $\dfrac{\mathrm{d}F}{\mathrm{d}t} = \dfrac{\partial F}{\partial x}\dot{x} + \dfrac{\partial F}{\partial y}\dot{y}$.
+
+questions:
+  - id: q1_a
+    parent: "1"
+    enonce: |
+      Déterminer $\dot{f}(t)$ pour $f(t) = \ln\!\left[1 + \sin^2(\omega t)\right]$ avec $\omega$ constant. Décomposer la fonction en trois niveaux.
+    coup_de_pouce:
+      - titre: "Décomposition"
+        texte: |
+          $u = \omega t$, $s = \sin u$, $v = 1 + s^2$, $f = \ln v$. Simplifier ensuite avec $2\sin u\cos u = \sin 2u$.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $$
+          \begin{array}{rcl}
+          \dot{f} & = & \dfrac{\mathrm{d}f}{\mathrm{d}v}\cdot\dfrac{\mathrm{d}v}{\mathrm{d}s}\cdot\dfrac{\mathrm{d}s}{\mathrm{d}u}\cdot\dfrac{\mathrm{d}u}{\mathrm{d}t}\\[3mm]
+          & = & \dfrac{1}{1+\sin^2(\omega t)}\cdot 2\sin(\omega t)\cdot\cos(\omega t)\cdot\omega\\[3mm]
+          & = & \dfrac{\omega\,\sin(2\omega t)}{1+\sin^2(\omega t)}.
+          \end{array}
+          $$
+
+  - id: q1_b
+    parent: "1"
+    enonce: |
+      Un mobile se déplace à vitesse constante $b$ selon l'axe $Ox$ : $x(t) = bt$. Il est à distance $d(t) = \sqrt{a^2 + x(t)^2}$ d'un point fixe situé à la distance $a$ de l'axe. Calculer $\dot{d}(t)$, l'exprimer en fonction de $x$ et $d$, et étudier $\dot{d}$ pour $t = 0$ puis $t\to\infty$.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $d = \sqrt{a^2 + b^2t^2}$, donc
+          $$\mathrm{d}(d) = \frac{2b^2t\,\mathrm{d}t}{2\sqrt{a^2+b^2t^2}} \quad\Longrightarrow\quad \dot{d} = \frac{b^2t}{\sqrt{a^2+b^2t^2}} = b\,\frac{x}{d}.$$
+          À $t=0$, $x = 0$ donc $\dot{d} = 0$ : le mobile passe au plus près du point. Quand $t\to\infty$, $x/d\to 1$ donc $\dot{d}\to b$ : la distance augmente presque à la vitesse du mobile. Le rapport $x/d$ est le cosinus de l'angle entre la direction du mobile et la direction du point.
+
+  - id: q2_a
+    parent: "2"
+    enonce: |
+      (*) Un ballon sphérique est gonflé : son volume augmente au rythme $\dfrac{\mathrm{d}V}{\mathrm{d}t} = 20\ \text{cm}^3\cdot\text{s}^{-1}$. Avec $V = \dfrac{4}{3}\pi r^3$, établir l'expression de $\dfrac{\mathrm{d}r}{\mathrm{d}t}$ en fonction de $r$ et $\dfrac{\mathrm{d}V}{\mathrm{d}t}$, puis calculer sa valeur pour $r = 5\ \text{cm}$ et $r = 10\ \text{cm}$.
+    coup_de_pouce:
+      - titre: "Chaîne"
+        texte: |
+          $\dfrac{\mathrm{d}V}{\mathrm{d}t} = \dfrac{\mathrm{d}V}{\mathrm{d}r}\cdot\dfrac{\mathrm{d}r}{\mathrm{d}t}$ avec $\dfrac{\mathrm{d}V}{\mathrm{d}r} = 4\pi r^2$.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $$\frac{\mathrm{d}V}{\mathrm{d}t} = 4\pi r^2\,\frac{\mathrm{d}r}{\mathrm{d}t} \quad\Longrightarrow\quad \frac{\mathrm{d}r}{\mathrm{d}t} = \frac{1}{4\pi r^2}\frac{\mathrm{d}V}{\mathrm{d}t}.$$
+          \begin{itemize}[label=$\bullet$]
+            \item $r = 5\ \text{cm}$ : $\dfrac{\mathrm{d}r}{\mathrm{d}t} = \dfrac{20}{4\pi\times 25} = \dfrac{0{,}2}{\pi}\approx 0{,}064\ \text{cm}\cdot\text{s}^{-1}$.
+            \item $r = 10\ \text{cm}$ : $\dfrac{\mathrm{d}r}{\mathrm{d}t} = \dfrac{20}{4\pi\times 100}\approx 0{,}016\ \text{cm}\cdot\text{s}^{-1}$.
+          \end{itemize}
+          À débit de gaz constant, le rayon croît de plus en plus lentement.
+
+  - id: q2_b
+    parent: "2"
+    enonce: |
+      La surface du ballon est $S = 4\pi r^2$. Exprimer $\dfrac{\mathrm{d}S}{\mathrm{d}t}$ en fonction de $r$ et de $\dfrac{\mathrm{d}V}{\mathrm{d}t}$ seulement, puis calculer sa valeur pour $r = 5\ \text{cm}$ et $r = 10\ \text{cm}$.
+    coup_de_pouce:
+      - titre: |
+          Éliminer $\dot{r}$
+        texte: |
+          $\dfrac{\mathrm{d}S}{\mathrm{d}t} = 8\pi r\,\dot{r}$, puis remplacer $\dot{r}$ par le résultat de la question précédente.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $$\frac{\mathrm{d}S}{\mathrm{d}t} = 8\pi r\,\dot{r} = 8\pi r\cdot\frac{1}{4\pi r^2}\frac{\mathrm{d}V}{\mathrm{d}t} = \frac{2}{r}\,\frac{\mathrm{d}V}{\mathrm{d}t}.$$
+          \begin{itemize}[label=$\bullet$]
+            \item $r = 5\ \text{cm}$ : $\dfrac{\mathrm{d}S}{\mathrm{d}t} = \dfrac{2}{5}\times 20 = 8\ \text{cm}^2\cdot\text{s}^{-1}$.
+            \item $r = 10\ \text{cm}$ : $\dfrac{\mathrm{d}S}{\mathrm{d}t} = \dfrac{2}{10}\times 20 = 4\ \text{cm}^2\cdot\text{s}^{-1}$.
+          \end{itemize}
+          {\bf Homogénéité} : $\dfrac{1}{\text{cm}}\cdot\text{cm}^3\cdot\text{s}^{-1} = \text{cm}^2\cdot\text{s}^{-1}$. On a aussi $\dfrac{\mathrm{d}S}{\mathrm{d}V} = \dfrac{2}{r}$.
+
+  - id: q3_a
+    parent: "3"
+    enonce: |
+      (*) Une échelle de longueur $L = 5{,}0\ \text{m}$ est appuyée contre un mur vertical. Le pied de l'échelle est à la distance $x(t)$ du mur et le haut à la hauteur $y(t)$. Écrire la relation entre $x$ et $y$, puis exprimer $\dot{y}$ en fonction de $x$, $y$ et $\dot{x}$.
+    coup_de_pouce:
+      - titre: "Relation géométrique"
+        texte: |
+          Théorème de Pythagore : $x^2 + y^2 = L^2$, avec $L$ constant. Dériver par rapport à $t$ : $\dfrac{\mathrm{d}(x^2)}{\mathrm{d}t} = 2x\dot{x}$.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $x(t)^2 + y(t)^2 = L^2$. En dérivant par rapport à $t$ (avec $\dot{L}=0$) :
+          $$2x\dot{x} + 2y\dot{y} = 0 \quad\Longrightarrow\quad \dot{y} = -\frac{x}{y}\,\dot{x}.$$
+          On peut aussi écrire $y = \sqrt{L^2 - x^2}$, donc $\dfrac{\mathrm{d}y}{\mathrm{d}x} = -\dfrac{x}{\sqrt{L^2-x^2}} = -\dfrac{x}{y}$, puis $\dot{y} = \dfrac{\mathrm{d}y}{\mathrm{d}x}\dot{x}$ (règle de la chaîne).
+
+  - id: q3_b
+    parent: "3"
+    enonce: |
+      Le pied glisse à la vitesse constante $\dot{x} = 0{,}50\ \text{m}\cdot\text{s}^{-1}$. Calculer $\dot{y}$ lorsque $x = 3{,}0\ \text{m}$, puis lorsque $x = 4{,}0\ \text{m}$. Interpréter le signe et l'évolution. Que se passe-t-il quand $x\to L$ ?
+    solution:
+      - titre: "Résolution"
+        texte: |
+          \begin{itemize}[label=$\bullet$]
+            \item $x = 3{,}0\ \text{m}$ : $y = 4{,}0\ \text{m}$, $\dot{y} = -\dfrac{3}{4}\times 0{,}50 = -0{,}375\ \text{m}\cdot\text{s}^{-1}$.
+            \item $x = 4{,}0\ \text{m}$ : $y = 3{,}0\ \text{m}$, $\dot{y} = -\dfrac{4}{3}\times 0{,}50 \approx -0{,}67\ \text{m}\cdot\text{s}^{-1}$.
+          \end{itemize}
+          $\dot{y}<0$ : le haut descend. Sa vitesse (en valeur absolue) augmente à mesure que le pied s'éloigne. Quand $x\to L$, $y\to 0$ et $|\dot{y}|\to\infty$ : le modèle ne peut pas rester valable (en pratique l'échelle décolle du mur avant).
+
+  - id: q4_a
+    parent: "4"
+    enonce: |
+      Un pendule de longueur $L$ (constante) oscille avec l'angle $\theta(t) = \theta_0\cos(\omega t)$ ($\theta_0$, $\omega$ constants). L'abscisse de la masse est $x(t) = L\sin\theta(t)$. Calculer $\dot{x}(t)$.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $$\dot{x} = L\cos\theta\cdot\dot{\theta}, \qquad \dot{\theta} = -\theta_0\omega\sin(\omega t),$$
+          donc
+          $$\dot{x}(t) = -L\,\theta_0\,\omega\,\sin(\omega t)\,\cos\!\big(\theta_0\cos(\omega t)\big).$$
+
+  - id: q4_b
+    parent: "4"
+    enonce: |
+      Simplifier $\dot{x}$ dans le cas des petites oscillations ($\theta_0\ll 1$ rad) et donner l'amplitude de la vitesse. Vérifier l'homogénéité.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          Si $\theta_0\ll 1$ alors $\cos\!\big(\theta_0\cos\omega t\big)\approx 1$ et
+          $$\dot{x}(t) \approx -L\,\theta_0\,\omega\,\sin(\omega t).$$
+          L'amplitude de la vitesse est $v_{\max} = L\theta_0\omega$.
+          {\bf Homogénéité} : $\theta_0$ est sans dimension et $[\omega] = \text{s}^{-1}$, donc $[L\theta_0\omega] = \text{m}\cdot\text{s}^{-1}$, une vitesse.

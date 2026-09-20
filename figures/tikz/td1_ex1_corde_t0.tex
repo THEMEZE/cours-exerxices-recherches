@@ -150,27 +150,27 @@
 
     ;
 
-    \draw[
-        dashed,
-        line width=0.6ex,
-        shift = {(1.5*\echelleX,0)} 
-        ] 
-        (0,-1.55*\echelleY) -- (0,0.55*\echelleY)
-        (\lam*\echelleX,-1.55*\echelleY) -- (\lam*\echelleX,0.55*\echelleY)
-        ;
-    \draw[
-        thick, 
-        line width=0.8ex, 
-        <-> , 
-        shift = {(1.5*\echelleX,-1.55*\echelleY)} 
-        ] 
-        (0,0) --++ (\lam*\echelleX,0*\echelleY) 
-        node[
-            midway, 
-            below,
-            font=\sffamily\bfseries\fontsize{15pt}{1pt}\selectfont\bfseries,
-            text=\colorOne ,
-            ] {${\bm\lambda}$};
+    % \draw[
+    %     dashed,
+    %     line width=0.6ex,
+    %     shift = {(1.5*\echelleX,0)} 
+    %     ] 
+    %     (0,-1.55*\echelleY) -- (0,0.55*\echelleY)
+    %     (\lam*\echelleX,-1.55*\echelleY) -- (\lam*\echelleX,0.55*\echelleY)
+    %     ;
+    % \draw[
+    %     thick, 
+    %     line width=0.8ex, 
+    %     <-> , 
+    %     shift = {(1.5*\echelleX,-1.55*\echelleY)} 
+    %     ] 
+    %     (0,0) --++ (\lam*\echelleX,0*\echelleY) 
+    %     node[
+    %         midway, 
+    %         below,
+    %         font=\sffamily\bfseries\fontsize{15pt}{1pt}\selectfont\bfseries,
+    %         text=\colorOne ,
+    %         ] {${\bm\lambda}$};
 
     \pgfmathsetmacro{\xP}{1.5*\echelleX}
     \pgfmathsetmacro{\yP}{

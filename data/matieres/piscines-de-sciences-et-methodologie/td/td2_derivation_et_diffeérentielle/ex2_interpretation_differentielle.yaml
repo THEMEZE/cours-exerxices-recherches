@@ -87,7 +87,7 @@ questions:
       - titre: "Résolution"
         texte: |
           $$\frac{\mathrm{d}S}{\mathrm{d}x} = 2x$$
-          *Homogénéité* : $[S] = L^2$, $[x] = L \implies \left[\frac{\mathrm{d}S}{\mathrm{d}x}\right] = \frac{L^2}{L} = L$. De même, $[2x] = L$. Le résultat est bien homogène.
+          {\bf Homogénéité} : $[S] = L^2$, $[x] = L \implies \left[\frac{\mathrm{d}S}{\mathrm{d}x}\right] = \frac{L^2}{L} = L$. De même, $[2x] = L$. Le résultat est bien homogène à une longueur.
 
   - id: q1_b
     parent: "1"
@@ -96,7 +96,7 @@ questions:
     solution:
       - titre: "Résolution"
         texte: |
-          $$\mathrm{d}S = 2x \mathrm{d}x$$
+          $$\mathrm{d}S = 2x \mathrm{d}x ~ (=  S'(x)\mathrm{d}x )  $$
 
   - id: q1_c
     parent: "1"
@@ -106,7 +106,7 @@ questions:
       - titre: "Résolution"
         texte: |
           $$\Delta S = (x+\mathrm{d}x)^2 - x^2 = x^2 + 2x\mathrm{d}x + (\mathrm{d}x)^2 - x^2$$
-          $$\Delta S = 2x\mathrm{d}x + (\mathrm{d}x)^2$$
+          $$\Delta S = \overbrace{2x\mathrm{d}x}^{\mathrm{d}S}  + (\mathrm{d}x)^2$$
 
   - id: q1_d
     parent: "1"
@@ -119,9 +119,19 @@ questions:
           Géométriquement, $\mathrm{d}S = 2x\mathrm{d}x$ représente la surface de deux bandes rectangulaires de bordure, tandis que $(\mathrm{d}x)^2$ est la surface du petit carré d'angle.
           
           Pour $x = 10\text{ m}$ :
-          * Pour $\mathrm{d}x = 3\text{ m}$ : $\mathrm{d}S = 60\text{ m}^2$, $\Delta S = 69\text{ m}^2$. Écart = $9\text{ m}^2$.
-          * Pour $\mathrm{d}x = 0,5\text{ m}$ : $\mathrm{d}S = 10\text{ m}^2$, $\Delta S = 10,25\text{ m}^2$. Écart = $0,25\text{ m}^2$.
-          * Pour $\mathrm{d}x = 0,1\text{ m}$ : $\mathrm{d}S = 2\text{ m}^2$, $\Delta S = 2,01\text{ m}^2$. Écart = $0,01\text{ m}^2$.
+          \begin{itemize}[label = $\bullet$]
+           \item  Pour $\mathrm{d}x = 3\text{ m}$ : $\mathrm{d}S(x) = 60\text{ m}^2$, $\Delta S(x) = 69\text{ m}^2$. $(\mathrm{d}x)^2 = 9\text{ m}^2$.
+           \item  Pour $\mathrm{d}x = 0,5\text{ m}$ : $\mathrm{d}S(x) = 10\text{ m}^2$, $\Delta S(x) = 10,25\text{ m}^2$. $(\mathrm{d}x)^2 = 0,25\text{ m}^2$.
+           \item  Pour $\mathrm{d}x = 0,1\text{ m}$ : $\mathrm{d}S(x) = 2\text{ m}^2$, $\Delta S(x) = 2,01\text{ m}^2$. $(\mathrm{d}x)^2 = 0,01\text{ m}^2$.
+          \end{itemize}
+        
+        figure:
+
+          - ref: td2_PhV110_Surface
+            legende: |
+              
+            scale: 0.7
+            label: 
 
   - id: q1_e
     parent: "1"
@@ -130,28 +140,46 @@ questions:
     solution:
       - titre: "Résolution"
         texte: |
-          Lorsque $\mathrm{d}x \ll x$, le terme d'ordre deux $(\mathrm{d}x)^2$ devient négligeable devant le terme linéaire $2x\mathrm{d}x$. La différentielle est une approximation linéaire de la variation réelle.
+          Lorsque $\mathrm{d}x \ll x$, le terme d'ordre deux $(\mathrm{d}x)^2$ devient négligeable devant le terme linéaire $2x\mathrm{d}x$. La différentielle est une approximation linéaire de la variation réelle.\\
+          
+          (Merci NZIENGUI Marc kharl pour la précision)\\
+
+        figure:
+
+          - ref: td2_PhV110_Surface_graph
+            legende: |
+              
+            scale: 0.7
+            label: 
 
   - id: q1_f
     parent: "1"
     enonce: |
       Soit la mesure du côté $a$ d'un carré : $a = 2,5 \pm 0,1\text{ cm}$. Calculer la surface $S$ du carré et déterminer son incertitude $\Delta S$ :
-      * soit en exprimant la valeur maximale et minimale de $S$
-      * soit par la méthode différentielle ($\Delta S \approx \mathrm{d}S$).
+      (i) soit en exprimant la valeur maximale et minimale de $S$
+      (ii) soit par la méthode différentielle ($\Delta S \approx \mathrm{d}S$).
     solution:
       - titre: "Résolution"
         texte: |
-          Valeur centrale : $S = a^2 = 2,5^2 = 6,25\text{ cm}^2$.
+          $a_m = \overbrace{2,5\text{ cm} }^{a} \pm \overbrace{0,1 \text{ cm} }^{\mathrm{d}a }$ \\
+
+          Valeur centrale : $S(a) = a^2 = (2,5 \text{ cm} ) ^2 = 6,25\text{ cm}^2$.
           
-          * **Méthode des extrema** :
-            $S_{\max} = 2,6^2 = 6,76\text{ cm}^2$
-            $S_{\min} = 2,4^2 = 5,76\text{ cm}^2$
-            $\Delta S = \frac{S_{\max} - S_{\min}}{2} = 0,50\text{ cm}^2$.
+          \begin{itemize}[label = $\bullet$]
+            \item  {\bf Méthode des extrema} :
+              \begin{itemize}[label = $\bullet$]
+                \item $S_{\max} = \overbrace{2,5\text{ cm} }^{a} +  \overbrace{0,1 \text{ cm}}^{\mathrm{d}a}  = (2,6\text{ cm})^2 = 6,76\text{ cm}^2$
+                \item $S_{\min} = \overbrace{2,5\text{ cm} }^{a} -  \overbrace{0,1 \text{ cm}}^{\mathrm{d}a} = (2,4\text{ cm}) ^2 = 5,76\text{ cm}^2$
+              \end{itemize}
+            $\Delta S \approx \frac{S_{\max} - S_{\min}}{2} = 0,50\text{ cm}^2$.
           
-          * **Méthode différentielle** :
-            $\Delta S \approx \mathrm{d}S = 2a \Delta a = 2 \times 2,5 \times 0,1 = 0,50\text{ cm}^2$.
+            \item  {\bf Méthode différentielle} :
+            $\Delta S(a) \approx \mathrm{d}S(a) = 2 \, a  \, \mathrm{d} a = 2 \times 2,5 \times 0,1 \text{ cm}^2 = 0,50\text{ cm}^2$.
+
+            \item $\Delta S(a) = \overbrace{S(a+da)}^{S_{\max}} - S(a) = 0.51 \text{ cm}^2$
+          \end{itemize}
           
-          *Résultat* : $S = (6,3 \pm 0,5)\text{ cm}^2$.
+          {\bf Résultat}  : $S = (6,3 \pm 0,5)\text{ cm}^2$. (Attention 2 CS)
 
   - id: q2_a
     parent: "2"
@@ -169,7 +197,7 @@ questions:
     solution:
       - titre: "Résolution"
         texte: |
-          $$\mathrm{d}z = -4t \mathrm{d}t$$
+          $$\mathrm{d}z = -4t \mathrm{d}t ~ (=  \dot{z}(t)\mathrm{d}t ) $$
 
   - id: q2_c
     parent: "2"
@@ -178,9 +206,9 @@ questions:
     solution:
       - titre: "Résolution"
         texte: |
-          $$z(t+\mathrm{d}t) - z(t) = [1 - 2(t+\mathrm{d}t)^2] - [1 - 2t^2] = -4t\mathrm{d}t - 2(\mathrm{d}t)^2$$
+          $$\Delta z  \equiv z(t+\mathrm{d}t) - z(t) = [1 - 2(t+\mathrm{d}t)^2] - [1 - 2t^2] = \overbrace{-4t\mathrm{d}t}^{\mathrm{d}z} - 2(\mathrm{d}t)^2$$
           D'où :
-          $$z(t+\mathrm{d}t) - z(t) = \mathrm{d}z - 2(\mathrm{d}t)^2$$
+          $$\Delta z  - \mathrm{d}z =  - 2(\mathrm{d}t)^2$$
 
   - id: q2_d
     parent: "2"
@@ -190,8 +218,10 @@ questions:
       - titre: "Résolution"
         texte: |
           Cette égalité approchée est valable si $\mathrm{d}t \ll t$, rendant le terme $-2(\mathrm{d}t)^2$ négligeable devant $-4t\mathrm{d}t$.
-          * $\dot{z}$ représente la **vitesse instantanée** de la particule.
-          * $\mathrm{d}z$ représente le **déplacement élémentaire** sur un intervalle de temps très court $\mathrm{d}t$.
+          \begin{itemize}[label = $\bullet$]
+          \item  $\dot{z}$ représente la {\bf vitesse instantanée} de la particule.
+          \item  $\mathrm{d}z$ représente le {\bf déplacement élémentaire} sur un intervalle de temps très court $\mathrm{d}t$.
+          \end{itemize}
 
   - id: q2_e
     parent: "2"
@@ -201,6 +231,14 @@ questions:
       - titre: "Résolution"
         texte: |
           Sur le graphe $z(t)$, la différence $z(t+\mathrm{d}t) - z(t)$ mesure le déplacement vertical sur la courbe parabole, tandis que $\mathrm{d}z$ se mesure le long de la tangente au point d'abscisse $t$.
+        figure:
+
+          - ref: td2_PhV110_Position_graph
+            legende: |
+              
+            scale: 0.7
+            label:
+
 
   - id: q2_f
     parent: "2"
@@ -210,4 +248,4 @@ questions:
       - titre: "Résolution"
         texte: |
           $$\ddot{z}(t) = \frac{\mathrm{d}^2 z}{\mathrm{d}t^2} = -4 \quad (\text{en cm}\cdot\text{s}^{-2})$$
-          $\ddot{z}$ représente **l'accélération** de la particule. Elle est constante et négative.
+          $\ddot{z}$ représente {\bf l'accélération} de la particule. Elle est constante et négative.

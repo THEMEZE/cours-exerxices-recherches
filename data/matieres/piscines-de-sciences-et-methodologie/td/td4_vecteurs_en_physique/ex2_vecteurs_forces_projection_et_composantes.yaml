@@ -1,0 +1,123 @@
+id: td_meca_ex2
+intitule: "Vecteurs forces, projection et composantes"
+td: td_forces
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - mecanique.forces_et_principe_fundamental
+
+metadonnees:
+  duree_estimee: "30 min"
+  difficulte: 1
+  type_exercice: "Application"
+  indispensable: true
+
+enonce_intro: |
+  On considère une particule située au point $M(1\text{ cm}; 1\text{ cm})$ soumise à deux forces $\vec{F}_1$ et $\vec{F}_2$ contenues dans le plan $(Oxy)$. L'axe $(Ox)$ est horizontal vers la droite et $(Oy)$ vertical vers le haut.
+
+prerequis:
+  - titre: "Projections cartésiennes et coordonnées polaires"
+    texte: |
+      Savoir projeter un vecteur connaissant son module et son angle par rapport aux axes cartésiens ($F_x = F \cos\theta$, $F_y = F \sin\theta$).
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Addition vectorielle et 2e loi de Newton"
+    texte: |
+      Calculer la résultante de forces projetées et en déduire l'accélération subie par un point matériel.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Transition composantes cartésiennes et polaires"
+    texte: |
+      S'assurer de la bonne maîtrise des passages entre les représentations $(F_x, F_y)$ et $(F, \theta)$.
+
+coup_de_pouce:
+  - titre: "Angle de la force F2"
+    texte: |
+      Utilise la trigonométrie de base sur le triangle rectangle formé par les composantes de $\vec{F}_2$.
+
+point_cours:
+  - titre: "Seconde loi de Newton"
+    texte: |
+      Dans un référentiel galiléen, la somme des forces appliquées à un point matériel de masse $m$ est égale à sa masse multipliée par son accélération : $\sum \vec{F} = m\vec{a}$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Signe des composantes"
+    texte: |
+      Attention au signe des composantes lors des projections (par exemple la composante $y$ négative de $\vec{F}_1$).
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Méthode géométrique vs analytique"
+    texte: |
+      Faire tracer le parallélogramme de force pour valider visuellement les signes des composantes calculées analytiquement.
+
+bilan:
+  - titre: "Bilan des forces"
+    texte: |
+      La résultante cartésienne s'obtient simplement par la somme algébrique des composantes sur chaque axe indépendant.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Changement de base de projection"
+    texte: |
+      Exprimer la résultante des forces dans une base inclinée d'un angle $\alpha$ par rapport à la base d'origine.
+
+questions:
+  - id: q2_a
+    parent: "1"
+    enonce: |
+      Préciser les caractéristiques graphiques des forces $\vec{F}_1 = 3\vec{u}_x - 1\vec{u}_y\text{ (N)}$ et $\vec{F}_2$ (norme $3\text{ N}$, inclinée de $60^\circ$ au-dessus de $Ox$).
+    solution:
+      - titre: "Caractéristiques des forces"
+        texte: |
+          $\vec{F}_1$ s'applique en $M(1;1)$, dirigé vers la droite ($+3$) et vers le bas ($-1$).
+          $\vec{F}_2$ s'applique en $M$, orienté dans le premier cadran à $60^\circ$ de l'axe horizontal.
+
+  - id: q2_b
+    parent: "1"
+    enonce: |
+      Calculer l'intensité de $\vec{F}_1$ ainsi que les composantes cartésiennes de $\vec{F}_2$.
+    solution:
+      - titre: "Calculs de normes et composantes"
+        texte: |
+          Intensité de $\vec{F}_1$ :
+          $$\|\vec{F}_1\| = \sqrt{3^2 + (-1)^2} = \sqrt{10} \approx 3{,}16\text{ N}$$
+          Composantes de $\vec{F}_2$ :
+          $$F_{2x} = 3 \cos(60^\circ) = 1{,}50\text{ N}$$
+          $$F_{2y} = 3 \sin(60^\circ) \approx 2{,}60\text{ N}$$
+          Soit $\vec{F}_2 = 1{,}50\vec{u}_x + 2{,}60\vec{u}_y\text{ (N)}$.
+
+  - id: q2_c
+    parent: "1"
+    enonce: |
+      Décrire la méthode de construction géométrique de la force résultante $\vec{F}_{\text{res}} = \vec{F}_1 + \vec{F}_2$.
+    solution:
+      - titre: "Somme géométrique"
+        texte: |
+          On place l'origine du vecteur $\vec{F}_2$ à l'extrémité du vecteur $\vec{F}_1$ depuis le point d'application $M$. Le vecteur résultant relie $M$ à l'extrémité finale.
+
+  - id: q2_d
+    parent: "1"
+    enonce: |
+      Déterminer les composantes cartésiennes et polaires (norme et angle) de $\vec{F}_{\text{res}}$.
+    solution:
+      - titre: "Résultante des forces"
+        texte: |
+          Composantes :
+          $$F_{\text{res},x} = 3 + 1{,}50 = 4{,}50\text{ N}$$
+          $$F_{\text{res},y} = -1 + 2{,}60 = 1{,}60\text{ N}$$
+          Représentation polaire :
+          $$F_{\text{res}} = \sqrt{4{,}50^2 + 1{,}60^2} \approx 4{,}78\text{ N}$$
+          $$\theta = \arctan\left(\frac{1{,}60}{4{,}50}\right) \approx 19{,}58^\circ$$
+
+  - id: q2_e
+    parent: "1"
+    enonce: |
+      Si la particule a une masse $m = 370\text{ g}$, déterminer l'accélération subie $\vec{a}$.
+    solution:
+      - titre: "Calcul de l'accélération"
+        texte: |
+          D'après la 2e loi de Newton $\vec{a} = \frac{\vec{F}_{\text{res}}}{m}$ (avec $m = 0{,}370\text{ kg}$) :
+          $$a_x = \frac{4{,}50}{0{,}370} \approx 12{,}16\text{ m}\cdot\text{s}^{-2}$$
+          $$a_y = \frac{1{,}60}{0{,}370} \approx 4{,}32\text{ m}\cdot\text{s}^{-2}$$
+          Norme globale : $\|\vec{a}\| = \frac{4{,}78}{0{,}370} \approx 12{,}92\text{ m}\cdot\text{s}^{-2}$.

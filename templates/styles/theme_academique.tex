@@ -219,6 +219,13 @@
 \TitrePedEtoilesGauchetrue % défaut : étoiles à gauche (cas normal)
 \newif\ifTitrePedIndispensable
 
+% Registres/booléens pour \TitreEtoilesDansBarrePath (mode normal
+% 0-5 et mode binaire 6-31 -- voir cette macro pour le détail).
+\newcount\TitreCountNiveau
+\newcount\TitreCountQuot
+\newif\ifTitreBinMode
+\newif\ifTitreEtoileOui
+
 
 % ⚠️ BUG CORRIGÉ (3e tentative) : mettre \ExplSyntaxOn / \ExplSyntaxOff
 % À L'INTÉRIEUR du corps de \newcommand{...}{...} ne sert à RIEN :
@@ -304,20 +311,37 @@
     -{Latex[length=\TitreArrowHUtile pt, width=\TitreArrowHUtile pt]},
     color=white,
     line width={\TitreArrowHUtile*0.4},
-    line cap=round
+    line cap=butt %round rect
   ]
     (0,0) -- (\ArrowLen pt, 0);
 }
 
 % --- Étoiles de difficulté ------------------------------------------
 %
-%   ★ ★ ☆ ☆ ☆
+%   ★ ★ ☆ ☆ ☆   (difficulté 1-5, mode normal)
+%   ★ ☆ ★ ☆ ★   (difficulté 6-31, mode binaire -- voir plus bas)
 %
-% #1 = Niveau (1 à 5)
-% #2 = Couleur des étoiles pleines (= couleur du titre / de la barre)
+% #1 = Niveau (0 à 31 -- 0 à 5 = mode normal, 6 à 31 = mode binaire)
+% #2 = Couleur "creuse" (= couleur du titre / de la barre -- utilisée
+%      pour les étoiles NON atteintes, qui se fondent dans la barre)
 % #3 = Hauteur utile \HUtile (= taille "slot" de chaque étoile ;
 %       la taille RÉELLEMENT dessinée est légèrement plus petite,
 %       voir \TitreEtoileTailleFacteur ci-dessous)
+%
+% ⚠️ BUG CORRIGÉ : les étoiles "atteintes" (i<=niveau) étaient
+% dessinées avec fill=#2 -- la MÊME couleur que le fond de la barre
+% -- donc quasi invisibles dessus (seul un mince contour blanc les
+% distinguait). Les étoiles "non atteintes" étaient en blanc plein,
+% donc BEAUCOUP plus visibles -- l'inverse de ce qu'on veut : plus la
+% difficulté est élevée, plus on doit voir de blanc plein, pas
+% l'inverse. Les deux couleurs de remplissage sont donc échangées
+% ci-dessous (\TitreEtoileRemplieCouleur / \TitreEtoileCreuseCouleur).
+%
+% 🎲 NOUVEAU -- mode binaire (difficulté 6 à 31) : pour une "vraie"
+% difficulté au-delà de 5, les 5 étoiles représentent le NIVEAU EN
+% BINAIRE sur 5 bits (poids 16-8-4-2-1, bit de poids fort à gauche),
+% étoile pleine = bit à 1, étoile creuse = bit à 0. Permet d'aller
+% jusqu'à 31 (= 11111 en binaire = 5 étoiles pleines).
 %
 % IMPORTANT : cette macro calcule et EXPOSE elle-même la largeur
 % totale occupée (\TitreEtoilesLargeur), à partir du MÊME facteur
@@ -336,18 +360,41 @@
   % pointes -> évite que les étoiles dépassent du trait).
   \def\TitreEtoileTailleFacteur{0.85}%
 
-  \foreach \i in {1,...,5}{%
+  % Niveau demandé, arrondi/borné à un entier entre 0 et 31 (garde-fou
+  % : une valeur invalide ne doit jamais faire planter le document).
+  \TitreCountNiveau=#1\relax
+  \ifnum\TitreCountNiveau<0 \TitreCountNiveau=0 \fi
+  \ifnum\TitreCountNiveau>31 \TitreCountNiveau=31 \fi
+  % Mode binaire dès que le niveau dépasse 5 (la représentation
+  % "N étoiles pleines sur 5" n'a plus de sens au-delà).
+  \ifnum\TitreCountNiveau>5
+    \TitreBinModetrue
+  \else
+    \TitreBinModefalse
+  \fi
+
+  \foreach \i/\TitrePoidsBit in {1/16,2/8,3/4,4/2,5/1}{%
     \pgfmathsetmacro{\XPos}{(\i-1)*(#3*\TitreEtoilesEspacementFacteur)}%
     \pgfmathsetmacro{\TailleEtoile}{#3*\TitreEtoileTailleFacteur}%
-    \ifnum\i>#1
-      % Étoile vide : contour blanc, intérieur blanc
+    % Détermine si CETTE étoile doit être "pleine" (\TitreEtoileOui)
+    % ou "creuse", selon le mode normal ou binaire.
+    \ifTitreBinMode
+      \TitreCountQuot=\TitreCountNiveau
+      \divide\TitreCountQuot by \TitrePoidsBit
+      \ifodd\TitreCountQuot \TitreEtoileOuitrue \else \TitreEtoileOuifalse \fi
+    \else
+      \ifnum\i>\TitreCountNiveau \TitreEtoileOuifalse \else \TitreEtoileOuitrue \fi
+    \fi
+    \ifTitreEtoileOui
+      % Étoile "atteinte" (pleine) : bien visible, blanc plein.
       \node[
         star, star points=5, star point ratio=.50, rounded corners=0.2pt,
         minimum size=\TailleEtoile pt, inner sep=0pt, outer sep=0pt,
         draw=white, fill=white, line width=0.4pt, rotate=180
       ] at (\XPos pt, 0) {};
     \else
-      % Étoile pleine : contour blanc, remplie de la couleur du titre
+      % Étoile "non atteinte" (creuse) : se fond dans la barre, ne
+      % laisse qu'un mince contour blanc.
       \node[
         star, star points=5, star point ratio=.50, rounded corners=0.2pt,
         minimum size=\TailleEtoile pt, inner sep=0pt, outer sep=0pt,

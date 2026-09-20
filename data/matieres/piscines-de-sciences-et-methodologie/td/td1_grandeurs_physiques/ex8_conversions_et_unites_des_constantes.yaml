@@ -1,0 +1,281 @@
+id: td1_ex8
+intitule: |
+  (*) Conversions d'unités et unités des constantes fondamentales
+td: td1
+facultatif: true
+seance: 1
+
+cours_rattache:
+  - chap1.unites_et_conversions
+  - chap1.analyse_dimensionnelle
+
+metadonnees:
+  duree_estimee: "40 min"
+  difficulte: 3 # Sur une échelle de 1 à 5
+  type_exercice: "Entraînement"
+  indispensable: false
+
+enonce_intro: |
+  Cet exercice comporte deux volets. Le premier travaille les {\bf conversions d'unités} (questions directes puis conversions composées). Le second montre comment {\bf déterminer l'unité d'une constante fondamentale} à partir d'une loi physique, puis comment combiner des constantes pour fabriquer une grandeur de dimension donnée.
+
+prerequis : 
+  - titre: |
+      Unités du système international
+    texte: |
+      Connaître 
+      \begin{itemize}[label=$\bullet$]
+        \item les sept unités de base du SI et les préfixes usuels ($\text{n}$, $\mu$, $\text{m}$, $\text{k}$, $\text{M}$, $\text{G}$),
+        \item les équations aux dimensions ($[\,\cdot\,]$) des grandeurs mécaniques et électriques usuelles,
+        \item les lois physiques de base (Newton, Coulomb, énergie cinétique, \dots).
+      \end{itemize} 
+
+objectifs_pedagogiques_etudiants :
+  - titre: |
+      Convertir sans erreur et retrouver l'unité d'une constante
+    texte: |
+      \begin{itemize}[label=$\star$]
+      \item Convertir une grandeur simple ou composée (vitesse, masse volumique, débit, énergie) en unité SI.
+      \item Retrouver la dimension et l'unité SI d'une constante à partir d'une loi qui la contient.
+      \item Combiner des constantes fondamentales pour obtenir une grandeur de dimension imposée.
+      \end{itemize}
+
+objectifs_pedagogiques_enseignants :
+  - titre: |
+      Donner du sens aux constantes fondamentales
+    texte: |
+      \begin{itemize}[label=$\star$]
+      \item Faire comprendre qu'une constante « porte » une unité qui compense exactement les dimensions de la loi.
+      \item Préparer l'introduction des unités de Planck et des unités naturelles.
+      \end{itemize}
+
+coup_de_pouce: 
+  - titre: |
+      Méthode générale
+    texte: |
+      \begin{itemize}[label=$\star$]
+      \item Conversion : multiplier par des rapports égaux à $1$, par exemple $\dfrac{1~\text{km}}{10^{3}~\text{m}}$, de sorte que l'ancienne unité se simplifie.
+      \item Constante : isoler la constante dans la loi, puis remplacer chaque grandeur par son unité SI.
+      \item Pour une puissance, la conversion se fait aussi à la puissance : $1~\text{cm}^3 = (10^{-2}~\text{m})^3 = 10^{-6}~\text{m}^3$.
+      \end{itemize}
+
+point_cours :
+  - titre: |
+      Conversions et constantes
+    texte: |
+      \begin{itemize}[label=$\star$]
+      \item {\bf Conversion} : la valeur numérique change mais la grandeur reste la même. Par exemple $1~\text{h} = 3\,600~\text{s}$.
+      \item {\bf Constante fondamentale} : une constante intervenant dans une loi, comme $G$, $h$, $k_B$ ou $\varepsilon_0$, a une dimension telle que la loi soit homogène.
+      \item {\bf Unités dérivées utiles} : $1~\text{N} = 1~\text{kg.m.s}^{-2}$, $1~\text{J} = 1~\text{kg.m}^2\text{.s}^{-2}$, $1~\text{W} = 1~\text{J.s}^{-1}$, $1~\text{C} = 1~\text{A.s}$.
+      \end{itemize}
+
+remarques_pedagogiques_ecueils_classiques: 
+  - titre: |
+      Erreurs récurrentes chez les étudiants
+    texte: |
+      \begin{itemize}[label=$\star$]
+      \item Convertir $\text{cm}^3$ en $\text{m}^3$ avec le facteur $10^{-2}$ au lieu de $10^{-6}$.
+      \item Multiplier au lieu de diviser (ou l'inverse) pour passer de $\text{km.h}^{-1}$ à $\text{m.s}^{-1}$.
+      \item Oublier de remplacer les unités dérivées ($\text{N}$, $\text{J}$, $\text{C}$) par les unités de base.
+      \item Oublier que $\text{K}$ (kelvin) et $\text{mol}$ sont des unités de base à part entière.
+      \end{itemize}
+remarques_pedagogiques_conseils_animation: 
+  - titre: |
+      Pédagogie en classe
+    texte: |
+      \begin{itemize}[label=$\star$]
+      \item Faire écrire chaque conversion sous forme d'un produit de fractions égales à $1$ pour que les unités se simplifient visiblement.
+      \item La question $5$ (loi de Kepler) peut servir de fil rouge vers le cours de gravitation.
+      \end{itemize}
+
+bilan: 
+  - titre: |
+      Synthèse de l'exercice
+    texte: |
+      Convertir consiste à multiplier par $1$ écrit sous la forme d'un rapport d'unités. L'unité d'une constante se lit dans la loi qui la contient, et deux constantes peuvent être combinées pour former une grandeur de dimension donnée (longueur, temps, masse de Planck).
+
+aller_plus_loin: 
+  - niveau: lycee
+    titre: |
+      Unités hors système international
+    texte: |
+      Rechercher l'origine du nœud, de l'électron-volt, de l'année-lumière et de l'unité astronomique.
+
+  - niveau: prepa
+    titre: |
+      Système d'unités naturelles
+    texte: |
+      Poser $\hbar = c = k_B = 1$ et exprimer une énergie, une longueur et une température dans la même unité.
+
+  - niveau: licence
+    titre: |
+      Redéfinition du SI de 2019
+    texte: |
+      Expliquer comment les valeurs fixées de $h$, $e$, $k_B$ et $N_A$ définissent désormais le kilogramme, l'ampère, le kelvin et la mole.
+
+questions:
+
+  - id: q1
+
+    enonce: |
+      {\bf Conversions directes}\\
+
+      Convertir en unité SI, en donnant le résultat en écriture scientifique :
+      \begin{enumerate}[label=\alph*)]
+        \item $72 ~\text{km.h}^{-1}$
+        \item $1,0 ~\text{g.cm}^{-3}$
+        \item $5,0 ~\text{L}$
+        \item $1 ~\text{kWh}$
+        \item $1 ~\text{bar}$ sachant que $1 ~\text{bar} = 1,0 \times 10^{5} ~\text{Pa}$, exprimé en unités de base du SI
+        \item $2,5 ~\text{mm}^2$
+      \end{enumerate}
+
+    coup_de_pouce: 
+      - titre: |
+          Rapports égaux à 1
+        texte: |
+          Par exemple : $72 ~\text{km.h}^{-1} = 72 \times \dfrac{10^{3} ~\text{m}}{3\,600 ~\text{s}}$. Pour un volume : $1 ~\text{L} = 1 ~\text{dm}^3$.
+
+    solution: 
+      - titre: |
+          Correction détaillée de la question 1
+        texte : |
+          \begin{enumerate}[label=\alph*)]
+            \item $72 \times \dfrac{10^{3}}{3\,600} = 20 ~\text{m.s}^{-1} = 2,0 \times 10^{1} ~\text{m.s}^{-1}$.
+            \item $1,0 ~\text{g.cm}^{-3} = 1,0 \times \dfrac{10^{-3} ~\text{kg}}{10^{-6} ~\text{m}^3} = 1,0 \times 10^{3} ~\text{kg.m}^{-3}$.
+            \item $1 ~\text{L} = 1 ~\text{dm}^3 = 10^{-3} ~\text{m}^3$ donc $5,0 ~\text{L} = 5,0 \times 10^{-3} ~\text{m}^3$.
+            \item $1 ~\text{kWh} = 10^{3} ~\text{W} \times 3\,600 ~\text{s} = 3,6 \times 10^{6} ~\text{J}$.
+            \item $1 ~\text{Pa} = 1 ~\text{N.m}^{-2} = 1 ~\text{kg.m.s}^{-2}\text{.m}^{-2} = 1 ~\text{kg.m}^{-1}\text{.s}^{-2}$ donc $1 ~\text{bar} = 1,0 \times 10^{5} ~\text{kg.m}^{-1}\text{.s}^{-2}$.
+            \item $2,5 ~\text{mm}^2 = 2,5 \times (10^{-3} ~\text{m})^2 = 2,5 \times 10^{-6} ~\text{m}^2$.
+          \end{enumerate}
+
+  - id: q2
+
+    enonce: |
+      {\bf Conversions composées}\\
+
+      \begin{enumerate}[label=\alph*)]
+        \item L'accélération de la pesanteur vaut $g = 9,81 ~\text{m.s}^{-2}$. L'exprimer en $\text{km.h}^{-2}$.
+        \item Le débit d'un robinet est de $30 ~\text{L.min}^{-1}$. L'exprimer en $\text{m}^3\text{.s}^{-1}$.
+        \item La masse volumique du mercure est $13,6 ~\text{g.cm}^{-3}$. L'exprimer en $\text{kg.m}^{-3}$.
+        \item L'énergie d'ionisation de l'hydrogène est $13,6 ~\text{eV}$, avec $1 ~\text{eV} = 1,602 \times 10^{-19} ~\text{J}$. L'exprimer en joule, puis en $\text{kg.m}^{2}\text{.s}^{-2}$.
+        \item La vitesse de la lumière est $c = 3,00 \times 10^{8} ~\text{m.s}^{-1}$. L'exprimer en $\text{km.h}^{-1}$.
+      \end{enumerate}
+
+    coup_de_pouce: 
+      - titre: |
+          Puissances de conversion
+        texte: |
+          Pour $\text{h}^{-2}$, on multiplie par $(3\,600)^2$ car $1 ~\text{h} = 3\,600 ~\text{s}$ donc $1 ~\text{s}^{-2} = (3\,600)^2 ~\text{h}^{-2}$.
+
+    solution: 
+      - titre: |
+          Correction détaillée de la question 2
+        texte : |
+          \begin{enumerate}[label=\alph*)]
+            \item $g = 9,81 \times \dfrac{10^{-3} ~\text{km}}{\text{m}} \times (3\,600)^2 ~\dfrac{\text{s}^2}{\text{h}^2}$, soit
+            $$g = 9,81 \times 10^{-3} \times 12\,960\,000 \approx 1,27 \times 10^{5} ~\text{km.h}^{-2}.$$
+            \item $30 ~\text{L.min}^{-1} = 30 \times \dfrac{10^{-3} ~\text{m}^3}{60 ~\text{s}} = 5,0 \times 10^{-4} ~\text{m}^3\text{.s}^{-1}$.
+            \item $13,6 ~\text{g.cm}^{-3} = 13,6 \times 10^{3} ~\text{kg.m}^{-3} = 1,36 \times 10^{4} ~\text{kg.m}^{-3}$.
+            \item $13,6 \times 1,602 \times 10^{-19} \approx 2,18 \times 10^{-18} ~\text{J} = 2,18 \times 10^{-18} ~\text{kg.m}^{2}\text{.s}^{-2}$.
+            \item $c = 3,00 \times 10^{8} \times \dfrac{10^{-3} ~\text{km}}{\text{m}} \times \dfrac{3\,600 ~\text{s}}{1 ~\text{h}} = 1,08 \times 10^{9} ~\text{km.h}^{-1}$.
+          \end{enumerate}
+
+  - id: q3
+
+    enonce: |
+      {\bf Unité d'une constante à partir d'une loi}\\
+
+      Pour chaque loi, isoler la constante, donner son équation aux dimensions et son unité SI en unités de base :
+      \begin{enumerate}[label=\alph*)]
+        \item Gravitation universelle : $F = G \, \dfrac{m_1 m_2}{r^2}$, constante $G$.
+        \item Énergie d'un photon : $E = h \, \nu$ où $\nu$ est la fréquence, constante de Planck $h$.
+        \item Énergie thermique moyenne d'une molécule d'un gaz parfait monoatomique : $E = \dfrac{3}{2} k_B T$, constante de Boltzmann $k_B$.
+        \item Loi de Coulomb : $F = \dfrac{1}{4\pi\varepsilon_0} \dfrac{q_1 q_2}{r^2}$, permittivité du vide $\varepsilon_0$.
+        \item Loi de Stefan-Boltzmann : $\dfrac{P}{S} = \sigma T^4$ où $P/S$ est la puissance rayonnée par unité de surface, constante $\sigma$.
+      \end{enumerate}
+
+    coup_de_pouce: 
+      - titre: |
+          Dimensions à connaître
+        texte: |
+          $[F] = M L T^{-2}$, $[E] = M L^2 T^{-2}$, $[P] = M L^2 T^{-3}$, $[q] = I T$, $[\text{température}] = \Theta$. Un facteur numérique comme $\dfrac{3}{2}$ ou $4\pi$ n'a pas de dimension.
+
+    solution: 
+      - titre: |
+          Correction détaillée de la question 3
+        texte : |
+          \begin{enumerate}[label=\alph*)]
+            \item $G = \dfrac{F \, r^2}{m_1 m_2}$ donc $[G] = \dfrac{M L T^{-2} \cdot L^2}{M^2} = M^{-1} L^{3} T^{-2}$. Unité : $\text{m}^3\text{.kg}^{-1}\text{.s}^{-2}$.
+            \item $h = \dfrac{E}{\nu}$ et $[\nu] = T^{-1}$ donc $[h] = M L^2 T^{-1}$. Unité : $\text{kg.m}^2\text{.s}^{-1}$ (soit $\text{J.s}$).
+            \item $k_B = \dfrac{2E}{3T}$ donc $[k_B] = M L^2 T^{-2} \Theta^{-1}$. Unité : $\text{kg.m}^2\text{.s}^{-2}\text{.K}^{-1}$ (soit $\text{J.K}^{-1}$).
+            \item $\varepsilon_0 = \dfrac{q_1 q_2}{4\pi F r^2}$ donc $[\varepsilon_0] = \dfrac{I^2 T^2}{M L T^{-2} \cdot L^2} = M^{-1} L^{-3} T^{4} I^{2}$. Unité : $\text{kg}^{-1}\text{.m}^{-3}\text{.s}^{4}\text{.A}^{2}$ (soit $\text{F.m}^{-1}$).
+            \item $\sigma = \dfrac{P}{S \, T^4}$ donc $[\sigma] = \dfrac{M L^2 T^{-3}}{L^2 \, \Theta^4} = M T^{-3} \Theta^{-4}$. Unité : $\text{kg.s}^{-3}\text{.K}^{-4}$ (soit $\text{W.m}^{-2}\text{.K}^{-4}$).
+          \end{enumerate}
+
+  - id: q4
+
+    enonce: |
+      {\bf Fabriquer une grandeur avec des constantes (question difficile)}\\
+
+      On cherche une longueur à partir de trois constantes fondamentales : la constante de gravitation $G$, la constante de Planck réduite $\hbar = \dfrac{h}{2\pi}$ et la vitesse de la lumière $c$. On pose $\ell_P = G^{\alpha} \, \hbar^{\beta} \, c^{\gamma}$.
+      \begin{enumerate}[label=\alph*)]
+        \item Rappeler les équations aux dimensions de $G$, $\hbar$ et $c$.
+        \item Écrire le système d'équations vérifié par $\alpha$, $\beta$, $\gamma$ pour que $\ell_P$ soit une longueur, puis le résoudre.
+        \item Calculer numériquement $\ell_P$ avec $G = 6,67 \times 10^{-11} ~\text{m}^3\text{.kg}^{-1}\text{.s}^{-2}$, $\hbar = 1,05 \times 10^{-34} ~\text{J.s}$ et $c = 3,00 \times 10^{8} ~\text{m.s}^{-1}$.
+        \item En déduire le temps de Planck $t_P = \dfrac{\ell_P}{c}$.
+        \item Montrer que $m_P = \sqrt{\dfrac{\hbar c}{G}}$ est bien une masse. Calculer sa valeur.
+      \end{enumerate}
+
+    coup_de_pouce: 
+      - titre: |
+          Système linéaire
+        texte: |
+          Écrire $[\ell_P] = M^{-\alpha+\beta} \, L^{3\alpha+2\beta+\gamma} \, T^{-2\alpha-\beta-\gamma}$ puis identifier avec $L^1$ : l'exposant de $M$ et celui de $T$ doivent être nuls, celui de $L$ doit valoir $1$.
+
+    solution: 
+      - titre: |
+          Correction détaillée de la question 4
+        texte : |
+          \begin{enumerate}[label=\alph*)]
+            \item $[G] = M^{-1} L^3 T^{-2}$, $[\hbar] = M L^2 T^{-1}$, $[c] = L T^{-1}$.
+            \item $[\ell_P] = M^{-\alpha+\beta} \, L^{3\alpha+2\beta+\gamma} \, T^{-2\alpha-\beta-\gamma}$. On veut $L^1$ donc
+            $$-\alpha + \beta = 0, \qquad 3\alpha + 2\beta + \gamma = 1, \qquad -2\alpha - \beta - \gamma = 0.$$
+            La première équation donne $\beta = \alpha$. La troisième donne $\gamma = -3\alpha$. La deuxième devient $5\alpha - 3\alpha = 1$ donc $\alpha = \dfrac{1}{2}$. Finalement
+            $$\alpha = \beta = \frac{1}{2}, \qquad \gamma = -\frac{3}{2}, \qquad \ell_P = \sqrt{\frac{\hbar G}{c^3}}.$$
+            \item $\ell_P = \sqrt{\dfrac{1,05 \times 10^{-34} \times 6,67 \times 10^{-11}}{(3,00 \times 10^{8})^3}} = \sqrt{\dfrac{7,00 \times 10^{-45}}{2,70 \times 10^{25}}} \approx \sqrt{2,59 \times 10^{-70}}$, soit $\ell_P \approx 1,6 \times 10^{-35} ~\text{m}$.
+            \item $t_P = \dfrac{1,6 \times 10^{-35}}{3,00 \times 10^{8}} \approx 5,4 \times 10^{-44} ~\text{s}$.
+            \item $\left[\dfrac{\hbar c}{G}\right] = \dfrac{M L^2 T^{-1} \cdot L T^{-1}}{M^{-1} L^3 T^{-2}} = M^2$, donc $[m_P] = M$ : c'est bien une masse. 
+            $$m_P = \sqrt{\dfrac{1,05 \times 10^{-34} \times 3,00 \times 10^{8}}{6,67 \times 10^{-11}}} = \sqrt{4,72 \times 10^{-16}} \approx 2,2 \times 10^{-8} ~\text{kg}.$$
+          \end{enumerate}
+
+  - id: q5
+
+    enonce: |
+      {\bf La constante de la troisième loi de Kepler (question difficile)}\\
+
+      La troisième loi de Kepler s'écrit $T^2 = K \, a^3$ où $T$ est la période de révolution d'une planète autour du Soleil et $a$ le demi-grand axe de son orbite.
+      \begin{enumerate}[label=\alph*)]
+        \item Donner la dimension et l'unité SI de $K$.
+        \item La théorie de Newton donne $K = \dfrac{4\pi^2}{G \, M_S}$ avec $M_S = 1,99 \times 10^{30} ~\text{kg}$. Vérifier que cette expression a bien la dimension trouvée en a).
+        \item Calculer $K$ en unités SI avec $G = 6,67 \times 10^{-11} ~\text{m}^3\text{.kg}^{-1}\text{.s}^{-2}$.
+        \item Convertir $K$ en $\text{an}^2\text{.UA}^{-3}$, avec $1 ~\text{an} = 3,16 \times 10^{7} ~\text{s}$ et $1 ~\text{UA} = 1,50 \times 10^{11} ~\text{m}$. Que remarque-t-on ?
+        \item La Terre est à $1 ~\text{UA}$ du Soleil. Une planète a une période de $11,9 ~\text{ans}$. Calculer son demi-grand axe en UA, sans utiliser les unités SI.
+      \end{enumerate}
+
+    coup_de_pouce: 
+      - titre: |
+          Pour la conversion
+        texte: |
+          Comme $1 ~\text{s} = \dfrac{1}{3,16 \times 10^{7}} ~\text{an}$ et $1 ~\text{m} = \dfrac{1}{1,50 \times 10^{11}} ~\text{UA}$, on a $1 ~\text{s}^2\text{.m}^{-3} = \dfrac{(1,50 \times 10^{11})^3}{(3,16 \times 10^{7})^2} ~\text{an}^2\text{.UA}^{-3}$.
+
+    solution: 
+      - titre: |
+          Correction détaillée de la question 5
+        texte : |
+          \begin{enumerate}[label=\alph*)]
+            \item $K = \dfrac{T^2}{a^3}$ donc $[K] = T^2 L^{-3}$. Unité SI : $\text{s}^2\text{.m}^{-3}$.
+            \item $\left[\dfrac{4\pi^2}{G M_S}\right] = \dfrac{1}{M^{-1} L^3 T^{-2} \cdot M} = T^2 L^{-3}$ : c'est cohérent.
+            \item $K = \dfrac{4\pi^2}{6,67 \times 10^{-11} \times 1,99 \times 10^{30}} = \dfrac{39,5}{1,33 \times 10^{20}} \approx 2,97 \times 10^{-19} ~\text{s}^2\text{.m}^{-3}$.
+            \item $K = 2,97 \times 10^{-19} \times \dfrac{(1,50 \times 10^{11})^3}{(3,16 \times 10^{7})^2} = 2,97 \times 10^{-19} \times \dfrac{3,38 \times 10^{33}}{9,99 \times 10^{14}} \approx 1,00 ~\text{an}^2\text{.UA}^{-3}$. Dans ces unités, la constante vaut $1$ : c'est pourquoi les astronomes utilisent l'an et l'UA.
+            \item $a^3 = \dfrac{T^2}{K} = 11,9^2 = 141,6 ~\text{UA}^3$ donc $a = \sqrt[3]{141,6} \approx 5,21 ~\text{UA}$ (il s'agit de Jupiter).
+          \end{enumerate}

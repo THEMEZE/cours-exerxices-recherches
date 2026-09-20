@@ -10,7 +10,7 @@ cours_rattache:
   - chap1.celerite_onde
 
 metadonnees:
-  duree_estimee: "25 min"
+  duree_estimee: "40 min"
   difficulte: 2 # Sur une échelle de 1 à 5
   type_exercice: "Application directe du cours"
   indispensable: true
@@ -33,36 +33,38 @@ prerequis :
   - titre: "Dérivées partielles et composition"
     texte: |
       Savoir dériver une fonction composée à plusieurs variables par la règle
-      de la chaîne (*chain rule*). Connaître la définition d'une onde progressive
+      de la chaîne ({\bf chain rule}). Connaître la définition d'une onde progressive
       et de sa célérité $c$.
 
 objectifs_pedagogiques_etudiants :
   - titre: "Vérification formelle et sens de propagation"
     texte: |
-      - Vérifier mathématiquement qu'une fonction de la forme $f(x \mp ct)$ est solution de l'équation de d'Alembert.
-      - Associer le signe devant le terme $ct$ au sens de propagation de l'onde progressive.
-      - Utiliser la propriété de linéarité de l'équation d'onde.
+      \begin{itemize}[label=$\bullet$]
+      \item Vérifier mathématiquement qu'une fonction de la forme $f(x \mp ct)$ est solution de l'équation de d'Alembert.
+      \item Associer le signe devant le terme $ct$ au sens de propagation de l'onde progressive.
+      \item Utiliser la propriété de linéarité de l'équation d'onde.
+      \end{itemize}
 
 objectifs_pedagogiques_enseignants :
   - titre: "Ancrage des représentations d'ondes"
     texte: |
-      - Démystifier le formalisme des fonctions à deux variables $y(x,t)$.
-      - Faire le lien entre le mouvement spatial d'un profil et le concept d'argument constant.
+      \begin{itemize}[label=$\bullet$]
+      \item Démystifier le formalisme des fonctions à deux variables $y(x,t)$.
+      \item Faire le lien entre le mouvement spatial d'un profil et le concept d'argument constant.
+      \end{itemize}
 
 point_cours :
   - titre: "Équation de d'Alembert à 1D"
     texte: |
-      Toute fonction de classe $\mathcal{C}^2$ de la forme $y(x,t) = f(x-ct) + g(x+ct)$
-      est solution de l'équation d'onde 1D. La fonction $f(x-ct)$ représente une onde
-      progressive se déplaçant vers les $x$ croissants à la vitesse $c$, tandis que
+      Toute fonction de classe $\mathcal{C}^2$ de la forme $y(x,t) = f(x-ct) + g(x+ct)$ est solution de l'équation d'onde 1D.\\
+
+      La fonction $f(x-ct)$ représente une onde progressive se déplaçant vers les $x$ croissants à la vitesse $c$, tandis que
       $g(x+ct)$ représente une onde se déplaçant vers les $x$ décroissants.
 
 remarques_pedagogiques_ecueils_classiques: 
   - titre: "Confusion de signe sur le sens de propagation"
     texte: |
-      Les étudiants associent souvent à tort le signe minus (« $-$ ») à un déplacement
-      vers la gauche (vers les $x$ négatifs). Il faut insister sur le raisonnement
-      à argument constant : si $t$ augmente, $x$ doit augmenter pour maintenir $x-ct$ constant.
+      Les étudiants associent souvent à tort le signe minus (« $-$ ») à un déplacement vers la gauche (vers les $x$ négatifs). Il faut insister sur le raisonnement à argument constant : si $t$ augmente, $x$ doit augmenter pour maintenir $x-ct$ constant.
 
 remarques_pedagogiques_conseils_animation: 
   - titre: "Animation au tableau ou géométrie dynamique"
@@ -101,11 +103,135 @@ aller_plus_loin:
       directe fournit la forme $y(\xi,\eta) = f(\xi) + g(\eta)$.
 
   - niveau: master
+    titre: "Lien avec les coordonnées caractéristiques et la notation covariante"
+    texte: |
+      Introduire les coordonnées caractéristiques :
+      \[
+        \xi=x-ct,
+        \qquad
+        \eta=x+ct.
+      \]
+
+      Dans ces coordonnées, l'opérateur d'onde se factorise :
+      \[
+        \frac{\partial^2}{\partial x^2}
+        -
+        \frac{1}{c^2}
+        \frac{\partial^2}{\partial t^2}
+        =
+        4
+        \frac{\partial^2}{\partial\xi\,\partial\eta}.
+      \]
+
+      Les fonctions $f(\xi)$ et $g(\eta)$ sont alors directement
+      identifiées comme les deux familles d'ondes se propageant dans
+      les directions opposées.
+
+      \medskip
+
+      \textbf{Ouverture vers la notation covariante.}
+
+      En relativité, les coordonnées d'espace et de temps peuvent être
+      regroupées dans un quadrivecteur
+      \[
+        x^\mu=(ct,x,y,z).
+      \]
+      On introduit alors la dérivée covariante
+      \[
+        \partial_\mu
+        \equiv
+        \frac{\partial}{\partial x^\mu}.
+      \]
+      Avec la convention de signature
+      \[
+        \eta_{\mu\nu}=\operatorname{diag}(1,-1,-1,-1),
+      \]
+      on obtient
+      \[
+        \partial_\mu
+        =
+        \left(
+          \frac{1}{c}\frac{\partial}{\partial t},
+          \frac{\partial}{\partial x},
+          \frac{\partial}{\partial y},
+          \frac{\partial}{\partial z}
+        \right).
+      \]
+
+      La dérivée à indice contravariant est obtenue en relevant l'indice
+      avec la métrique :
+      \[
+        \partial^\mu
+        =
+        \eta^{\mu\nu}\partial_\nu.
+      \]
+      Ainsi,
+      \[
+        \partial^\mu
+        =
+        \left(
+          \frac{1}{c}\frac{\partial}{\partial t},
+          -\frac{\partial}{\partial x},
+          -\frac{\partial}{\partial y},
+          -\frac{\partial}{\partial z}
+        \right).
+      \]
+
+      La contraction des deux dérivées donne alors l'opérateur
+      de d'Alembert :
+      \[
+        \boxed{
+        \partial_\mu\partial^\mu
+        =
+        \frac{1}{c^2}\frac{\partial^2}{\partial t^2}
+        -
+        \nabla^2
+        }.
+      \]
+
+      L'équation d'onde dans le vide,
+      \[
+        \frac{1}{c^2}\frac{\partial^2\psi}{\partial t^2}
+        -
+        \nabla^2\psi
+        =0,
+      \]
+      peut donc s'écrire de manière compacte
+      \[
+        \boxed{\partial_\mu\partial^\mu\psi=0}.
+      \]
+
+      Dans le cas unidimensionnel,
+      \[
+        \partial_\mu\partial^\mu
+        =
+        \frac{1}{c^2}\frac{\partial^2}{\partial t^2}
+        -
+        \frac{\partial^2}{\partial x^2},
+      \]
+      qui est, à un signe près selon la convention choisie pour
+      l'opérateur d'onde, l'opérateur rencontré précédemment.
+
+      \medskip
+
+      \textbf{Point important :} la distinction entre $\partial_\mu$
+      et $\partial^\mu$ ne signifie pas qu'il s'agit de deux dérivées
+      différentes. L'indice est simplement abaissé ou relevé à l'aide
+      de la métrique :
+      \[
+        \partial^\mu=\eta^{\mu\nu}\partial_\nu.
+      \]
+      Cette notation permet d'écrire les équations relativistes sous une
+      forme indépendante du choix particulier des coordonnées.
+
+  - niveau: master
     titre: "Solutions fondamentales et fonction de Green"
     texte: |
       La formule de d'Alembert permet d'exprimer la solution du problème de Cauchy pour l'équation
       des ondes avec conditions initiales $y(x,0) = y_0(x)$ et $\frac{\partial y}{\partial t}(x,0) = v_0(x)$ :
       $y(x,t) = \frac{1}{2}[y_0(x-ct) + y_0(x+ct)] + \frac{1}{2c} \int_{x-ct}^{x+ct} v_0(s) \, \mathrm{d}s$.
+
+  
 
 questions:
 
@@ -689,6 +815,57 @@ questions:
         titre: "Croisement d'ondes"
         texte: |
           Deux vagues arrivant en sens inverse se croisent, s'additionnent, puis poursuivent leur chemin sans altération.
+      
+      - niveau: prepa
+        titre: "Linéarité de l'équation de d'Alembert"
+        texte: |
+          L'équation de d'Alembert pour une onde se propageant dans un milieu
+          homogène s'écrit
+          \[
+            \frac{\partial^2 y}{\partial t^2}
+            -
+            c^2\frac{\partial^2 y}{\partial x^2}
+            =0.
+          \]
+          On peut introduire l'opérateur d'onde
+          \[
+            \mathcal{D}
+            =
+            \frac{\partial^2}{\partial t^2}
+            -
+            c^2\frac{\partial^2}{\partial x^2}.
+          \]
+          Cet opérateur est \textbf{linéaire} : pour deux fonctions $y_1$ et
+          $y_2$ et deux constantes $\alpha$ et $\beta$,
+          \[
+            \mathcal{D}(\alpha y_1+\beta y_2)
+            =
+            \alpha\mathcal{D}(y_1)
+            +
+            \beta\mathcal{D}(y_2).
+          \]
+          Ainsi, si $y_1$ et $y_2$ sont deux solutions de l'équation de
+          d'Alembert, alors
+          \[
+            y=\alpha y_1+\beta y_2
+          \]
+          est également une solution. C'est la base mathématique du
+          \textbf{principe de superposition} des ondes.
+
+          En revanche, si l'équation comportait un terme non linéaire, par
+          exemple
+          \[
+            \frac{\partial^2 y}{\partial t^2}
+            -
+            c^2\frac{\partial^2 y}{\partial x^2}
+            +\lambda y^2=0,
+          \]
+          l'opérateur associé ne serait plus linéaire et le principe de
+          superposition ne serait plus valable en général.
+
+          \textbf{À retenir :} la superposition des ondes n'est pas une
+          propriété indépendante de l'équation : elle découle directement de
+          la linéarité de l'équation de propagation.
 
       - niveau: prepa
         titre: "Équations non linéaires"
@@ -793,13 +970,13 @@ questions:
       et $t_2$ sur un même graphique, en faisant apparaître le déplacement
       du point considéré. Conclure quant au sens de propagation de l'onde.
 
-    figure:
-      - ref: td1_ex0_onde_x_minus_ct
-        legende: |
-          Translation du profil d'une onde $y(x,t)=f(x-ct)$ entre
-          les instants $t_1$ et $t_2$.
-        scale: 0.7
-        label: "fig:onde_x_minus_ct"
+    # figure:
+    #   - ref: td1_ex0_onde_x_minus_ct
+    #     legende: |
+    #       Translation du profil d'une onde $y(x,t)=f(x-ct)$ entre
+    #       les instants $t_1$ et $t_2$.
+    #     scale: 0.7
+    #     label: "fig:onde_x_minus_ct"
 
     prerequis : 
       - titre: "Maniement des inégalités"
@@ -920,6 +1097,14 @@ questions:
           }
           $$
 
+        figure:
+          - ref: td1_ex0_onde_x_minus_ct
+            legende: |
+              Translation du profil d'une onde $y(x,t)=f(x-ct)$ entre
+              les instants $t_1$ et $t_2$.
+            scale: 0.7
+            label: "fig:onde_x_minus_ct"
+
     remarques_pedagogiques_ecueils_classiques: 
       - titre: "Piège du signe moins"
         texte: |
@@ -967,13 +1152,7 @@ questions:
 
       Conclure quant au sens de propagation de cette onde.
 
-    figure:
-      - ref: td1_ex0_onde_x_plus_ct
-        legende: |
-          Translation du profil d'une onde $y(x,t)=g(x+ct)$ entre
-          les instants $t_1$ et $t_2$.
-        scale: 0.7
-        label: "fig:onde_x_plus_ct"
+    
 
     prerequis : 
       - titre: "Raisonnements de la question 4a"
@@ -1075,6 +1254,15 @@ questions:
           \quad\text{est une onde se propageant vers les }x\text{ décroissants.}
           }
           $$
+        figure:
+          - ref: td1_ex0_onde_x_plus_ct
+            legende: |
+              Translation du profil d'une onde $y(x,t)=g(x+ct)$ entre
+              les instants $t_1$ et $t_2$.
+            scale: 0.7
+            label: "fig:onde_x_plus_ct"
+
+        
 
     remarques_pedagogiques_ecueils_classiques: 
       - titre: "Confondre célérité et vitesse algébrique"

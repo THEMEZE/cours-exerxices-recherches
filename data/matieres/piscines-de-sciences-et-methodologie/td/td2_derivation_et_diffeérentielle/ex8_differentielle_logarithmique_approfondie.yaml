@@ -1,0 +1,179 @@
+id: td2_ex8
+intitule: |
+  Différentielle logarithmique : approfondissement (incertitudes en situation réelle)
+td: td2
+facultatif: true
+seance: 1
+
+cours_rattache:
+  - chap2.derivation_et_differentielle
+
+metadonnees:
+  duree_estimee: "50 min"
+  difficulte: 4
+  type_exercice: |
+    Entraînement $\&$ Calcul
+  indispensable: false
+
+enonce_intro: |
+  Cet exercice prolonge l'exercice 4 avec des formules réelles de physique et des données numériques. On applique la méthode de la différentielle logarithmique pour obtenir l'incertitude \textbf{maximale} (somme des contributions en valeur absolue), on identifie la mesure qui domine l'incertitude, et on rencontre un cas où le logarithme ne suffit pas directement (formule des lentilles).
+
+  Pour une grandeur $f = k\,x^\alpha y^\beta z^\gamma$ ($k$ constant) :
+  $$\frac{\Delta f}{f} = |\alpha|\frac{\Delta x}{x} + |\beta|\frac{\Delta y}{y} + |\gamma|\frac{\Delta z}{z}.$$
+
+prerequis:
+  - titre: "Exercices 4 et 6"
+    texte: |
+      Méthode logarithmique, différence entre $\delta f$ (variation algébrique) et $\Delta f$ (incertitude maximale, toujours positive).
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Propager des incertitudes dans des formules réelles"
+    texte: |
+      Écrire le résultat d'une mesure avec son incertitude, avec le bon nombre de chiffres significatifs, et identifier la grandeur qui limite la précision.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Piège du regroupement de termes"
+    texte: |
+      Montrer que pour une formule qui n'est pas un produit de puissances, les valeurs absolues doivent être prises \textbf{après} avoir regroupé les coefficients de chaque $\mathrm{d}x_i$, sinon on surestime fortement l'incertitude.
+
+coup_de_pouce:
+  - titre: "Chiffres significatifs"
+    texte: |
+      L'incertitude s'écrit avec 1 (parfois 2) chiffre significatif, et la valeur est arrondie à la même décimale que l'incertitude.
+
+point_cours:
+  - titre: "Rappel de la méthode"
+    texte: |
+      \begin{enumerate}[label=\arabic*)]
+        \item Prendre $\ln f$ et développer.
+        \item Différentier : $\dfrac{\mathrm{d}f}{f} = \dots$
+        \item Regrouper les termes en $\mathrm{d}x_i$.
+        \item Remplacer $\mathrm{d}$ par $\Delta$ et mettre chaque coefficient en \textbf{valeur absolue}.
+      \end{enumerate}
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Valeur absolue avant regroupement"
+    texte: |
+      Dans la question 4, mettre en valeur absolue les termes de $\frac{\mathrm{d}f}{f}$ avant de regrouper les $\mathrm{d}p$ et $\mathrm{d}p'$ donne $\Delta f = 0{,}72\ \text{cm}$ au lieu de $0{,}28\ \text{cm}$.
+  - titre: "Oublier l'exposant"
+    texte: |
+      Ne pas multiplier $\Delta d/d$ par 2 dans $R\propto d^{-2}$.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Budget d'incertitude"
+    texte: |
+      Demander à chaque fois : « quelle mesure améliorer en priorité ? ». On compare les termes $|a_i|\,\Delta x_i/x_i$, pas les incertitudes relatives seules.
+
+bilan:
+  - titre: "Synthèse"
+    texte: |
+      La méthode logarithmique donne immédiatement une incertitude relative pour un produit de puissances. Pour les autres formules, on revient à $\mathrm{d}f = \sum \frac{\partial f}{\partial x_i}\mathrm{d}x_i$ en regroupant les termes avant de prendre les valeurs absolues.
+
+aller_plus_loin:
+  - niveau: master
+    titre: "Combinaison quadratique"
+    texte: |
+      Refaire les questions avec une somme quadratique des contributions. Voir l'exercice 9 pour une famille de combinaisons (norme $p$).
+
+questions:
+  - id: q1
+    parent: "1"
+    enonce: |
+      Période d'un pendule simple : $T = 2\pi\sqrt{\dfrac{L}{g}}$, avec $L = 1{,}000 \pm 0{,}005\ \text{m}$ et $g = 9{,}81 \pm 0{,}03\ \text{m}\cdot\text{s}^{-2}$. Établir $\dfrac{\Delta T}{T}$ par la méthode logarithmique, calculer $T$ et $\Delta T$, et écrire le résultat.
+    coup_de_pouce:
+      - titre: "Exposants"
+        texte: |
+          $T = 2\pi\,L^{1/2}\,g^{-1/2}$ : $2\pi$ est une constante, $\mathrm{d}(2\pi)=0$.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $\ln T = \ln 2\pi + \dfrac{1}{2}\ln L - \dfrac{1}{2}\ln g$, donc
+          $$\frac{\mathrm{d}T}{T} = \frac{1}{2}\frac{\mathrm{d}L}{L} - \frac{1}{2}\frac{\mathrm{d}g}{g} \quad\Longrightarrow\quad \frac{\Delta T}{T} = \frac{1}{2}\frac{\Delta L}{L} + \frac{1}{2}\frac{\Delta g}{g}.$$
+          Numériquement : $\dfrac{\Delta L}{L} = 0{,}50\ \%$, $\dfrac{\Delta g}{g} = \dfrac{0{,}03}{9{,}81}\approx 0{,}31\ \%$, donc $\dfrac{\Delta T}{T}\approx 0{,}25 + 0{,}15 = 0{,}40\ \%$.
+          $T = 2\pi\sqrt{1{,}000/9{,}81}\approx 2{,}006\ \text{s}$ et $\Delta T \approx 2{,}006\times 0{,}0040 \approx 0{,}008\ \text{s}$.
+
+          {\bf Résultat} : $T = (2{,}006 \pm 0{,}008)\ \text{s}$.
+
+  - id: q2_a
+    parent: "2"
+    enonce: |
+      Résistance d'un fil cylindrique : $R = \dfrac{\rho L}{S}$ avec $S = \dfrac{\pi d^2}{4}$. Exprimer $R$ en fonction de $\rho$, $L$ et $d$, puis établir $\dfrac{\Delta R}{R}$.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $R = \dfrac{4\rho L}{\pi d^2}$, donc $\ln R = \ln\dfrac{4}{\pi} + \ln\rho + \ln L - 2\ln d$ et
+          $$\frac{\mathrm{d}R}{R} = \frac{\mathrm{d}\rho}{\rho} + \frac{\mathrm{d}L}{L} - 2\frac{\mathrm{d}d}{d} \quad\Longrightarrow\quad \frac{\Delta R}{R} = \frac{\Delta\rho}{\rho} + \frac{\Delta L}{L} + 2\frac{\Delta d}{d}.$$
+
+  - id: q2_b
+    parent: "2"
+    enonce: |
+      Données : $\rho = (1{,}7 \pm 0{,}034)\times 10^{-8}\ \Omega\cdot\text{m}$, $L = 2{,}00 \pm 0{,}01\ \text{m}$, $d = 0{,}50 \pm 0{,}01\ \text{mm}$. Calculer $R$, $\Delta R$, écrire le résultat et déterminer quelle mesure contribue le plus à l'incertitude.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $\dfrac{\Delta\rho}{\rho} = 2\ \%$, $\dfrac{\Delta L}{L} = 0{,}5\ \%$, $\dfrac{\Delta d}{d} = 2\ \%$.
+          $$\frac{\Delta R}{R} = 2 + 0{,}5 + 2\times 2 = 6{,}5\ \%.$$
+          $R = \dfrac{4\times 1{,}7\times 10^{-8}\times 2{,}00}{\pi\,(0{,}50\times 10^{-3})^2}\approx 0{,}173\ \Omega$ et $\Delta R \approx 0{,}173\times 0{,}065\approx 0{,}011\ \Omega$.
+
+          {\bf Résultat} : $R = (0{,}173 \pm 0{,}011)\ \Omega$.
+
+          Contributions : $\rho$ : 2 points sur 6,5 ($\approx 31\ \%$), $L$ : 0,5 ($\approx 8\ \%$), $d$ : 4 ($\approx 62\ \%$). Le diamètre domine, car il intervient au carré et sa précision relative est faible. Améliorer sa mesure est la priorité.
+
+  - id: q3
+    parent: "3"
+    enonce: |
+      Énergie cinétique : $E_c = \dfrac{1}{2}mv^2$, avec $m = 2{,}00 \pm 0{,}02\ \text{kg}$ et $v = 3{,}0 \pm 0{,}1\ \text{m}\cdot\text{s}^{-1}$. Calculer $E_c$ et $\Delta E_c$, et écrire le résultat.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $\dfrac{\Delta E_c}{E_c} = \dfrac{\Delta m}{m} + 2\dfrac{\Delta v}{v} = 1{,}0\ \% + 2\times 3{,}3\ \% \approx 7{,}7\ \%$.
+          $E_c = \dfrac{1}{2}\times 2{,}00\times 3{,}0^2 = 9{,}0\ \text{J}$ et $\Delta E_c \approx 9{,}0\times 0{,}077\approx 0{,}7\ \text{J}$.
+
+          {\bf Résultat} : $E_c = (9{,}0 \pm 0{,}7)\ \text{J}$. La vitesse est responsable de $\approx 87\ \%$ de l'incertitude relative.
+
+  - id: q4_a
+    parent: "4"
+    enonce: |
+      (*) Lentille mince : $\dfrac{1}{f} = \dfrac{1}{p} + \dfrac{1}{p'}$, soit $f = \dfrac{pp'}{p + p'}$. Établir $\dfrac{\mathrm{d}f}{f}$ par la méthode logarithmique et regrouper les termes en $\mathrm{d}p$ et $\mathrm{d}p'$.
+    coup_de_pouce:
+      - titre: "Logarithme d'une somme"
+        texte: |
+          $\ln f = \ln p + \ln p' - \ln(p+p')$ et $\mathrm{d}\ln(p+p') = \dfrac{\mathrm{d}p + \mathrm{d}p'}{p+p'}$.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $$
+          \begin{array}{rcl}
+          \dfrac{\mathrm{d}f}{f} & = & \dfrac{\mathrm{d}p}{p} + \dfrac{\mathrm{d}p'}{p'} - \dfrac{\mathrm{d}p + \mathrm{d}p'}{p+p'}\\[3mm]
+          & = & \left(\dfrac{1}{p} - \dfrac{1}{p+p'}\right)\mathrm{d}p + \left(\dfrac{1}{p'} - \dfrac{1}{p+p'}\right)\mathrm{d}p'\\[3mm]
+          & = & \dfrac{p'}{p\,(p+p')}\,\mathrm{d}p + \dfrac{p}{p'\,(p+p')}\,\mathrm{d}p'.
+          \end{array}
+          $$
+          Donc $\mathrm{d}f = \dfrac{p'^2}{(p+p')^2}\,\mathrm{d}p + \dfrac{p^2}{(p+p')^2}\,\mathrm{d}p'$ (on retrouve $\dfrac{\mathrm{d}f}{f^2} = \dfrac{\mathrm{d}p}{p^2} + \dfrac{\mathrm{d}p'}{p'^2}$ en différentiant directement $\frac{1}{f}$).
+
+  - id: q4_b
+    parent: "4"
+    enonce: |
+      (*) Pour $p = 30{,}0 \pm 0{,}5\ \text{cm}$ et $p' = 60{,}0 \pm 0{,}5\ \text{cm}$, calculer $f$ et $\Delta f$. Comparer avec le résultat qu'on obtiendrait en mettant en valeur absolue les termes \textbf{avant} de regrouper :
+      $\dfrac{\Delta f}{f} \overset{?}{=} \dfrac{\Delta p}{p} + \dfrac{\Delta p'}{p'} + \dfrac{\Delta p + \Delta p'}{p+p'}$.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $f = \dfrac{30\times 60}{90} = 20{,}0\ \text{cm}$. Les coefficients de la question précédente sont tous positifs :
+          $$\Delta f = \frac{p'^2}{(p+p')^2}\Delta p + \frac{p^2}{(p+p')^2}\Delta p' = \frac{4}{9}\times 0{,}5 + \frac{1}{9}\times 0{,}5 \approx 0{,}28\ \text{cm}.$$
+          {\bf Résultat} : $f = (20{,}0 \pm 0{,}3)\ \text{cm}$.
+
+          Avec valeur absolue avant regroupement :
+          $$\Delta f \overset{?}{=} 20\left(\frac{0{,}5}{30} + \frac{0{,}5}{60} + \frac{1{,}0}{90}\right) \approx 0{,}72\ \text{cm},$$
+          soit plus de deux fois trop. Le terme $-\dfrac{\mathrm{d}p+\mathrm{d}p'}{p+p'}$ compense partiellement les deux autres, et cette compensation disparaît si on met les termes en valeur absolue trop tôt.
+
+  - id: q5
+    parent: "5"
+    enonce: |
+      Soit $f = \dfrac{x^3\,z}{y^2}$ avec $\dfrac{\Delta x}{x} = 1\ \%$, $\dfrac{\Delta y}{y} = 2\ \%$ et $\dfrac{\Delta z}{z} = 4\ \%$. Calculer $\dfrac{\Delta f}{f}$, identifier la contribution dominante, et déterminer la valeur maximale de $\dfrac{\Delta z}{z}$ qui permet d'avoir $\dfrac{\Delta f}{f}\le 10\ \%$.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $\dfrac{\Delta f}{f} = 3\dfrac{\Delta x}{x} + 2\dfrac{\Delta y}{y} + \dfrac{\Delta z}{z} = 3 + 4 + 4 = 11\ \%$.
+          Contributions : $x$ : 3 (27 %), $y$ : 4 (36 %), $z$ : 4 (36 %). $y$ et $z$ dominent à égalité.
+          Pour $\dfrac{\Delta f}{f}\le 10\ \%$ avec $x$ et $y$ inchangés : $3 + 4 + \dfrac{\Delta z}{z}\le 10$, donc $\dfrac{\Delta z}{z}\le 3\ \%$.

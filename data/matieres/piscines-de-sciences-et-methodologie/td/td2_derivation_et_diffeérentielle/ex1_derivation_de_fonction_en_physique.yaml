@@ -15,8 +15,35 @@ metadonnees:
 
 enonce_intro: |
   En Physique, les variables et les fonctions changent souvent de nom, d'où l'intérêt d'utiliser la notation différentielle lors du calcul de dérivées. De plus, les fonctions contiennent des paramètres (grandeurs constantes) souvent représentés par des lettres : il faut donc bien distinguer variables et paramètres.
-  Notation en Physique sur les dérivées par rapport au temps $t$ : la dérivée $\frac{\mathrm{d}x}{\mathrm{d}t}$ se note $\dot{x}$.
+  Notation en Physique sur les dérivées par rapport au temps $t$ : la dérivée $\frac{\mathrm{d}x}{\mathrm{d}t}$ se note $\dot{x}$.\\
 
+  Déterminer la dérivée des fonctions suivantes (en utilisant la notation diﬀérentielle) :
+
+  
+
+  {
+          %\fontsize{10pt}{10pt}\selectfont
+
+          \[
+          \begin{array}{rrcllcrrcll}
+          \textbf{(a)} & f(x) & = & k\, \ln x  & k \, \text{constant}  && \textbf{(d)} & r(\theta) & = & a \, \cos \theta + b \, \sin \theta &  \text{$a$ et $b$ constants}
+          \\[2mm]
+
+          \textbf{(b)} & g(t) & = & R \, \cos( 2 \omega t ) & \text{$R$ et $\omega$ constants} && \textbf{(e)} & x(t) 
+          & = & a \, \cos ( \alpha t^2 ) & \text{$a$ et $\alpha$ constants}
+          \\[2mm]
+
+          \textbf{(c)} & h(t)
+          & = & \sin^2(\omega t) & \text{$\omega$ constant}
+          && \textbf{(f)} & z(t)
+          & = & a \, t^2 - b t  & \text{$a$ et $b$ constants}
+          \end{array}
+          \]
+
+        \bigskip
+      }
+
+  
 prerequis:
   - titre: "Dérivées usuelles et règles de dérivation"
     texte: |
@@ -42,6 +69,59 @@ point_cours:
     texte: |
       La dérivée d'une fonction $f(x)$ par rapport à sa variable $x$ se note $\frac{\mathrm{d}f}{\mathrm{d}x}(x)$.
       En physique, pour une fonction dépendant du temps $t$, la dérivée temporelle première se note $\frac{\mathrm{d}x}{\mathrm{d}t} = \dot{x}$, et la dérivée seconde $\frac{\mathrm{d}^2 x}{\mathrm{d}t^2} = \ddot{x}$.
+  
+  - titre: |
+      Usuelles
+    texte: |
+        $$
+        \begin{array}{rcl}
+        \mathrm{d}(f \circ g) & = & (f' \circ g) \cdot \mathrm{d}g,\\
+        \mathrm{d}(f \cdot g) & = & g \cdot \mathrm{d}f + f \cdot \mathrm{d}g
+        \end{array}
+        $$
+
+        Pour $k$ constant, $\mathrm{d}k = 0$. Donc 
+        $$
+        \begin{array}{rcl}
+        \mathrm{d}(k \cdot f) & = & k \cdot \mathrm{d}f
+        \end{array}
+        $$
+
+        On peut aussi déduire 
+        $$
+        \begin{array}{rcl}
+        \mathrm{d}(f^n) & = & n \, f^{n-1} \cdot \mathrm{d}f
+        \end{array}
+        $$
+
+        En particulier 
+        $$
+        \begin{array}{rcl}
+        \mathrm{d}(f^{-1}) & = & -f^{-2} \cdot \mathrm{d}f ~=~ \displaystyle -\frac{\mathrm{d}f}{f^2}
+        \end{array}
+        $$
+
+        En écrivant ${\displaystyle \mathrm{d}\left( \frac{f}{g} \right)} = \mathrm{d}(f \cdot g^{-1}) = g^{-1} \mathrm{d}f + f \cdot \mathrm{d}(g^{-1})$, il vient que 
+        $$
+        \begin{array}{rcl}
+        {\displaystyle \mathrm{d}\left( \frac{f}{g} \right)} & = & \displaystyle \frac{g \cdot \mathrm{d}f - f \cdot \mathrm{d}g}{g^2}
+        \end{array}
+        $$
+
+  - titre: |
+        Fonctions Usuelles
+    texte: |
+        $$
+        \begin{array}{rcl}
+        \mathrm{d}(\exp \colon x \mapsto \exp(x) ) & \colon &  x \mapsto \exp(x) \,\mathrm{d}x,\\[1ex]
+        \mathrm{d}(\ln \colon x \mapsto  \ln x) & \colon & \displaystyle x \mapsto  \frac{\mathrm{d}x}{x},\\[1ex]
+        \mathrm{d}(\cos \colon x \mapsto  \cos x) & \colon &  x \mapsto  - \sin x \,\mathrm{d}x,\\[1ex]
+        \mathrm{d}(\sin \colon x \mapsto  \sin x) & \colon &  x \mapsto  \cos x \,\mathrm{d}x,\\[1ex]
+        \mathrm{d}(\tan \colon x \mapsto  \tan x) & \colon & x \mapsto  (1 + \tan^2 x)\,\mathrm{d}x ~=~ \displaystyle \frac{\mathrm{d}x}{\cos^2 x},\\[1ex]
+        \mathrm{d}(x \mapsto  x^\alpha) & = & x \mapsto  \alpha \, x^{\alpha-1} \,\mathrm{d}x
+        \end{array}
+        $$
+       
 
 remarques_pedagogiques_ecueils_classiques:
   - titre: "Erreur de paramètre"
@@ -65,70 +145,104 @@ aller_plus_loin:
       Introduction à la dérivation par rapport à une variable lorsque la fonction en comporte plusieurs : $\frac{\partial f}{\partial x}$.
 
 questions:
+  
   - id: q1_a
     parent: "1"
     enonce: |
       Déterminer la dérivée de $f(x) = k \ln(x)$ avec $k$ constant.
-    point_cours:
-      - titre: |
-          Dérivée de $\ln(x)$
-        texte: |
-          $\frac{\mathrm{d}}{\mathrm{d}x}(\ln x) = \frac{1}{x}$.
     coup_de_pouce:
-      - titre: "Facteur constant"
+      - titre: |
+          différentielle $d(k\ln)$
         texte: |
-          Le paramètre $k$ est en facteur, il reste inchangé lors de la dérivation.
+          Le paramètre $k$ est en facteur, il reste inchangé lors de la dérivation. Et\\
+          $$
+          \mathrm{d}(\ln x ) = \frac{\mathrm{d}x}{x}.
+          $$
     solution:
       - titre: "Résolution"
         texte: |
-          $$\frac{\mathrm{d}f}{\mathrm{d}x} = k \cdot \frac{1}{x} = \frac{k}{x}$$
+          $$
+          \begin{array}{rcl}
+          \mathrm{d}f(x) & = & \mathrm{d}(k\,\ln)(x)\\
+          & = & k \, \mathrm{d}(\ln)(x) \\
+          & = & {\displaystyle k \,  \frac{\mathrm{d}x}{x} } 
+          \end{array}
+          $$
+          Donc 
+          $$\frac{\mathrm{d}f}{\mathrm{d}x} = k \, \cdot \frac{1}{x} = \frac{k}{x}.$$
 
   - id: q1_b
     parent: "1"
     enonce: |
       Déterminer la dérivée de $g(t) = R \cos(2\omega t)$ avec $R$ et $\omega$ constants.
-    point_cours:
-      - titre: |
-          Dérivée de $\cos(ut)$
-        texte: |
-          $\frac{\mathrm{d}}{\mathrm{d}t}(\cos(ut)) = -u \sin(ut)$.
     coup_de_pouce:
-      - titre: "Variable temporelle"
+      - titre: |
+          Différentiel de $\cos(u)$
         texte: |
-          La variable est $t$. La fonction interne est $u(t) = 2\omega t$, sa dérivée par rapport à $t$ est $2\omega$.
+    
+          $$ \mathrm{d}(\cos u ) = -\sin(u) \cdot \mathrm{d}(u)$$.
+
     solution:
       - titre: "Résolution"
         texte: |
-          $$\dot{g}(t) = \frac{\mathrm{d}g}{\mathrm{d}t} = R \cdot (-2\omega \sin(2\omega t)) = -2 R \omega \sin(2\omega t)$$
+          soit $h(x) = R \, \cos x $ et $u(t) = 2\omega t$, tel que $g(t) = h(u(t))$
+          $$
+          \begin{array}{rcl}
+          \mathrm{d}g(t) & = & \mathrm{d}(R \, h \circ u )(t),\\
+          & = & R \,  \mathrm{d}(h \circ u )(t), \\
+          & = & R \, h'(u)(t) \cdot \mathrm{d}(u)(t) \\
+          \end{array}
+          $$
+
+          Or $h'(x) = - \sin x $ et $\mathrm{d}(u)(t) = 2\omega \, \mathrm{d}t$
+
+          Donc 
+
+          $$
+          \mathrm{d}g(t) ~ = ~ - 2 R \omega \sin ( 2\omega t )\, \mathrm{d}t,
+          $$
+
+          donc 
+
+          $$\dot{g}(t) \equiv  \frac{\mathrm{d}g}{\mathrm{d}t} = R \cdot (-2\omega \sin(2\omega t)) = -2 R \omega \sin(2\omega t)$$
+
 
   - id: q1_c
     parent: "1"
     enonce: |
       Déterminer la dérivée de $h(t) = \sin^2(\omega t)$ avec $\omega$ constant.
-    point_cours:
-      - titre: |
-          Dérivée de $u^n$
-        texte: |
-          $\frac{\mathrm{d}}{\mathrm{d}t}(u(t)^n) = n \cdot u'(t) \cdot u(t)^{n-1}$.
     coup_de_pouce:
       - titre: "Composition multiple"
         texte: |
-          Pose $u(t) = \sin(\omega t)$. Alors $h(t) = u(t)^2$.
+
+          Pose $u(t) = \sin(\omega t)$. Alors $h = u^2$. Et utilise $\mathrm{d}(u^n)  =  n \, u^{n-1} \cdot \mathrm{d}u$
     solution:
       - titre: "Résolution"
         texte: |
-          $$\dot{h}(t) = \frac{\mathrm{d}h}{\mathrm{d}t} = 2 \cdot \sin(\omega t) \cdot \frac{\mathrm{d}}{\mathrm{d}t}(\sin(\omega t)) = 2 \cdot \sin(\omega t) \cdot (\omega \cos(\omega t))$$
+          On pose $h = u^2$ avec $u(t) = \sin(\omega t)$.
+          \[
+          \mathrm{d}h(t) = \mathrm{d}(u^2)(t) = 2 \, u(t) \cdot \mathrm{d}u(t) = 2 \, \overbrace{\sin(\omega t)}^{u(t)} \cdot \overbrace{\omega \cos(\omega t) \mathrm{d}t}^{\mathrm{d}u(t)} = \omega \, \underbrace{2 \, \sin(\omega t) \, \cos(\omega t)}_{\sin(2 \omega t)} \, \mathrm{d}t,
+          \]
+
+          ou encore
+
+          \[
+          \dot{h}(t) \equiv \frac{\mathrm{d}h}{\mathrm{d}t}(t) = 2 \cdot \sin(\omega t) \cdot (\omega \cos(\omega t))
+          \]
+
           En utilisant la formule trigonométrique $2\sin(x)\cos(x) = \sin(2x)$ :
-          $$\dot{h}(t) = \omega \sin(2\omega t)$$
+          \[
+          \dot{h}(t) = \omega \sin(2\omega t)
+          \]
 
   - id: q1_d
     parent: "1"
     enonce: |
       Déterminer la dérivée de $r(\theta) = a \cos(\theta) + b \sin(\theta)$ avec $a$ et $b$ constants.
-    point_cours:
-      - titre: "Dérivée par rapport à un angle"
-        texte: |
-          $\frac{\mathrm{d}}{\mathrm{d}\theta}(\cos\theta) = -\sin\theta$ et $\frac{\mathrm{d}}{\mathrm{d}\theta}(\sin\theta) = \cos\theta$.
+    # point_cours:
+    #   - titre: "Dérivée par rapport à un angle"
+    #     texte: |
+    #       $\frac{\mathrm{d}}{\mathrm{d}\theta}(\cos\theta) = -\sin\theta$ et $\frac{\mathrm{d}}{\mathrm{d}\theta}(\sin\theta) = \cos\theta$.
     coup_de_pouce:
       - titre: |
           Variable $\theta$
@@ -137,16 +251,22 @@ questions:
     solution:
       - titre: "Résolution"
         texte: |
-          $$\frac{\mathrm{d}r}{\mathrm{d}\theta} = -a \sin(\theta) + b \cos(\theta)$$
+          $$
+          \mathrm{d}r(\theta) = \mathrm{d}(a \cos + b \sin)(\theta) = a\, \mathrm{d}\cos(\theta) + b\, \mathrm{d} \sin(\theta) = (- a \, \sin + b \, \cos ) (\theta)  \, \mathrm{d}\theta
+          $$
+          Donc 
+          $$\frac{\mathrm{d}r}{\mathrm{d}\theta} = -a \sin(\theta) + b \cos(\theta).$$
+          Mieux 
+          $$r' = -a \sin + b \cos).$$
 
   - id: q1_e
     parent: "1"
     enonce: |
       Déterminer la dérivée de $x(t) = a \cos(\alpha t^2)$ avec $a$ et $\alpha$ constants.
-    point_cours:
-      - titre: "Fonction composée cosinus"
-        texte: |
-          $\frac{\mathrm{d}}{\mathrm{d}t}(\cos(u(t))) = -u'(t) \sin(u(t))$.
+    # point_cours:
+    #   - titre: "Fonction composée cosinus"
+    #     texte: |
+    #       $\frac{\mathrm{d}}{\mathrm{d}t}(\cos(u(t))) = -u'(t) \sin(u(t))$.
     coup_de_pouce:
       - titre: "Dérivée de l'argument"
         texte: |
@@ -154,7 +274,20 @@ questions:
     solution:
       - titre: "Résolution"
         texte: 
-          $$\dot{x}(t) = \frac{\mathrm{d}x}{\mathrm{d}t} = a \cdot (-2\alpha t \sin(\alpha t^2)) = -2 a \alpha t \sin(\alpha t^2)$$
+          $$
+          \begin{array}{rcl}
+          \mathrm{d}x(t)  & = &  \mathrm{d}(a \, \cos (u))(t) \\
+          & =  & a \, \mathrm{d}(\cos (u))(t) \\
+          & =  & a \, \cos'(u(t)) \cdot  \mathrm{d}(u)(t)\\ 
+          & = & a \, \overbrace{-\sin(\alpha t^2)}^{\cos'(u(t))} \cdot  \overbrace{2 \alpha t \mathrm{d} t}^{\mathrm{d}(u)(t)} \\
+          & =  & -2 a \alpha t \sin(\alpha t^2)  \mathrm{d} t
+          \end{array}
+          $$
+
+          Encore 
+
+          
+          $$\dot{x}(t) \equiv \frac{\mathrm{d}x}{\mathrm{d}t} = a \cdot (-2\alpha t \sin(\alpha t^2)) = -2 a \alpha t \sin(\alpha t^2)$$
 
   - id: q1_f
     parent: "1"
@@ -171,4 +304,6 @@ questions:
     solution:
       - titre: "Résolution"
         texte: |
-          $$\dot{z}(t) = \frac{\mathrm{d}z}{\mathrm{d}t} = 2a t - b$$
+          $$ \mathrm{d}z(t) = (2a t - b) \mathrm{d}t $$
+          Soit 
+          $$\dot{z}(t) = \frac{\mathrm{d}z}{\mathrm{d}t} = 2a t - b.$$

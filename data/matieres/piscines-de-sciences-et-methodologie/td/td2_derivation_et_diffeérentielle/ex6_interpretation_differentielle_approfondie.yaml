@@ -1,0 +1,209 @@
+id: td2_ex6
+intitule: |
+  Interprétation de la différentielle : approfondissement (volume, pendule, approximations)
+td: td2
+facultatif: true
+seance: 1
+
+cours_rattache:
+  - chap2.derivation_et_differentielle
+
+metadonnees:
+  duree_estimee: "50 min"
+  difficulte: 3
+  type_exercice: "Entraînement"
+  indispensable: false
+
+enonce_intro: |
+  Cet exercice prolonge l'exercice 2. On y étudie la différence $\Delta f - \mathrm{d}f$ pour une fonction de degré 3 (le volume d'une sphère), on l'applique à un calcul d'incertitude (le pendule simple), puis on utilise $\mathrm{d}f$ pour estimer des valeurs numériques sans calculatrice.
+
+prerequis:
+  - titre: "Exercice 2"
+    texte: |
+      $\mathrm{d}f = f'(x)\,\mathrm{d}x$ et $\Delta f = f(x+\mathrm{d}x) - f(x)$ ; incertitude par la méthode différentielle.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Quantifier l'erreur de l'approximation linéaire"
+    texte: |
+      Savoir que l'erreur $\Delta f - \mathrm{d}f$ est d'ordre $(\mathrm{d}x)^2$, évaluer son importance relative, et prévoir son signe.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Du géométrique au numérique"
+    texte: |
+      Passer de l'image de la coquille sphérique (dérivée du volume = surface) à l'usage pratique de la linéarisation, et faire le lien avec le développement de Taylor à l'ordre 2.
+
+coup_de_pouce:
+  - titre: "Développer proprement"
+    texte: |
+      Pour $\Delta V$, développer $(r+\mathrm{d}r)^3 = r^3 + 3r^2\mathrm{d}r + 3r(\mathrm{d}r)^2 + (\mathrm{d}r)^3$.
+
+point_cours:
+  - titre: "Linéarisation et erreur"
+    texte: |
+      Pour $f$ deux fois dérivable et $\mathrm{d}x$ petit :
+      $$f(x+\mathrm{d}x) \approx f(x) + f'(x)\,\mathrm{d}x, \qquad \Delta f - \mathrm{d}f \approx \frac{1}{2}f''(x)\,(\mathrm{d}x)^2.$$
+      Le signe de $f''$ donne le signe de l'erreur : $f''>0$ (convexe) $\Rightarrow \Delta f > \mathrm{d}f$ ; $f''<0$ (concave) $\Rightarrow \Delta f < \mathrm{d}f$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Angles en degrés"
+    texte: |
+      Utiliser $\mathrm{d}(\sin x) = \cos x\,\mathrm{d}x$ avec $\mathrm{d}x$ en degrés. La formule n'est valable que pour un angle en radians.
+  - titre: "Confondre erreur absolue et erreur relative"
+    texte: |
+      Une erreur $\Delta V - \mathrm{d}V$ de $1{,}3\ \text{cm}^3$ est négligeable sur $126\ \text{cm}^3$ mais pas sur $2\ \text{cm}^3$ : c'est le rapport qui compte.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Ordre de grandeur"
+    texte: |
+      Faire remarquer que diviser $\mathrm{d}r$ par 10 divise l'erreur relative par 10 (erreur relative $\approx \mathrm{d}r/r$) et non par 100.
+
+bilan:
+  - titre: "Synthèse"
+    texte: |
+      La différentielle est exacte au premier ordre, avec une erreur en $(\mathrm{d}x)^2$. Cette précision suffit largement pour estimer des incertitudes et des valeurs approchées.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Formule de Taylor-Lagrange"
+    texte: |
+      Majorer $|\Delta f - \mathrm{d}f|$ par $\frac{1}{2}\sup|f''|\,(\mathrm{d}x)^2$ et en déduire une incertitude sur l'approximation.
+
+questions:
+  - id: q1_a
+    parent: "1"
+    enonce: |
+      Le volume d'une sphère de rayon $r$ est $V(r) = \dfrac{4}{3}\pi r^3$. Calculer $\dfrac{\mathrm{d}V}{\mathrm{d}r}$, vérifier l'homogénéité et reconnaître le résultat.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $$\frac{\mathrm{d}V}{\mathrm{d}r} = 4\pi r^2.$$
+          {\bf Homogénéité} : $[V] = L^3$, $[r] = L$, donc $\left[\dfrac{\mathrm{d}V}{\mathrm{d}r}\right] = L^2$, comme $[4\pi r^2] = L^2$.
+          On reconnaît la surface $S$ de la sphère : $\dfrac{\mathrm{d}V}{\mathrm{d}r} = S(r)$.
+
+  - id: q1_b
+    parent: "1"
+    enonce: |
+      En déduire $\mathrm{d}V$ et interpréter géométriquement.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $$\mathrm{d}V = 4\pi r^2\,\mathrm{d}r.$$
+          C'est le volume d'une coquille sphérique d'épaisseur $\mathrm{d}r$, approximée par « surface $\times$ épaisseur ».
+
+  - id: q1_c
+    parent: "1"
+    enonce: |
+      Exprimer exactement $\Delta V = V(r+\mathrm{d}r) - V(r)$ et l'écrire sous la forme $\mathrm{d}V + (\text{termes d'ordre supérieur})$.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $$
+          \begin{array}{rcl}
+          \Delta V & = & \dfrac{4}{3}\pi\left[(r+\mathrm{d}r)^3 - r^3\right]\\[2mm]
+          & = & \dfrac{4}{3}\pi\left[3r^2\mathrm{d}r + 3r(\mathrm{d}r)^2 + (\mathrm{d}r)^3\right]\\[2mm]
+          & = & \overbrace{4\pi r^2\,\mathrm{d}r}^{\mathrm{d}V} + 4\pi r\,(\mathrm{d}r)^2 + \dfrac{4}{3}\pi(\mathrm{d}r)^3.
+          \end{array}
+          $$
+
+  - id: q1_d
+    parent: "1"
+    enonce: |
+      Pour $r = 10\ \text{cm}$, calculer $\mathrm{d}V$, $\Delta V$ et l'erreur relative $\dfrac{\Delta V - \mathrm{d}V}{\Delta V}$ pour $\mathrm{d}r = 1\ \text{cm}$, $0{,}1\ \text{cm}$ et $0{,}01\ \text{cm}$. Que constate-t-on ?
+    solution:
+      - titre: "Résolution"
+        texte: |
+          \begin{itemize}[label=$\bullet$]
+            \item $\mathrm{d}r = 1\ \text{cm}$ : $\mathrm{d}V = 4\pi\cdot 100\cdot 1 \approx 1\,257\ \text{cm}^3$, $\Delta V = \frac{4\pi}{3}(1331 - 1000) \approx 1\,386\ \text{cm}^3$, erreur relative $\approx 9{,}4\ \%$.
+            \item $\mathrm{d}r = 0{,}1\ \text{cm}$ : $\mathrm{d}V \approx 125{,}7\ \text{cm}^3$, $\Delta V \approx 126{,}9\ \text{cm}^3$, erreur relative $\approx 1{,}0\ \%$.
+            \item $\mathrm{d}r = 0{,}01\ \text{cm}$ : $\mathrm{d}V \approx 12{,}57\ \text{cm}^3$, $\Delta V \approx 12{,}58\ \text{cm}^3$, erreur relative $\approx 0{,}10\ \%$.
+          \end{itemize}
+          L'erreur relative est divisée par 10 quand $\mathrm{d}r$ est divisé par 10. En effet le terme dominant de l'erreur est $4\pi r(\mathrm{d}r)^2$, donc $\dfrac{4\pi r(\mathrm{d}r)^2}{4\pi r^2\,\mathrm{d}r} = \dfrac{\mathrm{d}r}{r}$.
+
+  - id: q1_e
+    parent: "1"
+    enonce: |
+      Vérifier que le terme $4\pi r(\mathrm{d}r)^2$ est égal à $\dfrac{1}{2}V''(r)(\mathrm{d}r)^2$.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $V'(r) = 4\pi r^2$ donc $V''(r) = 8\pi r$, et $\dfrac{1}{2}V''(r)(\mathrm{d}r)^2 = 4\pi r(\mathrm{d}r)^2$.
+          Le terme correctif principal est bien donné par la dérivée seconde. Le terme $\frac{4}{3}\pi(\mathrm{d}r)^3$ est d'ordre 3.
+
+  - id: q2_a
+    parent: "2"
+    enonce: |
+      Pendule simple : $T(L) = 2\pi\sqrt{\dfrac{L}{g}}$, avec $g = 9{,}81\ \text{m}\cdot\text{s}^{-2}$ (supposé exact) et $L = 0{,}500 \pm 0{,}002\ \text{m}$. Calculer $T$ puis $\dfrac{\mathrm{d}T}{\mathrm{d}L}$ à $L = 0{,}500\ \text{m}$.
+    coup_de_pouce:
+      - titre: "Rappel"
+        texte: |
+          D'après l'exercice 5, $\dfrac{\mathrm{d}T}{\mathrm{d}L} = \dfrac{\pi}{\sqrt{gL}} = \dfrac{T}{2L}$.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $T = 2\pi\sqrt{\dfrac{0{,}500}{9{,}81}} \approx 1{,}419\ \text{s}$.
+          $$\frac{\mathrm{d}T}{\mathrm{d}L} = \frac{T}{2L} = \frac{1{,}419}{2\times 0{,}500} \approx 1{,}419\ \text{s}\cdot\text{m}^{-1}.$$
+
+  - id: q2_b
+    parent: "2"
+    enonce: |
+      En déduire l'incertitude $\Delta T$ par la méthode différentielle, puis vérifier avec les valeurs extrêmes de $L$. Écrire le résultat avec le bon nombre de chiffres significatifs.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          {\bf Méthode différentielle} : $\Delta T \approx \left|\dfrac{\mathrm{d}T}{\mathrm{d}L}\right|\Delta L = 1{,}419\times 0{,}002 \approx 0{,}003\ \text{s}$.
+
+          {\bf Extrema} : $L_{\max} = 0{,}502\ \text{m} \Rightarrow T_{\max} \approx 1{,}4214\ \text{s}$ ; $L_{\min} = 0{,}498\ \text{m} \Rightarrow T_{\min} \approx 1{,}4157\ \text{s}$. La demi-différence vaut $\approx 0{,}003\ \text{s}$, en accord.
+
+          {\bf Résultat} : $T = (1{,}419 \pm 0{,}003)\ \text{s}$.
+
+  - id: q2_c
+    parent: "2"
+    enonce: |
+      Comparer l'incertitude relative $\dfrac{\Delta T}{T}$ à $\dfrac{\Delta L}{L}$. Que dire du rapport ?
+    solution:
+      - titre: "Résolution"
+        texte: |
+          $\dfrac{\Delta T}{T} = \dfrac{1}{2}\dfrac{\Delta L}{L} = \dfrac{1}{2}\times 0{,}4\ \% = 0{,}2\ \%$.
+          Le rapport vaut $1/2$, qui est l'exposant de $L$ dans $T\propto L^{1/2}$. Les exposants se lisent directement sur les incertitudes relatives (voir exercice 8).
+
+  - id: q3
+    parent: "3"
+    enonce: |
+      Sans calculatrice, estimer à l'aide de la différentielle, puis comparer avec la valeur exacte (donnée entre parenthèses) :
+
+      \begin{enumerate}[label=(\roman*)]
+        \item $\sqrt{4{,}04}$ \quad ($\approx 2{,}009975$)
+        \item $\dfrac{1}{1{,}02}$ \quad ($\approx 0{,}980392$)
+        \item $\sin(31^\circ)$ \quad ($\approx 0{,}515038$)
+      \end{enumerate}
+    coup_de_pouce:
+      - titre: "Point de départ"
+        texte: |
+          Choisir un point $x_0$ proche où la fonction est connue : $x_0 = 4$, $x_0 = 1$, $x_0 = 30^\circ = \pi/6$, puis $f(x_0+\mathrm{d}x) \approx f(x_0) + f'(x_0)\,\mathrm{d}x$. Pour (iii), convertir $1^\circ$ en radians.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          \begin{enumerate}[label=(\roman*)]
+            \item $f = \sqrt{x}$, $f' = \dfrac{1}{2\sqrt{x}}$, $x_0 = 4$, $\mathrm{d}x = 0{,}04$ : $\sqrt{4{,}04}\approx 2 + \dfrac{0{,}04}{4} = 2{,}01$.
+            \item $f = \dfrac{1}{x}$, $f' = -\dfrac{1}{x^2}$, $x_0 = 1$, $\mathrm{d}x = 0{,}02$ : $\dfrac{1}{1{,}02}\approx 1 - 0{,}02 = 0{,}98$.
+            \item $f = \sin$, $f' = \cos$, $x_0 = \dfrac{\pi}{6}$, $\mathrm{d}x = \dfrac{\pi}{180}\approx 0{,}01745\ \text{rad}$ : $\sin 31^\circ \approx \dfrac{1}{2} + \dfrac{\sqrt{3}}{2}\times 0{,}01745 \approx 0{,}5151$.
+          \end{enumerate}
+          Les erreurs sont respectivement $\approx 2{,}5\times 10^{-5}$, $4\times 10^{-4}$ et $8\times 10^{-5}$.
+
+  - id: q4
+    parent: "4"
+    enonce: |
+      (*) Dans les trois estimations précédentes, dire si l'approximation par la différentielle est une valeur par excès ou par défaut. Relier la réponse au signe de $f''$.
+    coup_de_pouce:
+      - titre: "Point de cours"
+        texte: |
+          $\Delta f - \mathrm{d}f \approx \dfrac{1}{2}f''(x_0)(\mathrm{d}x)^2$ : le signe de l'erreur est celui de $f''$.
+    solution:
+      - titre: "Résolution"
+        texte: |
+          \begin{itemize}[label=$\bullet$]
+            \item $f = \sqrt{x}$ : $f'' = -\dfrac{1}{4}x^{-3/2} < 0$. Fonction concave, $\Delta f < \mathrm{d}f$ : l'estimation $2{,}01$ est \textbf{par excès} (exact $2{,}009975$).
+            \item $f = \dfrac{1}{x}$ : $f'' = \dfrac{2}{x^3} > 0$. Fonction convexe, $\Delta f > \mathrm{d}f$ : l'estimation $0{,}98$ est \textbf{par défaut} (exact $0{,}980392$).
+            \item $f = \sin$ près de $\pi/6$ : $f'' = -\sin < 0$. Fonction concave, l'estimation $0{,}5151$ est \textbf{par excès} (exact $0{,}515038$).
+          \end{itemize}
+          Géométriquement, une courbe concave est en dessous de sa tangente, une courbe convexe est au-dessus.

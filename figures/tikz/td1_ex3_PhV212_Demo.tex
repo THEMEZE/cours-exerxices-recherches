@@ -1,0 +1,296 @@
+
+
+% 3. Environnement unique et superposition directe
+\begin{tikzpicture}
+  % On dessine les deux éléments sur le MÊME repère absolu
+  %\clip[](-4, -4) rectangle (11 , 4) ;
+
+    \newcommand{\maCourbe}{
+            plot[
+                smooth,
+                tension=0.5
+            ] coordinates {
+                (-2,1)(2,2)(8,8)(9,10)
+            }
+    }
+
+    \draw[
+        color=colorThree,
+        line width=0.8ex
+    ] \maCourbe;
+
+    \begin{scope}
+        
+        \clip[](2, 2) rectangle (8 ,8) ;
+            
+        \draw[
+            shift = {(0, 0)},
+            color=colorOne,
+            line width=0.8ex
+        ] \maCourbe;
+
+    \end{scope}
+
+    \draw
+        (-1.3,0)edge[thick,line width=0.9ex,->,color=\colorOne]node[pos=0.9,below,font=\sffamily\bfseries\fontsize{16pt}{18pt}\selectfont,text=\colorOne]{$ $}(10.8,0)
+
+        (0,-1.3)edge[thick,line width=0.9ex,->,color=\colorOne]node[pos=0.85,left,font=\sffamily\bfseries\fontsize{16pt}{18pt}\selectfont,text=\colorOne]{$ $}(0,10.8)
+
+        (-0.5,2)edge[dashed,line width=0.9ex,color=\colorThree]node[pos=0,left,font=\sffamily\bfseries\fontsize{16pt}{18pt}\selectfont,text=\colorThree]{$ $}(10.8,2)
+        (-0.5,2)edge[line width=0.9ex,color=\colorOne]node[pos=0,left,font=\sffamily\bfseries\fontsize{16pt}{18pt}\selectfont,text=\colorOne]{$\bm{y(x,t)}$}(0.5,2)
+
+        (-0.5,8)edge[dashed,line width=0.9ex,color=\colorThree]node[pos=0,left,font=\sffamily\bfseries\fontsize{16pt}{18pt}\selectfont,text=\colorThree]{$\bm{y(x+\mathrm{d}x,t)}$}(10.8,8)
+        (-0.5,8)edge[line width=0.9ex,color=\colorOne]node[pos=0,left,font=\sffamily\bfseries\fontsize{16pt}{18pt}\selectfont,text=\colorOne]{$\bm{y(x+\mathrm{d}x,t)}$}(0.5,8)
+
+        (2,-0.5)edge[dashed,line width=0.9ex,color=\colorThree]node[pos=0,below,font=\sffamily\bfseries\fontsize{16pt}{18pt}\selectfont,text=\colorThree]{$ $}(2,10.8)
+        (2,-0.5)edge[line width=0.9ex,color=\colorOne]node[pos=0,below,font=\sffamily\bfseries\fontsize{16pt}{18pt}\selectfont,text=\colorOne]{$\bm{x}$}(2,0.5)
+
+        (8,-0.5)edge[dashed,line width=0.9ex,color=\colorThree]node[pos=0,below,font=\sffamily\bfseries\fontsize{16pt}{18pt}\selectfont,text=\colorThree]{$ $}(8,10.8)
+        (8,-0.5)edge[line width=0.9ex,color=\colorOne]node[shift = {(0,0.1)}, pos=0,below,font=\sffamily\bfseries\fontsize{16pt}{18pt}\selectfont,text=\colorOne]{$\bm{x + \mathrm{d} x }$}(8,0.5)
+
+        (2,-1.5)edge[thick,line width=0.9ex,<-,color=\colorOne](4.5,-1.5)
+        (5.5,-1.5)edge[thick,line width=0.9ex,->,color=\colorOne](8,-1.5)
+
+        (10.8,2)edge[thick,line width=0.9ex,<-,color=\colorOne](10.8,2.3)
+        (10.8,7.7)edge[thick,line width=0.9ex,->,color=\colorOne](10.8,8)
+
+        (2,2)edge[thick,line width=0.9ex,->,color=\colorSix]node[shift = {(0,0)}, pos=0.6,above,font=\sffamily\bfseries\fontsize{16pt}{18pt}\selectfont,text=\colorSix ,rotate = 45]{$\bm{\vec{T}(x,t)}$}(-1,-1)
+
+        (8,8)edge[thick,line width=0.9ex,->,color=\colorSix]node[shift = {(0,0)}, pos=0.5,above,font=\sffamily\bfseries\fontsize{16pt}{18pt}\selectfont,text=\colorSix ,rotate = 55]{$\bm{\vec{T}(x + \mathrm{d} x ,t)}$}(11,12)
+
+
+    ;
+
+    \node[font=\sffamily\bfseries\fontsize{16pt}{18pt}\selectfont,text=\colorOne] at (5,-1.5) {$\bm{\mathrm{d} x}$};
+
+    \node[font=\sffamily\bfseries\fontsize{16pt}{18pt}\selectfont,text=\colorOne , rotate = 90 ] at (10.8,5) {$\bm{\mathrm{d}y(x,t) + o\left ( \left \vert \frac{\mathrm{d} x}{x} \right \vert ^2 \right )}$};
+
+
+    \draw[color=colorFour, line width=0.9ex , shift = {(8,8)}] 
+        (0,0) -- 
+        (1,0) arc (0:53:1cm) 
+        node[midway, right=2pt , font=\sffamily\bfseries\fontsize{16pt}{18pt}\selectfont,text=\colorFour] {$\bm{\alpha( x + \mathrm{d} x , t )}$}
+        -- (0,0)
+    ;
+
+    \draw[color=colorFour, line width=0.9ex , shift = {(2,2)}] 
+        (0,0) -- 
+        (1,0) arc (0:45:1cm) 
+        node[midway, right=2pt , font=\sffamily\bfseries\fontsize{16pt}{18pt}\selectfont,text=\colorFour] {$\bm{\alpha( x , t )}$}
+        -- (0,0)
+    ;
+
+
+
+%   \node[transform canvas={scale=0.5}] at (15,0) {
+%     \begin{tikzpicture}
+
+%         \draw[
+%             opacity = 0.5, 
+%             fill=colorOne!10!colorTwo,
+%             draw=colorOne,
+%             line width=2.2ex
+%             ] (0,0) ellipse [x radius=5cm, y radius=2cm];
+
+%         \draw[
+%             fill=none,
+%             draw=colorOne,
+%             line width=2.2ex
+%             ] (0,1) ellipse [x radius=5cm, y radius=2cm];
+
+%         \draw[
+%             color=colorOne,
+%             line width=2.2ex,
+%             pattern={Lines[
+%                         angle=90,
+%                         distance=3ex,
+%                         line width=1.8ex
+%                     ]},
+%             pattern color=colorOne!50!colorTwo ,
+%             ] (5,0) arc[
+%             start angle=0,
+%             end angle=-180,
+%             x radius=5cm,
+%             y radius=2cm
+%             ]--(-5,1)
+%             (-5,1) arc[
+%             start angle=180,
+%             end angle=360,
+%             x radius=5cm,
+%             y radius=2cm
+%             ]--(5,0)
+%             (5,0) arc[
+%             start angle=0,
+%             end angle=180,
+%             x radius=5cm,
+%             y radius=2cm
+%             ]--(-5,1)
+%             (-5,1) arc[
+%             start angle=180,
+%             end angle=0,
+%             x radius=5cm,
+%             y radius=2cm
+%             ]--(5,0)
+%         ;
+
+%         \draw[
+%             color=colorFour,
+%             line width=1.0ex,
+%             ->
+%             ] (0,0) -- ({5*cos(45)},{2*sin(45)})
+%             node[pos = 0.5, above , font=\fontsize{20pt}{1pt}\selectfont\bfseries, text=colorFour  , rotate = 30 ]{$r$}
+%         ;
+
+%         \draw[
+%             fill=colorFour,
+%             color=colorFour,
+%             line width=0.5ex,
+%             ] (0,0) circle (0.1)
+%         ;
+
+%          \draw[
+%             color=colorFour,
+%             line width=0.5ex,
+%             >-
+%             ] (-6,0) -- (-6,0.2)
+%         ;
+%         \draw[
+%             color=colorFour,
+%             line width=0.5ex,
+%             -<
+%             ] (-6,0.8) -- (-6,1)
+%         ;
+%         \node[font=\fontsize{10pt}{1pt}\selectfont\bfseries, text=colorFour  , rotate = 90 ] at (-6, 0.5) {$\mathrm{d} r$}; 
+
+%         %\node[font=\fontsize{40pt}{1pt}\selectfont\bfseries, text=colorFour  , rotate = 0 ] at (0, -3) {$\mathrm{d} r \not \ll r $};
+
+%         \begin{scope}[shift={(-4,4)}]
+%                 \draw[,
+%                     line width=1.5ex, color=colorOne, 
+%                 fill=colorSix!20,
+%                     pattern={Lines[
+%                         angle=90,
+%                         distance=3ex,
+%                         line width=1.8ex
+%                     ]},
+%                     pattern color=colorOne!50!colorTwo ]  
+%                 (0,0) rectangle (3,2);
+%                 \node[font=\fontsize{40pt}{1pt}\selectfont\bfseries, text=colorOne , right ] 
+%                     at (3.5,1) {$=$};
+
+%                 \node[font=\fontsize{40pt}{1pt}\selectfont\bfseries, text=colorOne , right ] 
+%                     at (5.5,1) {$\mathrm{d}A(r)$};
+
+
+%         \end{scope}
+
+%     \end{tikzpicture}   
+%   };
+
+%   \node[transform canvas={scale=0.5}] at (0,0) {
+%     \begin{tikzpicture}
+
+%         \begin{scope}
+
+%             \draw[
+%             color=colorSix,
+%             line width=2.2ex,
+%             draw = none, 
+%             pattern={Lines[
+%                         angle=45,
+%                         distance=3ex,
+%                         line width=1.8ex
+%                     ]},
+%             pattern color=colorSix ,
+%             ] (5,0) -- (6,0) 
+%             (6,0) arc[
+%             start angle=0,
+%             end angle=360,
+%             x radius=6cm,
+%             y radius=6cm
+%             ]--(5,0)
+%             (5,0) arc[
+%             start angle=0,
+%             end angle=-360,
+%             x radius=5cm,
+%             y radius=5cm
+%             ]
+%         ;
+
+%         \end{scope}
+
+%         \draw[
+%             fill=none,
+%             draw=colorOne,
+%             line width=2.2ex
+%             ] (0,0) circle (5);
+
+%         \draw[
+%             fill=none,
+%             draw=colorOne,
+%             line width=2.2ex
+%             ] (0,0) circle (6);
+        
+       
+
+%         \draw[
+%             color=colorFour,
+%             line width=1.0ex,
+%             ->
+%             ] (0,0) -- ({5*cos(45)},{5*sin(45)})
+%             node[pos = 0.5, above , font=\fontsize{20pt}{1pt}\selectfont\bfseries, text=colorFour  , rotate = 45 ]{$r$}
+%         ;
+
+%         \draw[
+%             fill=colorFour,
+%             color=colorFour,
+%             line width=0.5ex,
+%             ] (0,0) circle (0.1)
+%         ;
+
+%          \draw[
+%             color=colorFour,
+%             line width=0.5ex,
+%             >-
+%             ] (-6,0) -- (-5.8,0.)
+%         ;
+%         \draw[
+%             color=colorFour,
+%             line width=0.5ex,
+%             -<
+%             ] (-5.2,0) -- (-5,0)
+%         ;
+%         \node[font=\fontsize{10pt}{1pt}\selectfont\bfseries, text=colorFour   , rotate = 0 ] at (-5.5, 0.0) {$\mathrm{d} r$}; 
+
+%         %\node[font=\fontsize{40pt}{1pt}\selectfont\bfseries, text=colorFour  , rotate = 0 ] at (0, -7) {$\mathrm{d} r  \ll r $};
+
+%         \begin{scope}[shift={(-4,6.5)}]
+%                 \draw[,
+%                     line width=1.5ex, color=colorOne, 
+%                 fill=colorSix!20,
+%                     pattern={Lines[
+%                         angle=45,
+%                         distance=3ex,
+%                         line width=1.8ex
+%                     ]},
+%                     pattern color=colorSix ]  
+%                 (0,0) rectangle (3,2);
+%                 \node[font=\fontsize{40pt}{1pt}\selectfont\bfseries, text=colorOne , right ] 
+%                     at (3.5,1) {$=$};
+
+%                 \node[font=\fontsize{40pt}{1pt}\selectfont\bfseries, text=colorOne , right ] 
+%                     at (5.5,1) {$\Delta A(r)$};
+
+
+%         \end{scope}
+
+%     \end{tikzpicture}   
+%   };
+
+
+  
+
+  % Grille de repérage
+  %\draw[line width=2.5ex , color = red] (-8, -5.5) rectangle (8 , 4.5) ;
+  %\drawgrid{-3}{11}{-4}{4}{1}{1}
+\end{tikzpicture}

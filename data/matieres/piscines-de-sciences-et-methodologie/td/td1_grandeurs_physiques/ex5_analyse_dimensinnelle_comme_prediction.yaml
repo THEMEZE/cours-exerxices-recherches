@@ -9,30 +9,352 @@ cours_rattache:
 
 metadonnees:
   duree_estimee: "25 min"
-  difficulte: 1 # Sur une échelle de 1 à 5
+  difficulte: 3 # Sur une échelle de 1 à 5
   type_exercice: "Révision"
-  indispensable: false
+  indispensable: true
 
 enonce_intro: |
   L’analyse des dimensions d’un problème complexe permet de prédire la forme d’une loi physique.
 
 
-prerequis : 
+prerequis:
   - titre: |
-
+      Grandeurs physiques et dimensions
     texte: |
+      \begin{itemize}[label = $\bullet$]
 
+        \item {\bf Dimensions fondamentales}
 
-objectifs_pedagogiques_etudiants :
+        \begin{itemize}[label=$\circ$]
+
+          \item Connaître les dimensions de la masse $M$,
+            de la longueur $L$ et du temps $T$.
+
+          \item Savoir exprimer une grandeur dérivée
+            à partir des dimensions fondamentales.
+
+        \end{itemize}
+
+        \item {\bf Grandeurs dérivées}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Connaître la dimension de la force :
+            $[F] = M L T^{-2}$.
+
+          \item Connaître la dimension de la vitesse :
+            $[v] = L T^{-1}$.
+
+          \item Connaître la dimension de l'accélération :
+            $[a] = L T^{-2}$.
+
+          \item Connaître la dimension de la pression :
+            $[P] = M L^{-1} T^{-2}$.
+
+        \end{itemize}
+
+      \end{itemize}
+
   - titre: |
-
+      Règles de calcul dimensionnel
     texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Opérations sur les dimensions}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Savoir multiplier et diviser
+            des dimensions physiques.
+
+          \item Savoir manipuler les puissances
+            de grandeurs physiques.
+
+          \item Savoir additionner les exposants
+            des dimensions lors d'un produit.
+
+        \end{itemize}
+
+        \item {\bf Homogénéité dimensionnelle}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Vérifier que les deux membres
+            d'une relation possèdent la même dimension.
+
+          \item Identifier les dimensions fondamentales
+            présentes dans une expression.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Manipulation algébrique et puissances
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Calcul littéral}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Savoir écrire une relation sous la forme
+            d'un produit de puissances.
+
+          \item Savoir résoudre un système linéaire
+            à plusieurs inconnues.
+
+          \item Savoir manipuler les exposants
+            d'une expression algébrique.
+
+        \end{itemize}
+
+      \end{itemize}
+
+
+objectifs_pedagogiques_etudiants:
+  - titre: |
+      Identifier les grandeurs pertinentes
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Analyse du problème physique}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Identifier les grandeurs physiques
+            susceptibles d'influencer la grandeur recherchée.
+
+          \item Distinguer les grandeurs fondamentales
+            des grandeurs dérivées.
+
+          \item Déterminer les dimensions des grandeurs
+            intervenant dans un problème physique.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Construire une loi physique par analyse dimensionnelle
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Forme générale d'une loi}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Émettre une hypothèse sur la forme
+            de la dépendance entre les grandeurs.
+
+          \item Exprimer la grandeur recherchée
+            sous la forme d'un produit de puissances :
+
+            \[
+              X = k A^\alpha B^\beta C^\gamma.
+            \]
+
+          \item Comprendre le rôle de la constante
+            sans dimension $k$.
+
+        \end{itemize}
+
+        \item {\bf Mise en équation}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Écrire l'équation aux dimensions
+            correspondant à la relation supposée.
+
+          \item Décomposer chaque grandeur
+            en dimensions fondamentales.
+
+          \item Identifier les exposants des dimensions
+            de chaque côté de l'égalité.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Résoudre un système d'équations dimensionnelles
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Construction du système}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Associer une équation à chaque dimension
+            fondamentale présente.
+
+          \item Résoudre le système linéaire
+            obtenu pour les exposants inconnus.
+
+          \item Vérifier la cohérence des valeurs
+            des exposants avec la relation initiale.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Prédire une loi physique
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Application à la loi de Stokes}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Déterminer la dépendance de la force
+            visqueuse en fonction de $\eta$, $r$ et $v$.
+
+          \item Retrouver la structure de la loi :
+
+            \[
+              F = k \eta r v.
+            \]
+
+          \item Comprendre que l'analyse dimensionnelle
+            ne permet pas de déterminer le facteur numérique
+            $k$.
+
+        \end{itemize}
+
+        \item {\bf Application au pendule simple}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Identifier les grandeurs pertinentes
+            pour la période d'oscillation.
+
+          \item Montrer que la masse n'intervient pas
+            dans l'expression dimensionnelle recherchée.
+
+          \item Déterminer la dépendance de la période
+            en fonction de $\ell$ et $g$.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Identifier les limites de la méthode
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Interprétation des résultats}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Distinguer la forme dimensionnelle
+            d'une loi de sa forme exacte.
+
+          \item Identifier le rôle des constantes
+            sans dimension.
+
+          \item Comprendre que plusieurs lois peuvent
+            être compatibles avec une même analyse
+            dimensionnelle.
+
+        \end{itemize}
+
+      \end{itemize}
       
 
-objectifs_pedagogiques_enseignants :
+objectifs_pedagogiques_enseignants:
   - titre: |
-
+      Réinvestir les connaissances dimensionnelles
     texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Mobilisation des prérequis}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Vérifier la maîtrise des dimensions
+            des grandeurs fondamentales.
+
+          \item Identifier les difficultés liées
+            aux grandeurs dérivées.
+
+          \item Réactiver les règles de calcul
+            sur les puissances dimensionnelles.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Introduire une méthode de prédiction physique
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Construction d'une relation}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Faire identifier les grandeurs
+            pertinentes avant toute manipulation.
+
+          \item Faire formuler une hypothèse
+            de dépendance sous forme de puissances.
+
+          \item Faire construire le système d'équations
+            à partir des dimensions fondamentales.
+
+          \item Faire résoudre le système
+            et interpréter les exposants obtenus.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Développer l'autonomie dans le raisonnement
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Progression pédagogique}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Guider la résolution de la loi de Stokes
+            à travers les différentes étapes.
+
+          \item Encourager les étudiants à réutiliser
+            la méthode pour le pendule simple.
+
+          \item Faire verbaliser le raisonnement
+            plutôt que de se limiter au calcul.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Faire comprendre les limites de l'analyse dimensionnelle
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Interprétation physique}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Montrer que les dimensions déterminent
+            les exposants dans les cas étudiés.
+
+          \item Faire identifier les informations
+            qui ne peuvent pas être déduites
+            par analyse dimensionnelle.
+
+          \item Introduire la distinction entre
+            prédiction dimensionnelle et théorie physique.
+
+        \end{itemize}
+
+      \end{itemize}
 
 coup_de_pouce: 
       
@@ -57,55 +379,874 @@ coup_de_pouce:
         \end{enumerate}
       
 
-point_cours :
+point_cours:
   - titre: |
-
+      Principe de l'analyse dimensionnelle
     texte: |
+      \begin{itemize}[label = $\bullet$]
 
+        \item {\bf Objectif de la méthode}
 
+        \begin{itemize}[label=$\circ$]
 
+          \item Utiliser les dimensions physiques
+            pour contraindre la forme d'une relation.
 
-remarques_pedagogiques_ecueils_classiques: 
+          \item Exploiter l'homogénéité dimensionnelle
+            d'une loi physique.
+
+          \item Déterminer les dépendances en puissances
+            de plusieurs grandeurs physiques.
+
+        \end{itemize}
+
+        \item {\bf Hypothèse de départ}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item On suppose que la grandeur recherchée
+            peut s'écrire sous la forme :
+
+            \[
+              X = k A^\alpha B^\beta C^\gamma.
+            \]
+
+          \item La constante $k$ est supposée sans dimension.
+
+          \item Les exposants $\alpha$, $\beta$ et $\gamma$
+            sont déterminés par homogénéité dimensionnelle.
+
+        \end{itemize}
+
+      \end{itemize}
+
   - titre: |
-  
+      Méthode générale de résolution
     texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Étape 1 : Identifier les grandeurs}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Lister les grandeurs susceptibles
+            d'influencer la grandeur recherchée.
+
+          \item Déterminer les dimensions de chaque grandeur.
+
+        \end{itemize}
+
+        \item {\bf Étape 2 : Proposer une relation}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Écrire la grandeur recherchée
+            comme un produit de puissances.
+
+          \item Introduire une constante sans dimension.
+
+        \end{itemize}
+
+        \item {\bf Étape 3 : Écrire l'équation aux dimensions}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Remplacer chaque grandeur par sa dimension.
+
+          \item Développer les puissances
+            des dimensions fondamentales.
+
+        \end{itemize}
+
+        \item {\bf Étape 4 : Construire le système}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Identifier les exposants de $M$, $L$ et $T$.
+
+          \item Égaler les exposants de chaque dimension
+            fondamentale entre les deux membres.
+
+        \end{itemize}
+
+        \item {\bf Étape 5 : Résoudre et conclure}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Résoudre le système linéaire
+            sur les exposants inconnus.
+
+          \item Remplacer les exposants dans la relation
+            de départ.
+
+          \item Interpréter le résultat obtenu.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Application à la loi de Stokes
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Grandeurs physiques}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Force :
+
+            \[
+              [F] = M L T^{-2}.
+            \]
+
+          \item Viscosité dynamique :
+
+            \[
+              [\eta] = M L^{-1} T^{-1}.
+            \]
+
+          \item Rayon :
+
+            \[
+              [r] = L.
+            \]
+
+          \item Vitesse :
+
+            \[
+              [v] = L T^{-1}.
+            \]
+
+        \end{itemize}
+
+        \item {\bf Forme supposée}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item On suppose :
+
+            \[
+              F = k\eta^\alpha r^\beta v^\gamma.
+            \]
+
+          \item L'équation aux dimensions donne :
+
+            \[
+              M L T^{-2}
+              =
+              M^\alpha
+              L^{-\alpha+\beta+\gamma}
+              T^{-\alpha-\gamma}.
+            \]
+
+        \end{itemize}
+
+        \item {\bf Résolution}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Équations sur les exposants :
+
+            \[
+              \begin{cases}
+                \alpha = 1,\\
+                -\alpha+\beta+\gamma = 1,\\
+                -\alpha-\gamma = -2.
+              \end{cases}
+            \]
+
+          \item Solution :
+
+            \[
+              \alpha = \beta = \gamma = 1.
+            \]
+
+          \item Expression obtenue :
+
+            \[
+              F = k\eta r v.
+            \]
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Application au pendule simple
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Grandeurs physiques}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Période :
+
+            \[
+              [T] = T.
+            \]
+
+          \item Masse :
+
+            \[
+              [m] = M.
+            \]
+
+          \item Longueur :
+
+            \[
+              [\ell] = L.
+            \]
+
+          \item Accélération de la pesanteur :
+
+            \[
+              [g] = L T^{-2}.
+            \]
+
+        \end{itemize}
+
+        \item {\bf Forme supposée}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item On suppose :
+
+            \[
+              T = k m^\alpha \ell^\beta g^\gamma.
+            \]
+
+          \item Équation aux dimensions :
+
+            \[
+              T
+              =
+              M^\alpha
+              L^{\beta+\gamma}
+              T^{-2\gamma}.
+            \]
+
+        \end{itemize}
+
+        \item {\bf Résolution}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Le système donne :
+
+            \[
+              \begin{cases}
+                \alpha = 0,\\
+                \beta+\gamma = 0,\\
+                -2\gamma = 1.
+              \end{cases}
+            \]
+
+          \item Solution :
+
+            \[
+              \alpha=0,\qquad
+              \beta=\frac{1}{2},\qquad
+              \gamma=-\frac{1}{2}.
+            \]
+
+          \item Expression obtenue :
+
+            \[
+              T = k\sqrt{\frac{\ell}{g}}.
+            \]
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Limites de l'analyse dimensionnelle
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Constante sans dimension}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item L'analyse dimensionnelle ne permet
+            généralement pas de déterminer le facteur
+            numérique sans dimension $k$.
+
+          \item Dans la loi de Stokes,
+            la théorie hydrodynamique donne $k=6\pi$
+            pour une sphère dans le régime de Stokes.
+
+          \item Pour le pendule simple,
+            l'approximation des petites oscillations
+            conduit à $k=2\pi$.
+
+        \end{itemize}
+
+        \item {\bf Domaine de validité}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item La méthode dépend des grandeurs
+            sélectionnées au départ.
+
+          \item Une grandeur pertinente oubliée
+            peut modifier la forme de la loi.
+
+          \item Les dépendances plus complexes,
+            comme les fonctions trigonométriques,
+            ne sont pas nécessairement déterminées
+            par une simple approche en puissances.
+
+        \end{itemize}
+
+      \end{itemize}
+
+
+
+
+rremarques_pedagogiques_ecueils_classiques:
+  - titre: |
+      Confusion entre grandeur fondamentale et dérivée
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Classification des grandeurs}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item La longueur $r$ est une grandeur
+            fondamentale de dimension $L$.
+
+          \item La vitesse $v$ est une grandeur dérivée
+            de dimension $L T^{-1}$.
+
+          \item La force $F$ est une grandeur dérivée
+            de dimension $M L T^{-2}$.
+
+          \item La viscosité dynamique $\eta$
+            est une grandeur dérivée.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Mauvaise dimension de la viscosité
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Viscosité dynamique}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Rappeler que l'unité de $\eta$ est
+            le pascal-seconde :
+
+            \[
+              [\eta] = [P][T]
+              = M L^{-1}T^{-1}.
+            \]
+
+          \item Ne pas confondre la viscosité dynamique
+            avec la viscosité cinématique.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Oubli de certaines dimensions fondamentales
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Construction du système}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Chaque dimension fondamentale
+            doit être traitée séparément.
+
+          \item Une dimension absente du membre de gauche
+            correspond à un exposant nul.
+
+          \item Pour le pendule simple, la masse
+            n'apparaît pas dans la dimension de la période :
+            $\alpha=0$.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Erreurs dans les signes des exposants
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Manipulation des puissances}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Vérifier les signes lors du développement
+            des puissances de dimensions.
+
+          \item Dans la loi de Stokes,
+            le temps possède l'exposant :
+
+            \[
+              -\alpha-\gamma.
+            \]
+
+          \item Dans le pendule simple,
+            la dimension de $g^\gamma$ est :
+
+            \[
+              L^\gamma T^{-2\gamma}.
+            \]
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Confusion entre détermination et vérification
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Portée du résultat}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item L'analyse dimensionnelle permet
+            de contraindre la forme d'une loi.
+
+          \item Elle ne prouve pas à elle seule
+            que le modèle physique est valide.
+
+          \item Le facteur numérique $k$ n'est pas déterminé
+            par l'analyse dimensionnelle seule.
+
+        \end{itemize}
+
+      \end{itemize}
       
-remarques_pedagogiques_conseils_animation: 
+remarques_pedagogiques_conseils_animation:
   - titre: |
-
+      Introduction par une question de prédiction
     texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Mise en situation}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Demander aux étudiants :
+            « Peut-on retrouver la forme d'une loi physique
+            sans résoudre les équations du mouvement ? »
+
+          \item Faire identifier les grandeurs physiques
+            susceptibles d'influencer le phénomène.
+
+          \item Introduire le principe de l'analyse
+            dimensionnelle comme outil de prédiction.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Résolution collective de la loi de Stokes
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Construction de la méthode}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Faire lister les dimensions
+            de toutes les grandeurs.
+
+          \item Demander aux étudiants
+            de proposer une forme en puissances.
+
+          \item Construire le système au tableau
+            en associant une équation à chaque dimension.
+
+          \item Faire résoudre le système
+            par les étudiants.
+
+        \end{itemize}
+
+        \item {\bf Vérification}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Réinjecter les exposants obtenus
+            dans la relation dimensionnelle.
+
+          \item Vérifier que la dimension finale
+            correspond à celle de la force.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Transfert vers le pendule simple
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Réinvestissement autonome}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Demander aux étudiants de résoudre
+            le problème sans détailler immédiatement
+            la méthode.
+
+          \item Insister sur le fait que la masse
+            peut être présente dans le problème
+            sans intervenir dans la loi recherchée.
+
+          \item Faire comparer les deux systèmes
+            d'équations obtenus.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Discussion sur les limites de la méthode
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Interprétation}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Demander si la valeur de $k$
+            peut être déterminée à partir des dimensions.
+
+          \item Faire distinguer les résultats
+            dimensionnels des résultats théoriques.
+
+          \item Introduire les coefficients $6\pi$
+            et $2\pi$ comme exemples de facteurs
+            déterminés par une étude physique complémentaire.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Gestion du temps et différenciation
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Progression}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Accorder un temps de recherche
+            individuel ou en binôme.
+
+          \item Proposer le coup de pouce méthodologique
+            aux étudiants qui bloquent sur la construction
+            du système.
+
+          \item Utiliser le pendule comme exercice
+            de réinvestissement plus autonome.
+
+        \end{itemize}
+
+      \end{itemize}
       
 
-bilan: 
+bilan:
   - titre: |
-
+      Méthode générale à retenir
     texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Démarche de résolution}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Identifier les grandeurs pertinentes
+            pour le phénomène étudié.
+
+          \item Proposer une forme en puissances
+            de ces grandeurs.
+
+          \item Écrire l'équation aux dimensions.
+
+          \item Égaler les exposants des dimensions
+            fondamentales de chaque côté.
+
+          \item Résoudre le système d'équations.
+
+          \item Déduire la forme de la loi recherchée.
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Résultats essentiels
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Loi de Stokes}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item La méthode conduit à :
+
+            \[
+              F = k\eta r v.
+            \]
+
+          \item Le facteur numérique $k$ nécessite
+            une information physique complémentaire.
+
+        \end{itemize}
+
+        \item {\bf Pendule simple}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item La masse ne participe pas
+            à la dépendance dimensionnelle de la période.
+
+          \item La forme obtenue est :
+
+            \[
+              T = k\sqrt{\frac{\ell}{g}}.
+            \]
+
+        \end{itemize}
+
+      \end{itemize}
+
+  - titre: |
+      Limites de l'analyse dimensionnelle
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Interprétation}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item La méthode permet de déterminer
+            certaines dépendances en puissances.
+
+          \item Elle ne permet pas toujours
+            de déterminer une loi complète.
+
+          \item Les constantes sans dimension
+            nécessitent une information supplémentaire.
+
+          \item La validité physique du modèle
+            doit être établie par une théorie
+            ou une expérience.
+
+        \end{itemize}
+
+      \end{itemize}
 
 
-aller_plus_loin: 
+aller_plus_loin:
   - niveau: lycee
-
     titre: |
-
+      Vérification dimensionnelle de lois physiques
     texte: |
+      \begin{itemize}[label = $\bullet$]
 
+        \item {\bf Lois de la mécanique}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Vérifier la dimension de la vitesse
+            à partir de $v=d/t$.
+
+          \item Vérifier la dimension de l'énergie
+            cinétique :
+
+            \[
+              E_c = \frac{1}{2}mv^2.
+            \]
+
+          \item Déterminer la dimension
+            de la constante de raideur $k$
+            dans la loi de Hooke :
+
+            \[
+              F = kx.
+            \]
+
+        \end{itemize}
+
+        \item {\bf Analyse de relations}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Identifier les relations homogènes
+            et non homogènes.
+
+          \item Vérifier la cohérence des unités
+            dans une formule de physique.
+
+        \end{itemize}
+
+      \end{itemize}
 
   - niveau: prepa
     titre: |
-
+      Théorème de Buckingham et lois d'échelle
     texte: |
-      
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Théorème de Buckingham}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Comprendre le principe du théorème
+            des groupes sans dimension.
+
+          \item Déterminer le nombre de groupes
+            sans dimension indépendants.
+
+          \item Construire des groupes $\Pi$
+            à partir des grandeurs physiques.
+
+        \end{itemize}
+
+        \item {\bf Applications}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Étudier les lois d'échelle
+            dans des problèmes de mécanique des fluides.
+
+          \item Introduire le nombre de Reynolds :
+
+            \[
+              \mathrm{Re} = \frac{\rho v L}{\eta}.
+            \]
+
+          \item Relier le nombre de Reynolds
+            aux régimes d'écoulement.
+
+        \end{itemize}
+
+      \end{itemize}
 
   - niveau: licence
     titre: |
-
+      Analyse dimensionnelle et lois physiques exactes
     texte: |
-     
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Loi de Stokes}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Étudier les hypothèses de validité
+            de la loi de Stokes.
+
+          \item Comprendre le rôle du nombre de Reynolds
+            dans l'écoulement autour d'une sphère.
+
+          \item Relier l'analyse dimensionnelle
+            aux équations de Navier--Stokes.
+
+        \end{itemize}
+
+        \item {\bf Pendule simple}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Démontrer l'équation différentielle
+            du pendule simple.
+
+          \item Utiliser l'approximation
+            des petits angles.
+
+          \item Comparer la période exacte
+            et la période approchée.
+
+        \end{itemize}
+
+        \item {\bf Analyse dimensionnelle avancée}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Étudier le rôle des groupes
+            sans dimension dans la modélisation.
+
+          \item Identifier les limites d'une
+            approche purement dimensionnelle.
+
+        \end{itemize}
+
+      \end{itemize}
 
   - niveau: master
     titre: |
-
+      Similarité physique et modélisation avancée
     texte: |
+      \begin{itemize}[label = $\bullet$]
+
+        \item {\bf Théorie de la similarité}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Étudier les conditions de similarité
+            entre deux systèmes physiques.
+
+          \item Distinguer la similarité géométrique,
+            cinématique et dynamique.
+
+          \item Utiliser les nombres sans dimension
+            pour construire des modèles réduits.
+
+        \end{itemize}
+
+        \item {\bf Mécanique des fluides}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Étudier les nombres de Reynolds,
+            de Froude et de Weber.
+
+          \item Relier les groupes sans dimension
+            aux régimes physiques observés.
+
+          \item Comprendre les limites
+            de la transposition d'une expérience
+            à un système réel.
+
+        \end{itemize}
+
+        \item {\bf Modélisation théorique}
+
+        \begin{itemize}[label=$\circ$]
+
+          \item Comparer les prédictions
+            de l'analyse dimensionnelle
+            aux solutions des équations physiques.
+
+          \item Étudier les dépendances
+            qui ne peuvent pas être déterminées
+            par la seule homogénéité dimensionnelle.
+
+          \item Introduire l'analyse asymptotique
+            et les approximations de modèles.
+
+        \end{itemize}
+
+      \end{itemize}
       
 
 

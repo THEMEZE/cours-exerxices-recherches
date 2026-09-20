@@ -9,77 +9,538 @@ cours_rattache:
 
 metadonnees:
   duree_estimee: "25 min"
-  difficulte: 1 # Sur une échelle de 1 à 5
+  difficulte: 2 # Sur une échelle de 1 à 5
   type_exercice: "Révision"
-  indispensable: false
+  indispensable: true
 
 enonce_intro: |
+  L'analyse dimensionnelle est un outil permettant de vérifier rapidement
+  la cohérence d'une relation physique. Elle repose notamment sur le principe
+  d'homogénéité : deux grandeurs additionnées ou soustraites doivent avoir
+  la même dimension, et les deux membres d'une équation physique doivent
+  également avoir la même dimension.
+
+  Cet exercice permet de revoir les règles fondamentales de l'analyse
+  dimensionnelle et de les appliquer à différentes relations physiques.
 
 
-prerequis : 
+prerequis:
+  - titre: |
+      Grandeurs fondamentales et dérivées du S.I.
+
+    texte: |
+      \begin{itemize}[label=$\bullet$]
+        \item Connaître les grandeurs fondamentales du S.I. et leurs dimensions :
+          longueur $L$, masse $M$, temps $T$.
+        \item Savoir exprimer la dimension des grandeurs dérivées à partir
+          des dimensions fondamentales.
+        \item Connaître notamment :
+          \[
+            [v]=L*T^{-1},
+            \qquad
+            [a]=L*T^{-2}.
+          \]
+      \end{itemize}
+
+  - titre: |
+    
+      Calcul dimensionnel
+
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+        \item {\bf Calcul dimensionnel }
+        \begin{itemize}[label=$\circ$]
+          \item Savoir calculer la dimension d'un produit ou d'un quotient
+            de grandeurs.
+          \item Savoir utiliser les puissances d'une grandeur dans une
+            expression dimensionnelle.
+          \item Savoir reconnaître une grandeur sans dimension.
+        \end{itemize}
+        \item {\bf Opérations sur les grandeurs physiques }
+        \begin{itemize}[label=$\circ$]
+          \item Savoir que l'addition et la soustraction ne sont possibles
+            qu'entre grandeurs de même dimension.
+          \item Savoir que les dimensions se multiplient lors d'un produit
+            et se divisent lors d'un quotient.
+        \end{itemize}
+      \end{itemize}
+
+  # - titre: |
+  #     Opérations sur les grandeurs physiques
+
+  #   texte: |
+  #     \begin{itemize}[label=$\bullet$]
+  #       \item Savoir que l'addition et la soustraction ne sont possibles
+  #         qu'entre grandeurs de même dimension.
+  #       \item Savoir que les dimensions se multiplient lors d'un produit
+  #         et se divisent lors d'un quotient.
+  #     \end{itemize}
+
+
+objectifs_pedagogiques_etudiants:
+
+  - titre: |
+    texte :
+      \begin{itemize}[label = $\bullet$]
+        \item {\bf Vérification de l'homogénéité }
+          \begin{itemize}[label=$\circ$]
+            \item Savoir déterminer si une équation physique est homogène en
+              comparant les dimensions de ses différents termes et de ses deux membres.
+            \item Savoir identifier rapidement une relation nécessairement fausse
+              lorsqu'elle n'est pas homogène.
+          \end{itemize}
+        \item {\bf Détermination de la dimension d'une constante }
+          \begin{itemize}[label=$\circ$]
+            \item Savoir retrouver la dimension d'une constante ou d'un paramètre
+              physique à partir d'une relation connue.
+            \item Savoir isoler dimensionnellement une grandeur inconnue à partir
+              d'une équation physique.
+          \end{itemize}
+        \item {\bf Fonctions mathématiques }
+          \begin{itemize}[label=$\circ$]
+            \item Savoir que les arguments des fonctions trigonométriques,
+              exponentielles et logarithmiques doivent être sans dimension.
+            \item Savoir déterminer les dimensions des grandeurs intervenant
+              dans l'argument d'une fonction mathématique.
+          \end{itemize}
+        \item {\bf Utilisation de l'analyse dimensionnelle }
+          \begin{itemize}[label=$\circ$]
+            \item Utiliser l'analyse dimensionnelle comme outil de contrôle
+              rapide d'une relation physique.
+            \item Comprendre qu'une relation homogène n'est pas nécessairement
+              vraie, mais qu'une relation non homogène ne peut pas être correcte.
+          \end{itemize}
+      \end{itemize}
+
+  # - titre: |
+  #     Vérifier l'homogénéité d'une relation
+
+  #   texte: |
+  #     Savoir déterminer si une équation physique est homogène en comparant
+  #     les dimensions de ses différents termes et de ses deux membres.
+
+  # - titre: |
+  #     Déterminer la dimension d'une constante
+
+  #   texte: |
+  #     Savoir retrouver la dimension d'une constante ou d'un paramètre
+  #     physique à partir d'une relation connue.
+
+  # - titre: |
+  #     Utiliser les fonctions mathématiques
+
+  #   texte: |
+  #     Comprendre que les arguments des fonctions trigonométriques,
+  #     exponentielles et logarithmiques doivent être sans dimension.
+
+  # - titre: |
+  #     Détecter une incohérence physique
+
+  #   texte: |
+  #     Être capable d'utiliser l'analyse dimensionnelle comme outil de
+  #     contrôle rapide d'une relation physique et identifier une relation
+  #     nécessairement fausse lorsqu'elle n'est pas homogène.
+
+objectifs_pedagogiques_enseignants:
+
+  - titre: |
+    texte:
+      \begin{itemize}[label = $\bullet$]
+        \item {\bf Consolider les règles de base }
+          \begin{itemize}[label=$\circ$]
+            \item Vérifier que les étudiants maîtrisent les règles d'addition
+              et de soustraction des grandeurs physiques.
+            \item Vérifier que les étudiants maîtrisent les règles de multiplication
+              et de division des grandeurs physiques.
+          \end{itemize}
+        \item {\bf Distinguer homogénéité et validité }
+          \begin{itemize}[label=$\circ$]
+            \item Insister sur le fait qu'une relation homogène n'est pas
+              nécessairement vraie.
+            \item Faire comprendre que l'homogénéité est une condition nécessaire
+              de cohérence, mais pas une condition suffisante de validité physique.
+          \end{itemize}
+        \item {\bf Développer un réflexe de vérification }
+          \begin{itemize}[label=$\circ$]
+            \item Encourager les étudiants à effectuer une analyse dimensionnelle
+              avant toute application numérique.
+            \item Inciter les étudiants à utiliser l'analyse dimensionnelle avant
+              toute manipulation algébrique complexe.
+          \end{itemize}
+        \item {\bf Introduire les grandeurs sans dimension }
+          \begin{itemize}[label=$\circ$]
+            \item Faire identifier les grandeurs adimensionnelles dans une
+              expression physique.
+            \item Faire comprendre le rôle des grandeurs sans dimension dans les
+              arguments des fonctions trigonométriques, exponentielles et
+              logarithmiques.
+          \end{itemize}
+      \end{itemize}
+  # - titre: |
+  #     Consolider les règles de base
+
+  #   texte: |
+  #     Vérifier que les étudiants maîtrisent les règles d'addition,
+  #     de soustraction, de multiplication et de division des grandeurs
+  #     physiques.
+
+  # - titre: |
+  #     Faire distinguer homogénéité et validité
+
+  #   texte: |
+  #     Insister sur le fait qu'une relation homogène n'est pas nécessairement
+  #     vraie. L'analyse dimensionnelle constitue une condition nécessaire
+  #     de cohérence, mais pas une condition suffisante de validité physique.
+
+  # - titre: |
+  #     Développer un réflexe de vérification
+
+  #   texte: |
+  #     Encourager les étudiants à effectuer une analyse dimensionnelle
+  #     avant toute application numérique ou manipulation algébrique complexe.
+
+  # - titre: |
+  #     Introduire les grandeurs sans dimension
+
+  #   texte: |
+  #     Faire apparaître le rôle des grandeurs adimensionnelles, notamment
+  #     dans les arguments des fonctions trigonométriques, exponentielles
+  #     et logarithmiques.
+
+point_cours:
+  - titre: |
+      Principe d'homogénéité
+
+    texte: |
+      Une relation physique doit être homogène : tous les termes qui sont
+      additionnés ou soustraits doivent avoir la même dimension et les deux
+      membres d'une équation doivent avoir la même dimension.
+
+  - titre: |
+      Règles de calcul dimensionnel
+
+    texte: |
+      \begin{itemize}[label=$\bullet$]
+        \item Pour un produit :
+          \[
+            [AB]=[A][B].
+          \]
+        \item Pour un quotient :
+          \[
+            \left[\frac{A}{B}\right]=\frac{[A]}{[B]}.
+          \]
+        \item Pour une puissance :
+          \[
+            [A^n]=[A]^n.
+          \]
+        \item Pour une somme ou une différence, les termes doivent avoir
+          la même dimension.
+      \end{itemize}
+
+  - titre: |
+      Grandeurs sans dimension $\&$ Fonctions mathématiques
+
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+        \item {\bf Grandeurs sans dimension }
+          \begin{itemize}[label=$\circ$]
+            \item Une grandeur sans dimension possède une dimension égale à $1$..
+            \item Les constantes numériques pures sont sans dimension et ne modifient pas la dimension d'une expression.
+          \end{itemize}
+        \item {\bf Fonctions mathématiques}
+          \begin{itemize}[label=$\circ$]
+            \item Les fonctions $\exp$, $\cos$, $\sin$ et $\ln$ prennent un argument sans dimension. Ainsi, si $f(x)$ désigne l'une de ces fonctions, l'argument $x$ doit vérifier :
+            \[
+              [x]=1.
+            \]
+          \end{itemize}
+      \end{itemize}
+
+  - titre: |
+      Dérivation
+
+    texte: |
+      Pour une grandeur $f$ dépendant d'une variable $x$, la dimension
+      de la dérivée est donnée par :
+      \[
+        \left[\frac{df}{dx}\right]=\frac{[f]}{[x]}.
+      \]
+
+remarques_pedagogiques_ecueils_classiques:
+
   - titre: |
 
     texte: |
+      \begin{itemize}[label = $\bullet$]
+        \item {\bf Confondre homogénéité et vérité }
+          \begin{itemize}[label=$\circ$]
+            \item Comprendre qu'une relation homogène n'est pas nécessairement
+              correcte.
+            \item Par exemple, $x=at^2$ et $x=2at^2$ sont toutes deux homogènes,
+              mais l'analyse dimensionnelle seule ne permet pas de déterminer
+              le coefficient numérique correct.
+          \end{itemize}
+        \item {\bf Additionner des dimensions différentes }
+          \begin{itemize}[label=$\circ$]
+            \item Éviter d'additionner ou de soustraire directement des grandeurs
+              de dimensions différentes.
+            \item Rappeler que des expressions comme $x+v$ ou $a+t$ n'ont pas
+              de sens physique en général.
+          \end{itemize}
+        \item {\bf Oublier les puissances }
+          \begin{itemize}[label=$\circ$]
+            \item Lors du calcul dimensionnel, appliquer les puissances à
+              l'ensemble de la dimension de la grandeur.
+            \item Par exemple :
+              \[
+                [v^2]=[v]^2.
+              \]
+          \end{itemize}
+        \item {\bf Oublier que les arguments sont sans dimension }
+          \begin{itemize}[label=$\circ$]
+            \item Vérifier que l'argument d'une fonction trigonométrique,
+              exponentielle ou logarithmique est sans dimension.
+            \item Pour $\cos(\omega t+\varphi)$, vérifier notamment :
+              \[
+                [\omega]=T^{-1}
+                \qquad\text{et}\qquad
+                [\varphi]=1.
+              \]
+          \end{itemize}
+        \item {\bf Confondre unité et dimension }
+          \begin{itemize}[label=$\circ$]
+            \item Distinguer la dimension d'une grandeur de son unité.
+            \item Par exemple, une longueur a pour dimension $L$, tandis que
+              son unité dans le S.I. peut être le mètre.
+          \end{itemize}
+      \end{itemize}
 
+  # - titre: |
+  #     Confondre homogénéité et vérité
 
-objectifs_pedagogiques_etudiants :
+  #   texte: |
+  #     Une relation homogène n'est pas nécessairement correcte. Par exemple,
+  #     $x=at^2$ et $x=2at^2$ sont toutes deux homogènes, mais l'analyse
+  #     dimensionnelle seule ne permet pas de déterminer le coefficient
+  #     numérique correct.
+
+  # - titre: |
+  #     Additionner des dimensions différentes
+
+  #   texte: |
+  #     Une erreur fréquente consiste à additionner directement des grandeurs
+  #     de dimensions différentes. Rappeler que des termes comme $x+v$ ou
+  #     $a+t$ n'ont pas de sens physique en général.
+
+  # - titre: |
+  #     Oublier les puissances
+
+  #   texte: |
+  #     Lors du calcul de la dimension d'une expression comme $v^2/a$,
+  #     les puissances doivent être appliquées à toute la dimension de la
+  #     grandeur :
+  #     \[
+  #       [v^2]=[v]^2.
+  #     \]
+
+  # - titre: |
+  #     Oublier que les arguments sont sans dimension
+
+  #   texte: |
+  #     Pour une expression telle que $\cos(\omega t+\varphi)$, les étudiants
+  #     peuvent oublier que l'ensemble $\omega t+\varphi$ doit être sans
+  #     dimension. Il faut donc avoir :
+  #     \[
+  #       [\omega]=T^{-1}
+  #       \qquad\text{et}\qquad
+  #       [\varphi]=1.
+  #     \]
+
+  # - titre: |
+  #     Confondre unité et dimension
+
+  #   texte: |
+  #     Une dimension et une unité ne sont pas synonymes. Par exemple,
+  #     une longueur a pour dimension $L$, tandis que son unité dans le S.I.
+  #     peut être le mètre.
+
+remarques_pedagogiques_conseils_animation:
+
   - titre: |
-
-    texte: |
       
 
-objectifs_pedagogiques_enseignants :
-  - titre: |
-
     texte: |
-      
-point_cours :
-  - titre: |
+      \begin{itemize}[label = $\bullet$]
+        \item {\bf Commencer par le vocabulaire }
+          \begin{itemize}[label=$\circ$]
+            \item Faire expliciter par les étudiants les notions de dimension,
+              d'homogénéité et de grandeur sans dimension.
+            \item Vérifier que les étudiants distinguent correctement ces trois
+              notions avant de commencer les calculs.
+          \end{itemize}
+        \item {\bf Faire verbaliser le raisonnement }
+          \begin{itemize}[label=$\circ$]
+            \item Demander aux étudiants de justifier chaque étape du calcul
+              dimensionnel.
+            \item Faire expliciter des questions simples comme :
+              « quelle est la dimension de cette grandeur ? »,
+              « pourquoi peut-on additionner ces deux termes ? »,
+              « que doit vérifier l'argument du cosinus ? ».
+          \end{itemize}
+        \item {\bf Utiliser la première question comme diagnostic }
+          \begin{itemize}[label=$\circ$]
+            \item Utiliser la question de cours pour identifier rapidement
+              les difficultés des étudiants.
+            \item Porter une attention particulière à la distinction entre
+              condition nécessaire et condition suffisante.
+          \end{itemize}
+        \item {\bf Insister sur l'ordre des calculs }
+          \begin{itemize}[label=$\circ$]
+            \item Encourager les étudiants à identifier d'abord la dimension
+              du membre de gauche.
+            \item Calculer ensuite séparément la dimension de chaque terme
+              du membre de droite, puis comparer les résultats.
+          \end{itemize}
+        \item {\bf Faire remarquer les grandeurs caractéristiques }
+          \begin{itemize}[label=$\circ$]
+            \item Faire reconnaître les dimensions usuelles des grandeurs
+              rencontrées en mécanique.
+            \item Identifier notamment :
+              \[
+                [v]=L*T^{-1},
+                \qquad
+                [a]=L*T^{-2},
+                \qquad
+                [\mathcal{E}]=M*L^2*T^{-2}.
+              \]
+          \end{itemize}
+      \end{itemize}
 
-    texte: |
 
+  # - titre: |
+  #     Commencer par le vocabulaire
 
-remarques_pedagogiques_ecueils_classiques: 
-  - titre: |
-  
-    texte: |
-      
-remarques_pedagogiques_conseils_animation: 
-  - titre: |
+  #   texte: |
+  #     Faire expliciter par les étudiants les mots « dimension »,
+  #     « homogène » et « sans dimension » avant de commencer les calculs.
 
-    texte: |
+  # - titre: |
+  #     Faire verbaliser le raisonnement
+
+  #   texte: |
+  #     Demander aux étudiants de justifier chaque étape :
+  #     « quelle est la dimension de cette grandeur ? »,
+  #     « pourquoi peut-on additionner ces deux termes ? »,
+  #     « que doit vérifier l'argument du cosinus ? ».
+
+  # - titre: |
+  #     Utiliser la première question comme diagnostic
+
+  #   texte: |
+  #     La question de cours permet d'identifier rapidement les difficultés
+  #     avant de passer aux applications. Une attention particulière doit
+  #     être portée à la distinction entre condition nécessaire et condition
+  #     suffisante.
+
+  # - titre: |
+  #     Insister sur l'ordre des calculs
+
+  #   texte: |
+  #     Pour chaque relation, encourager la méthode suivante :
+  #     identifier la dimension du membre de gauche, calculer séparément
+  #     la dimension de chaque terme du membre de droite, puis comparer.
+
+  # - titre: |
+  #     Faire remarquer les grandeurs caractéristiques
+
+  #   texte: |
+  #     Profiter de l'exercice pour faire reconnaître certaines dimensions
+  #     usuelles : $L*T^{-1}$ pour une vitesse, $L*T^{-2}$ pour une accélération
+  #     et $M*L^2*T^{-2}$ pour une énergie.
       
 
 bilan: 
   - titre: |
+      Bilan
 
     texte: |
+      \begin{itemize}[label = $\bullet$]
+        \item {\bf Homogénéité d'une équation}
+          \begin{itemize}[label = $\circ$]
+            \item Une équation physique doit être homogène : tous les termes
+              qui sont additionnés ou soustraits doivent avoir la même dimension,
+              et les deux membres de l'équation doivent avoir la même dimension.
+            \item L'analyse dimensionnelle permet donc de détecter rapidement
+              une équation impossible ou incohérente.
+          \end{itemize}
+
+        \item {\bf Analyse dimensionnelle des grandeurs}
+          \begin{itemize}[label = $\circ$]
+            \item Pour déterminer la dimension d'une grandeur ou d'une constante,
+              partir de la relation qui la définit et remplacer chaque grandeur
+              par sa dimension.
+            \item Les constantes numériques sans dimension, comme $\frac{1}{2}$
+              ou $2$, ne modifient pas la dimension d'une expression.
+          \end{itemize}
+
+        \item {\bf Fonctions mathématiques}
+          \begin{itemize}[label = $\circ$]
+            \item L'argument d'une fonction trigonométrique, exponentielle ou
+              logarithmique doit être sans dimension.
+            \item Ainsi, dans $\cos(\omega t+\varphi)$, les grandeurs
+              $\omega t$ et $\varphi$ sont sans dimension.
+          \end{itemize}
+
+        \item {\bf Vérification d'une relation physique}
+          \begin{itemize}[label = $\circ$]
+            \item Une équation homogène n'est pas nécessairement vraie :
+              l'analyse dimensionnelle vérifie la cohérence des dimensions,
+              mais ne permet pas de déterminer les coefficients numériques
+              ou de valider à elle seule la relation physique.
+            \item En revanche, une équation non homogène ne peut pas être
+              une relation physique correcte entre les grandeurs considérées.
+          \end{itemize}
+      \end{itemize}
 
 
-aller_plus_loin: 
+aller_plus_loin:
   - niveau: lycee
-
     titre: |
+      Vérifier des relations physiques simples
 
     texte: |
-
+      Utiliser l'analyse dimensionnelle pour vérifier les relations
+      classiques de mécanique et d'électricité, par exemple
+      $v=d/t$, $E_c=\frac12mv^2$ ou $P=UI$.
 
   - niveau: prepa
     titre: |
+      Retrouver une relation par analyse dimensionnelle
 
     texte: |
-      
+      Utiliser l'analyse dimensionnelle pour déterminer la forme possible
+      d'une loi physique à partir des grandeurs dont elle dépend.
+      On pourra notamment introduire l'analyse dimensionnelle de lois
+      faisant intervenir plusieurs paramètres.
 
   - niveau: licence
     titre: |
+      Théorème de Vaschy-Buckingham
 
     texte: |
-     
+      Introduire le théorème $\Pi$ de Vaschy-Buckingham et la construction
+      de grandeurs sans dimension. Montrer comment cette méthode permet
+      de réduire le nombre de paramètres indépendants d'un problème physique.
 
   - niveau: master
     titre: |
+      Analyse d'échelles et similitude
 
     texte: |
+      Étendre l'analyse dimensionnelle à l'analyse d'échelles, aux lois
+      d'échelle et aux nombres sans dimension utilisés en physique
+      et en mécanique des fluides, tels que les nombres de Reynolds,
+      de Froude ou de Mach.
       
 
 
@@ -89,146 +550,168 @@ questions:
   - id: q1_intro
 
     enonce: |
-      %{\bf Notions de cours S.I.} \\
+      {\bf Notions de cours S.I.} 
       %Répondre aux questions de cours relatives à l'homogénéité
       %(a) Définir une équation homogène. (b) Une équation homogène est-elle forcément vraie ? (c) Une équation non homogène peut-elle être vraie ? (d) Quelles sont les règles d'addition/soustraction ? (e) De multiplication/division ? (f) Quelle est la dimension d'une dérivée df/dx ? (g) Quelle est la dimension des fonctions transcendentales (exp, cos, ln) et de leurs arguments ?
+      \begin{enumerate}[label=\alph*)]
+        \item Définir la notion d’homogénéité.
+        \item Une équation homogène est elle nécessairement vraie ?
+        \item Une équation non homogène est elle nécessairement fausse ?
+        \item Dans quels cas, peut on additionner/soustraire des grandeurs entre elles ?
+        \item Dans quels cas, peut on multiplier/diviser des grandeurs entre elles ?
+        \item Quelle est la dimension de la dérivée d’une grandeur par rapport à une variable ?
+        \item Que peut on dire de la dimension des fonctions mathématiques $\exp(x)$ , $\cos(x)$ , $\ln(x)$ ? Et de leur argument ?
+      \end{enumerate}
 
-    point_cours: 
-      - titre: |
-
-        texte: |
-
-          L'addition/soustraction impose des termes de même dimension. Les arguments des fonctions usuelles (exp, cos, sin, ln) doivent être strictement sans dimension ([x] = 1).
-
-    is_intro_only: true 
-
-  - id: q1a
-
-    parent: "1"
-
-    enonce: |
-      Définir la notion d’homogénéité.
-    
-    point_cours: 
-      - titre: |
-
-        texte: |
-              
     solution:
       - titre: |
 
         texte: |
-          Une équation est homogène si tous ses termes ont la même dimension.
+          \begin{enumerate}[label=\alph*)]
+            \item Une équation est homogène si tous ses termes ont la même dimension.
+            \item Non, elle peut être physiquement fausse à cause d'un facteur numérique.
+            \item Oui, une équation non homogène est toujours fausse.
+            \item On ne peut additionner que des grandeurs de même dimension.
+            \item On peut multiplier ou diviser des grandeurs de dimensions différentes.
+            \item $[df/dx] = [f] / [x]$.
+            \item Les fonctions transcendentales et leurs arguments sont adimensionnels $([f] = 1, [x] = 1)$.
+          \end{enumerate}
+    # point_cours: 
+    #   - titre: |
 
-  - id: q1b
+    #     texte: |
 
-    parent: "1"
+    #       L'addition/soustraction impose des termes de même dimension. Les arguments des fonctions usuelles (exp, cos, sin, ln) doivent être strictement sans dimension ([x] = 1).
 
-    enonce: |
-      Une équation homogène est elle nécessairement vraie ?
+    #is_intro_only: true 
+
+  # - id: q1a
+
+  #   parent: "1"
+
+  #   enonce: |
+  #     Définir la notion d’homogénéité.
     
-    point_cours: 
-      - titre: |
+  #   point_cours: 
+  #     - titre: |
 
-        texte: |
+  #       texte: |
               
-    solution:
-      - titre: |
+  #   solution:
+  #     - titre: |
 
-        texte: |
-          Non, elle peut être physiquement fausse à cause d'un facteur numérique.
+  #       texte: |
+  #         Une équation est homogène si tous ses termes ont la même dimension.
 
+  # - id: q1b
 
-  - id: q1c
+  #   parent: "1"
 
-    parent: "1"
-
-    enonce: |
-      Une équation non homogène est elle nécessairement fausse ?
+  #   enonce: |
+  #     Une équation homogène est elle nécessairement vraie ?
     
-    point_cours: 
-      - titre: |
+  #   point_cours: 
+  #     - titre: |
 
-        texte: |
+  #       texte: |
               
-    solution:
-      - titre: |
+  #   solution:
+  #     - titre: |
 
-        texte: |
-          Oui, une équation non homogène est toujours fausse.
+  #       texte: |
+  #         Non, elle peut être physiquement fausse à cause d'un facteur numérique.
 
 
-  - id: q1d
+  # - id: q1c
 
-    parent: "1"
+  #   parent: "1"
 
-    enonce: |
-      Dans quels cas, peut on additionner/soustraire des grandeurs entre elles ?
+  #   enonce: |
+  #     Une équation non homogène est elle nécessairement fausse ?
     
-    point_cours: 
-      - titre: |
+  #   point_cours: 
+  #     - titre: |
 
-        texte: |
+  #       texte: |
               
-    solution:
-      - titre: |
+  #   solution:
+  #     - titre: |
 
-        texte: |
-          On ne peut additionner que des grandeurs de même dimension.
+  #       texte: |
+  #         Oui, une équation non homogène est toujours fausse.
 
-  - id: q1e
 
-    parent: "1"
+  # - id: q1d
 
-    enonce: |
-      Dans quels cas, peut on multiplier/diviser des grandeurs entre elles ?
+  #   parent: "1"
+
+  #   enonce: |
+  #     Dans quels cas, peut on additionner/soustraire des grandeurs entre elles ?
     
-    point_cours: 
-      - titre: |
+  #   point_cours: 
+  #     - titre: |
 
-        texte: |
+  #       texte: |
               
-    solution:
-      - titre: |
+  #   solution:
+  #     - titre: |
 
-        texte: |
-          On peut multiplier ou diviser des grandeurs de dimensions différentes.
+  #       texte: |
+  #         On ne peut additionner que des grandeurs de même dimension.
 
-  - id: q1f
+  # - id: q1e
 
-    parent: "1"
+  #   parent: "1"
 
-    enonce: |
-      Quelle est la dimension de la dérivée d’une grandeur par rapport à une variable ?
+  #   enonce: |
+  #     Dans quels cas, peut on multiplier/diviser des grandeurs entre elles ?
     
-    point_cours: 
-      - titre: |
+  #   point_cours: 
+  #     - titre: |
 
-        texte: |
+  #       texte: |
               
-    solution:
-      - titre: |
+  #   solution:
+  #     - titre: |
 
-        texte: |
-          $[df/dx] = [f] / [x]$.
+  #       texte: |
+  #         On peut multiplier ou diviser des grandeurs de dimensions différentes.
 
-  - id: q1g
+  # - id: q1f
 
-    parent: "1"
+  #   parent: "1"
 
-    enonce: |
-      Que peut on dire de la dimension des fonctions mathématiques $\exp(x)$ , $\cos(x)$ , $\ln(x)$ ? Et de leur argument ?
+  #   enonce: |
+  #     Quelle est la dimension de la dérivée d’une grandeur par rapport à une variable ?
     
-    point_cours: 
-      - titre: |
+  #   point_cours: 
+  #     - titre: |
 
-        texte: |
+  #       texte: |
               
-    solution:
-      - titre: |
+  #   solution:
+  #     - titre: |
 
-        texte: |
-          Les fonctions transcendentales et leurs arguments sont adimensionnels $([f] = 1, [x] = 1)$.
+  #       texte: |
+  #         $[df/dx] = [f] / [x]$.
+
+  # - id: q1g
+
+  #   parent: "1"
+
+  #   enonce: |
+  #     Que peut on dire de la dimension des fonctions mathématiques $\exp(x)$ , $\cos(x)$ , $\ln(x)$ ? Et de leur argument ?
+    
+  #   point_cours: 
+  #     - titre: |
+
+  #       texte: |
+              
+  #   solution:
+  #     - titre: |
+
+  #       texte: |
+  #         Les fonctions transcendentales et leurs arguments sont adimensionnels $([f] = 1, [x] = 1)$.
 
   - id: q2
 
@@ -238,7 +721,7 @@ questions:
       \begin{enumerate}[label=\alph*)]
         \item Soit $x$, la coordonnée donnant la position d’un mobile sur un axe, $v$ sa vitesse et $a$ son accélération, vérifier si les équations suivantes sont homogènes :
           $$
-            x = a t,\quad  x = \frac{1}2 a t^2 + v*t, \quad \text{et }  x = \frac{v^2}{2 a}.
+            x = a t,\quad  x = \frac{1}2 a t^2 + vt, \quad \text{et }  x = \frac{v^2}{2 a}.
           $$
         \item La vitesse $v$ d’une particule varie avec le temps $t$ selon : $v= At+ Bt^2$.
           Quelles sont les dimensions des constantes $A$ et $B$ ?
@@ -251,8 +734,77 @@ questions:
     coup_de_pouce: 
       
       - titre: |
+          Vérifier l'homogénéité d'une équation
 
         texte: |
+          \begin{itemize}[label=$\bullet$]
+            \item Pour qu'une équation soit homogène, les deux membres doivent avoir la {\bf même dimension}.
+            \item Pour une somme ou une différence, tous les termes doivent également avoir {\bf la même dimension}.
+            \item Rappeler les dimensions :
+              \begin{itemize}[label=$\circ$]
+                \item $[x]=L$
+                \item $[v]=L*T^{-1}$
+                \item $[a]=L*T^{-2}$
+                \item $[t]=T$
+              \end{itemize}
+            \item Commencer par calculer la dimension de chaque terme du membre de droite, puis la comparer à $[x]$.
+          \end{itemize}
+
+
+      - titre: |
+          Dimensions des constantes $A$ et $B$
+
+        texte: |
+          \begin{itemize}[label=$\bullet$]
+            \item Dans $v=At+Bt^2$, les deux termes $At$ et $Bt^2$ doivent avoir la {\bf même dimension que $v$}.
+            \item On a $[v]=L*T^{-1}$.
+            \item Utiliser :
+              \begin{itemize}[label=$\circ$]
+                \item $[A]=\dfrac{[v]}{[t]}$
+                \item $[B]=\dfrac{[v]}{[t]^2}$
+              \end{itemize}
+          \end{itemize}
+
+
+      - titre: |
+          Dimensions de $R$, $\omega$ et $\varphi$
+
+        texte: |
+          \begin{itemize}[label=$\bullet$]
+            \item Dans $x=R\cos(\omega t+\varphi)$, commencer par comparer les dimensions de $x$ et de $R$.
+            \item Une fonction trigonométrique comme $\cos$ prend un argument {\bf sans dimension}.
+            \item Il faut donc que :
+              \begin{itemize}[label=$\circ$]
+                \item $[\omega t+\varphi]=1$
+                \item $[\omega t]=1$
+                \item $[\varphi]=1$
+              \end{itemize}
+            \item En déduire la dimension de $\omega$ à partir de $[\omega][t]=1$.
+          \end{itemize}
+
+
+      - titre: |
+          Vérifier l'homogénéité de $\mathcal{E}_p=mgz$
+
+        texte: |
+          \begin{itemize}[label=$\bullet$]
+            \item Pour vérifier l'équation, comparer $[\mathcal{E}_p]$ et $[mgz]$.
+            \item Rappeler les dimensions :
+              \begin{itemize}[label=$\circ$]
+                \item $[m]=M$
+                \item $[g]=L*T^{-2}$
+                \item $[z]=L$
+              \end{itemize}
+            \item Calculer ensuite :
+              $$
+                [mgz]=[m][g][z].
+              $$
+            \item La dimension d'une énergie est :
+              $$
+                [\mathcal{E}]=M*L^2*T^{-2}.
+              $$
+            \item Comparer les deux résultats pour conclure sur l'homogénéité.
+          \end{itemize}
 
 
     solution: 

@@ -1,0 +1,187 @@
+id: td_meca_ex1
+intitule: "Tir horizontal et cinématique 2D"
+td: td_cinematique
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - mecanique.cinematique_2d
+  - mecanique.mouvement_projectile
+
+metadonnees:
+  duree_estimee: "45 min"
+  difficulte: 2
+  type_exercice: "Application"
+  indispensable: true
+
+enonce_intro: |
+  On étudie le mouvement à deux dimensions d'un projectile lancé horizontalement dans le champ de pesanteur terrestre uniformément réparti. L'axe $(Ox)$ est horizontal, dirigé vers la droite, et l'axe $(Oy)$ est vertical, dirigé vers le haut. La durée entre deux points consécutifs enregistrés est notée $\tau$.
+
+prerequis:
+  - titre: "Vecteur position, vitesse et accélération"
+    texte: |
+      Connaître les définitions différentielles $\vec{v} = \frac{\mathrm{d}\vec{OM}}{\mathrm{d}t}$ et $\vec{a} = \frac{\mathrm{d}\vec{v}}{\mathrm{d}t}$, ainsi que l'approximation par taux de variation sur des intervalles finis : $\vec{v}_k \approx \frac{\vec{M_{k-1}M_{k+1}}}{2\tau}$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Calculs vectoriels et cinématiques"
+    texte: |
+      Savoir déterminer graphiquement et analytiquement les composantes des vecteurs position, vitesse et accélération pour un mouvement parabolique plane.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Lien entre discrets et continus"
+    texte: |
+      Faire comprendre le passage d'une trajectoire chronophotographiée discrète aux équations horaires analytiques du mouvement.
+
+coup_de_pouce:
+  - titre: "Choix de l'intervalle d'approximation"
+    texte: |
+      Pour calculer le vecteur vitesse au point $M_k$, utilise la différence de position entre les points $M_{k-1}$ et $M_{k+1}$ sur un intervalle de temps $\Delta t = 2\tau$.
+
+point_cours:
+  - titre: "Tir projectile dans un champ uniforme"
+    texte: |
+      Pour un tir horizontal sans frottement :
+      $x(t) = v_0 t$
+      $y(t) = -\frac{1}{2}g t^2$
+      L'accélération est constante : $\vec{a} = -g \vec{u}_y$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Intervalle de temps mal compté"
+    texte: |
+      Oublier que la distance entre $M_{k-1}$ et $M_{k+1}$ couvre une durée de $2\tau$ et non $\tau$.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Indépendance des axes"
+    texte: |
+      Bien faire constater aux étudiants que la vitesse horizontale $v_x$ reste constante tandis que la vitesse verticale $v_y$ croît de façon linéaire avec le temps.
+
+bilan:
+  - titre: "Synthèse cinématique"
+    texte: |
+      Un tir horizontal se décompose en un mouvement rectiligne uniforme selon l'axe horizontal et un mouvement uniformément accéléré en chute libre selon l'axe vertical.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Frottements fluides"
+    texte: |
+      Étude de la déviation de la trajectoire parabolique en présence d'une force de frottement quadratique $\vec{f} = -k v \vec{v}$.
+
+questions:
+  - id: q1_a
+    parent: "1"
+    enonce: |
+      Exprimer les vecteurs position $\vec{OM}(t_2)$, $\vec{OM}(t_5)$ et $\vec{OM}(t_7)$ dans la base cartésienne $(\vec{u}_x, \vec{u}_y)$.
+    solution:
+      - titre: "Expressions des vecteurs position"
+        texte: |
+          * $\vec{OM}(t_2) = x_2 \vec{u}_x + y_2 \vec{u}_y$
+          * $\vec{OM}(t_5) = x_5 \vec{u}_x + y_5 \vec{u}_y$
+          * $\vec{OM}(t_7) = x_7 \vec{u}_x + y_7 \vec{u}_y$
+
+  - id: q1_b
+    parent: "1"
+    enonce: |
+      Exprimer le vecteur déplacement $\Delta\vec{OM}_{5\to 7}$ entre les instants $t_5$ et $t_7$, puis donner la formule de sa norme.
+    solution:
+      - titre: "Vecteur déplacement"
+        texte: |
+          Le vecteur déplacement s'écrit $\Delta\vec{OM}_{5\to 7} = \vec{OM}(t_7) - \vec{OM}(t_5) = \vec{M_5 M_7}$.
+          Sa norme s'exprime par :
+          $$\|\Delta\vec{OM}_{5\to 7}\| = \sqrt{(x_7 - x_5)^2 + (y_7 - y_5)^2}$$
+
+  - id: q1_c
+    parent: "1"
+    enonce: |
+      Définir le vecteur vitesse instantanée $\vec{v}(t)$ puis donner l'approximation de $\vec{v}_6$ au point $M_6$ à l'aide des points environnants.
+    solution:
+      - titre: "Vecteur vitesse en t6"
+        texte: |
+          Par définition : $\vec{v}(t) = \frac{\mathrm{d}\vec{OM}}{\mathrm{d}t}$.
+          Approximation au point $M_6$ ($\Delta t = 2\tau$) :
+          $$\vec{v}_6 \approx \frac{\vec{M_5 M_7}}{2\tau}$$
+          Composantes : $v_{6,x} = \frac{x_7 - x_5}{2\tau}$, $v_{6,y} = \frac{y_7 - y_5}{2\tau}$ et $\|\vec{v}_6\| = \sqrt{v_{6,x}^2 + v_{6,y}^2}$.
+
+  - id: q1_d
+    parent: "1"
+    enonce: |
+      Exprimer de même les approximations des vecteurs vitesse aux instants $t_8$ et $t_{10}$.
+    solution:
+      - titre: "Vecteurs vitesse v8 et v10"
+        texte: |
+          * En $t_8$ : $\vec{v}_8 \approx \frac{\vec{M_7 M_9}}{2\tau}$, d'où $v_{8,x} = \frac{x_9 - x_7}{2\tau}$ et $v_{8,y} = \frac{y_9 - y_7}{2\tau}$.
+          * En $t_{10}$ : $\vec{v}_{10} \approx \frac{\vec{M_9 M_{11}}}{2\tau}$, d'où $v_{10,x} = \frac{x_{11} - x_9}{2\tau}$ et $v_{10,y} = \frac{y_{11} - y_9}{2\tau}$.
+
+  - id: q1_e
+    parent: "1"
+    enonce: |
+      Donner l'expression approchée de l'accélération $\vec{a}_9$ au point $M_9$ et préciser sa valeur S.I.
+    solution:
+      - titre: "Accélération en t9"
+        texte: |
+          $$\vec{a}_9 \approx \frac{\vec{v}_{10} - \vec{v}_8}{2\tau}$$
+          En unités S.I., la bille est en chute libre : $\vec{a}_9 \approx -9{,}81 \vec{u}_y\text{ m}\cdot\text{s}^{-2}$.
+
+  - id: q2_a
+    parent: "2"
+    enonce: |
+      Compléter le tableau des valeurs cinématiques avec un pas de temps $\tau = 0{,}05\text{ s}$ et une échelle de $0{,}20\text{ m}$ par graduation.
+    solution:
+      - titre: "Tableau de mesures"
+        texte: |
+          * $t = 0{,}05\text{ s}$ : $x = 0{,}10\text{ m}$, $v_x = 2{,}0\text{ m/s}$, $y = -0{,}012\text{ m}$, $v_y = -0{,}49\text{ m/s}$
+          * $t = 0{,}10\text{ s}$ : $x = 0{,}20\text{ m}$, $v_x = 2{,}0\text{ m/s}$, $y = -0{,}049\text{ m}$, $v_y = -0{,}98\text{ m/s}$
+          * $t = 0{,}20\text{ s}$ : $x = 0{,}40\text{ m}$, $v_x = 2{,}0\text{ m/s}$, $y = -0{,}196\text{ m}$, $v_y = -1{,}96\text{ m/s}$
+          * $t = 0{,}30\text{ s}$ : $x = 0{,}60\text{ m}$, $v_x = 2{,}0\text{ m/s}$, $y = -0{,}441\text{ m}$, $v_y = -2{,}94\text{ m/s}$
+
+  - id: q2_b
+    parent: "2"
+    enonce: |
+      Écrire le vecteur position $\vec{OM}(t)$ sous forme cartésienne aux instants $t_5 = 0{,}25\text{ s}$, $t_7 = 0{,}35\text{ s}$ et $t_9 = 0{,}45\text{ s}$.
+    solution:
+      - titre: "Vecteurs position calculés"
+        texte: |
+          * $\vec{OM}(t_5) = 0{,}50 \vec{u}_x - 0{,}306 \vec{u}_y\text{ (m)}$
+          * $\vec{OM}(t_7) = 0{,}70 \vec{u}_x - 0{,}601 \vec{u}_y\text{ (m)}$
+          * $\vec{OM}(t_9) = 0{,}90 \vec{u}_x - 0{,}993 \vec{u}_y\text{ (m)}$
+
+  - id: q2_c
+    parent: "2"
+    enonce: |
+      Dériver analytiquement les positions pour obtenir $v_x(t)$ et $v_y(t)$, puis évaluer aux instants $t_6 = 0{,}30\text{ s}$ et $t_8 = 0{,}40\text{ s}$.
+    solution:
+      - titre: "Vitesses analytiques"
+        texte: |
+          $v_x(t) = \frac{\mathrm{d}x}{\mathrm{d}t} = 2{,}0\text{ m}\cdot\text{s}^{-1}$ et $v_y(t) = \frac{\mathrm{d}y}{\mathrm{d}t} = -g t = -9{,}81 t\text{ m}\cdot\text{s}^{-1}$.
+          * En $t_6 = 0{,}30\text{ s}$ : $v_x = 2{,}0\text{ m/s}$, $v_y = -2{,}94\text{ m/s}$.
+          * En $t_8 = 0{,}40\text{ s}$ : $v_x = 2{,}0\text{ m/s}$, $v_y = -3{,}92\text{ m/s}$.
+
+  - id: q2_d
+    parent: "2"
+    enonce: |
+      Déduire le vecteur accélération analytique $\vec{a}(t_7)$.
+    solution:
+      - titre: "Accélération analytique"
+        texte: |
+          $a_x = \frac{\mathrm{d}v_x}{\mathrm{d}t} = 0\text{ m}\cdot\text{s}^{-2}$ et $a_y = \frac{\mathrm{d}v_y}{\mathrm{d}t} = -9{,}81\text{ m}\cdot\text{s}^{-2}$.
+          $$\vec{a}(t_7) = -9{,}81 \vec{u}_y\text{ m}\cdot\text{s}^{-2}$$
+
+  - id: q3_a
+    parent: "3"
+    enonce: |
+      Une bille lâchée sans vitesse initiale et une bille lancée horizontalement de la même hauteur touchent-elles le sol en même temps ?
+    solution:
+      - titre: "Indépendance des mouvements"
+        texte: |
+          Oui, les deux billes touchent le sol exactement au même instant. Le mouvement vertical est totalement indépendant du mouvement horizontal : les deux billes sont soumises à la même accélération $a_y = -g$ avec une vitesse initiale verticale $v_{0y} = 0$.
+
+  - id: q3_b
+    parent: "3"
+    enonce: |
+      Calculer la durée de la trajectoire et la portée d'un tir horizontal effectué depuis une falaise de hauteur $h = 20\text{ m}$ à $v_0 = 15\text{ m/s}$.
+    solution:
+      - titre: "Calcul de portée et durée"
+        texte: |
+          Durée du tir :
+          $$\Delta t = \sqrt{\frac{2h}{g}} = \sqrt{\frac{2 \times 20}{9{,}81}} \approx 2{,}02\text{ s}$$
+          Portée horizontale :
+          $$d = v_0 \cdot \Delta t = 15 \times 2{,}02 \approx 30{,}3\text{ m}$$

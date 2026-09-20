@@ -19,8 +19,25 @@
 % Notation opérateur (physique quantique) : \operator{H} -> Ĥ
 \newcommand{\operator}[1]{\hat{#1}}
 
-\newcommand{\ptFleche}[2]{\tikz[remember picture, baseline=(#1.base)]{\node[inner sep=0pt, outer sep=0pt] (#1) {#2};}}
+%\newcommand{\ptFleche}[2]{\tikz[remember picture, baseline=(#1.base)]{\node[inner sep=0pt, outer sep=0pt] (#1) {#2};}}
 
+\tikzstyle{every picture}+=[remember picture]
+\tikzset{
+  na/.style={
+    shape=ellipse,
+    inner sep=0pt
+  }
+}
+
+\newcommand{\ptFleche}[2]{%
+  \tikz[
+    remember picture,
+    baseline=(#1.base)
+  ]{%
+    \shorthandoff{:;!?}%
+    \node[na] (#1) {#2};%
+  }%
+}
 
 % ------------------------------------------------------------------
 % 1. CONTRÔLE PRÉCIS DES MARGES (geometry)

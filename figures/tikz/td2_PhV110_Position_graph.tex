@@ -1,0 +1,66 @@
+
+% 3. Environnement unique et superposition directe
+\begin{tikzpicture}
+  % On dessine les deux éléments sur le MÊME repère absolu
+  \clip[](-6, -5.5) rectangle (6 , 4.5) ;
+
+  \node[transform canvas={scale=1}] at (0,0) {
+    \begin{tikzpicture}
+        
+        % 2. Axe des abscisses (x)
+        \draw[line width=1.0ex, color=colorOne, ->] (-2,0) -- (5,0) 
+            node[pos=0.9, below, color=colorOne, font=\fontsize{20pt}{10pt}\bfseries\selectfont] {$t$};
+
+        % 3. Axe des ordonnées (S(x))
+        \draw[line width=1.0ex, color=colorOne, ->] (0,-8) -- (0,2.5) 
+            %node[pos=0.9, left, color=colorOne, font=\fontsize{20pt}{10pt}\bfseries\selectfont] {$y$}
+            ;
+
+        % 4. Courbe de la parabole y = x^2 (domaine restreint pour rester dans le cadre)
+        \draw[smooth, line width=1.0ex, color=colorFour, domain=-2.1:2.1, samples=100] 
+            plot (\x, {1-2*\x*\x});
+
+        \node[below right, color=colorFour, font=\fontsize{15pt}{10pt}\bfseries\selectfont , rotate = 80] at (-2.4, -4.4) {$z(t) = 1-2t^2$};
+
+        \draw[dashed, smooth, line width=0.8ex, color=colorFive, domain=-0.5:3, samples=100] 
+            plot (\x, {-4*\x+3});
+
+        \node[below right, color=colorFive, font=\fontsize{7pt}{10pt}\bfseries\selectfont , rotate = -75] at (2.5, -5.0) {$\dot{z}(a)(t-a)+z(a)$};
+
+        \draw[line width=0.8ex, color=colorOne] (1,0.3) -- (1,-0.3) 
+            node[pos=-0.1, above , color=colorOne, font=\fontsize{20pt}{10pt}\bfseries\selectfont] {$a$};
+        \draw[line width=0.8ex, color=colorOne] (2,0.3) -- (2,-0.3) 
+            node[pos=-0.1, above, color=colorOne, shift={(0.8,-0.0)},  font=\fontsize{20pt}{10pt}\bfseries\selectfont] {$a + \mathrm{d} a$};
+
+        \draw[dashed, line width=0.5ex, color=colorOne] (1,0) -- (1,-8);
+        \draw[dashed, line width=0.5ex, color=colorOne] (-2.5,-1) -- (4,-1)
+            node[pos=-0.0, left, color=colorOne, font=\fontsize{20pt}{10pt}\bfseries\selectfont] {$z(a)$};
+        \draw[dashed, line width=0.5ex, color=colorOne] (2,0) -- (2,-8);
+        \draw[dashed, line width=0.5ex, color=colorOne] (-2.5,-7) -- (4,-7)
+            node[pos=-0.0, left, color=colorOne, font=\fontsize{20pt}{10pt}\bfseries\selectfont] {$z(a + \mathrm{d} a )$};
+
+        \draw[dashed, line width=0.5ex, color=colorOne] (-2.5,-5) -- (4,-5)
+            node[pos=-0.0, left, color=colorOne, font=\fontsize{20pt}{10pt}\bfseries\selectfont] {$\dot{z}(a)\mathrm{d} a+z(a)$};
+
+        \draw[dashed, line width=0.5ex, color=colorOne , -{Latex[length=4mm,width=3mm]}] (1,1.2) -- (1.2,1.2);
+        \draw[dashed, line width=0.5ex, color=colorOne , {Latex[length=4mm,width=3mm]}- ] (1.8,1.2) -- (2,1.2);
+        \node[color=colorOne, font=\fontsize{10pt}{10pt}\bfseries\selectfont ] at (1.5, 1.2) {$\mathrm{d} a$};
+
+        \draw[line width=0.5ex, color=colorOne , {Latex[length=4mm,width=3mm]}- ] (3,-5) -- (3,-3.5);
+        \draw[line width=0.5ex, color=colorOne , -{Latex[length=4mm,width=3mm]} ] (3,-2.5) -- (3,-1);
+        \node[color=colorOne, font=\fontsize{10pt}{10pt}\bfseries\selectfont , rotate = 90 ] at (3, -3) {$\mathrm{d} z(a)$};
+
+        \draw[line width=0.5ex, color=colorOne , {Latex[length=4mm,width=3mm]}- ] (4.0,-7) -- (4.0,-4.5);
+        \draw[line width=0.5ex, color=colorOne , -{Latex[length=4mm,width=3mm]} ] (4,-3.5) -- (4,-1);
+        \node[color=colorOne, font=\fontsize{10pt}{10pt}\bfseries\selectfont , rotate = 90 ] at (4.0,-4) {$\Delta z(a)$};
+
+
+
+     \end{tikzpicture}
+};
+        
+
+  % Grille de repérage
+  %\draw[line width=2.5ex , color = red] (-8, -5.5) rectangle (8 , 4.5) ;
+  %\drawgrid{-6.}{6}{-5.5}{4.5}{1}{1}
+\end{tikzpicture}

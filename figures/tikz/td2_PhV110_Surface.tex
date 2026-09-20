@@ -1,0 +1,219 @@
+% ==============================================================================
+% Fichier : ./figures/tikz/td2_PhV110_Surface.tex
+% ==============================================================================
+
+% 1. Styles locaux
+\tikzset{
+    flechedimg/.style={
+      <-,
+      >=stealth,
+      line width=1.2ex
+    },
+    flechedimd/.style={
+      ->,
+      >=stealth,
+      line width=1.2ex
+    },
+    flechesmalldimg/.style={
+      >-,
+      >=stealth,
+      line width=1.2ex
+    },
+    flechesmalldimd/.style={
+      -<,
+      >=stealth,
+      line width=1.2ex
+    },
+}
+
+% 2. Macros de tracé (SANS \begin{tikzpicture} à l'intérieur)
+\newcommand{\SurfaceCore}{%
+    \coordinate (O) at (0, 0);
+    \coordinate (A) at (10,0);
+    \coordinate (B) at (0,10);
+    \coordinate (C) at (-5,-5);
+
+    % Cadre principal x*x
+    \draw[line width=1.5ex, color=colorOne] (C) rectangle ($(A)+(B)+(C)$);
+
+    % Texte central
+    \node[font=\fontsize{40pt}{1pt}\selectfont, text=colorFour] at (O) {
+        $S(x) = x^2$
+    };
+
+    % Flèches de cotation x (Bas)
+    \draw (O) edge[flechedimg, shift={($(C)-0.2*(B)$)}] ($(O)!0.4!(A)$)
+          ($(O)!0.6!(A)$) edge[flechedimd, shift={($(C)-0.2*(B)$)}] ($(O)!1.0!(A)$);
+
+    % Flèches de cotation x (Gauche)
+    \draw (O) edge[flechedimg, shift={($(C)-0.2*(A)$)}] ($(O)!0.4!(B)$)
+          ($(O)!0.6!(B)$) edge[flechedimd, shift={($(C)-0.2*(A)$)}] ($(O)!1.0!(B)$);
+
+    % Étiquettes x
+    \node[font=\fontsize{40pt}{1pt}\selectfont, text=colorOne] at ($(O)!0.5!(A)+(C)-0.2*(B)$) {$x$};
+    \node[font=\fontsize{40pt}{1pt}\selectfont, text=colorOne, rotate=90] at ($(O)!0.5!(B)+(C)-0.2*(A)$) {$x$};
+}
+
+\newcommand{\DeltaSurfaceCore}{%
+    \coordinate (O) at (0, 0);
+    \coordinate (A) at (10,0);
+    \coordinate (B) at (0,10);
+    \coordinate (C) at (-5,-5);
+    \coordinate (D) at (3,0);  % Largeur dx
+    \coordinate (E) at (0,3);  % Hauteur dx
+
+    % Bande verticale droite (x * dx)
+    \draw[line width=1.5ex, color=colorOne , 
+        fill=colorSix!20,
+            pattern={Lines[
+                angle=45,
+                distance=3ex,
+                line width=1.8ex
+            ]},
+            pattern color=colorThree ] 
+        ($(A)+(C)$) rectangle ($(A)+(B)+(D)+(C)$);
+
+    % Bande horizontale haute (x * dx)
+    \draw[line width=1.5ex, color=colorOne, 
+        fill=colorSix!20,
+            pattern={Lines[
+                angle=45,
+                distance=3ex,
+                line width=1.8ex
+            ]},
+            pattern color=colorThree ]  
+        ($(B)+(C)$) rectangle ($(A)+(B)+(E)+(C)$);
+
+    % Petit carré de coin (dx * dx)
+    \draw[line width=1.5ex, color=colorOne, 
+        fill=colorSix!20,
+            pattern={Lines[
+                angle=-45,
+                distance=3ex,
+                line width=1.8ex
+            ]},
+            pattern color=colorSix ] 
+        ($(A)+(B)+(C)$) rectangle ($(A)+(B)+(D)+(E)+(C)$);
+
+    % Textes centraux x.dx
+    \node[font=\fontsize{40pt}{1pt}\selectfont, text=colorTwo, rotate=90] 
+        at ($(A)+0.5*(B)+(C)+0.5*(D)$) {$x \cdot \mathrm{d}x$};
+
+    \node[font=\fontsize{40pt}{1pt}\selectfont, text=colorTwo] 
+        at ($(B)+0.5*(A)+(C)+0.5*(E)$) {$x \cdot \mathrm{d}x$};
+
+    \node[font=\fontsize{40pt}{1pt}\selectfont, text=colorTwo] 
+        at ($(B)+(A)+(C)+0.5*(E)+0.5*(D)$) {$(\mathrm{d}x)^2$};
+
+    % Flèches de cotation dx (Bas-Droite)
+    \draw (A) edge[flechesmalldimg, shift={($(C)-0.2*(B)$)}] ($(A)+0.2*(D)$)
+          ($(A)+0.8*(D)$) edge[flechesmalldimd, shift={($(C)-0.2*(B)$)}] ($(A)+1.0*(D)$);
+
+    % Flèches de cotation dx (Haut-Gauche)
+    \draw (B) edge[flechesmalldimg, shift={($(C)-0.2*(A)$)}] ($(B)+0.2*(E)$)
+          ($(B)+0.8*(E)$) edge[flechesmalldimd, shift={($(C)-0.2*(A)$)}] ($(B)+1.0*(E)$);
+
+    % Étiquettes dx
+    \node[font=\fontsize{40pt}{1pt}\selectfont, text=colorOne] 
+        at ($(A)+0.5*(D)+(C)-0.2*(B)$) {$\mathrm{d}x$};
+
+    \node[font=\fontsize{40pt}{1pt}\selectfont, text=colorOne, rotate=90] 
+        at ($(B)+0.5*(E)+(C)-0.2*(A)$) {$\mathrm{d}x$};
+}
+
+% 3. Environnement unique et superposition directe
+\begin{tikzpicture}
+  % On dessine les deux éléments sur le MÊME repère absolu
+  \clip[](-8, -5.5) rectangle (8 , 4.5) ;
+
+  \node[transform canvas={scale=0.5}] at (0,0) {
+    \begin{tikzpicture}
+        \SurfaceCore
+        \DeltaSurfaceCore
+
+        \draw[  opacity = 1 ]
+            (0.5,7) edge[line width=2.2ex ,color = colorThree!50!colorOne ,arrows = {Computer Modern Rightarrow[sharp ,length=1.1cm]}-,  out = 90  , in = 180  ]node[pos=1, right]{\color{colorThree!50!colorOne} \fontsize{40pt}{10pt}\selectfont \bfseries  $x \cdot \mathrm{d}x$  }(3.5,10)
+        ;
+
+        \draw[  opacity = 1 ]
+            (7,2.5) edge[line width=2.2ex ,color = colorThree!50!colorOne ,arrows = {Computer Modern Rightarrow[sharp ,length=1.1cm]}-,  out = 45  , in = 180  ]node[pos=1, right]{\color{colorThree!50!colorOne} \fontsize{40pt}{10pt}\selectfont \bfseries  $x \cdot \mathrm{d}x$  }(10,5)
+        ;
+
+        \draw[  opacity = 1 ]
+            (7,7.5) edge[line width=2.2ex ,color = colorSix!50!colorOne ,arrows = {Computer Modern Rightarrow[sharp ,length=1.1cm]}-,  out = 45  , in = 180  ]node[pos=1, right]{\color{colorSix!50!colorOne} \fontsize{40pt}{10pt}\selectfont \bfseries  $(\mathrm{d}x)^2$  }(10,10)
+        ;
+
+        \begin{scope}[shift={(15,0)}]
+
+            \begin{scope}[shift={(0,0)}]
+                \draw[,
+                    line width=1.5ex, color=colorOne, 
+                fill=colorSix!20,
+                    pattern={Lines[
+                        angle=45,
+                        distance=3ex,
+                        line width=1.8ex
+                    ]},
+                    pattern color=colorThree ]  
+                (0,0) rectangle (3,2);
+                \node[font=\fontsize{40pt}{1pt}\selectfont\bfseries, text=colorOne , right ] 
+                    at (3.5,1) {$=$};
+
+                \node[font=\fontsize{40pt}{1pt}\selectfont\bfseries, text=colorOne , right ] 
+                    at (5.5,1) {$\mathrm{d}S(x)$};
+
+
+            \end{scope}
+
+        
+
+            \begin{scope}[shift={(0,-3)}]
+                \draw[
+                    shift={(-5,0)},
+                    line width=1.5ex, color=colorOne, 
+                fill=colorSix!20,
+                    pattern={Lines[
+                        angle=-45,
+                        distance=3ex,
+                        line width=1.8ex
+                    ]},
+                    pattern color=colorSix ]  
+                (0,0) rectangle (3,2);
+
+                \node[font=\fontsize{60pt}{1pt}\selectfont\bfseries, text=colorOne , right ] 
+                    at (-1.9,1) {$+$};
+
+                \draw[shift={(0,0)},
+                    line width=1.5ex, color=colorOne, 
+                fill=colorSix!20,
+                    pattern={Lines[
+                        angle=45,
+                        distance=3ex,
+                        line width=1.8ex
+                    ]},
+                    pattern color=colorThree ]  
+                (0,0) rectangle (3,2);
+
+                \node[font=\fontsize{40pt}{1pt}\selectfont\bfseries, text=colorOne , right ] 
+                    at (3.5,1) {$=$};
+
+                \node[font=\fontsize{40pt}{1pt}\selectfont\bfseries, text=colorOne , right ] 
+                    at (5.5,1) {$\Delta S(x)$};
+
+
+            \end{scope}
+
+        \end{scope}
+
+
+
+
+
+    \end{tikzpicture}
+  };
+  
+
+  % Grille de repérage
+  %\draw[line width=2.5ex , color = red] (-8, -5.5) rectangle (8 , 4.5) ;
+  %\drawgrid{-8}{8}{-5.5}{4.5}{1}{1}
+\end{tikzpicture}

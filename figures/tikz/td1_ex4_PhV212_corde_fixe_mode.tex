@@ -1,0 +1,115 @@
+\begin{tikzpicture}[scale=1, transform shape] % transform shape applique le scale aux textes et hachures
+
+    % ==========================================
+    % MODE N = 1 (En haut)
+    % ==========================================
+    \begin{scope}[shift={(0, 0)}]
+        % Axe central pointillé
+        \draw[dashed, line width=1.0ex, color=colorOne] (-7,0) -- (7,0);
+
+        % Hachures Support Gauche (x = 0)
+        \draw[
+            line width=1.5ex, 
+            draw=none, 
+            fill=colorSix!20,
+            pattern={Lines[angle=45, distance=1ex, line width=0.5ex]},
+            pattern color=colorOne
+        ] (-6.4,-0.6) rectangle (-6,0.6);
+
+        % Hachures Support Droit (x = L)
+        \draw[
+            line width=1.5ex, 
+            draw=none, 
+            fill=colorSix!20,
+            pattern={Lines[angle=45, distance=1ex, line width=0.5ex]},
+            pattern color=colorOne
+        ] (6,-0.6) rectangle (6.4,0.6);
+
+        % Corde N = 1
+        \draw[
+            color=colorFour,
+            line width=0.8ex,
+            domain=-6:6,
+            samples=100,
+            smooth
+        ] plot (\x, {2.5*sin(180*(\x + 6)/12)});
+
+        % Enveloppe en pointillés (position opposée)
+        \draw[
+            color=colorFour!40,
+            line width=0.4ex,
+            dashed,
+            domain=-6:6,
+            samples=100,
+            smooth
+        ] plot (\x, {-2.5*sin(180*(\x + 6)/12)});
+
+        % Murs d'accroche et Étiquettes
+        \draw[color=colorOne, line width=1.5ex] (-6,-0.6) -- (-6,0.6)
+            node[pos=0, below, font=\fontsize{15pt}{12pt}\bfseries\selectfont, text=colorOne] {$x = 0$};
+
+        \draw[color=colorOne, line width=1.5ex] (6,-0.6) -- (6,0.6)
+            node[pos=0, below, font=\fontsize{15pt}{12pt}\bfseries\selectfont, text=colorOne] {$x = L$};
+
+        % Indication du mode
+        \node[font=\fontsize{16pt}{12pt}\bfseries\selectfont, text=colorFour] at (0, 3.2) {Mode $N = 1$};
+    \end{scope}
+
+    % ==========================================
+    % MODE N = 4 (En bas)
+    % ==========================================
+    % Le shift déplace ce dessin de 8 unités vers le bas
+    \begin{scope}[shift={(0, -8)}]
+        
+        % Axe central pointillé
+        \draw[dashed, line width=1.0ex, color=colorOne] (-7,0) -- (7,0);
+
+        % Hachures Support Gauche (x = 0)
+        \draw[
+            line width=1.5ex, 
+            draw=none, 
+            fill=colorSix!20,
+            pattern={Lines[angle=45, distance=1ex, line width=0.5ex]},
+            pattern color=colorOne
+        ] (-6.4,-0.6) rectangle (-6,0.6);
+
+        % Hachures Support Droit (x = L)
+        \draw[
+            line width=1.5ex, 
+            draw=none, 
+            fill=colorSix!20,
+            pattern={Lines[angle=45, distance=1ex, line width=0.5ex]},
+            pattern color=colorOne
+        ] (6,-0.6) rectangle (6.4,0.6);
+
+        % Corde N = 4
+        \draw[
+            color=colorFour,
+            line width=0.8ex,
+            domain=-6:6,
+            samples=200,
+            smooth
+        ] plot (\x, {2.0*sin(4*180*(\x + 6)/12)});
+
+        % Enveloppe en pointillés (position opposée)
+        \draw[
+            color=colorFour!40,
+            line width=0.4ex,
+            dashed,
+            domain=-6:6,
+            samples=200,
+            smooth
+        ] plot (\x, {-2.0*sin(4*180*(\x + 6)/12)});
+
+        % Murs d'accroche et Étiquettes
+        \draw[color=colorOne, line width=1.5ex] (-6,-0.6) -- (-6,0.6)
+            node[pos=0, below, font=\fontsize{15pt}{12pt}\bfseries\selectfont, text=colorOne] {$x = 0$};
+
+        \draw[color=colorOne, line width=1.5ex] (6,-0.6) -- (6,0.6)
+            node[pos=0, below, font=\fontsize{15pt}{12pt}\bfseries\selectfont, text=colorOne] {$x = L$};
+
+        % Indication du mode
+        \node[font=\fontsize{16pt}{12pt}\bfseries\selectfont, text=colorFour] at (0, 2.8) {Mode $N = 4$};
+    \end{scope}
+
+\end{tikzpicture}

@@ -64,7 +64,7 @@ aller_plus_loin:
 
 questions:
   - id: q1
-    parent: "1"
+    #parent: "1"
     enonce: |
       Un avion commence sa course au repos ($v_A = 0$) en $A$. Il décolle $30\text{ s}$ plus tard en $B$ avec une accélération constante $a$. La distance $AB = 900\text{ m}$.
 
@@ -82,7 +82,7 @@ questions:
           \end{enumerate}
 
   - id: q2
-    parent: "2"
+    #parent: "2"
     enonce: |
       Un camion parcourt $164\text{ m}$ en $8\text{ s}$ lors d'une décélération constante de $0,5\text{ m}\cdot\text{s}^{-2}$.
 
@@ -102,7 +102,7 @@ questions:
           \end{enumerate}
 
   - id: q3
-    parent: "3"
+    #parent: "3"
     enonce: |
       Une voiture a une vitesse $v_A = 50\text{ km}\cdot\text{h}^{-1}$ au point $A$ et subit une accélération de $a = 3\text{ m}\cdot\text{s}^{-2}$.
 
@@ -122,7 +122,7 @@ questions:
           \end{enumerate}
 
   - id: q4
-    parent: "4"
+    #parent: "4"
     enonce: |
       Tracer et commenter les caractéristiques des courbes $x(t)$, $v_x(t)$ et $a_x(t)$ pour les trois mouvements.
 

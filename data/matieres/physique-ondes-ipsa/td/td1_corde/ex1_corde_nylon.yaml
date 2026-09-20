@@ -9,7 +9,7 @@ cours_rattache:
   - chap1.onde_plane_progressive
 
 metadonnees:
-  duree_estimee: "25 min"
+  duree_estimee: "20 min"
   difficulte: 2 # Sur une échelle de 1 à 5
   type_exercice: "Application directe du cours"
   indispensable: true
@@ -43,11 +43,11 @@ questions:
         texte: |
           $\mu = \rho\,S$ avec $S=\pi d^2/4$ la section de la corde.
         # cours_rattache: ["chap1.masse_lineique"]
-        figure:
-          - ref: td1_ex1_corde_t0
-            legende: "Coupe transversale de la corde"
-            scale: 0.2  # Facteur d'échelle (ex: 0.8 pour 80%)
-            label: "fig:cordet0"  # Label pour le \ref{}
+        # figure:
+        #   - ref: td1_ex1_corde_t0
+        #     legende: "Coupe transversale de la corde"
+        #     scale: 0.2  # Facteur d'échelle (ex: 0.8 pour 80%)
+        #     label: "fig:cordet0"  # Label pour le \ref{}
 
       - titre: "Relation dynamique"
         texte: |
@@ -145,6 +145,12 @@ questions:
         texte: |
           $\lambda = 4\text{cm}$ m (lecture graphique directe sur la figure \ref{fig:cordet0}).
 
+        figure:
+          - ref: td1_ex1_corde_t0_lambda
+            legende: "Allure de la corde à $t=0$."
+            scale: 0.6  # Facteur d'échelle (ex: 0.8 pour 80%)
+            label: "fig:cordet0lamb"  # Label pour le \ref{}
+
   - id: q2b
     parent: "2"
     enonce: "Quelle est sa période temporelle $T$ ?"
@@ -165,7 +171,7 @@ questions:
     coup_de_pouce:
       - titre: "Proportionnalité de phase"
         texte: |
-          Une variation de phase de $2\\pi$ (ou $360^\circ$) correspond à une durée $T$.
+          Une variation de phase de $2\pi$ (ou $360^\circ$) correspond à une durée $T$.
     correction:
       - titre: "Calcul de durée"
         texte: "$\\Delta t = \\dfrac{60}{360}T \\approx 2.6\\times10^{-5}$ s."
@@ -190,6 +196,11 @@ questions:
     solution:
       - titre: "Interpretation graphique"
         texte: "La corde de la figure 1 est translatée de $\\lambda/8$ vers les $x$ croissants."
+        figure:
+          - ref: td1_ex1_corde_t_t8
+            legende: "Allure de la corde à $t = T/8$."
+            scale: 0.7  # Facteur d'échelle (ex: 0.8 pour 80%)
+            label: "fig:???"  # Label pour le \ref{}
 
   - id: q2e
     parent: "2"
@@ -218,4 +229,7 @@ questions:
 
     solution:
       - titre: "Derivation temporel"
-        texte: "$v_y(x_P,0) = \\partial_t y(x_P,0) = a\\,\\omega\\sin(kx_P+\\phi)$, lue sur la pente de la courbe en $x_P$."
+        texte: |
+          $v_y(x_P,0) = \partial_t y(x_P,0) = a\,\omega\sin(kx_P+\phi)$, lue sur la pente de la courbe en $x_P$.\\
+
+          On note $\Phi(x, t) = k(x-ct)+\phi$ la phase. Or $y(x_P,0) \propto \cos(\Phi(x_p, t=0)) = 0$ donc $v_y(x_P,0) \propto \sin(\Phi(x_p, t=0)) = \pm 1$. Donc $v_y(x_P,0)  = \pm \, a\,\omega$. 

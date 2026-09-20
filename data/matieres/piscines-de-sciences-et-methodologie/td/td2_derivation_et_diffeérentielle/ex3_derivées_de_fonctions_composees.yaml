@@ -135,8 +135,14 @@ questions:
     solution:
       - titre: "Résolution"
         texte: |
-          La quantité $\mathrm{d}A$ est la surface de la couronne circulaire d'épaisseur infinitésimale $\mathrm{d}r$ entourant le cercle de rayon $r$.
+          On définie $$\Delta A(r) = A(r + \mathrm{d}r) - A(r) = \pi (r + \mathrm{d}r)^2 - \pi r^2 = \overbrace{2\pi r \mathrm{d}r}^{\mathrm{d}A(r)} + \pi (\mathrm{d}r)^2$$ (cf fig \ref{figDisque}). On supose que $\mathrm{d}r \ll r$ de tel sorte que $(\mathrm{d}r)^2 \ll r \mathrm{d}r , r^2$. Soit  $$\Delta A(r) \underset{\mathrm{d}r \ll r}{=} \mathrm{d}A(r) + o((\mathrm{d}r)^2).$$ Donc si $\mathrm{d}r \ll r$ alors $$\Delta A(r) \approx \mathrm{d}A(r)$$ et  la quantité $\mathrm{d}A$ est la surface de la couronne circulaire d'épaisseur infinitésimale $\mathrm{d}r$ entourant le cercle de rayon $r$.
+        figure:
 
+          - ref: td2_PhV110_Disque
+            legende: |
+              
+            scale: 0.7
+            label: figDisque
   - id: q3_d
     parent: "3"
     enonce: |

@@ -1,0 +1,62 @@
+% \begin{tikzpicture}[scale=1]
+%     \draw[fill=gray!30] (-1,-0.5) rectangle (0,0.5);
+%     \node at (-0.5,0) {vibreur};
+%     \node[left] at (-1,0) {$O$};
+%     \draw[thick, blue, domain=0:5, samples=150, smooth]
+%         plot (\x, {0.4*sin(2*180/2*\x)*exp(-0.15*\x)});
+%     \draw[fill=gray] (5,-0.5) rectangle (5.2,0.5);
+%     \node[right] at (5.2,0) {$A$};
+% \end{tikzpicture}
+
+\begin{tikzpicture}[scale=1]
+
+    \draw[dashed,line width=1.0ex, color=colorOne] (-7,0) -- (7,0);
+
+
+    \draw[,
+        line width=1.5ex, 
+        %color=none, 
+        draw = none, 
+        fill=colorSix!20,
+        pattern={Lines[
+            angle=45,
+            distance=1ex,
+            line width=0.5ex
+        ]},
+        pattern color=colorOne ]  
+    (-6.4,-0.6) rectangle (-6,0.6);
+
+    % \draw[,
+    %     line width=1.5ex, color=colorOne, 
+    %     draw = none, 
+    %     fill=colorSix!20,
+    %     pattern={Lines[
+    %         angle=45,
+    %         distance=1ex,
+    %         line width=0.5ex
+    %     ]},
+    %     pattern color=colorOne ]  
+    % (6,-0.6) rectangle (6.4,0.6);
+
+    \newcommand{\maCourbe}{
+            plot[
+                smooth,
+                tension=0.5
+            ] coordinates {
+                (-6,0)(-4,2)(-3,2)(-2,-2)(-1,2.5)(0,2)(0.5,0.4)(1,-1)(1.5,0)(2,2)(2.5,1.5)(3,0.8)(4,1)(5,0.5)(6,1)
+            }
+    }
+
+    \draw[
+        color=colorFour,
+        line width=0.8ex
+    ] \maCourbe;
+
+    \draw[color=colorOne, line width=1.5ex] (-6,-0.6) -- (-6,0.6)
+    node[pos= 0 , below , font=\fontsize{15pt}{12pt}\selectfont \bf, text=\colorOne]{$ x = 0$ };
+    \draw[color=colorOne, line width=0.5ex] (6,-0.6) -- (6,0.6)
+    node[pos= 0 , below , font=\fontsize{15pt}{12pt}\selectfont \bf, text=\colorOne]{$ x = L$ };
+\end{tikzpicture}
+
+
+

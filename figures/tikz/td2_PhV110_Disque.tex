@@ -1,0 +1,219 @@
+
+
+% 3. Environnement unique et superposition directe
+\begin{tikzpicture}
+  % On dessine les deux éléments sur le MÊME repère absolu
+  \clip[](-4, -4) rectangle (11 , 4) ;
+
+  \node[transform canvas={scale=0.5}] at (15,0) {
+    \begin{tikzpicture}
+
+        \draw[
+            opacity = 0.5, 
+            fill=colorOne!10!colorTwo,
+            draw=colorOne,
+            line width=2.2ex
+            ] (0,0) ellipse [x radius=5cm, y radius=2cm];
+
+        \draw[
+            fill=none,
+            draw=colorOne,
+            line width=2.2ex
+            ] (0,1) ellipse [x radius=5cm, y radius=2cm];
+
+        \draw[
+            color=colorOne,
+            line width=2.2ex,
+            pattern={Lines[
+                        angle=90,
+                        distance=3ex,
+                        line width=1.8ex
+                    ]},
+            pattern color=colorOne!50!colorTwo ,
+            ] (5,0) arc[
+            start angle=0,
+            end angle=-180,
+            x radius=5cm,
+            y radius=2cm
+            ]--(-5,1)
+            (-5,1) arc[
+            start angle=180,
+            end angle=360,
+            x radius=5cm,
+            y radius=2cm
+            ]--(5,0)
+            (5,0) arc[
+            start angle=0,
+            end angle=180,
+            x radius=5cm,
+            y radius=2cm
+            ]--(-5,1)
+            (-5,1) arc[
+            start angle=180,
+            end angle=0,
+            x radius=5cm,
+            y radius=2cm
+            ]--(5,0)
+        ;
+
+        \draw[
+            color=colorFour,
+            line width=1.0ex,
+            ->
+            ] (0,0) -- ({5*cos(45)},{2*sin(45)})
+            node[pos = 0.5, above , font=\fontsize{20pt}{1pt}\selectfont\bfseries, text=colorFour  , rotate = 30 ]{$r$}
+        ;
+
+        \draw[
+            fill=colorFour,
+            color=colorFour,
+            line width=0.5ex,
+            ] (0,0) circle (0.1)
+        ;
+
+         \draw[
+            color=colorFour,
+            line width=0.5ex,
+            >-
+            ] (-6,0) -- (-6,0.2)
+        ;
+        \draw[
+            color=colorFour,
+            line width=0.5ex,
+            -<
+            ] (-6,0.8) -- (-6,1)
+        ;
+        \node[font=\fontsize{10pt}{1pt}\selectfont\bfseries, text=colorFour  , rotate = 90 ] at (-6, 0.5) {$\mathrm{d} r$}; 
+
+        %\node[font=\fontsize{40pt}{1pt}\selectfont\bfseries, text=colorFour  , rotate = 0 ] at (0, -3) {$\mathrm{d} r \not \ll r $};
+
+        \begin{scope}[shift={(-4,4)}]
+                \draw[,
+                    line width=1.5ex, color=colorOne, 
+                fill=colorSix!20,
+                    pattern={Lines[
+                        angle=90,
+                        distance=3ex,
+                        line width=1.8ex
+                    ]},
+                    pattern color=colorOne!50!colorTwo ]  
+                (0,0) rectangle (3,2);
+                \node[font=\fontsize{40pt}{1pt}\selectfont\bfseries, text=colorOne , right ] 
+                    at (3.5,1) {$=$};
+
+                \node[font=\fontsize{40pt}{1pt}\selectfont\bfseries, text=colorOne , right ] 
+                    at (5.5,1) {$\mathrm{d}A(r)$};
+
+
+        \end{scope}
+
+    \end{tikzpicture}   
+  };
+
+  \node[transform canvas={scale=0.5}] at (0,0) {
+    \begin{tikzpicture}
+
+        \begin{scope}
+
+            \draw[
+            color=colorSix,
+            line width=2.2ex,
+            draw = none, 
+            pattern={Lines[
+                        angle=45,
+                        distance=3ex,
+                        line width=1.8ex
+                    ]},
+            pattern color=colorSix ,
+            ] (5,0) -- (6,0) 
+            (6,0) arc[
+            start angle=0,
+            end angle=360,
+            x radius=6cm,
+            y radius=6cm
+            ]--(5,0)
+            (5,0) arc[
+            start angle=0,
+            end angle=-360,
+            x radius=5cm,
+            y radius=5cm
+            ]
+        ;
+
+        \end{scope}
+
+        \draw[
+            fill=none,
+            draw=colorOne,
+            line width=2.2ex
+            ] (0,0) circle (5);
+
+        \draw[
+            fill=none,
+            draw=colorOne,
+            line width=2.2ex
+            ] (0,0) circle (6);
+        
+       
+
+        \draw[
+            color=colorFour,
+            line width=1.0ex,
+            ->
+            ] (0,0) -- ({5*cos(45)},{5*sin(45)})
+            node[pos = 0.5, above , font=\fontsize{20pt}{1pt}\selectfont\bfseries, text=colorFour  , rotate = 45 ]{$r$}
+        ;
+
+        \draw[
+            fill=colorFour,
+            color=colorFour,
+            line width=0.5ex,
+            ] (0,0) circle (0.1)
+        ;
+
+         \draw[
+            color=colorFour,
+            line width=0.5ex,
+            >-
+            ] (-6,0) -- (-5.8,0.)
+        ;
+        \draw[
+            color=colorFour,
+            line width=0.5ex,
+            -<
+            ] (-5.2,0) -- (-5,0)
+        ;
+        \node[font=\fontsize{10pt}{1pt}\selectfont\bfseries, text=colorFour   , rotate = 0 ] at (-5.5, 0.0) {$\mathrm{d} r$}; 
+
+        %\node[font=\fontsize{40pt}{1pt}\selectfont\bfseries, text=colorFour  , rotate = 0 ] at (0, -7) {$\mathrm{d} r  \ll r $};
+
+        \begin{scope}[shift={(-4,6.5)}]
+                \draw[,
+                    line width=1.5ex, color=colorOne, 
+                fill=colorSix!20,
+                    pattern={Lines[
+                        angle=45,
+                        distance=3ex,
+                        line width=1.8ex
+                    ]},
+                    pattern color=colorSix ]  
+                (0,0) rectangle (3,2);
+                \node[font=\fontsize{40pt}{1pt}\selectfont\bfseries, text=colorOne , right ] 
+                    at (3.5,1) {$=$};
+
+                \node[font=\fontsize{40pt}{1pt}\selectfont\bfseries, text=colorOne , right ] 
+                    at (5.5,1) {$\Delta A(r)$};
+
+
+        \end{scope}
+
+    \end{tikzpicture}   
+  };
+
+
+  
+
+  % Grille de repérage
+  %\draw[line width=2.5ex , color = red] (-8, -5.5) rectangle (8 , 4.5) ;
+  %\drawgrid{-3}{11}{-4}{4}{1}{1}
+\end{tikzpicture}

@@ -29,8 +29,56 @@ profils:
 targets:
 
   # ---------------- Physique des ondes (IPSA) ----------------
-  - name: td1_test_Ph110
-    titre: "TD 1 -- Propagation des ondes mécaniques sur une corde -- Test"
+  - name: td1_PhV110_enonce
+    titre: "TD 1 -- GRANDEURS PHYSIQUES  Dimensions, unités et analyse dimensionnelle -- Test"
+    matiere: piscines-de-sciences-et-methodologie
+    type_doc: td
+    doc: td1_grandeurs_physiques
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: false
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td1_PhV110_corrige
+    titre: "TD 1 -- GRANDEURS PHYSIQUES  Dimensions, unités et analyse dimensionnelle -- Test"
+    matiere: piscines-de-sciences-et-methodologie
+    type_doc: td
+    doc: td1_grandeurs_physiques
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: false
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td1_PhV110_fiche
+    titre: "TD 1 -- GRANDEURS PHYSIQUES  Dimensions, unités et analyse dimensionnelle -- Test"
     matiere: piscines-de-sciences-et-methodologie
     type_doc: td
     doc: td1_grandeurs_physiques
@@ -51,9 +99,57 @@ targets:
     show_remarques_pedagogiques_ecueils_classiques: true
     show_remarques_pedagogiques_conseils_animation: true
     show_bilan: true
-    aller_plus_loin_niveaux: [licence]
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master]
 
-  - name: td1_test_Ph110
+  - name: td2_PhV110_enonce
+    titre: "TD 2 -- DÉRIVATION ET DIFFÉRENTIELLE (4h) Interprétation en Physique -- Test"
+    matiere: piscines-de-sciences-et-methodologie
+    type_doc: td
+    doc: td2_derivation_et_diffeérentielle
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: false
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td2_PhV110_corrige
+    titre: "TD 2 -- DÉRIVATION ET DIFFÉRENTIELLE (4h) Interprétation en Physique -- Test"
+    matiere: piscines-de-sciences-et-methodologie
+    type_doc: td
+    doc: td2_derivation_et_diffeérentielle
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: false
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td2_PhV110_fiche
     titre: "TD 2 -- DÉRIVATION ET DIFFÉRENTIELLE (4h) Interprétation en Physique -- Test"
     matiere: piscines-de-sciences-et-methodologie
     type_doc: td
@@ -75,7 +171,7 @@ targets:
     show_remarques_pedagogiques_ecueils_classiques: true
     show_remarques_pedagogiques_conseils_animation: true
     show_bilan: true
-    aller_plus_loin_niveaux: [licence]
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master]
 
   - name: td1_test_Ph110_0
     titre: "TD 2 -- DÉRIVATION ET DIFFÉRENTIELLE (4h) Interprétation en Physique -- Test"
@@ -101,7 +197,31 @@ targets:
     show_bilan: true
     aller_plus_loin_niveaux: [licence]
 
-  - name: td1_enonce
+  - name: td1_test_Ph110_0
+    titre: "TD 2 -- DÉRIVATION ET DIFFÉRENTIELLE (4h) Interprétation en Physique -- Test"
+    matiere: piscines-de-sciences-et-methodologie
+    type_doc: td
+    doc: td4_vecteurs_en_physique
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: true
+    show_objectifs_pedagogiques_etudiants: true
+    show_objectifs_pedagogiques_enseignants: true
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: true
+    show_remarques_pedagogiques_conseils_animation: true
+    show_bilan: true
+    aller_plus_loin_niveaux: [licence]
+
+  - name: td1_PhV212_enonce
     titre: "TD 1 -- Propagation des ondes mécaniques sur une corde"
     matiere: physique-ondes-ipsa
     type_doc: td
@@ -124,7 +244,30 @@ targets:
     show_bilan: false
     aller_plus_loin_niveaux: []
 
-  - name: td1_corrige
+  - name: td1_PhV212_aides
+    titre: "TD 1 -- Propagation des ondes mécaniques sur une corde"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td1_corde
+    etablissement: IPSA
+    promo: A2
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_figure: true
+    show_animation_note: false
+    show_prerequis: false
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: false
+    show_solution: false
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td1_PhV212_corrige
     titre: "TD 1 -- Propagation des ondes mécaniques sur une corde -- Corrigé"
     matiere: physique-ondes-ipsa
     type_doc: td
@@ -133,20 +276,20 @@ targets:
     promo: A2
     annee: "2026-2027"
     auteur: "Guillaume THÉMÈZE"
-    show_metadonnees: false 
-    show_figure: false
+    show_metadonnees: true 
+    show_figure: true
     show_animation_note: true
-    show_prerequis: true
-    show_objectifs_pedagogiques_etudiants: true
-    show_objectifs_pedagogiques_enseignants: true
+    show_prerequis: false
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
     show_point_cours: true
     show_coup_de_pouce: true
-    show_correction: true
+    show_correction: false
     show_solution: true
-    show_remarques_pedagogiques_ecueils_classiques: true
-    show_remarques_pedagogiques_conseils_animation: true
-    show_bilan: true
-    aller_plus_loin_niveaux: [lycee, prepa, licence, master, doctorat]
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
 
   - name: td1_test
     titre: "TD 1 -- Propagation des ondes mécaniques sur une corde -- Test"
@@ -159,18 +302,18 @@ targets:
     auteur: "Guillaume THÉMÈZE"
     show_metadonnees: true 
     show_figure: true
-    show_animation_note: false
-    show_prerequis: false
-    show_objectifs_pedagogiques_etudiants: false
-    show_objectifs_pedagogiques_enseignants: false
-    show_point_cours: false
-    show_coup_de_pouce: false
-    show_correction: false
+    show_animation_note: true
+    show_prerequis: true
+    show_objectifs_pedagogiques_etudiants: true
+    show_objectifs_pedagogiques_enseignants: true
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: true
     show_solution: true
-    show_remarques_pedagogiques_ecueils_classiques: false
-    show_remarques_pedagogiques_conseils_animation: false
-    show_bilan: false
-    aller_plus_loin_niveaux: []
+    show_remarques_pedagogiques_ecueils_classiques: true
+    show_remarques_pedagogiques_conseils_animation: true
+    show_bilan: true
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master, doctorat]
 
   - name: td1_ex1_fiche
     titre: "Fiche -- Corde de nylon"

@@ -1,38 +1,244 @@
 % Corde a t = T/8 : translation de lambda/8 vers les x croissants
-\begin{tikzpicture}[scale=1]
-    \def\lam{4}
-    \def\amp{1}
-    \def\shift{0.5} % lambda/8
-    \draw[->] (-0.3,0) -- (8.5,0) node[right] {$x$};
-    \draw[->] (0,-1.5) -- (0,1.5) node[above] {$y$};
-    \draw[thick, gray!50, domain=0:8, samples=200, smooth]
-        plot (\x, {\amp*sin(2*180/\lam*\x)});
-    \draw[thick, red, domain=0:8, samples=200, smooth]
-        plot (\x, {\amp*sin(2*180/\lam*(\x-\shift))});
+% \begin{tikzpicture}[scale=1]
+%     \def\lam{4}
+%     \def\amp{1}
+%     \def\shift{0.5} % lambda/8
+%     \draw[->] (-0.3,0) -- (8.5,0) node[right] {$x$};
+%     \draw[->] (0,-1.5) -- (0,1.5) node[above] {$y$};
+%     \draw[thick, gray!50, domain=0:8, samples=200, smooth]
+%         plot (\x, {\amp*sin(2*180/\lam*\x)});
+%     \draw[thick, red, domain=0:8, samples=200, smooth]
+%         plot (\x, {\amp*sin(2*180/\lam*(\x-\shift))});
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[scale=1]
+%     \def\lam{4}
+%     \def\amp{1.2}
+%     \def\shift{0.5} % lambda/8
+
+%     % 1. Grille stylisée (arrière-plan)
+%     \drawgrid{-1}{9}{-2}{2}
+
+%     % 2. Axes au style "Mer de Fermi"
+%     \draw[fermi axis] (-0.5, 0) -- (8.8, 0) node[pos=1.02, below] {\huge $x$};
+%     \draw[fermi axis] (0, -1.8) -- (0, 1.8) node[pos=1.02, left] {\huge $y$};
+
+%     % 3. Courbe 1 (Signal original) -> Bleu Indigo (colorFour)
+%     \draw[wave primary, domain=0:8, samples=200, smooth]
+%         plot (\x, {\amp*sin(2*180/\lam*\x)});
+
+%     % 4. Courbe 2 (Signal déphasé) -> Rouge Corail (colorSix)
+%     \draw[wave secondary, domain=0:8, samples=200, smooth]
+%         plot (\x, {\amp*sin(2*180/\lam*(\x-\shift))});
+
+%     % 5. Légende / Annotations harmonisées
+%     \node[color=colorFour, right] at (4.5, 1.4) {$\psi_1(x)$};
+%     \node[color=colorSix, right] at (6.0, -1.4) {$\psi_2(x - \delta)$};
+
+% \end{tikzpicture}
+
+% Figure 1 -- Allure de la corde a t=0 (onde sinusoidale, lambda = 1 unite)
+% \begin{tikzpicture}[scale=1]
+%     \def\lam{4}   % longueur d'onde en cm sur la figure
+%     \def\amp{1}   % amplitude en cm sur la figure
+%     \draw[->] (-0.3,0) -- (8.5,0) node[right] {$x$};
+%     \draw[->] (0,-1.5) -- (0,1.5) node[above] {$y$};
+%     \draw[thick, blue, domain=0:8, samples=200, smooth]
+%         plot (\x, {\amp*sin(2*180/\lam*\x)});
+%     \draw[dashed] (\lam,-1.3) -- (\lam,1.3);
+%     \draw[<->] (0,-1.3) -- (\lam,-1.3) node[midway, below] {$\lambda$};
+%     \node[blue] at (1,1.3) {$P$};
+%     \fill[blue] (1,{\amp*sin(2*180/\lam)}) circle (1.5pt);
+% \end{tikzpicture}
+
+
+\begin{tikzpicture}
+	
+
+	% Définition de l’échelle
+	%\def\echelleY{10}
+	\pgfmathsetmacro{\echelleY}{2}
+	%\def\echelleX{50}
+	\pgfmathsetmacro{\echelleX}{1.5}
+
+    %\clip[scale = 0.95 , decorate, decoration={random steps, segment length=0.1 cm, amplitude=0.2cm}](#1 , #2 ) rectangle ( #3 , #4 ) ;
+	\clip[](-1.4*\echelleX , -2*\echelleY) rectangle (10.5*\echelleX , 2.0*\echelleY) ;
+
+	% Définition de la liste
+	\def\listeLabelsY{
+        -1/-1/,
+        0//,
+        1/1/
+    }
+
+    \def\listeLabelsX{
+        -1/-1/,
+        0//,
+        1/1/,
+        2/2/,
+        3/3/,
+        4/4/,
+        5/5/,
+        6/6/,
+        7/7/,
+        8/8/,
+        9/9/,
+        10/10/
+    }
+
+    \def\lam{4}   % longueur d'onde en cm sur la figure
+    \def\amp{1}   % amplitude en cm sur la figure
+    \def\phi{-2*180/\lam*0.5}  % phase en cm sur la figure 
+
+	\begin{scope}
+
+		%\clip[](\valXmin , -1) rectangle (9, 11.0) ;
+        
+		\backgrowngrid{-1}{-3}{10}{3}{\echelleX}{\echelleY/2}{\colorThree!50!\colorTwo}{\colorTwo}{0.5ex}
+        
+
+        \begin{scope}[shift={(1*\echelleX,1.25*\echelleY)},]
+            \draw[
+                line width=0.5ex,
+                draw=\colorThree,
+                fill=\colorThree!50!\colorTwo,
+                rounded corners=6pt,
+                opacity = 0.5
+            ]
+            (0,0) rectangle (9*\echelleX,0.5*\echelleY);
+
+
+            \draw[shift={(0.5*\echelleX,0.25*\echelleY)}]
+                (0.0*\echelleX,0*\echelleY) edge[shift = {(0,0)},line width=0.8ex  ,color=\colorFour] node[shift = {(0,0)} , pos=1, right , font=\fontsize{12pt}{12pt}\selectfont \bf, text=\colorFour 
+                    ]{${\bm f(x) = y(x , t = 0 )}$} (1.0*\echelleX,0.0*\echelleY)
+
+                (0.0*\echelleX,0*\echelleY) edge[shift = {(6,0)} , line width=0.8ex  ,color=\colorSix] node[shift = {(0,0)} , pos=1, right , font=\fontsize{12pt}{12pt}\selectfont \bf, text=\colorSix 
+                    ]{${\bm f(x) = y(x , t = T/8 )}$} (1.0*\echelleX,0.0*\echelleY)
+                ;
+        \end{scope}
+        
+        \draw[opacity = 1, line width=0.8ex  ,color=colorFour ,  fill = none, domain=-2:11, samples=200, smooth]
+            plot (\x*\echelleX, {\echelleY*\amp*cos(2*180/\lam*\x + \phi)}) 
+            ;
+
+        \draw[line width=0.8ex  ,color=\colorSix ,  fill = none, domain=-2:11, samples=200, smooth]
+            plot (\x*\echelleX, {\echelleY*\amp*cos(2*180/\lam*(\x-\lam/8) + \phi)}) 
+            ;
+
+        
+		% \draw[line width=0.8ex  ,color=\colorFour ,  fill = none]
+		% plot[smooth] file {data/Donnee_article_simul_expansion_1_24-04-2024-T-x0.table}
+		% (-10.2,10) edge[] node[shift = {(0,0)} , pos=1, right ]{\fontsize{16pt}{19pt}\selectfont \bf Données } (-8.7,10)
+		% ;
+		% \draw[line width=0.8ex  ,color=\colorSix,  fill = none]
+		% plot[smooth] file {data/GHD_1_article_simul_expansion_1_24-04-2024-T-x0.table}
+		% (-10.2,9) edge[] node[shift = {(0,0)} , pos=1, right ]{\fontsize{16pt}{19pt}\selectfont \bf T = 560 nK  } (-8.7,9)
+		% ;
+		% \draw[line width=0.8ex  ,color=\colorThree,  fill = none]
+		% plot[] file {data/GHD_2_article_simul_expansion_1_24-04-2024-T-x0.table}
+		% (-10.2,8) edge[] node[shift = {(0,0)} , pos=1, right ]{\fontsize{16pt}{19pt}\selectfont \bf Ajust : T = 1550 nK  } (-8.7,8)
+		% ;
+
+	\end{scope}
+
+	% Graduations     
+	\begin{scope}[shift = {(0,0)}]
+		\GraduationsY{\listeLabelsY}{\echelleY}{0.3}{0.5ex}{\colorOne}{\Large}
+        \GraduationsY{-1.5/-1.5/, -0.5/-0.5/ , 0.5/0.5/ , 1.5/1.5/}{\echelleY}{0.2}{0.4ex}{\colorOne}{\large}
+	\end{scope}
+	\begin{scope}[shift = {(0,0)}]
+		\GraduationsX{\listeLabelsX}{\echelleX}{0.3}{0.5ex}{\colorOne}{\Large}
+    \end{scope}
+
+	% Axxes 
+	\draw[shift = {(0,0)}]
+        (-2*\echelleX, 0) 
+            edge[
+                thick, 
+                line width=0.8ex, 
+                ->, 
+                >=Triangle, 
+                color=\colorOne
+                ] 
+            node[
+                shift = {(0,-1)} ,
+                pos=0.85,
+                below,
+                font=\sffamily\bfseries\fontsize{15pt}{1pt}\selectfont\bfseries,
+                text=\colorOne
+                ]
+            { 
+                ${\bm x}~(\text{cm}) $ 
+            } 
+        (10.5*\echelleX, 0)
+        ;
+	\draw [shift = {(0,0)}]  
+        (0, -1.75*\echelleY) 
+            edge[
+                thick, 
+                line width=0.8ex, 
+                ->, 
+                >=Triangle, 
+                color=\colorOne
+                ] 
+            node[
+                shift = {(-1,0)} , 
+                pos=0.85, 
+                above , 
+                rotate = 90,
+                font=\sffamily\bfseries\fontsize{15pt}{1pt}\selectfont\bfseries,
+                text=\colorOne ,
+                ]
+            {
+                ${\bm y}~(\text{mm}) $ 
+            } 
+        (0, 1.85*\echelleY)
+
+    ;
+
+    \draw[
+        dashed,
+        line width=0.6ex,
+        shift = {(1.5*\echelleX,0)} 
+        ] 
+        (0,-1.55*\echelleY) -- (0,0.55*\echelleY)
+        (\lam/8*\echelleX,-1.55*\echelleY) -- (\lam/8*\echelleX,0.55*\echelleY)
+        ;
+    \draw[
+        thick, 
+        line width=0.8ex, 
+        >-< , 
+        shift = {(1.5*\echelleX,-1.55*\echelleY)} 
+        ] 
+        (0,0) --++ (\lam/8*\echelleX,0*\echelleY) 
+        node[
+            shift ={(0,-0.2)},
+            midway, 
+            below,
+            font=\sffamily\bfseries\fontsize{15pt}{1pt}\selectfont\bfseries,
+            text=\colorOne ,
+            ] {${\bm\lambda/8}$};
+
+    \pgfmathsetmacro{\xP}{1.5*\echelleX}
+    \pgfmathsetmacro{\yP}{
+        \echelleY*\amp*cos(360*1.5/\lam + \phi)
+    }
+
+    \node[
+        shift = {(0.4,0.4)},
+        font=\sffamily\bfseries\fontsize{20pt}{1pt}\selectfont\bfseries, 
+        text=\colorFour
+    ]
+    at (\xP,\yP)
+    {$P$};
+
+    \fill[
+        color=\colorFour
+    ]
+    (\xP,\yP)
+    circle (0.15cm);
+	%\draw[line width=2.5ex , color = red ] (-14*\echelleX , -1*\echelleY) rectangle (9.5*\echelleX , 12*\echelleY) ;
+	%\drawgrid{-2}{11}{-2}{2}{\echelleX}{\echelleY}
+
 \end{tikzpicture}
 
-\begin{tikzpicture}[scale=1]
-    \def\lam{4}
-    \def\amp{1.2}
-    \def\shift{0.5} % lambda/8
-
-    % 1. Grille stylisée (arrière-plan)
-    \drawgrid{-1}{9}{-2}{2}
-
-    % 2. Axes au style "Mer de Fermi"
-    \draw[fermi axis] (-0.5, 0) -- (8.8, 0) node[pos=1.02, below] {\huge $x$};
-    \draw[fermi axis] (0, -1.8) -- (0, 1.8) node[pos=1.02, left] {\huge $y$};
-
-    % 3. Courbe 1 (Signal original) -> Bleu Indigo (colorFour)
-    \draw[wave primary, domain=0:8, samples=200, smooth]
-        plot (\x, {\amp*sin(2*180/\lam*\x)});
-
-    % 4. Courbe 2 (Signal déphasé) -> Rouge Corail (colorSix)
-    \draw[wave secondary, domain=0:8, samples=200, smooth]
-        plot (\x, {\amp*sin(2*180/\lam*(\x-\shift))});
-
-    % 5. Légende / Annotations harmonisées
-    \node[color=colorFour, right] at (4.5, 1.4) {$\psi_1(x)$};
-    \node[color=colorSix, right] at (6.0, -1.4) {$\psi_2(x - \delta)$};
-
-\end{tikzpicture}

@@ -9,14 +9,21 @@ cours_rattache:
   - chap1.modes_propres
 
 metadonnees:
-  duree_estimee: "25 min"
-  difficulte: 2 # Sur une échelle de 1 à 5
+  duree_estimee: "40 min"
+  difficulte: 3 # Sur une échelle de 1 à 5
   type_exercice: "Application directe du cours"
   indispensable: true
 
 enonce_intro: |
   Une corde homogène, de masse linéique $\mu$ et de longueur $L$, est fixée en ses deux extrémités $A(x=0)$ et $B(x=L)$. La corde de tension $F$, écartée de sa position d'équilibre, est abandonnée à l'instant $t=0$. Le déplacement transversal $y(x,t)$ obéit à l'équation de d'Alembert :
   $$\frac{\partial^2 y}{\partial x^2} = \frac{\mu}{F} \frac{\partial^2 y}{\partial t^2}$$
+
+figure:
+  ref: td1_ex4_PhV212_corde_fixe
+  legende: " "
+  scale: 0.7
+  label: "fig:???"
+
 
 questions:
   - id: q1
@@ -26,28 +33,209 @@ questions:
       Quelle relation existe-t-il entre $k$, $\omega$ et la célérité $c$ ? (Relation de dispersion).
 
     coup_de_pouce:
+
+      - titre: "Méthode simple"
+        texte: |
+          Injectez $y(x,t) = A\cos(kx+\varphi)\cos(\omega t+\phi)$ dans l'équation de d'Alembert, séparez les termes en $x$ et en $t$. Et on aura une relation entre $\omega$ , $k$ et $c$
+
       - titre: "Méthode de séparation"
         texte: |
           Injectez $y(x,t) = f(x)g(t)$ dans l'équation d'onde, séparez les termes en $x$ et en $t$ pour égaler chaque membre à une constante négative $-k^2$.
 
     correction:
+
+      - titre: "Directe"
+        texte: |
+          Si on on injecte $y(x,t) = A\cos(kx+\varphi)\cos(\omega t+\phi)$ dans $\frac{\partial^2 y}{\partial x^2} - \frac{\mu}{F} \frac{\partial^2 y}{\partial t^2} = 0$ , on obtient directement $\omega = k c$.
+
       - titre: "Résultat"
         texte: |
           On obtient $f''(x) + k^2 f(x) = 0$ et $g''(t) + \omega^2 g(t) = 0$.
           La relation de dispersion est $\omega = c\cdot k$ avec $c = \sqrt{F/\mu}$.
 
     solution:
+
+      - titre: "Injection"
+        texte: |
+          $y'(x,t) = - A k \sin(kx+\varphi)\cos(\omega t+\phi)$ et $y''(x,t) = - A k^2 \cos(kx+\varphi)\cos(\omega t+\phi)$ et //
+          $\dot{y}(x,t) = - A \omega \cos(kx+\varphi)\sin(\omega t+\phi)$ et $\ddot{y}(x,t) = - A \omega^2 \cos(kx+\varphi)\cos(\omega t+\phi)$. Donc avec $\frac{\partial^2 y}{\partial x^2} - \frac{\mu}{F} \frac{\partial^2 y}{\partial t^2} = 0$ \\
+
+          $$
+          \omega^2 = k^2 c^2.
+          $$
+
       - titre: "Démonstration complète"
         texte: |
           En injectant $y(x,t) = f(x)g(t)$ dans l'équation d'onde :
           $$f''(x)g(t) = \frac{1}{c^2}f(x)g''(t) \implies \frac{f''(x)}{f(x)} = \frac{1}{c^2}\frac{g''(t)}{g(t)} = -k^2$$
           On obtient deux équations différentielles harmoniques :
-          1. $f''(x) + k^2 f(x) = 0 \implies f(x) = C_1\cos(kx+\varphi)$
-          2. $g''(t) + \omega^2 g(t) = 0 \implies g(t) = C_2\cos(\omega t+\phi)$
+          \begin{itemize}
+          \item[1.] $f''(x) + k^2 f(x) = 0 \implies f(x) = C_1\cos(kx+\varphi)$
+          \item[2.] $g''(t) + \omega^2 g(t) = 0 \implies g(t) = C_2\cos(\omega t+\phi)$
+          \end{itemize}
           
           Par produit, $y(x,t) = A\cos(kx+\varphi)\cos(\omega t+\phi)$ avec $A = C_1 C_2$.
           La constante de séparation impose la relation de dispersion : $\omega = c\cdot k$, soit $k = \dfrac{\omega}{c}$ avec $c = \sqrt{\dfrac{F}{\mu}}$.
 
+    aller_plus_loin:
+
+      - niveau: master
+        titre: "Séparation des variables pour l'équation de d'Alembert unidimensionnelle"
+        texte: |
+          {\bf 1. Position du problème et cadre fonctionnel} \\
+
+          On considère l'équation des ondes (d'Alembert) 1D sur un domaine spatial borné $\Omega = ]0, L[$ :\\
+
+          $$\frac{\partial^2 y}{\partial x^2}(x,t) - \frac{1}{c^2} \frac{\partial^2 y}{\partial t^2}(x,t) = 0, \quad \forall (x,t) \in ]0, L[ \times \mathbb{R}^+_*$$
+          avec $c = \sqrt{\frac{F}{\mu}} > 0$. Le champ scalaire $y \in C^2(\bar{\Omega} \times \mathbb{R}^+)$ est assujetti aux conditions aux limites de Dirichlet homogènes :
+          $$y(0,t) = y(L,t) = 0, \quad \forall t \ge 0$$\\
+
+          {\bf 2. Postulat de séparation des variables}\\
+          La méthode de Fourier repose sur la recherche de solutions particulières non triviales à variables séparées sous forme de produit tensoriel d'espaces fonctionnels :
+          $$y(x,t) = f(x) \cdot g(t) \quad \text{avec } f \in C^2([0, L], \mathbb{R}), \, g \in C^2(\mathbb{R}^+, \mathbb{R})$$
+
+          {\bf Motivation mathématique :} \\
+
+          \begin{itemize}[label =$\circ$]
+            \item {\bf Réduction dimensionnelle :} Conversion d'un opérateur différentiel aux dérivées partielles d'ordre 2 en deux opérateurs différentiels ordinaires linéaires (EDO) univariés.
+            \item {\bf Base de l'espace de Hilbert :} L'opérateur spatial $-\frac{\mathrm{d}^2}{\mathrm{d}x^2}$ muni des conditions de Dirichlet est auto-adjoint sur $L^2(0,L)$. Le théorème spectral garantit que ses fonctions propres $\{f_n\}_{n \ge 1}$ forment une base hilbertienne orthogonale.
+            \item {\bf Interprétation physique :} Recherche des modes propres (ou régimes stationnaires) où le profil spatial $f(x)$ subit une modulation temporelle globale $g(t)$.
+          \end{itemize}
+
+          {\bf 3. Principe de superposition et completude}\\
+
+          En raison de la linéarité de l'opérateur de d'Alembert $\Box = \frac{\partial^2}{\partial x^2} - \frac{1}{c^2}\frac{\partial^2}{\partial t^2}$, toute combinaison linéaire de solutions à variables séparées est encore solution. La solution générale s'exprime par le développement en série de Fourier :
+          $$y(x,t) = \sum_{n=1}^{+\infty} f_n(x) \cdot g_n(t)$$
+          La convergence de la série dépend de la régularité des données initiales $y(x,0)$ et $\frac{\partial y}{\partial t}(x,0)$.
+
+      - niveau: prepa
+        titre: "Réduction de l'EDP en système d'EDO Sturm-Liouville"
+        texte: |
+          {\bf 1. Injectivité et isolement des variables}\\
+
+          Soit $y(x,t) = f(x) \cdot g(t)$ une solution non nulle. Sur l'ouvert $\{(x,t) \mid f(x)g(t) \neq 0\}$, la substitution dans l'équation de d'Alembert donne :
+          $$f''(x) \cdot g(t) = \frac{1}{c^2} f(x) \cdot g''(t)$$
+
+          En divisant par le produit $f(x)g(t)$ :
+          $$\frac{f''(x)}{f(x)} = \frac{1}{c^2} \frac{g''(t)}{g(t)}$$
+
+          {\bf 2. Constante de séparation (Théorème d'isolation)}\\
+          Considérons la fonction $H(x,t) = \frac{f''(x)}{f(x)} - \frac{1}{c^2} \frac{g''(t)}{g(t)} = 0$.
+          * $\frac{\partial H}{\partial t} = 0 \implies \frac{\mathrm{d}}{\mathrm{d}x}\left(\frac{f''(x)}{f(x)}\right) = 0 \implies \frac{f''(x)}{f(x)} = K \in \mathbb{R}$
+          * $\frac{\partial H}{\partial x} = 0 \implies \frac{\mathrm{d}}{\mathrm{d}t}\left(\frac{1}{c^2}\frac{g''(t)}{g(t)}\right) = 0 \implies \frac{1}{c^2}\frac{g''(t)}{g(t)} = K \in \mathbb{R}$
+
+          {\bf 3. Étude spectrale du signe de la constante $K$ }\\
+          Le problème spatial s'écrit sous forme d'un problème aux valeurs propres de Sturm-Liouville :
+          $$f''(x) - K f(x) = 0 \quad \text{avec } f(0) = f(L) = 0$$
+
+          \begin{enumerate}
+          \item {\bf Cas $K > 0$ ($K = \alpha^2, \alpha > 0$) :}
+            $f(x) = C_1 e^{\alpha x} + C_2 e^{-\alpha x}$.
+            $f(0) = 0 \implies C_2 = -C_1$.
+            $f(L) = 0 \implies C_1(e^{\alpha L} - e^{-\alpha L}) = 0 \implies C_1 = C_2 = 0$ (solution triviale éliminée).
+          \item  {\bf Cas $K = 0$ :}
+            $f(x) = A x + B$.
+            $f(0) = 0 \implies B = 0$ et $f(L) = 0 \implies A = 0$ (solution triviale éliminée).
+          \item  {\bf Cas $K < 0$ ($K = -k^2, k > 0$) :}
+            $f(x) = A \cos(kx) + B \sin(kx)$.
+            $f(0) = 0 \implies A = 0$.
+            $f(L) = 0 \implies B \sin(k L) = 0 \implies k_n = \frac{n\pi}{L}, \; n \in \mathbb{N}^*$.
+          \end{enumerate}
+
+          {\bf 4. Détermination des EDO associées }
+          Pour chaque mode $n \in \mathbb{N}^*$, la constante de séparation vaut $K_n = -k_n^2 = -\left(\frac{n\pi}{L}\right)^2$. On obtient deux EDO d'oscillateurs harmoniques :
+
+          $$\begin{cases} 
+          f_n''(x) + k_n^2 f_n(x) = 0 \implies f_n(x) = B_n \sin\left(\dfrac{n\pi x}{L}\right) \\[6pt]
+          g_n''(t) + \omega_n^2 g_n(t) = 0 \implies g_n(t) = C_n \cos(\omega_n t) + D_n \sin(\omega_n t)
+          \end{cases}$$
+          avec la relation de dispersion $\omega_n = c k_n = \frac{n\pi c}{L}$.
+
+      - niveau: master
+        titre: "Résolution par Transformée de Fourier spatiale et spectre continu"
+        texte: |
+          {\bf 1. Transformation intégrale sur le domaine infini $\mathbb{R}$ }\\
+
+          Pour une corde infinie $x \in \mathbb{R}$, on applique la Transformée de Fourier partielle en espace définie sur $\mathcal{S}(\mathbb{R})$ (espace de Schwartz) :
+          $$\hat{y}(k,t) = \mathcal{F}_x [y(x,t)] = \int_{-\infty}^{+\infty} y(x,t) \, e^{-i k x} \, \mathrm{d}x$$
+
+          {\bf 2. Réduction de l'EDP dans l'espace des fréquences spatiales }\\
+          En utilisant la propriété d'échange dérivation/multiplication $\mathcal{F}_x\left[\frac{\partial^2 y}{\partial x^2}\right] = (ik)^2 \hat{y}(k,t) = -k^2 \hat{y}(k,t)$, l'équation de d'Alembert devient :
+          $$-k^2 \hat{y}(k,t) - \frac{1}{c^2} \frac{\partial^2 \hat{y}}{\partial t^2}(k,t) = 0 \iff \frac{\partial^2 \hat{y}}{\partial t^2}(k,t) + (ck)^2 \hat{y}(k,t) = 0$$
+
+          Pour chaque mode $k \in \mathbb{R}$, la solution d'EDO temporelle paramétrée par $k$ est :
+          $$\hat{y}(k,t) = A(k) \, e^{-i c k t} + B(k) \, e^{i c k t}$$
+
+          {\bf 3. Reconstruction par TF inverse et formule de d'Alembert }\\
+          En appliquant la transformée de Fourier inverse :
+          $$y(x,t) = \mathcal{F}_x^{-1}[\hat{y}(k,t)] = \frac{1}{2\pi} \int_{-\infty}^{+\infty} \hat{y}(k,t) \, e^{i k x} \, \mathrm{d}k$$
+          $$y(x,t) = \frac{1}{2\pi} \int_{-\infty}^{+\infty} A(k) e^{i k (x - c t)} \, \mathrm{d}k + \frac{1}{2\pi} \int_{-\infty}^{+\infty} B(k) e^{i k (x + c t)} \, \mathrm{d}k$$
+
+          En posant $F(\xi) = \mathcal{F}^{-1}[A(k)](\xi)$ et $G(\xi) = \mathcal{F}^{-1}[B(k)](\xi)$, on retrouve la solution générale d'ondes progressives :
+          $$y(x,t) = F(x - ct) + G(x + ct)$$
+
+          {\bf 4. Dualité Séparation des Variables vs Transformée de Fourier }\\
+
+          %| Propriété / Méthode | Séparation des variables (Fourier discret) | Transformée de Fourier (Continu) |
+          %| :--- | :--- | :--- |
+          %| **Géométrie de l'espace** | Domaine borné $\Omega = ]0, L[$ (Conditions aux limites) | Domaine infini $\Omega = \mathbb{R}$ (Conditions aux limites à l'infini) |
+          %| **Spectre fréquentiel** | Discret ($k_n = \frac{n\pi}{L}, n \in \mathbb{N}^*$) | Continu ($k \in \mathbb{R}$) |
+          %| **Représentation de la solution** | Série de Fourier : $\sum_{n} f_n(x) g_n(t)$ | Intégrale de Fourier : $\int_{\mathbb{R}} \hat{y}(k,t) e^{i k x} \mathrm{d}k$ |
+          %| **Nature physique** | Superposition d'ondes stationnaires | Superposition d'ondes planes progressives |
+
+          $$
+          \begin{array}{ccc}
+          \textbf{Propriété / Méthode} & \textbf{Séparation des variables (Fourier discret} & \textbf{Transformée de Fourier (Continu)} \\
+          \hline 
+          \textbf{Géométrie de l'espace} & \text{Domaine borné $\Omega = ]0, L[$ (Conditions aux limites)} & \text{Domaine infini $\Omega = \mathbb{R}$ (Conditions aux limites à l'infini)} \\
+          \textbf{Spectre fréquentie} & \text{Discret ($k_n = \frac{n\pi}{L}, n \in \mathbb{N}^*$)} & \text{Continu ($k \in \mathbb{R}$))} \\
+          \textbf{Représentation de la solution} & \text{Série de Fourier : $\sum_{n} f_n(x) g_n(t)$} & \text{Intégrale de Fourier : $\int_{\mathbb{R}} \hat{y}(k,t) e^{i k x} \mathrm{d}k$} \\
+          \textbf{Nature physique} & \text{Superposition d'ondes stationnaires} & \text{Superposition d'ondes planes progressives} 
+          \end{array}
+          $$
+
+      - niveau: licence
+        titre: "Pour aller plus loin : interprétation géométrique et représentations complexes"
+        texte: |
+          {\bf 1. Interprétation vectorielle dans le plan réel (Produit scalaire)}
+
+          La combinaison linéaire $C\cos(a) + B\sin(a)$ s'interprète directement comme le produit scalaire euclidien de deux vecteurs du plan $\mathbb{R}^2$ :
+          \begin{itemize}[label = $\circ$]
+            \item Un vecteur de commande dépendant des amplitudes : $\vec{V} = \begin{pmatrix} C \\ B \end{pmatrix}$
+            \item Un vecteur unitaire variant avec la phase : $\vec{u}(a) = \begin{pmatrix} \cos(a) \\ \sin(a) \end{pmatrix}$
+          \end{itemize}
+
+          En exprimant le produit scalaire via les normes et l'angle interpolé :
+          $$C\cos(a) + B\sin(a) = \vec{V} \cdot \vec{u}(a) = \|\vec{V}\| \, \|\vec{u}(a)\| \cos\big(\widehat{(\vec{V}, \vec{u}(a))}\big)$$
+
+          \begin{itemize}[label = $\circ$]
+            \item La norme vaut $\|\vec{V}\| = \sqrt{C^2 + B^2} = R$.
+            \item L'argument polarisé de $\vec{V}$ est $\theta = \operatorname{atan2}(B, C)$, d'où l'angle orienté $\widehat{(\vec{V}, \vec{u}(a))} = a - \theta$.
+            \item On retrouve géométriquement : $R\cos(a - \theta)$.
+          \end{itemize}
+
+          {\bf 2. Formalisme des nombres complexes et phaseurs}
+
+          En physique mathématique et en traitement du signal, cette contraction s'effectue via le passage dans l'espace des phaseurs sur $\mathbb{C}$.
+
+          Considérons la partie réelle du produit d'un nombre complexe par $e^{i a}$ :
+          $$Z = C - i B = R e^{-i \theta} \quad \text{avec } R = \sqrt{C^2 + B^2} \text{ et } \theta = \operatorname{atan2}(B, C)$$
+
+          L'expression initiale s'écrit alors :
+          $$C\cos(a) + B\sin(a) = \operatorname{Re}\left( (C - i B) e^{i a} \right) = \operatorname{Re}\left( R e^{-i \theta} e^{i a} \right) = \operatorname{Re}\left( R e^{i(a - \theta)} \right) = R\cos(a - \theta)$$
+
+          {\bf 3. Application au calcul des conditions initiales de l'onde}
+
+          Dans le cadre de la corde vibrante, la solution temporelle s'écrit sous forme séparée :
+          $$g(t) = C \cos(\omega t) + B \sin(\omega t) = R \cos(\omega t - \theta)$$
+
+          L'introduction de l'amplitude globale $R$ et du déphasage temporel $\theta$ permet une identification directe de l'état initial du système à $t=0$ :
+          $$\begin{cases}
+          g(0) = R \cos(\theta) = C & \text{(position initiale)} \\[4pt]
+          g'(0) = \omega R \sin(\theta) = \omega B & \text{(vitesse initiale)}
+          \end{cases}$$
+
+          L'énergie mécanique totale du mode $n$ est alors directement proportionnelle au carré de l'amplitude contractée $R_n^2 = C_n^2 + B_n^2$.
   - id: q2
     enonce: |
       Montrer que les fréquences de vibration sont des multiples entiers d'une fréquence fondamentale $f_1$ ($f_N = N f_1$). Exprimer $f_1$ en fonction de $F$, $L$ et $\mu$.
@@ -126,17 +314,19 @@ questions:
       - titre: "Résultat"
         texte: |
           $y_N(x,t) = A_N \sin\left(\dfrac{N\pi}{L}x\right)\cos(\omega_N t + \phi_N)$.
-          $N+1$ nœuds en $x_n = n\dfrac{L}{N}$ ($n \in [0, N]$).
-          $N$ ventres en $x_v = \left(n+\dfrac{1}{2}\right)\dfrac{L}{N}$ ($n \in [0, N-1]$).
+          $N+1$ nœuds en $x_n = n\dfrac{L}{N}$ ($n \in \llbracket 0, N \rrbracket $).
+          $N$ ventres en $x_v = \left(n+\dfrac{1}{2}\right)\dfrac{L}{N}$ ($n \in \llbracket 0, N-1 \rrbracket $).
           Distance entre deux nœuds ou deux ventres consécutifs : $\dfrac{\lambda_N}{2} = \dfrac{L}{N}$.
 
     solution:
       - titre: "Analyse structurée"
         texte: |
-          - **Forme du mode $N$ :** $y_N(x,t) = A_N \sin\left(\dfrac{N\pi x}{L}\right)\cos(\omega_N t + \phi_N)$.
-          - **Nœuds ($y_N = 0$) :** $\dfrac{N\pi x}{L} = n\pi \implies x_n = n\dfrac{L}{N}$ avec $n \in \{0, 1, \dots, N\}$. Il y a $N+1$ nœuds.
-          - **Ventres ($|y_N| = A_N$) :** $\dfrac{N\pi x}{L} = \left(n+\dfrac{1}{2}\right)\pi \implies x_v = \left(n+\dfrac{1}{2}\right)\dfrac{L}{N}$ avec $n \in \{0, \dots, N-1\}$. Il y a $N$ ventres.
-          - **Distance inter-nœuds / inter-ventres :** $d = \dfrac{L}{N} = \dfrac{\lambda_N}{2}$.
+          \begin{itemize}[label = $\bullet$]
+          \item {\bf Forme du mode $N$ :} $y_N(x,t) = A_N \sin\left(\dfrac{N\pi x}{L}\right)\cos(\omega_N t + \phi_N)$.
+          \item {\bf Nœuds ($y_N = 0$) :} $\dfrac{N\pi x}{L} = n\pi \implies x_n = n\dfrac{L}{N}$ avec $n \in \{0, 1, \dots, N\}$. Il y a $N+1$ nœuds.
+          \item {\bf Ventres ($|y_N| = A_N$) :} $\dfrac{N\pi x}{L} = \left(n+\dfrac{1}{2}\right)\pi \implies x_v = \left(n+\dfrac{1}{2}\right)\dfrac{L}{N}$ avec $n \in \{0, \dots, N-1\}$. Il y a $N$ ventres.
+          \item {\bf Distance inter-nœuds / inter-ventres :} $d = \dfrac{L}{N} = \dfrac{\lambda_N}{2}$.
+          \end{itemize}
 
   - id: q6
     enonce: "Dessiner la corde pour $N=1$ et $N=4$."
@@ -148,8 +338,10 @@ questions:
     correction:
       - titre: "Allure"
         texte: |
-          - **$N=1$** : Une demi-onde entre $0$ et $L$ (1 ventre au centre $x=L/2$).
-          - **$N=4$** : Deux ondes complètes entre $0$ et $L$ (4 ventres, nœuds en $0, L/4, L/2, 3L/4, L$).
+          \begin{itemize}[label = $\bullet$]
+          \item {\bf $N=1$} : Une demi-onde entre $0$ et $L$ (1 ventre au centre $x=L/2$).
+          \item {\bf $N=4$} : Deux ondes complètes entre $0$ et $L$ (4 ventres, nœuds en $0, L/4, L/2, 3L/4, L$).
+          \end{itemize}
 
     solution:
       - titre: "Tracé schématique"
@@ -158,6 +350,12 @@ questions:
             \item $N=1$ (Fondamental) : \texttt{A (---) B} (1 seul fuseau de longueur $L$).
             \item $N=4$ (Harmonique 4) : \texttt{A ()()()() B} (4 fuseaux de longueur $L/4$).
           \end{itemize}
+
+        figure:
+          ref: td1_ex4_PhV212_corde_fixe_mode
+          legende: " "
+          scale: 0.7
+          label: "fig:???"
 
     aller_plus_loin:
       - niveau: prepa

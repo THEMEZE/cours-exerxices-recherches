@@ -1,21 +1,27 @@
 id: td1_ex6
 intitule: "Ondes stationnaires sur une corde avec une extrémité libre"
 td: td1
-facultatif: false
+facultatif: true
 seance: 1
 cours_rattache:
   - chap1.conditions_aux_limites
   - chap1.modes_propres_libre
 
 metadonnees:
-  duree_estimee: "25 min"
-  difficulte: 2 # Sur une échelle de 1 à 5
+  duree_estimee: "30 min"
+  difficulte: 4 # Sur une échelle de 1 à 5
   type_exercice: "Application directe du cours"
-  indispensable: true
+  indispensable: false
   
 enonce_intro: |
   On considère une corde de longueur $L$, fixée à l'extrémité $A(x=0)$ et totalement libre de se déplacer transversalement à l'extrémité $B(x=L)$. À l'extrémité libre, la force transversale est nulle, ce qui impose un nœud de tension transversale :
-  $$T_y(L,t) = F\left.\frac{\partial y}{\partial x}\right|_{x=L} = 0$$
+  $$T_y(L,t) = F \sin( \alpha( L , t )) \approx F\left.\frac{\partial y}{\partial x}\right|_{x=L} = 0$$
+
+figure:
+  ref: td1_ex6_PhV212_corde_stationaire_libre
+  legende: " "
+  scale: 0.7
+  label: "fig:???"
 
 questions:
   - id: q1
@@ -45,7 +51,7 @@ questions:
           
           Les fréquences propres s'écrivent :
           $$f_N = \frac{c}{\lambda_N} = (2N-1)\frac{c}{4L} = (2N-1)f_1 \quad \text{avec } f_1 = \frac{c}{4L}$$
-          Seuls les harmoniques **impairs** de la fréquence fondamentale $f_1$ sont présents.
+          Seuls les harmoniques {\bf impairs} de la fréquence fondamentale $f_1$ sont présents.
 
   - id: q2
     enonce: |
@@ -66,8 +72,10 @@ questions:
       - titre: "Interprétation physique"
         texte: |
           Pour le fondamental $N=1$, la corde contient un quart de longueur d'onde ($L = \lambda_1/4$) :
-          - **Nœud :** en $x=0$ (déplacement imposé nul).
-          - **Ventre :** en $x=L$ (déplacement transversal maximal, pente spatiale nulle).
+          \begin{itemize}[label=$\bullet$]
+          \item {\bf Nœud :} en $x=0$ (déplacement imposé nul).
+          \item {\bf Ventre :}  en $x=L$ (déplacement transversal maximal, pente spatiale nulle).
+          \end{itemize}
 
     aller_plus_loin:
       - niveau: licence

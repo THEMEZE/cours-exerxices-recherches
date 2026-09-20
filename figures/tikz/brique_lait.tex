@@ -1,0 +1,245 @@
+
+\definecolor{myWhite}{HTML}{f7f7f7}
+\definecolor{myGr1}{HTML}{c6c6c6}
+\definecolor{myGr2}{HTML}{e3e3e3}
+\definecolor{myCy}{HTML}{0396C1}
+\pagestyle{empty}
+
+\tikzset{
+  emballage/.style={
+    line width=0.6ex,
+    rounded corners=6pt,
+    draw= colorOne
+  }
+}
+
+\newcommand{\briqueLait}{
+
+  \begin{tikzpicture}[scale=0.4, every node/.style={scale=1.0}]
+
+  %front
+  \fill[myWhite,emballage] (4.3,-17.6) -- (-9.5,-14.25) -- (-9.5,8.2) -- (4.3,5.75) -- cycle;
+  \path[decorate, decoration={text effects along path,
+  text={Lait},
+  text align=center,
+  text effects/.cd,
+  characters={text along path, scale=5,xslant=-.2},
+  fit text to path
+  }] (-8.8,-3.82) -- (3,-6.36);%MILK
+
+  \coordinate (A) at (-7.1,-5.95);
+  \coordinate (B) at (1.9,-8.02);
+
+  \path[decorate, decoration={text effects along path,
+  text={1L},
+  text align={
+    align=center,
+    left indent=0.5,
+    right indent=0.2%
+  },
+  text effects/.cd,
+  characters={text along path, scale=3,xslant=-.2,text=cyan},
+  fit text to path
+  }] ($(A)!0.5!(B)$) -- ($(A)!1.0!(B)$);%package
+  %upper
+  \fill[myGr2 , emballage] (-1,10.6) -- (12.5,8.35) --  (4.3,5.75)  -- (-9.5,8.2) -- cycle;
+  %lateral
+  \fill[myGr1, emballage] (12.5,-14.25) -- (12.5,8.35) -- (4.3,5.75) -- (4.3,-17.6) -- cycle;
+  %hole
+  %\draw[fill=gray, emballage] (-6.1,8.6) .. controls (-6.5,8.5) and (-6.2,8.2) .. (-5.5,8.2) .. controls (-4.9,8.2) and (-4.4,8.4) .. (-4.8,8.6)-- cycle;
+  %fold lateral 1
+  \draw[emballage] (4.3,5.75)-- (8.1,1.2) -- (9,1.5) -- (9,2.7) -- (12.5,8.35);
+  %fold lateral 2
+  \fill[myGr1!90, emballage] (8,7) -- (8.1,1.2) -- (9,1.5) -- (9,2.7) -- (9.03,7.42) -- cycle;
+  %fold upper
+  \fill[myGr2!55, emballage]  (-4.46,9.79) -- (-5.42,9.43)-- (8,7) -- (9.03,7.42) -- cycle ;
+  %straw
+  %\shade[inner color=myCy!50,outer color=myCy, emballage] (-4.8,8.4) -- (-4.9,15.6) -- (-4.7,15.7) -- (-4.9,16) -- (-4.8,16.1) -- (-5,16.4) -- (-4.9,16.5) -- (-5.2,16.7) -- (-5.1,16.8) -- (-5.4,17) -- (-5.4,17.1) -- (-5.7,17.2) -- (-5.7,17.4) -- (-6,17.4) -- (-6.1,17.6) -- (-6.4,17.5) -- (-6.48,17.7) -- (-6.7,17.6) -- (-6.9,17.7) -- (-7.1,17.6) -- (-7.3,17.7) -- (-7.5,17.5) -- (-7.7,17.6) -- (-7.9,17.3) -- (-17.7,11.6) -- (-17.2,10.6) -- (-7.2,16.3) -- (-7.14,16.21) -- (-7.07,16.32)  -- (-6.98,16.24)  -- (-6.91,16.34)  -- (-6.85,16.3) -- (-6.79,16.35) -- (-6.72,16.27) -- (-6.64,16.33)  -- (-6.58,16.24)  -- (-6.5,16.28) -- (-6.48,16.2) -- (-6.4,16.2) -- (-6.4,16.1) -- (-6.3,16.1) -- (-6.31,16) -- (-6.18,16.01)-- (-6.23,15.89)-- (-6.13,15.85)-- (-6.21,15.76)-- (-6.06,15.73)-- (-6.13,15.64)-- (-6.05,15.56)-- (-6,8.4);
+  \end{tikzpicture}
+
+}
+
+\tikzset{
+    flechedimg/.style={
+      <-,
+      >=stealth,
+      line width=3.8pt
+    },
+    flechedimd/.style={
+      ->,
+      >=stealth,
+      line width=3.8pt
+    },
+    cote/.style={
+      font=\small,
+      inner sep=2pt
+    }
+  }
+
+\newcommand{\briqueLaitScare}{
+
+  \begin{tikzpicture}[scale=0.4, every node/.style={scale=1.0}]
+
+  \coordinate (A) at (-9.5,8.2);
+  \coordinate (B) at (4.3,5.75);
+  \coordinate (C) at (-9.5,-14.25);
+  \coordinate (D) at (12.5,8.35);
+
+  \coordinate (AB) at ($(B)-(A)$);
+  \coordinate (AC) at ($(C)-(A)$);
+  \coordinate (BD) at ($(D)-(B)$);
+
+
+  %front
+  \fill[myWhite,emballage] (A) -- ($(A)!1.0!(B)$) -- ($(A)!1.0!(B) + 0.7*(AC)$) -- ($(A)!0.7!(C)$) -- cycle;
+  %upper
+  \fill[myGr2 , emballage] (A) -- (B) --  ($(B)!1.5!(D)$)  -- ($(A)+1.5*(BD)$) -- cycle;
+  %lateral
+  \fill[myGr1, emballage] (B) -- ($(B)!1.5!(D)$) -- ($($(B)!1.5!(D)$)+0.7*(AC)$ ) -- ($(B)+0.7*(AC)$) -- cycle;
+
+
+  %dimension 
+
+  \coordinate (AC07) at ($(A)!0.7!(C)$);
+
+  \coordinate (AC07AB) at ($(AC07)+1.0*(AB)$);
+
+  \coordinate (AC07ABBD) at ($(AC07AB)+1.5*(BD)$);
+
+  \draw[]
+      % Flèche A -> 20 % de AC07
+      (A) edge[flechedimg, shift={($-0.2*(AB)$)}] ($(A)!0.2!(AC07)$)
+      % Flèche C -> AC07, avec départ à 20 % de AC07-C
+      ($(A)!0.8!(AC07)$) edge[flechedimd,shift={($-0.2*(AB)$)}] ($(A)!1.0!(AC07)$)
+
+      % Dimension AB
+      ($(AC07)!0.0!(AC07AB)$) edge[flechedimg,shift={($-0.4*(BD)$)}]  ($(AC07)!0.2!(AC07AB)$)
+      ($(AC07)!0.8!(AC07AB)$) edge[flechedimd,shift={($-0.4*(BD)$)}]  ($(AC07)!1.0!(AC07AB)$)
+
+      % % Dimension BD
+      ($(AC07AB)!0.0!(AC07ABBD)$) edge[flechedimg,shift={($0.3*(AB)$)}]  ($(AC07AB)!0.2!(AC07ABBD)$)
+      ($(AC07AB)!0.8!(AC07ABBD)$) edge[flechedimd,shift={($0.3*(AB)$)}]  ($(AC07AB)!1.0!(AC07ABBD)$)
+    ;
+
+  \path[
+    decorate,
+    decoration={
+      text effects along path,
+      text={10 cm},
+      text align={
+        align=center,
+      },
+      text effects/.cd,
+      characters={
+        text along path,
+        scale=2,
+        xslant=0.2,
+        text=colorOne
+      },
+      fit text to path
+    }
+  ]
+    ($(A)!0.7!(AC07) - 0.20*(AB)$)--($(A)!0.3!(AC07) - 0.20*(AB)$);
+
+  \path[
+    decorate,
+    decoration={
+      text effects along path,
+      text={10 cm},
+      text align={
+        align=center,
+      },
+      text effects/.cd,
+      characters={
+        text along path,
+        scale=2,
+        xslant=1.2,
+        text=colorOne
+      },
+      fit text to path
+    }
+  ]
+    ($(AC07)!0.2!(AC07AB) - 0.5*(BD)$)--($(AC07)!0.8!(AC07AB) - 0.5*(BD)$);
+
+  \path[
+    decorate,
+    decoration={
+      text effects along path,
+      text={10 cm},
+      text align={
+        align=center,
+      },
+      text effects/.cd,
+      characters={
+        text along path,
+        scale=2,
+        xslant=-1.2,
+        text=colorOne
+      },
+      fit text to path
+    }
+  ]
+    ($(AC07AB)!0.15!(AC07ABBD) + 0.4*(AB)$)--($(AC07AB)!0.85!(AC07ABBD) + 0.4*(AB)$);
+
+
+  \path[decorate, decoration={text effects along path,
+  text={Lait},
+  text align=center,
+  text effects/.cd,
+  characters={text along path, scale=5,xslant=-.2},
+  fit text to path,
+  shift={(0.0,4.5)}
+  }] (-8.8,-3.82) -- (3,-6.36);%MILK
+
+  \coordinate (A) at (-7.1,-5.95);
+  \coordinate (B) at (1.9,-8.02);
+
+  \path[decorate, decoration={text effects along path,
+  text={1L},
+  text align={
+    align=center,
+    left indent=0.5,
+    right indent=0.2%
+  },
+  text effects/.cd,
+  characters={text along path, scale=3,xslant=-.2,text=cyan},
+  fit text to path,
+  shift={(0.0,6.5)}
+  }] ($(A)!0.5!(B)$) -- ($(A)!1.0!(B)$);%package
+
+
+
+
+  %\drawgrid{-10}{13}{-15}{10}{1}{1}
+
+\end{tikzpicture}
+
+
+}
+
+\newcommand{\TikZapprox}{%
+  \begin{tikzpicture}
+      \node at (0,0) {$\approx $};
+  \end{tikzpicture}
+}
+
+
+
+
+\begin{tikzpicture}
+  \clip[](-8, -4) rectangle (10, 3.5) ;
+  \node[transform canvas={scale=0.5}] at (-10,0.) {\briqueLait};
+  \node[transform canvas={scale=0.5}] at (9,-2.15) {\briqueLaitScare};
+  \node[transform canvas={scale=5.5}] at (-0.1,-0.1) {\TikZapprox};
+
+  %\draw[line width=2.5ex , color = red ] (-8, -4) rectangle (10, 3.5) ;
+  %\drawgrid{-8}{10}{-4}{3.5}{1}{1}
+  
+\end{tikzpicture}
+
+
+
+
+
+
+

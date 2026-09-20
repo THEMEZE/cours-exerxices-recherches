@@ -2,7 +2,7 @@ id: td1_ex6
 intitule: |
   (*) Grandeurs numériques : mesures, incertitudes $\&$ chiffres significatifs
 td: td1
-facultatif: false
+facultatif: true
 seance: 1
 
 cours_rattache:
@@ -10,7 +10,7 @@ cours_rattache:
 
 metadonnees:
   duree_estimee: "25 min"
-  difficulte: 1 # Sur une échelle de 1 à 5
+  difficulte: 3 # Sur une échelle de 1 à 5
   type_exercice: "Révision"
   indispensable: true
 
@@ -21,53 +21,105 @@ prerequis :
   - titre: |
       Notions de base de métrologie
     texte: |
-      Connaître les opérations arithmétiques de base, la notion de pourcentage, l'écriture scientifique et la définition d'un chiffre significatif.
+      Connaître 
+      \begin{itemize}[label=$\bullet$]
+        \item les opérations arithmétiques de base,
+        \item la notion de pourcentage,
+        \item l'écriture scientifique et 
+        \item la définition d'un chiffre significatif
+      \end{itemize} 
 
 objectifs_pedagogiques_etudiants :
   - titre: |
       Savoir présenter un résultat expérimental
     texte: |
-      * Distinguer incertitude absolue et incertitude relative.
-      * Écrire un résultat sous la forme $x = (x_m \pm \Delta x) \text{ unité}$ de manière cohérente.
-      * Conserver le bon nombre de chiffres significatifs après une opération (somme ou produit).
+      \begin{itemize}[label=$\star$]
+      \item Distinguer incertitude absolue et incertitude relative.
+      \item Écrire un résultat sous la forme $x = (x_m \pm \Delta x) \text{ unité}$ de manière cohérente.
+      \item Conserver le bon nombre de chiffres significatifs après une opération (somme ou produit).
+      \end{itemize}
 
 objectifs_pedagogiques_enseignants :
   - titre: |
       Installer la rigueur métrologique dès le début d'année
     texte: |
-      * Éliminer l'habitude de recopier les affichages complets des calculatrices.
-      * Faire prendre conscience qu'une mesure physique n'est jamais exacte et n'a de sens sans son unité.
+      \begin{itemize}[label=$\star$]
+      \item Éliminer l'habitude de recopier les affichages complets des calculatrices.
+      \item Faire prendre conscience qu'une mesure physique n'est jamais exacte et n'a de sens sans son unité.
+      \end{itemize}
 
 coup_de_pouce: 
   - titre: |
       Gestion des chiffres significatifs
     texte: |
-      * Pour une addition/soustraction, aligne les puissances de 10 puis compte le nombre de chiffres **après la virgule** (décimales).
-      * Pour une multiplication/division, compte le nombre total de **chiffres significatifs** des données entrantes.
-      * L'incertitude absolue subit la même unité et la même dimension que la grandeur mesurée.
+      \begin{itemize}[label=$\star$]
+      \item Pour une addition/soustraction, aligne les puissances de 10 puis compte le nombre de chiffres {\bf après la virgule} (décimales).
+      \item Pour une multiplication/division, compte le nombre total de {\bf chiffres significatifs} des données entrantes.
+      \item L'incertitude absolue subit la même unité et la même dimension que la grandeur mesurée.
+      \end{itemize}
 
 point_cours :
   - titre: |
+      Chiffre significatif
+    texte: |
+      
+      \begin{itemize}[label=$\star$]
+        \item {\bf Chiffres significatifs} : les chiffres significatifs d'une
+        valeur numérique sont les chiffres qui apportent une information sur
+        la précision de la mesure. On ne conserve que les chiffres justifiés
+        par la précision de l'expérience afin de ne pas donner une précision
+        artificielle au résultat.
+
+        \item {\bf Influence de l'unité choisie} : le nombre de chiffres
+        significatifs d'une grandeur physique doit rester cohérent lorsque
+        l'on change d'unité. La valeur numérique et l'unité évoluent
+        conjointement, mais la précision physique de la mesure reste
+        inchangée. Par exemple :
+        $$
+        0,0040~\text{m} = 4,0 \times 10^{-3}~\text{m}
+        = 4,0~\text{mm}.
+        $$
+        Ces trois écritures possèdent toutes {\bf 2 chiffres significatifs}.
+        Les zéros servant uniquement à positionner la virgule ne sont pas
+        significatifs.
+
+        \item {\bf Lien avec l'écriture scientifique} : l'écriture scientifique
+        permet de faire apparaître explicitement le nombre de chiffres
+        significatifs. Elle s'écrit sous la forme
+        $$
+        a \times 10^n, \qquad 1 \leq |a| < 10.
+        $$
+        Les chiffres significatifs sont alors ceux du coefficient $a$.
+        Par exemple, $0,0040 = 4,0 \times 10^{-3}$ comporte 2 chiffres
+        significatifs, tandis que $4 \times 10^{-3}$ n'en comporte qu'un.
+      \end{itemize}
+      {\bf Merci DECHAUX Tom pour les precisions}\\
+  - titre: |
       Incertitudes et chiffres significatifs
     texte: |
-      * **Incertitude absolue** $\Delta x$ : même dimension et unité que $x$. Elle s'arrondit généralement à $1$ seul chiffre significatif par excès.
-      * **Incertitude relative** $\frac{\Delta x}{x}$ : grandeur adimensionnelle (souvent exprimée en $\%$).
-      * Le dernier chiffre significatif conservé sur la valeur mesurée $x_m$ doit correspondre à la position du chiffre de l'incertitude $\Delta x$.
+      \begin{itemize}[label=$\star$]
+        \item {\bf Incertitude absolue} $\Delta x$ : même dimension et unité que $x$. Elle s'arrondit généralement à $1$ seul chiffre significatif par excès.
+        \item {\bf Incertitude relative} $\frac{\Delta x}{x}$ : grandeur adimensionnelle (souvent exprimée en $\%$).
+        \item Le dernier chiffre significatif conservé sur la valeur mesurée $x_m$ doit correspondre à la position du chiffre de l'incertitude $\Delta x$.
+      \end{itemize}
 
 remarques_pedagogiques_ecueils_classiques: 
   - titre: |
       Erreurs récurrentes chez les étudiants
     texte: |
-      * Incohérence du nombre de décimales entre la valeur mesurée et l'incertitude absolue (ex. $15,62 \pm 0,042$).
-      * Oubli des parenthèses lors du facteur d'échelle ou de l'unité : écrire $15,6 \pm 0,3 \text{ g}$ au lieu de $(15,6 \pm 0,3) \text{ g}$.
-      * Inversion des règles entre addition (comptage des décimales) et multiplication (comptage des chiffres significatifs).
-
+      \begin{itemize}[label=$\star$]
+      \item Incohérence du nombre de décimales entre la valeur mesurée et l'incertitude absolue (ex. $15,62 \pm 0,042$).
+      \item  Oubli des parenthèses lors du facteur d'échelle ou de l'unité : écrire $15,6 \pm 0,3 \text{ g}$ au lieu de $(15,6 \pm 0,3) \text{ g}$.
+      \item  Inversion des règles entre addition (comptage des décimales) et multiplication (comptage des chiffres significatifs).
+      \end{itemize}
 remarques_pedagogiques_conseils_animation: 
   - titre: |
       Pédagogie en classe
     texte: |
-      * Demander aux étudiants ce que leur affiche la calculatrice pour $\pi \times 1,26^2 \times 7,3$ pour leur faire prendre conscience de l'absurdité physique de recopier $10$ chiffres.
-      * Insister sur le fait que la précision d'un résultat ne peut jamais dépasser la précision de la donnée la moins précise.
+      \begin{itemize}[label=$\star$]
+      \item Demander aux étudiants ce que leur affiche la calculatrice pour $\pi \times 1,26^2 \times 7,3$ pour leur faire prendre conscience de l'absurdité physique de recopier $10$ chiffres.
+      \item Insister sur le fait que la précision d'un résultat ne peut jamais dépasser la précision de la donnée la moins précise.
+      \end{itemize}
 
 bilan: 
   - titre: |
@@ -146,13 +198,13 @@ questions:
           \begin{enumerate}[label=\alph*)]
             \item 
             \begin{itemize}[label=$\bullet$]
-              \item **Incertitude relative** : $\frac{\Delta m}{m} = 2 \% = 0,02$. Elle est adimensionnelle (dimension 1).
-              \item **Incertitude absolue** : $\Delta m = 0,02 \times 15,6 \text{ g} = 0,312 \text{ g}$. En arrondissant à un chiffre significatif par excès : $\Delta m = 0,3 \text{ g}$. Sa dimension est une masse ($[\Delta m] = M$).
+              \item {\bf Incertitude relative} : $\frac{\Delta m}{m} = 2 \% = 0,02$. Elle est adimensionnelle (dimension 1).
+              \item {\bf Incertitude absolue} : $\Delta m = 0,02 \times 15,6 \text{ g} = 0,312 \text{ g}$. En arrondissant à un chiffre significatif par excès : $\Delta m = 0,3 \text{ g}$. Sa dimension est une masse ($[\Delta m] = M$).
             \end{itemize}
             \item L'écriture rigoureuse demande d'aligner le nombre de décimales de la valeur mesurée sur celui de l'incertitude absolue :
             $$m = (15,6 \pm 0,3) \text{ g}$$
             \item L'intervalle de confiance est $m_e \in [15,6 - 0,3 ~;~ 15,6 + 0,3]$, soit $m_e \in [15,3 \text{ g} ~;~ 15,9 \text{ g}]$.
-            \item La valeur $15,6 \text{ g}$ comporte **3 chiffres significatifs** ($1$, $5$ et $6$). Le chiffre $6$ est incertain (sa valeur réelle oscille entre $3$ et $9$).
+            \item La valeur $15,6 \text{ g}$ comporte {\bf 3 chiffres significatifs} ($1$, $5$ et $6$). Le chiffre $6$ est incertain (sa valeur réelle oscille entre $3$ et $9$).
           \end{enumerate}
 
   - id: q2
@@ -195,19 +247,78 @@ questions:
       - titre: |
           Correction détaillée de la question 2
         texte : |
+          %\begin{enumerate}[label=\alph*)]
+          %  \item 
+          %  \begin{itemize}[label=$\bullet$]
+          %    \item $\ell = 15,62 \pm 0,016 \text{ cm}$ : {\bf Incorrecte}. L'incertitude a $3$ décimales alors que la valeur mesurée n'en a que $2$. De plus, il manque des parenthèses.
+          %    \item $\ell = 15,62 \pm 0,08$ : {\bf Incorrecte}. L'unité est absente.
+          %    \item $\ell = 15,62 \pm 0,04 \text{ cm}$ : {\bf Incorrecte} (sans parenthèses), mais la cohérence des décimales est respectée. L'écriture rigoureuse est $\ell = (15,62 \pm 0,04) \text{ cm}$.
+          %  \end{itemize}
+          %  \item $V = \pi \times r^2 \times h = \pi \times (1,26)^2 \times 7,3 \approx 36,408 \text{ cm}^3$.\\
+          %  Le facteur le moins précis est $h = 7,3 \text{ cm}$ ($2$ chiffres significatifs). Le résultat doit donc être arrondi à {\bf 2 chiffres significatifs} :
+          %  $$V = 36 \text{ cm}^3 \quad \text{ou} \quad V = 3,6 \times 10^1 \text{ cm}^3$$
+          %  \item Ramenons les deux termes à la même puissance de $10$ (par exemple $10^0 = 1$) :
+          %  $$A = 0,056 \times 10^2 = 5,6 \quad (\text{1 décimale})$$
+          %  $$B = 11,8 \times 10^{-1} = 1,18 \quad (\text{2 décimales})$$
+          %  La somme donne $5,6 + 1,18 = 6,78$. Le résultat doit être arrondi à la donnée ayant le moins de décimales ($1$ seule décimale, imposée par $5,6$) :
+          %  $$\text{Somme} = 6,8$$
+          %\end{enumerate}
+
           \begin{enumerate}[label=\alph*)]
-            \item 
+
+            \item
+
             \begin{itemize}[label=$\bullet$]
-              \item $\ell = 15,62 \pm 0,016 \text{ cm}$ : **Incorrecte**. L'incertitude a $3$ décimales alors que la valeur mesurée n'en a que $2$. De plus, il manque des parenthèses.
-              \item $\ell = 15,62 \pm 0,08$ : **Incorrecte**. L'unité est absente.
-              \item $\ell = 15,62 \pm 0,04 \text{ cm}$ : **Incorrecte** (sans parenthèses), mais la cohérence des décimales est respectée. L'écriture rigoureuse est $\ell = (15,62 \pm 0,04) \text{ cm}$.
+
+              \item $\ell = 15,62 \pm 0,016 \text{ cm}$ : {\bf Incorrecte}. L'incertitude comporte $3$ décimales, tandis que la valeur mesurée n'en comporte que $2$. Il faut harmoniser le nombre de décimales de la valeur et de son incertitude (ou écrire la mesure entre parenthèses : $(15,620 \pm 0,016) \text{ cm}$).
+
+              \item $\ell = 15,62 \pm 0,08$ : {\bf Incorrecte}.
+              L'unité de longueur n'est pas précisée.
+
+              \item $\ell = 15,62 \pm 0,04 \text{ cm}$ : {\bf Correcte}. 
+              Cette écriture peut être rencontrée dans la littérature scientifique.
+              Cependant, l'utilisation de parenthèses est préférable, car elle
+              rend explicite le fait que l'incertitude et la valeur mesurée
+              possèdent la même unité et évite toute ambiguïté :
+              $$
+              \ell = (15,62 \pm 0,04) \text{ cm}.
+              $$
+
             \end{itemize}
-            \item $V = \pi \times r^2 \times h = \pi \times (1,26)^2 \times 7,3 \approx 36,408 \text{ cm}^3$.\\
-            Le facteur le moins précis est $h = 7,3 \text{ cm}$ ($2$ chiffres significatifs). Le résultat doit donc être arrondi à **2 chiffres significatifs** :
-            $$V = 36 \text{ cm}^3 \quad \text{ou} \quad V = 3,6 \times 10^1 \text{ cm}^3$$
-            \item Ramenons les deux termes à la même puissance de $10$ (par exemple $10^0 = 1$) :
-            $$A = 0,056 \times 10^2 = 5,6 \quad (\text{1 décimale})$$
-            $$B = 11,8 \times 10^{-1} = 1,18 \quad (\text{2 décimales})$$
-            La somme donne $5,6 + 1,18 = 6,78$. Le résultat doit être arrondi à la donnée ayant le moins de décimales ($1$ seule décimale, imposée par $5,6$) :
-            $$\text{Somme} = 6,8$$
+
+            \item $V = \pi \times r^2 \times h
+            = \pi \times (1,26)^2 \times 7,3
+            \approx 36,408 \text{ cm}^3$.\\
+
+            Le facteur le moins précis est $h = 7,3 \text{ cm}$
+            ($2$ chiffres significatifs). Le résultat doit donc être arrondi
+            à {\bf 2 chiffres significatifs} :
+
+            $$
+            V = 36 \text{ cm}^3
+            \quad \text{ou} \quad
+            V = 3,6 \times 10^1 \text{ cm}^3
+            $$
+
+            \item Ramenons les deux termes à la même puissance de $10$
+            (par exemple $10^0 = 1$) :
+
+            $$
+            A = 0,056 \times 10^2 = 5,6
+            \quad (\text{1 décimale})
+            $$
+
+            $$
+            B = 11,8 \times 10^{-1} = 1,18
+            \quad (\text{2 décimales})
+            $$
+
+            La somme donne $5,6 + 1,18 = 6,78$.
+            Le résultat doit être arrondi à la donnée ayant le moins de décimales
+            ($1$ seule décimale, imposée par $5,6$) :
+
+            $$
+            \text{Somme} = 6,8
+            $$
+
           \end{enumerate}

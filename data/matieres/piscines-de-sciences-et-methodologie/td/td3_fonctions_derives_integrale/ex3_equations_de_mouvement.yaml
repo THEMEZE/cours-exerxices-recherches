@@ -65,7 +65,7 @@ aller_plus_loin:
 
 questions:
   - id: q1
-    parent: "1"
+    #parent: "1"
     enonce: |
       Soit une particule de position $x(t) = 6t^2 - t^3$ (en m).
       
@@ -86,10 +86,10 @@ questions:
             \item $2 < t < 4\text{ s}$ : $v_x > 0$ et $a_x < 0 \implies$ le mobile avance toujours vers les $x$ croissants mais en **décélérant**.
             \item $4 < t < 6\text{ s}$ : à $t=4\text{ s}$, $v_x=0$. Pour $4 < t < 6\text{ s}$, $v_x < 0$ et $a_x < 0 \implies$ le mobile a fait demi-tour et se déplace vers les $x$ négatifs en **accélérant**.
             \item $t > 6\text{ s}$ : $x(t) < 0$, $v_x < 0$, $a_x < 0 \implies$ poursuite du mouvement vers les $x$ négatifs en **accélérant**.
-          \end{enumerate>
+          \end{enumerate}
 
   - id: q2
-    parent: "2"
+    #parent: "2"
     enonce: |
       Soit la position $x(t) = t^3 - 6t^2 - 15t + 40$ (en m).
       
@@ -109,7 +109,7 @@ questions:
           \end{enumerate}
 
   - id: q3
-    parent: "3"
+    #parent: "3"
     enonce: |
       L'accélération d'une particule est $a(t) = 12t - 6$ ($\text{m}\cdot\text{s}^{-2}$). À $t=0$, $v_0 = 4\text{ m}\cdot\text{s}^{-1}$ et $x_0 = -3\text{ m}$.
 

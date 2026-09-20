@@ -1,0 +1,319 @@
+id: td1_ex9
+intitule: |
+  (*) Entraînement : chiffres significatifs, incertitudes et propagation
+td: td1
+facultatif: true
+seance: 1
+
+cours_rattache:
+  - chap1.mesures_et_incertitudes
+
+metadonnees:
+  duree_estimee: "40 min"
+  difficulte: 4 # Sur une échelle de 1 à 5
+  type_exercice: "Entraînement"
+  indispensable: false
+
+enonce_intro: |
+  Cet exercice d'entraînement est composé de questions directes (application immédiate des règles) puis de questions plus difficiles (calculs à plusieurs grandeurs mesurées, propagation des incertitudes, changements d'unités).
+
+prerequis : 
+  - titre: |
+      Avoir traité l'exercice 6
+    texte: |
+      Connaître 
+      \begin{itemize}[label=$\bullet$]
+        \item les règles sur les chiffres significatifs (somme et produit),
+        \item l'écriture $x = (x_m \pm \Delta x) \text{ unité}$,
+        \item les préfixes du système international ($\text{m}$, $\text{k}$, $\mu$, \dots).
+      \end{itemize} 
+
+objectifs_pedagogiques_etudiants :
+  - titre: |
+      S'entraîner jusqu'à l'automatisme
+    texte: |
+      \begin{itemize}[label=$\star$]
+      \item Compter sans hésiter les chiffres significatifs d'une valeur.
+      \item Arrondir correctement une incertitude puis la valeur associée.
+      \item Estimer l'incertitude d'un résultat calculé à partir de plusieurs mesures.
+      \item Identifier la mesure qui limite la précision d'un résultat.
+      \end{itemize}
+
+objectifs_pedagogiques_enseignants :
+  - titre: |
+      Fournir une banque d'entraînement graduée
+    texte: |
+      \begin{itemize}[label=$\star$]
+      \item Les questions $1$ à $3$ sont directes et peuvent être données en autonomie.
+      \item Les questions $4$ à $6$ sont plus difficiles et conviennent à un travail en groupe.
+      \end{itemize}
+
+coup_de_pouce: 
+  - titre: |
+      Méthode générale
+    texte: |
+      \begin{itemize}[label=$\star$]
+      \item Toujours calculer d'abord avec toute la précision de la calculatrice, {\bf arrondir seulement à la fin}.
+      \item Arrondir l'incertitude à $1$ chiffre significatif {\bf par excès}, puis arrondir la valeur au même rang décimal.
+      \item Pour un produit ou un quotient, les incertitudes {\bf relatives} s'additionnent (majoration).
+      \end{itemize}
+
+point_cours :
+  - titre: |
+      Propagation des incertitudes (niveau lycée)
+    texte: |
+      Soit une grandeur $G = k \, \dfrac{x^a \, y^b}{z^c}$ où $k$ est une constante exacte. Par majoration, l'incertitude relative sur $G$ est
+      $$
+      \frac{\Delta G}{G} = |a| \frac{\Delta x}{x} + |b| \frac{\Delta y}{y} + |c| \frac{\Delta z}{z}.
+      $$
+      Pour une somme ou une différence $S = x \pm y$, ce sont les incertitudes {\bf absolues} qui s'additionnent : $\Delta S = \Delta x + \Delta y$.
+
+remarques_pedagogiques_ecueils_classiques: 
+  - titre: |
+      Erreurs récurrentes chez les étudiants
+    texte: |
+      \begin{itemize}[label=$\star$]
+      \item Arrondir les résultats intermédiaires et accumuler les erreurs d'arrondi.
+      \item Oublier l'exposant $2$ de $D^2$ dans la propagation (l'incertitude relative de $D$ compte {\bf deux fois}).
+      \item Compter les zéros de tête comme chiffres significatifs.
+      \item Convertir une incertitude sans convertir la valeur (ou l'inverse).
+      \end{itemize}
+remarques_pedagogiques_conseils_animation: 
+  - titre: |
+      Pédagogie en classe
+    texte: |
+      \begin{itemize}[label=$\star$]
+      \item Faire remarquer à chaque fois quelle mesure domine l'incertitude finale : c'est celle qu'il faut améliorer en premier expérimentalement.
+      \item Comparer le résultat de la question $5$ à la valeur tabulée $g = 9,81 \text{ m.s}^{-2}$ pour introduire la notion de compatibilité.
+      \end{itemize}
+
+bilan: 
+  - titre: |
+      Synthèse de l'exercice
+    texte: |
+      Un résultat expérimental n'est complet que s'il est donné avec son incertitude, arrondie correctement, et son unité. L'incertitude finale est pilotée par la mesure la moins précise en valeur relative, pondérée par son exposant dans la formule.
+
+aller_plus_loin: 
+  - niveau: lycee
+    titre: |
+      Comparaison à une valeur de référence
+    texte: |
+      Dire si un résultat $(x_m \pm \Delta x)$ est compatible avec une valeur tabulée $x_{ref}$, c'est-à-dire si $x_{ref}$ appartient à l'intervalle $[x_m - \Delta x ~;~ x_m + \Delta x]$.
+
+  - niveau: prepa
+    titre: |
+      Incertitude-type composée
+    texte: |
+      Refaire la question $4$ en combinant les incertitudes-types en quadrature : $\left(\dfrac{u(G)}{G}\right)^2 = \sum_i \left(a_i \dfrac{u(x_i)}{x_i}\right)^2$ et comparer avec la majoration.
+
+questions:
+
+  - id: q1
+
+    enonce: |
+      {\bf Compter les chiffres significatifs (question directe)}\\
+
+      Donner le nombre de chiffres significatifs de chaque valeur, puis l'écrire en notation scientifique :
+      \begin{enumerate}[label=\alph*)]
+        \item $0,0250 ~\text{m}$
+        \item $3,0 \times 10^{2} ~\text{s}$
+        \item $1,20 \times 10^{-3} ~\text{kg}$
+        \item $0,00700 ~\text{mm}$
+        \item $4,05 \times 10^{5} ~\text{Pa}$
+      \end{enumerate}
+
+    point_cours :
+      - titre: |
+          Rappel
+        texte: |
+          Les zéros situés à gauche du premier chiffre non nul ne sont pas significatifs. Les zéros situés à droite d'un chiffre significatif, après la virgule, le sont.
+
+    coup_de_pouce: 
+      - titre: |
+          Astuce
+        texte: |
+          Écrire d'abord la valeur sous la forme $a \times 10^n$ avec $1 \leq a < 10$, puis compter les chiffres de $a$.
+
+    solution: 
+      - titre: |
+          Correction détaillée de la question 1
+        texte : |
+          \begin{enumerate}[label=\alph*)]
+            \item $0,0250 ~\text{m} = 2,50 \times 10^{-2} ~\text{m}$ : {\bf 3 chiffres significatifs}.
+            \item $3,0 \times 10^{2} ~\text{s}$ : {\bf 2 chiffres significatifs}.
+            \item $1,20 \times 10^{-3} ~\text{kg}$ : {\bf 3 chiffres significatifs}.
+            \item $0,00700 ~\text{mm} = 7,00 \times 10^{-3} ~\text{mm}$ : {\bf 3 chiffres significatifs}.
+            \item $4,05 \times 10^{5} ~\text{Pa}$ : {\bf 3 chiffres significatifs}.
+          \end{enumerate}
+
+  - id: q2
+
+    enonce: |
+      {\bf Écrire correctement un résultat (question directe)}\\
+
+      Pour chaque mesure, arrondir l'incertitude absolue à $1$ chiffre significatif par excès puis écrire le résultat sous la forme $(x_m \pm \Delta x) \text{ unité}$ :
+      \begin{enumerate}[label=\alph*)]
+        \item $x = 12,3456 ~\text{m}$ avec $\Delta x = 0,0234 ~\text{m}$
+        \item $T = 2,5 ~\text{s}$ avec une incertitude relative de $4 \%$
+        \item $U = 5,00 ~\text{V}$ avec une incertitude relative de $1,5 \%$
+        \item $v = 3,0 \times 10^{8} ~\text{m.s}^{-1}$ avec $\Delta v = 1 \times 10^{6} ~\text{m.s}^{-1}$
+      \end{enumerate}
+
+    coup_de_pouce: 
+      - titre: |
+          Ordre des opérations
+        texte: |
+          Calculer $\Delta x$ (si besoin), l'arrondir {\bf par excès} à un chiffre significatif, puis arrondir la valeur mesurée à la même décimale que l'incertitude.
+
+    solution: 
+      - titre: |
+          Correction détaillée de la question 2
+        texte : |
+          \begin{enumerate}[label=\alph*)]
+            \item $\Delta x = 0,0234 \to 0,03 ~\text{m}$ (par excès). La valeur est arrondie à $2$ décimales :
+            $$x = (12,35 \pm 0,03) ~\text{m}$$
+            \item $\Delta T = 0,04 \times 2,5 = 0,10 ~\text{s}$, soit $0,1 ~\text{s}$. Une seule décimale :
+            $$T = (2,5 \pm 0,1) ~\text{s}$$
+            \item $\Delta U = 0,015 \times 5,00 = 0,075 ~\text{V}$, arrondi par excès à $0,08 ~\text{V}$. Deux décimales :
+            $$U = (5,00 \pm 0,08) ~\text{V}$$
+            \item $\Delta v = 1 \times 10^{6} = 0,01 \times 10^{8} ~\text{m.s}^{-1}$. Il faut donc écrire la valeur avec deux décimales dans la même puissance de $10$ :
+            $$v = (3,00 \pm 0,01) \times 10^{8} ~\text{m.s}^{-1}$$
+          \end{enumerate}
+
+  - id: q3
+
+    enonce: |
+      {\bf Opérations et chiffres significatifs (question directe)}\\
+
+      Effectuer les opérations suivantes en donnant le résultat avec le bon nombre de chiffres significatifs :
+      \begin{enumerate}[label=\alph*)]
+        \item $12,5 + 3,72$
+        \item $4,20 \times 3,1$
+        \item $\dfrac{8,0}{3,00}$
+        \item $1,5 \times 10^{3} + 2,50 \times 10^{2}$
+      \end{enumerate}
+
+    coup_de_pouce: 
+      - titre: |
+          Quelle règle ?
+        texte: |
+          Somme : compter les {\bf décimales}. Produit ou quotient : compter les {\bf chiffres significatifs}.
+
+    solution: 
+      - titre: |
+          Correction détaillée de la question 3
+        texte : |
+          \begin{enumerate}[label=\alph*)]
+            \item Somme : $12,5 + 3,72 = 16,22$. Le terme le moins précis a $1$ décimale : {\bf $16,2$}.
+            \item Produit : $4,20 \times 3,1 = 13,02$. Le facteur le moins précis a $2$ chiffres significatifs : {\bf $13$}.
+            \item Quotient : $8,0 / 3,00 = 2,666\ldots$ Le facteur le moins précis ($8,0$) a $2$ chiffres significatifs : {\bf $2,7$}.
+            \item Mettons les deux termes à la même puissance de $10$ : $1,5 \times 10^{3} + 0,250 \times 10^{3} = 1,750 \times 10^{3}$. Le terme le moins précis ($1,5 \times 10^3$) a $1$ décimale : {\bf $1,8 \times 10^{3}$}.
+          \end{enumerate}
+
+  - id: q4
+
+    enonce: |
+      {\bf Masse volumique d'un cylindre (question difficile)}\\
+
+      Un cylindre métallique plein est caractérisé par les mesures suivantes :
+      $$
+      m = (152,3 \pm 0,1) ~\text{g}, \qquad D = (2,50 \pm 0,02) ~\text{cm}, \qquad h = (10,00 \pm 0,05) ~\text{cm}.
+      $$
+      \begin{enumerate}[label=\alph*)]
+        \item Donner l'expression de la masse volumique $\rho$ en fonction de $m$, $D$ et $h$.
+        \item Calculer $\rho$ avec la calculatrice, sans arrondir.
+        \item Calculer les incertitudes relatives de $m$, $D$ et $h$. Quelle mesure est la moins précise en valeur relative ?
+        \item En déduire l'incertitude relative sur $\rho$ puis l'incertitude absolue $\Delta \rho$ (arrondie à $1$ chiffre significatif par excès).
+        \item Écrire $\rho$ en $\text{g.cm}^{-3}$ puis en $\text{kg.m}^{-3}$, avec son incertitude.
+      \end{enumerate}
+
+    coup_de_pouce: 
+      - titre: |
+          Attention à l'exposant
+        texte: |
+          $\rho = \dfrac{4m}{\pi D^2 h}$. Comme $D$ est au carré, son incertitude relative intervient avec un facteur $2$. Les constantes $4$ et $\pi$ n'ont pas d'incertitude.
+
+    solution: 
+      - titre: |
+          Correction détaillée de la question 4
+        texte : |
+          \begin{enumerate}[label=\alph*)]
+            \item $V = \pi \dfrac{D^2}{4} h$ donc $\displaystyle \rho = \frac{m}{V} = \frac{4m}{\pi D^2 h}$.
+            \item $\rho = \dfrac{4 \times 152,3}{\pi \times 2,50^2 \times 10,00} = \dfrac{609,2}{196,35} \approx 3,1027 ~\text{g.cm}^{-3}$.
+            \item 
+            $$\frac{\Delta m}{m} = \frac{0,1}{152,3} \approx 0,0007, \qquad \frac{\Delta D}{D} = \frac{0,02}{2,50} = 0,008, \qquad \frac{\Delta h}{h} = \frac{0,05}{10,00} = 0,005.$$
+            La mesure de $D$ est la moins précise en valeur relative ($0,8 \%$).
+            \item 
+            $$\frac{\Delta \rho}{\rho} = \frac{\Delta m}{m} + 2\frac{\Delta D}{D} + \frac{\Delta h}{h} \approx 0,00066 + 0,016 + 0,005 \approx 0,0217.$$
+            $\Delta \rho = 0,0217 \times 3,1027 \approx 0,067 ~\text{g.cm}^{-3}$, arrondi par excès à $0,07 ~\text{g.cm}^{-3}$.
+            \item 
+            $$\rho = (3,10 \pm 0,07) ~\text{g.cm}^{-3} = (3,10 \pm 0,07) \times 10^{3} ~\text{kg.m}^{-3}.$$
+            (Conversion : $1 ~\text{g.cm}^{-3} = 10^{3} ~\text{kg.m}^{-3}$.)
+          \end{enumerate}
+
+  - id: q5
+
+    enonce: |
+      {\bf Mesure de $g$ avec un pendule simple (question difficile)}\\
+
+      Pour un pendule simple de longueur $L$ et de petites oscillations, la période est $T = 2\pi \sqrt{\dfrac{L}{g}}$. On mesure
+      $$
+      L = (0,850 \pm 0,005) ~\text{m}, \qquad T = (1,85 \pm 0,02) ~\text{s}.
+      $$
+      \begin{enumerate}[label=\alph*)]
+        \item Exprimer $g$ en fonction de $L$ et $T$.
+        \item Calculer $g$ avec la calculatrice, sans arrondir.
+        \item Calculer l'incertitude relative puis absolue sur $g$.
+        \item Écrire le résultat $g = (g_m \pm \Delta g) \text{ unité}$.
+        \item Le résultat est-il compatible avec la valeur tabulée $g = 9,81 ~\text{m.s}^{-2}$ ? Quelle mesure faut-il améliorer en priorité ?
+      \end{enumerate}
+
+    coup_de_pouce: 
+      - titre: |
+          Isoler $g$
+        texte: |
+          Élever au carré : $T^2 = 4\pi^2 \dfrac{L}{g}$. Comme $T$ est au carré, l'incertitude relative de $T$ compte deux fois.
+
+    solution: 
+      - titre: |
+          Correction détaillée de la question 5
+        texte : |
+          \begin{enumerate}[label=\alph*)]
+            \item $g = \dfrac{4\pi^2 L}{T^2}$.
+            \item $g = \dfrac{4\pi^2 \times 0,850}{1,85^2} = \dfrac{33,556}{3,4225} \approx 9,805 ~\text{m.s}^{-2}$.
+            \item 
+            $$\frac{\Delta g}{g} = \frac{\Delta L}{L} + 2\frac{\Delta T}{T} = \frac{0,005}{0,850} + 2 \times \frac{0,02}{1,85} \approx 0,0059 + 0,0216 \approx 0,0275.$$
+            $\Delta g = 0,0275 \times 9,805 \approx 0,27 ~\text{m.s}^{-2}$, arrondi par excès à $0,3 ~\text{m.s}^{-2}$.
+            \item $g = (9,8 \pm 0,3) ~\text{m.s}^{-2}$.
+            \item L'intervalle est $[9,5 ~;~ 10,1] ~\text{m.s}^{-2}$ : il contient $9,81 ~\text{m.s}^{-2}$, le résultat est {\bf compatible} avec la valeur tabulée. La mesure de $T$ (incertitude relative $\approx 1,1 \%$, comptée deux fois) est la principale source d'incertitude : il vaut mieux mesurer la durée de plusieurs périodes.
+          \end{enumerate}
+
+  - id: q6
+
+    enonce: |
+      {\bf Somme de longueurs avec unités mélangées (question difficile)}\\
+
+      Trois segments sont mis bout à bout : $\ell_1 = 2,34 \times 10^{-3} ~\text{m}$, $\ell_2 = 4,1 ~\text{mm}$ et $\ell_3 = 0,0068 ~\text{m}$.
+      \begin{enumerate}[label=\alph*)]
+        \item Convertir les trois longueurs en millimètres et indiquer le nombre de décimales de chacune.
+        \item Calculer la longueur totale $\ell$ avec le bon nombre de chiffres significatifs.
+        \item Exprimer $\ell$ en mètres en notation scientifique.
+        \item Le segment $\ell_2$ est mesuré avec une incertitude de $0,1 ~\text{mm}$ et $\ell_1$, $\ell_3$ avec la même incertitude. Que vaut l'incertitude absolue sur $\ell$ ? Cela est-il cohérent avec le résultat de la question b) ?
+      \end{enumerate}
+
+    coup_de_pouce: 
+      - titre: |
+          Unité commune
+        texte: |
+          Pour une somme, il faut d'abord exprimer tous les termes dans la {\bf même unité}, puis compter les décimales.
+
+    solution: 
+      - titre: |
+          Correction détaillée de la question 6
+        texte : |
+          \begin{enumerate}[label=\alph*)]
+            \item $\ell_1 = 2,34 ~\text{mm}$ ($2$ décimales), $\ell_2 = 4,1 ~\text{mm}$ ($1$ décimale), $\ell_3 = 6,8 ~\text{mm}$ ($1$ décimale).
+            \item $\ell = 2,34 + 4,1 + 6,8 = 13,24 ~\text{mm}$. Le résultat a au plus $1$ décimale : {\bf $\ell = 13,2 ~\text{mm}$}.
+            \item $\ell = 1,32 \times 10^{-2} ~\text{m}$ ($3$ chiffres significatifs).
+            \item Pour une somme, les incertitudes absolues s'additionnent : $\Delta \ell = 3 \times 0,1 = 0,3 ~\text{mm}$. On écrit $\ell = (13,2 \pm 0,3) ~\text{mm}$. Le dernier chiffre significatif ($1$ décimale) est bien celui de l'incertitude : c'est cohérent avec la règle de la somme.
+          \end{enumerate}

@@ -1,0 +1,96 @@
+id: td_outils_ex1
+intitule: "Alphabet grec et notations en sciences physiques"
+td: td_outils_mathematiques
+facultatif: true
+seance: 1
+
+cours_rattache:
+  - outils.notations_et_constantes
+
+metadonnees:
+  duree_estimee: "15 min"
+  difficulte: 1
+  type_exercice: "Mémoire"
+  indispensable: true
+
+enonce_intro: |
+  L'alphabet grec est omniprésent en sciences physiques pour désigner des grandeurs, des constantes, des angles ou des opérateurs. Une maîtrise parfaite des caractères minuscules, majuscules et de leurs usages standards est indispensable.
+
+prerequis:
+  - titre: "Notations fondamentales"
+    texte: |
+      Aucun prérequis spécifique hors de la curiosité pour les notations Scientifiques.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Reconnaissance des symboles"
+    texte: |
+      Savoir lire, écrire et associer chaque lettre grecque à son domaine d'utilisation usuel en physique.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Standardisation des notations"
+    texte: |
+      Uniformiser le vocabulaire et l'écriture manuscrite des symboles scientifiques dès le début du cursus.
+
+coup_de_pouce:
+  - titre: "Symboles courants"
+    texte: |
+      Pense aux unités SI de résistance ($\Omega$), aux longueurs d'onde ($\lambda$) ou aux angles ($\theta$, $\phi$).
+
+point_cours:
+  - titre: "Importance du contexte"
+    texte: |
+      Une même lettre grecque peut représenter des grandeurs différentes selon le domaine (ex: $\rho$ pour la masse volumique en mécanique ou la résistivité en électrocinétique).
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Confusion visuelle"
+    texte: |
+      Confondre $\nu$ (nu, fréquence) avec $v$ (vitesse), ou $\rho$ (rho) avec la lettre p.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Mise en pratique au tableau"
+    texte: |
+      Faire tracer explicitement les caractères au tableau pour corriger le sens de tracé des lettres délicates ($\xi$, $\zeta$, $\chi$).
+
+bilan:
+  - titre: "Alphabet scientifique"
+    texte: |
+      Les 24 lettres grecques constituent le second langage de la physique fondamentale.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Notations tensorielles et symboles spéciaux"
+    texte: |
+      Utilisation du symbole de Levi-Civita $\epsilon_{ijk}$ et du symbole de Kronecker $\delta_{ij}$.
+
+questions:
+  - id: q_alphabet_01
+    parent: "1"
+    enonce: |
+      Donner les minuscules, majuscules et usages usuels des 24 lettres de l'alphabet grec.
+    solution:
+      - titre: "Tableau de référence de l'alphabet grec"
+        texte: |
+          1. **Alpha** ($\alpha$, A) : Angle, coefficient de dilatation.
+          2. **Bêta** ($\beta$, B) : Angle, désintégration nucléaire.
+          3. **Gamma** ($\gamma$, $\Gamma$) : Conductivité, facteur de Lorentz, rayon gamma.
+          4. **Delta** ($\delta$, $\Delta$) : Quantité infinitésimale ($\delta$), variation ($\Delta$).
+          5. **Epsilon** ($\varepsilon$, E) : Permittivité électrique, constante d'élongation.
+          6. **Zêta** ($\zeta$, Z) : Coefficient d'amortissement.
+          7. **Êta** ($\eta$, H) : Viscosité dynamique, rendement thermique.
+          8. **Thêta** ($\theta$, $\Theta$) : Angle d'orientation, température.
+          9. **Iota** ($\iota$, I) : Indice, matrice identité restreinte.
+          10. **Kappa** ($\kappa$, K) : Compressibilité isotherme, courbure.
+          11. **Lambda** ($\lambda$, $\Lambda$) : Longueur d'onde, conductivité molaire.
+          12. **Mu** ($\mu$, M) : Micro ($10^{-6}$), perméabilité magnétique, masse volumique.
+          13. **Nu** ($\nu$, N) : Fréquence d'une onde, viscosité cinématique.
+          14. **Xi** ($\xi$, $\Xi$) : Avancement d'une réaction chimique.
+          15. **Omicron** ($o$, O) : Ordre de grandeur.
+          16. **Pi** ($\pi$, $\Pi$) : Constante circulaire $3{,}14159...$ ($\pi$), produit ($\Pi$).
+          17. **Rho** ($\rho$, P) : Masse volumique, résistivité électrique.
+          18. **Sigma** ($\sigma$, $\Sigma$) : Conductivité électrique, contrainte ($\sigma$), somme ($\Sigma$).
+          19. **Tau** ($\tau$, T) : Temps de relaxation, constante de temps $RC$.
+          20. **Upsilon** ($\upsilon$, $\Upsilon$) : Volume massique.
+          21. **Phi** ($\phi$, $\Phi$) : Phase, angle ($\phi$), flux magnétique ($\Phi$).
+          22. **Khi** ($\chi$, X) : Susceptibilité magnétique ou électrique.
+          23. **Psi** ($\psi$, $\Psi$) : Fonction d'onde en physique quantique.
+          24. **Oméga** ($\omega$, $\Omega$) : Vitesse angulaire, pulsation ($\omega$), Ohm ($\Omega$).

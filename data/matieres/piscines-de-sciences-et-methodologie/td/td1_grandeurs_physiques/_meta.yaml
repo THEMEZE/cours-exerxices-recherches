@@ -4,6 +4,14 @@ chapitre_cours: ""
 duree_estimee: "6 h"
 seance: 1
 niveau_public: [lycée]
+
+enonce_intro: |
+  Dans ce chapitre intitulé Grandeurs physiques, nous allons aborder des notions qui s’avèrent utiles
+  dans tous les domaines des sciences notamment les sciences physiques et les sciences de l’ingénieur.
+  En eﬀet, toute science utilise des grandeurs dont il faut connaitre la nature qu’on appelle la dimension
+  insi qu’une valeur qui dépend de l’unité du système utilisé.
+
+
 exercices_ordre:
   - ex1_grandeurs_physiques_fondamentales
   - ex2_grandeurs_derivees_equation_aux_dimensions_et_conversions
@@ -11,3 +19,8 @@ exercices_ordre:
   - ex4_loi_et_constantes_fondamentales_en_physiques
   - ex5_analyse_dimensinnelle_comme_prediction
   - ex6_grandeurs_numeriques
+  - ex7_homogeneite_et_dimension_avance
+  - ex8_conversions_et_unites_des_constantes
+  - ex9_entrainement_grandeurs_numeriques
+  - ex10_theoreme_pi_et_maquettes
+

@@ -1,0 +1,335 @@
+id: td1_ex7
+intitule: |
+  (*) Homogénéité d'une équation et dimension d'une grandeur : exercices avancés
+td: td1
+facultatif: true
+seance: 1
+
+cours_rattache:
+  - chap1.analyse_dimensionnelle
+  - chap1.homogeneite
+
+metadonnees:
+  duree_estimee: "50 min"
+  difficulte: 4 # Sur une échelle de 1 à 5
+  type_exercice: "Approfondissement"
+  indispensable: false
+
+enonce_intro: |
+  Cet exercice reprend les deux grands usages de l'analyse dimensionnelle : {\bf tester l'homogénéité} d'une équation (détecter une erreur) et {\bf déterminer la dimension} d'une grandeur (ou d'une constante) à partir d'une loi. Les situations sont plus variées que dans les exercices précédents : électricité, thermodynamique, ondes, mécanique quantique, mécanique des fluides.
+
+prerequis : 
+  - titre: |
+      Dimensions et homogénéité
+    texte: |
+      Connaître 
+      \begin{itemize}[label=$\bullet$]
+        \item les sept dimensions de base ($M$, $L$, $T$, $I$, $\Theta$, $N$, $J$) et la notation $[\,\cdot\,]$,
+        \item les règles $[ab] = [a][b]$, $[a/b] = [a]/[b]$, $[a^n] = [a]^n$ et $[a + b]$ n'a de sens que si $[a] = [b]$,
+        \item les lois usuelles : $P = UI$, $E = \tfrac{1}{2} L I^2$, $F = q v B$, $PV = nRT$, \dots
+      \end{itemize} 
+
+objectifs_pedagogiques_etudiants :
+  - titre: |
+      Manipuler l'homogénéité avec assurance
+    texte: |
+      \begin{itemize}[label=$\star$]
+      \item Tester rapidement l'homogénéité d'une équation et corriger une erreur.
+      \item Comprendre que l'homogénéité est une condition {\bf nécessaire mais non suffisante}.
+      \item Déterminer la dimension d'une grandeur ou d'une constante à partir d'une loi.
+      \item Reconnaître qu'un argument d'exponentielle, de logarithme ou de sinus est adimensionnel.
+      \end{itemize}
+
+objectifs_pedagogiques_enseignants :
+  - titre: |
+      Installer un réflexe de vérification
+    texte: |
+      \begin{itemize}[label=$\star$]
+      \item Faire de l'homogénéité un réflexe de contrôle avant tout calcul numérique.
+      \item Montrer que la dimension d'une fonction d'onde ou d'une constante de fluides peut se déduire d'une seule équation.
+      \end{itemize}
+
+coup_de_pouce: 
+  - titre: |
+      Méthode générale
+    texte: |
+      \begin{itemize}[label=$\star$]
+      \item Écrire l'équation aux dimensions de {\bf chaque terme} séparément puis les comparer.
+      \item Les termes d'une somme ou de part et d'autre d'un signe $=$ doivent avoir la {\bf même} dimension.
+      \item Les facteurs numériques ($2$, $\pi$, $\tfrac{1}{2}$, \dots) sont adimensionnels.
+      \item L'argument d'une fonction transcendante ($\exp$, $\ln$, $\sin$, \dots) est toujours adimensionnel.
+      \end{itemize}
+
+point_cours :
+  - titre: |
+      Homogénéité
+    texte: |
+      Une équation physique est {\bf homogène} si tous ses termes ont la même dimension. C'est une condition nécessaire : une équation non homogène est {\bf forcément fausse}. Elle n'est pas suffisante : une équation homogène peut être fausse (facteur numérique oublié, mauvaise fonction).
+  - titre: |
+      Dimensions électriques usuelles
+    texte: |
+      $[I] = I$, $[\text{charge}] = I\,T$, $[\text{tension}] = M\,L^2\,T^{-3}\,I^{-1}$ (car $P = UI$ et $[P] = M L^2 T^{-3}$).
+
+remarques_pedagogiques_ecueils_classiques: 
+  - titre: |
+      Erreurs récurrentes chez les étudiants
+    texte: |
+      \begin{itemize}[label=$\star$]
+      \item Conclure « l'équation est juste » parce qu'elle est homogène.
+      \item Écrire $[a + b] = [a] + [b]$ au lieu de $[a] = [b]$.
+      \item Oublier le carré de la vitesse dans $\tfrac{1}{2}\rho v^2$.
+      \item Donner à la constante d'une exponentielle une dimension sans regarder son argument.
+      \end{itemize}
+remarques_pedagogiques_conseils_animation: 
+  - titre: |
+      Pédagogie en classe
+    texte: |
+      \begin{itemize}[label=$\star$]
+      \item La question $1$ f) et la question $6$ illustrent que l'homogénéité ne détermine pas les facteurs numériques.
+      \item La question $5$ montre qu'on peut déduire la dimension d'une fonction d'onde par simple normalisation.
+      \end{itemize}
+
+bilan: 
+  - titre: |
+      Synthèse de l'exercice
+    texte: |
+      L'homogénéité permet de détecter toute équation fausse et de déduire la dimension d'une grandeur inconnue à partir d'une loi. Elle ne fixe ni les facteurs numériques ni la forme précise de la loi.
+
+aller_plus_loin: 
+  - niveau: lycee
+    titre: |
+      Détecter les erreurs
+    texte: |
+      Relire des formules de cours et vérifier leur homogénéité sur des exemples de son choix.
+
+  - niveau: prepa
+    titre: |
+      Grandeurs adimensionnelles
+    texte: |
+      Chercher la signification physique des nombres de Reynolds, de Péclet et de Prandtl à partir de leurs dimensions.
+
+  - niveau: licence
+    titre: |
+      Systèmes d'unités
+    texte: |
+      Comparer les dimensions de $\varepsilon_0$ et $\mu_0$ dans les systèmes SI et CGS gaussien.
+
+questions:
+
+  - id: q1
+
+    enonce: |
+      {\bf Tester l'homogénéité d'équations}\\
+
+      $x$ est une position, $v$ une vitesse, $a$ une accélération, $t$ un temps, $P$ une pression, $\rho$ une masse volumique, $g$ l'accélération de la pesanteur, $h$ une hauteur, $M_S$ la masse du Soleil, $p$ une quantité de mouvement, $F$ une force, $S$ une surface. Dire pour chaque équation si elle est homogène, et si elle est fausse la corriger :
+      \begin{enumerate}[label=\alph*)]
+        \item $x = x_0 + v_0 t + a t^2$
+        \item $P + \tfrac{1}{2}\rho v^2 + \rho g h = \text{cste}$
+        \item $P + \rho v + \rho g h = \text{cste}$
+        \item $v = \sqrt{\dfrac{G M_S}{r}}$
+        \item $E^2 = p^2 c^2 + m^2 c^4$
+        \item $F = \tfrac{1}{2}\rho S v$ (force de traînée)
+      \end{enumerate}
+
+    coup_de_pouce: 
+      - titre: |
+          Que compare-t-on ?
+        texte: |
+          Il suffit de calculer la dimension de chaque terme. Ne pas s'arrêter à la première équation homogène : demandez-vous aussi si elle est {\bf correcte}.
+
+    solution: 
+      - titre: |
+          Correction détaillée de la question 1
+        texte : |
+          \begin{enumerate}[label=\alph*)]
+            \item $[a t^2] = L\,T^{-2}\,T^2 = L$, $[v_0 t] = L$, $[x_0] = L$ : l'équation est {\bf homogène}. Elle est pourtant {\bf fausse} car le facteur $\tfrac{1}{2}$ est absent : $x = x_0 + v_0 t + \tfrac{1}{2} a t^2$. L'homogénéité est nécessaire mais non suffisante.
+            \item $[P] = M L^{-1} T^{-2}$, $[\rho v^2] = M L^{-3} L^2 T^{-2} = M L^{-1} T^{-2}$, $[\rho g h] = M L^{-3} L T^{-2} L = M L^{-1} T^{-2}$ : {\bf homogène} (relation de Bernoulli).
+            \item $[\rho v] = M L^{-3} L T^{-1} = M L^{-2} T^{-1} \neq [P]$ : {\bf non homogène} donc fausse. Correction : remplacer $\rho v$ par $\tfrac{1}{2}\rho v^2$.
+            \item $\left[\dfrac{G M_S}{r}\right] = \dfrac{M^{-1} L^3 T^{-2} \cdot M}{L} = L^2 T^{-2}$, donc le second membre est $L\,T^{-1}$ : {\bf homogène} (vitesse orbitale circulaire).
+            \item $[E^2] = M^2 L^4 T^{-4}$. $[p c] = M L T^{-1} \cdot L T^{-1} = M L^2 T^{-2}$ donc $[p^2 c^2] = M^2 L^4 T^{-4}$. $[m c^2] = M L^2 T^{-2}$ donc $[m^2 c^4] = M^2 L^4 T^{-4}$ : {\bf homogène} (relation énergie-impulsion relativiste).
+            \item $[\rho S v] = M L^{-3} L^2 L T^{-1} = M T^{-1} \neq [F] = M L T^{-2}$ : {\bf non homogène}. Correction : $F = \tfrac{1}{2}\rho S v^2$ car $[\rho S v^2] = M L^{-3} L^2 L^2 T^{-2} = M L T^{-2}$.
+          \end{enumerate}
+
+  - id: q2
+
+    enonce: |
+      {\bf Déterminer la dimension d'une grandeur électrique ou magnétique}\\
+
+      À partir des lois suivantes, donner l'équation aux dimensions de la grandeur demandée :
+      \begin{enumerate}[label=\alph*)]
+        \item la viscosité dynamique $\eta$, avec la loi de Stokes $F = 6\pi \eta R v$ ;
+        \item la tension électrique $U$, avec la puissance $P = U I$ ;
+        \item la résistance $R = \dfrac{U}{I}$ ;
+        \item la capacité $C$, avec $Q = C U$ où $Q$ est une charge ;
+        \item le champ magnétique $B$, avec la force de Lorentz $F = q v B$ ;
+        \item l'inductance $L$, avec l'énergie magnétique $E = \tfrac{1}{2} L I^2$.
+        \item Vérifier ensuite que la loi $U = L \dfrac{\mathrm{d}I}{\mathrm{d}t}$ est homogène avec les résultats précédents.
+      \end{enumerate}
+
+    coup_de_pouce: 
+      - titre: |
+          Ordre de calcul
+        texte: |
+          Commencer par $[U]$ (question b) : il sert pour c), d) et g). Une dérivée $\dfrac{\mathrm{d}I}{\mathrm{d}t}$ a pour dimension $[I]/T$.
+
+    solution: 
+      - titre: |
+          Correction détaillée de la question 2
+        texte : |
+          \begin{enumerate}[label=\alph*)]
+            \item $[\eta] = \dfrac{[F]}{[R][v]} = \dfrac{M L T^{-2}}{L \cdot L T^{-1}} = M\,L^{-1}\,T^{-1}$ (unité : $\text{Pa.s}$).
+            \item $[U] = \dfrac{[P]}{[I]} = M\,L^2\,T^{-3}\,I^{-1}$ (unité : $\text{V}$).
+            \item $[R] = \dfrac{[U]}{[I]} = M\,L^2\,T^{-3}\,I^{-2}$ (unité : $\Omega$).
+            \item $[C] = \dfrac{[Q]}{[U]} = \dfrac{I\,T}{M L^2 T^{-3} I^{-1}} = M^{-1}\,L^{-2}\,T^{4}\,I^{2}$ (unité : $\text{F}$).
+            \item $[B] = \dfrac{[F]}{[q][v]} = \dfrac{M L T^{-2}}{I T \cdot L T^{-1}} = M\,T^{-2}\,I^{-1}$ (unité : $\text{T}$).
+            \item $[L] = \dfrac{[E]}{[I]^2} = \dfrac{M L^2 T^{-2}}{I^2} = M\,L^2\,T^{-2}\,I^{-2}$ (unité : $\text{H}$).
+            \item $\left[L \dfrac{\mathrm{d}I}{\mathrm{d}t}\right] = M L^2 T^{-2} I^{-2} \cdot I\,T^{-1} = M\,L^2\,T^{-3}\,I^{-1} = [U]$ : l'équation est {\bf homogène}.
+          \end{enumerate}
+
+  - id: q3
+
+    enonce: |
+      {\bf Arguments de fonctions et constantes}\\
+
+      Un argument d'exponentielle, de logarithme ou de fonction trigonométrique est nécessairement sans dimension.
+      \begin{enumerate}[label=\alph*)]
+        \item Une onde progressive s'écrit $y(x,t) = A \sin(\omega t - k x)$. Donner les dimensions de $\omega$ et $k$, puis celle de la vitesse de phase $v_\varphi = \omega / k$.
+        \item La pression atmosphérique varie avec l'altitude $z$ selon $P(z) = P_0 \exp\!\left(-\dfrac{M_{mol}\, g\, z}{R\, T}\right)$ où $M_{mol}$ est la masse molaire, $R$ la constante des gaz parfaits ($[R] = M L^2 T^{-2} N^{-1} \Theta^{-1}$) et $T$ la température. Vérifier que l'argument est sans dimension.
+        \item Loi d'Arrhenius : $k = A \exp\!\left(-\dfrac{E_a}{R T}\right)$. Déterminer la dimension et l'unité SI de $E_a$. Que peut-on dire de la dimension de $A$ ?
+        \item Un étudiant écrit $u(t) = u_0 \ln(t)$ où $t$ est un temps. Cette écriture est-elle homogène ? Comment la corriger ?
+      \end{enumerate}
+
+    coup_de_pouce: 
+      - titre: |
+          Masse molaire
+        texte: |
+          $[M_{mol}] = M\,N^{-1}$ (masse par quantité de matière). Pour c), écrire que $\dfrac{E_a}{R T}$ est adimensionnel.
+
+    solution: 
+      - titre: |
+          Correction détaillée de la question 3
+        texte : |
+          \begin{enumerate}[label=\alph*)]
+            \item $\omega t$ est sans dimension donc $[\omega] = T^{-1}$. De même $k x$ est sans dimension donc $[k] = L^{-1}$. Alors $[v_\varphi] = \dfrac{T^{-1}}{L^{-1}} = L\,T^{-1}$ : c'est bien une vitesse.
+            \item $\left[\dfrac{M_{mol}\, g\, z}{R\, T}\right] = \dfrac{M N^{-1} \cdot L T^{-2} \cdot L}{M L^2 T^{-2} N^{-1} \Theta^{-1} \cdot \Theta} = 1$ : l'argument est bien {\bf sans dimension}.
+            \item $[E_a] = [R][T] = M L^2 T^{-2} N^{-1} \Theta^{-1} \cdot \Theta = M\,L^2\,T^{-2}\,N^{-1}$. Unité SI : $\text{kg.m}^2\text{.s}^{-2}\text{.mol}^{-1} = \text{J.mol}^{-1}$. Comme l'exponentielle est sans dimension, $[A] = [k]$ : $A$ a la même dimension que la constante de vitesse $k$.
+            \item Le logarithme d'une grandeur dimensionnée n'a pas de sens : {\bf non homogène}. Il faut écrire $u(t) = u_0 \ln\!\left(\dfrac{t}{\tau}\right)$ où $\tau$ est un temps de référence (par exemple $1 ~\text{s}$).
+          \end{enumerate}
+
+  - id: q4
+
+    enonce: |
+      {\bf Équation de Van der Waals (question difficile)}\\
+
+      L'équation d'état d'un gaz réel de $n$ moles, de volume $V$, de pression $P$ et de température $T$ s'écrit
+      $$
+      \left(P + \frac{a\, n^2}{V^2}\right)\left(V - n\, b\right) = n\, R\, T.
+      $$
+      \begin{enumerate}[label=\alph*)]
+        \item Quelle relation doivent vérifier les dimensions de $P$ et de $\dfrac{a n^2}{V^2}$ ? En déduire $[a]$.
+        \item Quelle relation doivent vérifier $[V]$ et $[n b]$ ? En déduire $[b]$.
+        \item Déterminer $[R]$ et l'unité SI de $R$ à partir de la loi des gaz parfaits.
+        \item Donner les unités SI de $a$ et de $b$ en unités de base, puis en $\text{Pa.m}^6\text{.mol}^{-2}$ pour $a$ et $\text{m}^3\text{.mol}^{-1}$ pour $b$.
+        \item Pour le dioxyde de carbone, $a = 0,364 ~\text{Pa.m}^6\text{.mol}^{-2}$ et $b = 4,27 \times 10^{-5} ~\text{m}^3\text{.mol}^{-1}$. Calculer la pression corrective $\dfrac{a n^2}{V^2}$ pour $n = 1,00 ~\text{mol}$ dans $V = 1,00 ~\text{L}$, et la comparer à $P_{atm} = 1,01 \times 10^{5} ~\text{Pa}$.
+      \end{enumerate}
+
+    coup_de_pouce: 
+      - titre: |
+          Somme de termes
+        texte: |
+          Dans $P + \dfrac{a n^2}{V^2}$ et dans $V - n b$, les deux termes doivent avoir la même dimension pour que la somme ait un sens.
+
+    solution: 
+      - titre: |
+          Correction détaillée de la question 4
+        texte : |
+          \begin{enumerate}[label=\alph*)]
+            \item $\left[\dfrac{a n^2}{V^2}\right] = [P]$ donc $[a] = \dfrac{[P][V]^2}{[n]^2} = \dfrac{M L^{-1} T^{-2} \cdot L^6}{N^2} = M\,L^5\,T^{-2}\,N^{-2}$.
+            \item $[n b] = [V]$ donc $[b] = \dfrac{L^3}{N} = L^3\,N^{-1}$.
+            \item $R = \dfrac{P V}{n T}$ donc $[R] = \dfrac{M L^{-1} T^{-2} \cdot L^3}{N \cdot \Theta} = M\,L^2\,T^{-2}\,N^{-1}\,\Theta^{-1}$. Unité : $\text{kg.m}^2\text{.s}^{-2}\text{.mol}^{-1}\text{.K}^{-1} = \text{J.mol}^{-1}\text{.K}^{-1}$.
+            \item $a$ : $\text{kg.m}^5\text{.s}^{-2}\text{.mol}^{-2}$, soit $\text{Pa.m}^6\text{.mol}^{-2}$ car $1 ~\text{Pa} = 1 ~\text{kg.m}^{-1}\text{.s}^{-2}$. $b$ : $\text{m}^3\text{.mol}^{-1}$.
+            \item $V = 1,00 ~\text{L} = 1,00 \times 10^{-3} ~\text{m}^3$. Alors
+            $$\frac{a n^2}{V^2} = \frac{0,364 \times 1,00^2}{(1,00 \times 10^{-3})^2} = 3,64 \times 10^{5} ~\text{Pa}.$$
+            C'est environ $3,6$ fois la pression atmosphérique : la correction n'est pas négligeable à cette densité.
+          \end{enumerate}
+
+  - id: q5
+
+    enonce: |
+      {\bf Équation de Schrödinger (question difficile)}\\
+
+      En mécanique quantique, une particule de masse $m$ se déplaçant selon $x$ dans un potentiel $V(x)$ est décrite par une fonction d'onde $\psi(x,t)$ vérifiant
+      $$
+      i\hbar \frac{\partial \psi}{\partial t} = -\frac{\hbar^2}{2m}\frac{\partial^2 \psi}{\partial x^2} + V\, \psi.
+      $$
+      On donne $[\hbar] = M L^2 T^{-1}$ et $i$ est adimensionnel.
+      \begin{enumerate}[label=\alph*)]
+        \item Donner la dimension de chacun des deux premiers termes en fonction de $[\psi]$. Vérifier qu'ils sont homogènes entre eux.
+        \item En déduire la dimension de $V$. Quelle grandeur physique reconnaît-on ?
+        \item La probabilité de trouver la particule entre $x$ et $x + \mathrm{d}x$ est $|\psi|^2 \, \mathrm{d}x$ et la probabilité totale vaut $1$ : $\displaystyle \int |\psi|^2 \, \mathrm{d}x = 1$. En déduire $[\psi]$.
+        \item Que devient $[\psi]$ pour une particule en trois dimensions avec $\displaystyle \int |\psi|^2 \, \mathrm{d}^3 r = 1$ ?
+      \end{enumerate}
+
+    coup_de_pouce: 
+      - titre: |
+          Probabilité
+        texte: |
+          Une probabilité est un nombre pur : $\left[\displaystyle \int |\psi|^2 \, \mathrm{d}x\right] = [\psi]^2 \cdot L = 1$.
+
+    solution: 
+      - titre: |
+          Correction détaillée de la question 5
+        texte : |
+          \begin{enumerate}[label=\alph*)]
+            \item $\left[i\hbar \dfrac{\partial \psi}{\partial t}\right] = \dfrac{M L^2 T^{-1}}{T}[\psi] = M\,L^2\,T^{-2}\,[\psi]$.\\
+            $\left[\dfrac{\hbar^2}{2m}\dfrac{\partial^2 \psi}{\partial x^2}\right] = \dfrac{M^2 L^4 T^{-2}}{M \cdot L^2}[\psi] = M\,L^2\,T^{-2}\,[\psi]$.\\
+            Les deux termes ont la même dimension : {\bf homogène}.
+            \item $[V\psi] = [V][\psi]$ doit valoir $M L^2 T^{-2}[\psi]$ donc $[V] = M\,L^2\,T^{-2}$ : c'est une {\bf énergie} (énergie potentielle).
+            \item $[\psi]^2 \cdot L = 1$ donc $[\psi] = L^{-1/2}$ (unité : $\text{m}^{-1/2}$).
+            \item $[\psi]^2 \cdot L^3 = 1$ donc $[\psi] = L^{-3/2}$ (unité : $\text{m}^{-3/2}$).
+          \end{enumerate}
+
+  - id: q6
+
+    enonce: |
+      {\bf Loi de Poiseuille : trouver l'erreur (question difficile)}\\
+
+      Le débit volumique $Q$ d'un fluide de viscosité dynamique $\eta$ dans un tuyau cylindrique de rayon $R$ et de longueur $\ell$, soumis à une différence de pression $\Delta P$, est cherché par trois étudiants :
+      $$
+      \text{(A)}~ Q = \frac{\pi R^3 \Delta P}{8 \eta \ell}, \qquad \text{(B)}~ Q = \frac{\pi R^4 \Delta P}{8 \eta \ell}, \qquad \text{(C)}~ Q = \frac{\pi R^4 \Delta P}{8 \eta}.
+      $$
+      \begin{enumerate}[label=\alph*)]
+        \item Donner la dimension du débit volumique $Q$.
+        \item Tester l'homogénéité des trois formules. Laquelle est possible ?
+        \item On suppose $Q = k \, \dfrac{R^p \, \Delta P}{\eta \, \ell}$ avec $k$ constante sans dimension. Déterminer l'exposant $p$ par homogénéité.
+        \item L'homogénéité permet-elle de trouver la valeur $k = \dfrac{\pi}{8}$ ? Justifier.
+        \item On mesure $Q = 1,0 \times 10^{-6} ~\text{m}^3\text{.s}^{-1}$ pour de l'eau ($\eta = 1,0 \times 10^{-3} ~\text{Pa.s}$) dans un tube de rayon $R = 1,0 ~\text{mm}$ et de longueur $\ell = 1,0 ~\text{m}$. Utiliser (B) pour calculer $\Delta P$ avec le bon nombre de chiffres significatifs.
+      \end{enumerate}
+
+    coup_de_pouce: 
+      - titre: |
+          Dimensions utiles
+        texte: |
+          $[\Delta P] = M L^{-1} T^{-2}$, $[\eta] = M L^{-1} T^{-1}$. Calculer d'abord $\left[\dfrac{\Delta P}{\eta \, \ell}\right]$ : cette combinaison est commune aux trois formules.
+      - titre: |
+          Pour l'application numérique
+        texte: |
+          Isoler $\Delta P = \dfrac{8 \eta \ell Q}{\pi R^4}$ et convertir $R$ en mètres.
+
+    solution: 
+      - titre: |
+          Correction détaillée de la question 6
+        texte : |
+          \begin{enumerate}[label=\alph*)]
+            \item $[Q] = \dfrac{\text{volume}}{\text{temps}} = L^3\,T^{-1}$.
+            \item $\left[\dfrac{\Delta P}{\eta \ell}\right] = \dfrac{M L^{-1} T^{-2}}{M L^{-1} T^{-1} \cdot L} = L^{-1}\,T^{-1}$.
+            \begin{itemize}[label=$\bullet$]
+              \item (A) : $[R^3] \cdot L^{-1} T^{-1} = L^2 T^{-1} \neq L^3 T^{-1}$ : non homogène.
+              \item (B) : $[R^4] \cdot L^{-1} T^{-1} = L^3 T^{-1} = [Q]$ : {\bf homogène}.
+              \item (C) : $[R^4] \cdot \dfrac{M L^{-1} T^{-2}}{M L^{-1} T^{-1}} = L^4 T^{-1} \neq L^3 T^{-1}$ : non homogène.
+            \end{itemize}
+            Seule (B) est possible.
+            \item $L^{p} \cdot L^{-1} T^{-1} = L^3 T^{-1}$ donc $p - 1 = 3$ soit $p = 4$.
+            \item Non : les facteurs numériques (comme $\pi$ et $8$) sont sans dimension et ne sont donc pas contraints par l'homogénéité. Il faut un calcul complet (résolution de l'équation de Navier-Stokes) ou une mesure.
+            \item $\Delta P = \dfrac{8 \eta \ell Q}{\pi R^4} = \dfrac{8 \times 1,0 \times 10^{-3} \times 1,0 \times 1,0 \times 10^{-6}}{\pi \times (1,0 \times 10^{-3})^4} = \dfrac{8,0 \times 10^{-9}}{3,14 \times 10^{-12}} \approx 2,5 \times 10^{3} ~\text{Pa}$ (soit $2$ chiffres significatifs).
+          \end{enumerate}

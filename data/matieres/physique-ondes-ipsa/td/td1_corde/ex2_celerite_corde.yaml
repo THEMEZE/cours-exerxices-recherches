@@ -8,8 +8,8 @@ cours_rattache:
   - chap1.reflexion_transmission
 
 metadonnees:
-  duree_estimee: "25 min"
-  difficulte: 2 # Sur une échelle de 1 à 5
+  duree_estimee: "5 min"
+  difficulte: 1 # Sur une échelle de 1 à 5
   type_exercice: "Application directe du cours"
   indispensable: true
 

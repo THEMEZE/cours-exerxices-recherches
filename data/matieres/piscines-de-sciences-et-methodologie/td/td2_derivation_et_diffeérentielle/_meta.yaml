@@ -7,5 +7,10 @@ niveau_public: [lycée]
 exercices_ordre:
   - ex1_derivation_de_fonction_en_physique
   - ex2_interpretation_differentielle
-  - ex3_derivées_de_fonctions_composees
-  - ex4_différentielle_logarithmique
+  - ex3_derivées_de_fonctions_composees
+  - ex4_différentielle_logarithmique
+  - ex5_derivation_de_fonction_en_physique_approfondie
+  - ex6_interpretation_differentielle_approfondie
+  - ex7_derivees_de_fonctions_composees_approfondies
+  - ex8_differentielle_logarithmique_approfondie
+  - ex9_incertitudes_combinaison_puissance_p

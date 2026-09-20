@@ -88,5 +88,71 @@
     "type_doc": "td",
     "doc": "td2_derivation_et_diffeérentielle",
     "pdf": "td1_test_Ph110.pdf"
+  },
+  "td1_test_Ph110_0": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td3_fonctions_derives_integrale",
+    "pdf": "td1_test_Ph110_0.pdf"
+  },
+  "td1_Ph110": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td1_grandeurs_physiques",
+    "pdf": "td1_Ph110.pdf"
+  },
+  "td2_Ph110": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td2_derivation_et_diffeérentielle",
+    "pdf": "td2_Ph110.pdf"
+  },
+  "td1_Ph110_0": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td1_grandeurs_physiques",
+    "pdf": "td1_Ph110_0.pdf"
+  },
+  "td1_Ph110_corrige": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td1_grandeurs_physiques",
+    "pdf": "td1_Ph110_corrige.pdf"
+  },
+  "td2_Ph110_corrige": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td2_derivation_et_diffeérentielle",
+    "pdf": "td2_Ph110_corrige.pdf"
+  },
+  "td1_PhV212_corrige": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td1_corde",
+    "pdf": "td1_PhV212_corrige.pdf"
+  },
+  "td1_PhV212_enonce": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td1_corde",
+    "pdf": "td1_PhV212_enonce.pdf"
+  },
+  "td1_PhV212_aides": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td1_corde",
+    "pdf": "td1_PhV212_aides.pdf"
+  },
+  "td2_PhV110_corrige": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td2_derivation_et_diffeérentielle",
+    "pdf": "td2_PhV110_corrige.pdf"
+  },
+  "td1_PhV110_corrige": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td1_grandeurs_physiques",
+    "pdf": "td1_PhV110_corrige.pdf"
   }
 }
