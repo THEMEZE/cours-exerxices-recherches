@@ -4,9 +4,9 @@
 # Gestion des arguments 
 # 
 # Usage : 
-# ./compile.sh -> compile tous les .tex 
-# ./compile.sh file1.tex -> compile seulement file1.tex 
-# ./compile.sh a.tex b.tex -> compile une liste précise 
+# build/compile_all_tex.sh -> compile tous les .tex 
+# build/compile_all_tex.sh file1.tex -> compile seulement file1.tex 
+# build/compile_all_tex.sh a.tex b.tex -> compile une liste précise 
 # ------------------------------------------------------------
 
 # ------------------------------------------------------------

@@ -73,6 +73,14 @@ questions:
           $\vec{F}_1$ s'applique en $M(1;1)$, dirigé vers la droite ($+3$) et vers le bas ($-1$).
           $\vec{F}_2$ s'applique en $M$, orienté dans le premier cadran à $60^\circ$ de l'axe horizontal.
 
+        figure:
+          - ref: td4_ex2_a_PhV110
+            legende:
+            # scale: 0.7
+            width: 0.8
+            # height: 4cm       # les deux ensemble : la figure est étirée pour tenir exactement dans ce cadre
+            label: 
+
   - id: q2_b
     parent: "1"
     enonce: |
@@ -95,6 +103,14 @@ questions:
       - titre: "Somme géométrique"
         texte: |
           On place l'origine du vecteur $\vec{F}_2$ à l'extrémité du vecteur $\vec{F}_1$ depuis le point d'application $M$. Le vecteur résultant relie $M$ à l'extrémité finale.
+
+        figure:
+          - ref: td4_ex2_b_PhV110
+            legende:
+            # scale: 0.7
+            width: 0.8
+            # height: 4cm       # les deux ensemble : la figure est étirée pour tenir exactement dans ce cadre
+            label: 
 
   - id: q2_d
     parent: "1"

@@ -31,6 +31,50 @@ animation:
   scale: 0.8  # Facteur d'échelle (ex: 0.8 pour 80%)
   label: "fig:corde_t0"  # Label pour le \ref{}
 
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi une corde plus fine ou plus tendue sonne-t-elle plus aigu ?"
+    duree_introduction: "5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Sur une guitare, les cordes graves sont grosses et lourdes, les aiguës fines. Si l'on tend davantage une corde, la note monte. Pouvez-vous prévoir, {\bf sans calcul}, comment la vitesse d'une onde sur la corde varie avec la tension et avec le diamètre ? Et la vitesse de l'onde est-elle la vitesse à laquelle bouge la corde ?
+    texte: |
+      {\bf Idée clé : la célérité ne dépend que du milieu.} Sur une corde tendue, $c=\sqrt{F/\mu}$ avec $\mu=\rho S$ la masse linéique : plus la tension est grande, plus l'onde est rapide ; plus la corde est lourde, plus elle est lente. Une onde sinusoïdale progressive s'écrit
+      $$y(x,t)=a\cos(kx-\omega t+\phi),\qquad k=\frac{2\pi}{\lambda},\ \ \omega=\frac{2\pi}{T},\ \ c=\frac\lambda T=\frac\omega k .$$
+      Il ne faut pas confondre la {\bf célérité} $c$ de l'onde (le motif qui avance) et la {\bf vitesse transversale} $\partial_t y$ d'un point de la corde (qui monte et descend).
+
+outils_mathematiques:
+  - titre: "Aire d'un disque et masse linéique"
+    texte: |
+      $S=\pi d^2/4$ et $\mu=\rho S$. Penser à convertir : $1~\text{mm}=10^{-3}$ m, d'où $S=\pi(10^{-3})^2/4\approx7{,}85\times10^{-7}$ m$^2$. Maîtriser les puissances de dix évite les erreurs d'unités.
+  - titre: "Analyse dimensionnelle"
+    texte: |
+      $[F/\mu]=\dfrac{\mathrm{kg\,m\,s^{-2}}}{\mathrm{kg\,m^{-1}}}=\mathrm{m^2\,s^{-2}}$ : la racine carrée est bien une vitesse. L'analyse dimensionnelle permet de {\bf deviner} $c\propto\sqrt{F/\mu}$ à une constante sans dimension près.
+  - titre: "Relations entre grandeurs ondulatoires"
+    texte: |
+      $k=2\pi/\lambda$, $\omega=2\pi/T=2\pi f$, $c=\lambda f=\omega/k$. Une période temporelle $T$ correspond à un déphasage de $2\pi$ ; une longueur d'onde $\lambda$ à un décalage spatial de $2\pi$.
+  - titre: "Phase, degrés et radians"
+    texte: |
+      Une variation de phase de $60^\circ=\pi/3$ rad correspond à $\dfrac{60}{360}=\dfrac16$ de période : $\Delta t=T/6$. Règle de trois sur les angles.
+  - titre: "Translation de graphe : $y(x,t+\\Delta t)=y(x-c\\Delta t,t)$"
+    texte: |
+      Entre $t$ et $t+T/8$ le profil se décale de $c\,T/8=\lambda/8$ vers les $x$ croissants. Même idée qu'en cinématique : un décalage $\Delta t$ correspond à un déplacement $c\,\Delta t$.
+  - titre: "Dérivée partielle d'un cosinus"
+    texte: |
+      $v_y=\partial_t y=a\omega\sin(kx-\omega t+\phi)$, de valeur maximale $a\omega$. Un point où $y=0$ (passage par l'équilibre) est un point où $|v_y|=a\omega$ est maximale, car $\cos^2+\sin^2=1$.
+
+liens_autres_disciplines:
+  - discipline: "Musique et lutherie"
+    texte: |
+      La hauteur d'une note est liée à la fréquence $f_1=c/(2L)$ : on accorde une guitare en changeant la tension $F$ (clé d'accord) et on choisit des cordes de $\mu$ différents (cordes filées pour les graves).
+  - discipline: "Cinématique"
+    texte: |
+      Décaler un profil de $\lambda/8$ pour $T/8$ revient à un mouvement uniforme de vitesse $c=\lambda/T$ : le motif se comporte comme un mobile.
+  - discipline: "Génie civil"
+    texte: |
+      On estime la tension d'un hauban de pont en le faisant vibrer et en mesurant sa fréquence propre : $F=4\mu L^2f_1^2$.
+  - discipline: "Électricité et signaux"
+    texte: |
+      Un signal sinusoïdal $a\cos(\omega t+\phi)$ est caractérisé par son amplitude, sa pulsation et sa phase. Le déphasage entre deux points de la corde est le même que le déphasage entre deux tensions alternatives retardées.
+
 questions:
   - id: q1
     enonce: |
@@ -64,9 +108,6 @@ questions:
         texte: |
           $\mu = \rho\,S = \rho\,\dfrac{\pi d^2}{4} \approx 7.46\times10^{-4}\ \text{kg/m}.$
           $c=\sqrt{F/\mu}=\sqrt{50/7.46\times10^{-4}}\approx 259\ \text{m/s}.$
-      - titre: "Tettetetet"
-        texte: |
-          tetetetetet teste ici néna zamane 
 
     solution:
       - titre: "Rédaction pas à pas"
@@ -83,9 +124,7 @@ questions:
         # figure:
         #   ref: calcul_section_sch
         #   legende: "Schéma d'application numérique"
-      - titre: "Tettetetet"
-        texte: |
-          fao mi coze encore oubien lébon 
+
 
     aller_plus_loin:
       - niveau: lycee

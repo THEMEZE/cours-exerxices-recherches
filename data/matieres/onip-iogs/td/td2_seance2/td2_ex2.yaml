@@ -1,0 +1,163 @@
+id: td2_ex2
+intitule: "Fonction \\texttt{get\\_list} et mesure du temps d'exécution"
+td: td2
+facultatif: false
+seance: 2
+cours_rattache:
+  - onip.fonctions_python
+  - onip.mesure_de_temps
+
+metadonnees:
+  duree_estimee: "15 min"
+  difficulte: 1
+  type_exercice: "Application directe"
+  indispensable: true
+
+enonce_intro: |
+  1. Créer une fonction \texttt{get\_list} qui génère une liste de $N$
+     nombres réels régulièrement répartis entre une valeur \texttt{start}
+     et une valeur \texttt{stop}. $N$, \texttt{start} et \texttt{stop}
+     seront des paramètres de cette fonction. \texttt{start} aura une
+     valeur par défaut de 0. \\
+  2. Mesurer le temps d'exécution de la création d'une liste
+     \texttt{L\_test} de 10 000 points répartis entre 0 et 1.
+
+prerequis:
+  - titre: "Paramètres par défaut"
+    texte: |
+      En Python, \texttt{def f(a, b, c=0):} définit un paramètre
+      \texttt{c} optionnel : si l'appelant ne le fournit pas, la valeur
+      \texttt{0} est utilisée.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Suivre une signature imposée"
+    texte: |
+      Respecter l'ordre de paramètres demandé par l'énoncé
+      (\texttt{N, stop, start=0}) plutôt que de le deviner par analogie
+      avec \texttt{np.linspace(start, stop, num)}, qui utilise un ordre
+      différent.
+  - titre: "Mesurer un temps d'exécution proprement"
+    texte: |
+      Utiliser \texttt{time.perf\_counter()} en encadrant strictement la
+      portion de code à mesurer, sans y inclure l'affichage ni les
+      imports.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Préparer la comparaison avec Numpy"
+    texte: |
+      Ne pas s'attarder sur la valeur numérique du chronométrage : ce qui
+      compte est la méthode de mesure, qui sera immédiatement réutilisée
+      à l'identique dans l'exercice suivant (\texttt{td2\_ex3}) pour la
+      comparaison liste Python / vecteur Numpy.
+
+point_cours:
+  - titre: "Solution commentée"
+    texte: |
+      \begin{verbatim}
+      import time
+
+      def get_list(N: int, stop: float, start: float = 0) -> list[float]:
+          """Genere une liste de N reels regulierement repartis
+          entre start et stop (bornes incluses)."""
+          # N points -> N - 1 intervalles (meme piege qu'a l'exercice 1).
+          step = (stop - start) / (N - 1)
+          return [start + i * step for i in range(N)]
+
+
+      # time.perf_counter() : plus precis que time.time(), et insensible
+      # aux ajustements de l'horloge systeme. On n'encadre QUE l'appel
+      # de la fonction, ni l'affichage ni l'import.
+      debut = time.perf_counter()
+      L_test = get_list(10_000, 1)
+      fin = time.perf_counter()
+
+      duree_liste_python = fin - debut
+      print(f"Temps d'execution (liste Python, 10000 points) : "
+            f"{duree_liste_python:.6f} s")
+      \end{verbatim}
+      Ordre de grandeur observé (dépend fortement de la machine) : environ
+      $0{,}0005$ à $0{,}001$ s pour 10 000 points.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Mesurer trop de choses"
+    texte: |
+      Inclure l'affichage (\texttt{print}) ou l'import dans le
+      chronométrage rend la mesure incomparable avec celle de l'exercice
+      suivant : n'encadrer de \texttt{perf\_counter()} que la ligne
+      d'appel de la fonction elle-même.
+  - titre: "Confondre nombre de points et nombre d'intervalles"
+    texte: |
+      Même remède qu'à l'exercice précédent : dessiner un petit exemple
+      pour fixer la formule du pas.
+
+bilan:
+  - titre: "\\texttt{perf\\_counter} plutôt que \\texttt{time}"
+    texte: |
+      \texttt{time.perf\_counter()} est le bon outil pour mesurer un temps
+      d'exécution : plus précis que \texttt{time.time()}, non affecté par
+      un changement d'horloge système.
+
+aller_plus_loin:
+  - niveau: ecole_ingenieur
+    titre: "Mesure répétée avec timeit"
+    texte: |
+      Pour une mesure plus stable, répéter la mesure plusieurs fois et
+      prendre le minimum ou la moyenne :
+      \texttt{timeit.timeit(lambda: get\_list(10\_000, 1), number=100) / 100}.
+
+questions:
+  - id: q1
+    enonce: |
+      Écrire \texttt{get\_list(N, stop, start=0)} en respectant l'ordre de
+      paramètres imposé par l'énoncé.
+    coup_de_pouce: |
+      Le pas se calcule comme à l'exercice précédent : $N$ points, $N-1$
+      intervalles.
+    correction: "step = (stop - start) / (N - 1) ; return [start + i*step for i in range(N)]"
+    solution:
+      - titre: "Implémentation"
+        texte: |
+          \begin{verbatim}
+          def get_list(N, stop, start=0):
+              step = (stop - start) / (N - 1)
+              return [start + i * step for i in range(N)]
+          \end{verbatim}
+          Test rapide : \texttt{get\_list(5, 1)} avec \texttt{start} par
+          défaut (0), et \texttt{get\_list(5, 10, 5)} entre 5 et 10.
+  - id: q2
+    enonce: |
+      Mesurer le temps d'exécution de la génération de 10 000 points
+      entre 0 et 1 avec cette fonction.
+    coup_de_pouce: |
+      Encadrez uniquement l'appel de \texttt{get\_list}, pas
+      l'\texttt{import time} ni le \texttt{print} du résultat.
+    correction: "Environ 0.0005 à 0.001 s pour 10 000 points (ordre de grandeur, dépend de la machine)."
+    solution:
+      - titre: "Mesure"
+        texte: |
+          \begin{verbatim}
+          debut = time.perf_counter()
+          L_test = get_list(10_000, 1)
+          fin = time.perf_counter()
+          duree_liste_python = fin - debut
+          \end{verbatim}
+          La valeur absolue mesurée varie beaucoup d'une machine à
+          l'autre : ce qui compte est l'ordre de grandeur, pour la
+          comparaison avec la version Numpy de l'exercice suivant.
+  - id: q3
+    enonce: |
+      Pourquoi utiliser \texttt{time.perf\_counter()} plutôt que
+      \texttt{time.time()} ?
+    coup_de_pouce: |
+      L'un des deux peut être affecté par une resynchronisation de
+      l'horloge système (ex. NTP) pendant la mesure.
+    correction: "\\texttt{perf\\_counter()} est plus précis et insensible aux ajustements de l'horloge système."
+    solution:
+      - titre: "Réponse"
+        texte: |
+          \texttt{time.time()} renvoie l'heure « murale » du système, qui
+          peut être modifiée pendant l'exécution (synchronisation réseau,
+          changement de fuseau...), ce qui fausserait une mesure de durée.
+          \texttt{time.perf\_counter()} utilise une horloge monotone dédiée
+          aux mesures de performance, avec une meilleure résolution :
+          c'est le choix recommandé pour chronométrer un morceau de code.

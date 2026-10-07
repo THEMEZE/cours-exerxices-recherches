@@ -1,0 +1,169 @@
+id: td2_ex1
+intitule: "Coordonnées cartésiennes et polaires"
+td: td2
+facultatif: false
+seance: 2
+
+cours_rattache:
+  - cinematique.coordonnees_cartesiennes
+  - cinematique.coordonnees_polaires
+  - cinematique.base_polaire
+
+metadonnees:
+  duree_estimee: "20 min"
+  difficulte: 2
+  type_exercice: "Cours actif / Fondamental"
+  indispensable: true
+
+enonce_intro: |
+  On se place dans un plan muni d'un repère cartésien $Oxy$. Un point $M$ du plan peut être repéré soit par
+  ses coordonnées cartésiennes $(x,y)$, soit par ses {\bf coordonnées polaires} $(r,\theta)$ : $r=OM$ est la
+  distance de $M$ à l'origine et $\theta$ est l'angle orienté entre l'axe $Ox$ et le vecteur $\overrightarrow{OM}$.
+
+prerequis:
+  - titre: "Trigonométrie du cercle"
+    texte: |
+      Pour un point du cercle trigonométrique d'angle $\theta$, l'abscisse est $\cos\theta$ et l'ordonnée est $\sin\theta$. Théorème de Pythagore : $\cos^2\theta+\sin^2\theta=1$. Les angles sont définis modulo $2\pi$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Passer d'un système de coordonnées à l'autre"
+    texte: |
+      Savoir écrire sans hésiter les formules de passage cartésien $\leftrightarrow$ polaire, traduire l'équation d'une courbe dans l'autre système, et {\bf choisir le système adapté} à la symétrie du problème.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Rendre les coordonnées polaires familières avant la cinématique"
+    texte: |
+      Exercice court, à faire en début de séance : il installe l'idée qu'un cercle centré en $O$ est « $r=$ cte » et qu'une demi-droite issue de $O$ est « $\theta=$ cte ». La question (d) prépare l'exercice 2 : un mouvement circulaire uniforme est simplement $r=$ cte et $\theta=\omega t$.
+
+point_cours:
+  - titre: "Coordonnées polaires"
+    texte: |
+      $$x=r\cos\theta,\qquad y=r\sin\theta,\qquad r=\sqrt{x^2+y^2}.$$
+      L'angle se déduit de $\cos\theta=x/r$ et $\sin\theta=y/r$ (et non du seul $\tan\theta=y/x$, qui ne distingue pas $\theta$ de $\theta+\pi$). L'origine $O$ ($r=0$) n'a pas d'angle défini.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Utiliser $\\theta=\\arctan(y/x)$ sans regarder le quadrant"
+    texte: |
+      La fonction $\arctan$ renvoie un angle dans $]-\pi/2,\pi/2[$. Pour $M(-1,1)$, $\arctan(-1)=-\pi/4$ alors que $\theta=3\pi/4$ : il faut ajouter $\pi$ quand $x<0$.
+  - titre: "Croire que $x=y$ impose $\\theta=\\pi/4$ pour tout point"
+    texte: |
+      La droite $x=y$ contient aussi les points du troisième quadrant ($\theta=5\pi/4$ avec $r>0$). On écrit donc $\theta=\pi/4\ [\pi]$, ou $\theta=\pi/4$ avec $r$ de signe quelconque.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Faire deviner avant de calculer"
+    texte: |
+      Pour (b) et (c), demander d'abord « quelle quantité reste constante sur la courbe ? » : la distance à $O$ pour le cercle, l'angle pour la droite passant par $O$. L'équation polaire se lit alors sans calcul.
+
+bilan:
+  - titre: "Un cercle : $r=$ cte. Une droite par $O$ : $\\theta=$ cte."
+    texte: |
+      Les formules $x=r\cos\theta$, $y=r\sin\theta$, $r=\sqrt{x^2+y^2}$ permettent de passer d'un système à l'autre. Une courbe simple dans un système peut être compliquée dans l'autre : on choisit les coordonnées polaires quand le problème a une symétrie de rotation autour d'un point. Un mouvement circulaire uniforme s'écrit $r=R$, $\theta=\omega t$.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Autres courbes en polaire"
+    texte: |
+      Tracer les courbes d'équation polaire $r=\theta$ (spirale d'Archimède), $r=2\cos\theta$ (que représente-t-elle en cartésien ? multiplier par $r$ : $x^2+y^2=2x$, un cercle de centre $(1,0)$ passant par $O$) et $r=a(1+\cos\theta)$ (cardioïde, exercice 3).
+  - niveau: master
+    titre: "Élément d'aire et intégrales en polaire"
+    texte: |
+      L'élément d'aire en polaire est $\mathrm dA=r\,\mathrm dr\,\mathrm d\theta$ (le facteur $r$ est le jacobien du changement de variables). L'aire d'un disque de rayon $R$ se calcule en une ligne : $\displaystyle\int_0^{2\pi}\!\!\int_0^R r\,\mathrm dr\,\mathrm d\theta=\pi R^2$. Refaire le calcul en cartésien et constater la différence de difficulté.
+
+accroche_point_cours_essentiel:
+  - titre: "Quel système de coordonnées choisir ?"
+    duree_introduction: "3 à 5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Pour décrire un cercle de rayon 2, on écrit $x^2+y^2=4$ : c'est une équation à résoudre. Mais un radar, lui, repère un avion par sa {\bf distance} et son {\bf direction}, pas par « tant de kilomètres vers l'est et tant vers le nord ». Peut-on décrire ce même cercle en {\bf quatre caractères} ? Et une droite passant par l'origine ?
+    texte: |
+      {\bf Idée clé : on choisit les coordonnées adaptées à la symétrie du problème.} Un point se repère par $(x,y)$ ou par $(r,\theta)$ avec
+      $$x=r\cos\theta,\qquad y=r\sin\theta,\qquad r=\sqrt{x^2+y^2}.$$
+      Pour un problème à symétrie de rotation autour de $O$, $r$ et $\theta$ sont plus naturels : un {\bf cercle centré en $O$} est « $r=$ cte » et une {\bf demi-droite issue de $O$} est « $\theta=$ cte ». C'est ce qui rendra le mouvement circulaire presque trivial dès l'exercice suivant.
+
+outils_mathematiques:
+  - titre: "Pythagore et projections"
+    texte: |
+      Le triangle rectangle de côtés $x$, $y$ et d'hypoténuse $r$ donne $r^2=x^2+y^2$, $\cos\theta=x/r$, $\sin\theta=y/r$. Passer de $(r,\theta)$ à $(x,y)$ revient à {\bf projeter} sur les axes.
+  - titre: "Réciproque de la tangente et quadrant"
+    texte: |
+      $\tan\theta=y/x$ se réécrit $\theta=\arctan(y/x)$ {\bf seulement si} $x>0$. Pour les autres quadrants : $\theta=\arctan(y/x)+\pi$ si $x<0$. Les calculatrices et logiciels proposent la fonction $\operatorname{atan2}(y,x)$ qui gère automatiquement ce cas.
+  - titre: "Périodicité et valeurs remarquables"
+    texte: |
+      $\theta$ est défini modulo $2\pi$. À connaître : $\cos$ et $\sin$ en $0,\ \tfrac\pi6,\ \tfrac\pi4,\ \tfrac\pi3,\ \tfrac\pi2$. Conversion $\pi/6$ rad $=30^\circ$.
+  - titre: "Équation d'une droite par l'origine"
+    texte: |
+      $y=mx$ avec $m=\tan\theta_0$ : en polaire, $\tan\theta=\tan\theta_0$ soit $\theta=\theta_0\ [\pi]$. La pente est la tangente de l'angle.
+  - titre: "Nombres complexes : module et argument"
+    texte: |
+      Avec $z=x+iy=r\,e^{i\theta}$, on a $r=|z|$ et $\theta=\arg z$ : les coordonnées polaires sont la forme trigonométrique d'un complexe. Un cercle centré en $O$ est $|z|=R$.
+
+liens_autres_disciplines:
+  - discipline: "Mathématiques"
+    texte: |
+      Nombres complexes (module, argument), changement de variables dans une intégrale double ($\mathrm dA=r\,\mathrm dr\,\mathrm d\theta$), équations de courbes.
+  - discipline: "Navigation et géographie"
+    texte: |
+      Un pilote ou un marin repère une position par son {\bf cap} (angle) et sa {\bf distance} : c'est un système polaire. La latitude et la longitude sont l'analogue sur la sphère.
+  - discipline: "Radar, sonar, robotique"
+    texte: |
+      Un radar mesure naturellement une distance et un angle de visée ; un robot aspirateur à capteur laser mesure son environnement en polaire avant de le convertir en carte cartésienne.
+  - discipline: "Électromagnétisme"
+    texte: |
+      Le champ d'un fil rectiligne infini a une symétrie de rotation autour du fil : il ne dépend que de la distance $r$ au fil. Même idée : on choisit le système de coordonnées qui épouse la symétrie.
+
+questions:
+  - id: q1
+    enonce: |
+      (a) Rappeler les formules de passage entre coordonnées cartésiennes et coordonnées polaires.
+    coup_de_pouce: |
+      Faites un schéma : le point $M$, ses projections sur $Ox$ et $Oy$, et le triangle rectangle de côtés $x$ et $y$.
+    correction: |
+      $x=r\cos\theta$, $y=r\sin\theta$ ; $r=\sqrt{x^2+y^2}$, $\cos\theta=x/r$, $\sin\theta=y/r$ (soit $\tan\theta=y/x$ avec une discussion sur le quadrant).
+    solution:
+      - titre: "(a) Polaire vers cartésien"
+        texte: |
+          Dans le triangle rectangle formé par $O$, la projection de $M$ sur $Ox$ et $M$, l'hypoténuse vaut $r$ et l'angle en $O$ vaut $\theta$ :
+          $$\boxed{x=r\cos\theta,\qquad y=r\sin\theta}.$$
+      - titre: "(a) Cartésien vers polaire"
+        texte: |
+          Par Pythagore, puis en divisant :
+          $$\boxed{r=\sqrt{x^2+y^2}},\qquad \cos\theta=\frac xr,\qquad \sin\theta=\frac yr,\qquad \tan\theta=\frac yx\ (x\neq0).$$
+          Pour déterminer $\theta$, on regarde le signe de $x$ et de $y$ (quadrant). Exemple : $M(-1,1)$ a pour coordonnées polaires $r=\sqrt2$ et $\theta=3\pi/4$, alors que $\arctan(-1)=-\pi/4$. Pour $M=O$, $r=0$ et $\theta$ est indéterminé.
+
+  - id: q2
+    enonce: |
+      \begin{itemize}
+        \item[(b)] Une courbe a pour équation cartésienne $x^2+y^2=4$. De quelle courbe s'agit-il ? Quelle est son équation en coordonnées polaires ?
+        \item[(c)] Une courbe a pour équation cartésienne $x=y$. De quelle courbe s'agit-il ? Quelle est son équation en coordonnées polaires ?
+      \end{itemize}
+    coup_de_pouce: |
+      Remplacez $x$ et $y$ par $r\cos\theta$ et $r\sin\theta$ et simplifiez. Pour (c), que se passe-t-il quand $r=0$ ?
+    correction: |
+      (b) Cercle de centre $O$ et de rayon $2$ : $r=2$. (c) Droite passant par $O$, de pente $1$ : $\theta=\pi/4\ [\pi]$.
+    solution:
+      - titre: "(b) Cercle"
+        texte: |
+          $x^2+y^2=r^2(\cos^2\theta+\sin^2\theta)=r^2$, donc l'équation devient $r^2=4$, soit $\boxed{r=2}$ (avec $r\geq0$), $\theta$ quelconque. C'est un {\bf cercle de centre $O$ et de rayon $2$}.
+      - titre: "(c) Droite"
+        texte: |
+          $x=y\iff r\cos\theta=r\sin\theta\iff r(\cos\theta-\sin\theta)=0$. Soit $r=0$ (l'origine, qui appartient à la droite), soit $\tan\theta=1$, c'est-à-dire
+          $$\boxed{\theta=\frac\pi4\ [\pi]}.$$
+          C'est la {\bf droite passant par $O$ de pente $1$}, première bissectrice des axes : la demi-droite $\theta=\pi/4$ ($r>0$) dans le premier quadrant, et la demi-droite $\theta=5\pi/4$ ($r>0$) dans le troisième. On peut aussi écrire $\theta=\pi/4$ en autorisant $r<0$.
+      - titre: "Bilan comparatif"
+        texte: |
+          Le cercle centré en $O$ est « $r=$ constante » ($\theta$ libre) ; la droite passant par $O$ est « $\theta=$ constante » ($r$ libre). Les rôles sont symétriques.
+
+  - id: q3
+    enonce: |
+      (d) En coordonnées polaires, $M$ a pour équations horaires $r(t)=3$ et $\theta(t)=\dfrac\pi6\,t$ (unités S.I.). Quelle est sa trajectoire ? Déterminer les équations horaires de $M$ en coordonnées cartésiennes.
+    coup_de_pouce: |
+      $r$ est constant : quelle courbe obtient-on ? Reportez ensuite $r$ et $\theta(t)$ dans $x=r\cos\theta$ et $y=r\sin\theta$.
+    correction: |
+      Cercle de centre $O$ et de rayon $3$ m, parcouru à vitesse angulaire constante $\omega=\pi/6$ rad/s (période $12$ s). $x(t)=3\cos(\pi t/6)$ et $y(t)=3\sin(\pi t/6)$.
+    solution:
+      - titre: "(d) Trajectoire"
+        texte: |
+          La distance à l'origine reste égale à $3$ m : la trajectoire est le {\bf cercle de centre $O$ et de rayon $3$ m}. L'angle $\theta(t)=\frac\pi6 t$ croît linéairement : le cercle est parcouru à vitesse angulaire constante $\omega=\pi/6$ rad/s, dans le sens trigonométrique, avec la période $T=2\pi/\omega=12$ s.
+      - titre: "(d) Équations horaires cartésiennes"
+        texte: |
+          $$\boxed{x(t)=3\cos\!\left(\frac{\pi t}{6}\right)},\qquad \boxed{y(t)=3\sin\!\left(\frac{\pi t}{6}\right)}.$$
+          Vérification : $x^2+y^2=9$. Quelques positions : $t=0$ en $(3,0)$ ; $t=3$ s en $(0,3)$ ; $t=6$ s en $(-3,0)$ ; $t=12$ s de retour en $(3,0)$. On retrouve exactement la structure de l'exercice du TD1 sur le mouvement circulaire en base cartésienne, mais écrite ici en deux lignes en polaire : $r=3$, $\theta=\omega t$.

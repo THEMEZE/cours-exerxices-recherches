@@ -15,7 +15,17 @@ metadonnees:
   indispensable: true
 
 enonce_intro: |
-  On étudie le mouvement à deux dimensions d'un projectile lancé horizontalement dans le champ de pesanteur terrestre uniformément réparti. L'axe $(Ox)$ est horizontal, dirigé vers la droite, et l'axe $(Oy)$ est vertical, dirigé vers le haut. La durée entre deux points consécutifs enregistrés est notée $\tau$.
+  On étudie le mouvement à deux dimensions d'un projectile lancé horizontalement dans le champ de pesanteur terrestre uniformément réparti. L'axe $(Ox)$ est horizontal, dirigé vers la droite, et l'axe $(Oy)$ est vertical, dirigé vers le haut. La durée entre deux points consécutifs enregistrés est notée $\tau = \frac{1}{20}s $.
+
+figure:
+
+  - ref: td4_ex1_PhV110_enonce
+    legende: |
+      {}
+    # scale: 0.7
+    width: 0.8
+    # height: 4cm       # les deux ensemble : la figure est étirée pour tenir exactement dans ce cadre
+    label:
 
 prerequis:
   - titre: "Vecteur position, vitesse et accélération"
@@ -67,49 +77,254 @@ aller_plus_loin:
       Étude de la déviation de la trajectoire parabolique en présence d'une force de frottement quadratique $\vec{f} = -k v \vec{v}$.
 
 questions:
+  - id: q1_intro
+    enonce: |
+      {\bf Construction de vecteurs.}  (graphique page suivante)
+
+    
+
+    is_intro_only: true 
+
   - id: q1_a
     parent: "1"
     enonce: |
-      Exprimer les vecteurs position $\vec{OM}(t_2)$, $\vec{OM}(t_5)$ et $\vec{OM}(t_7)$ dans la base cartésienne $(\vec{u}_x, \vec{u}_y)$.
+      Tracer le vecteur position $\overrightarrow{OM}(t)$ aux instants $t_2$ ; $t_5$ et $t_7$. 
     solution:
       - titre: "Expressions des vecteurs position"
         texte: |
-          * $\vec{OM}(t_2) = x_2 \vec{u}_x + y_2 \vec{u}_y$
-          * $\vec{OM}(t_5) = x_5 \vec{u}_x + y_5 \vec{u}_y$
-          * $\vec{OM}(t_7) = x_7 \vec{u}_x + y_7 \vec{u}_y$
+          \begin{itemize}
+            \item $\overrightarrow{OM}(t_i) = \overrightarrow{OM}_i$
+            \item $\overrightarrow{OM}(t_2) = \overrightarrow{OM}_2$
+            \item $\overrightarrow{OM}(t_5) = \overrightarrow{OM}_5$
+            \item $\overrightarrow{OM}(t_7) = \overrightarrow{OM}_7$
+          \end{itemize}
+
+        figure:
+
+          - ref: td4_ex1_1a_PhV110
+            legende: |
+              {}
+            # scale: 0.7
+            width: 0.8
+            # height: 4cm       # les deux ensemble : la figure est étirée pour tenir exactement dans ce cadre
+            label:
 
   - id: q1_b
     parent: "1"
     enonce: |
-      Exprimer le vecteur déplacement $\Delta\vec{OM}_{5\to 7}$ entre les instants $t_5$ et $t_7$, puis donner la formule de sa norme.
+      Exprimer le vecteur déplacement $\Delta\overrightarrow{OM}{(t_{5\to7})}$ entre les instants $t_5$ et $t_7$, puis le tracer. À l’aide de l’échelle fournie, mesurer puis donner la norme de ce vecteur en taille réelle.
     solution:
       - titre: "Vecteur déplacement"
         texte: |
-          Le vecteur déplacement s'écrit $\Delta\vec{OM}_{5\to 7} = \vec{OM}(t_7) - \vec{OM}(t_5) = \vec{M_5 M_7}$.
-          Sa norme s'exprime par :
-          $$\|\Delta\vec{OM}_{5\to 7}\| = \sqrt{(x_7 - x_5)^2 + (y_7 - y_5)^2}$$
+          Le vecteur déplacement s'écrit $\Delta\overrightarrow{OM}{(t_{5\to 7})} = \overrightarrow{OM}(t_7) - \overrightarrow{OM}(t_5) = \overrightarrow{OM}_7 - \overrightarrow{OM}_5 = \overrightarrow{M_5 M_7}$.
+          %Sa norme s'exprime par :$$\|\Delta\vec{OM}_{5\to 7}\| = \sqrt{(x_7 - x_5)^2 + (y_7 - y_5)^2}$$
+
+          Sur le graphique \ref{td4_ex1_1b_PhV110}, la norme $\left\|\Delta\overrightarrow{OM}{(t_{5\to7})}\right\|$ correspond à $0{,}42$ unité graphique. 
+          
+          Or, l’échelle indique que $0{,}2$ unité graphique correspond à $20~\mathrm{cm}$. Ainsi, dans la réalité : $$ \left\|\Delta\overrightarrow{OM}{(t_{5\to7})}\right\| = 0{,}42 \times \frac{20~\mathrm{cm}}{0{,}2} = 42~\mathrm{cm}. $$ 
+          
+          La norme du vecteur déplacement est donc de $\boxed{42~\mathrm{cm}}$.
+
+        figure:
+
+          - ref: td4_ex1_1b_PhV110
+            legende: |
+              Déplacement du point matériel entre les positions $M_5$ et $M_7$.
+            # scale: 0.7
+            width: 0.8
+            # height: 4cm       # les deux ensemble : la figure est étirée pour tenir exactement dans ce cadre
+            label: fig.td4_ex1_1b_PhV110
 
   - id: q1_c
     parent: "1"
+
     enonce: |
-      Définir le vecteur vitesse instantanée $\vec{v}(t)$ puis donner l'approximation de $\vec{v}_6$ au point $M_6$ à l'aide des points environnants.
-    solution:
-      - titre: "Vecteur vitesse en t6"
+      Rappeler la définition du vecteur vitesse $\vec{v}(t)$ à partir du vecteur déplacement $\Delta\overrightarrow{OM}$ et de la durée $\Delta t$.
+      Déterminer le vecteur vitesse à l’instant $t_6$, calculer sa norme, puis le tracer en utilisant l’échelle prévue pour les vitesses.
+      Par lecture graphique, déterminer les composantes du vecteur $\vec{v}_6$.
+
+    attention:
+      - titre: "Vecteur vitesse en $t_6$"
         texte: |
-          Par définition : $\vec{v}(t) = \frac{\mathrm{d}\vec{OM}}{\mathrm{d}t}$.
-          Approximation au point $M_6$ ($\Delta t = 2\tau$) :
-          $$\vec{v}_6 \approx \frac{\vec{M_5 M_7}}{2\tau}$$
-          Composantes : $v_{6,x} = \frac{x_7 - x_5}{2\tau}$, $v_{6,y} = \frac{y_7 - y_5}{2\tau}$ et $\|\vec{v}_6\| = \sqrt{v_{6,x}^2 + v_{6,y}^2}$.
+          Dans le TD 3, nous avons utilisé la définition approchée du vecteur vitesse :
+          $$\vec{v}(t_i)\simeq\frac{\overrightarrow{OM}(t_{i+1})-\overrightarrow{OM}(t_i)}{t_{i+1}-t_i}.$$
+
+          Ici, pour obtenir une meilleure précision graphique, nous utiliserons une différence centrée :
+          $$\vec{v}(t_i)\simeq\frac{\overrightarrow{OM}(t_{i+1})-\overrightarrow{OM}(t_{i-1})}{t_{i+1}-t_{i-1}}.$$
+
+          Lorsque $\Delta t$ devient très petit, ces deux expressions tendent vers la même limite, qui est la définition du vecteur vitesse instantanée :
+          $$\vec{v}(t_i)=\lim_{\Delta t\to 0}\frac{\Delta\overrightarrow{OM}}{\Delta t}.$$
+
+          La raison pour laquelle la différence centrée permet généralement une meilleure approximation sera étudiée plus précisément en mathématiques à l’aide des développements limités.
+
+    aller_plus_loin:
+      - niveau: licence
+        titre: "Pourquoi la différence centrée est-elle plus précise ?"
+        texte: |
+          Soit $f$ une fonction suffisamment régulière, $x\in\mathbb{R}$ et $h$ un réel suffisamment petit.Les développements limités de $f$ au voisinage de $x$ donnent :
+          $$f(x+h)=f(x)+f'(x)h+\frac{f''(x)}{2}h^2+o(h^2),$$
+          et
+          $$f(x-h)=f(x)-f'(x)h+\frac{f''(x)}{2}h^2+o(h^2).$$
+
+          Pour la différence vers l’avant, on obtient :
+          $$f(x+h)-f(x)=f'(x)h+\frac{f''(x)}{2}h^2+o(h^2),$$
+          donc
+          $$\frac{f(x+h)-f(x)}{h}=f'(x)+\frac{f''(x)}{2}h+o(h).$$
+
+          L’erreur est donc de l’ordre de $h$.
+
+          Pour la différence centrée :
+          $$f(x+h)-f(x-h)=2f'(x)h+o(h^2),$$
+          d’où
+          $$\frac{f(x+h)-f(x-h)}{2h}=f'(x)+o(h).$$
+
+          En conservant les termes suivants du développement limité, on montre que l’erreur de la différence centrée est en fait de l’ordre de $h^2$, contre une erreur de l’ordre de $h$ pour la différence vers l’avant.
+          La différence centrée fournit donc une approximation plus précise de la dérivée lorsque $h$ est petit.
+
+    solution:
+      - titre: "Vecteur vitesse en $t_6$"
+        texte: |
+          Pour déterminer le vecteur vitesse à l’instant $t_i$, nous utilisons la différence centrée :
+          $$\vec{v}(t_i)\simeq\frac{\Delta\overrightarrow{OM}{(t_{i-1\to i+1})}}{\Delta t_{i-1\to i+1}}.$$
+
+          Avec :
+          $$\Delta\overrightarrow{OM}{(t_{i-1\to i+1})}=\overrightarrow{OM}(t_{i+1})-\overrightarrow{OM}(t_{i-1})=\overrightarrow{M_{i-1}M_{i+1}},$$
+          et
+          $$\Delta t_{i-1\to i+1}=t_{i+1}-t_{i-1} = 2 \tau = \frac{2}{20}s = \frac{1}{10}s.$$
+
+          Pour $i=6$, on obtient donc :
+          $$\boxed{\vec{v}_6 \equiv \vec{v}(t_6) \simeq \frac{\Delta\overrightarrow{OM}{(t_{5\to 7})}}{t_7-t_5} = \frac{\overrightarrow{M_5M_7}}{2\tau}}.$$
+
+        
+
+      - titre: "Trassage du vecteur vitesse en $t_6$"
+        texte: |
+          
+
+          La norme de $\vec{v}_6$ est :
+          $$\boxed{ v_6 \equiv \Vert \vec{v}_6 \Vert \simeq  \left \Vert \frac{\Delta\overrightarrow{OM}{(t_{5\to 7})}}{2 \tau}  \right \Vert = \frac{\Vert \Delta\overrightarrow{OM}{(t_{5\to 7})}\Vert}{2 \tau } = \frac{42~ cm}{1/10 ~s }= 4,2 ~m \cdot s^{-1}}$$
+
+          D’après l’échelle de vitesse du graphique, $2~m\cdot s^{-1}$ correspondent à $0{,}2$ unité graphique. Ainsi, une vitesse de $4{,}2~m\cdot s^{-1}$ correspond à une longueur de
+          $$4{,}2\times\frac{0{,}2}{2}=0{,}42$$unité sur le graphique.\\
+
+          Le vecteur vitesse $\vec{v}(t_i)$ a la même direction et le même sens que le vecteur déplacement $\Delta\overrightarrow{OM}(t_{i-1\to i+1})$. Ainsi, pour $i=6$, le vecteur $\vec{v}_6$ a la même direction et le même sens que $\overrightarrow{M_5M_7}$.\\
+
+          Pour des raisons de lisibilité, notamment pour faciliter la correction, on choisit de représenter le vecteur $\vec{v}_6$ à partir du point $M_6$. Le point d’application d’un vecteur libre peut en effet être choisi arbitrairement, à condition de conserver sa direction, son sens et sa norme.\\
+
+          On part donc de $M_6$ et on trace le vecteur dans la direction et le sens de $\overrightarrow{M_5M_7}$, avec une longueur de $0{,}42$ unité graphique.On obtient ainsi le vecteur vitesse $\vec{v}_6$.
+
+          %Par définition : $\vec{v}(t) = \frac{\mathrm{d}\vec{OM}}{\mathrm{d}t}$.
+          %Approximation au point $M_6$ ($\Delta t = 2\tau$) :
+          %$$\vec{v}_6 \approx \frac{\vec{M_5 M_7}}{2\tau}$$
+          %Composantes : $v_{6,x} = \frac{x_7 - x_5}{2\tau}$, $v_{6,y} = \frac{y_7 - y_5}{2\tau}$ et $\|\vec{v}_6\| = \sqrt{v_{6,x}^2 + v_{6,y}^2}$.
+
+        figure:
+
+          - ref: td4_ex1_1c1_PhV110
+            legende: |
+              $\vec{v}(t_6)$
+            # scale: 0.7
+            width: 0.8
+            # height: 4cm       # les deux ensemble : la figure est étirée pour tenir exactement dans ce cadre
+            label: fig.td4_ex1_1c1_PhV110
+
+      - titre: "Composante du vecteur vitesse en $t_6$"
+        texte: |
+          
+          Le vecteur $\vec{v}(t_6)$ se cécompose en 
+          $$ \vec{v}(t_6) = v_x(t_6) \vec{u}_x + v_y(t_6) \vec{u}_y.$$
+          Sa projection sur l'axe $\vec{u}_x$ nous donne $v_x(t_6)$ et ce lui sur l'axe $\vec{u}_y$ nous done $v_y(t_6)$.
+
+          Ici sur le grapgique on trouve que ces projection corespondent à 
+          $$v_x(t_6)= 0{,}3 \text{ unité}\, \& \, v_y(t_6)= - 0{,}29 \text{ unité},$$
+          soit (en multiplient par $\frac{2 \, m\cdot s^{-1}}{2\text{  unité}}$) , dans la réalité 
+          $$v_x(t_6) = 3\, m\cdot s^{-1} \, \& \, v_y(t_6)= - 2.9\, m\cdot s^{-1}.$$
+          
+
+        figure:
+
+          - ref: td4_ex1_1c2_PhV110
+            legende: |
+              $\vec{v}(t_6)$
+            # scale: 0.7
+            width: 0.8
+            # height: 4cm       # les deux ensemble : la figure est étirée pour tenir exactement dans ce cadre
+            label: fig.td4_ex1_1c2_PhV110
 
   - id: q1_d
     parent: "1"
     enonce: |
-      Exprimer de même les approximations des vecteurs vitesse aux instants $t_8$ et $t_{10}$.
+      Procéder de la même manière pour déterminer et tracer les vecteurs vitesses $\vec{v}(t)$ aux instants $t_8$ et $t_{10}$. Par lecture graphique, déterminer les composantes des vecteurs $\vec{v}(t_8)$ et $\vec{v}(t_{10})$.
+
     solution:
-      - titre: "Vecteurs vitesse v8 et v10"
+
+      - titre: |
+         Vecteurs vitesse $\vec{v}(t_8)$ et $\vec{v}(t_{10})$
         texte: |
-          * En $t_8$ : $\vec{v}_8 \approx \frac{\vec{M_7 M_9}}{2\tau}$, d'où $v_{8,x} = \frac{x_9 - x_7}{2\tau}$ et $v_{8,y} = \frac{y_9 - y_7}{2\tau}$.
-          * En $t_{10}$ : $\vec{v}_{10} \approx \frac{\vec{M_9 M_{11}}}{2\tau}$, d'où $v_{10,x} = \frac{x_{11} - x_9}{2\tau}$ et $v_{10,y} = \frac{y_{11} - y_9}{2\tau}$.
+          On trace les vecteurs déplacement correspondant aux différences centrées en $t_8$ et $t_{10}$ :
+
+          $$\Delta\overrightarrow{OM}(t_{7\to9})\quad\text{et}\quad\Delta\overrightarrow{OM}(t_{9\to11}).$$
+
+          Leurs normes sont :
+
+          $$\left\Vert\Delta\overrightarrow{OM}(t_{7\to9})\right\Vert= 0{,}49~\text{unité}= 49~\text{cm},$$
+
+          et
+
+          $$\left\Vert\Delta\overrightarrow{OM}(t_{9\to11})\right\Vert= 0{,}57~\text{unité}= 57~\text{cm}.$$
+
+          Les normes des vecteurs vitesses sont alors :
+
+          $$\left\Vert\vec{v}_8\right\Vert\simeq\frac{\left\Vert\Delta\overrightarrow{OM}(t_{7\to9})\right\Vert}{2\tau}=\frac{49~\text{cm}}{1/10~\text{s}}=4{,}9~\text{m}\cdot\text{s}^{-1},$$
+
+          et
+
+          $$\left\Vert\vec{v}_{10}\right\Vert\simeq\frac{\left\Vert\Delta\overrightarrow{OM}(t_{9\to11})\right\Vert}{2\tau}=\frac{57~\text{cm}}{1/10~\text{s}}=5{,}7~\text{m}\cdot\text{s}^{-1}.$$
+
+          D’après l’échelle du graphique, $2~\text{m}\cdot\text{s}^{-1}$ correspondent à $0{,}2$ unité graphique. Les longueurs des vecteurs vitesses à représenter sont donc :
+
+          $$\left\Vert\vec{v}_8\right\Vert=4{,}9\times\frac{0{,}2}{2}=0{,}49~\text{unité},$$
+
+          et
+
+          $$\left\Vert\vec{v}_{10}\right\Vert=5{,}7\times\frac{0{,}2}{2}=0{,}57~\text{unité}.$$
+
+          Pour tracer $\vec{v}_8$, on part du point $M_8$ et on trace un vecteur dans la même direction et le même sens que $\overrightarrow{M_7M_9}$, avec une longueur de $0{,}49$ unité graphique.
+
+          De même, pour tracer $\vec{v}{t_10}$, on part du point $M_{10}$ et on trace un vecteur dans la même direction et le même sens que $\overrightarrow{M_9M_{11}}$, avec une longueur de $0{,}57$ unité graphique.
+
+
+        figure:
+
+          - ref: td4_ex1_1d1_PhV110
+            legende: |
+              $\vec{v}(t_6)$
+            # scale: 0.7
+            width: 0.8
+            # height: 4cm       # les deux ensemble : la figure est étirée pour tenir exactement dans ce cadre
+            label: fig.td4_ex1_1d1_PhV110
+
+      - titre: |
+         Vecteurs vitesse $\vec{v}(t_8)$ et $\vec{v}(t_{10})$
+        texte: |
+          $$ \vec{v}(t_8) = v_{x}(t_8) \vec{u}_x + v_{y}(t_8) \vec{u}_y $$
+          avec 
+          $$v_x(t_8)= 0{,}3 \text{ unité} = 3\, m \cdot s^{-1} \, \& v_y(t_8)= -0{,}39 \text{ unité} = -3.9\, m \cdot s^{-1}.$$
+          $$ \vec{v}(t_{10}) = v_{x}(t_{10}) \vec{u}_x + v_{y}(t_{10}) \vec{u}_y $$
+          avec 
+          $$v_x(t_{10})= 0{,}3 \text{ unité} = 3\, m \cdot s^{-1} \, \& v_y(t_{10})= -0{,}49 \text{ unité} =- 4.9\, m \cdot s^{-1}.$$
+
+
+
+        figure:
+
+          - ref: td4_ex1_1d2_PhV110
+            legende: |
+              $ $
+            # scale: 0.7
+            width: 0.8
+            # height: 4cm       # les deux ensemble : la figure est étirée pour tenir exactement dans ce cadre
+            label: fig.td4_ex1_1d2_PhV110
 
   - id: q1_e
     parent: "1"
@@ -118,8 +333,34 @@ questions:
     solution:
       - titre: "Accélération en t9"
         texte: |
-          $$\vec{a}_9 \approx \frac{\vec{v}_{10} - \vec{v}_8}{2\tau}$$
+          $$\vec{a}_9 = \vec{a}(t_9) \approx \frac{\vec{v}(t_{10}) - \vec{v}(t_8)}{t_{10} - t_8}\frac{\vec{v}_{10} - \vec{v}_8}{2\tau}$$
+
+          Depuis le point $M_9$ (par exemple tracez le vecteur $\vec{v}_{10} - \vec{v}_8$ et mesuer la norme de ce vecteur en unité grafique puis convertissez un unité réel.
+
+          Or 
+          $$\Vert  \vec{a}_9 \Vert = \frac{\Vert (\vec{v}_{10} - \vec{v}_8) \Vert }{2\tau}$$
+          
+          Et $\vec{a}_9$ est colinéraire et dans le meme sens que $\vec{v}_{10} - \vec{v}_8$.
+
+          Donc avec avec sa norme est sa direction on devrais trouver : 
+
           En unités S.I., la bille est en chute libre : $\vec{a}_9 \approx -9{,}81 \vec{u}_y\text{ m}\cdot\text{s}^{-2}$.
+
+        figure:
+
+          - ref: td4_ex1_1e_PhV110
+            legende: |
+              $ $
+            # scale: 0.7
+            width: 0.8
+            # height: 4cm       # les deux ensemble : la figure est étirée pour tenir exactement dans ce cadre
+            label: fig.td4_ex1_1e_PhV110
+
+  - id: q2_intro
+    enonce: |
+      {\bf Construction de vecteurs.}  (graphique page suivante)
+
+    is_intro_only: true 
 
   - id: q2_a
     parent: "2"
@@ -128,10 +369,24 @@ questions:
     solution:
       - titre: "Tableau de mesures"
         texte: |
-          * $t = 0{,}05\text{ s}$ : $x = 0{,}10\text{ m}$, $v_x = 2{,}0\text{ m/s}$, $y = -0{,}012\text{ m}$, $v_y = -0{,}49\text{ m/s}$
-          * $t = 0{,}10\text{ s}$ : $x = 0{,}20\text{ m}$, $v_x = 2{,}0\text{ m/s}$, $y = -0{,}049\text{ m}$, $v_y = -0{,}98\text{ m/s}$
-          * $t = 0{,}20\text{ s}$ : $x = 0{,}40\text{ m}$, $v_x = 2{,}0\text{ m/s}$, $y = -0{,}196\text{ m}$, $v_y = -1{,}96\text{ m/s}$
-          * $t = 0{,}30\text{ s}$ : $x = 0{,}60\text{ m}$, $v_x = 2{,}0\text{ m/s}$, $y = -0{,}441\text{ m}$, $v_y = -2{,}94\text{ m/s}$
+
+          $$
+          \begin{array}{c||ccccccccccccc}
+          t ~{(\text{en } s)} & \frac{1}{20} & \frac{2}{20} = \frac{1}{10} & \frac{3}{20} & \frac{4}{20} =  \frac{1}{5} & \frac{5}{20} = \frac{1}{4} & \frac{6}{20} = \frac{3}{10} & \frac{7}{20} & \frac{8}{20} = \frac{2}{5} & \frac{9}{20} & \frac{10}{20} = \frac{1}{2} & \frac{11}{20} & \frac{12}{20} = \frac{3}{5} & \frac{13}{20} \\
+          \hline
+          \hline
+          x ~{(\text{en } m)} & 0.15 & 0.3 & 0.45 & 0.6 & 0.75 & 0.9 & 1.05 & 1.2 & 1.35 & 1.50 & 1.65 & 1.8 & 1.95 \\
+          v_x ~{(\text{en } m\cdot s^{-1}} & X & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 3 &  X \\
+          \hline 
+          \hline
+          y ~{(\text{en } m)} & -0.01 & -0.05 & -0.11 & -0.2 & -0.3 & -0.45 & -0.6 & -0.7& -1.0 & -1.22 & -1.5 & -1.76 & -2.1 \\
+          v_x ~{(\text{en } m\cdot s^{-1}} & X & -1.00 & -1.5 & -1.96 & -2.5 & -2.95 & -3.4 & -3.9 & -4.4 & -4.9 & -5.4 & -5.9 &  -6.4 \\
+          \end{array}
+          $$
+          %* $t = 0{,}05\text{ s}$ : $x = 0{,}10\text{ m}$, $v_x = 2{,}0\text{ m/s}$, $y = -0{,}012\text{ m}$, $v_y = -0{,}49\text{ m/s}$
+          %* $t = 0{,}10\text{ s}$ : $x = 0{,}20\text{ m}$, $v_x = 2{,}0\text{ m/s}$, $y = -0{,}049\text{ m}$, $v_y = -0{,}98\text{ m/s}$
+          %* $t = 0{,}20\text{ s}$ : $x = 0{,}40\text{ m}$, $v_x = 2{,}0\text{ m/s}$, $y = -0{,}196\text{ m}$, $v_y = -1{,}96\text{ m/s}$
+          %* $t = 0{,}30\text{ s}$ : $x = 0{,}60\text{ m}$, $v_x = 2{,}0\text{ m/s}$, $y = -0{,}441\text{ m}$, $v_y = -2{,}94\text{ m/s}$
 
   - id: q2_b
     parent: "2"
@@ -140,9 +395,13 @@ questions:
     solution:
       - titre: "Vecteurs position calculés"
         texte: |
-          * $\vec{OM}(t_5) = 0{,}50 \vec{u}_x - 0{,}306 \vec{u}_y\text{ (m)}$
-          * $\vec{OM}(t_7) = 0{,}70 \vec{u}_x - 0{,}601 \vec{u}_y\text{ (m)}$
-          * $\vec{OM}(t_9) = 0{,}90 \vec{u}_x - 0{,}993 \vec{u}_y\text{ (m)}$
+          $$ \overrightarrow{OM}(t) = x(t) \vec{u}_x + y(t) \vec{u}_y $$
+          $$ \overrightarrow{OM}(t_5) = \overbrace{0.75~m}^{x(t_5)} \vec{u}_x + \overbrace{-0.3~m}^{y(t_5)} \vec{u}_y $$
+          $$ \overrightarrow{OM}(t_7) = \overbrace{1.05~m}^{x(t_7)} \vec{u}_x + \overbrace{-0.6~m}^{y(t_7)} \vec{u}_y $$
+          $$ \overrightarrow{OM}(t_9) = \overbrace{1.35~m}^{x(t_5)} \vec{u}_x + \overbrace{-1.0~m}^{y(t_9)} \vec{u}_y $$
+          %* $\vec{OM}(t_5) = 0{,}50 \vec{u}_x - 0{,}306 \vec{u}_y\text{ (m)}$
+          %* $\vec{OM}(t_7) = 0{,}70 \vec{u}_x - 0{,}601 \vec{u}_y\text{ (m)}$
+          %* $\vec{OM}(t_9) = 0{,}90 \vec{u}_x - 0{,}993 \vec{u}_y\text{ (m)}$
 
   - id: q2_c
     parent: "2"
@@ -151,9 +410,14 @@ questions:
     solution:
       - titre: "Vitesses analytiques"
         texte: |
-          $v_x(t) = \frac{\mathrm{d}x}{\mathrm{d}t} = 2{,}0\text{ m}\cdot\text{s}^{-1}$ et $v_y(t) = \frac{\mathrm{d}y}{\mathrm{d}t} = -g t = -9{,}81 t\text{ m}\cdot\text{s}^{-1}$.
-          * En $t_6 = 0{,}30\text{ s}$ : $v_x = 2{,}0\text{ m/s}$, $v_y = -2{,}94\text{ m/s}$.
-          * En $t_8 = 0{,}40\text{ s}$ : $v_x = 2{,}0\text{ m/s}$, $v_y = -3{,}92\text{ m/s}$.
+          $$ \vec{v}(t_i) \approx  \overbrace{\frac{x(t_{i+1}) - x(t_{i-1})}{t_{i+1} - t_{i-1}}}^{ \approx v_x(t_i)} \vec{u}_x + \overbrace{\frac{y(t_{i+1}) - y(t_{i-1})}{t_{i+1} - t_{i-1}}}^{ \approx v_y(t_i)} \vec{u}_y $$
+          $$ \vec{v}(t_6) \approx  \overbrace{\frac{x(t_{7}) - x(t_{5})}{t_{7} - t_{5}}}^{ \approx 3  m\cdot s^{-1}} \vec{u}_x + \overbrace{\frac{y(t_{7}) - y(t_{5})}{t_{7} - t_{5}}}^{ \approx - 2.95 \, m \cdot s^{-1} } \vec{u}_y $$ 
+          $$ \vec{v}(t_8) \approx  \overbrace{\frac{x(t_{9}) - x(t_{7})}{t_{9} - t_{7}}}^{ \approx 3  m\cdot s^{-1}} \vec{u}_x + \overbrace{\frac{y(t_{9}) - y(t_{7})}{t_{9} - t_{7}}}^{ \approx -3.9 \, m \cdot s^{-1} } \vec{u}_y $$ 
+
+          On a des valeurs très similaires et même idetique obtenue graphiquement en question 1.
+          %$v_x(t) = \frac{\mathrm{d}x}{\mathrm{d}t} = 2{,}0\text{ m}\cdot\text{s}^{-1}$ et $v_y(t) = \frac{\mathrm{d}y}{\mathrm{d}t} = -g t = -9{,}81 t\text{ m}\cdot\text{s}^{-1}$.
+          %* En $t_6 = 0{,}30\text{ s}$ : $v_x = 2{,}0\text{ m/s}$, $v_y = -2{,}94\text{ m/s}$.
+          %* En $t_8 = 0{,}40\text{ s}$ : $v_x = 2{,}0\text{ m/s}$, $v_y = -3{,}92\text{ m/s}$.
 
   - id: q2_d
     parent: "2"
@@ -162,9 +426,17 @@ questions:
     solution:
       - titre: "Accélération analytique"
         texte: |
-          $a_x = \frac{\mathrm{d}v_x}{\mathrm{d}t} = 0\text{ m}\cdot\text{s}^{-2}$ et $a_y = \frac{\mathrm{d}v_y}{\mathrm{d}t} = -9{,}81\text{ m}\cdot\text{s}^{-2}$.
-          $$\vec{a}(t_7) = -9{,}81 \vec{u}_y\text{ m}\cdot\text{s}^{-2}$$
+          $$ \vec{a}(t_i) \approx  \overbrace{\frac{v_x(t_{i+1}) - v_x(t_{i-1})}{t_{i+1} - t_{i-1}}}^{ \approx a_x(t_i)} \vec{u}_x + \overbrace{\frac{v_y(t_{i+1}) - v_y(t_{i-1})}{t_{i+1} - t_{i-1}}}^{ \approx a_y(t_i)} \vec{u}_y $$
+          $$ \vec{a}(t_7) =  \overbrace{\frac{v_x(t_{8}) - v_x(t_{6})}{t_{8} - t_{6}}}^{ \approx 0  m\cdot s^{-2}} \vec{u}_x + \overbrace{\frac{v_y(t_{8}) - v_y(t_{6})}{t_{8} - t_{6}}}^{ \approx - 9.5 \, m \cdot s^{-2} } \vec{u}_y $$ 
 
+          %$a_x = \frac{\mathrm{d}v_x}{\mathrm{d}t} = 0\text{ m}\cdot\text{s}^{-2}$ et $a_y = \frac{\mathrm{d}v_y}{\mathrm{d}t} = -9{,}81\text{ m}\cdot\text{s}^{-2}$.
+          %$$\vec{a}(t_7) = -9{,}81 \vec{u}_y\text{ m}\cdot\text{s}^{-2}$$
+
+  - id: q3_intro
+    enonce: |
+      {\bf Application.} 
+
+    is_intro_only: true 
   - id: q3_a
     parent: "3"
     enonce: |
@@ -174,14 +446,159 @@ questions:
         texte: |
           Oui, les deux billes touchent le sol exactement au même instant. Le mouvement vertical est totalement indépendant du mouvement horizontal : les deux billes sont soumises à la même accélération $a_y = -g$ avec une vitesse initiale verticale $v_{0y} = 0$.
 
+          On choisit un repère $(O,x,y)$ avec l'axe $y$ vertical orienté vers le haut. Les deux billes partent de la même hauteur $h$ à l'instant $t=0$.
+
+          \begin{itemize}[label = $\bullet$]
+
+            \item {\bf Bille A :} lâchée sans vitesse initiale.
+
+            Selon $x$ :
+            $$x_A(t)=0$$
+
+            Selon $y$ :
+            $$y_A(t)=h-\frac{1}{2}gt^2$$
+
+            \item  {\bf Bille B :} lancée horizontalement avec une vitesse initiale $v_0$.
+
+            Selon $x$ :
+            $$x_B(t)=v_0t$$
+
+            Selon $y$ :
+            $$y_B(t)=h-\frac{1}{2}gt^2$$
+
+            Les deux billes ont donc la même équation horaire selon $y$. Elles ont la même position verticale à chaque instant et atteignent le sol simultanément. Leur mouvement horizontal ne modifie pas leur chute verticale.
+
+          \end{itemize}
+
+        figure:
+          - ref: td4_ex1_3a_PhV110
+            legende: |
+              $ $
+            # scale: 0.7
+            width: 0.8
+            # height: 4cm       # les deux ensemble : la figure est étirée pour tenir exactement dans ce cadre
+            label: fig.td4_ex1_3a_PhV110
+
+  - id: q3_b
+    parent: "3"
+    enonce: |
+      On considère deux billes A et B, de même masse, dans un champ de pesanteur uniforme. À l'instant initial, la bille B est immobile et se trouve à 2 m horizontalement et 2 m verticalement de la bille A. La bille A est lancée avec une vitesse initiale dirigée vers la position initiale de B.
+
+      On néglige les frottements de l'air.
+
+      \begin{itemize}
+        \item[a)] Prévision intuitive
+
+          Sans effectuer de calcul, proposer une ou plusieurs valeurs possibles de la norme de la vitesse initiale $\Vert\vec{v}_0\Vert$ de la bille A pour que les deux billes se rencontrent.
+
+          La norme de la vitesse initiale peut-elle être nulle ?
+        
+        \item[b)] Étude théorique
+
+          On note $\overrightarrow{AB}$ le vecteur reliant les positions initiales des deux billes.
+
+          Démontrer que, quelle que soit la distance horizontale et verticale initiale entre les deux billes, elles se rencontrent si la vitesse initiale de A est non nulle et dirigée dans le même sens que $\overrightarrow{AB}$.
+
+          Expliquer ce qui change lorsque la norme de la vitesse initiale varie.
+      \end{itemize}
+
+    figure:
+      - ref: td4_ex1_3b_PhV110
+        legende: |
+          $ $
+        # scale: 0.7
+        width: 0.8
+        # height: 4cm       # les deux ensemble : la figure est étirée pour tenir exactement dans ce cadre
+        label: fig.td4_ex1_3b_PhV110
+
+
+    solution:
+      - titre: "Collision de deux billes : indépendance et mouvement relatif"
+        texte: |
+
+          \begin{itemize}
+            \item[a)]Prévision intuitive
+
+              La distance initiale entre les deux billes vaut :
+              $$AB=\sqrt{2^2+2^2}=2\sqrt{2}\ \text{m}.$$
+
+              La bille A doit se déplacer vers B. On peut donc proposer n'importe quelle vitesse initiale strictement positive, à condition que sa direction et son sens soient ceux de $\overrightarrow{AB}$.
+
+              La norme de la vitesse ne peut pas être nulle, car la bille A resterait immobile horizontalement et verticalement, comme B, et les deux billes ne se rencontreraient pas.
+
+            \item[b)] Démonstration
+
+              On choisit un repère $(O,x,y)$ avec l'axe $y$ vertical orienté vers le haut. À l'instant initial :
+              $$
+              \overrightarrow{OA}(0)=\vec{0},
+              \qquad
+              \overrightarrow{OB}(0)=\overrightarrow{AB}.
+              $$
+
+              La bille A est lancée avec une vitesse initiale $\vec{v}_0$, tandis que la bille B est lâchée sans vitesse initiale.
+
+              Les deux billes sont soumises à la même accélération :
+              $\vec{a}_A=\vec{a}_B=-g\vec{e}_y.$
+
+              Les équations horaires sont donc :
+              $\overrightarrow{OA}(t)=\vec{v}_0t-\frac12gt^2\vec{e}_y,\quad \overrightarrow{OB}(t)=\overrightarrow{AB}-\frac12gt^2\vec{e}_y.$
+
+              Pour que les billes se rencontrent, il faut que leurs positions soient égales :
+              $\overrightarrow{OA}(t)=\overrightarrow{OB}(t).$
+
+              En simplifiant les termes liés à la pesanteur, on obtient :
+              $\vec{v}_0t=\overrightarrow{AB}.$
+
+              Si $\vec{v}_0$ est dirigée dans le même sens que $\overrightarrow{AB}$, on peut écrire :
+              $\vec{v}_0=v_0\frac{\overrightarrow{AB}}{AB},\qquad v_0>0.$
+
+              L'équation de rencontre devient alors :
+              $v_0t=AB.$
+
+              Ainsi, l'instant de rencontre est :
+              $$\boxed{t_{\mathrm{rencontre}}=\frac{AB}{v_0}}.$$
+
+              Les deux billes se rencontrent donc pour toute vitesse initiale strictement positive dirigée selon $\overrightarrow{AB}$.
+
+            \item[c)] Influence de la vitesse initiale
+
+              La vitesse initiale détermine le temps nécessaire pour atteindre la position de rencontre :
+              $t_{\mathrm{rencontre}}=\frac{AB}{v_0}.$
+
+              Plus la vitesse initiale est grande, plus la rencontre a lieu tôt. Comme les deux billes chutent avec la même accélération verticale, leur hauteur au moment de la rencontre dépend de cet instant :
+              $$\boxed{y_{\mathrm{rencontre}}=y_A(0)+v_{0y}t_{\mathrm{rencontre}}-\frac12gt_{\mathrm{rencontre}}^2}.$$
+
+              La hauteur d'impact varie donc avec la vitesse initiale. La direction de lancement, elle, est essentielle : si la vitesse n'est pas dirigée vers la position initiale de B, les billes ne se rencontrent pas dans ce modèle.
+
+          \end{itemize}
+
   - id: q3_b
     parent: "3"
     enonce: |
       Calculer la durée de la trajectoire et la portée d'un tir horizontal effectué depuis une falaise de hauteur $h = 20\text{ m}$ à $v_0 = 15\text{ m/s}$.
+
+    figure:
+      - ref: td4_ex1_3c_PhV110
+        legende: |
+          $ $
+        # scale: 0.7
+        width: 0.8
+        # height: 4cm       # les deux ensemble : la figure est étirée pour tenir exactement dans ce cadre
+        label: fig.td4_ex1_3c_PhV110
     solution:
       - titre: "Calcul de portée et durée"
         texte: |
+          $$ 0 = y(\Delta t)  = h - \frac{1}2 g (\Delta t)^2 $$ Donc 
+
           Durée du tir :
           $$\Delta t = \sqrt{\frac{2h}{g}} = \sqrt{\frac{2 \times 20}{9{,}81}} \approx 2{,}02\text{ s}$$
+
+          Or 
+          $$
+          d = x(\Delta t ) - x_0 = v_O \Delta t,
+          $$Donc 
+
           Portée horizontale :
           $$d = v_0 \cdot \Delta t = 15 \times 2{,}02 \approx 30{,}3\text{ m}$$
+
+          On eut aussi fixer $x_0$ à 0.

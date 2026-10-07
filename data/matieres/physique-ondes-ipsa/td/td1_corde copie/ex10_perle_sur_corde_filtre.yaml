@@ -1,0 +1,195 @@
+id: td1_ex10
+intitule: "Une perle sur la corde : réflexion, transmission et filtre passe-bas mécanique"
+td: td1
+facultatif: true
+seance: 1
+cours_rattache:
+  - chap1.reflexion_transmission
+  - chap1.impedance_caracteristique
+  - chap1.regime_sinusoidal
+
+metadonnees:
+  duree_estimee: "55 min"
+  difficulte: 5 # Sur une échelle de 1 à 5
+  type_exercice: "Approfondissement, problème guidé"
+  indispensable: false
+
+enonce_intro: |
+  Une corde homogène infinie, de masse linéique $\mu=0{,}02\ \text{kg}\cdot\text{m}^{-1}$ et de tension $F=50\ \text{N}$, est le siège d'ondes transversales. Une petite perle de masse $m=5\ \text{g}$ est fixée à la corde au point $x=0$. On néglige le poids et les frottements.
+
+  Une onde sinusoïdale incidente $\underline{y}_i=e^{\,j(\omega t-kx)}$ arrive de la gauche ($x<0$). Il apparaît une onde réfléchie $\underline{y}_r=\underline{r}\,e^{\,j(\omega t+kx)}$ et une onde transmise $\underline{y}_t=\underline{\tau}\,e^{\,j(\omega t-kx)}$ ($x>0$).
+
+  On note $c=\sqrt{F/\mu}$, $k=\omega/c$ et $Z=\sqrt{F\mu}$ l'impédance caractéristique de la corde (exercice 7).
+
+prerequis:
+  - titre: "Exercices 5 et 7"
+    texte: |
+      Notation complexe, conditions aux limites, impédance $Z$ et puissance transportée par une onde progressive.
+
+objectifs_pedagogiques_etudiants:
+  - titre: |
+      Trouver $\underline{r}$ et $\underline{\tau}$ pour un défaut ponctuel
+    texte: |
+      Écrire les conditions de raccordement (continuité du déplacement et équation du mouvement de la perle), déduire des coefficients complexes dépendant de la fréquence, et interpréter la perle comme un filtre du premier ordre.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Analogie avec un circuit RC"
+    texte: |
+      Le résultat $\theta\,\dot y_t+y_t=y_i(0,t)$ est l'équation d'un circuit RC. On peut faire le parallèle : la perle est un condensateur d'inertie, la corde une résistance de valeur $2Z$.
+
+coup_de_pouce:
+  - titre: "Deux conditions"
+    texte: |
+      En $x=0$ : (1) la corde est continue, donc $y(0^-,t)=y(0^+,t)$ ; (2) le PFD sur la perle relie l'accélération à la différence des forces transversales exercées par la droite et par la gauche.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Continuité de la pente"
+    texte: |
+      Avec la perle, $\partial_x y$ n'est pas continue en $x=0$ : c'est précisément cette discontinuité qui fournit la force sur la perle.
+  - titre: "Signe des ondes"
+    texte: |
+      Pour l'onde réfléchie, $\partial_x y=+jk\,\underline{r}\,e^{\,j(\omega t+kx)}$ ; pour l'onde qui va vers la droite, $\partial_x y=-jk\,e^{\,j(\omega t-kx)}$.
+
+bilan:
+  - titre: "Résultats à retenir"
+    texte: |
+      Avec $\beta=\dfrac{m\omega}{2Z}$ : $\underline{\tau}=\dfrac{1}{1+j\beta}$ et $\underline{r}=\dfrac{-j\beta}{1+j\beta}$. $R=\dfrac{\beta^2}{1+\beta^2}$ et $T=\dfrac{1}{1+\beta^2}$, avec $R+T=1$. La perle est un filtre passe-bas de constante de temps $\theta=\dfrac{m}{2Z}$ pour l'onde transmise.
+
+aller_plus_loin:
+  - niveau: master
+    titre: "Perle amortie et ressort"
+    texte: |
+      Si la perle est reliée à un support par un ressort de raideur $K$ et un amortisseur, on obtient la résonance d'un absorbeur : pour $\omega=\sqrt{K/m}$ le déplacement de la perle devient nul en régime forcé, et l'onde est entièrement réfléchie. Principe des amortisseurs à masse accordée.
+
+questions:
+  - id: q1
+    enonce: |
+      Écrire les deux conditions de raccordement en $x=0$. Pour la seconde, établir
+      $$m\,\frac{\partial^2y}{\partial t^2}(0,t)=F\left[\frac{\partial y}{\partial x}(0^+,t)-\frac{\partial y}{\partial x}(0^-,t)\right].$$
+    coup_de_pouce:
+      - titre: "Forces sur la perle"
+        texte: |
+          La corde de droite tire la perle avec la composante transversale $+F\,\partial_x y(0^+)$, celle de gauche avec $-F\,\partial_x y(0^-)$ (cf. exercice 3).
+    correction:
+      - titre: "Résultat"
+        texte: |
+          (1) $y(0^-,t)=y(0^+,t)$ ; (2) $m\,\partial_t^2y(0,t)=F\left[\partial_x y(0^+,t)-\partial_x y(0^-,t)\right]$.
+    solution:
+      - titre: "Justification"
+        texte: |
+          La perle est un point matériel de masse $m$ : son accélération est $\partial_t^2y(0,t)$. Les seules forces transversales sont celles des tensions des deux côtés, de composantes $F\sin\alpha\approx F\,\partial_x y$ au niveau de la perle : à droite $+F\,\partial_x y(0^+)$, à gauche $-F\,\partial_x y(0^-)$. Le PFD donne (2). La continuité (1) exprime que la corde ne se rompt pas. Si $m\to0$, (2) redonne la continuité de la pente, c'est-à-dire l'absence de défaut.
+
+  - id: q2
+    enonce: |
+      En déduire les coefficients
+      $$\underline{\tau}=\frac{1}{1+j\beta},\qquad\underline{r}=\frac{-j\beta}{1+j\beta},\qquad\text{avec}\quad\beta=\frac{m\omega}{2Z}.$$
+      Vérifier que $\underline{\tau}=1+\underline{r}$ et que $|\underline{r}|^2+|\underline{\tau}|^2=1$.
+    coup_de_pouce:
+      - titre: "Utiliser $Z$"
+        texte: |
+          $kF=\dfrac{\omega}{c}F=\omega\sqrt{F\mu}=\omega Z$. Reporter les expressions de $\partial_x y$ dans (2).
+    correction:
+      - titre: "Résultat"
+        texte: |
+          (1) $\Rightarrow1+\underline{r}=\underline{\tau}$. (2) $\Rightarrow2j\omega Z\,\underline{r}=m\omega^2(1+\underline{r})$, d'où $\underline{r}=\dfrac{-j\beta}{1+j\beta}$ et $\underline{\tau}=\dfrac{1}{1+j\beta}$.
+    solution:
+      - titre: "Calcul"
+        texte: |
+          En $x=0$ : $y(0^-,t)=\left(1+\underline{r}\right)e^{\,j\omega t}$ et $y(0^+,t)=\underline{\tau}\,e^{\,j\omega t}$, donc (1) donne $\underline{\tau}=1+\underline{r}$.
+
+          Pentes : $\partial_x y(0^-,t)=\left(-jk+jk\,\underline{r}\right)e^{\,j\omega t}$ et $\partial_x y(0^+,t)=-jk\,\underline{\tau}\,e^{\,j\omega t}$. L'accélération est $-\omega^2\underline{\tau}\,e^{\,j\omega t}$. La condition (2) devient
+          $$-m\omega^2\underline{\tau}=F\left[-jk\,\underline{\tau}+jk-jk\,\underline{r}\right]=-jkF\left[\underline{\tau}+\underline{r}-1\right]=-jkF\cdot2\underline{r},$$
+          en utilisant $\underline{\tau}-1=\underline{r}$. Avec $kF=\omega Z$ : $m\omega^2(1+\underline{r})=2j\omega Z\,\underline{r}$, soit
+          $$\underline{r}\left(2jZ-m\omega\right)=m\omega\quad\Rightarrow\quad\underline{r}=\frac{m\omega}{2jZ-m\omega}=\frac{\beta}{j-\beta}=\frac{-j\beta}{1+j\beta}\qquad\left(\beta=\frac{m\omega}{2Z}\right).$$
+          Puis $\underline{\tau}=1+\underline{r}=\dfrac{1}{1+j\beta}$.
+
+          Vérification : $|\underline{r}|^2+|\underline{\tau}|^2=\dfrac{\beta^2+1}{1+\beta^2}=1$.
+
+  - id: q3
+    enonce: |
+      Puissances. Exprimer les coefficients de réflexion et de transmission en puissance, $R=|\underline{r}|^2$ et $T=|\underline{\tau}|^2$ (les impédances des deux côtés sont égales). Montrer que $R+T=1$ et interpréter. Définir la fréquence de coupure $f_c$ par $R=T=\tfrac{1}{2}$ et la calculer. Calculer $R$ et $T$ à $f=20\ \text{Hz}$ et à $f=100\ \text{Hz}$.
+    coup_de_pouce:
+      - titre: "Puissances"
+        texte: |
+          D'après l'exercice 7, pour une onde progressive $\langle\mathcal{P}\rangle=\tfrac{1}{2}Z\omega^2|\text{amplitude}|^2$ : avec le même $Z$ et le même $\omega$, les rapports de puissances sont les rapports des modules au carré.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $R=\dfrac{\beta^2}{1+\beta^2}$, $T=\dfrac{1}{1+\beta^2}$, $R+T=1$ : l'énergie incidente est soit réfléchie soit transmise, la perle n'en absorbe pas en moyenne. $\beta=1$ pour $\omega_c=\dfrac{2Z}{m}=400\ \text{rad/s}$, soit $f_c\approx63{,}7\ \text{Hz}$. À $20\ \text{Hz}$ : $\beta\approx0{,}314$, $R\approx9{,}0\ \%$, $T\approx91{,}0\ \%$. À $100\ \text{Hz}$ : $\beta\approx1{,}571$, $R\approx71{,}2\ \%$, $T\approx28{,}8\ \%$.
+    solution:
+      - titre: "Calcul"
+        texte: |
+          $$R=|\underline{r}|^2=\frac{\beta^2}{1+\beta^2},\qquad T=|\underline{\tau}|^2=\frac{1}{1+\beta^2},\qquad R+T=1.$$
+          La perle ne stocke aucune énergie en moyenne sur une période (elle oscille de façon périodique) : toute la puissance incidente est réfléchie ou transmise.
+
+          Ici $Z=\sqrt{50\times0{,}02}=1\ \text{kg/s}$ et $c=50\ \text{m/s}$. $\beta=\dfrac{m\omega}{2Z}=2{,}5\times10^{-3}\,\omega$.
+          $R=T=\tfrac{1}{2}\Leftrightarrow\beta=1\Leftrightarrow\omega_c=\dfrac{2Z}{m}=\dfrac{2\times1}{0{,}005}=400\ \text{rad/s}$, soit $f_c=\dfrac{400}{2\pi}\approx63{,}7\ \text{Hz}$.
+          À $f=20\ \text{Hz}$ ($\omega=125{,}7\ \text{rad/s}$) : $\beta=0{,}314$, $R=\dfrac{0{,}0987}{1{,}0987}\approx0{,}090$ et $T\approx0{,}910$.
+          À $f=100\ \text{Hz}$ ($\omega=628{,}3\ \text{rad/s}$) : $\beta=1{,}571$, $R=\dfrac{2{,}467}{3{,}467}\approx0{,}712$ et $T\approx0{,}288$.
+          La perle laisse passer les basses fréquences et réfléchit les hautes : c'est un filtre passe-bas pour l'onde transmise.
+
+  - id: q4
+    enonce: |
+      Déphasage. Calculer l'argument de $\underline{\tau}$. À la fréquence de coupure, quel est le retard temporel de l'onde transmise par rapport à ce qu'elle serait sans perle ? Comparer avec la période.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $\arg\underline{\tau}=-\arctan\beta$. À $f_c$ : $-\pi/4$, soit un retard $\Delta t=\dfrac{\pi/4}{\omega_c}=\dfrac{T_c}{8}\approx1{,}96\ \text{ms}$ (avec $T_c=15{,}7\ \text{ms}$).
+    solution:
+      - titre: "Calcul"
+        texte: |
+          $\underline{\tau}=\dfrac{1-j\beta}{1+\beta^2}$ donc $\arg\underline{\tau}=-\arctan\beta$. À la coupure $\beta=1$ : déphasage $-\pi/4$. Le retard s'obtient par $\Delta t=\dfrac{|\varphi|}{\omega_c}=\dfrac{\pi/4}{400}\approx1{,}96\ \text{ms}$, soit $T_c/8$ avec $T_c=2\pi/\omega_c\approx15{,}7\ \text{ms}$. À basse fréquence le retard vaut $\approx\beta/\omega=\dfrac{m}{2Z}=2{,}5\ \text{ms}$, indépendant de $\omega$ : c'est la constante de temps $\theta$ de la question suivante.
+
+  - id: q5
+    enonce: |
+      (*) Approche temporelle. On envoie une onde de forme quelconque $y_i(x,t)=s(t-x/c)$. Notons $y_i(0,t)=s(t)$, $y_r(0,t)$ et $y_t(0,t)$ les déplacements en $x=0$. Montrer que $y_t(0,t)=y_i(0,t)+y_r(0,t)$ et que, pour des ondes qui partent du repos,
+      $$\theta\,\dot y_t(0,t)+y_t(0,t)=y_i(0,t),\qquad\theta=\frac{m}{2Z}.$$
+      Calculer $\theta$. Résoudre pour un échelon $s(t)=Y_0$ ($t>0$) et donner le déplacement réfléchi.
+    coup_de_pouce:
+      - titre: "Ondes progressives"
+        texte: |
+          $y_i=s(t-x/c)$ donne $\partial_x y_i=-\dot s/c$. Pour l'onde réfléchie, $y_r=u(t+x/c)$ donne $\partial_x y_r=+\dot u/c$. Pour l'onde transmise, $\partial_x y_t=-\dot y_t/c$. Utiliser $F/c=Z$.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          La condition (2) donne $m\ddot y_t=2Z\left(\dot y_i-\dot y_t\right)$ en $x=0$, d'où $\theta\dot y_t+y_t=y_i$ après intégration, avec $\theta=m/(2Z)=2{,}5\ \text{ms}$. Pour un échelon $Y_0$ : $y_t(0,t)=Y_0\left(1-e^{-t/\theta}\right)$ et $y_r(0,t)=y_t-y_i=-Y_0\,e^{-t/\theta}$.
+    solution:
+      - titre: "Démonstration"
+        texte: |
+          La continuité (1) donne $y_t(0,t)=y_i(0,t)+y_r(0,t)$. Les pentes en $x=0$ sont
+          $$\partial_x y(0^-)=-\frac{\dot y_i}{c}+\frac{\dot y_r}{c},\qquad\partial_x y(0^+)=-\frac{\dot y_t}{c}.$$
+          La condition (2) devient, avec $y_r=y_t-y_i$ :
+          $$m\ddot y_t=\frac{F}{c}\left[-\dot y_t+\dot y_i-\dot y_r\right]=Z\left[-\dot y_t+\dot y_i-\dot y_t+\dot y_i\right]=2Z\left(\dot y_i-\dot y_t\right).$$
+          En intégrant entre l'instant initial (repos) et $t$ : $m\dot y_t=2Z\left(y_i-y_t\right)$, soit
+          $$\theta\,\dot y_t+y_t=y_i,\qquad\theta=\frac{m}{2Z}=\frac{0{,}005}{2\times1}=2{,}5\ \text{ms}.$$
+          C'est l'équation d'un filtre passe-bas du premier ordre, de fréquence de coupure $\dfrac{1}{2\pi\theta}=63{,}7\ \text{Hz}$, ce qui est bien $f_c$ de la question 3.
+
+          Pour l'échelon $y_i(0,t)=Y_0$ ($t>0$) et $y_t(0,0)=0$ (la perle est initialement au repos) : $y_t(0,t)=Y_0\left(1-e^{-t/\theta}\right)$. Alors $y_r(0,t)=y_t-y_i=-Y_0\,e^{-t/\theta}$. Au début du choc, l'onde réfléchie est de signe opposé à l'onde incidente ($-Y_0$) : la perle se comporte comme une extrémité fixe. Après plusieurs $\theta$, elle laisse passer l'échelon presque intégralement.
+
+  - id: q6
+    enonce: |
+      Cas limites. Que deviennent $\underline{r}$, $\underline{\tau}$ quand $m\to0$ ? quand $m\to\infty$ ? quand $\omega\to0$ ? Dans chaque cas, donner la situation physique correspondante.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $m\to0$ ou $\omega\to0$ ($\beta\to0$) : $\underline{r}\to0$, $\underline{\tau}\to1$, corde sans perle (perle sans effet). $m\to\infty$ ($\beta\to\infty$) : $\underline{r}\to-1$, $\underline{\tau}\to0$ : corde fixée à un point d'attache immobile, réflexion totale avec inversion du signe de l'amplitude.
+    solution:
+      - titre: "Interprétation"
+        texte: |
+          \begin{itemize}[label=$\bullet$]
+            \item {\bf $\beta\to0$} ($m\to0$ ou basses fréquences) : la perle est trop légère (ou l'onde trop lente) pour perturber la corde : $\underline{\tau}\to1$.
+            \item {\bf $\beta\to\infty$} ($m\to\infty$ ou hautes fréquences) : la perle ne peut plus suivre les oscillations, elle est immobile : c'est un point fixe. On retrouve la réflexion totale avec changement de signe des ondes sur une extrémité fixe, $\underline{r}=-1$ (cf. exercice 4).
+          \end{itemize}
+          Une perle intermédiaire est donc un point fixe pour les hautes fréquences et transparente pour les basses.
+
+  - id: q7
+    enonce: |
+      (**) On dispose $M$ perles identiques régulièrement espacées d'une distance $d$ sur la même corde. Sans calcul, expliquer qualitativement pourquoi, pour $\omega\ll\omega_c$, l'onde se propage presque librement mais avec une vitesse plus faible, puis faire le lien avec l'exercice 9.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          Pour $\lambda\gg d$ le milieu se comporte comme une corde continue de masse linéique effective $\mu+m/d$ : célérité $c_{\text{eff}}=\sqrt{F/(\mu+m/d)}<c$. Pour des fréquences plus élevées les réflexions multiples aux perles créent une coupure : c'est la chaîne de masses de l'exercice 9.
+    solution:
+      - titre: "Discussion"
+        texte: |
+          Aux basses fréquences ($\lambda\gg d$), les perles ajoutent de la masse par unité de longueur : $\mu_{\text{eff}}=\mu+m/d$, d'où une célérité plus faible. Cette célérité effective vaut $c_{\text{eff}}=c/\sqrt{1+m/(\mu d)}$. Quand $\lambda$ devient comparable à $d$, les ondes réfléchies par chaque perle interfèrent et le milieu devient dispersif, avec une bande de fréquences interdite. Le cas limite $\mu\to0$ est exactement la chaîne de masses de l'exercice 9.

@@ -1,0 +1,131 @@
+id: td3_ex2
+intitule: "Interface entre deux milieux, notion d'impédance acoustique"
+td: td3
+facultatif: false
+seance: 4
+
+cours_rattache:
+  - chap3.impedance_acoustique
+  - chap3.coefficients_energie
+
+metadonnees:
+  duree_estimee: "20 min"
+  difficulte: 2
+  type_exercice: "Application numérique"
+  indispensable: true
+
+enonce_intro: |
+  Une onde ultrasonore (non perceptible par l'oreille humaine) plane,
+  progressive, sinusoïdale de fréquence $f=500$ kHz se propage dans l'air
+  (qui occupe la région $x<0$) suivant la direction $x'Ox$. Elle rencontre
+  l'interface air-aluminium en $x=0$.
+
+  On donne les masses volumiques de l'air $\rho_1=1{,}3~\text{kg}\cdot\text{m}^{-3}$
+  et de l'aluminium $\rho_2=2700~\text{kg}\cdot\text{m}^{-3}$. On donne les
+  célérités de l'onde ultrasonore dans l'air $c_1=340~\text{m}\cdot\text{s}^{-1}$
+  et dans l'aluminium $c_2=5110~\text{m}\cdot\text{s}^{-1}$.
+
+figure:
+  - ref: td3_ex2_interface_air_alu
+    legende: |
+      Suggestion : reprendre le schéma de l'interface fluide-fluide du TD2 (exercice 4), en remplaçant le second milieu par un solide (hachures caractéristiques d'un matériau rigide) ; faire figurer $\rho_1,c_1,Z_1$ côté air et $\rho_2,c_2,Z_2$ côté aluminium, avec des flèches d'épaisseurs très différentes pour l'onde réfléchie (quasi totale) et l'onde transmise (quasi nulle).
+    width: 0.7
+    label:
+
+prerequis:
+  - titre: "Coefficients de réflexion et de transmission en énergie à une interface"
+    texte: |
+      Cet exercice réutilise directement les résultats généraux établis pour l'interface fluide-fluide (TD2) : à une interface entre deux milieux d'impédances acoustiques caractéristiques $Z_1=\rho_1c_1$ et $Z_2=\rho_2c_2$, les coefficients \textbf{énergétiques} de réflexion et de transmission s'écrivent
+      $$R = \left(\frac{Z_1-Z_2}{Z_1+Z_2}\right)^2, \qquad T = 1-R = \frac{4Z_1Z_2}{(Z_1+Z_2)^2}.$$
+      Ces formules restent valables à une interface fluide-solide dès lors que l'on assimile la propagation dans le solide à une onde de compression (longitudinale) de célérité $c_2$ caractérisée par la même impédance $Z=\rho c$ — approximation raisonnable en incidence normale, tant que l'on ignore les ondes de cisaillement propres aux solides (cf. aller plus loin).
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Appliquer numériquement le concept d'impédance à un cas fluide-solide"
+    texte: |
+      Savoir calculer une impédance acoustique caractéristique à partir de données tabulées, évaluer le degré d'adaptation d'impédance entre deux milieux très différents, et interpréter physiquement un coefficient de transmission énergétique très faible en le reliant à une application concrète (imagerie médicale par ultrasons).
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Insister sur l'ordre de grandeur et sur la portée pratique"
+    texte: |
+      L'intérêt de cet exercice, très bref en termes de calculs, est de faire réaliser aux étudiants l'ordre de grandeur considérable du désaccord d'impédance entre un gaz et un solide (facteur $\sim 3\times10^4$ ici), et sa conséquence directe et quantifiée : plus de 99,9 % de l'énergie est réfléchie. C'est l'occasion de relier ce résultat abstrait à une application biomédicale très concrète (nécessité d'un gel de couplage en échographie) déjà évoquée en aller plus loin du TD2.
+
+point_cours:
+  - titre: "Rappel express : de l'amplitude à l'énergie"
+    texte: |
+      On rappelle (TD2) que le passage des coefficients en \emph{amplitude de pression} $R_p=(Z_2-Z_1)/(Z_1+Z_2)$ aux coefficients en \emph{énergie} (intensité acoustique moyenne, proportionnelle au carré de l'amplitude) se fait simplement par mise au carré : $R=R_p^2$, ce qui rend le résultat indépendant du signe de $Z_2-Z_1$ — un point important ici, où l'on peut directement écrire $R=((Z_1-Z_2)/(Z_1+Z_2))^2$ sans se soucier de l'ordre des indices.
+
+      \textbf{Attention de notation} : dans cet exercice (comme souvent dans les énoncés), les lettres $R$ et $T$ désignent directement les coefficients \emph{énergétiques} (et non plus les coefficients en amplitude de pression notés $R,T$ dans l'exercice 4 du TD2) : il faut donc être attentif, d'un exercice à l'autre, à la grandeur physique que ces mêmes lettres désignent.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Confusion entre coefficients d'amplitude et d'énergie"
+    texte: |
+      Certains étudiants appliquent directement la formule de l'amplitude $(Z_2-Z_1)/(Z_1+Z_2)$ (proche de $-1$ ici) comme si c'était un pourcentage d'énergie réfléchie, ce qui n'a pas de sens (une amplitude relative proche de $-1$ ne signifie pas $100\%$ d'énergie réfléchie au sens algébrique, même si ici $R\to 1$ numériquement) : il faut impérativement mettre au carré pour obtenir un coefficient énergétique, seul interprétable directement comme une fraction de puissance.
+  - titre: "Oublier les unités de l'impédance acoustique"
+    texte: |
+      L'impédance acoustique $Z=\rho c$ s'exprime en $\text{kg}\cdot\text{m}^{-2}\cdot\text{s}^{-1}$, unité parfois notée « rayl » (du nom de Rayleigh) ; un oubli ou une erreur d'unité sur $\rho$ ou $c$ fausse complètement l'ordre de grandeur du rapport $Z_2/Z_1$.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Lien avec le gel d'échographie"
+    texte: |
+      Si l'occasion s'y prête, montrer un flacon de gel d'échographie et rappeler son rôle exact (assurer un contact sans bulle d'air entre la sonde et la peau, la moindre lame d'air suffisant à réfléchir la quasi-totalité du signal ultrasonore, comme le calcul de la question 2 le quantifie) rend ce résultat très concret pour les étudiants.
+
+bilan:
+  - titre: "Un fort désaccord d'impédance interdit la transmission"
+    texte: |
+      Cet exercice illustre numériquement, sur un exemple concret (interface air/aluminium), la conclusion générale déjà établie au TD2 : un désaccord d'impédance important entre deux milieux ($Z_2/Z_1\gg 1$ ou $\ll 1$) conduit à une réflexion quasi totale de l'énergie incidente, quelles que soient les valeurs de $\rho$ et $c$ prises séparément. C'est ce phénomène qui impose, en pratique, l'usage d'un milieu de couplage d'impédance intermédiaire chaque fois que l'on souhaite faire pénétrer efficacement une onde acoustique d'un gaz vers un solide ou un liquide (échographie, contrôle non destructif par ultrasons).
+
+aller_plus_loin:
+  - niveau: master
+    titre: "Ondes de compression et de cisaillement dans un solide"
+    texte: |
+      Contrairement à un fluide, un solide comme l'aluminium peut également transmettre des ondes de cisaillement (transverses), en plus des ondes de compression (longitudinales) considérées ici. En incidence oblique, une partie de l'énergie incidente se convertit en onde transverse dans le solide (conversion de mode), ce qui complique le bilan énergétique par rapport au cas purement fluide-fluide du TD2 : la matrice de passage à l'interface doit alors tenir compte de deux célérités distinctes dans le solide ($c_L$ pour les ondes longitudinales, $c_T<c_L$ pour les ondes transverses).
+  - niveau: ingénieur
+    titre: "Contrôle non destructif (CND) par ultrasons"
+    texte: |
+      Le contrôle non destructif de pièces métalliques par ultrasons repose sur le même principe physique que l'échographie médicale : un gel ou un bain d'eau assure le couplage entre le capteur (émetteur-récepteur piézoélectrique) et la pièce à inspecter, afin d'injecter efficacement l'énergie acoustique dans le métal. Les défauts internes (fissures, inclusions d'air) sont détectés précisément parce qu'ils constituent eux-mêmes des interfaces à fort désaccord d'impédance, donc de fortes réflexions (échos) repérables sur le signal reçu.
+
+questions:
+  - id: q1
+    enonce: "Calculer les impédances acoustiques $Z_1$ et $Z_2$ caractéristiques de l'air et de l'aluminium. Conclusion : le système est-il adapté en impédance ?"
+    coup_de_pouce: |
+      Impédance acoustique caractéristique : $Z=\rho c$ (cf. prérequis et TD2).
+    correction: |
+      $Z_1=\rho_1c_1=1.3\times340\approx442$ kg·m$^{-2}$·s$^{-1}$ (rayl).
+      $Z_2=\rho_2c_2=2700\times5110\approx1.38\times10^7$ rayl.
+      $Z_2\gg Z_1$ : le système est très mal adapté en impédance.
+    solution:
+      - titre: "Calcul numérique des deux impédances"
+        texte: |
+          $$Z_1 = \rho_1 c_1 = 1{,}3 \times 340 = 442~\text{kg}\cdot\text{m}^{-2}\cdot\text{s}^{-1},$$
+          $$Z_2 = \rho_2 c_2 = 2700 \times 5110 = 13\,797\,000 \approx 1{,}38\times10^7~\text{kg}\cdot\text{m}^{-2}\cdot\text{s}^{-1}.$$
+      - titre: "Conclusion sur l'adaptation d'impédance"
+        texte: |
+          Le rapport des impédances vaut
+          $$\frac{Z_2}{Z_1} = \frac{1{,}38\times10^7}{442} \approx 3{,}1\times10^4,$$
+          soit un désaccord de plus de quatre ordres de grandeur. Le système air/aluminium est donc extrêmement \textbf{mal adapté en impédance} : on s'attend, d'après le bilan qualitatif du TD2, à ce que la quasi-totalité de l'énergie incidente soit réfléchie à l'interface (à vérifier quantitativement en question 2).
+
+  - id: q2
+    enonce: "Calculer le pourcentage d'énergie de l'onde incidente qui est transmise dans l'aluminium. Interpréter ce résultat. Vous pouvez calculer les coefficients en énergie $R$ et $T$."
+    coup_de_pouce: |
+      Coefficient de réflexion en énergie $R=\left(\dfrac{Z_1-Z_2}{Z_1+Z_2}\right)^2$, et $T=1-R=\dfrac{4Z_1Z_2}{(Z_1+Z_2)^2}$ (cf. prérequis).
+    correction: |
+      $R\approx\left(\dfrac{442-1.38\times10^7}{442+1.38\times10^7}\right)^2\approx0.9999$ (quasi tout est réfléchi).
+      $T=1-R\approx1.3\times10^{-4}$, soit environ $0.013\%$ de l'énergie transmise :
+      un fort désaccord d'impédance réfléchit presque toute l'onde -- c'est le
+      principe utilisé en échographie (gel de couplage) pour éviter cette perte.
+    solution:
+      - titre: "Calcul détaillé de $R$"
+        texte: |
+          Avec $Z_1=442$ et $Z_2=1{,}3797\times10^7$ (SI), on calcule d'abord la somme et la différence :
+          $$Z_1+Z_2 \approx 1{,}379744\times10^7, \qquad Z_2-Z_1 \approx 1{,}379656\times10^7.$$
+          Le rapport vaut
+          $$\frac{Z_2-Z_1}{Z_1+Z_2} \approx \frac{1{,}379656}{1{,}379744} \approx 0{,}999936,$$
+          d'où, en mettant au carré (le signe de la différence n'a pas d'importance pour le coefficient énergétique) :
+          $$R = \left(\frac{Z_2-Z_1}{Z_1+Z_2}\right)^2 \approx (0{,}999936)^2 \approx 0{,}999872.$$
+      - titre: "Coefficient de transmission et interprétation"
+        texte: |
+          Par conservation de l'énergie (aucune dissipation supposée à l'interface) :
+          $$T = 1-R \approx 1-0{,}999872 = 0{,}000128 \approx 1{,}3\times10^{-4},$$
+          soit environ $\boxed{0{,}013\,\%}$ de l'énergie incidente transmise dans l'aluminium — une fraction extrêmement faible, cohérente avec le très fort désaccord d'impédance mis en évidence en question 1.
+
+          \textbf{Interprétation physique} : plus de $99{,}98\,\%$ de l'énergie acoustique incidente est réfléchie à l'interface air/aluminium. C'est précisément la raison pour laquelle, en échographie médicale, on interpose un gel de couplage entre la sonde et la peau : sans lui, la moindre lame d'air entre la sonde et le corps réfléchirait la quasi-totalité du signal ultrasonore (comme ici pour l'aluminium), rendant l'examen inexploitable. Le gel, dont l'impédance acoustique est proche de celle des tissus mous, permet au contraire une transmission efficace de l'onde vers le corps.

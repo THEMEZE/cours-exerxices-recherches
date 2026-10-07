@@ -39,6 +39,8 @@
 % Prérequis : couleur terre / brun chaud
 \definecolor{colorPrerequis}{HTML}{8B5E3C}
 
+\definecolor{colorAttention}{RGB}{200,60,60}
+
 % Objectifs pédagogiques étudiants : bleu pédagogique
 \definecolor{colorObjectifsPedagogiquesEtudiants}{HTML}{1565C0}
 
@@ -124,6 +126,76 @@
 \newsavebox{\TitreMesureTitre}
 \newlength{\TitreLargeurEffLen}
 
+% ============================================================
+% LARGEUR ÉTROITE D'UN TITRE MULTI-LIGNES (remplace varwidth)
+% ============================================================
+%
+% ⚠️ BUG DE FOND IDENTIFIÉ (et confirmé par isolation) : le package
+% `anyfontsize` (chargé par templates/styles/monstyletikz.tex) patche
+% une macro interne du noyau LaTeX (\tryif@simple, utilisée par la
+% sélection de police) qui réutilise des registres temporaires
+% globaux. Or `varwidth` a besoin de re-typographier le même
+% paragraphe PLUSIEURS FOIS à des largeurs différentes pour trouver
+% la plus étroite qui tienne -- donc rappelle \selectfont plusieurs
+% fois -- et ces appels répétés, une fois patchés par anyfontsize,
+% corrompent la recherche de varwidth, qui abandonne silencieusement
+% et retombe sur la largeur maximale demandée (d'où le trait qui
+% restait loin du titre quand celui-ci passait sur plusieurs lignes).
+%
+% \TitreLargeurEtroite ci-dessous fait le même travail que varwidth
+% (trouver la largeur la plus étroite qui donne le même nombre de
+% lignes qu'à la largeur maximale) mais SANS jamais rappeler
+% \selectfont plus d'UNE fois -- donc immunisée contre ce conflit.
+% Principe : la police est sélectionnée UNE SEULE fois (#3), puis on
+% teste plusieurs largeurs candidates par dichotomie en comparant la
+% HAUTEUR du paragraphe résultant à la hauteur de référence (largeur
+% max) -- une ligne de plus fait sauter la hauteur d'un
+% \baselineskip, donc "même hauteur" = "même nombre de lignes",
+% sans avoir besoin de compter les lignes explicitement (ce qui,
+% testé, s'est avéré bien plus fragile à manipuler au niveau TeX).
+\newdimen\TitreDichoBasse
+\newdimen\TitreDichoHaute
+\newdimen\TitreDichoMilieu
+\newdimen\TitreDichoHauteurRef
+\newdimen\TitreDichoHauteurEssai
+\newcount\TitreDichoIter
+
+\newcommand{\TitreLargeurEtroite}[3]{%
+  % #1 = largeur maximale (au-delà, retour à la ligne -- déjà connue
+  %      comme donnant le nombre de lignes de référence)
+  % #2 = texte du titre
+  % #3 = code de sélection de police (ex: \fontsize{15}{17}\selectfont\bfseries)
+  \begingroup
+    #3\relax
+    \setbox0=\vbox{\hsize=#1\relax \noindent #2\par}%
+    \TitreDichoHauteurRef=\ht0 \advance\TitreDichoHauteurRef by \dp0
+    \advance\TitreDichoHauteurRef by 0.5pt % petite marge de sécurité (arrondis)
+
+    \TitreDichoBasse=0pt   % borne basse : peut donner TROP de lignes
+    \TitreDichoHaute=#1\relax % borne haute : SÛRE (nb de lignes de référence)
+    \TitreDichoIter=0
+    \loop
+      \TitreDichoMilieu=\TitreDichoBasse
+      \advance\TitreDichoMilieu by \TitreDichoHaute
+      \divide\TitreDichoMilieu by 2
+      \setbox0=\vbox{\hsize=\TitreDichoMilieu\relax \noindent #2\par}%
+      \TitreDichoHauteurEssai=\ht0 \advance\TitreDichoHauteurEssai by \dp0
+      \ifdim\TitreDichoHauteurEssai>\TitreDichoHauteurRef
+        \TitreDichoBasse=\TitreDichoMilieu % trop étroit (ligne en plus) -> remonter la borne basse
+      \else
+        \TitreDichoHaute=\TitreDichoMilieu % encore assez large -> peut resserrer encore
+      \fi
+      \advance\TitreDichoIter by 1
+    \ifnum\TitreDichoIter<14 \repeat
+    % ⚠️ BUG (encore un !) IDENTIFIÉ : \global\setlength{...}{...} ne
+    % se propage PAS correctement quand \setlength est patché par le
+    % package `calc` (chargé par templates/styles/packages.tex via
+    % `animate`) -- confirmé par isolation. Affectation directe du
+    % registre à la place (contourne \setlength entièrement) :
+    \global\TitreLargeurEffLen=\TitreDichoHaute\relax
+  \endgroup
+}
+
 % Boîte et longueur pour le cas "étoiles déplacées dans la barre
 % DROITE" (voir plus bas : si le titre est trop long pour tenir sur
 % une ligne, les étoiles quittent la barre gauche -- où restent
@@ -148,6 +220,13 @@
 \newif\ifTitrePedEtoilesGauche
 \TitrePedEtoilesGauchetrue % défaut : étoiles à gauche (cas normal)
 \newif\ifTitrePedIndispensable
+
+% Registres/booléens pour \TitreEtoilesDansBarrePath (mode normal
+% 0-5 et mode binaire 6-31 -- voir cette macro pour le détail).
+\newcount\TitreCountNiveau
+\newcount\TitreCountQuot
+\newif\ifTitreBinMode
+\newif\ifTitreEtoileOui
 
 
 % ⚠️ BUG CORRIGÉ (3e tentative) : mettre \ExplSyntaxOn / \ExplSyntaxOff
@@ -217,26 +296,54 @@
 % avancer le curseur \XCur après la flèche. Si tu changes ce 1.5
 % ICI, pense à le changer aussi là-bas (sinon même bug que les
 % étoiles : chevauchement avec l'élément suivant).
+% ⚠️ BUG TIKZ CLASSIQUE (celui qui empêchait la flèche de s'afficher
+% depuis le tout début, identifié et confirmé par isolation à la
+% toute fin) : utiliser un PARAMÈTRE DE MACRO (#1) directement à
+% l'intérieur d'une spécification de pointe de flèche TikZ
+% "-{Latex[length=#1 pt, ...]}" est fragile -- TikZ analyse cette
+% chaîne avec son propre tokenizer bas niveau, qui ne gère pas
+% correctement un "#1" brut à cet endroit précis (contrairement à
+% "\pgfmathsetmacro{...}{#1*1.5}" juste au-dessus, qui lui n'a
+% jamais posé de problème). Le correctif standard : capturer #1
+% dans une macro normale AVANT de l'utiliser dans la spec de flèche.
 \newcommand{\TitreIndispensableDansBarrePath}[1]{%
-  \pgfmathsetmacro{\ArrowLen}{#1*1.5}%
+  \edef\TitreArrowHUtile{#1}%
+  \pgfmathsetmacro{\ArrowLen}{\TitreArrowHUtile*1.5}%
   \draw[
-    -{Latex[length=#1 pt, width=#1 pt]},
+    -{Latex[length=\TitreArrowHUtile pt, width=\TitreArrowHUtile pt]},
     color=white,
-    line width={#1*0.4},
-    line cap=round
+    line width={\TitreArrowHUtile*0.4},
+    line cap=butt %round rect
   ]
     (0,0) -- (\ArrowLen pt, 0);
 }
 
 % --- Étoiles de difficulté ------------------------------------------
 %
-%   ★ ★ ☆ ☆ ☆
+%   ★ ★ ☆ ☆ ☆   (difficulté 1-5, mode normal)
+%   ★ ☆ ★ ☆ ★   (difficulté 6-31, mode binaire -- voir plus bas)
 %
-% #1 = Niveau (1 à 5)
-% #2 = Couleur des étoiles pleines (= couleur du titre / de la barre)
+% #1 = Niveau (0 à 31 -- 0 à 5 = mode normal, 6 à 31 = mode binaire)
+% #2 = Couleur "creuse" (= couleur du titre / de la barre -- utilisée
+%      pour les étoiles NON atteintes, qui se fondent dans la barre)
 % #3 = Hauteur utile \HUtile (= taille "slot" de chaque étoile ;
 %       la taille RÉELLEMENT dessinée est légèrement plus petite,
 %       voir \TitreEtoileTailleFacteur ci-dessous)
+%
+% ⚠️ BUG CORRIGÉ : les étoiles "atteintes" (i<=niveau) étaient
+% dessinées avec fill=#2 -- la MÊME couleur que le fond de la barre
+% -- donc quasi invisibles dessus (seul un mince contour blanc les
+% distinguait). Les étoiles "non atteintes" étaient en blanc plein,
+% donc BEAUCOUP plus visibles -- l'inverse de ce qu'on veut : plus la
+% difficulté est élevée, plus on doit voir de blanc plein, pas
+% l'inverse. Les deux couleurs de remplissage sont donc échangées
+% ci-dessous (\TitreEtoileRemplieCouleur / \TitreEtoileCreuseCouleur).
+%
+% 🎲 NOUVEAU -- mode binaire (difficulté 6 à 31) : pour une "vraie"
+% difficulté au-delà de 5, les 5 étoiles représentent le NIVEAU EN
+% BINAIRE sur 5 bits (poids 16-8-4-2-1, bit de poids fort à gauche),
+% étoile pleine = bit à 1, étoile creuse = bit à 0. Permet d'aller
+% jusqu'à 31 (= 11111 en binaire = 5 étoiles pleines).
 %
 % IMPORTANT : cette macro calcule et EXPOSE elle-même la largeur
 % totale occupée (\TitreEtoilesLargeur), à partir du MÊME facteur
@@ -255,18 +362,41 @@
   % pointes -> évite que les étoiles dépassent du trait).
   \def\TitreEtoileTailleFacteur{0.85}%
 
-  \foreach \i in {1,...,5}{%
+  % Niveau demandé, arrondi/borné à un entier entre 0 et 31 (garde-fou
+  % : une valeur invalide ne doit jamais faire planter le document).
+  \TitreCountNiveau=#1\relax
+  \ifnum\TitreCountNiveau<0 \TitreCountNiveau=0 \fi
+  \ifnum\TitreCountNiveau>31 \TitreCountNiveau=31 \fi
+  % Mode binaire dès que le niveau dépasse 5 (la représentation
+  % "N étoiles pleines sur 5" n'a plus de sens au-delà).
+  \ifnum\TitreCountNiveau>5
+    \TitreBinModetrue
+  \else
+    \TitreBinModefalse
+  \fi
+
+  \foreach \i/\TitrePoidsBit in {1/16,2/8,3/4,4/2,5/1}{%
     \pgfmathsetmacro{\XPos}{(\i-1)*(#3*\TitreEtoilesEspacementFacteur)}%
     \pgfmathsetmacro{\TailleEtoile}{#3*\TitreEtoileTailleFacteur}%
-    \ifnum\i>#1
-      % Étoile vide : contour blanc, intérieur blanc
+    % Détermine si CETTE étoile doit être "pleine" (\TitreEtoileOui)
+    % ou "creuse", selon le mode normal ou binaire.
+    \ifTitreBinMode
+      \TitreCountQuot=\TitreCountNiveau
+      \divide\TitreCountQuot by \TitrePoidsBit
+      \ifodd\TitreCountQuot \TitreEtoileOuitrue \else \TitreEtoileOuifalse \fi
+    \else
+      \ifnum\i>\TitreCountNiveau \TitreEtoileOuifalse \else \TitreEtoileOuitrue \fi
+    \fi
+    \ifTitreEtoileOui
+      % Étoile "atteinte" (pleine) : bien visible, blanc plein.
       \node[
         star, star points=5, star point ratio=.50, rounded corners=0.2pt,
         minimum size=\TailleEtoile pt, inner sep=0pt, outer sep=0pt,
         draw=white, fill=white, line width=0.4pt, rotate=180
       ] at (\XPos pt, 0) {};
     \else
-      % Étoile pleine : contour blanc, remplie de la couleur du titre
+      % Étoile "non atteinte" (creuse) : se fond dans la barre, ne
+      % laisse qu'un mince contour blanc.
       \node[
         star, star points=5, star point ratio=.50, rounded corners=0.2pt,
         minimum size=\TailleEtoile pt, inner sep=0pt, outer sep=0pt,
@@ -308,12 +438,6 @@
   % #2 = Épaisseur de la barre (ex: 0.3cm)
 
   \edef\TitreTmpInd{\pgfkeysvalueof{/TitrePedagogique/indispensable}}%
-  % DIAGNOSTIC TEMPORAIRE -- à retirer une fois le bug de la flèche
-  % résolu. Regarde dans le fichier .log la ligne "DIAGNOSTIC
-  % indispensable=[...]" : si tu vois autre chose que "True" ou
-  % "true" entre les crochets (ex: un espace, un retour à la ligne,
-  % "1", etc.), ça nous dira exactement quoi comparer en plus.
-  \typeout{DIAGNOSTIC indispensable=[\TitreTmpInd]}%
   \edef\TitreTmpDiff{\pgfkeysvalueof{/TitrePedagogique/difficulte}}%
   \edef\TitreTmpDuree{\pgfkeysvalueof{/TitrePedagogique/duree}}%
 
@@ -334,11 +458,15 @@
   % second motif s'est avéré ne pas persister de façon fiable.
   % --------------------------------------------------------------
   \TitrePedIndispensablefalse
-  \ifstrequal{\TitreTmpInd}{true}{\TitrePedIndispensabletrue}{}%
-  \ifstrequal{\TitreTmpInd}{True}{\TitrePedIndispensabletrue}{}%
-  \ifstrequal{\TitreTmpInd}{1}{\TitrePedIndispensabletrue}{}%
-  % DIAGNOSTIC TEMPORAIRE
-  \typeout{DIAGNOSTIC IndispensableBool=[\ifTitrePedIndispensable true\else false\fi]}%
+  % ⚠️ BUG (enfin) IDENTIFIÉ : \ifstrequal{\Macro}{chaîne}{...}{...}
+  % échoue silencieusement à exécuter une commande \newif comme code
+  % vrai/faux dès qu'un des deux côtés comparés est une macro (même
+  % après \edef) -- testé et reproduit en isolation. \ifdefstring
+  % (etoolbox également, faite spécifiquement pour "comparer une
+  % macro à une chaîne") n'a PAS ce problème.
+  \ifdefstring{\TitreTmpInd}{true}{\TitrePedIndispensabletrue}{}%
+  \ifdefstring{\TitreTmpInd}{True}{\TitrePedIndispensabletrue}{}%
+  \ifdefstring{\TitreTmpInd}{1}{\TitrePedIndispensabletrue}{}%
 
   % Hauteur utile COMMUNE à la flèche, aux étoiles et à la durée.
   %
@@ -489,8 +617,6 @@
   \else
     \TitrePedTropLongfalse
   \fi
-  % DIAGNOSTIC TEMPORAIRE
-  \typeout{DIAGNOSTIC TitreTropLong=[\ifTitrePedTropLong true\else false\fi] largeurTitreNat=[\the\wd\TitreMesureTitre] largeurMax=[\the\dimexpr#3\relax]}%
 
   % Étoiles à gauche (cas normal) sauf si le titre est trop long :
   % dans ce cas elles migrent vers la barre DROITE (voir
@@ -505,26 +631,18 @@
   % --------------------------------------------------------------
   % Largeur RÉELLE du titre.
   %
-  % ⚠️ CHANGEMENT : l'ancienne mesure utilisait \hbox{#2 #7}, qui ne
-  % peut JAMAIS retourner à la ligne (largeur infinie) -- elle ne
-  % pouvait donc que dire "tient en une ligne ?" oui/non, jamais
-  % calculer la largeur réelle d'un titre qui doit passer sur 2+
-  % lignes (elle retombait alors bêtement sur #3, la largeur MAX,
-  % même si le texte replié aurait pu tenir dans moins large).
-  %
-  % \varwidth{#3} (package déjà chargé dans le projet) résout ça
-  % nativement : il replie le texte dans la limite #3 si besoin,
-  % et renvoie la largeur la plus ÉTROITE qui contient le résultat
-  % (= largeur naturelle si une seule ligne suffit, ou largeur de la
-  % ligne repliée la plus longue sinon). \TitreLargeurEffLen suit
-  % donc TOUJOURS la largeur réelle du bloc de texte, qu'il tienne
-  % sur une ou plusieurs lignes -> le trait s'ajuste bien dans tous
-  % les cas, plus besoin du \ifdim de comparaison à #3.
+  % ⚠️ Ne dépend PLUS de varwidth (voir \TitreLargeurEtroite,
+  % déclarée plus haut, et son commentaire pour le pourquoi complet
+  % du conflit avec anyfontsize). Si le titre tient sur une ligne :
+  % on réutilise directement sa largeur naturelle, déjà mesurée
+  % ci-dessus (aucun calcul supplémentaire). Sinon : dichotomie
+  % maison, immunisée contre le conflit anyfontsize/varwidth.
   % --------------------------------------------------------------
-  \sbox{\TitreMesureTitre}{\begin{varwidth}{#3}#2#7\end{varwidth}}%
-  \setlength{\TitreLargeurEffLen}{\wd\TitreMesureTitre}%
-  % DIAGNOSTIC TEMPORAIRE
-  \typeout{DIAGNOSTIC LargeurEffLen(varwidth)=[\the\TitreLargeurEffLen] largeurMax(#3)=[\the\dimexpr#3\relax]}%
+  \ifTitrePedTropLong
+    \TitreLargeurEtroite{#3}{#7}{#2}%
+  \else
+    \setlength{\TitreLargeurEffLen}{\wd\TitreMesureTitre}%
+  \fi
 
   % --------------------------------------------------------------
   % Mesure du bloc de métadonnées, ELLE AUSSI avant l'ouverture du
@@ -545,8 +663,6 @@
   % elles y ont été déplacées (titre trop long) ET qu'il y a
   % effectivement une difficulté à afficher (sinon rien à mesurer).
   \edef\TitreTmpDiffCheck{\pgfkeysvalueof{/TitrePedagogique/difficulte}}%
-  % DIAGNOSTIC TEMPORAIRE
-  \typeout{DIAGNOSTIC difficulte=[\TitreTmpDiffCheck] EtoilesGaucheOui=[\ifTitrePedEtoilesGauche true\else false\fi]}%
   \ifTitrePedTropLong
     \ifx\TitreTmpDiffCheck\empty\else
       \sbox{\TitreMetaBoxDroite}{\TitreMetaBarreDroite{#1}{#4}}%
@@ -828,7 +944,7 @@
 % Environnement générique
 % ============================================================
 
-\NewDocumentEnvironment{encadrestylezero}{mmm}
+\NewDocumentEnvironment{encadrestyle}{mmm}
 {%
   \begin{tcolorbox}[
     %float, % <-- Rend la tcolorbox elle-même flottante
@@ -853,7 +969,7 @@
       \node[
         rotate=90,
         anchor=south,
-        font={\sffamily\bfseries\fontsize{5pt}{6pt}\selectfont},
+        font=\sffamily\bfseries\fontsize{5pt}{1pt}\selectfont\bfseries,
         text=#3,
         inner sep=0pt
       ] at ([xshift=-3pt]frame.west)
@@ -863,7 +979,7 @@
       \node[
         rotate=90,
         anchor=center,
-        font={\sffamily\bfseries\small\fontsize{5pt}{6pt}\selectfont},
+        font=\sffamily\bfseries\small\fontsize{5pt}{10pt}\selectfont\bfseries,
         text=white,
         inner sep=0pt
       ] at ([xshift=2pt]frame.west |- frame.center)
@@ -875,65 +991,6 @@
   \end{tcolorbox}%
 }
 
-
-\NewDocumentEnvironment{encadrestyle}{mmm}
-{%
-  \begingroup
-  %
-  \begin{tcolorbox}[
-    enhanced,
-    notitle,
-    colback=#3!5,
-    colbacklower=white,
-    frame hidden,
-    boxrule=0pt,
-    sharp corners,
-    borderline west={4pt}{0pt}{#3},
-    left=7mm,
-    fontupper=\sffamily,
-    overlay={%
-      %
-      \fill[#3]
-        (frame.south west)
-        rectangle
-        ([xshift=4pt]frame.north west);
-
-      %
-      \node[
-        rotate=90,
-        anchor=south,
-        font=\sffamily\bfseries,
-        text=#3,
-        inner sep=0pt
-      ] at ([xshift=-3pt]frame.west)
-      {%
-        \begingroup
-        \fontsize{5pt}{6pt}\selectfont
-        #2%
-        \endgroup
-      };
-
-      %
-      \node[
-        rotate=90,
-        anchor=center,
-        font=\sffamily\bfseries,
-        text=white,
-        inner sep=0pt
-      ] at ([xshift=2pt]frame.west |- frame.center)
-      {%
-        \begingroup
-        \fontsize{5pt}{6pt}\selectfont
-        #1%
-        \endgroup
-      };
-    }
-  ]%
-}
-{%
-  \end{tcolorbox}%
-  \endgroup
-}
 
 % ============================================================
 % Environnements pédagogiques
@@ -948,6 +1005,15 @@
 }
 {%
   \end{encadrestyle}%
+}
+
+\NewDocumentEnvironment{attention}{o} {% 
+  \IfNoValueTF{#1} {
+    \begin{encadrestyle}{Attention}{}{colorAttention}} 
+      {\begin{encadrestyle}{Attention}{#1}{colorAttention}} 
+    } 
+  {% 
+  \end{encadrestyle}% 
 }
 
 \NewDocumentEnvironment{objectifspedagogiquesetudiants}{o}

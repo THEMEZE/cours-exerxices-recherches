@@ -1,0 +1,211 @@
+id: td1_ex3
+intitule: |
+  Tri à bulles (\texttt{bubble\_sort}) et mutation en place
+td: td1
+facultatif: false
+seance: 1
+cours_rattache:
+  - intro.algorithmes_de_tri
+  - intro.mutation_et_aliasing
+  - intro.debogage
+
+metadonnees:
+  duree_estimee: "20 min"
+  difficulte: 1
+  type_exercice: "Débogage + amélioration de la qualité du code"
+  indispensable: true
+
+enonce_intro: |
+  On fournit \texttt{bubble\_sort0.py}, un tri à bulles qui trie en fait
+  la liste dans l'ordre \textbf{décroissant} au lieu de croissant. Il faut
+  identifier la cause avec le débogueur, corriger, puis discuter un effet
+  de bord discret mais important : la fonction modifie la liste passée en
+  argument \emph{en place}.
+
+prerequis:
+  - titre: "Principe du tri à bulles"
+    texte: |
+      À chaque passage, on parcourt la liste et on échange deux éléments
+      adjacents s'ils ne sont pas dans le bon ordre. Après $i$ passages,
+      les $i$ plus grands éléments sont correctement placés en fin de
+      liste : on peut donc réduire la zone parcourue d'un élément à chaque
+      passage supplémentaire.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Retrouver un bug de comparaison inversée"
+    texte: |
+      Diagnostiquer, à l'aide du débogueur, pourquoi un tri renvoie
+      l'ordre inverse de celui attendu.
+  - titre: "Comprendre la mutation en place"
+    texte: |
+      Observer qu'une fonction Python peut modifier un objet (ici une
+      liste) reçu en argument, sans avoir besoin de renvoyer explicitement
+      un nouvel objet.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Préparer le terrain pour la régression linéaire"
+    texte: |
+      La mutation en place est un sujet transversal qui réapparaît, sous
+      une forme plus subtile, dans l'exercice sur la régression linéaire
+      bruitée (\texttt{td1\_ex5}) : ne pas hésiter à l'amorcer ici sans
+      trop insister sur l'efficacité algorithmique elle-même.
+
+point_cours:
+  - titre: |
+      Code original fourni (\texttt{bubble\_sort0.py})
+    texte: |
+      \begin{verbatim}
+      def bubble_sort(arr):
+          n = len(arr)
+          for i in range(n):
+              for j in range(0, n - i - 1):
+                  if arr[j] < arr[j + 1]:
+                      arr[j], arr[j + 1] = arr[j + 1], arr[j]
+          return arr
+
+
+      unsorted_list = [64, 34, 25, 12, 22, 11, 90]
+
+      # Expected output: [11, 12, 22, 25, 34, 64, 90]
+      print("Sorted list:", bubble_sort(unsorted_list))
+      \end{verbatim}
+      La condition d'échange est \texttt{arr[j] < arr[j+1]} : elle échange
+      donc les éléments quand le premier est plus \textbf{petit}, ce qui
+      fait remonter les plus \textbf{petits} éléments en fin de liste — un
+      tri décroissant, contrairement au commentaire « Expected output ».
+  - titre: |
+      Code corrigé et documenté (\texttt{bubble\_sort.py})
+    texte: |
+      \begin{verbatim}
+      def bubble_sort(values: list[int]) -> list[int]:
+          """Trie une liste d'entiers dans l'ordre croissant."""
+          number_of_values = len(values)
+
+          # A chaque passage, le plus grand element encore non place
+          # est deplace vers la fin de la liste.
+          for pass_number in range(number_of_values):
+
+              # La partie situee apres cet indice est deja triee :
+              # elle n'a plus besoin d'etre parcourue.
+              for index in range(0, number_of_values - pass_number - 1):
+
+                  # Pour un ordre CROISSANT, on echange si l'element
+                  # de gauche est plus GRAND que celui de droite.
+                  if values[index] > values[index + 1]:
+                      values[index], values[index + 1] = (
+                          values[index + 1],
+                          values[index]
+                      )
+
+          return values
+      \end{verbatim}
+  - titre: "Démarche de débogage conseillée"
+    texte: |
+      \begin{enumerate}
+        \item Exécuter le code original et comparer avec le commentaire
+          « Expected output ».
+        \item Poser un point d'arrêt dans la boucle interne et suivre la
+          liste après chaque échange.
+        \item Demander : « quel élément remonte en fin de liste à la fin
+          de la première passe ? » (attendu : 90, le plus grand ; dans
+          l'original c'est 11, le plus petit).
+        \item Corriger le sens de la comparaison et vérifier.
+        \item Afficher \texttt{unsorted\_list} après l'appel : la variable
+          d'origine a elle aussi été triée (mutation en place).
+      \end{enumerate}
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Masquer le bug plutôt que le corriger"
+    texte: |
+      Certains étudiants inversent la liste avec \texttt{.reverse()} ou
+      \texttt{[::-1]} pour « corriger » le résultat : cela masque le
+      symptôme sans corriger l'algorithme lui-même. Demander explicitement
+      de corriger la comparaison dans la boucle.
+  - titre: "Perte de stabilité avec <= ou >="
+    texte: |
+      Remplacer \texttt{<} par \texttt{<=} ou \texttt{>=} peut laisser le
+      résultat faux, ou faire des échanges inutiles d'éléments égaux.
+      Tester avec des doublons, par exemple \texttt{[3, 1, 3, 2]}.
+  - titre: "Confusion sur la borne n - i - 1"
+    texte: |
+      Faire dessiner l'état de la liste après chaque passe : la fin de
+      liste est déjà triée, inutile de la reparcourir ; le « -1 » évite de
+      sortir de la liste avec \texttt{j+1}.
+
+bilan:
+  - titre: "Aliasing : un sujet transversal"
+    texte: |
+      \texttt{bubble\_sort} modifie la liste \emph{en place} ; c'est pour
+      cela que la fonction n'a même pas besoin de renvoyer un nouvel
+      objet pour que l'appelant voie le résultat trié. Cette même
+      propriété devient une source d'effets de bord non désirés dans
+      l'exercice sur la régression linéaire (\texttt{td1\_ex5}).
+
+aller_plus_loin:
+  - niveau: ecole_ingenieur
+    titre: "Arrêt anticipé"
+    texte: |
+      Ajouter un booléen \texttt{swapped} : si aucun échange n'a lieu
+      pendant une passe, la liste est déjà triée et on peut arrêter.
+      Mesurer le gain de temps sur une liste déjà triée de 10 000
+      éléments.
+  - niveau: ecole_ingenieur
+    titre: "Version sans mutation"
+    texte: |
+      Écrire \texttt{bubble\_sort\_copy}, qui NE modifie PAS la liste
+      passée en argument (travaille sur une copie et renvoie une nouvelle
+      liste). Vérifier avec \texttt{assert} que la liste d'origine reste
+      intacte après l'appel.
+
+questions:
+  - id: q1
+    enonce: |
+      Exécuter \texttt{bubble\_sort0.py}. Le résultat correspond-il au
+      commentaire « Expected output » ? Identifier la ligne responsable.
+    coup_de_pouce: |
+      Suivez la liste après le premier échange dans la boucle interne : le
+      plus petit ou le plus grand élément remonte-t-il en fin de liste ?
+    correction: "La condition arr[j] < arr[j+1] trie en ordre décroissant."
+    solution:
+      - titre: "Diagnostic"
+        texte: |
+          Le résultat affiché est \texttt{[90, 64, 34, 25, 22, 12, 11]} :
+          décroissant, alors que le commentaire annonçait un ordre
+          croissant. La condition d'échange \texttt{arr[j] < arr[j+1]} fait
+          remonter les plus petits éléments à la fin, ce qui produit un tri
+          décroissant.
+  - id: q2
+    enonce: |
+      Corriger la fonction pour obtenir un tri croissant. Valider sur
+      \texttt{[64, 34, 25, 12, 22, 11, 90]}, \texttt{[]}, \texttt{[1]},
+      \texttt{[3, 1, 3, 2]} et le pire cas \texttt{[5, 4, 3, 2, 1]}.
+    coup_de_pouce: |
+      Il suffit d'inverser le sens de la comparaison, pas de trier la
+      liste par un autre moyen.
+    correction: "Remplacer arr[j] < arr[j+1] par values[index] > values[index+1]."
+    solution:
+      - titre: "Correction et validation"
+        texte: |
+          Avec \texttt{values[index] > values[index+1]}, tous les cas
+          proposés sont correctement triés en ordre croissant, y compris
+          la liste vide et la liste à un seul élément (aucune itération de
+          boucle n'est alors nécessaire).
+  - id: q3
+    enonce: |
+      Que vaut \texttt{unsorted\_list} \emph{après} l'appel à
+      \texttt{bubble\_sort(unsorted\_list)} ? Pourquoi ?
+    coup_de_pouce: |
+      La fonction échange les éléments avec la notation
+      \texttt{arr[j], arr[j+1] = arr[j+1], arr[j]} : sur quel objet
+      opère-t-elle réellement ?
+    correction: "La liste d'origine est triée aussi : la fonction modifie l'objet reçu en place."
+    solution:
+      - titre: "Mutation en place"
+        texte: |
+          En Python, une liste est un objet \emph{mutable} : le paramètre
+          \texttt{arr} (ou \texttt{values}) référence le même objet que
+          \texttt{unsorted\_list} dans le code appelant, sans en faire une
+          copie. Les échanges effectués à l'intérieur de la fonction
+          modifient donc directement la liste d'origine, qui se retrouve
+          triée après l'appel — même si l'on n'utilise pas la valeur de
+          retour de la fonction.

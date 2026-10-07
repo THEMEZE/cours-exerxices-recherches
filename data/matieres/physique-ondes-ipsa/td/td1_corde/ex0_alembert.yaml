@@ -233,6 +233,51 @@ aller_plus_loin:
 
   
 
+accroche_point_cours_essentiel:
+  - titre: "Une forme qui avance sans se déformer"
+    duree_introduction: "5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Quand une secousse remonte le long d'une corde, la « bosse » avance sans changer de forme. Comment une simple fonction $f$ de la variable $x-ct$ peut-elle décrire cela ? Et pourquoi le signe « moins » correspond-il à un déplacement vers la {\bf droite} et non vers la gauche ?
+    texte: |
+      {\bf Idée clé : une onde progressive est un profil qui se translate à la vitesse $c$.} Toute fonction de la forme $f(x-ct)$ ou $g(x+ct)$ est solution de l'équation de d'Alembert, et, l'équation étant {\bf linéaire}, la somme $f(x-ct)+g(x+ct)$ aussi. Pour savoir où va l'onde, on {\bf suit un point du profil} : son argument reste constant, donc $x-ct=\text{cte}$ donne $x=x_0+ct$, c'est-à-dire une propagation vers les $x$ croissants.
+
+outils_mathematiques:
+  - titre: "Dérivée partielle et fonction composée"
+    texte: |
+      Pour $y(x,t)=f(u)$ avec $u=x-ct$ : $\dfrac{\partial y}{\partial x}=f'(u)\dfrac{\partial u}{\partial x}=f'(u)$ et $\dfrac{\partial y}{\partial t}=f'(u)\dfrac{\partial u}{\partial t}=-c\,f'(u)$. Dériver deux fois fait apparaître le facteur $c^2$ : le signe de $c$ disparaît au carré.
+  - titre: "Translation d'un graphe"
+    texte: |
+      Le graphe de $x\mapsto f(x-x_0)$ est celui de $f$ {\bf décalé de $x_0$ vers la droite}. Ici $x_0=ct$ augmente avec le temps : le profil glisse vers la droite sans se déformer.
+  - titre: "Argument constant et loi horaire"
+    texte: |
+      $x-ct=\text{cte}\Rightarrow x(t)=x_0+ct$ : c'est la loi horaire d'un mobile en mouvement rectiligne uniforme de vitesse $c$ (cinématique). Dériver par rapport à $t$ donne directement $\dfrac{\mathrm dx}{\mathrm dt}=+c$.
+  - titre: "Linéarité de la dérivation"
+    texte: |
+      $\dfrac{\partial^2}{\partial x^2}(y_1+y_2)=\dfrac{\partial^2 y_1}{\partial x^2}+\dfrac{\partial^2 y_2}{\partial x^2}$ : toute combinaison linéaire de solutions d'une équation linéaire homogène est solution (espace vectoriel des solutions).
+  - titre: "Coordonnées caractéristiques"
+    texte: |
+      Avec $\xi=x-ct$ et $\eta=x+ct$ : $\partial_x=\partial_\xi+\partial_\eta$ et $\partial_t=c\,(\partial_\eta-\partial_\xi)$, d'où $\partial_x^2-\dfrac1{c^2}\partial_t^2=4\,\partial_\xi\partial_\eta$. L'équation devient $\partial_\xi\partial_\eta y=0$, qui s'intègre en $y=f(\xi)+g(\eta)$.
+  - titre: "Lien avec les sinusoïdes"
+    texte: |
+      $\cos(kx-\omega t)=\cos\!\big(k(x-\tfrac\omega kt)\big)$ est du type $f(x-ct)$ avec $c=\omega/k$ : les ondes sinusoïdales sont des cas particuliers d'ondes progressives.
+
+liens_autres_disciplines:
+  - discipline: "Cinématique"
+    texte: |
+      Une crête est un « mobile » : sa position $x=x_0+ct$ est une loi horaire de mouvement rectiligne uniforme. Aucune matière ne se déplace avec elle : la corde, elle, ne fait que monter et descendre.
+  - discipline: "Mathématiques"
+    texte: |
+      Équations aux dérivées partielles, changement de variables, espaces vectoriels de solutions. La solution générale $f(x-ct)+g(x+ct)$ est l'analogue de la solution générale d'une EDO linéaire du second ordre (deux fonctions arbitraires au lieu de deux constantes).
+  - discipline: "Électromagnétisme et optique"
+    texte: |
+      Les champs $E$ et $B$ dans le vide vérifient la même équation avec $c=1/\sqrt{\varepsilon_0\mu_0}\approx3\times10^8$ m/s : la lumière est une onde progressive.
+  - discipline: "Océanographie et géophysique"
+    texte: |
+      Tsunamis et ondes sismiques se propagent comme des profils qui se translatent : mesurer le retard entre deux stations donne la célérité et localise la source.
+  - discipline: "Relativité"
+    texte: |
+      Les droites $x=\pm ct$ sont les {\bf caractéristiques} de l'équation : ce sont aussi les trajectoires de la lumière dans un diagramme d'espace-temps (cône de lumière).
+
 questions:
 
   - id: q1

@@ -1,0 +1,290 @@
+id: td2_ex4
+intitule: "Génération de signaux et affichage avec matplotlib"
+td: td2
+facultatif: false
+seance: 2
+cours_rattache:
+  - onip.numpy_vecteurs
+  - onip.matplotlib_bases
+  - onip.critere_de_nyquist
+  - onip.arguments_par_defaut
+
+metadonnees:
+  duree_estimee: "45 min"
+  difficulte: 3
+  type_exercice: "Application longue, cœur du bloc"
+  indispensable: true
+
+enonce_intro: |
+  1. Créer un vecteur temps de 101 points régulièrement répartis entre 0
+     et 1 s. Quelle est la période d'échantillonnage ? \\
+  2. Importer \texttt{matplotlib.pyplot}. \\
+  3. Tracer une sinusoïde de période 50 ms en rouge, avec titre, axes et
+     légende. \\
+  4. Que pensez-vous du résultat ? Améliorer le résultat. \\
+  5. Tracer sur le même graphique une sinusoïde de période 20 ms en bleu. \\
+  6. Faire un zoom pour n'afficher que quelques périodes des deux
+     sinusoïdes. \\
+  7. Faire une fonction générant un signal sinusoïdal sur 10 périodes avec
+     une fréquence d'échantillonnage 6 fois supérieure à la fréquence du
+     signal. Arguments : période et amplitude. \\
+  8. Tester cette fonction avec une période de 30 ms et afficher le
+     signal. \\
+  9. Compléter la fonction pour qu'elle prenne un vecteur temps en
+     argument supplémentaire (défaut : liste vide). Si vide, même
+     comportement qu'avant ; sinon, générer le signal sur ce vecteur.
+     Message si la fréquence d'échantillonnage n'est pas correcte. \\
+  10. Tester cette nouvelle fonctionnalité.
+
+prerequis:
+  - titre: "Critère de Nyquist vs confort visuel"
+    texte: |
+      Le critère de Nyquist ($f_e > 2f$) est un minimum théorique de
+      \emph{reconstruction} du signal. Il est distinct du critère de
+      \emph{confort visuel} d'un tracé matplotlib, qui nécessite bien plus
+      de points par période (typiquement 10 à 100) pour ne pas donner un
+      rendu anguleux — les deux notions sont vues successivement dans cet
+      exercice (questions 4 et 9).
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Tracer un graphique scientifique complet"
+    texte: |
+      Ajouter systématiquement titre, labels d'axes, légende et grille à
+      un tracé matplotlib ; utiliser \texttt{plt.xlim} pour zoomer sans
+      recalculer les données.
+  - titre: "Écrire une fonction avec argument optionnel"
+    texte: |
+      Ajouter un paramètre par défaut à une fonction déjà écrite, et gérer
+      deux comportements distincts selon que cet argument est fourni ou
+      non.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Exercice le plus long du bloc, à ne pas sacrifier"
+    texte: |
+      Les questions 7 à 10 (fonction avec argument optionnel et message
+      conditionnel) préparent directement le travail sur les fonctions de
+      la séance 3 (FFT, meshgrid). Prévoir de circuler activement pendant
+      les questions 3-4, le point le plus visuel et le plus fréquemment
+      source de blocage.
+
+point_cours:
+  - titre: "Questions 1 à 6 : tracé et zoom (extrait commenté)"
+    texte: |
+      \begin{verbatim}
+      import numpy as np
+      import matplotlib.pyplot as plt
+
+      time_vector = np.linspace(0, 1, 101)
+      Te = time_vector[1] - time_vector[0]     # 0.01 s
+
+      periode_1 = 0.050            # 50 ms
+      frequence_1 = 1 / periode_1  # 20 Hz
+      signal_1 = np.sin(2 * np.pi * frequence_1 * time_vector)
+
+      plt.figure()
+      plt.plot(time_vector, signal_1, color="red",
+               label=f"Periode = {periode_1*1000:.0f} ms")
+      plt.xlabel("Temps (s)"); plt.ylabel("Amplitude")
+      plt.title("Sinusoide de periode 50 ms")
+      plt.legend(); plt.grid()
+      plt.show()
+
+      # Q4 : avec Te=10 ms pour une periode de 50 ms, seulement 5 points
+      # par periode -> rendu anguleux. On regenere un vecteur temps plus
+      # fin, SANS changer la duree totale du signal.
+      time_vector_fin = np.linspace(0, 1, 2001)   # Te ~= 0.5 ms
+      signal_1_fin = np.sin(2 * np.pi * frequence_1 * time_vector_fin)
+
+      # Q5-6 : deuxieme sinusoide + zoom avec xlim (ne recalcule rien,
+      # restreint seulement la fenetre d'affichage).
+      periode_2 = 0.020
+      frequence_2 = 1 / periode_2
+      signal_2_fin = np.sin(2 * np.pi * frequence_2 * time_vector_fin)
+
+      plt.figure()
+      plt.plot(time_vector_fin, signal_1_fin, color="red", label="50 ms")
+      plt.plot(time_vector_fin, signal_2_fin, color="blue", label="20 ms")
+      plt.xlim(0, 0.1)   # zoom : 2 periodes de la rouge, 5 de la bleue
+      plt.legend(); plt.grid(); plt.show()
+      \end{verbatim}
+  - titre: "Questions 7-8 : fonction \\texttt{generate\\_sine\\_10\\_periods}"
+    texte: |
+      \begin{verbatim}
+      def generate_sine_10_periods(period: float, amplitude: float):
+          """Genere un signal sinusoidal sur 10 periodes, echantillonne
+          a une frequence 6 fois superieure a la frequence du signal."""
+          frequency = 1 / period
+          sampling_frequency = 6 * frequency
+          Te = 1 / sampling_frequency
+          duration = 10 * period
+
+          # np.arange(0, duration, Te) : le nombre de points decoule de
+          # Te et duration (contrairement a linspace, ou l'on fixerait
+          # le nombre de points a priori).
+          time_vector = np.arange(0, duration, Te)
+          signal = amplitude * np.sin(2 * np.pi * frequency * time_vector)
+          return time_vector, signal
+
+      t_30ms, sig_30ms = generate_sine_10_periods(period=0.030, amplitude=2)
+      \end{verbatim}
+      Avec seulement 6 points par période, le rendu est très anguleux
+      (utiliser \texttt{marker="o"} pour bien visualiser les points
+      réels) : c'est volontaire ($f_e = 6f$), et un bon écho à la
+      question 4 (6 points/période respecte Nyquist mais reste visuellement
+      grossier).
+  - titre: "Question 9-10 : version avec vecteur temps optionnel"
+    texte: |
+      \begin{verbatim}
+      def generate_sine_10_periods_v2(
+          period: float,
+          amplitude: float,
+          time_vector: np.ndarray | list = [],   # cf. piege ci-dessous
+      ):
+          frequency = 1 / period
+
+          # len(...) == 0 fonctionne pour une liste vide ET un ndarray
+          # vide, contrairement a "time_vector == []" qui leverait une
+          # erreur avec un ndarray non vide (comparaison ambigue).
+          if len(time_vector) == 0:
+              sampling_frequency = 6 * frequency
+              Te = 1 / sampling_frequency
+              duration = 10 * period
+              time_vector = np.arange(0, duration, Te)
+          else:
+              time_vector = np.asarray(time_vector)
+              # Frequence d'echantillonnage deduite du vecteur FOURNI.
+              Te_fourni = np.mean(np.diff(time_vector))
+              sampling_frequency = 1 / Te_fourni
+
+              # Critere de Nyquist strict : fe > 2f.
+              if sampling_frequency <= 2 * frequency:
+                  print(
+                      f"ATTENTION : frequence d'echantillonnage "
+                      f"insuffisante (fe={sampling_frequency:.1f} Hz, "
+                      f"signal a {frequency:.1f} Hz)."
+                  )
+
+          signal = amplitude * np.sin(2 * np.pi * frequency * time_vector)
+          return time_vector, signal
+      \end{verbatim}
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Confondre Nyquist et rendu visuel"
+    texte: |
+      Considérer que 5 points par période (question 3-4) est un bug de
+      sous-échantillonnage Nyquist : 5 points reste au-dessus du minimum
+      théorique de 2 (Nyquist respecté), mais insuffisant pour un affichage
+      lisse. Bien distinguer les deux notions.
+  - titre: "Piège de l'argument par défaut mutable"
+    texte: |
+      \texttt{time\_vector=[]} est un piège Python classique : une valeur
+      par défaut \emph{mutable} (liste, dict...) est créée une seule fois
+      à la définition de la fonction et partagée entre tous les appels qui
+      ne fournissent pas cet argument. Ici, sans conséquence car la
+      fonction réaffecte \texttt{time\_vector} sans le modifier en place —
+      bon prétexte pour montrer le piège avec un contre-exemple :
+      \begin{verbatim}
+      def ajoute(valeur, ma_liste=[]):
+          ma_liste.append(valeur)
+          return ma_liste
+      print(ajoute(1))   # [1]
+      print(ajoute(2))   # [1, 2]  <- surprise !
+      \end{verbatim}
+  - titre: "Tester \\texttt{time\\_vector == []} plutôt que \\texttt{len(...) == 0}"
+    texte: |
+      Fonctionne pour une liste vide, mais lève une \texttt{ValueError}
+      (« ambiguous truth value ») si un tableau Numpy non vide est passé.
+      Utiliser \texttt{len(time\_vector) == 0}.
+  - titre: "Oublier de recalculer fe à partir du vecteur fourni"
+    texte: |
+      Réutiliser \texttt{fe = 6 \* frequency} codée en dur au lieu de
+      recalculer $f_e$ à partir du vecteur temps réellement fourni par
+      l'utilisateur : le message d'alerte de la question 9 n'a de sens que
+      si $f_e$ est bien recalculée.
+
+bilan:
+  - titre: "Deux critères, deux échelles"
+    texte: |
+      Nyquist ($f_e > 2f$) garantit qu'un signal \emph{peut} être
+      reconstruit ; un rendu visuel lisse en demande bien davantage. Bien
+      distinguer les deux avant de conclure qu'un tracé « cassé » est
+      forcément un bug de sous-échantillonnage au sens strict.
+
+aller_plus_loin:
+  - niveau: ecole_ingenieur
+    titre: "Vecteur temps non régulier"
+    texte: |
+      Que se passerait-il avec un vecteur temps non régulièrement
+      échantillonné (pas variable) ? Le calcul de $T_e$ par
+      \texttt{np.mean(np.diff(...))} resterait-il pertinent ?
+
+questions:
+  - id: q1
+    enonce: |
+      Créer le vecteur temps de 101 points sur [0, 1] s et calculer sa
+      période d'échantillonnage.
+    coup_de_pouce: |
+      Même raisonnement que \texttt{td2\_ex1} : $N$ points, $N-1$
+      intervalles.
+    correction: "\\texttt{time\\_vector = np.linspace(0,1,101)} ; Te = 0.01 s."
+    solution:
+      - titre: "Calcul"
+        texte: |
+          \texttt{time\_vector = np.linspace(0, 1, 101)} donne
+          \texttt{Te = time\_vector[1] - time\_vector[0] = 0{,}01} s.
+  - id: q2
+    enonce: |
+      Tracer la sinusoïde de période 50 ms sur ce vecteur temps, en rouge,
+      avec titre, axes et légende. Que pensez-vous du résultat ? Comment
+      l'améliorer ?
+    coup_de_pouce: |
+      Combien de points par période cela fait-il, avec $T_e=10$ ms et une
+      période de 50 ms ?
+    correction: "Seulement 5 points/période : rendu anguleux. Régénérer un vecteur temps plus fin, sans changer la durée."
+    solution:
+      - titre: "Diagnostic et amélioration"
+        texte: |
+          Avec $T_e = 10$ ms pour une période de $50$ ms, on n'a que
+          $50/10 = 5$ points par période : la courbe reliée par segments de
+          droite a un aspect anguleux, peu représentatif d'une vraie
+          sinusoïde. Ce n'est pas un sous-échantillonnage au sens de
+          Nyquist ($5 > 2$), mais c'est insuffisant pour un rendu visuel
+          lisse. L'amélioration consiste à augmenter le nombre de points
+          du vecteur temps (par ex. \texttt{np.linspace(0, 1, 2001)}), sans
+          changer la durée totale du signal.
+  - id: q3
+    enonce: |
+      Écrire \texttt{generate\_sine\_10\_periods(period, amplitude)}, qui
+      génère un signal sur 10 périodes avec $f_e = 6f$. La tester avec une
+      période de 30 ms.
+    coup_de_pouce: |
+      \texttt{duration = 10 * period} ; \texttt{Te = 1 / (6 * frequency)}.
+    correction: "np.arange(0, 10*period, 1/(6/period)) — voir code ci-dessus."
+    solution:
+      - titre: "Implémentation"
+        texte: |
+          Voir le code commenté ci-dessus (« Questions 7-8 »). Avec
+          \texttt{period=0.030}, \texttt{amplitude=2}, on obtient un signal
+          de $6$ points par période, sur $10$ périodes, dont le rendu très
+          anguleux illustre concrètement l'écart entre le critère de
+          Nyquist et un affichage visuellement satisfaisant.
+  - id: q4
+    enonce: |
+      Compléter la fonction pour accepter un vecteur temps optionnel
+      (défaut : liste vide). Si un vecteur est fourni, en déduire $f_e$ et
+      afficher un message si le critère de Nyquist n'est pas respecté.
+      Tester avec un vecteur bien échantillonné, puis un vecteur trop
+      grossier.
+    coup_de_pouce: |
+      Utilisez \texttt{np.mean(np.diff(time\_vector))} pour déduire $T_e$
+      d'un vecteur temps quelconque (supposé régulier).
+    correction: "Voir \\texttt{generate\\_sine\\_10\\_periods\\_v2} ci-dessus ; le cas « mal échantillonné » doit afficher le message d'alerte."
+    solution:
+      - titre: "Validation"
+        texte: |
+          Avec \texttt{t\_manuel\_ok = np.linspace(0, 0.3, 1000)}, largement
+          suffisant pour 30 ms, aucun message n'apparaît. Avec
+          \texttt{t\_manuel\_ko = np.linspace(0, 0.3, 5)}, bien trop peu de
+          points, le message d'avertissement doit s'afficher : c'est le
+          test de compréhension à faire vérifier avant de considérer
+          l'exercice terminé.

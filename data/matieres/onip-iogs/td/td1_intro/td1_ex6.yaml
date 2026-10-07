@@ -1,0 +1,127 @@
+id: td1_ex6
+intitule: "Somme des éléments d'une liste : mauvais argument d'appel"
+td: td1
+facultatif: false
+seance: 1
+cours_rattache:
+  - intro.slicing
+  - intro.debogage
+
+metadonnees:
+  duree_estimee: "10 min"
+  difficulte: 1
+  type_exercice: "Débogage rapide"
+  indispensable: true
+
+enonce_intro: |
+  On fournit \texttt{sum\_list\_elements0.py} : la fonction
+  \texttt{sum\_list\_elements} elle-même est correcte, mais le script
+  affiche \texttt{Sum of elements = 10} au lieu des \texttt{15} annoncés
+  par le commentaire « Expected output ». Exercice très court, à traiter
+  en échauffement ou en fin de séance.
+
+prerequis:
+  - titre: "Slicing Python"
+    texte: |
+      Pour une liste \texttt{L}, \texttt{L[:-1]} désigne tous les éléments
+      sauf le dernier. C'est un slicing valide syntaxiquement, mais qui
+      change le contenu réellement transmis à une fonction si on ne le
+      fait pas intentionnellement.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Distinguer bug de logique interne et mauvais appel"
+    texte: |
+      Vérifier qu'une fonction, correcte en elle-même, peut donner un
+      résultat faux si elle est appelée avec de mauvais arguments.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Exercice d'échauffement ou de fin de séance"
+    texte: |
+      Volontairement bref : à utiliser pour occuper les étudiants les plus
+      rapides en attendant la suite, ou pour clore la séance sur une note
+      simple après des exercices plus longs.
+
+point_cours:
+  - titre: "Code fourni (\\texttt{sum\\_list\\_elements0.py})"
+    texte: |
+      \begin{verbatim}
+      def sum_list_elements(my_list):
+          total = 0
+          for i in range(len(my_list)):
+              total += my_list[i]
+          return total
+
+
+      sample_list = [1, 2, 3, 4, 5]
+
+      # Expected output: Sum of elements = 15
+      print("Sum of elements =", sum_list_elements(sample_list[:-1]))
+      \end{verbatim}
+  - titre: "Localisation du bug"
+    texte: |
+      La fonction \texttt{sum\_list\_elements} elle-même est correcte :
+      elle additionne bien tous les éléments qu'on lui donne. Le bug est
+      dans l'\textbf{appel} : \texttt{sample\_list[:-1]} transmet
+      \texttt{[1, 2, 3, 4]} (sans le dernier élément, 5), et non
+      \texttt{sample\_list} en entier. La somme calculée, $1+2+3+4=10$,
+      est donc exacte \emph{pour les arguments reçus}, mais ne correspond
+      pas à l'intention du commentaire.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Chercher le bug dans la boucle plutôt que dans l'appel"
+    texte: |
+      Un réflexe fréquent est de relire la boucle \texttt{for} en
+      cherchant une erreur d'indice, alors que la boucle est parfaitement
+      correcte : faire d'abord vérifier ce qui est réellement passé en
+      argument, par exemple en affichant \texttt{sample\_list[:-1]} avant
+      l'appel.
+
+bilan:
+  - titre: "Une fonction correcte peut être mal utilisée"
+    texte: |
+      Avant de chercher un bug \emph{à l'intérieur} d'une fonction,
+      vérifier ce qui lui est réellement transmis en argument : le
+      problème peut très bien se situer du côté de l'appelant.
+
+aller_plus_loin:
+  - niveau: ecole_ingenieur
+    titre: "Variantes sans boucle explicite"
+    texte: |
+      Réécrire la somme avec \texttt{sum()} puis avec
+      \texttt{functools.reduce}, et comparer la lisibilité des trois
+      versions (boucle indexée, boucle \texttt{for...in}, fonctions
+      natives).
+
+questions:
+  - id: q1
+    enonce: |
+      Exécuter le script. Le résultat correspond-il au commentaire
+      « Expected output: Sum of elements = 15 » ? Localiser précisément la
+      cause de l'écart, sans modifier la fonction \texttt{sum\_list\_elements}.
+    coup_de_pouce: |
+      Affichez \texttt{sample\_list[:-1]} séparément avant l'appel à la
+      fonction.
+    correction: "\\texttt{sample\\_list[:-1]} exclut le dernier élément (5) de l'argument transmis."
+    solution:
+      - titre: "Diagnostic"
+        texte: |
+          Le résultat affiché est \texttt{10}, et non \texttt{15}. La
+          fonction \texttt{sum\_list\_elements} additionne correctement
+          tous les éléments qu'elle reçoit, mais l'appel
+          \texttt{sum\_list\_elements(sample\_list[:-1])} lui transmet
+          \texttt{[1, 2, 3, 4]} (le slicing \texttt{[:-1]} exclut le
+          dernier élément), et non la liste complète
+          \texttt{[1, 2, 3, 4, 5]}.
+  - id: q2
+    enonce: |
+      Corriger l'appel pour obtenir \texttt{Sum of elements = 15}.
+    coup_de_pouce: |
+      Il suffit de transmettre la liste complète, sans slicing.
+    correction: "\\texttt{sum\\_list\\_elements(sample\\_list)} (sans le [:-1])."
+    solution:
+      - titre: "Correction"
+        texte: |
+          En appelant \texttt{sum\_list\_elements(sample\_list)} (sans le
+          slicing \texttt{[:-1]}), les cinq éléments sont bien additionnés
+          et le résultat affiché devient \texttt{15}, conforme au
+          commentaire.

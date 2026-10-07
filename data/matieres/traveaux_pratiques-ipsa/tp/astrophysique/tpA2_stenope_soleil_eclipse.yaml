@@ -1,0 +1,201 @@
+id: tpA_tp2
+intitule: "Image sténopéique du Soleil : diamètre angulaire, croissants sous les arbres et éclipse"
+tp: tpA
+facultatif: false
+seance: 1
+cours_rattache:
+  - optique.optique_geometrique
+  - optique.diffraction
+  - astronomie.diametre_angulaire
+
+metadonnees:
+  duree_estimee: "2 h 30 (extérieur, par temps ensoleillé)"
+  difficulte: 3 # Sur une échelle de 1 à 5
+  type_exercice: "TP expérimental en extérieur"
+  indispensable: true
+  public_cible: [lycee, cpge, licence, ecole_aviation]
+
+enonce_intro: |
+  Sous un arbre, les taches de lumière au sol sont rondes : chaque trou entre les feuilles se comporte comme un sténopé et projette une \textbf{image du Soleil}. Pendant une éclipse partielle, ces taches deviennent des croissants, images du Soleil partiellement masqué par la Lune. Le 12 août 2026, la France a connu une éclipse partielle profonde en fin de journée (plus de $90\ \%$ à Paris) ; les photographies de ce jour peuvent servir de données.
+
+  Dans ce TP, on construit un sténopé, on mesure la taille de l'image du Soleil à différentes distances pour en déduire son \textbf{diamètre angulaire} $\theta$, puis son rayon. On étudie ensuite ce qui décide qu'une tache de lumière est l'image du Soleil (croissant) ou la forme du trou. La valeur de $\theta$ sera réutilisée dans le TP A3 (densité du Soleil).
+
+securite:
+  - titre: "Ne jamais regarder le Soleil"
+    texte: |
+      On ne regarde jamais le Soleil, ni directement, ni à travers le trou du sténopé, ni avec des jumelles ou un appareil photo sans filtre. On regarde uniquement l'\textbf{écran} sur lequel se projette l'image, en tournant le dos au Soleil. Pour observer directement une éclipse, utiliser uniquement des lunettes certifiées ISO 12312-2.
+
+materiel:
+  - "Boîte en carton longue (tube d'emballage, boîte à chaussures) ou deux feuilles cartonnées reliées par un tube"
+  - "Feuille d'aluminium ménager, épingle, poinçon ou perforatrice à trou de $1$ à $2\\ \\text{mm}$"
+  - "Écran blanc (papier calque ou feuille blanche) et ruban adhésif"
+  - "Règle graduée au demi-millimètre, mètre ruban"
+  - "Smartphone pour les photographies et les mesures d'angle (application niveau ou inclinomètre)"
+  - "Passoire, chapeau de paille, feuilles d'arbre ou grille de cuisine pour l'observation des taches (facultatif)"
+
+manipulation:
+  - titre: "1. Construction du sténopé"
+    texte: |
+      Découper un carré de $5\ \text{cm}$ de côté dans le fond d'une boîte et le fermer avec une feuille d'aluminium percée d'un petit trou (épingle) que l'on agrandit progressivement. Placer un écran à l'opposé. La profondeur $D$ est réglable (longueur de la boîte, ou écran mobile).
+  - titre: "2. Mesures d'image"
+    texte: |
+      En tournant le dos au Soleil, viser le Soleil avec le trou (l'ombre de la boîte doit être minimale sur l'écran) et mesurer le diamètre $d$ de l'image du Soleil pour $D=0{,}50\ ;\ 1{,}00\ ;\ 1{,}50\ ;\ 2{,}00\ \text{m}$. Mesurer chaque diamètre plusieurs fois (deux opérateurs).
+  - titre: "3. Taille du trou"
+    texte: |
+      Refaire la mesure à $D=1{,}00\ \text{m}$ pour des trous de diamètres $0{,}3\ ;\ 1\ ;\ 3\ ;\ 10\ ;\ 30\ \text{mm}$. Comparer la forme de l'image et sa netteté.
+  - titre: "4. Taches sous les arbres"
+    texte: |
+      Sous un arbre feuillu, mesurer le diamètre de quelques taches de lumière rondes et estimer la hauteur $h$ des feuilles concernées (mètre ruban, application d'inclinomètre). Photographier le sol avec une règle. Éventuellement, photographier les croissants lors d'une éclipse partielle.
+
+donnees_exemple: |
+  Données typiques : $D=0{,}50\ ;\ 1{,}00\ ;\ 1{,}50\ ;\ 2{,}00\ \text{m}$ donnent $d=4{,}7\ ;\ 9{,}3\ ;\ 14{,}0\ ;\ 18{,}6\ \text{mm}$ (incertitude de lecture $\pm0{,}5\ \text{mm}$).
+
+prerequis:
+  - titre: "Notions"
+    texte: |
+      Propagation rectiligne de la lumière, angle en radians ($\alpha\approx\tan\alpha$ pour $\alpha\ll1$), régression linéaire.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "De l'image au diamètre angulaire"
+    texte: |
+      Savoir qu'un sténopé forme une image inversée dont la taille est proportionnelle à la distance, en déduire un angle, puis une dimension physique en utilisant une distance connue.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Ce qui se voit dans les taches"
+    texte: |
+      Faire comprendre que la forme des taches dépend du rapport entre la taille du trou et la taille $D\theta$ de l'image du Soleil : petite ouverture, image du Soleil ; grande ouverture, forme du trou.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Trou trop grand ou trop petit"
+    texte: |
+      Un trou de $10\ \text{mm}$ à $1\ \text{m}$ donne une image floue de $19\ \text{mm}$ de large (l'image est la somme de l'image du Soleil et de la forme du trou). Un trou de $0{,}1\ \text{mm}$ donne une image sombre et entourée d'anneaux de diffraction.
+  - titre: "Confondre angle et distance"
+    texte: |
+      $d=D\theta$ n'a pas de rapport avec la distance au Soleil ; c'est l'angle sous lequel on voit le Soleil qui compte.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Un TP à faire dehors"
+    texte: |
+      Proposer un défi : « le plus grand Soleil » avec une boîte de moins de $3\ \text{m}$, ou l'image du Soleil sur le mur d'une salle obscure percé d'un trou (camera obscura). Comparer avec les taches sous un arbre.
+
+lien_aviation:
+  - titre: "Éblouissement et navigation astronomique"
+    texte: |
+      Les sextants à bulle utilisés en navigation aérienne jusque dans les années 1970 visaient le bord inférieur du Soleil ; on corrige la mesure du demi-diamètre apparent du Soleil ($\approx16'$). Le diamètre angulaire mesuré ici est celui de cette correction. Discuter aussi l'éblouissement en vol face au Soleil bas (par exemple lors d'un atterrissage face à l'ouest en fin de journée) et le rôle des pare-soleil.
+
+bilan:
+  - titre: "Résultats à retenir"
+    texte: |
+      $d=D\theta$ ; $\theta\approx9{,}3\ \text{mrad}\approx0{,}53^\circ\approx32'$ ; $R_\odot=\dfrac{a\,\theta}{2}\approx6{,}96\times10^{8}\ \text{m}$. Une tache de lumière est une image du Soleil si le trou est petit devant $D\theta$.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Flou géométrique et diffraction"
+    texte: |
+      Le diamètre optimal du trou vaut $s\approx\sqrt{2{,}44\,\lambda D}\approx1{,}2\ \text{mm}$ pour $D=1\ \text{m}$ et $\lambda=550\ \text{nm}$ : c'est l'égalité du flou géométrique $s$ et de la tache de diffraction $2{,}44\lambda D/s$.
+  - niveau: master
+    titre: "Convolution de deux ouvertures"
+    texte: |
+      L'image est la convolution du disque solaire (de brillance non uniforme à cause de l'assombrissement centre-bord) et de la forme du trou. On peut retrouver l'assombrissement centre-bord du Soleil sur une image bien contrastée.
+
+questions:
+  - id: q1
+    enonce: |
+      Modèle. Un objet lointain vu sous l'angle $\theta$ forme, à travers un trou de très petite taille, une image de taille $d$ sur un écran situé à la distance $D$ du trou. Montrer que $d=2D\tan(\theta/2)\approx D\theta$. L'image est-elle droite ou renversée ? Est-elle plus grande ou plus petite si on double $D$ ?
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $d=2D\tan(\theta/2)\approx D\theta$ (proportionnelle à $D$) ; image renversée (les rayons passent par le trou sans déviation).
+    solution:
+      - titre: "Démonstration"
+        texte: |
+          Les rayons issus des deux bords du Soleil, séparés de $\theta$, passent par le trou et atteignent l'écran en des points séparés de $d=2D\tan(\theta/2)$. Pour $\theta\ll1$ : $d\approx D\theta$. Les rayons se croisent au trou : le haut du Soleil est projeté en bas de l'écran, donc l'image est renversée (et inversée gauche-droite). Doubler $D$ double $d$ : l'image est plus grande mais deux fois moins lumineuse (surface $\times4$).
+
+  - id: q2
+    enonce: |
+      Traiter les données de l'énoncé : tracer $d$ en fonction de $D$, ajuster une droite passant par l'origine, en déduire $\theta$ en radians et en degrés (avec incertitude), puis comparer à la valeur de référence $\theta_{\text{ref}}=9{,}30\ \text{mrad}$ ($0{,}533^\circ$).
+    coup_de_pouce:
+      - titre: "Régression"
+        texte: |
+          Pente : $\theta=\dfrac{\sum D_id_i}{\sum D_i^2}$ pour un ajustement par l'origine. Estimer l'incertitude par la dispersion des rapports $d_i/D_i$.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $\dfrac{d}{D}=9{,}4\ ;\ 9{,}3\ ;\ 9{,}3\ ;\ 9{,}3\ \text{mm/m}$, donc $\theta=(9{,}3\pm0{,}3)\ \text{mrad}=(0{,}53\pm0{,}02)^\circ$ ($\pm3\ \%$).
+    solution:
+      - titre: "Calcul"
+        texte: |
+          $\sum D_id_i=0{,}5\times4{,}7+1{,}0\times9{,}3+1{,}5\times14{,}0+2{,}0\times18{,}6=2{,}35+9{,}3+21{,}0+37{,}2=69{,}85$ et $\sum D_i^2=0{,}25+1+2{,}25+4=7{,}5$, donc $\theta=\dfrac{69{,}85}{7{,}5}=9{,}31\ \text{mm/m}=9{,}31\ \text{mrad}$.
+          Incertitude : l'incertitude de lecture de $0{,}5\ \text{mm}$ sur $d$ conduit à $\dfrac{\Delta d}{d}$ de $10\ \%$ à $D=0{,}5\ \text{m}$ mais de $2{,}7\ \%$ à $D=2\ \text{m}$ : les plus grandes distances sont les plus précises. On retient $\pm3\ \%$.
+          Conversion : $9{,}31\times10^{-3}\ \text{rad}\times\dfrac{180}{\pi}=0{,}533^\circ=32{,}0'$.
+
+  - id: q3
+    enonce: |
+      Sachant que la distance moyenne Terre-Soleil est $a=1{,}496\times10^{11}\ \text{m}$, calculer le rayon du Soleil. Comparer avec la valeur tabulée $6{,}96\times10^{8}\ \text{m}$. Dans le même esprit, on mesure la Lune sous l'angle $\theta_L=9{,}0\ \text{mrad}$ ; sa distance est de $3{,}84\times10^{8}\ \text{m}$. Calculer son rayon et discuter le rapport avec le Soleil.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $R_\odot=\dfrac{a\theta}{2}\approx6{,}96\times10^{8}\ \text{m}$. $R_L=\dfrac{3{,}84\times10^{8}\times9{,}0\times10^{-3}}{2}\approx1{,}73\times10^{6}\ \text{m}$. Le rapport $R_\odot/R_L\approx400$ compense le rapport des distances $\approx390$ : d'où des diamètres apparents voisins et des éclipses totales.
+    solution:
+      - titre: "Calcul"
+        texte: |
+          $R_\odot=\dfrac{a\theta}{2}=\dfrac{1{,}496\times10^{11}\times9{,}31\times10^{-3}}{2}=6{,}96\times10^{8}\ \text{m}$. Le Soleil est $109$ fois plus large que la Terre.
+          $R_L=1{,}73\times10^{6}\ \text{m}$ (tabulé $1{,}74\times10^{6}$). $\dfrac{R_\odot}{R_L}=402$ et $\dfrac{a}{d_L}=390$ : la Lune et le Soleil ont presque le même diamètre apparent. Comme les orbites sont elliptiques, $\theta_L$ varie de $8{,}6$ à $9{,}8\ \text{mrad}$ et $\theta_\odot$ de $9{,}15$ à $9{,}46\ \text{mrad}$ : selon la distance, l'éclipse est totale ou annulaire.
+
+  - id: q4
+    enonce: |
+      Effet de la taille du trou $s$. Pour $D=1{,}00\ \text{m}$, décrire ce que l'on attend pour $s=0{,}3\ ;\ 1\ ;\ 3\ ;\ 10\ ;\ 30\ \text{mm}$. On approxime l'étalement de l'image par $\delta\approx s$ (flou géométrique) et par $\delta_{\text{diff}}=\dfrac{2{,}44\lambda D}{s}$ (diffraction, $\lambda=550\ \text{nm}$). Trouver la valeur optimale de $s$ et calculer le diamètre apparent de l'image pour chacune des valeurs de $s$.
+    coup_de_pouce:
+      - titre: "Diamètre apparent"
+        texte: |
+          $d_{\text{app}}\approx D\theta+s$ (image du Soleil élargie de la taille du trou), auquel s'ajoute la diffraction si $s$ est très petit.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $s_{\text{opt}}=\sqrt{2{,}44\lambda D}\approx1{,}2\ \text{mm}$. Diamètres apparents pour $D=1\ \text{m}$ : $9{,}6\ ;\ 10{,}3\ ;\ 12{,}3\ ;\ 19{,}3\ ;\ 39{,}3\ \text{mm}$ (sans diffraction). Pour $s=0{,}3\ \text{mm}$, la diffraction contribue $\approx4{,}5\ \text{mm}$ de flou : l'image est plus floue que pour $s=1{,}2\ \text{mm}$.
+    solution:
+      - titre: "Discussion"
+        texte: |
+          Optimum : $s=\dfrac{2{,}44\lambda D}{s}\Rightarrow s=\sqrt{2{,}44\lambda D}=\sqrt{2{,}44\times550\times10^{-9}\times1}=1{,}16\ \text{mm}$.
+          Pour $s=0{,}3\ \text{mm}$, $\delta_{\text{diff}}=\dfrac{2{,}44\times550\times10^{-9}}{0{,}3\times10^{-3}}=4{,}5\ \text{mm}$ ; pour $s=10\ \text{mm}$, $\delta_{\text{diff}}=0{,}13\ \text{mm}$ (négligeable) mais le flou géométrique vaut $10\ \text{mm}$, comparable à l'image du Soleil ($9{,}3\ \text{mm}$). À $s=30\ \text{mm}$, l'image devient la forme du trou (disque de $39\ \text{mm}$).
+          Règle pratique : l'image est fidèle si $s\ll D\theta$.
+
+  - id: q5
+    enonce: |
+      Taches sous un arbre. Les feuilles d'un arbre sont à la hauteur $h=10\ \text{m}$ au-dessus du sol. (a) Quel est le diamètre des taches de lumière si le Soleil est au zénith ? (b) Le Soleil est à la hauteur $\varepsilon=40^\circ$ au-dessus de l'horizon : les taches sont elliptiques. Calculer leur grand axe et expliquer. (c) Le trou entre les feuilles mesure $s=3\ \text{cm}$ : la tache est-elle l'image du Soleil ? (d) Et si $s=50\ \text{cm}$ ?
+    correction:
+      - titre: "Résultat"
+        texte: |
+          (a) $d=h\theta=10\times9{,}3\times10^{-3}\approx9{,}3\ \text{cm}$. (b) distance de la feuille au sol le long du rayon : $D=h/\sin\varepsilon=15{,}6\ \text{m}$ ; petit axe $D\theta=14{,}5\ \text{cm}$ et grand axe $\dfrac{D\theta}{\sin\varepsilon}=22{,}5\ \text{cm}$. (c) $s\ll D\theta$ : image du Soleil (tache ronde ou croissant). (d) $s\gg D\theta$ : forme du trou.
+    solution:
+      - titre: "Discussion"
+        texte: |
+          (a) Au zénith : $d=h\theta\approx9{,}3\ \text{cm}$ (pour une feuille à $h=10\ \text{m}$).
+          (b) Le rayon fait l'angle $\varepsilon$ avec l'horizontale ; la distance feuille-tache est $D=h/\sin\varepsilon=10/\sin40^\circ=15{,}6\ \text{m}$. Le petit axe de la tache vaut $D\theta=14{,}5\ \text{cm}$ et le grand axe $D\theta/\sin\varepsilon=22{,}5\ \text{cm}$ : le sol oblique étire l'image dans la direction du Soleil.
+          (c) $s=3\ \text{cm}$, $D\theta=14{,}5\ \text{cm}$ : $s/D\theta\approx0{,}2$, l'image est fidèle (avec un léger flou). (d) Avec $s=50\ \text{cm}$, $s\gg D\theta$ : la tache a la forme du trou (avec des bords adoucis). Cette tache est « la forme du trou éclairée par le Soleil », pas l'image du Soleil.
+          Pendant une éclipse, seules les petites ouvertures reproduisent le croissant.
+
+  - id: q6
+    enonce: |
+      Éclipse partielle. Lors de l'éclipse partielle du 12 août 2026, l'obscuration à Paris atteignait $92\ \%$ au maximum. (a) Pourquoi les taches sous un arbre prennent-elles la forme de croissants ? (b) Le croissant sur le sol pointe-t-il dans la même direction que le croissant du Soleil dans le ciel ? (c) Le diamètre des taches change-t-il pendant l'éclipse ? (d) Photographier une passoire ou un chapeau de paille : chaque trou donne un croissant. Proposer un montage de mesure pour vérifier que la largeur du croissant diminue quand l'obscuration augmente.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          (a) chaque trou forme une image du Soleil, donc du Soleil partiellement occulté. (b) Non : l'image est renversée, le croissant est tourné de $180^\circ$ par rapport au ciel. (c) Non, $d=D\theta$ ne dépend pas de l'éclipse. (d) Comparer largeur du croissant à diamètre du disque sur des photos horodatées.
+    solution:
+      - titre: "Discussion"
+        texte: |
+          (a) Le Soleil partiellement caché par la Lune a la forme d'un croissant. Chaque petit trou entre les feuilles en donne une image, donc autant de croissants qu'il y a de trous. (b) L'image est renversée : un croissant dont les cornes pointent vers le haut dans le ciel donne un croissant dont les cornes pointent vers le bas. (c) Le diamètre de l'image reste $D\theta$, l'éclipse ne modifie pas $\theta$ (elle occulte la source). Si $s\ll D\theta$, la largeur du croissant est proportionnelle à $D\theta\times(1-\text{fraction})$.
+          (d) On photographie la tache avec une règle à plusieurs instants et on trace la largeur maximale du croissant en fonction de l'heure ; la courbe passe par un minimum au maximum de l'éclipse. Pour une éclipse totale, les taches disparaissent puis réapparaissent.
+
+  - id: q7
+    enonce: |
+      (*) Pourquoi le diamètre angulaire du Soleil est-il une donnée cruciale pour la suite ? Justifier que la mesure de $\theta$ et de la période orbitale $T$ suffit, avec la constante $G$, à obtenir la densité moyenne du Soleil (TP A3).
+    correction:
+      - titre: "Résultat"
+        texte: |
+          La troisième loi de Kepler fournit $GM_\odot=\dfrac{4\pi^2a^3}{T^2}$ ; le rayon est $R=\dfrac{a\theta}{2}$ ; donc $\rho_\odot=\dfrac{3M_\odot}{4\pi R^3}=\dfrac{24\pi}{GT^2\theta^3}$ : la distance $a$ disparaît.
+    solution:
+      - titre: "Aperçu du TP A3"
+        texte: |
+          $M_\odot=\dfrac{4\pi^2a^3}{GT^2}$ et $R_\odot=\dfrac{a\theta}{2}$ donnent $\rho_\odot=\dfrac{M_\odot}{\frac{4}{3}\pi R_\odot^3}=\dfrac{3\pi}{GT^2}\left(\dfrac{a}{R_\odot}\right)^3=\dfrac{24\pi}{GT^2\theta^3}$. La seule mesure géométrique nécessaire est l'angle $\theta$, que l'on obtient avec un sténopé.

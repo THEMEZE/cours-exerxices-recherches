@@ -1,0 +1,612 @@
+id: td2_ex1
+intitule: "Célérité d'une onde acoustique dans un fluide parfait"
+td: td2
+facultatif: false
+seance: 3
+
+cours_rattache:
+  - chap2.compressibilite
+  - chap2.celerite_son
+  - chap2.equation_onde_acoustique
+  - thermo.capacites_calorifiques
+
+metadonnees:
+  duree_estimee: "30 min"
+  difficulte: 3
+  type_exercice: "Cours actif / Application"
+  indispensable: true
+
+enonce_intro: |
+  Le fluide considéré est de l'air, modélisé comme un fluide parfait, de
+  rapport des capacités calorifiques $\gamma = C_P/C_V = 1.4$. Masse molaire
+  $M = 29$ g/mol, température $T = 293$ K, $R = 8.32$ J·mol$^{-1}$·K$^{-1}$.
+  On rappelle le coefficient de compressibilité $\chi = -\dfrac{1}{V}\dfrac{\partial V}{\partial P}$.
+
+# figure:
+#   - ref: td2_ex1_intro_schema
+#     legende: |
+#       Suggestion : schéma d'une tranche de fluide d'épaisseur $\mathrm{d}x$ au repos, traversée par l'onde acoustique. Faire apparaître la pression moyenne $P_0$, la surpression $p(x,t)$ appliquée sur chaque face de la tranche, et le déplacement $\Psi(x,t)$ des particules de fluide par rapport à leur position d'équilibre.
+#     width: 0.6
+#     label:
+#   - ref: td2_ex1_PV_diagram
+#     legende: |
+#       Suggestion : diagramme $(P,V)$ superposant, à partir d'un même point $(P_0,V_0)$, une transformation isotherme ($PV=\text{cte}$) et une transformation adiabatique réversible ($PV^\gamma=\text{cte}$). Faire apparaître visuellement que la pente locale (donc l'inverse de la compressibilité) est plus grande pour l'adiabatique — utile pour visualiser pourquoi $\chi_S < \chi_T$.
+#     width: 0.6
+#     label:
+#   - ref: td2_ex1_altitude
+#     legende: |
+#       Suggestion : graphe de la vitesse du son $c_S(z)$ en fonction de l'altitude $z$ dans l'atmosphère standard, superposé au profil de température $T(z)$, pour illustrer la question 5.
+#     width: 0.6
+#     label:
+
+prerequis:
+  - titre: "Coefficient de compressibilité et équation d'état"
+    texte: |
+      Connaître la définition du coefficient de compressibilité isotherme $\chi_T = -\dfrac{1}{V}\left(\dfrac{\partial V}{\partial P}\right)_T$ et de son analogue isentropique $\chi_S = -\dfrac{1}{V}\left(\dfrac{\partial V}{\partial P}\right)_S$, ainsi que l'équation d'état des gaz parfaits $PV=nRT$.
+
+      Connaître la relation générale établie en cours reliant la célérité d'une onde acoustique à la compressibilité et à la masse volumique du milieu :
+      $$c^2 = \frac{1}{\rho\,\chi}.$$
+
+      Cette relation est indépendante de l'hypothèse thermodynamique faite sur la transformation ; seule la valeur de $\chi$ (isotherme ou isentropique) change selon le modèle physique retenu pour décrire la propagation.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Choisir le bon modèle thermodynamique pour une situation physique"
+    texte: |
+      Savoir mobiliser les outils de thermodynamique (équation d'état, capacités calorifiques, lois de Laplace) pour calculer une grandeur de propagation ondulatoire.
+
+      Savoir confronter un résultat théorique à une valeur expérimentale de référence pour juger de la pertinence d'une hypothèse de modélisation, et savoir en tirer une conclusion physique argumentée plutôt qu'une simple constatation d'écart numérique.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Faire le lien entre acoustique et thermodynamique"
+    texte: |
+      Cet exercice permet de montrer que l'acoustique n'est pas un domaine isolé de la mécanique des fluides : la thermodynamique y intervient de façon essentielle via l'équation d'état du milieu.
+
+      L'enjeu pédagogique central est de faire vivre aux étudiants la démarche scientifique complète : poser une hypothèse simple (isotherme), en tirer une prédiction quantitative, la confronter à l'expérience, constater son insuffisance, puis raffiner l'hypothèse (isentropique) pour restaurer l'accord. C'est cette démarche, plus que le résultat final, qui doit être valorisée en séance.
+
+point_cours:
+
+  - titre: "Proposition de progression"
+    texte: |
+      \textbf{À introduire}
+
+      \begin{enumerate}
+        \item {\bf Les lois de Laplace}
+
+          Pour un gaz parfait en transformation adiabatique réversible :
+          $$PV^\gamma=\mathrm{cste},\qquad TV^{\gamma-1}=\mathrm{cste}.$$
+
+          On peut démontrer la première loi à partir du premier principe, en utilisant :
+          $$dU=nC_V\,dT,\qquad PV=nRT.$$
+
+          La deuxième loi se déduit ensuite de l'équation d'état.
+
+        \item {\bf Retrouver la célérité du son dans un gaz parfait}
+
+          On admet le résultat acoustique :
+          $$c^2=\left(\frac{\partial P}{\partial\rho}\right)_S.$$
+
+          Avec
+          $$P\rho^{-\gamma}=\mathrm{cste},$$
+          on obtient :
+          $$\left(\frac{\partial P}{\partial\rho}\right)_S=\gamma\frac{P}{\rho}.$$
+
+          Donc :
+          $$\boxed{c=\sqrt{\frac{\gamma P}{\rho}}}.$$
+
+          Cette application donne un sens physique concret à $\gamma$.
+
+      \end{enumerate}
+
+      \textbf{Pour approfondir}
+
+      \begin{enumerate}
+        \setcounter{enumi}{2}
+        \item {\bf Le rapport des compressibilités}
+
+        On peut introduire l'identité thermodynamique :
+        $$
+        \frac{\chi_T}{\chi_S}=\frac{C_p}{C_V}=\gamma.
+        $$
+
+        On la présentera comme une identité thermodynamique complémentaire, avec une démonstration seulement si les relations de Maxwell et les dérivées partielles sont déjà bien maîtrisées.
+      \end{enumerate}
+
+
+
+  # - titre: "Approximation accoustique"
+  #   texte: |
+  #     On considère un fluide parfait au repos, de masse volumique moyenne $\rho_0$ et de pression moyenne $P_0$, traversé par une petite perturbation. On note $\vec{v}(x,t)$ la vitesse particulaire eulérienne, $p(x,t) = P(x,t)-P_0$ la surpression acoustique, et $\rho'(x,t)=\rho(x,t)-\rho_0$ la surdensité.\\
+
+  #     \begin{itemize}[label =$\bullet$]
+  #       \item L'{\bf équation d'Euler} (bilan de conservation de quantité de mouvement) s'écrit  donc :
+  #         $$ \overbrace{(\rho_0 + \rho')}^{\rho} \left ( \frac{\partial \vec{v}}{\partial t} + ( \vec{v} \cdot \overrightarrow{\mathrm{grad}} ) \vec{v} ) \right ) = - \overrightarrow{\mathrm{grad}} \overbrace{(P_O + p)}^{P}, $$
+  #       \item et l'{\bf équation locale de conservation de la masse} s'écrit donc
+  #         $$ \mathrm{div} ( \overbrace{(\rho_0 + \rho')}^{\rho} \, \vec{v} ) + \frac{\partial  \overbrace{(\rho_0 + \rho')}^{\rho} }{\partial t} = 0.$$
+  #     \end{itemize}
+
+    
+  #     On suppose que la surpression acoustique $p(x,t)$, la la surdensité $\rho'(x,t)$ et la vitesse particulaire eulérienne $\vec{v}(x,t)$, ont en tot point du fluide une valeur moyenne temporelle nulle et sont supposés infiniment petits de même, ainsi que leurs dérivées spatiales et temporelles\footnote{Plus de sens en mathématique les gradeurs adimentionés $p/P_0$ , $\rho'/\rho_0$ et $\Vert \vec{v} \Vert / c$ sont infiniment petits de même ordre.} — toutes considérées comme des grandeurs du premier ordre (acoustique linéaire, hypothèse des petites perturbations).\\
+
+  #     Tous les calculs seront menés dans l'{\em approximation accoustique} c'est à dire à l'ordre 1 en ces infiniment petits, ce qui permet d'obtenir des équations linéaire.
+
+  # - titre: "Linéarisations"
+  #   texte: |
+  #     \begin{itemize}[label = $\bullet$]
+  #       \item {\bf Linéarisation de l'équation d'Euler} : Le terme d'accélération convective $ (\vec{v} \cdot \overrightarrow{\mathrm{grad}} ) \vec{v}$ et le terme $\rho' \partial \vec{v}/ partial t$ sont d'ordre 2 et doivent donc etre négligés par rapport aux termes d'ordre 0 et 1. D'autre part $P_O$ est uniforme donc $\overrightarrow{\mathrm{grad}}P_O = 0$.\\
+
+  #       On obtient l'{\bf équation d'Euler linéarisée} : 
+
+  #       $$\rho_0 \frac{\partial \vec{v}}{\partial t} = -\overrightarrow{\mathrm{grad}}\, p.$$
+
+  #       \item {\bf Linéarisation de l'équation locale de conservation de la masse} : le terme $\mathrm{div} ( \rho' \, \vec{v} )$ est d'ordre 2 , doivent donc etre négligés par rapport aux termes d'ordre 0 et 1. De plus $\rho_0$ est constant dont $\partial \rho_0 / \partial t = 0$ et $\mathrm{div} ( \rho_O \vec{v} ) = \rho_0 \mathrm{div} (\vec{v} )$.\\
+
+  #       On obtient l'{\bf équation locale de conservation de la masse linéarisée} :
+
+  #       $$\frac{\partial \rho'}{\partial t} + \rho_0\, \mathrm{div}\, \vec{v} = 0.$$
+
+  #     \end{itemize}
+
+  
+
+
+  # - titre: "Mise en équation d'une onde acoustique dans un fluide (rappel)"
+  #   texte: |
+  #     On considère un fluide parfait au repos, de masse volumique moyenne $\rho_0$ et de pression moyenne $P_0$, traversé par une petite perturbation. On note $\vec{v}(x,t)$ la vitesse particulaire eulérienne, $p(x,t) = P(x,t)-P_0$ la surpression acoustique, et $\rho'(x,t)=\rho(x,t)-\rho_0$ la surdensité — toutes considérées comme des grandeurs du premier ordre (acoustique linéaire, hypothèse des petites perturbations).
+
+  #     \textbf{Équation d'Euler linéarisée} (bilan de quantité de mouvement, en négligeant le terme convectif $(\vec v\cdot\overrightarrow{\mathrm{grad}})\vec v$, du second ordre) :
+  #     $$\rho_0 \frac{\partial \vec{v}}{\partial t} = -\overrightarrow{\mathrm{grad}}\, p.$$
+
+  #     \textbf{Équation de conservation de la masse linéarisée} :
+  #     $$\frac{\partial \rho'}{\partial t} + \rho_0\, \mathrm{div}\, \vec{v} = 0.$$
+
+  #     \textbf{Équation d'état linéarisée} : on relie $p$ et $\rho'$ via le coefficient de compressibilité adapté à la nature de la transformation subie par le fluide ($\chi_T$ ou $\chi_S$ selon les hypothèses) :
+  #     $$\rho' = \rho_0\, \chi\, p.$$
+
+  #     En prenant la divergence de l'équation d'Euler, la dérivée temporelle de l'équation de conservation de la masse, puis en éliminant $\rho'$ grâce à l'équation d'état, on obtient l'équation de d'Alembert vérifiée par la surpression :
+  #     $$\Delta p - \frac{1}{c^2}\frac{\partial^2 p}{\partial t^2} = 0, \qquad c^2 = \frac{1}{\rho_0\, \chi}.$$
+
+  #     Le vecteur déplacement $\vec{\Psi}(x,t)$, défini par $\vec v = \partial\vec\Psi/\partial t$, vérifie la même équation de propagation, de même que $\vec v$. C'est cette célérité $c$ que l'on cherche à évaluer dans cet exercice, selon l'hypothèse faite sur la nature (isotherme ou isentropique) de la compression du fluide au passage de l'onde.
+
+
+
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Confusion entre $\\chi_T$ et $\\chi_S$"
+    texte: |
+      Les étudiants utilisent souvent $\chi_T = 1/P$ par réflexe (loi des gaz parfaits) sans se demander si la transformation acoustique est réellement isotherme. Il est essentiel d'insister sur le fait que le choix du coefficient de compressibilité dépend d'une hypothèse physique sur la nature de la transformation, et que c'est précisément l'écart avec l'expérience (question 2) qui doit remettre en cause cette première hypothèse.
+  - titre: "Erreur d'unités sur la masse molaire"
+    texte: |
+      Une erreur très fréquente consiste à garder $M$ en g/mol dans l'application numérique de $c=\sqrt{\gamma RT/M}$, ce qui donne un résultat 1000 fois trop grand. Rappeler systématiquement la cohérence des unités SI ($M$ en kg/mol).
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Mesure en direct de la vitesse du son"
+    texte: |
+      Il est très efficace de mesurer en direct (ou de montrer une vidéo courte) la vitesse du son par méthode d'écho, ou à l'aide de deux microphones espacés reliés à un oscilloscope, puis de comparer la valeur mesurée aux deux modèles ($c_T$ et $c_S$) calculés par les étudiants eux-mêmes. La confrontation directe théorie/expérience rend la conclusion de l'exercice bien plus marquante qu'une simple lecture de résultat au tableau.
+
+bilan:
+  - titre: "Deux modèles, un critère de choix"
+    texte: |
+      Cet exercice illustre une démarche caractéristique de la physique : construire un modèle simple (isotherme), en tirer une prédiction quantitative, la confronter à l'expérience, identifier son insuffisance, puis raffiner l'hypothèse physique (isentropique) pour obtenir l'accord attendu.
+
+      À retenir : dans un gaz parfait, la vitesse du son ne dépend que de la température (à composition chimique fixée), via $c_S = \sqrt{\gamma RT/M}$ — et non de la pression ou de la masse volumique séparément.
+
+aller_plus_loin:
+  - niveau: CPGE
+    titre: "Démonstration de la première loi de Laplace"
+    texte: |
+      On considère un gaz parfait soumis à une transformation adiabatique réversible.
+
+      Le premier principe s'écrit :
+      $$dU=\delta Q+\delta W.$$
+
+      La transformation étant adiabatique :
+      $$\delta Q=0.$$
+
+      Pour une transformation réversible, le travail des forces de pression vaut :
+      $$\delta W=-P\,dV.$$
+
+      On obtient donc :
+      $$dU=-P\,dV.$$
+
+      Pour un gaz parfait, l'énergie interne ne dépend que de la température :
+      $$dU=nC_V\,dT.$$
+
+      Ainsi :
+      $$nC_V\,dT=-P\,dV.$$
+
+      En utilisant l'équation d'état du gaz parfait :
+      $$PV=nRT\qquad\Longrightarrow\qquadP=\frac{nRT}{V},$$
+      on obtient :
+      $$nC_V\,dT=-\frac{nRT}{V}\,dV.$$
+
+      Après simplification par $n$ :
+      $$C_V\frac{dT}{T}=-R\frac{dV}{V}.$$
+
+      En intégrant :
+      $$C_V\ln T=-R\ln V+\mathrm{cste}.$$
+
+      Soit :
+      $$\ln T+\frac{R}{C_V}\ln V=\mathrm{cste}.$$
+
+      Or :
+      $$R=C_p-C_V$$
+      et
+      $$\gamma=\frac{C_p}{C_V}.$$
+
+      Donc :
+      $$\frac{R}{C_V}=\frac{C_p-C_V}{C_V}=\gamma-1.$$
+
+      On obtient alors :
+      $$\ln T+(\gamma-1)\ln V=\mathrm{cste},$$
+      soit :
+      $$\boxed{TV^{\gamma-1}=\mathrm{cste}}.$$
+
+      En utilisant l'équation d'état :
+      $$T=\frac{PV}{nR},$$
+      on trouve :
+      $$\frac{PV}{nR}V^{\gamma-1}=\mathrm{cste}.$$
+
+      Les constantes $nR$ étant absorbées dans la constante d'intégration :
+      $$\boxed{PV^\gamma=\mathrm{cste}}.$$
+
+      Il s'agit de la {\bf première loi de Laplace}.
+
+  - niveau: CPGE
+    titre: "Approximation acoustique"
+    texte: |
+      On considère un fluide parfait au repos, de masse volumique moyenne $\rho_0$ et de pression moyenne $P_0$, traversé par une petite perturbation. On note $\vec{v}(x,t)$ la vitesse particulaire eulérienne, $p(x,t) = P(x,t)-P_0$ la surpression acoustique, et $\rho'(x,t)=\rho(x,t)-\rho_0$ la surdensité.\\
+
+      \begin{itemize}[label =$\bullet$]
+        \item L'{\bf équation d'Euler} (bilan de conservation de quantité de mouvement) s'écrit donc :
+          $$\overbrace{(\rho_0 + \rho')}^{\rho}\left(\frac{\partial \vec{v}}{\partial t}+(\vec{v}\cdot\overrightarrow{\mathrm{grad}})\vec{v}\right)=-\overrightarrow{\mathrm{grad}}\overbrace{(P_0+p)}^{P}.$$
+
+        \item L'{\bf équation locale de conservation de la masse} s'écrit donc :
+          $$\mathrm{div}\left(\overbrace{(\rho_0+\rho')}^{\rho}\,\vec{v}\right)+\frac{\partial\overbrace{(\rho_0+\rho')}^{\rho}}{\partial t}=0.$$
+      \end{itemize}
+
+      On suppose que la surpression acoustique $p(x,t)$, la surdensité $\rho'(x,t)$ et la vitesse particulaire eulérienne $\vec{v}(x,t)$ ont en tout point du fluide une valeur moyenne temporelle nulle et sont supposées infiniment petites de même, ainsi que leurs dérivées spatiales et temporelles\footnote{Plus de sens en mathématique, les grandeurs adimensionnées $p/P_0$, $\rho'/\rho_0$ et $\Vert\vec{v}\Vert/c$ sont infiniment petites du même ordre.} — toutes considérées comme des grandeurs du premier ordre (acoustique linéaire, hypothèse des petites perturbations).\\
+
+      Tous les calculs seront menés dans l'{\em approximation acoustique}, c'est-à-dire à l'ordre 1 en ces infiniment petits, ce qui permet d'obtenir des équations linéaires.
+
+  - niveau: CPGE
+    titre: "Linéarisations"
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+        \item {\bf Linéarisation de l'équation d'Euler} : Le terme d'accélération convective $(\vec{v}\cdot\overrightarrow{\mathrm{grad}})\vec{v}$ et le terme $\rho'\,\partial\vec{v}/\partial t$ sont d'ordre 2 et doivent donc être négligés par rapport aux termes d'ordre 0 et 1. D'autre part, $P_0$ est uniforme donc $\overrightarrow{\mathrm{grad}}P_0=0$.\\
+
+        On obtient l'{\bf équation d'Euler linéarisée} :
+        $$\rho_0\frac{\partial\vec{v}}{\partial t}=-\overrightarrow{\mathrm{grad}}\,p.$$
+
+        \item {\bf Linéarisation de l'équation locale de conservation de la masse} : Le terme $\mathrm{div}(\rho'\vec{v})$ est d'ordre 2 et doit donc être négligé par rapport aux termes d'ordre 0 et 1. De plus, $\rho_0$ est constant, donc $\partial\rho_0/\partial t=0$ et $\mathrm{div}(\rho_0\vec{v})=\rho_0\mathrm{div}(\vec{v})$.\\
+
+        On obtient l'{\bf équation locale de conservation de la masse linéarisée} :
+        $$\frac{\partial\rho'}{\partial t}+\rho_0\,\mathrm{div}\,\vec{v}=0.$$
+      \end{itemize}
+
+  - niveau: CPGE
+    titre : "Équation d'état linéarisée"
+    texte: |
+      Le coéficient de compressibilité isentropique (s) / isotherme (T) :
+      $$ \chi_{s/T} = \frac{1}{\rho} \left( \frac{\partial \rho}{\partial P} \right)_{s/T} = \frac{1}\rho \frac{D \rho }{D P} = \frac{1}\rho \frac{\frac{D \rho}{Dt}}{\frac{D P}{Dt}}, $$
+      où $D p $  et $D\rho$ sont associées à des dérivées particulaires (Vision Lagrangienne). Il vient que :
+      $$
+      \frac{D \rho}{Dt} = \rho \chi_{s/T} \frac{D P}{Dt} \quad \text{soit} \quad \cancel{\frac{D \rho_0}{Dt}} + \frac{D \rho'}{Dt} = (\rho_0 + \rho')  \chi_{s/T} \left ( \cancel{\frac{D P_O}{Dt}} + \frac{D p}{Dt} \right ) 
+      $$
+      Puis avec $P_O$ et $\rho_O$ constants :
+      $$\overbrace{ \frac{\partial \rho'}{\partial t} + ( \vec{v} \cdot \overrightarrow{\mathrm{grad}} ) \rho' }^{\frac{D \rho'}{Dt}} = (\rho_0 + \rho') \chi_{s/T} \overbrace{ \frac{\partial p}{\partial t} + ( \vec{v} \cdot \overrightarrow{\mathrm{grad}} ) \rho' }^{\frac{D p}{Dt}}.$$
+      Or dans l'approximation acoustique , les dérivées convectives $( \vec{v} \cdot \overrightarrow{\mathrm{grad}} ) \rho'$ et $( \vec{v} \cdot \overrightarrow{\mathrm{grad}} ) p$ sont d'ordre 2 et donc négligeable. De même pour le terme $\rho' \chi_{s/T} \frac{D p}{Dt}$. Nous obtenons l'équation linéarisée décrivant l'évolution thermodynamique du fluide :
+      $$
+      \frac{\partial \rho'}{\partial t} = \rho_0 \chi_{s/T} \frac{\partial p}{\partial t} \quad \text{soit} \quad \rho' = \rho_0 \chi_{s/T} p.
+      $$
+
+      On relie $p$ et $\rho'$ via le coefficient de compressibilité adapté à la nature de la transformation subie par le fluide ($\chi_T$ ou $\chi_S$ selon les hypothèses) :
+      $$\rho' = \rho_0\, \chi\, p.$$
+
+  - niveau: CPGE
+    titre : "Mise en équation de propagation d'une onde acoustique dans un fluide (rappel)"
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+        \item {\bf Élimination du champ de masse volumique}
+          $$
+          \overbrace{\rho_0 \chi \frac{\partial p}{\partial t}}^{\frac{\partial \rho'}{\partial t}} + \rho_0\, \mathrm{div}\, \vec{v} = 0
+          $$
+          donc 
+          $$
+          \mathrm{div}\, \vec{v} = -\chi \frac{\partial p}{\partial t} 
+          $$
+        \item {\bf Équation fe propagation de la surpression} : 
+
+          En prenant la divergence de l'équation d'Euler, et le théorème de Shwarz, la dérivée temporelle de l'équation de conservation de la masse, puis en éliminant $\rho'$ grâce à l'équation d'état, on obtient l'équation de d'Alembert vérifiée par la surpression :
+
+          $$
+          \mathrm{div}(\overrightarrow{\mathrm{grad}} p) = - \mathrm{div} \left ( \rho_0 \frac{\partial \vec{v} }{\partial t} \right ) = - \rho_0 \frac{\partial  (\mathrm{div}\vec{v}) }{\partial t}  = - \rho_0 \chi \frac{\partial^2 \vec{v} }{\partial t^2}.
+          $$
+
+          Avec l'opérateur laplacien $\Delta = \mathrm{div}(\overrightarrow{\mathrm{grad}})$.
+
+          $$\Delta p - \frac{1}{c^2}\frac{\partial^2 p}{\partial t^2} = 0, \qquad c^2 = \frac{1}{\rho_0\, \chi}.$$
+
+          Le vecteur déplacement $\vec{\Psi}(x,t)$, défini par $\vec v = \partial\vec\Psi/\partial t$, vérifie la même équation de propagation, de même que $\vec v$. C'est cette célérité $c$ que l'on cherche à évaluer dans cet exercice, selon l'hypothèse faite sur la nature (isotherme ou isentropique) de la compression du fluide au passage de l'onde.
+
+        \item {\bf Équation fe propagation de la vitesse} :
+          $$
+          \overrightarrow{\mathrm{grad}}(\mathrm{div} \vec{v}) = \overrightarrow{\mathrm{grad}} \left ( - \chi \frac{\partial p}{\partial t } \right ) = - \chi \overrightarrow{\mathrm{grad}} \left (\frac{\partial p}{\partial t } \right ) = - \chi \frac{\partial}{\partial t }(\overrightarrow{\mathrm{grad}} p ) =  - \chi \frac{\partial}{\partial t }\left ( - \rho_0 \frac{\partial \vec{v} }{\partial t }   \right ) = \rho_0 \chi  \frac{\partial^2 \vec{v} }{\partial t^2 } 
+          $$
+
+          Or $\overrightarrow{\mathrm{rot}}\overrightarrow{\mathrm{rot}} = \overrightarrow{\mathrm{grad}}(\mathrm{div}) - \vec{\Delta}$. Et 
+          $$
+          \rho_0 \frac{\partial \overrightarrow{\mathrm{rot}} \vec{v} }{\partial t} = \overrightarrow{\mathrm{rot}} \left (\rho_0 \frac{ \partial \vec{v} }{\partial t} \right )  = -  \overrightarrow{\mathrm{rot}} \left (  \overrightarrow{\mathrm{grad}} p \right ) = 0 
+          $$
+          Ainsi $\overrightarrow{\mathrm{rot}} \vec{v}$ est indépendant du temps. Nous suposons que le champ des vitesse est en tout point de moyenne temporelle nulle $\langle \vec{v} \rangle = 0$. Soit $\langle \overrightarrow{\mathrm{rot}} \vec{v} \rangle = \overrightarrow{\mathrm{rot}} \langle  \vec{v} \rangle  = 0$. Le vecteur $\overrightarrow{\mathrm{rot}} \vec{v}$, indépendant du temps, est confondu avec sa moyenne temporelle, et donc nul lui aussi. Nous retiendrons donc que : " La propagation d'ondes sonores est associée à un écoulement irrotationnel."
+
+          Donc $\vec{\Delta} = \overrightarrow{\mathrm{grad}}(\mathrm{div})$ et 
+
+          $$\vec{\Delta} \vec{v} - \frac{1}{c^2}\frac{\partial^2 \vec{v}}{\partial t^2} = 0, \qquad c^2 = \frac{1}{\rho_0\, \chi}.$$
+      \end{itemize}
+
+  
+
+  - niveau: CPGE
+    titre: |
+      Rappels de thermodynamique : capacités calorifiques et coefficient $\gamma$
+    texte: |
+      Pour un gaz parfait, on définit les capacités calorifiques molaires à volume constant $C_V$ et à pression constante $C_P$, reliées par la relation de Mayer $C_P - C_V = nR$. Leur rapport $\gamma = C_P/C_V$ dépend de la structure microscopique des molécules (théorème d'équipartition de l'énergie) : $\gamma = 5/3$ pour un gaz monoatomique, $\gamma \approx 7/5 = 1{,}4$ pour un gaz diatomique (comme l'air, majoritairement $N_2$ et $O_2$) aux températures usuelles.
+
+      Une transformation \textbf{adiabatique réversible} (isentropique) d'un gaz parfait vérifie les lois de Laplace :
+      $$PV^\gamma = \text{cte}, \qquad TV^{\gamma-1} = \text{cte}, \qquad T^\gamma P^{1-\gamma} = \text{cte}.$$
+
+      On en déduit directement le coefficient de compressibilité isentropique :
+      $$\chi_S = -\frac{1}{V}\left(\frac{\partial V}{\partial P}\right)_S = \frac{1}{\gamma P},$$
+      à comparer au coefficient isotherme $\chi_T = 1/P$. Le rapport $\chi_T/\chi_S = \gamma > 1$ traduit physiquement le fait qu'une compression isentropique s'accompagne d'une élévation de température qui « raidit » le gaz : il est plus difficile à comprimer qu'à température constante, d'où $\chi_S < \chi_T$ et donc $c_S > c_T$.
+
+      Le caractère isentropique de la propagation sonore se justifie physiquement par le fait que la période acoustique (de l'ordre de la milliseconde pour un son audible) est très courte devant le temps caractéristique de diffusion thermique sur une longueur d'onde : les échanges de chaleur n'ont pas le temps de s'effectuer de façon significative, la transformation est donc adiabatique ; elle est de plus réversible car les amplitudes mises en jeu sont infinitésimales (pas de dissipation visqueuse notable à cette échelle) — d'où l'hypothèse isentropique retenue en pratique.
+
+  - niveau: CPGE
+
+    titre : "Loi de Laplace pour un gaz parfait"
+    texte: |
+      $$d S = C_V \frac{dT}{T} + nR \frac{dV}{V}  = C_V d(\ln T ) + nR d(\ln V )$$
+      $$d S = C_P \frac{dT}{T} - nR \frac{dP}{P}  = C_V d(\ln T ) + nR d(\ln P )$$
+
+      Or avec la ralation de Mayer pour les gaz parfait $C_P - C_V = nR$ et $\gamma = C_P /C_V$ , il vient que 
+      $$C_V = \frac{nR}{\gamma - 1}\qquad \text{et}\qquad C_P = \frac{nR\gamma }{\gamma - 1}. $$
+
+      Donc 
+
+      $$d S =  nR \left ( \frac{1}{\gamma-1} d(\ln T ) + d(\ln V ) \right ) = nR \, d \left ( \ln (T^{\frac{1}{\gamma-1}} V ) \right )  $$
+      $$d S =  nR \left ( \frac{\gamma}{\gamma-1} d(\ln T ) - d(\ln P ) \right ) = nR \, d \left ( \ln (T^{\frac{\gamma}{\gamma-1}} P^{-1} ) \right ) $$
+
+      Donc 
+      $$
+      T V^{\gamma-1} = Cte \qquad T^\gamma P^{1-\gamma} = Cte  \qquad PV^\gamma = Cte.
+      $$
+
+  - niveau: CPGE
+    titre : "Relation de Mayer"
+    texte: |
+      $$T dS = C_V dT + l dV \qquad T dS = C_P dT + k dP $$
+      Or $C_V$ est défini à volume $V$ constant et $C_P$ est défini à préssion $P$ constant\\
+      Donc 
+      $$(C_P - C_V) T  = l dV = -k dP$$
+      Or 
+      $$l = T \left .  \frac{\partial p}{\partial T} \right )_V \qquad k = -T \left .  \frac{\partial V}{\partial T} \right )_P.$$
+      Donc 
+      $$C_P - C_V  = T \left .  \frac{\partial p}{\partial T} \right )_V \left .  \frac{\partial V}{\partial T} \right )_P. $$
+
+  - niveau: CPGE
+    titre : "Potentiels thermodynamiques"
+    texte: |
+      \begin{itemize}[label=$\bullet$]
+
+        \item \textbf{Énergie interne : $U(S,V)$}
+
+        L'énergie interne est l'énergie totale microscopique du système, hors énergie cinétique et potentielle macroscopiques. Ses variables naturelles sont l'entropie $S$ et le volume $V$.
+
+        \[
+        \boxed{U=U(S,V)}
+        \]
+
+        Sa différentielle s'écrit :
+        \[
+        \boxed{dU=T\,dS-P\,dV}
+        \]
+
+        \item \textbf{Enthalpie : $H(S,P)$}
+
+        L'enthalpie est un potentiel thermodynamique adapté à l'étude des transformations à pression constante. Elle tient compte de l'énergie interne et du travail associé à l'occupation d'un volume sous pression.
+
+        \[
+        \boxed{H=H(S,P)=U(S,V)+PV}
+        \]
+
+        Sa différentielle s'écrit :
+        \[
+        \boxed{dH=T\,dS+V\,dP}
+        \]
+
+        \item \textbf{Énergie libre de Helmholtz : $F(V,T)$}
+
+        L'énergie libre de Helmholtz est un potentiel adapté aux transformations à température et volume constants. Elle correspond à l'énergie interne diminuée de la contribution entropique $TS$.
+
+        \[
+        \boxed{F=F(V,T)=U(S,V)-TS}
+        \]
+
+        Sa différentielle s'écrit :
+        \[
+        \boxed{dF=-S\,dT-P\,dV}
+        \]
+
+        \item \textbf{Enthalpie libre : $G(P,T)$}
+
+        L'enthalpie libre, ou énergie libre de Gibbs, est un potentiel adapté aux transformations à température et pression constantes. Elle permet notamment d'étudier les équilibres et le sens d'évolution spontanée d'un système dans ces conditions.
+
+        \[
+        \boxed{G=G(P,T)=H(S,P)-TS}
+        \]
+
+        Sa différentielle s'écrit :
+        \[
+        \boxed{dG=-S\,dT+V\,dP}
+        \]
+
+        \end{itemize}
+
+  - niveau: CPGE
+    titre : "Coefficients calorimétriques"
+    texte: |
+      Les coefficients calorimétriques sont définis par :
+      \[
+      C_V = \left(\frac{\partial U}{\partial T}\right)_V
+      = T\left(\frac{\partial S}{\partial T}\right)_V,
+      \qquad
+      C_P = \left(\frac{\partial H}{\partial T}\right)_P
+      = T\left(\frac{\partial S}{\partial T}\right)_P.
+      \]
+      On peut alors écrire :
+      \[
+      \begin{aligned}
+      T\,dS &= C_V\,dT+\ell\,dV
+      &\qquad T\,dS &= C_P\,dT+k\,dP,\\
+      dU &= C_V\,dT+(\ell-P)\,dV
+      & dH &= C_P\,dT+(k+V)\,dP.
+      \end{aligned}
+      \]
+
+  - niveau: CPGE
+    titre : "Relations de Clapeyron"
+    texte: |
+      À partir de l'énergie libre \(F(T,V)=U-TS\), on a :
+      \[
+      dF=-S\,dT-P\,dV.
+      \]
+      L'égalité des dérivées croisées donne :
+      \[
+      \left(\frac{\partial S}{\partial V}\right)_T
+      =
+      \left(\frac{\partial P}{\partial T}\right)_V.
+      \]
+      Or, d'après \(T\,dS=C_V\,dT+\ell\,dV\), on obtient :
+      \[
+      \boxed{\ell=T\left(\frac{\partial P}{\partial T}\right)_V}.
+      \]
+
+      De même, à partir de l'enthalpie libre \(G(T,P)=H-TS\) :
+      \[
+      dG=-S\,dT+V\,dP.
+      \]
+      L'égalité des dérivées croisées conduit à :
+      \[
+      \left(\frac{\partial S}{\partial P}\right)_T
+      =
+      -\left(\frac{\partial V}{\partial T}\right)_P.
+      \]
+      Ainsi, d'après \(T\,dS=C_P\,dT+k\,dP\) :
+      \[
+      \boxed{k=-T\left(\frac{\partial V}{\partial T}\right)_P}.
+      \]
+  
+  - niveau: master
+    titre: "Vitesse du son dans un gaz réel"
+    texte: |
+      Pour un gaz réel décrit par l'équation d'état de van der Waals $\left(P + \dfrac{an^2}{V^2}\right)(V-nb) = nRT$, la compressibilité isentropique diffère de celle du gaz parfait et $c_S$ acquiert une dépendance explicite en pression, en plus de la température. On pourra établir un développement de $c_S$ au premier ordre en pression et discuter du signe de la correction selon les valeurs relatives de $a$ (terme attractif) et $b$ (covolume), ce qui relie la thermodynamique microscopique des gaz réels à une grandeur macroscopique mesurable.
+  - niveau: CPGE
+    titre: "Vitesse du son dans un mélange de gaz"
+    texte: |
+      Pour un mélange de gaz parfaits (par exemple l'air humide, mélange d'air sec et de vapeur d'eau), on pourra établir l'expression de $c_S$ en fonction des fractions molaires $x_i$, des masses molaires $M_i$ et des $\gamma_i$ de chaque constituant, et discuter pourquoi le son se propage légèrement plus vite dans l'air humide que dans l'air sec à température égale.
+
+questions:
+  - id: q1
+    enonce: |
+      On suppose que lors du passage de l'onde acoustique, le fluide subit
+      une transformation isotherme. En le modélisant comme un gaz parfait,
+      montrer que $c_T = \sqrt{RT/M}$.
+    coup_de_pouce: |
+      Pour un gaz parfait en transformation isotherme, $PV=$ cte à $T$ fixé,
+      donc $\chi_T = 1/P$. La célérité du son vérifie en général $c=\sqrt{1/(\rho\chi)}$
+      (rappelée dans les prérequis).
+    correction: "$c_T=\\sqrt{RT/M}$."
+    solution:
+      - titre: "Calcul de $\\chi_T$ pour un gaz parfait isotherme"
+        texte: |
+          Pour une mole de gaz parfait, l'équation d'état s'écrit $PV_m=RT$ à $T$ fixé, où $V_m$ est le volume molaire. En dérivant à $T$ constant :
+          $$\left(\frac{\partial V_m}{\partial P}\right)_T = -\frac{RT}{P^2} = -\frac{V_m}{P}.$$
+          Par définition, on en déduit directement
+          $$\chi_T = -\frac{1}{V_m}\left(\frac{\partial V_m}{\partial P}\right)_T = \frac{1}{P}.$$
+      - titre: "Report dans la formule de célérité"
+        texte: |
+          On utilise la relation générale établie dans le prérequis, $c^2 = 1/(\rho\chi)$, avec $\chi=\chi_T=1/P$ et $\rho = M/V_m = MP/(RT)$ (masse volumique du gaz parfait, obtenue en écrivant $\rho = m/V = M/V_m$ puis en substituant $V_m=RT/P$) :
+          \begin{eqnarray}
+            c_T^2 &=& \frac{1}{\rho\,\chi_T} = \frac{P}{\rho} = \frac{P}{MP/(RT)} = \frac{RT}{M}, \nonumber
+          \end{eqnarray}
+          d'où, en prenant la racine carrée (positive, car $c_T$ est une célérité) :
+          $$\boxed{c_T = \sqrt{\frac{RT}{M}}}.$$
+
+  - id: q2
+    enonce: |
+      Calculer $c_T$ numériquement. Est-ce en accord avec la mesure expérimentale ($\approx 340~m/s$) ? Conclure.
+    coup_de_pouce: |
+      Attention aux unités SI : $M$ en kg/mol.
+    correction: "$c_T=\\sqrt{8.32\\times293/0.029}\\approx290$ m/s -- sous-estime la valeur mesurée ($\\approx 340~m/s$)."
+    solution:
+      - titre: "Application numérique"
+        texte: |
+          On convertit d'abord $M$ en unités SI : $M = 29~\text{g/mol} = 0{,}029~\text{kg/mol}$. On calcule alors :
+          $$c_T = \sqrt{\frac{RT}{M}} = \sqrt{\frac{8{,}32 \times 293}{0{,}029}} = \sqrt{\frac{2437{,}8}{0{,}029}} = \sqrt{84062} \approx 290~\text{m}\cdot\text{s}^{-1}.$$
+      - titre: "Comparaison à l'expérience et conclusion"
+        texte: |
+          La valeur mesurée expérimentalement pour la vitesse du son dans l'air à température ambiante est $c_{\text{exp}} \approx 340~\text{m}\cdot\text{s}^{-1}$. L'écart relatif est
+          $$\frac{c_{\text{exp}}-c_T}{c_{\text{exp}}} \approx \frac{340-290}{340} \approx 15~\%,$$
+          ce qui est bien trop important pour être attribué à une simple imprécision expérimentale ou à un arrondi sur les données ($T$, $M$, $R$). Le modèle isotherme sous-estime donc significativement la célérité réelle du son : l'hypothèse d'une transformation isotherme lors du passage de l'onde acoustique doit être remise en cause (voir question 3).
+
+  - id: q3
+    enonce: "À quel type de transformation correspond alors la propagation de l'onde sonore ? Définir cette transformation."
+    coup_de_pouce: |
+      L'écart avec l'isotherme suggère une transformation trop rapide pour un échange de chaleur : pensez à l'adiabatique réversible (isentropique).
+    correction: "Transformation adiabatique réversible (isentropique) : rapide devant les temps d'échange thermique, sans échange de chaleur ni irréversibilité."
+    solution:
+      - titre: "Argument d'échelle de temps"
+        texte: |
+          Le point cours de thermodynamique rappelle qu'une transformation isotherme suppose un équilibre thermique permanent avec un thermostat extérieur, ce qui nécessite un temps caractéristique d'échange thermique par diffusion suffisamment court devant la période de l'onde. Or, pour un son audible ($f\sim 1~\text{kHz}$, période $T_{\text{ac}}\sim 1~\text{ms}$), le temps de diffusion thermique sur une distance de l'ordre d'une longueur d'onde ($\lambda \sim 0{,}3~\text{m}$) est très supérieur à $T_{\text{ac}}$ : la chaleur n'a pas le temps de s'évacuer d'une zone comprimée vers une zone détendue pendant une période acoustique. La transformation est donc \textbf{adiabatique} (pas d'échange de chaleur avec l'extérieur pendant le temps caractéristique du phénomène).
+      - titre: "Réversibilité et définition complète"
+        texte: |
+          Par ailleurs, les amplitudes de perturbation mises en jeu dans une onde sonore usuelle sont infinitésimales (surpressions typiquement inférieures au pascal, à comparer à $P_0\sim 10^5~\text{Pa}$) : il n'y a donc pas de dissipation irréversible notable par viscosité ou par gradients de température finis. La transformation est donc également \textbf{réversible}.
+
+          On retient : la propagation du son correspond, en première approximation, à une transformation \textbf{adiabatique réversible}, c'est-à-dire \textbf{isentropique} (à entropie constante), ce qui justifie l'usage du coefficient de compressibilité $\chi_S$ plutôt que $\chi_T$.
+
+  - id: q4
+    enonce: "Montrer que pour ce type de transformation, $c_S=\\sqrt{\\gamma RT/M}$. Calculer numériquement et commenter."
+    coup_de_pouce: |
+      Pour une transformation isentropique d'un gaz parfait, $PV^\gamma=$ cte, donc $\chi_S=1/(\gamma P)$ (cf. point cours de thermodynamique).
+    correction: "$c_S=\\sqrt{\\gamma RT/M}\\approx 343$ m/s -- en excellent accord avec la mesure."
+    solution:
+      - titre: "Calcul de $\\chi_S$ à partir de la loi de Laplace"
+        texte: |
+          La loi de Laplace pour une transformation isentropique d'un gaz parfait s'écrit $PV_m^\gamma = \text{cte}$. En différenciant logarithmiquement à entropie constante :
+          $$\frac{\mathrm{d}P}{P} + \gamma\,\frac{\mathrm{d}V_m}{V_m} = 0 \quad\Longrightarrow\quad \left(\frac{\partial V_m}{\partial P}\right)_S = -\frac{V_m}{\gamma P},$$
+          d'où, par définition,
+          $$\chi_S = -\frac{1}{V_m}\left(\frac{\partial V_m}{\partial P}\right)_S = \frac{1}{\gamma P}.$$
+      - titre: "Report dans la formule de célérité et calcul numérique"
+        texte: |
+          En reprenant le même calcul qu'à la question 1, avec $\chi_S=1/(\gamma P)$ au lieu de $\chi_T=1/P$, et $\rho=MP/(RT)$ :
+          $$c_S^2 = \frac{1}{\rho\,\chi_S} = \frac{\gamma P}{\rho} = \frac{\gamma RT}{M} \quad\Longrightarrow\quad \boxed{c_S = \sqrt{\frac{\gamma RT}{M}}}.$$
+          Numériquement :
+          $$c_S = \sqrt{\frac{1{,}4 \times 8{,}32 \times 293}{0{,}029}} = \sqrt{\frac{3412{,}9}{0{,}029}} = \sqrt{117686} \approx 343~\text{m}\cdot\text{s}^{-1}.$$
+          Cette valeur est en excellent accord (à moins de $1\%$) avec la mesure expérimentale $c_{\text{exp}}\approx 340$–$343~\text{m}\cdot\text{s}^{-1}$, ce qui confirme que le modèle isentropique est le bon modèle thermodynamique pour décrire la propagation du son dans un gaz parfait. On note aussi que $c_S/c_T = \sqrt{\gamma}\approx 1{,}18$, cohérent avec l'écart d'environ $15\%$ observé à la question 2.
+
+  - id: q5
+    enonce: "Comparer la vitesse du son au niveau de la mer et au sommet de l'Everest (densité de l'air environ 3 fois plus faible, composition chimique identique)."
+    coup_de_pouce: |
+      $c_S=\sqrt{\gamma P/\rho}$ ; à composition chimique et température fixées, comment $P/\rho$ varie-t-il avec l'altitude ?
+    correction: "À température égale, $c_S=\\sqrt{\\gamma RT/M}$ ne dépend pas de $\\rho$ ni de $P$ séparément, seulement de $T$ : la vitesse du son est quasiment la même (elle varie surtout avec la température, qui baisse en altitude, donc $c$ diminue légèrement -- pas d'un facteur 3)."
+    solution:
+      - titre: "Piège de l'énoncé : ne pas confondre $\\rho$, $P$ et $T$"
+        texte: |
+          On pourrait être tenté d'utiliser directement $c_S=\sqrt{\gamma P/\rho}$ et de penser que, $\rho$ étant environ 3 fois plus faible au sommet de l'Everest, la vitesse du son serait modifiée d'un facteur $\sqrt{3}$. C'est une erreur : $P$ diminue également avec l'altitude (loi de l'atmosphère isotherme ou standard), et le rapport $P/\rho$ n'est pas indépendant de $\rho$ seul. Il faut repartir de l'expression $c_S=\sqrt{\gamma RT/M}$, obtenue à la question 4, qui ne fait plus intervenir $P$ ni $\rho$ séparément mais uniquement la température $T$ (à composition chimique $M$, $\gamma$ fixée).
+      - titre: "Effet réel : la dépendance en température"
+        texte: |
+          En utilisant le modèle de l'atmosphère standard (gradient thermique $\mathrm{d}T/\mathrm{d}z \approx -6{,}5\times10^{-3}~\text{K}\cdot\text{m}^{-1}$ dans la troposphère), la température à l'altitude de l'Everest ($z\approx 8849~\text{m}$) est réduite d'environ :
+          $$\Delta T \approx 6{,}5\times10^{-3}\times 8849 \approx 57{,}5~\text{K}.$$
+          En partant de $T_0=293~\text{K}$ au niveau de la mer, on obtient $T\approx 235{,}5~\text{K}$ au sommet, soit :
+          $$c_S(\text{sommet}) = \sqrt{\frac{1{,}4\times 8{,}32\times 235{,}5}{0{,}029}} \approx 308~\text{m}\cdot\text{s}^{-1},$$
+          à comparer à $c_S(\text{mer})\approx 343~\text{m}\cdot\text{s}^{-1}$ : soit une baisse d'environ $10\%$, uniquement due à la baisse de température, et non un facteur 3 comme le suggérerait un raisonnement naïf basé sur $\rho$ seul.

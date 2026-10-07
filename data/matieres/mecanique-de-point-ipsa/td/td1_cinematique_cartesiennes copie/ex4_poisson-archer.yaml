@@ -1,0 +1,189 @@
+id: td1_ex4
+intitule: "Le poisson-archer, expert en balistique"
+td: td1
+facultatif: true
+seance: 1
+
+cours_rattache:
+  - cinematique.vecteur_position
+  - cinematique.vecteur_vitesse
+  - cinematique.coordonnees_cartesiennes
+  - dynamique.chute_libre
+  - energetique.theoreme_energie_mecanique
+
+metadonnees:
+  duree_estimee: "30 min"
+  difficulte: 3
+  type_exercice: "Entraînement / Exercice non guidé"
+  indispensable: false
+
+enonce_intro: |
+  Après avoir repéré un insecte posé sur une branche au-dessus de l'eau, le poisson-archer s'oriente et
+  projette un jet d'eau afin de l'atteindre et de le faire tomber.
+
+  Le poisson voit sa cible à une distance $d$, selon un axe incliné faisant un angle $\varphi$ avec
+  l'horizontale. Cependant, pour que la trajectoire du jet d'eau passe par l'insecte, la goutte d'eau
+  doit être lancée sous un angle $\alpha$ différent de l'angle de visée $\varphi$.
+
+  On néglige les frottements de l'air et la réfraction de la lumière à l'interface eau-air, et on
+  assimile la goutte à un point matériel en chute libre.
+
+prerequis:
+  - titre: "Mouvement d'un projectile en chute libre"
+    texte: |
+      Un point lancé de l'origine avec la vitesse $v_0$ sous l'angle $\alpha$ par rapport à l'horizontale, soumis uniquement à son poids ($\vec a=-g\,\vec u_y$), a pour équations horaires
+      $$x(t)=v_0\cos\alpha\;t,\qquad y(t)=v_0\sin\alpha\;t-\tfrac12 g\,t^2,$$
+      et pour composantes de vitesse $v_x=v_0\cos\alpha$ (constante) et $v_y=v_0\sin\alpha-g\,t$.
+  - titre: "Sommet de la trajectoire"
+    texte: |
+      Le sommet est le point où la composante verticale de la vitesse s'annule : $v_y=0$. À cet instant la vitesse est purement horizontale, de norme $v_0\cos\alpha$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Exploiter une condition géométrique sur la trajectoire"
+    texte: |
+      Savoir traduire « la cible est au sommet de la trajectoire » en une condition sur la vitesse ($v_y=0$), en déduire les coordonnées du sommet, puis une relation entre l'angle de tir $\alpha$ et l'angle de visée $\varphi$ {\bf indépendante de la vitesse initiale et de la distance}.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Deux méthodes pour une même condition, puis ouverture vers le formalisme hamiltonien"
+    texte: |
+      L'exercice se résout par la cinématique (annulation de $v_y$) ou par le théorème de l'énergie mécanique. Il est l'occasion de montrer que les deux approches sont équivalentes, puis d'ouvrir vers le fait que le mouvement horizontal et le mouvement vertical sont {\bf dynamiquement découplés} (énergies $E_x$ et $E_y$ séparément conservées), ce qui prépare la notion de séparabilité et d'intégrabilité abordée en master.
+
+point_cours:
+  - titre: "Théorème de l'énergie mécanique"
+    texte: |
+      Pour un point matériel de masse $m$ soumis à des forces conservatives (énergie potentielle $E_p$) et à des forces non conservatives de puissance $\mathcal P_{nc}$ :
+      $$\frac{\mathrm{d}E_m}{\mathrm{d}t}=\mathcal P_{nc},\qquad E_m=E_c+E_p .$$
+      En l'absence de forces non conservatives, $E_m$ est constante. Pour la chute libre : $E_m=\tfrac12 m v^2+m g y$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Confondre angle de visée et angle de tir"
+    texte: |
+      Le poisson {\bf voit} la cible sous l'angle $\varphi$, mais doit {\bf tirer} sous un angle $\alpha>\varphi$. Si le poisson tirait directement vers la cible ($\alpha=\varphi$), la goutte passerait sous l'insecte, car la gravité courbe la trajectoire.
+  - titre: "Appliquer l'énergie mécanique sans tenir compte de $v_x$"
+    texte: |
+      Au sommet, la vitesse n'est {\bf pas nulle} : il reste la composante horizontale $v_0\cos\alpha$. Écrire $\tfrac12 m v_0^2=m g y_S$ est une erreur classique : on trouverait la hauteur maximale d'un tir vertical.
+  - titre: "Chercher une valeur numérique de $v_0$ ou croire qu'elle est nécessaire"
+    texte: |
+      La question ne donne pas $v_0$. L'angle $\alpha$ ne dépend en fait que de $\varphi$ : $\tan\alpha=2\tan\varphi$. La vitesse $v_0$ ne sert qu'à calculer {\bf avec quelle vitesse} le poisson doit tirer.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Faire deviner le résultat avant le calcul"
+    texte: |
+      Demander aux étudiants si $\alpha$ dépend de $d$ ou de $v_0$ avant de calculer. Beaucoup répondent oui. Le résultat $\tan\alpha=2\tan\varphi$ est alors une surprise utile, et se retrouve géométriquement : au sommet d'une parabole, la tangente au point de lancement coupe l'horizontale du sommet à mi-portée (propriété d'Archimède de la parabole).
+
+bilan:
+  - titre: "Sommet de la trajectoire et relation $\\tan\\alpha = 2\\tan\\varphi$"
+    texte: |
+      Atteindre la cible au sommet de la trajectoire impose $\tan\alpha=2\tan\varphi$, soit pour $\varphi=36^\circ$ un angle de tir $\alpha\approx55{,}5^\circ$. Le résultat est indépendant de $d$ et de $v_0$ : seule la vitesse nécessaire dépend de $d$ ($v_0\approx3{,}9$ m/s pour $d=0{,}900$ m). La condition $v_y=0$ et le théorème de l'énergie mécanique conduisent à la même hauteur de sommet.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Le théorème de l'énergie mécanique : énoncé complet et application au sommet"
+    texte: |
+      {\bf Énoncé.} Pour un point matériel de masse $m$ dans un référentiel galiléen, le théorème de l'énergie cinétique s'écrit $\frac{\mathrm{d}E_c}{\mathrm{d}t}=\mathcal P_{\rm ext}=\vec F\cdot\vec v$. Si une partie des forces dérive d'une énergie potentielle, $\vec F_{\rm cons}=-\vec\nabla E_p$, alors $\mathcal P_{\rm cons}=-\frac{\mathrm{d}E_p}{\mathrm{d}t}$ et
+      $$\frac{\mathrm{d}}{\mathrm{d}t}\left(E_c+E_p\right)=\mathcal P_{nc}.$$
+      Sans force non conservative, $E_m=E_c+E_p$ est une constante du mouvement.
+
+      {\bf Application à la goutte.} Avec $E_p=m g y$, la conservation entre le lancement ($y=0$, vitesse $v_0$) et le sommet ($y=y_S$, vitesse $v_S$) donne
+      $$\tfrac12 m v_0^2=\tfrac12 m v_S^2+m g\,y_S .$$
+      Le théorème seul ne détermine pas $v_S$. Il faut une seconde information : {\bf la composante horizontale de la vitesse est conservée} (aucune force horizontale), donc $v_S=v_0\cos\alpha$ puisque $v_y=0$ au sommet. Ainsi
+      $$y_S=\frac{v_0^2-v_0^2\cos^2\alpha}{2g}=\frac{v_0^2\sin^2\alpha}{2g},$$
+      ce qui est exactement le résultat de la méthode cinématique. L'énergie n'a pas remplacé la dynamique : elle a fourni la hauteur sans résoudre l'équation du mouvement, mais la direction de la vitesse au sommet reste donnée par la conservation de la quantité de mouvement horizontale.
+
+      {\bf Variante.} Si la goutte devait atteindre l'insecte avec une vitesse donnée $v_c$ à la hauteur $y_c$ (sans être au sommet), on obtient directement $v_0^2=v_c^2+2g\,y_c$, sans connaître l'angle ni la durée du vol.
+  - niveau: licence
+    titre: "Parabole de sûreté : où peut-on atteindre ?"
+    texte: |
+      Pour une vitesse initiale $v_0$ fixée, l'ensemble des points atteignables est délimité par l'enveloppe de toutes les trajectoires, la {\bf parabole de sûreté}
+      $$y=\frac{v_0^2}{2g}-\frac{g}{2v_0^2}\,x^2 .$$
+      Montrer que la cible à $(d\cos\varphi,\,d\sin\varphi)$ n'est atteignable que si elle est sous cette parabole, et trouver la vitesse minimale de tir pour l'atteindre : $v_{0,\min}^2=g\left(d\sin\varphi+d\right)$. Dans ce cas limite, un seul angle de tir convient, $\alpha=\tfrac{\pi}{4}+\tfrac{\varphi}{2}$ (à comparer avec $\alpha=\arctan(2\tan\varphi)$ obtenu ici, qui correspond à un tir plus rapide et à une cible au sommet).
+  - niveau: master
+    titre: "Formalisme de Hamilton : séparabilité du mouvement horizontal et vertical"
+    texte: |
+      Pour la goutte (masse $m$), le hamiltonien est
+      $$\mathcal H(x,y,p_x,p_y)=\frac{p_x^2}{2m}+\frac{p_y^2}{2m}+m g y=\underbrace{\frac{p_x^2}{2m}}_{\mathcal H_x}+\underbrace{\frac{p_y^2}{2m}+m g y}_{\mathcal H_y}.$$
+      Les équations de Hamilton, $\dot q_i=\partial\mathcal H/\partial p_i$ et $\dot p_i=-\partial\mathcal H/\partial q_i$, donnent $\dot p_x=0$ (la coordonnée $x$ est {\bf cyclique}) et $\dot p_y=-mg$. Comme $\mathcal H=\mathcal H_x+\mathcal H_y$, chaque degré de liberté évolue indépendamment : $\mathcal H_x=E_x$ et $\mathcal H_y=E_y$ sont deux intégrales premières, avec $E=E_x+E_y$.
+
+      {\bf Lecture sur le problème.} Au sommet, $p_y=0$, donc $E_y=m g\,y_S$. Au lancement, $E_y=\tfrac12 m v_0^2\sin^2\alpha$. La conservation de $E_y$ redonne $y_S=v_0^2\sin^2\alpha/(2g)$ {\bf sans aucun recours à $v_x$} : c'est la séparation des énergies qui explique pourquoi la hauteur de montée ne dépend que de la composante verticale. La conservation de $E_x=\tfrac12 m v_0^2\cos^2\alpha$ est celle du mouvement uniforme horizontal.
+
+      {\bf Intégrabilité de Liouville.} Un système à $n=2$ degrés de liberté est intégrable s'il possède $n$ intégrales premières indépendantes en involution, $\{F_i,F_j\}=0$. Ici $F_1=\mathcal H_x$ et $F_2=\mathcal H_y$ conviennent, car $\{\mathcal H_x,\mathcal H_y\}=0$ (elles ne dépendent pas des mêmes variables conjuguées). La séparabilité de $\mathcal H$ en somme de termes à une variable est donc une condition {\bf suffisante} d'intégrabilité ; elle n'est pas nécessaire (le problème de Kepler est intégrable sans que $\mathcal H$ soit une somme évidente en coordonnées cartésiennes, grâce au moment cinétique et au vecteur de Runge-Lenz).
+
+      {\bf Couplage.} Si l'on ajoutait un terme de couplage, par exemple un potentiel $\lambda\,x\,y$, on aurait $\dot p_x=-\lambda y$ et $\dot p_y=-mg-\lambda x$ : l'énergie totale reste conservée, mais $E_x$ et $E_y$ échangent de la puissance ($\dot E_x=-\dot E_y\neq0$), ce que l'on peut écrire $\dot E_i=P_{j\to i}$ avec $P_{j\to i}=-P_{i\to j}$.
+  - niveau: master
+    titre: "Lien avec les torseurs : puissance du poids"
+    texte: |
+      Pour un système matériel étendu, la puissance des actions extérieures s'écrit avec le comoment du torseur des actions mécaniques $\{\mathcal T\}=\{\vec R,\vec M_O\}_O$ et du torseur cinématique $\{\mathcal V\}=\{\vec V_O,\vec\Omega\}$ :
+      $$\mathcal P=\{\mathcal T\}\cdot\{\mathcal V\}=\vec R\cdot\vec V_O+\vec M_O\cdot\vec\Omega .$$
+      Pour un solide de masse $m$ dans le champ de pesanteur uniforme, le torseur du poids en son centre de masse $G$ est $\{m\vec g,\ \vec 0\}_G$, et sa puissance vaut $\mathcal P=m\vec g\cdot\vec V_G=-m g\,\dot y_G=-\frac{\mathrm{d}}{\mathrm{d}t}(m g y_G)$. Pour un point matériel, $\vec\Omega$ n'intervient pas et on retrouve exactement la puissance $\vec F\cdot\vec v$ utilisée ci-dessus. Discuter ce que devient le problème si la « goutte » est remplacée par un solide en rotation (ballon) : l'énergie cinétique contient alors un terme de rotation, $E_c=\tfrac12 m V_G^2+\tfrac12 I\,\Omega^2$, et la hauteur du sommet reste inchangée tant que le poids est la seule action (la rotation est découplée, comme $x$ l'était de $y$).
+  - niveau: master
+    titre: "Hamilton-Jacobi : le projectile comme problème séparable"
+    texte: |
+      L'équation de Hamilton-Jacobi $\partial_t S+\mathcal H(q,\partial_q S)=0$ se résout par séparation des variables : $S=-E\,t+p_x\,x+W(y)$ avec
+      $$W(y)=\int\sqrt{2m\left(E_y-m g y\right)}\;\mathrm{d}y,\qquad E_y=E-\frac{p_x^2}{2m}.$$
+      La trajectoire s'obtient par $\partial S/\partial E=\text{cste}$ et $\partial S/\partial p_x=\text{cste}$ ; on retrouve la parabole. Le sommet correspond au point de rebroussement de $W$, où l'argument de la racine s'annule : $y_S=E_y/(m g)$. Cet exemple est le prototype des systèmes pour lesquels il existe des coordonnées « action-angle ».
+  - niveau: doctorat
+    titre: "Au-delà de l'idéal : frottement, non-séparabilité et chaos"
+    texte: |
+      {\bf Frottement linéaire.} Avec $-\gamma m\vec v$, les équations en $x$ et en $y$ restent découplées ; on obtient $v_x=v_{0x}e^{-\gamma t}$ et $v_y=\left(v_{0y}+g/\gamma\right)e^{-\gamma t}-g/\gamma$. Le système est dissipatif, mais peut encore se mettre sous forme hamiltonienne dépendant explicitement du temps (hamiltonien de Caldirola-Kanai $\mathcal H=e^{-\gamma t}\,p^2/2m+e^{\gamma t}\,V$), au prix d'une énergie qui n'a plus son sens physique usuel.
+
+      {\bf Frottement quadratique.} Avec $-\beta\,\|\vec v\|\,\vec v$, le terme $\|\vec v\|=\sqrt{v_x^2+v_y^2}$ {\bf couple} $x$ et $y$ : la séparabilité est détruite et il n'existe pas de solution analytique simple de la trajectoire. Seule l'intégration numérique est possible. Le sommet n'est plus à mi-portée et la trajectoire est asymétrique (retombée plus raide que la montée).
+
+      {\bf Culture.} Les systèmes hamiltoniens intégrables perdent leurs tores invariants quand on les perturbe par un couplage : c'est le théorème KAM (Kolmogorov, Arnold, Moser), à l'origine de la compréhension moderne du chaos hamiltonien. La parabole du projectile est elle-même l'approximation locale d'une ellipse de Kepler dont le foyer est le centre de la Terre, à grande distance (champ $\propto 1/r^2$ remplacé par un champ uniforme $g$) : la trajectoire réelle d'un projectile sans frottement est un arc d'ellipse.
+  - niveau: doctorat
+    titre: "Le vrai poisson-archer : réfraction et jet pulsé"
+    texte: |
+      Notre modèle néglige la {\bf réfraction} : l'image de l'insecte vue par le poisson est déplacée par la loi de Snell-Descartes $n_{\rm eau}\sin i_{\rm eau}=n_{\rm air}\sin i_{\rm air}$ ($n_{\rm eau}\approx1{,}33$), si bien que la position apparente diffère de la position réelle, sauf si le poisson vise presque à la verticale. Les études éthologiques indiquent que le poisson compense très bien cet effet. Les travaux sur la dynamique du jet suggèrent par ailleurs que le poisson ne tire pas une simple goutte : il module la vitesse d'éjection de façon à ce que le jet se rassemble en une masse unique (instabilité de Rayleigh-Plateau contrôlée) au moment de l'impact, ce qui augmente la force transmise à la proie. Exercice ouvert : estimer l'erreur commise sur $\alpha$ si l'on néglige la réfraction pour un tir à $\varphi=36^\circ$ avec le jet émergeant à travers l'interface.
+
+questions:
+  - id: q1
+    enonce: |
+      Si $\varphi=36^\circ$ et $d=0{,}900$ m, quel est l'angle de lancement $\alpha$ nécessaire pour que la goutte d'eau atteigne l'insecte {\bf au sommet de sa trajectoire} ?
+    coup_de_pouce: |
+      Prenez l'origine au point de départ de la goutte. Au sommet, que vaut la composante verticale de la vitesse ? Exprimez l'abscisse et l'ordonnée du sommet en fonction de $v_0$ et $\alpha$, puis écrivez que le sommet coïncide avec la position $(d\cos\varphi,\,d\sin\varphi)$ de l'insecte. Vous pouvez aussi utiliser le théorème de l'énergie mécanique pour la hauteur.
+    correction: "$\\tan\\alpha = 2\\tan\\varphi$, soit $\\alpha = \\arctan(2\\tan 36^\\circ)\\approx 55{,}5^\\circ$ (indépendant de $d$ et de $v_0$)."
+    solution:
+      - titre: "Repère et position de la cible"
+        texte: |
+          On prend l'origine $O$ à la bouche du poisson, $\vec u_x$ horizontal vers l'insecte et $\vec u_y$ vertical ascendant. La goutte part de $O$ avec la vitesse $v_0$ sous l'angle $\alpha$. L'insecte est en
+          $$x_c=d\cos\varphi\approx0{,}728~\text{m},\qquad y_c=d\sin\varphi\approx0{,}529~\text{m}.$$
+      - titre: "Équations horaires et condition de sommet"
+        texte: |
+          La goutte n'est soumise qu'à son poids :
+          $$x(t)=v_0\cos\alpha\;t,\qquad y(t)=v_0\sin\alpha\;t-\tfrac12 g\,t^2 .$$
+          Le sommet est atteint à l'instant $t_S$ tel que $v_y(t_S)=v_0\sin\alpha-g\,t_S=0$, soit $t_S=\dfrac{v_0\sin\alpha}{g}$. Ses coordonnées sont
+          $$x_S=\frac{v_0^2\sin\alpha\cos\alpha}{g},\qquad y_S=\frac{v_0^2\sin^2\alpha}{2g}.$$
+      - titre: "Condition « l'insecte est au sommet »"
+        texte: |
+          On impose $x_S=x_c$ et $y_S=y_c$. Le rapport des deux équations élimine $v_0$ et $g$ :
+          $$\frac{y_S}{x_S}=\frac{\sin\alpha}{2\cos\alpha}=\frac{\tan\alpha}{2}=\frac{y_c}{x_c}=\tan\varphi,$$
+          donc
+          $$\boxed{\tan\alpha=2\tan\varphi}.$$
+          Le résultat ne dépend ni de $d$ ni de $v_0$.
+      - titre: "Application numérique"
+        texte: |
+          Avec $\varphi=36^\circ$ : $\tan36^\circ\approx0{,}7265$, donc $\tan\alpha\approx1{,}453$ et
+          $$\boxed{\alpha=\arctan(1{,}453)\approx55{,}5^\circ}.$$
+          L'angle de tir est nettement supérieur à l'angle de visée ($36^\circ$) : le poisson doit « viser au-dessus » de l'insecte.
+      - titre: "Méthode alternative : théorème de l'énergie mécanique"
+        texte: |
+          La goutte n'est soumise qu'à son poids, force conservative : $E_m=\tfrac12 m v^2+m g y$ est constante. Entre le lancement ($y=0$, $v=v_0$) et le sommet ($y=y_S$, $v=v_S=v_0\cos\alpha$, car la composante horizontale de la vitesse est conservée et $v_y=0$) :
+          $$\tfrac12 m v_0^2=\tfrac12 m v_0^2\cos^2\alpha+m g\,y_S\;\Longrightarrow\; y_S=\frac{v_0^2\sin^2\alpha}{2g}.$$
+          On retrouve la même hauteur de sommet que par la cinématique. Avec en plus $x_S=v_0\cos\alpha\;t_S$ et $t_S=v_0\sin\alpha/g$, on conclut comme ci-dessus. Cette méthode évite d'écrire $y(t)$, mais ne se passe pas de la conservation de $v_x$.
+      - titre: "Vitesse de tir nécessaire (complément)"
+        texte: |
+          De $y_S=y_c$ on tire $v_0^2=\dfrac{2g\,y_c}{\sin^2\alpha}$. Avec $y_c\approx0{,}529$ m et $\sin^2(55{,}5^\circ)\approx0{,}679$ :
+          $$v_0\approx\sqrt{\frac{2\times9{,}81\times0{,}529}{0{,}679}}\approx3{,}9~\text{m/s},\qquad t_S=\frac{v_0\sin\alpha}{g}\approx0{,}33~\text{s}.$$
+          Vérification avec l'abscisse : $x_S=v_0^2\sin\alpha\cos\alpha/g\approx15{,}3\times0{,}467/9{,}81\approx0{,}73~\text{m}=x_c$. $\surd$
+
+  - id: q2
+    enonce: |
+      (*) Entraînement : que se passe-t-il si le poisson tire directement vers l'insecte ($\alpha=\varphi$) avec la même vitesse $v_0$ ? Au niveau de l'insecte, la goutte passe-t-elle au-dessus ou en dessous ?
+    coup_de_pouce: |
+      Calculez l'ordonnée $y(t)$ de la goutte à l'instant où son abscisse vaut $x_c=d\cos\varphi$.
+    correction: "La goutte passe en dessous de l'insecte, d'une hauteur $\\dfrac{g\\,x_c^2}{2v_0^2\\cos^2\\varphi}$."
+    solution:
+      - titre: "Tir direct"
+        texte: |
+          Avec $\alpha=\varphi$, la goutte atteint l'abscisse $x_c$ à $t_c=\dfrac{x_c}{v_0\cos\varphi}$ et son ordonnée vaut
+          $$y(t_c)=x_c\tan\varphi-\frac{g\,x_c^2}{2v_0^2\cos^2\varphi}=y_c-\frac{g\,x_c^2}{2v_0^2\cos^2\varphi}<y_c .$$
+          La goutte passe donc {\bf sous} l'insecte, de la quantité $\Delta y=\dfrac{g\,x_c^2}{2v_0^2\cos^2\varphi}$ : c'est la chute due à la gravité pendant la durée du vol. Avec $v_0\approx3{,}9$ m/s, $\Delta y\approx0{,}26$ m : le tir direct manque nettement sa cible, ce qui justifie que le poisson doive tirer au-dessus de la ligne de visée.

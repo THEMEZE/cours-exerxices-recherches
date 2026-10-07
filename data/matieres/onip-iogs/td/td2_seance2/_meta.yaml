@@ -1,0 +1,13 @@
+id: td2
+titre: "Séance 2 — Listes, fonctions, Numpy et matplotlib"
+chapitre_cours: "Outils Numériques pour l'Ingénieur·e en Physique (ONIP) — 5N-028-SCI"
+seance: 2
+niveau_public: [ecole_ingenieur, S5]
+exercices_ordre:
+  - td2_ex1
+  - td2_ex2
+  - td2_ex3
+  - td2_ex4
+  - td2_ex5
+  - td2_ex6
+  - td2_ex7

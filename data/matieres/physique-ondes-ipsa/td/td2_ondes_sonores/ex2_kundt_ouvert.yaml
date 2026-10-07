@@ -3,9 +3,17 @@ intitule: "Onde stationnaire, tube de Kundt ouvert"
 td: td2
 facultatif: false
 seance: 3
+
 cours_rattache:
   - chap2.ondes_stationnaires_acoustiques
   - chap2.reflexion_extremite_ouverte
+  - chap2.notation_complexe
+
+metadonnees:
+  duree_estimee: "40 min"
+  difficulte: 3
+  type_exercice: "Application"
+  indispensable: true
 
 enonce_intro: |
   Un haut-parleur en $x=0$ émet une onde acoustique dans un tube d'air de
@@ -14,27 +22,227 @@ enonce_intro: |
   réflexion en $x=L$ (extrémité ouverte), le déplacement réfléchi s'écrit
   $\Psi_R(x,t)=A_I e^{i(\omega t - k(2L-x))}$.
 
+# figure:
+#   - ref: td2_ex2_tube_schema
+#     legende: |
+#       Suggestion : schéma du tube ouvert-ouvert, haut-parleur en $x=0$, avec une flèche représentant l'onde incidente se propageant vers $x=L$ et une flèche représentant l'onde réfléchie repartant vers $x=0$ ; faire figurer explicitement les deux extrémités ouvertes.
+#     width: 0.6
+#     label:
+#   - ref: td2_ex2_superposition
+#     legende: |
+#       Suggestion : à un instant fixé, tracer sur le même graphe $\Psi_I(x,t_0)$, $\Psi_R(x,t_0)$ (en pointillés) et leur somme $\Psi(x,t_0)$ (trait plein), pour faire visuellement apparaître la construction de l'enveloppe stationnaire à partir de deux ondes progressives.
+#     width: 0.7
+#     label:
+#   - ref: td2_ex2_harmoniques
+#     legende: |
+#       Suggestion : quatre sous-graphes superposés représentant le profil spatial de la surpression $|\tilde p(x)|$ pour les quatre premiers harmoniques ($n=1,2,3,4$), avec les nœuds de pression clairement positionnés en $x=0$ et $x=L$ pour chaque mode.
+#     width: 0.8
+#     label:
+
+prerequis:
+  - titre: "Notation complexe et onde progressive"
+    texte: |
+      Connaître le principe de la notation complexe en acoustique : une grandeur physique réelle $\psi(x,t)$ est associée à une grandeur complexe $\tilde\psi(x,t)$ telle que $\psi = \mathrm{Re}(\tilde\psi)$, ce qui permet de manipuler des exponentielles plutôt que des sinus/cosinus tout en linéarisant les opérations de dérivation.
+
+      Connaître la forme générale d'une onde acoustique plane progressive dans la direction $+x$, $\tilde\Psi(x,t) = A\,e^{i(\omega t - kx)}$, avec $k = \omega/c$ la relation de dispersion (non dispersive) des ondes acoustiques dans un fluide homogène.
+
+      Savoir que le principe de superposition s'applique : toute combinaison linéaire de solutions de l'équation de d'Alembert en est encore solution.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Construire une onde stationnaire par superposition"
+    texte: |
+      Savoir construire explicitement une onde stationnaire comme la somme d'une onde incidente et d'une onde réfléchie, factoriser la partie spatiale et la partie temporelle, et interpréter physiquement cette séparation des variables (immobilité du profil spatial, oscillation uniquement temporelle).
+
+      Savoir traduire une condition aux limites physique (extrémité ouverte ou fermée) en une condition mathématique sur le champ de déplacement ou de pression, et en déduire les fréquences propres du système.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Distinguer condition aux limites en déplacement et en pression"
+    texte: |
+      Le point délicat de cet exercice est de faire comprendre que « extrémité ouverte » ne veut pas dire la même chose selon la grandeur observée : c'est un ventre de déplacement (le fluide y oscille librement) mais un nœud de pression (la pression y reste égale à la pression atmosphérique ambiante, imposée par le milieu extérieur). C'est cette distinction — déphasage spatial de $\pi/2$ entre les profils de $\Psi$ et de $p$ — qui structure toute l'analogie avec les cordes vibrantes et qu'il faut absolument faire ressortir en séance.
+
+point_cours:
+  - titre: "Ondes stationnaires et conditions aux limites acoustiques"
+    texte: |
+      Une onde stationnaire résulte de la superposition d'une onde incidente et d'une onde réfléchie de même amplitude, de sens de propagation opposés. Pour le déplacement,
+      $$\tilde\Psi(x,t) = \tilde\Psi_I(x,t) + \tilde\Psi_R(x,t),$$
+      et le calcul mène systématiquement à une forme du type $\tilde\Psi(x,t) = f(x)\,e^{i(\omega t + \varphi)}$ : la dépendance spatiale $f(x)$ (réelle, à un facteur de phase près) est figée dans le temps, seule la phase temporelle $e^{i\omega t}$ évolue — d'où le qualificatif de « stationnaire », par opposition à une onde progressive dont le profil se translate.
+
+      La condition physique à une extrémité \textbf{ouverte} est que la pression y reste égale à la pression atmosphérique extérieure (imposée par un réservoir infini d'air ambiant) : c'est donc un \textbf{nœud de surpression}, $p=0$. Réciproquement, le fluide y est libre de se déplacer : c'est un \textbf{ventre de déplacement}.
+
+      La condition physique à une extrémité \textbf{fermée} (paroi rigide) est que le fluide ne peut pas traverser la paroi : la vitesse normale, donc le déplacement, y est nul — c'est un \textbf{nœud de déplacement}, et par conséquent un \textbf{ventre de surpression} (la pression peut y varier librement).
+
+      Pour un tube ouvert aux deux extrémités, on impose donc un nœud de pression en $x=0$ \emph{et} en $x=L$ : cette double condition, tout à fait analogue à celle d'une corde vibrante fixée à ses deux extrémités (mais portant ici sur la pression et non le déplacement), sélectionne un ensemble discret de fréquences propres — les harmoniques du tube.
+
+      \textbf{Remarque méthodologique importante} (utile pour les questions 4 et 5) : l'expression de $\Psi_R$ donnée dans l'énoncé encode déjà, par construction, la condition de nœud de pression en $x=L$ (c'est ce qui a permis de l'écrire). La quantification des fréquences propres provient donc de l'imposition de la \emph{même} condition à l'\emph{autre} extrémité $x=0$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Confondre nœud de déplacement et nœud de pression"
+    texte: |
+      L'erreur la plus fréquente consiste à appliquer aux nœuds de pression le même raisonnement que pour les nœuds de déplacement d'une corde vibrante, sans réaliser que les profils de $\Psi(x)$ et de $p(x)$ sont en quadrature spatiale (l'un en cosinus, l'autre en sinus, à une extrémité donnée). Faire tracer explicitement les deux profils côte à côte lève généralement l'ambiguïté.
+  - titre: "Oublier la partie temporelle commune"
+    texte: |
+      Certains étudiants, en factorisant $\Psi(x,t)=2A_I\cos(k(L-x))\,e^{i(\omega t - kL)}$, perdent le facteur de phase $e^{-ikL}$ en cours de route. Ce terme ne change pas le caractère stationnaire de l'onde mais est nécessaire pour obtenir la bonne expression de $\tilde p(x,t)$ à la question suivante.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Poudre de liège dans un tube de Kundt réel"
+    texte: |
+      Si le matériel est disponible, l'expérience historique du tube de Kundt (poudre de liège ou de semoule qui s'accumule aux nœuds de vitesse/déplacement sous l'effet de l'onde stationnaire) est très parlante et permet de visualiser directement les positions des nœuds et ventres calculées en cours de séance.
+
+bilan:
+  - titre: "Résonance d'un tube ouvert-ouvert"
+    texte: |
+      Un tube ouvert aux deux extrémités résonne aux fréquences $f_n = n\,c/(2L)$, pour tout $n\in\mathbb{N}^*$ : tous les harmoniques (pairs et impairs) sont présents. Le mode fondamental ($n=1$) correspond à une demi-longueur d'onde contenue dans le tube, $L=\lambda_1/2$.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Correction de longueur d'extrémité (« end correction »)"
+    texte: |
+      En pratique, une extrémité ouverte n'est pas un nœud de pression parfait : le rayonnement acoustique dans l'espace libre au-delà du tube introduit une « longueur effective » supplémentaire, de l'ordre de $0{,}6\,r$ ($r$ rayon du tube) par extrémité ouverte. Les fréquences de résonance réelles sont alors légèrement décalées : $f_n \approx n\,c/(2(L+2\times 0{,}6\,r))$. On pourra proposer une mesure expérimentale simple (mesure de $f_1$ à $L$ et $r$ connus) pour mettre en évidence cet écart avec le modèle idéal.
+  - niveau: master
+    titre: "Guides d'onde acoustiques avec écoulement moyen"
+    texte: |
+      Dans un conduit parcouru par un écoulement moyen (silencieux automobile, conduit de ventilation), l'équation de propagation se modifie (équation convective) et les modes propres dépendent du nombre de Mach de l'écoulement ; on peut également s'intéresser aux modes de section variable (équation de Webster) qui gouvernent, par exemple, l'acoustique des instruments à vent de forme conique.
+
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi un tuyau ouvert sonne-t-il sur des notes précises ?"
+    duree_introduction: "5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Soufflez en travers d'une bouteille ou d'un tube : il ne résonne que sur certaines notes. Dans un tube ouvert aux deux bouts, que se passe-t-il à l'extrémité ouverte : le fluide y est-il {\bf immobile} ou {\bf libre de bouger} ? Et la pression, y est-elle maximale ou égale à la pression ambiante ?
+    texte: |
+      {\bf Idée clé : une onde stationnaire est la somme d'une onde incidente et d'une onde réfléchie.} Pour une extrémité ouverte, le déplacement est maximal (ventre de déplacement) mais la surpression est nulle (nœud de pression, car l'extérieur impose la pression atmosphérique) :
+      $$\Psi=2A_I\cos\big(k(L-x)\big)e^{i(\omega t-kL)},\qquad\tilde p=-2A_I\rho_0c\,\omega\sin\big(k(L-x)\big)e^{i(\omega t-kL)}.$$
+      Les profils de $\Psi$ et de $p$ sont en {\bf quadrature spatiale} ($\cos$ contre $\sin$). La condition $p(0)=0$ impose $\sin(kL)=0$, donc $f_n=n\,c/(2L)$ : {\bf tous} les harmoniques sont permis.
+
+outils_mathematiques:
+  - titre: "Notation complexe et partie réelle"
+    texte: |
+      Une grandeur réelle est la partie réelle de sa représentation complexe : $\psi=\operatorname{Re}\tilde\psi=2A_I\cos(k(L-x))\cos(\omega t-kL)$. La dérivation d'une exponentielle est plus simple que celle d'un produit trigonométrique.
+  - titre: "Formules d'Euler : $e^{iu}+e^{-iu}=2\\cos u$ et $e^{iu}-e^{-iu}=2i\\sin u$"
+    texte: |
+      Elles permettent de factoriser la somme des deux ondes : $e^{ik(L-x)}+e^{-ik(L-x)}=2\cos(k(L-x))$. Il faut mettre en facteur $e^{-ikL}$ et ne pas le perdre en route.
+  - titre: "Dérivée d'une fonction composée"
+    texte: |
+      $\dfrac{\mathrm d}{\mathrm dx}\cos\big(k(L-x)\big)=+k\sin\big(k(L-x)\big)$ : le signe $-x$ dans l'argument change le signe de la dérivée.
+  - titre: "Quadrature : $\\cos\\!\\left(u-\\dfrac\\pi2\\right)=\\sin u$"
+    texte: |
+      Dériver par rapport à $x$ décale la phase spatiale de $\pi/2$ : le profil de $p$ est décalé d'un quart de longueur d'onde par rapport à celui de $\Psi$. Un ventre de l'un est un nœud de l'autre.
+  - titre: "Zéros du sinus et quantification"
+    texte: |
+      $\sin(kL)=0\Leftrightarrow kL=n\pi$ ($n\in\mathbb N^*$) ; avec $k=2\pi f/c$, $f_n=nc/(2L)$. Le cas $n=0$ est exclu (fréquence nulle).
+  - titre: "Relation $1/\\chi_S=\\rho_0c^2$ et $k/\\chi_S=\\rho_0c\\,\\omega$"
+    texte: |
+      Pour passer de $\partial\Psi/\partial x$ à $\tilde p$, on remplace $\chi_S$ en fonction de $c$ et $\rho_0$, puis $k=\omega/c$. Vérifier l'homogénéité : $\rho_0c\,\omega\,\Psi$ est bien une pression.
+  - titre: "Dénombrement des nœuds et ventres"
+    texte: |
+      Le mode $n$ a $n+1$ nœuds de pression ($x=L(1-m/n)$, $m=0,\dots,n$) et $n$ ventres au milieu de chaque intervalle, séparés de $\lambda_n/2=L/n$.
+
+liens_autres_disciplines:
+  - discipline: "Cordes vibrantes (chapitre 1)"
+    texte: |
+      Les nœuds de pression d'un tube ouvert-ouvert jouent le rôle des nœuds de déplacement d'une corde fixée aux deux extrémités : mêmes fréquences $f_n=nc/(2L)$ avec $c=\sqrt{F/\mu}$ remplacé par la célérité du son.
+  - discipline: "Musique et lutherie"
+    texte: |
+      Flûte traversière, flûte à bec, tuyau d'orgue ouvert : tube ouvert-ouvert, tous les harmoniques, donc un timbre « brillant ». L'instrumentiste modifie $L$ en bouchant ou en ouvrant des trous.
+  - discipline: "Optique et lasers"
+    texte: |
+      Une cavité laser ou un résonateur de Fabry-Pérot sélectionne des fréquences telles que $L=n\lambda/2$ : même condition de quantification.
+  - discipline: "Mécanique quantique"
+    texte: |
+      La particule dans un puits de largeur $L$ a des fonctions d'onde en $\sin(n\pi x/L)$ : nœuds aux bords, comme la pression dans un tube ouvert-ouvert.
+  - discipline: "Ingénierie acoustique"
+    texte: |
+      Les silencieux, conduits de ventilation et tuyaux d'échappement ont des résonances dues à ces ondes stationnaires. La correction de longueur d'extrémité ($\approx0{,}6\,r$ par bout ouvert) est nécessaire pour accorder un instrument.
+
 questions:
   - id: q1
     enonce: "Justifier cette expression du déplacement réfléchi par un schéma."
-    coup_de_pouce: "Une extrémité ouverte est un ventre de déplacement (pas de nœud) : le déplacement n'est pas inversé au retour, contrairement à une réflexion sur paroi rigide."
+    coup_de_pouce: |
+      Une extrémité ouverte est un ventre de déplacement (pas de nœud) : le déplacement n'est pas inversé au retour, contrairement à une réflexion sur paroi rigide.
+    solution:
+      - titre: "Réflexion sans inversion de signe"
+        texte: |
+          On peut construire l'expression de $\Psi_R$ en imaginant que l'onde incidente $\Psi_I$ poursuit fictivement sa route au-delà de $x=L$ jusqu'à un point image $x'=2L-x$ symétrique de $x$ par rapport à $L$, sans changement de signe ni d'amplitude, puis en associant à ce trajet fictif une onde réellement réfléchie qui repart vers les $x$ décroissants : $\Psi_R(x,t)=A_I e^{i(\omega t-k(2L-x))}$. Physiquement, cela traduit le fait qu'une extrémité ouverte est un \textbf{ventre de déplacement} : le fluide y oscille librement, avec la même amplitude et le même signe que l'onde incidente, exactement comme l'extrémité libre d'une corde qui réfléchit une impulsion sans l'inverser (à la différence d'une extrémité fixée, qui inverse le signe — cf. exercice 3).
+      - titre: "Vérification directe sur la formule"
+        texte: |
+          On vérifie qu'en $x=L$, $\Psi_I(L,t)=A_I e^{i(\omega t-kL)}$ et $\Psi_R(L,t)=A_I e^{i(\omega t-k(2L-L))}=A_I e^{i(\omega t-kL)}$ : les deux contributions sont bien identiques en $x=L$ (même amplitude, même phase), ce qui correspond à un maximum de déplacement (ventre) et non à une annulation (nœud).
 
   - id: q2
     enonce: |
       Montrer que le déplacement résultant s'écrit
       $\Psi(x,t)=2A_I\cos\big(k(L-x)\big)e^{i(\omega t-kL)}$. Justifier le nom d'onde stationnaire.
-    coup_de_pouce: "Sommez $\\Psi_I+\\Psi_R$ et factorisez ; une onde stationnaire a un profil spatial et une évolution temporelle qui se séparent (le terme $\\cos(k(L-x))$ ne dépend pas de $t$)."
+    coup_de_pouce: |
+      Sommez $\Psi_I+\Psi_R$ et factorisez ; une onde stationnaire a un profil spatial et une évolution temporelle qui se séparent (le terme $\cos(k(L-x))$ ne dépend pas de $t$).
     correction: "$\\Psi(x,t)=\\Psi_I+\\Psi_R=2A_I\\cos(k(L-x))e^{i(\\omega t - kL)}$ : l'amplitude spatiale $\\cos(k(L-x))$ est fixe dans le temps, seule la phase temporelle oscille -- onde stationnaire."
+    solution:
+      - titre: "Calcul de la somme"
+        texte: |
+          On part de
+          $$\Psi(x,t) = \Psi_I(x,t)+\Psi_R(x,t) = A_I e^{i(\omega t-kx)} + A_I e^{i(\omega t-k(2L-x))}.$$
+          On met en facteur $A_I e^{i\omega t}$ :
+          $$\Psi(x,t) = A_I e^{i\omega t}\left[e^{-ikx} + e^{-ik(2L-x)}\right] = A_I e^{i\omega t}\left[e^{-ikx} + e^{ikx-2ikL}\right].$$
+          On met maintenant en facteur $e^{-ikL}$ à l'intérieur du crochet :
+          $$\Psi(x,t) = A_I e^{i\omega t} e^{-ikL}\left[e^{-ik(x-L)} + e^{ik(x-L)}\right] = A_I e^{i(\omega t-kL)}\left[e^{ik(L-x)} + e^{-ik(L-x)}\right].$$
+          En reconnaissant $e^{iu}+e^{-iu}=2\cos u$ avec $u=k(L-x)$, on obtient bien :
+          $$\boxed{\Psi(x,t) = 2A_I\cos\big(k(L-x)\big)\,e^{i(\omega t-kL)}}.$$
+      - titre: "Interprétation : pourquoi « onde stationnaire »"
+        texte: |
+          Cette expression est bien du type $f(x)\,e^{i(\omega t+\varphi_0)}$ annoncé dans le point cours : le facteur $f(x)=2A_I\cos(k(L-x))$ ne dépend pas du temps (à un facteur de phase global $e^{-ikL}$ près, indépendant de $x$), tandis que le facteur $e^{i\omega t}$ ne dépend pas de $x$. La partie réelle physique,
+          $$\psi(x,t) = 2A_I\cos(k(L-x))\cos(\omega t - kL),$$
+          décrit donc un profil spatial \emph{figé} (dont l'amplitude est modulée par $\cos(k(L-x))$) qui oscille globalement en phase, sans jamais se déplacer le long de l'axe $x$ : contrairement à une onde progressive, aucun point de la courbe ne « voyage », chaque point du tube oscille sur place avec une amplitude qui dépend de sa position — d'où le nom d'onde \textbf{stationnaire}.
 
   - id: q3
     enonce: "Exprimer la surpression acoustique (notation complexe) $\\tilde p(x,t)=-\\dfrac{1}{\\chi_S}\\dfrac{\\partial\\Psi}{\\partial x}$."
-    coup_de_pouce: "Dérivez simplement l'expression de $\\Psi(x,t)$ trouvée en 2) par rapport à $x$."
+    coup_de_pouce: |
+      Dérivez simplement l'expression de $\Psi(x,t)$ trouvée en 2) par rapport à $x$, puis utilisez $1/\chi_S=\rho_0 c^2$ (cf. point cours de l'exercice 1) et $k=\omega/c$ pour simplifier.
+    solution:
+      - titre: "Dérivation spatiale de $\\Psi$"
+        texte: |
+          On dérive $\Psi(x,t) = 2A_I\cos(k(L-x))\,e^{i(\omega t-kL)}$ par rapport à $x$, en n'oubliant pas la dérivée de la fonction composée (la dérivée de $\cos(k(L-x))$ par rapport à $x$ fait apparaître un signe $+k\sin$ à cause du signe « $-x$ » à l'intérieur) :
+          $$\frac{\partial\Psi}{\partial x} = 2A_I\,k\,\sin\big(k(L-x)\big)\,e^{i(\omega t-kL)}.$$
+      - titre: "Expression de la surpression"
+        texte: |
+          En reportant dans $\tilde p = -\dfrac{1}{\chi_S}\dfrac{\partial\Psi}{\partial x}$ :
+          $$\tilde p(x,t) = -\frac{2A_I k}{\chi_S}\sin\big(k(L-x)\big)\,e^{i(\omega t-kL)}.$$
+          Or, d'après la relation $c^2=1/(\rho_0\chi_S)$ établie dans le point cours de l'exercice 1, on a $1/\chi_S=\rho_0 c^2$ ; en utilisant de plus $k=\omega/c$, il vient $k/\chi_S = \rho_0 c^2\times\omega/c=\rho_0 c\,\omega$. On obtient finalement l'expression compacte :
+          $$\boxed{\tilde p(x,t) = -2A_I\,\rho_0 c\,\omega\,\sin\big(k(L-x)\big)\,e^{i(\omega t-kL)}}.$$
+          On remarque que le profil spatial de la pression, en $\sin(k(L-x))$, est en \textbf{quadrature} avec celui du déplacement, en $\cos(k(L-x))$ : là où $\Psi$ est maximal (ventre), $p$ s'annule (nœud), et réciproquement — conformément à ce qu'annonçait le point cours.
 
   - id: q4
     enonce: "En déduire les fréquences $f_n$ de résonance en surpression, en fonction de $n\\in\\mathbb{N}^*$, $c$ et $L$."
-    coup_de_pouce: "Un tube ouvert-ouvert a un ventre de déplacement (donc un nœud de surpression) à chaque extrémité : condition analogue à une corde fixée aux deux bouts mais sur la pression."
+    coup_de_pouce: |
+      Un tube ouvert-ouvert a un ventre de déplacement (donc un nœud de surpression) à chaque extrémité : condition analogue à une corde fixée aux deux bouts mais sur la pression. La condition en $x=L$ est déjà satisfaite automatiquement par construction (cf. remarque du point cours) ; il reste à imposer la même condition en $x=0$.
     correction: "$f_n = n\\,c/(2L)$, $n\\in\\mathbb{N}^*$."
+    solution:
+      - titre: "Vérification du nœud de pression en $x=L$ (automatique)"
+        texte: |
+          À partir de l'expression de $\tilde p(x,t)$ trouvée en question 3, on vérifie qu'en $x=L$ : $\sin(k(L-L))=\sin(0)=0$, donc $\tilde p(L,t)=0$ \emph{quelle que soit la valeur de $k$} (donc de la fréquence). Ce nœud de pression en $x=L$ était en fait déjà encodé dans l'expression de $\Psi_R$ donnée dans l'énoncé (cf. remarque du point cours) : il ne fournit donc aucune information nouvelle sur la fréquence.
+      - titre: "Condition de nœud de pression en $x=0$ : quantification"
+        texte: |
+          Le tube étant \emph{également} ouvert en $x=0$, la même condition physique (nœud de pression) doit y être satisfaite :
+          $$\tilde p(0,t) = -2A_I\rho_0 c\,\omega\,\sin(kL)\,e^{i(\omega t-kL)} = 0 \quad\Longrightarrow\quad \sin(kL)=0.$$
+          Cette équation n'est vérifiée que pour des valeurs discrètes de $k$ :
+          $$kL = n\pi, \qquad n\in\mathbb{N}^*.$$
+          (on exclut $n=0$, qui correspondrait à $k=0$, c'est-à-dire à une fréquence nulle, non physique). En utilisant $k=\omega/c=2\pi f/c$, on obtient :
+          $$\frac{2\pi f_n}{c}L = n\pi \quad\Longrightarrow\quad \boxed{f_n = \frac{n\,c}{2L}}, \qquad n\in\mathbb{N}^*.$$
+          C'est cette discrétisation des valeurs possibles de $f$ (et donc de $k$) qui constitue la résonance du tube : seules ces fréquences particulières permettent d'établir une onde stationnaire compatible avec les deux conditions aux limites simultanément.
 
   - id: q5
     enonce: "Positions des maxima/minima de surpression ; représenter graphiquement jusqu'à la 3e harmonique (n=4)."
-    coup_de_pouce: "Les nœuds de pression sont aux extrémités ouvertes, les ventres au milieu des segments -- comme les nœuds/ventres de déplacement pour une corde fixée."
+    coup_de_pouce: |
+      Les nœuds de pression sont aux extrémités ouvertes, les ventres au milieu des segments -- comme les nœuds/ventres de déplacement pour une corde fixée.
+    solution:
+      - titre: "Formule générale des nœuds et ventres pour l'harmonique $n$"
+        texte: |
+          Pour le mode propre $n$, on a $k_n = n\pi/L$, soit une longueur d'onde $\lambda_n = 2\pi/k_n = 2L/n$. Le profil spatial de la surpression, en $|\sin(k_n(L-x))|$, s'annule (nœuds) lorsque $k_n(L-x)=m\pi$ ($m$ entier), soit :
+          $$x_m^{\text{nœud}} = L - \frac{m\lambda_n}{2} = L\left(1-\frac{m}{n}\right), \qquad m=0,1,\dots,n,$$
+          ce qui donne $n+1$ nœuds régulièrement espacés de $L/n$, incluant nécessairement les deux extrémités $x=0$ et $x=L$ (cohérent avec le fait que les deux bouts sont ouverts). Les ventres (maxima de $|p|$) se situent exactement à mi-chemin entre deux nœuds consécutifs, soit
+          $$x_m^{\text{ventre}} = L\left(1-\frac{2m-1}{2n}\right), \qquad m=1,\dots,n.$$
+      - titre: "Application aux quatre premiers harmoniques"
+        texte: |
+          \begin{itemize}
+            \item $n=1$ ($f_1=c/2L$) : 2 nœuds (en $x=0$ et $x=L$), 1 ventre unique au milieu $x=L/2$.
+            \item $n=2$ ($f_2=c/L$) : 3 nœuds ($x=0,\,L/2,\,L$), 2 ventres ($x=L/4,\,3L/4$).
+            \item $n=3$ ($f_3=3c/2L$) : 4 nœuds ($x=0,\,L/3,\,2L/3,\,L$), 3 ventres ($x=L/6,\,L/2,\,5L/6$).
+            \item $n=4$ ($f_4=2c/L$) : 5 nœuds ($x=0,\,L/4,\,L/2,\,3L/4,\,L$), 4 ventres ($x=L/8,\,3L/8,\,5L/8,\,7L/8$).
+          \end{itemize}
+          On retrouve la structure classique : le mode $n$ possède $n$ ventres et $n+1$ nœuds, régulièrement répartis, tout à fait analogue aux modes propres d'une corde vibrante (mais avec les rôles de nœud/ventre échangés entre déplacement et pression).

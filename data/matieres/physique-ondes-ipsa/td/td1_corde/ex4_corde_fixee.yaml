@@ -25,6 +25,50 @@ figure:
   label: "fig:???"
 
 
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi une corde ne donne-t-elle que certaines notes ?"
+    duree_introduction: "5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Pincez une corde de guitare : elle peut vibrer sur son fondamental, mais aussi, en la touchant légèrement au milieu, sur la note à l'octave. Pourquoi y a-t-il des fréquences « permises » et pas toutes les fréquences ? Pourquoi ces fréquences sont-elles des {\bf multiples entiers} de la plus grave ?
+    texte: |
+      {\bf Idée clé : les conditions aux limites quantifient les modes.} Une onde stationnaire s'écrit à variables séparées, $y(x,t)=A\cos(kx+\varphi)\cos(\omega t+\phi)$, avec $\omega=ck$. Une corde fixée en $x=0$ et $x=L$ impose $y(0,t)=y(L,t)=0$ : $\varphi=\pi/2$ et $\sin(kL)=0$, donc
+      $$k_N=\frac{N\pi}{L},\qquad\lambda_N=\frac{2L}{N},\qquad f_N=N\,f_1,\ \ f_1=\frac c{2L}.$$
+      Le mode $N$ a $N+1$ nœuds (dont les 2 extrémités) et $N$ ventres, séparés de $\lambda_N/2$. La vibration quelconque est une {\bf superposition} de ces modes.
+
+outils_mathematiques:
+  - titre: "Séparation des variables et oscillateur harmonique"
+    texte: |
+      Avec $y=f(x)g(t)$ : $\dfrac{f''}{f}=\dfrac1{c^2}\dfrac{g''}g=-k^2$ (constante), d'où les deux équations $f''+k^2f=0$ et $g''+\omega^2g=0$, de solutions en $\cos$/$\sin$. Le problème spatial devient un problème aux valeurs propres.
+  - titre: "Zéros du sinus : $\\sin u=0\\iff u=N\\pi$"
+    texte: |
+      $\sin(kL)=0$ impose $kL=N\pi$ avec $N\in\mathbb N^*$. Le cas $N=0$ est exclu (corde immobile). C'est la quantification : un ensemble discret de valeurs permises.
+  - titre: "Formules produit-somme"
+    texte: |
+      $\sin a\cos b=\tfrac12\left[\sin(a+b)+\sin(a-b)\right]$, donc $\sin(kx)\cos(\omega t)=\tfrac12\left[\sin(kx+\omega t)+\sin(kx-\omega t)\right]$ : {\bf une onde stationnaire est la somme de deux ondes progressives} de sens opposés (lien avec l'exercice d'Alembert).
+  - titre: "Décalage de phase : $\\cos(u-\\pi/2)=\\sin u$"
+    texte: |
+      Avec $\varphi=\pi/2\ [\pi]$, $\cos(kx+\varphi)=\mp\sin(kx)$. Savoir passer de cosinus à sinus par un décalage de $\pi/2$.
+  - titre: "Dénombrement des nœuds et ventres"
+    texte: |
+      $\sin(N\pi x/L)=0$ pour $x=nL/N$, $n=0,\dots,N$ : $N+1$ points (« poteaux et intervalles »), donc $N$ fuseaux ou ventres.
+  - titre: "Série de Fourier (ouverture)"
+    texte: |
+      Toute forme initiale $y(x,0)$ s'écrit $\sum_N B_N\sin(N\pi x/L)$ : décomposer en modes, c'est faire une série de Fourier en sinus.
+
+liens_autres_disciplines:
+  - discipline: "Mécanique quantique"
+    texte: |
+      Une particule dans un puits infini de largeur $L$ a pour fonctions d'onde $\psi_n\propto\sin(n\pi x/L)$ et pour énergies $E_n\propto n^2$ : mêmes conditions aux limites, même quantification.
+  - discipline: "Musique et acoustique"
+    texte: |
+      Les harmoniques $f_N=Nf_1$ donnent le timbre d'un instrument. En touchant la corde en son milieu, on force un nœud en $L/2$ et on isole $N=2$ (flageolet).
+  - discipline: "Optique et lasers"
+    texte: |
+      Dans une cavité Fabry-Pérot de longueur $L$, les modes permis vérifient $L=N\lambda/2$ : même relation que pour la corde fixée aux deux extrémités.
+  - discipline: "Traitement du signal"
+    texte: |
+      Décomposer un son en harmoniques est une analyse de Fourier : spectre discret pour un signal périodique, continu pour un signal non périodique (voir la transformée de Fourier).
+
 questions:
   - id: q1
     enonce: |

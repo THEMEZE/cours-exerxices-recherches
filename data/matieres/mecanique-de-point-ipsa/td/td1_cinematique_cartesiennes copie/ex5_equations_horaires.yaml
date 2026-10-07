@@ -1,0 +1,198 @@
+id: td1_ex5
+intitule: "(*) Équations horaires 2D ou 3D"
+td: td1
+facultatif: true
+seance: 1
+
+cours_rattache:
+  - cinematique.vecteur_position
+  - cinematique.vecteur_vitesse
+  - cinematique.vecteur_acceleration
+  - cinematique.mouvement_circulaire_uniforme
+  - cinematique.mouvement_circulaire_non_uniforme
+  - cinematique.mouvement_spirale
+
+metadonnees:
+  duree_estimee: "45 min"
+  difficulte: 4
+  type_exercice: "Entraînement / Approfondissement"
+  indispensable: false
+
+enonce_intro: |
+  Un mobile assimilé à un point matériel $M$ est en mouvement dans un référentiel galiléen $\mathcal R$
+  d'origine $O$ et muni d'un repère cartésien $(Oxyz)$. Il est repéré par ses coordonnées cartésiennes
+  suivantes, dans six cas indépendants ($a,b,c$ désignant des constantes) :
+  $$
+  \begin{array}{llll}
+  1)\ \begin{cases}x=5t\\y=2\\z=15t\end{cases} &
+  2)\ \begin{cases}x=2\\y=0\\z=4t^2-8t\end{cases} &
+  3)\ \begin{cases}x=3\cos(10t)\\y=3\sin(10t)\\z=2\end{cases} \\[2em]
+  4)\ \begin{cases}x=at^2-bt+c\\y=2c\\z=0\end{cases} &
+  5)\ \begin{cases}x=3\cos(2t^2)\\y=3\sin(2t^2)\\z=0\end{cases} &
+  6)\ \begin{cases}x=2t\cos(4t)\\y=2t\sin(4t)\\z=0\end{cases}
+  \end{array}
+  $$
+  Déterminer, pour chaque cas, le vecteur position, le vecteur vitesse et le vecteur accélération du point $M$,
+  ainsi que leur norme, et caractériser le mouvement obtenu.
+
+prerequis:
+  - titre: "Boîte à outils de dérivation cartésienne"
+    texte: |
+      En base cartésienne fixe $(\vec\imath,\vec\jmath,\vec k)$, on dérive terme à terme : $\vec v=\dot x\,\vec\imath+\dot y\,\vec\jmath+\dot z\,\vec k$ et $\vec a = \ddot x\,\vec\imath+\ddot y\,\vec\jmath+\ddot z\,\vec k$, avec $\|\vec v\|=\sqrt{\dot x^2+\dot y^2+\dot z^2}$ et $\|\vec a\|=\sqrt{\ddot x^2+\ddot y^2+\ddot z^2}$. Il faut maîtriser la dérivation d'un produit de fonctions du temps (règle de Leibniz), utile dès que $t$ apparaît à la fois en facteur et à l'intérieur d'un $\cos$ ou d'un $\sin$ (cas 5 et 6 ci-dessous).
+  - titre: "Décomposition polaire d'un mouvement plan"
+    texte: |
+      Pour un mouvement plan, il est souvent instructif de repérer $r(t)=\|\overrightarrow{OM}\|$ et $\theta(t)$ tels que $x=r\cos\theta$, $y=r\sin\theta$, même si le calcul est mené in fine en cartésien : cela permet d'anticiper et de vérifier les résultats obtenus, notamment via $\|\vec v\|^2 = \dot r^2 + r^2\dot\theta^2$ et les composantes radiale/orthoradiale de l'accélération, $a_r = \ddot r - r\dot\theta^2$ et $a_\theta = r\ddot\theta+2\dot r\dot\theta$ (résultats de cours qui seront redémontrés plus tard, mais utilisables ici comme moyen de vérification).
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Automatiser le calcul vectoriel et reconnaître des mouvements-types"
+    texte: |
+      Savoir dériver rapidement et sans erreur des lois horaires variées (y compris avec $t$ apparaissant à plusieurs endroits, cas 5 et 6), et surtout savoir {\bf reconnaître, derrière le calcul}, un mouvement-type déjà rencontré (rectiligne uniforme, rectiligne uniformément varié, circulaire uniforme) ou un mouvement nouveau (circulaire non uniforme, spirale) qui anticipe les prochains chapitres du cours.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Exercice de synthèse et de reconnaissance de formes"
+    texte: |
+      Cet exercice, plus long et facultatif, vise à entraîner le réflexe de calcul mais surtout la {\bf lecture physique} d'une loi horaire : au-delà du résultat brut, on attend des étudiants qu'ils identifient à chaque fois la nature du mouvement (translation uniforme, MRUV, circulaire uniforme ou non, spirale). Les cas 5 et 6, plus délicats (dérivée d'un produit avec argument variable dans le cosinus/sinus), sont volontairement placés en fin d'exercice et gagnent à être reliés, en aparté, aux formules polaires $a_r, a_\theta$ vues en cours, sans exiger leur redémonstration ici.
+
+point_cours:
+  - titre: "Circulaire uniforme vs. circulaire non uniforme"
+    texte: |
+      Un mouvement à trajectoire circulaire ($r=$ cte) est {\bf uniforme} si $\dot\theta=\omega$ est constant (cas 3), et {\bf non uniforme} si $\dot\theta$ varie avec le temps (cas 5, où $\theta(t)=2t^2$ donne $\dot\theta=4t$, croissant) : dans ce dernier cas apparaît une accélération tangentielle non nulle, en plus de l'accélération centripète.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Dériver $t\\cos(\\omega t)$ comme si $t$ n'apparaissait qu'une fois"
+    texte: |
+      Dans les cas 5 et 6, une erreur très fréquente consiste à dériver uniquement l'argument du cosinus/sinus (comme au cas 3) en oubliant le facteur $t$ ou $2t$ multiplicatif à l'extérieur, qui impose une {\bf dérivée de produit} : $\frac{\mathrm d}{\mathrm dt}\big(f(t)\cos(g(t))\big) = f'(t)\cos(g(t)) - f(t)g'(t)\sin(g(t))$.
+
+bilan:
+  - titre: "Une même méthode, des mouvements très variés"
+    texte: |
+      Cet exercice montre qu'une méthode unique et systématique (dérivation cartésienne terme à terme) permet de traiter des mouvements de natures très différentes : translation uniforme (cas 1), MRUV rectiligne (cas 2 et 4), circulaire uniforme (cas 3), circulaire non uniforme (cas 5), et spirale (cas 6). La difficulté n'est donc pas dans la méthode elle-même, mais dans la rigueur du calcul de dérivée et dans l'interprétation physique du résultat obtenu.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Retrouver les cas 3, 5 et 6 en coordonnées polaires"
+    texte: |
+      On pourra reprendre les cas 3, 5 et 6 en identifiant $r(t)$ et $\theta(t)$, puis en utilisant directement les formules polaires $\vec v = \dot r\,\vec u_r + r\dot\theta\,\vec u_\theta$ et $\vec a = (\ddot r - r\dot\theta^2)\vec u_r + (r\ddot\theta+2\dot r\dot\theta)\vec u_\theta$ (établies plus tard dans le cours), pour constater que les normes obtenues coïncident avec celles calculées ici en cartésien, tout en simplifiant considérablement les calculs intermédiaires.
+
+questions:
+  - id: q1
+    enonce: |
+      Cas 1 : $x(t) = 5t$, $y(t)=2$, $z(t)=15t$ (unités SI). Déterminer $\overrightarrow{OM}(t)$, $\vec v(t)$, $\vec a(t)$ et leurs normes ; caractériser le mouvement.
+    coup_de_pouce: |
+      Toutes les coordonnées sont des fonctions affines de $t$ : quel type de mouvement cela évoque-t-il ?
+    correction: "$\\vec v=(5,0,15)$ constant, $\\vec a=\\vec 0$ : mouvement rectiligne uniforme, $\\|\\vec v\\|=5\\sqrt{10}\\approx15{,}8$ m/s."
+    solution:
+      - titre: "Vecteurs position, vitesse, accélération"
+        texte: |
+          $$\overrightarrow{OM}(t) = 5t\,\vec\imath + 2\,\vec\jmath + 15t\,\vec k.$$
+          En dérivant chaque composante (constante $y=2$ donc $\dot y=0$) :
+          $$\vec v(t) = 5\,\vec\imath + 15\,\vec k \quad (\text{constant}), \qquad \vec a(t) = \vec 0.$$
+          $$\|\vec v\| = \sqrt{5^2+15^2} = \sqrt{250} = 5\sqrt{10} \approx 15{,}8~\text{m/s}, \qquad \|\vec a\| = 0.$$
+      - titre: "Nature du mouvement"
+        texte: |
+          Les trois coordonnées étant des fonctions affines de $t$ (dont $y$ constante), le vecteur vitesse est constant et l'accélération est nulle : il s'agit d'un {\bf mouvement rectiligne uniforme}, le long de la droite de vecteur directeur $5\,\vec\imath+15\,\vec k$, à l'altitude fixe $y=2$.
+
+  - id: q2
+    enonce: |
+      Cas 2 : $x(t)=2$, $y(t)=0$, $z(t)=4t^2-8t$ (unités SI). Déterminer $\overrightarrow{OM}(t)$, $\vec v(t)$, $\vec a(t)$ et leurs normes ; caractériser le mouvement.
+    coup_de_pouce: |
+      Seule la coordonnée $z$ varie, et de façon quadratique : quel est le mouvement le long de $Oz$ ?
+    correction: "$\\vec v=(0,0,8t-8)$, $\\vec a=(0,0,8)$ constant : mouvement rectiligne uniformément accéléré le long de $Oz$, avec inversion du sens du mouvement à $t=1$ s."
+    solution:
+      - titre: "Vecteurs position, vitesse, accélération"
+        texte: |
+          $$\overrightarrow{OM}(t) = 2\,\vec\imath + (4t^2-8t)\,\vec k.$$
+          $$\vec v(t) = (8t-8)\,\vec k, \qquad \vec a(t) = 8\,\vec k \quad (\text{constant}).$$
+          $$\|\vec v(t)\| = |8t-8|, \qquad \|\vec a\| = 8~\text{m/s}^2.$$
+      - titre: "Nature du mouvement"
+        texte: |
+          Les coordonnées $x=2$ et $y=0$ sont constantes : le point $M$ se déplace uniquement le long de la droite verticale $x=2, y=0$ (parallèle à $Oz$). C'est un {\bf mouvement rectiligne uniformément accéléré} ($\vec a$ constant), avec une vitesse initiale $\vec v(0) = -8\,\vec k$ (le mobile part donc vers les $z$ décroissants), qui s'annule à $t=1$ s puis change de signe : le mobile ralentit, s'arrête un instant à $z=4-8=-4$ m, puis repart en sens inverse (vers les $z$ croissants), avec une accélération constante orientée vers $+\vec k$ tout du long.
+
+  - id: q3
+    enonce: |
+      Cas 3 : $x(t)=3\cos(10t)$, $y(t)=3\sin(10t)$, $z(t)=2$ (unités SI). Déterminer $\overrightarrow{OM}(t)$, $\vec v(t)$, $\vec a(t)$ et leurs normes ; caractériser le mouvement.
+    coup_de_pouce: |
+      C'est le mouvement circulaire de l'exercice 3, mais décalé le long de $Oz$.
+    correction: "Mouvement circulaire uniforme de rayon $R=3$ m, $\\omega=10$ rad/s, dans le plan $z=2$. $\\|\\vec v\\|=30$ m/s, $\\|\\vec a\\|=300$ m/s²."
+    solution:
+      - titre: "Vecteurs position, vitesse, accélération"
+        texte: |
+          $$\overrightarrow{OM}(t) = 3\cos(10t)\,\vec\imath + 3\sin(10t)\,\vec\jmath + 2\,\vec k.$$
+          $$\vec v(t) = -30\sin(10t)\,\vec\imath + 30\cos(10t)\,\vec\jmath \quad (\text{composante suivant } \vec k \text{ nulle, car } z \text{ constant}).$$
+          $$\vec a(t) = -300\cos(10t)\,\vec\imath - 300\sin(10t)\,\vec\jmath = -100\big(x\,\vec\imath+y\,\vec\jmath\big).$$
+          $$\|\vec v\| = \sqrt{900\sin^2(10t)+900\cos^2(10t)} = 30~\text{m/s} \ (\text{constant}), \qquad \|\vec a\| = 300~\text{m/s}^2 \ (\text{constant}).$$
+      - titre: "Nature du mouvement"
+        texte: |
+          Dans le plan horizontal $z=2$, on reconnaît exactement la structure de l'exercice 3 ($R=3$ m, $\omega=10$ rad/s) : c'est un {\bf mouvement circulaire uniforme}, de rayon $3$ m, parcouru à vitesse angulaire constante $10$ rad/s, dans le plan $z=2$ (l'axe du cercle est donc la droite $x=0,y=0$, parallèle à $Oz$). L'accélération, purement centripète, vérifie $\vec a=-\omega^2(\overrightarrow{OM}-2\vec k)$, pointant à chaque instant vers l'axe du cercle.
+
+  - id: q4
+    enonce: |
+      Cas 4 : $x(t)=at^2-bt+c$, $y(t)=2c$, $z(t)=0$ ($a,b,c$ constantes). Déterminer $\overrightarrow{OM}(t)$, $\vec v(t)$, $\vec a(t)$ et leurs normes ; caractériser le mouvement.
+    coup_de_pouce: |
+      Comparez à l'exercice 1, question 1 : ici c'est $Ox$ qui joue le rôle de l'axe du mouvement quadratique.
+    correction: "$\\vec v=(2at-b)\\,\\vec\\imath$, $\\vec a=2a\\,\\vec\\imath$ constant : mouvement rectiligne uniformément accéléré le long de la droite $y=2c$, $z=0$."
+    solution:
+      - titre: "Vecteurs position, vitesse, accélération"
+        texte: |
+          $$\overrightarrow{OM}(t) = (at^2-bt+c)\,\vec\imath + 2c\,\vec\jmath.$$
+          $$\vec v(t) = (2at-b)\,\vec\imath \quad (\text{car } y, z \text{ constants}), \qquad \vec a(t) = 2a\,\vec\imath \quad (\text{constant}).$$
+          $$\|\vec v(t)\| = |2at-b|, \qquad \|\vec a\| = 2|a|.$$
+      - titre: "Nature du mouvement"
+        texte: |
+          Les coordonnées $y=2c$ et $z=0$ étant constantes, le mouvement est entièrement contenu sur la droite parallèle à $Ox$ passant par le point $(0,2c,0)$. La coordonnée $x(t)$ étant quadratique en $t$, à accélération $2a$ constante, il s'agit d'un {\bf mouvement rectiligne uniformément varié} le long de cette droite (accéléré ou décéléré selon les signes relatifs de $a$ et de la vitesse instantanée $2at-b$), analogue à la situation étudiée en question 1(f) de l'exercice 1, mais ici le long de $Ox$ plutôt que de $Oy$.
+
+  - id: q5
+    enonce: |
+      Cas 5 : $x(t)=3\cos(2t^2)$, $y(t)=3\sin(2t^2)$, $z(t)=0$ (unités SI). Déterminer $\overrightarrow{OM}(t)$, $\vec v(t)$, $\vec a(t)$ et leurs normes ; caractériser le mouvement.
+    coup_de_pouce: |
+      Posez $\\theta(t)=2t^2$ : la trajectoire est-elle circulaire ? La vitesse angulaire $\dot\theta$ est-elle constante ?
+    correction: "Mouvement circulaire de rayon 3 m, mais {\\bf non uniforme} ($\\dot\\theta=4t$ croissant) : $\\|\\vec v\\|=12t$, $\\|\\vec a\\|=\\sqrt{144+2304t^4}=12\\sqrt{1+16t^4}$."
+    solution:
+      - titre: "Repérage polaire : rayon constant, angle non linéaire"
+        texte: |
+          On remarque que $x^2+y^2 = 9\cos^2(2t^2)+9\sin^2(2t^2) = 9$ : la trajectoire est donc bien un {\bf cercle de rayon $R=3$ m}, mais avec un angle polaire $\theta(t) = 2t^2$ qui {\bf n'est pas linéaire en $t$} : la vitesse angulaire $\dot\theta(t) = 4t$ croît avec le temps, le mouvement circulaire n'est donc pas uniforme.
+      - titre: "Vecteur vitesse (dérivée d'un produit avec argument variable)"
+        texte: |
+          Il faut dériver un produit, l'argument du cosinus/sinus dépendant lui-même de $t$ :
+          $$v_x = \frac{\mathrm d}{\mathrm dt}\big(3\cos(2t^2)\big) = -3\sin(2t^2)\cdot 4t = -12t\sin(2t^2),$$
+          $$v_y = \frac{\mathrm d}{\mathrm dt}\big(3\sin(2t^2)\big) = 3\cos(2t^2)\cdot 4t = 12t\cos(2t^2).$$
+          $$\vec v(t) = -12t\sin(2t^2)\,\vec\imath + 12t\cos(2t^2)\,\vec\jmath, \qquad \|\vec v\| = 12t\sqrt{\sin^2(2t^2)+\cos^2(2t^2)} = \boxed{12t}~\text{m/s (pour }t\geq0\text{)}.$$
+          On retrouve directement ce résultat via $\|\vec v\| = R\dot\theta = 3\times 4t = 12t$ (vitesse purement orthoradiale puisque $R$ est constant, $\dot R=0$).
+      - titre: "Vecteur accélération (par dérivation directe, puis vérification polaire)"
+        texte: |
+          En dérivant à nouveau chaque composante (règle du produit à trois facteurs) :
+          $$a_x = -12\sin(2t^2) - 12t\cdot\cos(2t^2)\cdot 4t = -12\sin(2t^2) - 48t^2\cos(2t^2),$$
+          $$a_y = 12\cos(2t^2) - 12t\cdot\sin(2t^2)\cdot 4t = 12\cos(2t^2) - 48t^2\sin(2t^2).$$
+          On vérifie ce résultat plus simplement grâce aux formules polaires (cf. « aller plus loin ») : $R$ constant ($\dot R=0$) donne une accélération purement tangentielle constante $a_t = R\ddot\theta = 3\times 4 = 12$ (le cercle est parcouru avec une accélération angulaire $\ddot\theta=4$ constante), et une accélération centripète $a_n = R\dot\theta^2 = 3\times(4t)^2 = 48t^2$, croissante avec $t$. D'où :
+          $$\|\vec a\| = \sqrt{a_t^2+a_n^2} = \sqrt{12^2+(48t^2)^2} = \boxed{12\sqrt{1+16t^4}}~\text{m/s}^2.$$
+      - titre: "Nature du mouvement"
+        texte: |
+          Il s'agit d'un {\bf mouvement circulaire non uniforme} : la trajectoire est un cercle de rayon fixe (3 m), mais parcouru à vitesse angulaire croissante ($\dot\theta=4t$), donc à vitesse (en norme) elle-même croissante ($\|\vec v\|=12t$). Contrairement au cas 3, l'accélération possède ici une composante tangentielle non nulle (et constante, $a_t=12$ m/s²) en plus de la composante centripète (croissante, $a_n=48t^2$).
+
+  - id: q6
+    enonce: |
+      Cas 6 : $x(t)=2t\cos(4t)$, $y(t)=2t\sin(4t)$, $z(t)=0$ (unités SI). Déterminer $\overrightarrow{OM}(t)$, $\vec v(t)$, $\vec a(t)$ et leurs normes ; caractériser le mouvement.
+    coup_de_pouce: |
+      Ici $r(t)=\|\overrightarrow{OM}\|=2t$ n'est plus constant : ce n'est plus un cercle. Identifiez $r(t)$ et $\theta(t)$ pour interpréter le mouvement.
+    correction: "Mouvement en spirale ($r=2t$, $\\theta=4t$) : $\\|\\vec v\\|=2\\sqrt{1+16t^2}$, $\\|\\vec a\\|=16\\sqrt{1+4t^2}$."
+    solution:
+      - titre: "Repérage polaire : rayon croissant, angle linéaire"
+        texte: |
+          On remarque que $\sqrt{x^2+y^2} = 2t\sqrt{\cos^2(4t)+\sin^2(4t)} = 2t$ : le point $M$ s'éloigne donc de $O$ proportionnellement au temps ($r(t)=2t$), tout en tournant à vitesse angulaire constante $\dot\theta=4$ rad/s ($\theta(t)=4t$). Il ne s'agit donc plus d'un cercle mais d'une {\bf spirale}.
+      - titre: "Vecteur vitesse"
+        texte: |
+          Par dérivation d'un produit (deux facteurs dépendant de $t$) :
+          $$v_x = 2\cos(4t) + 2t\times(-4\sin(4t)) = 2\cos(4t) - 8t\sin(4t),$$
+          $$v_y = 2\sin(4t) + 2t\times 4\cos(4t) = 2\sin(4t) + 8t\cos(4t).$$
+          $$\vec v(t) = \big(2\cos(4t)-8t\sin(4t)\big)\vec\imath + \big(2\sin(4t)+8t\cos(4t)\big)\vec\jmath.$$
+          On peut vérifier ce résultat via la décomposition polaire $\vec v = \dot r\,\vec u_r + r\dot\theta\,\vec u_\theta$, avec ici $\dot r=2$ (composante radiale constante) et $r\dot\theta = 2t\times4=8t$ (composante orthoradiale croissante) :
+          $$\|\vec v\| = \sqrt{\dot r^2 + (r\dot\theta)^2} = \sqrt{2^2+(8t)^2} = \boxed{2\sqrt{1+16t^2}}~\text{m/s}.$$
+      - titre: "Vecteur accélération"
+        texte: |
+          Toujours via la décomposition polaire (avec $\ddot r=0$ puisque $\dot r=2$ est constant, et $\ddot\theta=0$ puisque $\dot\theta=4$ est constant) :
+          $$a_r = \ddot r - r\dot\theta^2 = 0 - 2t\times16 = -32t, \qquad a_\theta = r\ddot\theta + 2\dot r\dot\theta = 0 + 2\times2\times4 = 16.$$
+          $$\|\vec a\| = \sqrt{a_r^2+a_\theta^2} = \sqrt{(32t)^2+16^2} = \sqrt{1024t^2+256} = \boxed{16\sqrt{1+4t^2}}~\text{m/s}^2.$$
+          (On peut vérifier que ce résultat coïncide avec celui obtenu en dérivant deux fois $x(t)$ et $y(t)$ directement en cartésien, calcul plus long mais équivalent.)
+      - titre: "Nature du mouvement : une spirale"
+        texte: |
+          Le point $M$ décrit une {\bf spirale} (spirale d'Archimède) : il s'éloigne de $O$ à vitesse radiale constante ($\dot r=2$ m/s) tout en tournant autour de $O$ à vitesse angulaire constante ($\dot\theta=4$ rad/s). Ni la norme de $\vec v$ ni celle de $\vec a$ ne sont constantes : elles croissent toutes deux avec $t$, à cause de l'augmentation continue du rayon $r(t)=2t$, qui amplifie la composante orthoradiale de la vitesse ($r\dot\theta$) et la composante centripète de l'accélération ($r\dot\theta^2$), bien que les grandeurs "purement radiales" ($\dot r$ et $a_\theta$, ici constantes) restent, elles, inchangées au cours du temps.

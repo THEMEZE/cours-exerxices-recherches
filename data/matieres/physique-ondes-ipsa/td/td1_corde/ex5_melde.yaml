@@ -23,6 +23,47 @@ figure:
   scale: 0.8
   label: "fig:melde"
 
+accroche_point_cours_essentiel:
+  - titre: "Faire danser une corde : de l'amplitude infinie ?"
+    duree_introduction: "5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Un vibreur fait osciller l'extrémité d'une corde. À certaines fréquences, de beaux « fuseaux » apparaissent avec une grande amplitude ; à d'autres, la corde reste presque immobile. Pourquoi ? Et que se passerait-il, selon le modèle, si l'on excitait {\bf exactement} à la bonne fréquence ?
+    texte: |
+      {\bf Idée clé : en régime forcé, la corde vibre à la fréquence imposée, avec un profil fixé par les conditions aux limites.} On cherche $\underline y(x,t)=\underline Y(x)e^{j\omega t}$ avec $\underline Y(0)=a$ et $\underline Y(\ell)=0$ :
+      $$\underline Y(x)=a\,\frac{\sin\big(k(\ell-x)\big)}{\sin(k\ell)},\qquad k=\omega\sqrt{\mu/F}.$$
+      L'amplitude diverge quand $\sin(k\ell)=0$, soit $f=Nf_1$ : c'est la {\bf résonance}. En pratique, l'amortissement la limite à une valeur finie.
+
+outils_mathematiques:
+  - titre: "Notation complexe"
+    texte: |
+      $\underline y=\underline Y(x)e^{j\omega t}$ : dériver par rapport à $t$ revient à multiplier par $j\omega$, donc $\partial_t^2\to-\omega^2$. L'équation de d'Alembert devient $\underline Y''+k^2\underline Y=0$. Le signal physique est la partie réelle.
+  - titre: "EDO linéaire du second ordre à coefficients constants"
+    texte: |
+      $\underline Y''+k^2\underline Y=0$ a pour solution $A\cos kx+B\sin kx$. Les deux constantes sont fixées par les {\bf deux conditions aux limites} $\underline Y(0)=a$ et $\underline Y(\ell)=0$.
+  - titre: "Formule de soustraction : $\\sin(a-b)=\\sin a\\cos b-\\cos a\\sin b$"
+    texte: |
+      Elle permet de regrouper $\sin(k\ell)\cos(kx)-\cos(k\ell)\sin(kx)$ en $\sin\big(k(\ell-x)\big)$ : c'est ce qui donne le profil final compact.
+  - titre: "Résonance : dénominateur qui s'annule"
+    texte: |
+      $\dfrac1{\sin(k\ell)}$ diverge quand $k\ell=N\pi$, soit $f_N=N\dfrac c{2\ell}=50N$ Hz avec $c=\sqrt{F/\mu}=50$ m/s et $\ell=0{,}5$ m. Valeurs de $k\ell$ à connaître : $\pi,\,2\pi,\,\dots$
+  - titre: "Amplitude des ventres"
+    texte: |
+      Le profil est $a\,\dfrac{\sin(k(\ell-x))}{\sin(k\ell)}$ ; son maximum en valeur absolue vaut $\dfrac a{|\sin(k\ell)|}\ge a$ : l'amplitude des ventres est toujours supérieure à celle du vibreur.
+
+liens_autres_disciplines:
+  - discipline: "Électrocinétique"
+    texte: |
+      Un circuit RLC en régime sinusoïdal forcé présente une résonance à $\omega_0=1/\sqrt{LC}$ avec la même notation complexe et le même rôle de l'amortissement (la résistance limite le pic).
+  - discipline: "Mécanique (oscillateur forcé)"
+    texte: |
+      Une masse sur un ressort excitée à sa fréquence propre atteint une grande amplitude. La corde est un oscillateur à une infinité de modes, avec une résonance par mode.
+  - discipline: "Génie civil et sécurité"
+    texte: |
+      Les ponts, passerelles et immeubles ont des fréquences propres à éviter : l'oscillation latérale de la passerelle du Millennium Bridge (Londres, 2000) a obligé à installer des amortisseurs. (L'effondrement du pont de Tacoma, souvent cité, relève en fait d'un flottement aéroélastique plus complexe.)
+  - discipline: "Acoustique"
+    texte: |
+      Un verre en cristal peut se briser si on le soumet à un son pur de la fréquence de sa résonance propre ; un tuyau d'orgue amplifie sélectivement ses harmoniques.
+
 questions:
   - id: q1
     enonce: |

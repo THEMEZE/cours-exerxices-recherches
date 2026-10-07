@@ -1,0 +1,13 @@
+id: tpO
+titre: "TP sur les ondes : visuels, amusants, orientés aviation"
+chapitre_cours: "Ondes mécaniques, sonores, électromagnétiques et lumineuses"
+seance: 1
+niveau_public: [lycee, cpge, licence, ecole_aviation]
+type_tp: "physique des ondes"
+exercices_ordre:
+  - tpO1_ressort_long_ralenti
+  - tpO2_son_doppler_mach
+  - tpO3_micro_ondes_chocolat
+  - tpO4_laser_cheveu_cd
+  - tpO5_polarisation_lunettes_pilote
+  - idees_supplementaires_aviation

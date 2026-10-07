@@ -1,0 +1,155 @@
+id: td2_ex5
+intitule: "Fonction porte : indexation booléenne Numpy"
+td: td2
+facultatif: false
+seance: 2
+cours_rattache:
+  - onip.numpy_vecteurs
+  - onip.numpy_conditions
+
+metadonnees:
+  duree_estimee: "15 min"
+  difficulte: 2
+  type_exercice: "Application directe"
+  indispensable: true
+
+enonce_intro: |
+  1. Créer une fonction \texttt{porte} qui renvoie un vecteur de booléens
+     à partir d'un vecteur \texttt{v\_in} : vrai si \texttt{v\_in} est
+     compris entre \texttt{min} et \texttt{max}, faux sinon.
+     \texttt{v\_in}, \texttt{min} et \texttt{max} sont des paramètres. \\
+  2. Tester cette fonction.
+
+prerequis:
+  - titre: "Opérateurs logiques vs opérateurs Numpy bit à bit"
+    texte: |
+      Les opérateurs Python \texttt{and}/\texttt{or}/\texttt{not}
+      n'opèrent que sur un seul booléen. Sur un tableau Numpy de plusieurs
+      éléments, il faut utiliser les opérateurs bit à bit \texttt{\&} (et),
+      \texttt{|} (ou) et \texttt{\textasciitilde} (non), qui s'appliquent
+      élément par élément.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Combiner des comparaisons Numpy"
+    texte: |
+      Construire un masque booléen combinant deux comparaisons avec
+      \texttt{\&}, en parenthésant chaque comparaison individuellement.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Prévenir un piège Numpy classique"
+    texte: |
+      Exercice court mais dense en pièges (\texttt{and}/\texttt{\&},
+      priorité des opérateurs) qui reviendront dans tout usage ultérieur de
+      Numpy : bien insister ici plutôt que de laisser les étudiants buter
+      dessus plus tard sans en comprendre l'origine.
+
+point_cours:
+  - titre: "Solution commentée"
+    texte: |
+      \begin{verbatim}
+      import numpy as np
+
+      def porte(v_in: np.ndarray, v_min: float, v_max: float) -> np.ndarray:
+          """Renvoie un vecteur de booleens : True la ou
+          v_min <= v_in <= v_max, False ailleurs."""
+          # (v_in >= v_min) cree un tableau de booleens, teste ELEMENT
+          # PAR ELEMENT sur tout le vecteur, sans boucle explicite.
+          # L'operateur logique ET s'ecrit '&' (pas 'and').
+          return (v_in >= v_min) & (v_in <= v_max)
+
+
+      v_in = np.linspace(-5, 5, 11)
+      resultat = porte(v_in, -2, 3)
+
+      print("v_in     :", v_in)
+      print("porte    :", resultat)
+      print("Elements retenus :", v_in[resultat])   # indexation booleenne
+      \end{verbatim}
+      Sur \texttt{v\_in = np.linspace(-5, 5, 11)}, \texttt{porte(v\_in, -2,
+      3)} renvoie \texttt{True} pour les valeurs de $-2$ à $3$ incluses.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Utiliser \\texttt{and} au lieu de \\texttt{\\&}"
+    texte: |
+      \texttt{(v\_in >= v\_min) and (v\_in <= v\_max)} lève
+      \texttt{ValueError: the truth value of an array with more than one
+      element is ambiguous} : Python ne sait pas convertir un tableau de
+      plusieurs booléens en un seul booléen avec \texttt{and}/\texttt{or}.
+      Cette erreur n'apparaît pas avec un seul flottant, seulement avec un
+      tableau de plusieurs éléments — bonne occasion d'expliquer la
+      différence entre opérateurs logiques Python et opérateurs Numpy bit à
+      bit.
+  - titre: "Oublier les parenthèses"
+    texte: |
+      \texttt{\&} a une priorité plus élevée que \texttt{>=} en Python :
+      sans parenthèses autour de chaque comparaison
+      (\texttt{v\_in >= v\_min \& v\_in <= v\_max}), le résultat est faux
+      ou provoque une erreur. Toujours parenthéser chaque comparaison
+      individuellement avant de les combiner avec \texttt{\&} ou \texttt{|}.
+
+bilan:
+  - titre: "and/or ne fonctionnent pas sur des tableaux"
+    texte: |
+      Sur un tableau Numpy de plusieurs éléments, utiliser \texttt{\&}/
+      \texttt{|} (jamais \texttt{and}/\texttt{or}), avec des parenthèses
+      explicites autour de chaque comparaison individuelle.
+
+aller_plus_loin:
+  - niveau: ecole_ingenieur
+    titre: "Fonction porte inversée"
+    texte: |
+      Écrire l'inverse de la fonction porte (vrai en dehors de
+      l'intervalle), en utilisant l'opérateur \texttt{\textasciitilde} ou
+      un \texttt{|} logique.
+
+questions:
+  - id: q1
+    enonce: |
+      Écrire \texttt{porte(v\_in, v\_min, v\_max)} et la tester sur
+      \texttt{v\_in = np.linspace(-5, 5, 11)} avec \texttt{v\_min=-2},
+      \texttt{v\_max=3}.
+    coup_de_pouce: |
+      Combinez deux comparaisons Numpy avec l'opérateur bit à bit adapté,
+      en parenthésant chaque comparaison.
+    correction: "\\texttt{return (v\\_in >= v\\_min) \\& (v\\_in <= v\\_max)}"
+    solution:
+      - titre: "Implémentation et test"
+        texte: |
+          \texttt{porte(v\_in, -2, 3)} renvoie \texttt{True} pour les
+          éléments de $-2$ à $3$ inclus, \texttt{False} ailleurs. On peut
+          récupérer directement les valeurs concernées avec
+          \texttt{v\_in[porte(v\_in, -2, 3)]} (indexation booléenne).
+  - id: q2
+    enonce: |
+      Que se passe-t-il si l'on utilise \texttt{and} au lieu de
+      \texttt{\&} ? Pourquoi cette erreur n'apparaît-elle pas avec un seul
+      flottant ?
+    coup_de_pouce: |
+      \texttt{and} exige de convertir chaque opérande en un seul booléen.
+    correction: "ValueError : ambiguïté de la valeur de vérité d'un tableau de plusieurs éléments."
+    solution:
+      - titre: "Explication"
+        texte: |
+          \texttt{and} tente de convertir chacun de ses deux opérandes en
+          un unique \texttt{bool} Python. Pour un seul flottant, la
+          comparaison renvoie un unique booléen, sans ambiguïté. Pour un
+          tableau Numpy de plusieurs éléments, la comparaison renvoie un
+          tableau de plusieurs booléens : Python ne sait pas lequel choisir
+          pour représenter « la » valeur de vérité de tout le tableau, d'où
+          l'exception \texttt{ValueError}.
+  - id: q3
+    enonce: |
+      Comment écrire l'inverse de la fonction porte (vrai en dehors de
+      l'intervalle) ?
+    coup_de_pouce: |
+      L'opérateur \texttt{\textasciitilde} inverse un tableau de
+      booléens.
+    correction: "\\texttt{\\textasciitilde{}porte(v\\_in, v\\_min, v\\_max)}, ou \\texttt{(v\\_in < v\\_min) | (v\\_in > v\\_max)}."
+    solution:
+      - titre: "Deux écritures équivalentes"
+        texte: |
+          On peut soit inverser le résultat de \texttt{porte} avec
+          \texttt{\textasciitilde porte(v\_in, v\_min, v\_max)}, soit
+          écrire directement la condition complémentaire :
+          \texttt{(v\_in < v\_min) | (v\_in > v\_max)}. Les deux
+          expressions sont équivalentes par les lois de De Morgan.

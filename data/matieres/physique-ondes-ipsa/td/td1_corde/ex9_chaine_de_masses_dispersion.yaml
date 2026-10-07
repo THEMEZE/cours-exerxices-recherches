@@ -60,6 +60,56 @@ aller_plus_loin:
     texte: |
       Avec deux masses alternées $m_1\neq m_2$, apparaît une bande interdite (gap) au bord de la zone de Brillouin et une branche optique.
 
+accroche_point_cours_essentiel:
+  - titre: "Et si la corde n'était pas continue ?"
+    duree_introduction: "5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Une corde réelle est faite d'atomes, donc de « grains ». Pour des ondes très longues, elle se comporte comme un milieu continu, mais que se passe-t-il quand la longueur d'onde devient comparable à la distance entre les grains ? Les ondes de toutes les fréquences se propagent-elles à la même vitesse ? Existe-t-il une fréquence au-delà de laquelle l'onde {\bf ne passe plus} ?
+    texte: |
+      {\bf Idée clé : un milieu discret est dispersif.} Pour $N$ masses $m$ espacées de $a$, reliées par des fils de tension $F$ :
+      $$m\ddot y_n=\frac Fa\,(y_{n+1}-2y_n+y_{n-1})\ \Longrightarrow\ \omega=\omega_{\max}\left|\sin\frac{ka}2\right|,\quad\omega_{\max}=2\sqrt{\frac F{ma}}.$$
+      La vitesse de phase $v_\varphi=\omega/k$ et la vitesse de groupe $v_g=\mathrm d\omega/\mathrm dk$ diffèrent ; pour $\omega>\omega_{\max}$ l'onde est {\bf évanescente} (filtre passe-bas) ; pour $ka\ll1$ on retrouve d'Alembert ($\omega\simeq c_0k$). L'énergie se propage à la vitesse de groupe.
+
+outils_mathematiques:
+  - titre: "Développement de Taylor jusqu'à l'ordre 4"
+    texte: |
+      $y(x\pm a)=y\pm ay'+\dfrac{a^2}2y''\pm\dfrac{a^3}6y'''+\dfrac{a^4}{24}y''''+\dots$ La somme $y(x+a)+y(x-a)-2y(x)=a^2y''+\dfrac{a^4}{12}y''''+\dots$ élimine les termes impairs. Le terme en $y''''$ est l'origine de la dispersion.
+  - titre: "Formule de linéarisation : $2\\cos\\theta-2=-4\\sin^2(\\theta/2)$"
+    texte: |
+      Issue de $\cos\theta=1-2\sin^2(\theta/2)$. Elle transforme $e^{jka}+e^{-jka}-2$ en $-4\sin^2(ka/2)$ et donne la relation de dispersion en sinus.
+  - titre: "Équivalent pour les petits arguments"
+    texte: |
+      $\sin u\approx u$ pour $|u|\ll1$ : $\omega\approx\omega_{\max}\dfrac{ka}2=c_0k$. C'est ce qui justifie la limite continue.
+  - titre: "Dérivée et vitesses de phase et de groupe"
+    texte: |
+      $\dfrac{\mathrm d}{\mathrm dk}\sin\dfrac{ka}2=\dfrac a2\cos\dfrac{ka}2$, d'où $v_g=c_0\cos\dfrac{ka}2$ et $v_\varphi=c_0\dfrac{\sin(ka/2)}{ka/2}$. Pour $ka=\pi$ : $v_g=0$ et $v_\varphi=2c_0/\pi$.
+  - titre: "Périodicité en $k$"
+    texte: |
+      $e^{-jk'na}=e^{-jkna}$ si $k'=k+2\pi p/a$ : deux nombres d'onde qui diffèrent de $2\pi/a$ décrivent les mêmes déplacements. On se restreint à $|k|\le\pi/a$ (première zone de Brillouin).
+  - titre: "Fonctions hyperboliques et nombre d'onde complexe"
+    texte: |
+      Pour $ka=\pi+jq$ : $\sin\!\left(\dfrac\pi2+j\dfrac q2\right)=\cosh\dfrac q2$, d'où $\cosh\dfrac q2=\dfrac\omega{\omega_{\max}}\ge1$ et $q=2\operatorname{arcosh}\dfrac\omega{\omega_{\max}}$. Un nombre d'onde complexe correspond à une décroissance exponentielle $e^{-qn}$.
+  - titre: "Modes d'une chaîne finie"
+    texte: |
+      $\sin\dfrac{np\pi}{N+1}$ avec $p=1,\dots,N$ : pour $p=N+1$ tous les $y_n$ sont nuls, donc il y a exactement $N$ modes (autant que de masses).
+
+liens_autres_disciplines:
+  - discipline: "Physique du solide"
+    texte: |
+      Les atomes d'un cristal forment une chaîne de masses reliées par des ressorts : $\omega=2\sqrt{K/m}\,|\sin(ka/2)|$ est la relation de dispersion des phonons. Avec deux masses alternées apparaissent une bande interdite et une branche optique.
+  - discipline: "Électricité (ligne à retard)"
+    texte: |
+      Une chaîne de cellules $L$-$C$ (ligne à retard, filtre passe-bas) a pour fréquence de coupure $\omega_c=2/\sqrt{LC}$ : même relation en sinus, avec $m\leftrightarrow L$ et $a/F\leftrightarrow C$.
+  - discipline: "Traitement du signal et informatique"
+    texte: |
+      Échantillonner à pas $a$ ne permet de représenter que $|k|\le\pi/a$, comme le théorème de Shannon limite la fréquence à $f_e/2$ : au-delà, deux nombres d'onde sont indiscernables (repliement de spectre ou aliasing).
+  - discipline: "Simulation numérique"
+    texte: |
+      Résoudre l'équation d'onde par différences finies revient exactement à ce modèle : le terme en $a^2y''''/12$ est l'erreur de dispersion numérique, qui déforme les signaux très courts (de longueur d'onde $\lambda\sim a$).
+  - discipline: "Optique et télécommunications"
+    texte: |
+      Dans une fibre optique, la différence entre vitesse de phase et vitesse de groupe élargit les impulsions (dispersion chromatique) et limite le débit.
+
 questions:
   - id: q1
     enonce: |

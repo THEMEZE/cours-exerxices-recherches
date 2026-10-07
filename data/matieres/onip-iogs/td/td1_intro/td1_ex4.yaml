@@ -1,0 +1,232 @@
+id: td1_ex4
+intitule: "Premier script scientifique : signal sinusoïdal (mauvaises pratiques)"
+td: td1
+facultatif: false
+seance: 1
+cours_rattache:
+  - intro.echantillonnage
+  - intro.critere_de_nyquist
+  - intro.bonnes_pratiques_python
+
+metadonnees:
+  duree_estimee: "35 min"
+  difficulte: 2
+  type_exercice: "Premier exemple scientifique + refactoring"
+  indispensable: true
+
+enonce_intro: |
+  On fournit \texttt{first\_try0.py}, dont l'en-tête annonce lui-même :
+  « This code shows bad programming behaviors ». Le script plante avec
+  \texttt{NameError: name 'plt' is not defined} après avoir affiché 101
+  valeurs. Au-delà du bug d'import, un second défaut, purement physique
+  celui-là, se cache dans le choix de l'échantillonnage temporel : c'est
+  lui qui doit être identifié en priorité.
+
+prerequis:
+  - titre: "Critère de Nyquist-Shannon"
+    texte: |
+      Pour reconstruire correctement un signal sinusoïdal de fréquence
+      $f$ à partir de ses échantillons, il faut échantillonner à une
+      fréquence $f_e$ telle que $f_e > 2f$. En deçà, le signal reconstruit
+      est un artefact (repliement de spectre, ou \emph{aliasing}) qui ne
+      ressemble en rien au signal réel.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Identifier un bug d'import"
+    texte: |
+      Lire un traceback Python et localiser précisément l'import manquant
+      responsable de la \texttt{NameError}.
+  - titre: "Diagnostiquer une erreur physique, pas seulement syntaxique"
+    texte: |
+      Comprendre qu'un code qui s'exécute sans erreur peut néanmoins
+      produire un résultat physiquement absurde si l'échantillonnage n'est
+      pas cohérent avec le signal étudié.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Deux erreurs qui se compensent en apparence"
+    texte: |
+      Avec $\pi$ exact, tous les échantillons du signal original tombent
+      (à $10^{-9}$ près) sur des multiples de la période : le signal
+      vaudrait quasiment 0 partout. C'est uniquement l'approximation
+      \texttt{3.14} qui produit une courbe non nulle d'allure plausible :
+      deux erreurs indépendantes se combinent pour fabriquer un résultat
+      trompeur. Utile pour montrer qu'une courbe qui « a l'air de
+      marcher » ne prouve rien.
+
+point_cours:
+  - titre: |
+      Code original fourni (\texttt{first\_try0.py})
+    texte: |
+      \begin{verbatim}
+      import numpy as nu
+
+      def fonctionA(a, b, c):
+          return a * nu.sin(2*3.14 * b * c)
+
+
+      if __name__ == '__main__':
+          a1=20
+          b1=850
+          c1=nu.linspace(0,50, 101)
+
+          r1 = fonctionA(a1, b1, c1)
+          print(r1)
+
+          plt.figure()
+          plt.plot(c1, r1)
+          plt.show()
+      \end{verbatim}
+  - titre: "Bug B1 — import manquant"
+    texte: |
+      \texttt{plt} est utilisé mais \texttt{import matplotlib.pyplot as
+      plt} est absent : \texttt{NameError}. Le \texttt{print(r1)} s'exécute
+      AVANT l'erreur, donc l'étudiant voit d'abord 101 valeurs, puis le
+      plantage à la ligne \texttt{plt.figure()}.
+  - titre: "Bug B2 — échantillonnage physiquement absurde (le plus important)"
+    texte: |
+      \texttt{c1 = linspace(0, 50, 101)} donne un pas de 0,5 s, donc une
+      fréquence d'échantillonnage $f_e = 2$ Hz, pour un signal de 850 Hz :
+      le critère de Nyquist ($f_e > 1700$ Hz) est massivement violé. La
+      courbe tracée est un artefact d'aliasing, sans rapport avec une vraie
+      sinusoïde à 850 Hz.
+  - titre: "Bug B3 — approximation 3.14 de pi"
+    texte: |
+      L'utilisation de \texttt{3.14} au lieu de \texttt{np.pi} introduit
+      une erreur relative d'environ $5 \times 10^{-4}$ sur la phase, qui
+      devient énorme lorsque $2\pi f t$ est grand — c'est cette
+      approximation, combinée au bug B2, qui produit une courbe d'amplitude
+      20 non nulle au lieu d'un signal quasiment constant à zéro.
+  - titre: |
+      Code corrigé et documenté (\texttt{first\_try.py})
+    texte: |
+      \begin{verbatim}
+      import numpy as np
+      import numpy.typing as npt
+      import matplotlib.pyplot as plt
+
+
+      def generate_sine_signal(
+          amplitude: float,
+          frequency: float,
+          time: npt.NDArray[np.float64]
+      ) -> npt.NDArray[np.float64]:
+          """Genere un signal sinusoidal."""
+          return amplitude * np.sin(2 * np.pi * frequency * time)
+
+
+      if __name__ == '__main__':
+          amplitude = 20
+          frequency = 850
+
+          # Fenetre courte (10 ms) et beaucoup de points :
+          # pas = 1 microseconde, soit fe = 1 MHz >> 2 x 850 Hz.
+          time = np.linspace(0, 0.01, 10001)
+
+          signal = generate_sine_signal(amplitude, frequency, time)
+
+          print(f"Amplitude : {amplitude}")
+          print(f"Frequence : {frequency} Hz")
+          print(f"Nombre de points : {len(time)}")
+
+          plt.figure()
+          plt.plot(time, signal)
+          plt.xlabel("Temps (s)")
+          plt.ylabel("Amplitude")
+          plt.title("Signal sinusoidal")
+          plt.grid()
+          plt.show()
+      \end{verbatim}
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Noms de variables opaques"
+    texte: |
+      \texttt{fonctionA, a, b, c, a1, b1, c1, r1} ne permettent pas de
+      savoir que \texttt{c} est le temps ou \texttt{b} la fréquence : faire
+      renommer systématiquement avant même de corriger le bug physique.
+  - titre: "Erreur d'unités sur les fréquences"
+    texte: |
+      Une confusion fréquente consiste à ne pas distinguer la fréquence du
+      signal (850 Hz) de la fréquence d'échantillonnage déduite du vecteur
+      temps : bien faire calculer explicitement $f_e = 1/T_e$ à partir du
+      pas du vecteur temps avant toute conclusion.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Faire chercher le bug physique en second"
+    texte: |
+      Le bug d'import (B1) est trivial à corriger et masque le vrai enjeu
+      pédagogique de l'exercice. Une fois \texttt{plt} importé, la courbe
+      s'affiche \emph{sans erreur Python} : c'est le moment de demander
+      « cette courbe est-elle plausible pour un signal à 850 Hz ? » plutôt
+      que de considérer l'exercice terminé.
+
+bilan:
+  - titre: "Un code sans erreur peut être physiquement faux"
+    texte: |
+      Un script qui s'exécute sans lever d'exception ne garantit rien sur
+      la validité physique de son résultat. Toujours vérifier l'ordre de
+      grandeur (ici, le nombre de points par période du signal) avant de
+      faire confiance à un tracé.
+
+aller_plus_loin:
+  - niveau: ecole_ingenieur
+    titre: "FFT du signal mal échantillonné"
+    texte: |
+      Tracer la transformée de Fourier du signal de \texttt{first\_try0.py}
+      (avant correction) pour visualiser concrètement l'aliasing dans le
+      domaine fréquentiel, en anticipant l'exercice de séance 3 sur la FFT.
+
+questions:
+  - id: q1
+    enonce: |
+      Exécuter \texttt{first\_try0.py}. Quelle erreur apparaît, et à quelle
+      ligne ? Corriger ce premier problème.
+    coup_de_pouce: |
+      Le message d'erreur nomme précisément le symbole non défini.
+    correction: "NameError: name 'plt' is not defined ; il manque l'import de matplotlib.pyplot."
+    solution:
+      - titre: "Diagnostic et correctif"
+        texte: |
+          Le traceback indique \texttt{NameError: name 'plt' is not
+          defined} à la ligne \texttt{plt.figure()}. Le fichier utilise
+          \texttt{plt} sans jamais l'importer : il faut ajouter
+          \texttt{import matplotlib.pyplot as plt} en tête de fichier.
+  - id: q2
+    enonce: |
+      Une fois \texttt{plt} importé, le script s'exécute sans erreur.
+      Calculer la fréquence d'échantillonnage réellement utilisée
+      (\texttt{c1 = np.linspace(0, 50, 101)}) et la comparer au critère de
+      Nyquist pour un signal de 850 Hz. Conclure sur la validité de la
+      courbe affichée.
+    coup_de_pouce: |
+      101 points sur 50 secondes donnent 100 intervalles : quel est le pas
+      temporel, puis la fréquence d'échantillonnage associée ?
+    correction: "fe = 2 Hz, très inférieure à 2×850 = 1700 Hz requis : le critère de Nyquist n'est pas respecté."
+    solution:
+      - titre: "Calcul et diagnostic physique"
+        texte: |
+          Le pas temporel est $T_e = 50/100 = 0{,}5$ s, soit
+          $f_e = 1/T_e = 2$ Hz. Le critère de Nyquist exige
+          $f_e > 2 \times 850 = 1700$ Hz : il est massivement violé (par un
+          facteur supérieur à 800). La courbe affichée est donc un artefact
+          de repliement de spectre, sans rapport avec une véritable
+          sinusoïde à 850 Hz, même si le script ne lève plus aucune
+          erreur Python.
+  - id: q3
+    enonce: |
+      Proposer un nouveau vecteur temps qui respecte largement le critère
+      de Nyquist pour un signal de 850 Hz, et réécrire le script en
+      corrigeant également le nom de fonction, les variables et
+      l'utilisation de \texttt{np.pi} à la place de \texttt{3.14}.
+    coup_de_pouce: |
+      Choisir une fenêtre temporelle courte (quelques millisecondes) et un
+      grand nombre de points, plutôt qu'une longue fenêtre peu échantillonnée.
+    correction: "time = np.linspace(0, 0.01, 10001) donne fe = 1 MHz, largement suffisant."
+    solution:
+      - titre: "Correction complète"
+        texte: |
+          En choisissant \texttt{time = np.linspace(0, 0.01, 10001)}, le
+          pas devient $1\,\mu s$, soit $f_e = 1$ MHz, très largement
+          supérieur au minimum de 1700 Hz exigé par Nyquist : la courbe
+          affichée montre alors environ 8,5 périodes d'une véritable
+          sinusoïde à 850 Hz sur 10 ms, conforme à l'amplitude de 20
+          annoncée.

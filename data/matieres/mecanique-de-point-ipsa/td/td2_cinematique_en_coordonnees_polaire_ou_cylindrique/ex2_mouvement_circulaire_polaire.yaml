@@ -1,0 +1,220 @@
+id: td2_ex2
+intitule: "Mouvement circulaire en base polaire"
+td: td2
+facultatif: false
+seance: 2
+
+cours_rattache:
+  - cinematique.base_polaire
+  - cinematique.vecteurs_unitaires_tournants
+  - cinematique.vecteur_vitesse
+  - cinematique.vecteur_acceleration
+  - cinematique.mouvement_circulaire_uniforme
+
+metadonnees:
+  duree_estimee: "40 min"
+  difficulte: 3
+  type_exercice: "Cours actif / Application"
+  indispensable: true
+
+enonce_intro: |
+  Dans le plan $Oxy$, on considère le déplacement d'un mobile assimilé à un point $M$. L'évolution de son
+  vecteur position dans la base polaire $(\vec u_r,\vec u_\theta)$ s'écrit
+  $$\overrightarrow{OM}(t)=R\,\vec u_r\qquad\text{avec } R \text{ constant},$$
+  et l'évolution de l'angle $\theta$ est donnée par $\theta(t)=\omega t$ avec $\omega$ constant.
+
+prerequis:
+  - titre: "Dérivées des vecteurs de la base polaire (TD1, exercice 4)"
+    texte: |
+      Les vecteurs $\vec u_r$ et $\vec u_\theta$ dépendent de $\theta$, donc du temps :
+      $$\frac{\mathrm d\vec u_r}{\mathrm d\theta}=\vec u_\theta,\qquad\frac{\mathrm d\vec u_\theta}{\mathrm d\theta}=-\vec u_r,\qquad\text{donc}\qquad\frac{\mathrm d\vec u_r}{\mathrm dt}=\dot\theta\,\vec u_\theta,\qquad\frac{\mathrm d\vec u_\theta}{\mathrm dt}=-\dot\theta\,\vec u_r.$$
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Calculer vitesse et accélération en base polaire"
+    texte: |
+      Savoir dériver un vecteur exprimé dans la base polaire (mobile) en utilisant les dérivées de $\vec u_r$ et $\vec u_\theta$, interpréter les résultats ($\vec v$ tangent, $\vec a$ centripète) et comprendre que {\bf le choix de la base ne change ni le mouvement, ni les normes, ni le tracé des vecteurs}, mais seulement leurs composantes.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Faire éprouver le gain de la base polaire"
+    texte: |
+      L'exercice reprend le mouvement circulaire du TD1 (calcul cartésien lourd). La question 3 est essentielle : elle sépare ce qui dépend du choix de base (les {\bf composantes}) de ce qui n'en dépend pas (le vecteur lui-même, sa norme, son tracé). Insister sur la distinction avec un changement de {\bf référentiel}, qui, lui, modifie le mouvement.
+
+point_cours:
+  - titre: "Vitesse et accélération en base polaire"
+    texte: |
+      Pour $\overrightarrow{OM}=r\,\vec u_r$, la dérivation d'un produit et celle des vecteurs unitaires donnent
+      $$\vec v=\dot r\,\vec u_r+r\dot\theta\,\vec u_\theta,\qquad\vec a=\left(\ddot r-r\dot\theta^2\right)\vec u_r+\left(r\ddot\theta+2\dot r\dot\theta\right)\vec u_\theta.$$
+      Pour un mouvement circulaire ($r=R$ constant), $\dot r=\ddot r=0$ : $\vec v=R\dot\theta\,\vec u_\theta$ et $\vec a=-R\dot\theta^2\,\vec u_r+R\ddot\theta\,\vec u_\theta$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Oublier que $\\vec u_r$ et $\\vec u_\\theta$ dépendent du temps"
+    texte: |
+      Erreur très fréquente : écrire $\vec v=\dot R\,\vec u_r=\vec 0$ car « $R$ est constant ». Le vecteur $\vec u_r$ tourne avec $M$ : sa dérivée est non nulle et c'est elle qui donne toute la vitesse.
+  - titre: "Confondre changement de base et changement de référentiel"
+    texte: |
+      Passer des coordonnées cartésiennes aux coordonnées polaires, c'est changer d'{\bf écriture} dans le {\bf même référentiel}. Le mouvement est identique. Un changement de référentiel (observateur en mouvement) change, lui, le mouvement.
+  - titre: "Dessiner $\\vec a$ tangent ou $\\vec v$ radial"
+    texte: |
+      $\vec v$ est tangent à la trajectoire (selon $\vec u_\theta$), $\vec a$ est dirigé vers le centre (selon $-\vec u_r$). Faire vérifier les dessins par le calcul de $\vec v\cdot\vec a=0$.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Comparer les durées de calcul"
+    texte: |
+      Faire chronométrer (en dehors de la séance, ou en comparant le nombre de lignes) le calcul de $\|\vec v\|$ et $\|\vec a\|$ du TD1 en cartésien et celui de cet exercice en polaire. Le gain est le meilleur argument pour apprendre la base polaire.
+
+bilan:
+  - titre: "Mouvement circulaire uniforme en base polaire"
+    texte: |
+      $$\vec v=R\omega\,\vec u_\theta,\qquad\|\vec v\|=R\omega,\qquad\vec a=-R\omega^2\,\vec u_r,\qquad\|\vec a\|=R\omega^2=\frac{v^2}{R}.$$
+      Le même mouvement s'écrit en cartésien avec des $\sin$ et des $\cos$ ; les composantes diffèrent d'une base à l'autre, mais le vecteur, sa norme et son tracé sont identiques.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Mouvement circulaire non uniforme"
+    texte: |
+      Si $\theta(t)$ n'est plus linéaire, $\ddot\theta\neq0$ et $\vec a=-R\dot\theta^2\,\vec u_r+R\ddot\theta\,\vec u_\theta$ : une composante tangentielle apparaît, qui modifie la norme de $\vec v$ ($\dot v=R\ddot\theta$), en plus de la composante centripète qui courbe la trajectoire. Reprendre le cas $\theta(t)=2t^2$ du TD1 (exercice équations horaires 2D/3D, cas 5) avec cette formule.
+  - niveau: master
+    titre: "Changement de base par une matrice de rotation"
+    texte: |
+      Les composantes dans les deux bases sont reliées par
+      $$\begin{pmatrix}v_x\\v_y\end{pmatrix}=\begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}\begin{pmatrix}v_r\\v_\theta\end{pmatrix}.$$
+      Montrer que cette matrice $P$ est orthogonale ($P^{\mathsf T}P=I$) et en déduire que $v_x^2+v_y^2=v_r^2+v_\theta^2$ : la norme ne dépend pas de la base.
+
+accroche_point_cours_essentiel:
+  - titre: "Deux lignes au lieu de deux pages"
+    duree_introduction: "5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Dans le TD1, il fallait dériver $R\cos\omega t$ et $R\sin\omega t$ puis simplifier avec $\cos^2+\sin^2=1$ pour trouver la vitesse d'un mouvement circulaire. Un repère qui {\bf tourne avec le mobile} peut-il rendre le même calcul presque immédiat ? Et la physique change-t-elle si on change de repère ?
+    texte: |
+      {\bf Idée clé : la base polaire est mobile, elle tourne avec $M$.} Il faut donc dériver aussi les vecteurs de base :
+      $$\frac{\mathrm d\vec u_r}{\mathrm dt}=\dot\theta\,\vec u_\theta,\qquad\frac{\mathrm d\vec u_\theta}{\mathrm dt}=-\dot\theta\,\vec u_r.$$
+      Pour $\overrightarrow{OM}=R\,\vec u_r$ : $\vec v=R\dot\theta\,\vec u_\theta$ (tangent) et $\vec a=-R\dot\theta^2\,\vec u_r$ (centripète). {\bf Le mouvement, le vecteur et sa norme sont les mêmes qu'en cartésien : seules les composantes changent.}
+
+outils_mathematiques:
+  - titre: "Dérivée composée : $\\dfrac{\\mathrm d}{\\mathrm dt}\\vec u(\\theta(t))=\\dot\\theta\\,\\dfrac{\\mathrm d\\vec u}{\\mathrm d\\theta}$"
+    texte: |
+      C'est la règle de la chaîne : on dérive d'abord par rapport à $\theta$ (résultat géométrique du TD1, exercice 4), puis on multiplie par $\dot\theta$.
+  - titre: "Dérivée d'un produit"
+    texte: |
+      $\dfrac{\mathrm d}{\mathrm dt}(r\,\vec u_r)=\dot r\,\vec u_r+r\,\dot{\vec u}_r$. Avec $r=R$ constant, le premier terme disparaît.
+  - titre: "Pythagore dans une base orthonormée"
+    texte: |
+      $\|\vec v\|^2=v_r^2+v_\theta^2$ car $\vec u_r\perp\vec u_\theta$ et ils sont unitaires. Aucune simplification trigonométrique n'est nécessaire, contrairement au calcul cartésien.
+  - titre: "Changement de base : matrice de rotation orthogonale"
+    texte: |
+      $\vec u_r=\cos\theta\,\vec\imath+\sin\theta\,\vec\jmath$ et $\vec u_\theta=-\sin\theta\,\vec\imath+\cos\theta\,\vec\jmath$. La matrice $P$ qui relie les deux bases vérifie $P^{\mathsf T}P=I$ : elle {\bf conserve les normes et les angles}. C'est pourquoi les normes de $\vec v$ et $\vec a$ ne dépendent pas de la base.
+  - titre: "Radian, période, pulsation"
+    texte: |
+      $\omega=2\pi/T$ en rad/s ; $\pi/6$ rad $=30^\circ$. Une unité d'angle n'a pas de dimension : $[\omega]=\mathrm T^{-1}$.
+  - titre: "Orthogonalité par le produit scalaire"
+    texte: |
+      $\vec v\cdot\vec a=R\omega\,\vec u_\theta\cdot(-R\omega^2\,\vec u_r)=0$ : vitesse et accélération sont orthogonales, donc $\|\vec v\|$ est constante ($\tfrac12\frac{\mathrm d}{\mathrm dt}\|\vec v\|^2=\vec v\cdot\vec a$).
+
+liens_autres_disciplines:
+  - discipline: "Algèbre linéaire"
+    texte: |
+      Un changement de base orthonormée est une rotation (matrice orthogonale) : les composantes changent, le vecteur, sa norme et les angles ne changent pas. Même idée que « un vecteur est un objet géométrique, pas une liste de nombres ».
+  - discipline: "Dynamique (chapitre suivant)"
+    texte: |
+      Avec $\vec a=-R\omega^2\vec u_r$, la deuxième loi de Newton impose une force centripète $m\,R\omega^2$ : tension d'un fil, attraction gravitationnelle pour la Lune, frottement des pneus dans un virage.
+  - discipline: "Ingénierie"
+    texte: |
+      Disque dur, CD, centrifugeuse, rotor d'éolienne : tous décrits par $r$ fixé et $\theta=\omega t$. L'accélération centripète $R\omega^2$ dimensionne la tenue mécanique des pièces.
+  - discipline: "Physique générale (covariance)"
+    texte: |
+      « Les lois de la physique ne dépendent pas du système de coordonnées » : ici le mouvement ne dépend pas du choix cartésien/polaire. Distinguer de la relativité galiléenne, où l'on change de {\bf référentiel}.
+
+questions:
+  - id: q1
+    enonce: |
+      Trajectoire et base polaire.
+      \begin{enumerate}[label=(\alph*)]
+          \item Donner la dimension des constantes $R$ et $\omega$.
+          \item Quelle est la trajectoire décrite par le mobile $M$ ?
+          \item Représenter graphiquement la trajectoire de $M$, en prenant $R=4\times10^{-2}$ S.I. et $\omega=\pi/6$ S.I.
+          \item Calculer les coordonnées polaires $(r,\theta)$ de $M$ à $t_0=0$ s, $t_1=1$ s, $t_2=2$ s, $t_3=3$ s.
+          \item Représenter ces points sur le graphique, ainsi que la base polaire associée $(\vec u_r,\vec u_\theta)$.
+      \end{enumerate}
+    coup_de_pouce: |
+      $\overrightarrow{OM}=R\,\vec u_r$ : que dire de la distance $OM$ ? Pour (e), $\vec u_r$ pointe de $O$ vers $M$ et $\vec u_\theta$ est $\vec u_r$ tourné de $+90^\circ$.
+    correction: |
+      $[R]=\mathrm L$, $[\omega]=\mathrm T^{-1}$ ; cercle de centre $O$ et de rayon $R$ ; points $(0{,}04\ \mathrm m;\ 0,\ \pi/6,\ \pi/3,\ \pi/2)$.
+    solution:
+      - titre: "(a) Dimensions"
+        texte: |
+          $R$ est la norme de $\overrightarrow{OM}$ : une longueur, $[R]=\mathrm L$. L'argument $\omega t$ est un angle (sans dimension), donc $[\omega]=\mathrm T^{-1}$ (vitesse angulaire, en rad/s).
+      - titre: "(b) Trajectoire"
+        texte: |
+          $OM=\|R\,\vec u_r\|=R$ est constant : $M$ décrit le {\bf cercle de centre $O$ et de rayon $R$}. L'angle $\theta=\omega t$ varie linéairement : le mouvement est circulaire {\bf uniforme}, dans le sens trigonométrique si $\omega>0$.
+      - titre: "(c)-(e) Tracé, coordonnées polaires et base"
+        texte: |
+          Avec $R=0{,}04$ m et $\omega=\pi/6$ rad/s (période $T=2\pi/\omega=12$ s) :
+          $$
+          \begin{array}{c|cccc}
+          t~(\mathrm s) & 0 & 1 & 2 & 3\\
+          \hline
+          r~(\mathrm m) & 0{,}04 & 0{,}04 & 0{,}04 & 0{,}04\\
+          \theta & 0 & \pi/6\ (30^\circ) & \pi/3\ (60^\circ) & \pi/2\ (90^\circ)
+          \end{array}
+          $$
+          Pour placer les points on peut passer en cartésien : $(0{,}04;\,0)$, $(0{,}035;\,0{,}020)$, $(0{,}020;\,0{,}035)$, $(0;\,0{,}04)$ (en mètres). En chaque point, on trace $\vec u_r$ (radial, de $O$ vers $M$) et $\vec u_\theta$ (tangent, obtenu en tournant $\vec u_r$ de $+90^\circ$) : cette base {\bf change d'orientation} d'un point à l'autre, contrairement à la base cartésienne.
+
+  - id: q2
+    enonce: |
+      Vitesse et accélération de $M$ en base polaire.
+      \begin{enumerate}[label=(\alph*)]
+          \item Déterminer l'expression du vecteur vitesse $\vec v$ de $M$ dans la base polaire $(\vec u_r,\vec u_\theta)$. En déduire sa norme $\|\vec v\|$.
+          \item Déterminer l'expression du vecteur accélération $\vec a$ de $M$ dans la base polaire. En déduire sa norme $\|\vec a\|$.
+          \item Représenter sur le graphique la vitesse $\vec v$ et l'accélération $\vec a$ de $M$ à différents instants $t$ (choisir une échelle adéquate pour la vitesse et pour l'accélération).
+          \item En un point de la trajectoire, représenter la base polaire $(\vec u_r,\vec u_\theta)$ et faire apparaître les composantes des vecteurs vitesse $\vec v$ et accélération $\vec a$.
+      \end{enumerate}
+    coup_de_pouce: |
+      Dérivez $R\,\vec u_r$ par rapport au temps. $R$ est constant, mais $\vec u_r$ ne l'est pas : utilisez $\dfrac{\mathrm d\vec u_r}{\mathrm dt}=\dot\theta\,\vec u_\theta$, puis recommencez avec $\vec u_\theta$.
+    correction: |
+      $\vec v=R\omega\,\vec u_\theta$, $\|\vec v\|=R\omega\approx2{,}1\times10^{-2}$ m/s ; $\vec a=-R\omega^2\,\vec u_r$, $\|\vec a\|=R\omega^2\approx1{,}1\times10^{-2}$ m/s$^2$.
+    solution:
+      - titre: "(a) Vecteur vitesse"
+        texte: |
+          $$\vec v=\frac{\mathrm d\overrightarrow{OM}}{\mathrm dt}=R\,\frac{\mathrm d\vec u_r}{\mathrm dt}=R\dot\theta\,\vec u_\theta=\boxed{R\omega\,\vec u_\theta}.$$
+          $\vec v$ est {\bf tangent} au cercle, dans le sens des $\theta$ croissants. La base $(\vec u_r,\vec u_\theta)$ étant orthonormée :
+          $$\|\vec v\|=\boxed{R\omega}=0{,}04\times\frac\pi6\approx2{,}1\times10^{-2}~\mathrm{m/s}.$$
+      - titre: "(b) Vecteur accélération"
+        texte: |
+          $$\vec a=\frac{\mathrm d\vec v}{\mathrm dt}=R\omega\,\frac{\mathrm d\vec u_\theta}{\mathrm dt}=R\omega\,(-\dot\theta\,\vec u_r)=\boxed{-R\omega^2\,\vec u_r}.$$
+          $$\|\vec a\|=\boxed{R\omega^2}=0{,}04\times\left(\frac\pi6\right)^2\approx1{,}1\times10^{-2}~\mathrm{m/s^2}.$$
+          L'accélération est {\bf radiale et centripète} : elle pointe vers $O$. On vérifie que $\vec v\cdot\vec a=0$ et que $\|\vec a\|=v^2/R$.
+      - titre: "(c)-(d) Représentation"
+        texte: |
+          En chaque point, $\vec v$ est tracé tangent au cercle (suivant $\vec u_\theta$), de longueur constante, et $\vec a$ est tracé vers le centre (suivant $-\vec u_r$), de longueur constante aussi. Avec une échelle, par exemple, de $1$ cm pour $0{,}01$ m/s pour $\vec v$ et de $1$ cm pour $0{,}005$ m/s$^2$ pour $\vec a$, on obtient une flèche d'environ $2$ cm pour $\vec v$ et $2$ cm pour $\vec a$. Les composantes sont directement lisibles : $v_r=0$, $v_\theta=R\omega$ ; $a_r=-R\omega^2$, $a_\theta=0$.
+
+  - id: q3
+    enonce: |
+      Retour sur le mouvement circulaire en base cartésienne. Comparer vos résultats à ceux obtenus dans le TD1 sur le mouvement circulaire.
+      \begin{enumerate}[label=(\alph*)]
+          \item Le mouvement de $M$ dépend-il du repère choisi ?
+          \item Les composantes des vecteurs vitesse et accélération dépendent-elles de la base choisie ?
+          \item Le tracé des vecteurs vitesse et accélération dépend-il de la base choisie ?
+          \item La norme des vecteurs vitesse et accélération dépend-elle de la base choisie ?
+      \end{enumerate}
+    coup_de_pouce: |
+      Exprimez $\vec u_\theta$ et $\vec u_r$ dans la base cartésienne et comparez avec $\vec v=-R\omega\sin(\omega t)\,\vec\imath+R\omega\cos(\omega t)\,\vec\jmath$ trouvé au TD1.
+    correction: |
+      (a) Non. (b) Oui. (c) Non. (d) Non.
+    solution:
+      - titre: "Vérification du lien entre les deux écritures"
+        texte: |
+          Comme $\vec u_\theta=-\sin\theta\,\vec\imath+\cos\theta\,\vec\jmath$ et $\vec u_r=\cos\theta\,\vec\imath+\sin\theta\,\vec\jmath$, on retrouve
+          $$R\omega\,\vec u_\theta=-R\omega\sin(\omega t)\,\vec\imath+R\omega\cos(\omega t)\,\vec\jmath,\qquad-R\omega^2\,\vec u_r=-R\omega^2\cos(\omega t)\,\vec\imath-R\omega^2\sin(\omega t)\,\vec\jmath,$$
+          c'est-à-dire exactement les résultats cartésiens du TD1 : les deux écritures décrivent {\bf le même vecteur}.
+      - titre: "(a) Le mouvement dépend-il du repère ?"
+        texte: |
+          {\bf Non.} Choisir des coordonnées cartésiennes ou polaires n'est qu'un choix d'{\bf écriture} dans le même référentiel : la trajectoire, la position à chaque instant et la loi du mouvement sont les mêmes. Il ne faut pas confondre avec un changement de référentiel, qui modifie le mouvement.
+      - titre: "(b) Les composantes dépendent-elles de la base ?"
+        texte: |
+          {\bf Oui.} Les composantes sont les « coordonnées » du vecteur dans une base donnée : $\vec v=(-R\omega\sin\theta,\ R\omega\cos\theta)$ en cartésien, mais $\vec v=(0,\ R\omega)$ en polaire. Les nombres changent, l'objet qu'ils décrivent non.
+      - titre: "(c) Le tracé dépend-il de la base ?"
+        texte: |
+          {\bf Non.} La flèche représentant $\vec v$ (ou $\vec a$) en un point donné a la même direction, le même sens et la même longueur, quelle que soit la base utilisée pour calculer ses composantes.
+      - titre: "(d) Les normes dépendent-elles de la base ?"
+        texte: |
+          {\bf Non.} $\|\vec v\|=\sqrt{v_x^2+v_y^2}=\sqrt{v_r^2+v_\theta^2}=R\omega$ et $\|\vec a\|=R\omega^2$ dans les deux bases : le passage d'une base orthonormée à l'autre est une rotation, qui conserve les normes. En revanche, en polaire, ce résultat est immédiat alors qu'en cartésien il demande d'utiliser $\cos^2+\sin^2=1$.

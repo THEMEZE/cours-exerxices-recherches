@@ -26,6 +26,39 @@ figure:
   scale: 0.8
   label: "fig:cordes_nouees"
 
+accroche_point_cours_essentiel:
+  - titre: "Course entre deux impulsions"
+    duree_introduction: "3 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Deux cordes sont nouées l'une à l'autre : l'une est deux fois plus lourde au mètre, mais plus courte. On envoie en même temps une impulsion depuis chaque extrémité. {\bf Laquelle arrive la première au nœud ?} Le plus court trajet l'emporte-t-il forcément ?
+    texte: |
+      {\bf Idée clé : la vitesse d'une impulsion est fixée par le milieu, pas par l'impulsion.} Sur une corde de tension $F$ et de masse linéique $\mu$, $c=\sqrt{F/\mu}$ ; la durée d'un trajet de longueur $L$ est donc $t=L/c=L\sqrt{\mu/F}$. Comme le nœud est de masse nulle, la {\bf tension est la même} des deux côtés ; seule la masse linéique change, donc la célérité.
+
+outils_mathematiques:
+  - titre: "Racine carrée et comparaison de rapports"
+    texte: |
+      Comparer $t_1$ et $t_2$ sans calculatrice : $\dfrac{t_1}{t_2}=\dfrac{L_1}{L_2}\sqrt{\dfrac{\mu_1}{\mu_2}}=\dfrac32\times\dfrac1{\sqrt2}\approx1{,}06>1$. Un rapport suffit, inutile de connaître $F$.
+  - titre: "Proportionnalités"
+    texte: |
+      $c\propto\mu^{-1/2}$ : doubler $\mu$ divise $c$ par $\sqrt2$ ($\approx1{,}41$, d'où $c_1/c_2=1690/1195$). Savoir lire une loi en puissance.
+  - titre: "Notation scientifique et ordres de grandeur"
+    texte: |
+      $1{,}4\times10^{-4}$ kg/m, $1{,}7\times10^3$ m/s, $1{,}8\times10^{-3}$ s. Une corde de piano typique a des vitesses de l'ordre de quelques centaines de m/s : les durées sont de l'ordre de la milliseconde.
+  - titre: "Relation distance-vitesse-durée"
+    texte: |
+      $t=L/c$ : application directe de la cinématique à un signal qui avance à vitesse constante.
+
+liens_autres_disciplines:
+  - discipline: "Optique"
+    texte: |
+      Une corde lourde joue le rôle d'un milieu où l'onde va plus lentement, comme la lumière dans le verre (indice $n=c_0/c$). Au passage d'un milieu à l'autre, une partie de l'onde est réfléchie et une partie transmise : même phénomène qu'à la surface d'une vitre.
+  - discipline: "Électronique et télécommunications"
+    texte: |
+      La réflectométrie envoie une impulsion dans un câble et mesure le temps d'écho : la distance à un défaut est $d=c\,\Delta t/2$. Même principe qu'au nœud entre deux cordes.
+  - discipline: "Sismologie"
+    texte: |
+      Les ondes sismiques sont partiellement réfléchies et transmises aux interfaces entre couches de nature différente : la mesure des retards permet de reconstituer la structure du sous-sol (prospection pétrolière).
+
 questions:
   - id: q1
     enonce: |
@@ -42,7 +75,7 @@ questions:
       - titre: "Résultat synthétique"
         texte: |
           $c_1 \approx 1690$ m/s, $c_2 \approx 1195$ m/s ; $t_1 = L_1/c_1 \approx 1.78$ ms, $t_2 = L_2/c_2 \approx 1.67$ ms.
-          C'est l'impulsion provenant de la **corde 2** qui atteint le point $O$ en premier.
+          C'est l'impulsion provenant de la {\bf corde 2} qui atteint le point $O$ en premier.
 
     solution:
       - titre: "Calculs détaillés pas à pas"

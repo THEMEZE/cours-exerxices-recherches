@@ -1,0 +1,235 @@
+id: td2_ex7
+intitule: "Équation du second degré : réels puis complexes"
+td: td2
+facultatif: true
+seance: 2
+cours_rattache:
+  - onip.fonctions_python
+  - onip.nombres_complexes_python
+  - onip.numpy_vecteurs
+
+metadonnees:
+  duree_estimee: "25 min"
+  difficulte: 2
+  type_exercice: "Exercice facultatif, fonctions, conditions et complexes"
+  indispensable: false
+
+enonce_intro: |
+  On veut résoudre l'équation $a x^2 + b x + c = 0$. \\
+  1. Écrire une fonction \texttt{racines\_reelles(a, b, c)} pour $a$, $b$,
+     $c$ réels, qui renvoie les racines réelles (aucune, une ou deux). \\
+  2. Écrire une fonction \texttt{racines(a, b, c)} qui renvoie toutes les
+     racines dans $\mathbb{C}$ (module \texttt{cmath}), y compris lorsque
+     $\Delta < 0$. \\
+  3. Faire fonctionner cette fonction avec $a$, $b$, $c$ eux-mêmes
+     complexes, et traiter le cas $a = 0$. \\
+  4. Vérifier les résultats en calculant $|a x^2 + b x + c|$ pour chaque
+     racine trouvée. \\
+  5. Écrire une version vectorisée avec Numpy, résolvant plusieurs
+     équations d'un coup.
+
+prerequis:
+  - titre: "Discriminant et racines"
+    texte: |
+      Pour $a \neq 0$, on pose $\Delta = b^2 - 4ac$. Les racines sont
+      $x_\pm = \dfrac{-b \pm \sqrt{\Delta}}{2a}$, où $\sqrt{\Delta}$ désigne
+      n'importe quelle racine carrée complexe de $\Delta$. Si $\Delta = 0$,
+      la racine est double. Cette formule reste valable pour $a$, $b$, $c$
+      complexes.
+  - titre: "Complexes en Python"
+    texte: |
+      Python note $j$ l'unité imaginaire : \texttt{1j}, \texttt{3 + 2j}.
+      \texttt{math.sqrt} refuse un nombre négatif, alors que
+      \texttt{cmath.sqrt} accepte tout complexe.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Structurer une fonction avec des cas"
+    texte: |
+      Distinguer les cas ($\Delta > 0$, $=0$, $<0$, $a = 0$) avec
+      \texttt{if}/\texttt{elif}/\texttt{else}.
+  - titre: "Manipuler les complexes"
+    texte: |
+      Utiliser \texttt{cmath} et comprendre que la même formule marche
+      pour des coefficients complexes.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Exercice facultatif de synthèse"
+    texte: |
+      Réinvestit fonctions, conditions et vectorisation. La question 5
+      peut être laissée aux plus rapides.
+
+point_cours:
+  - titre: "Cas réel"
+    texte: |
+      \begin{verbatim}
+      def racines_reelles(a, b, c):
+          """a, b, c reels avec a != 0 : renvoie les racines reelles (0, 1 ou 2)."""
+          delta = b**2 - 4 * a * c
+          if delta > 0:
+              return ((-b - delta**0.5) / (2 * a), (-b + delta**0.5) / (2 * a))
+          elif delta == 0:
+              return (-b / (2 * a),)
+          else:
+              return ()      # pas de racine reelle
+      \end{verbatim}
+  - titre: "Cas complexe général et vérification"
+    texte: |
+      \begin{verbatim}
+      import cmath
+
+      def racines(a, b, c, tol=1e-12):
+          """a, b, c reels OU complexes : renvoie toutes les racines complexes."""
+          if abs(a) < tol:                     # equation du premier degre
+              if abs(b) < tol:
+                  raise ValueError("equation degeneree : a = b = 0")
+              return (-c / b,)
+          delta = b**2 - 4 * a * c
+          if abs(delta) < tol:                 # racine double
+              return (-b / (2 * a),)
+          s = cmath.sqrt(delta)                # racine carree complexe
+          return ((-b - s) / (2 * a), (-b + s) / (2 * a))
+
+      def verifie(a, b, c, rac):
+          """Residu |a x^2 + b x + c| pour chaque racine (doit etre ~ 0)."""
+          return [abs(a * x**2 + b * x + c) for x in rac]
+      \end{verbatim}
+      Le test \texttt{abs(delta) < tol} remplace \texttt{delta == 0} :
+      avec des flottants, une égalité exacte est trop fragile.
+  - titre: "Jeu de tests"
+    texte: |
+      \begin{verbatim}
+      tests = [(1, -3, 2),                 # deux racines reelles : 1 et 2
+               (1, 2, 1),                  # racine double : -1
+               (1, 0, 1),                  # racines imaginaires pures : +-i
+               (1, -(3 + 1j), 2 + 2j),     # coefficient complexe : 2 et 1+i
+               (1j, 1 - 3j, -2 + 2j),      # a complexe : memes racines
+               (0, 2, -4)]                 # a = 0 : x = 2
+      for a, b, c in tests:
+          r = racines(a, b, c)
+          print((a, b, c), r, max(verifie(a, b, c, r)))
+      \end{verbatim}
+  - titre: "Version vectorisée avec Numpy"
+    texte: |
+      \begin{verbatim}
+      import numpy as np
+
+      def racines_np(a, b, c):
+          """Version vectorisee : a, b, c tableaux Numpy de meme forme."""
+          a, b, c = (np.asarray(t, dtype=complex) for t in (a, b, c))
+          delta = b**2 - 4 * a * c
+          s = np.sqrt(delta)                   # np.sqrt gere le complexe
+          return (-b - s) / (2 * a), (-b + s) / (2 * a)
+
+      A = np.array([1, 1, 1]); B = np.array([-3, 2, 1]); C = np.array([2, 1, 1])
+      r1, r2 = racines_np(A, B, C)
+
+      # Comparaison avec la fonction toute faite de Numpy :
+      print(np.roots([1j, 1 - 3j, -2 + 2j]))
+      \end{verbatim}
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "math.sqrt sur un nombre négatif"
+    texte: |
+      \texttt{math.sqrt(-1)} lève une \texttt{ValueError} : il faut
+      \texttt{cmath.sqrt}.
+  - titre: "Oublier les parenthèses autour de 2a"
+    texte: |
+      \texttt{-b + s / 2 * a} n'est pas \texttt{(-b + s) / (2 * a)} :
+      la priorité des opérateurs donne un résultat faux sans erreur.
+  - titre: "Tester delta == 0 avec des flottants"
+    texte: |
+      Un discriminant calculé peut valoir $10^{-16}$ au lieu de $0$ : utiliser
+      une tolérance.
+  - titre: "Oublier le cas a = 0"
+    texte: |
+      Avec $a = 0$, la division par $2a$ provoque une
+      \texttt{ZeroDivisionError}.
+
+bilan:
+  - titre: "Une formule, plusieurs domaines"
+    texte: |
+      La formule du discriminant est la même pour des coefficients réels ou
+      complexes ; seule la racine carrée doit être celle des complexes.
+      Toujours vérifier une solution en la réinjectant dans l'équation.
+
+aller_plus_loin:
+  - niveau: ecole_ingenieur
+    titre: "Stabilité numérique"
+    texte: |
+      Lorsque $|b|$ est très grand devant $|ac|$, la soustraction
+      $-b + \sqrt{\Delta}$ perd de la précision (annulation). Calculer d'abord
+      la racine de plus grand module, puis obtenir l'autre par
+      $x_1 x_2 = c/a$, et comparer les résultats.
+  - niveau: master
+    titre: "Comparaison avec np.roots"
+    texte: |
+      Comparer votre fonction à \texttt{np.roots([a, b, c])} sur des
+      milliers de coefficients aléatoires, et tracer l'écart maximal.
+
+questions:
+  - id: q1
+    enonce: |
+      Écrire \texttt{racines\_reelles(a, b, c)} et la tester sur
+      $x^2 - 3x + 2$, $x^2 + 2x + 1$ et $x^2 + x + 1$.
+    coup_de_pouce: |
+      Trois cas selon le signe de $\Delta$ ; la racine carrée d'un réel
+      positif s'écrit \texttt{delta**0.5}.
+    correction: "Racines 1 et 2 ; racine double -1 ; aucune racine reelle."
+    solution:
+      - titre: "Implémentation"
+        texte: |
+          Voir le code ci-dessus.
+  - id: q2
+    enonce: |
+      Écrire \texttt{racines(a, b, c)} avec \texttt{cmath}, et la
+      tester sur $x^2 + 1$ et $x^2 + x + 1$.
+    coup_de_pouce: |
+      Remplacer \texttt{delta**0.5} par \texttt{cmath.sqrt(delta)} :
+      plus besoin de distinguer le signe de $\Delta$.
+    correction: "x**2 + 1 : racines +i et -i ; x**2 + x + 1 : (-1 +- i*sqrt(3))/2."
+    solution:
+      - titre: "Résultat"
+        texte: |
+          Pour $x^2 + 1$ : $\pm i$. Pour $x^2 + x + 1$ :
+          $\dfrac{-1 \pm i\sqrt{3}}{2}$, soit environ $-0{,}5 \pm 0{,}866\,i$.
+  - id: q3
+    enonce: |
+      Tester avec des coefficients complexes : $x^2 - (3+i)x + (2+2i) = 0$,
+      puis la même équation multipliée par $i$. Que constate-t-on ?
+      Traiter aussi $a = 0$.
+    coup_de_pouce: |
+      Multiplier une équation par un complexe non nul ne change pas ses
+      racines. Pour $a = 0$, l'équation est du premier degré.
+    correction: "Racines 2 et 1+i dans les deux cas ; pour a = 0 : x = -c/b."
+    solution:
+      - titre: "Interprétation"
+        texte: |
+          Les deux équations ont les mêmes racines, $2$ et $1+i$. Pour
+          $a = 0$, on renvoie $-c/b$ (et on lève une erreur si aussi
+          $b = 0$).
+  - id: q4
+    enonce: |
+      Vérifier chaque solution en calculant $|a x^2 + b x + c|$.
+    coup_de_pouce: |
+      Le résultat doit être nul à l'erreur d'arrondi près (de l'ordre de
+      $10^{-16}$).
+    correction: "Residus de l'ordre de 1e-16 ou nuls."
+    solution:
+      - titre: "Vérification"
+        texte: |
+          Voir \texttt{verifie} ci-dessus : les résidus sont nuls ou de
+          l'ordre de $10^{-16}$, ce qui valide les racines.
+  - id: q5
+    enonce: |
+      Écrire une version vectorisée résolvant trois équations à la fois
+      avec des tableaux Numpy.
+    coup_de_pouce: |
+      Convertir les entrées en complexes avec \texttt{dtype=complex} pour
+      que \texttt{np.sqrt} accepte les discriminants négatifs.
+    correction: "np.sqrt sur un tableau complexe ; comparer avec np.roots."
+    solution:
+      - titre: "Implémentation"
+        texte: |
+          Voir \texttt{racines\_np} ci-dessus. Sans \texttt{dtype=complex},
+          \texttt{np.sqrt} renverrait \texttt{nan} pour un discriminant
+          négatif.

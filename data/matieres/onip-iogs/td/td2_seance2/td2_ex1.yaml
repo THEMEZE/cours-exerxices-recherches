@@ -1,0 +1,146 @@
+id: td2_ex1
+intitule: "Listes : génération d'un vecteur temps régulier"
+td: td2
+facultatif: false
+seance: 2
+cours_rattache:
+  - onip.listes_python
+  - onip.echantillonnage
+
+metadonnees:
+  duree_estimee: "10 min"
+  difficulte: 1
+  type_exercice: "Application directe"
+  indispensable: true
+
+enonce_intro: |
+  1. Générer une liste \texttt{L\_temps} de 101 points régulièrement
+     répartis entre 0 et 1 s. \\
+  2. Afficher la taille de cette liste. \\
+  3. Afficher le dernier élément de la liste. \\
+  4. Quelle est la période d'échantillonnage ?
+
+prerequis:
+  - titre: "Compréhensions de liste"
+    texte: |
+      À ce stade de la progression, Numpy n'a pas encore été introduit
+      (il arrive à l'exercice 3) : l'attendu est donc une liste Python
+      « pure », construite par exemple avec une compréhension de liste
+      \texttt{[expr for i in range(n)]}, pas encore un tableau Numpy.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Compter des intervalles, pas des points"
+    texte: |
+      Retenir que $N$ points régulièrement répartis sur un intervalle
+      définissent $N-1$ intervalles : le pas vaut donc
+      $(\text{stop}-\text{start})/(N-1)$, pas $/N$.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Ancrer un piège récurrent du bloc"
+    texte: |
+      Le décompte des intervalles ($N$ points $\rightarrow$ $N-1$
+      intervalles) revient à chaque exercice de génération de vecteur du
+      bloc (\texttt{td2\_ex2}, \texttt{td2\_ex3}...) : bien l'ancrer ici,
+      dès le premier exercice.
+
+point_cours:
+  - titre: "Solution commentée"
+    texte: |
+      \begin{verbatim}
+      nombre_de_points = 101
+      pas = 1 / (nombre_de_points - 1)   # 1/100 = 0.01, PAS 1/101
+
+      L_temps = [i * pas for i in range(nombre_de_points)]
+
+      print("Taille de L_temps :", len(L_temps))
+      print("Dernier element de L_temps :", L_temps[-1])
+
+      Te = L_temps[1] - L_temps[0]
+      print(f"Periode d'echantillonnage Te = {Te} s")
+      \end{verbatim}
+      Résultats : \texttt{len(L\_temps) = 101} ; \texttt{L\_temps[-1] = 1.0} ;
+      \texttt{Te = 0.01 s}.
+  - titre: "Précision flottante"
+    texte: |
+      Avec des flottants, \texttt{L\_temps[k+1] - L\_temps[k]} peut varier
+      de quelques $10^{-17}$ d'un couple de points à l'autre à cause des
+      arrondis binaires : c'est normal et sans conséquence pratique — bonne
+      occasion d'introduire la précision \texttt{float64} si des étudiants
+      s'en étonnent.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Diviser par N au lieu de N-1"
+    texte: |
+      \texttt{pas = 1/101} au lieu de \texttt{1/100} fait que le dernier
+      point vaut environ 0,99 au lieu de 1,0 : la liste ne couvre pas tout
+      l'intervalle demandé. Faire compter les intervalles sur un petit
+      exemple (3 points sur [0,1] $\rightarrow$ 2 intervalles de 0,5) avant
+      de généraliser à 101 points.
+  - titre: "Utiliser range() pour générer des réels"
+    texte: |
+      \texttt{range(0, 1, pas)} lève une \texttt{TypeError} : \texttt{range}
+      n'accepte que des entiers, ce n'est pas un outil de génération de
+      valeurs réelles.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Exercice d'échauffement rapide"
+    texte: |
+      Le seul vrai piège est le décompte des intervalles ; ne pas s'y
+      attarder au-delà du temps nécessaire pour le faire bien comprendre à
+      toute la salle.
+
+bilan:
+  - titre: "N points, N-1 intervalles"
+    texte: |
+      Une règle à retenir pour tout le bloc : générer $N$ points
+      régulièrement répartis entre \texttt{start} et \texttt{stop}
+      nécessite un pas de $(\text{stop}-\text{start})/(N-1)$.
+
+aller_plus_loin:
+  - niveau: ecole_ingenieur
+    titre: "Anticiper Numpy"
+    texte: |
+      Vérifier que \texttt{np.linspace(0, 1, 101)}, vu à l'exercice 3, fait
+      exactement la même chose que la compréhension de liste écrite ici.
+
+questions:
+  - id: q1
+    enonce: |
+      Générer \texttt{L\_temps}, puis afficher sa taille et son dernier
+      élément.
+    coup_de_pouce: |
+      Combien d'intervalles y a-t-il entre 101 points ?
+    correction: "\\texttt{len(L\\_temps)} = 101 ; \\texttt{L\\_temps[-1]} = 1.0."
+    solution:
+      - titre: "Construction et vérification"
+        texte: |
+          Avec \texttt{pas = 1/100}, la compréhension de liste
+          \texttt{[i * pas for i in range(101)]} produit bien 101 valeurs
+          allant de $0$ à $100 \times 0{,}01 = 1{,}0$ inclus.
+  - id: q2
+    enonce: |
+      Quelle est la période d'échantillonnage $T_e$ de cette liste ?
+    coup_de_pouce: |
+      $T_e$ est l'écart entre deux points consécutifs.
+    correction: "Te = 0.01 s."
+    solution:
+      - titre: "Calcul de Te"
+        texte: |
+          $T_e = L\_temps[1] - L\_temps[0] = 0{,}01$ s. On peut aussi la
+          lire directement dans le code (variable \texttt{pas}), mais la
+          retrouver à partir de la liste elle-même est une bonne pratique
+          si l'on ne connaît pas la formule de génération (utile par
+          exemple si la liste provient d'un fichier de données).
+  - id: q3
+    enonce: |
+      Si l'on voulait un pas de 5 ms, combien de points faudrait-il pour
+      couvrir 1 seconde ?
+    coup_de_pouce: |
+      1 seconde / 5 ms donne le nombre d'intervalles, pas directement le
+      nombre de points.
+    correction: "201 points (200 intervalles de 5 ms)."
+    solution:
+      - titre: "Calcul"
+        texte: |
+          Un pas de $5$ ms sur $1$ s correspond à $1/0{,}005 = 200$
+          intervalles, donc $200 + 1 = 201$ points.

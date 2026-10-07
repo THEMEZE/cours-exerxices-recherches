@@ -1,0 +1,10 @@
+id: td3
+titre: "Séance 3 — FFT 1D/2D, meshgrid et tramage"
+chapitre_cours: "Outils Numériques pour l'Ingénieur·e en Physique (ONIP) — 5N-028-SCI"
+seance: 3
+niveau_public: [ecole_ingenieur, S5]
+exercices_ordre:
+  - td3_ex1
+  - td3_ex2
+  - td3_ex3
+  - td3_ex4

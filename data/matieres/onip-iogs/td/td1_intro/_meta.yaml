@@ -1,0 +1,12 @@
+id: td1
+titre: "Intro — Prise en main de PyCharm, débogage et bonnes pratiques Python"
+chapitre_cours: "Bloc Intro — Méthodes numériques / ONIP, Semestre 5"
+seance: 1
+niveau_public: [ecole_ingenieur, S5]
+exercices_ordre:
+  - td1_ex1
+  - td1_ex2
+  - td1_ex3
+  - td1_ex4
+  - td1_ex5
+  - td1_ex6

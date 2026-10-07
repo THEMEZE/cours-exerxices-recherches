@@ -154,5 +154,173 @@
     "type_doc": "td",
     "doc": "td1_grandeurs_physiques",
     "pdf": "td1_PhV110_corrige.pdf"
+  },
+  "td3_PhV110": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td3_fonctions_derives_integrale",
+    "pdf": "td3_PhV110.pdf"
+  },
+  "test": {
+    "matiere": "traveaux_pratiques-ipsa",
+    "type_doc": "tp",
+    "doc": "general",
+    "pdf": "test.pdf"
+  },
+  "TP_IPSA_Generale_fiche": {
+    "matiere": "traveaux_pratiques-ipsa",
+    "type_doc": "tp",
+    "doc": "general",
+    "pdf": "TP_IPSA_Generale_fiche.pdf"
+  },
+  "TP_IPSA_Astrophysique_fiche": {
+    "matiere": "traveaux_pratiques-ipsa",
+    "type_doc": "tp",
+    "doc": "astrophysique",
+    "pdf": "TP_IPSA_Astrophysique_fiche.pdf"
+  },
+  "td1_PhV110_enonce": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td1_grandeurs_physiques",
+    "pdf": "td1_PhV110_enonce.pdf"
+  },
+  "td1_PhV110_fiche": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td1_grandeurs_physiques",
+    "pdf": "td1_PhV110_fiche.pdf"
+  },
+  "td2_PhV110_enonce": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td2_derivation_et_diffeérentielle",
+    "pdf": "td2_PhV110_enonce.pdf"
+  },
+  "td2_PhV110_fiche": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td2_derivation_et_diffeérentielle",
+    "pdf": "td2_PhV110_fiche.pdf"
+  },
+  "td4_PhV110": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td4_vecteurs_en_physique",
+    "pdf": "td4_PhV110.pdf"
+  },
+  "td3_PhV110_corrige": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td3_fonctions_derives_integrale",
+    "pdf": "td3_PhV110_corrige.pdf"
+  },
+  "td4_PhV110_corrige": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td4_vecteurs_en_physique",
+    "pdf": "td4_PhV110_corrige.pdf"
+  },
+  "td1_PhV212_fiche": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td1_corde",
+    "pdf": "td1_PhV212_fiche.pdf"
+  },
+  "td2_PhV212_enonce": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td2_ondes_sonores",
+    "pdf": "td2_PhV212_enonce.pdf"
+  },
+  "td2_PhV212_aides": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td2_ondes_sonores",
+    "pdf": "td2_PhV212_aides.pdf"
+  },
+  "td2_PhV212_corrige": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td2_ondes_sonores",
+    "pdf": "td2_PhV212_corrige.pdf"
+  },
+  "td2_PhV212_fiche": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td2_ondes_sonores",
+    "pdf": "td2_PhV212_fiche.pdf"
+  },
+  "td1_PhV111_fiche": {
+    "matiere": "mecanique-de-point-ipsa",
+    "type_doc": "td",
+    "doc": "td1_cinematique_cartesiennes",
+    "pdf": "td1_PhV111_fiche.pdf"
+  },
+  "td3_PhV212_fiche": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td3_reflexion_transmission",
+    "pdf": "td3_PhV212_fiche.pdf"
+  },
+  "td1_PhV111_corrige": {
+    "matiere": "mecanique-de-point-ipsa",
+    "type_doc": "td",
+    "doc": "td1_cinematique_cartesiennes",
+    "pdf": "td1_PhV111_corrige.pdf"
+  },
+  "td4_PhV110_fiche": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td4_vecteurs_en_physique",
+    "pdf": "td4_PhV110_fiche.pdf"
+  },
+  "td3_PhV110_fiche": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td3_fonctions_derives_integrale",
+    "pdf": "td3_PhV110_fiche.pdf"
+  },
+  "td1_PhV212_exs_maison_aide": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td1_corde",
+    "pdf": "td1_PhV212_exs_maison_aide.pdf"
+  },
+  "td2_PhV212_exs_maison_aide": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td2_ondes_sonores",
+    "pdf": "td2_PhV212_exs_maison_aide.pdf"
+  },
+  "td3_PhV212_corrige": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td3_reflexion_transmission",
+    "pdf": "td3_PhV212_corrige.pdf"
+  },
+  "td1_ONIP1_fiche": {
+    "matiere": "onip-iogs",
+    "type_doc": "td",
+    "doc": "td1_intro",
+    "pdf": "td1_ONIP1_fiche.pdf"
+  },
+  "td2_ONIP1_fiche": {
+    "matiere": "onip-iogs",
+    "type_doc": "td",
+    "doc": "td2_seance2",
+    "pdf": "td2_ONIP1_fiche.pdf"
+  },
+  "td3_ONIP1_fiche": {
+    "matiere": "onip-iogs",
+    "type_doc": "td",
+    "doc": "td3_seance3",
+    "pdf": "td3_ONIP1_fiche.pdf"
+  },
+  "td2_PhV111_fiche": {
+    "matiere": "mecanique-de-point-ipsa",
+    "type_doc": "td",
+    "doc": "td2_cinematique_en_coordonnees_polaire_ou_cylindrique",
+    "pdf": "td2_PhV111_fiche.pdf"
   }
 }

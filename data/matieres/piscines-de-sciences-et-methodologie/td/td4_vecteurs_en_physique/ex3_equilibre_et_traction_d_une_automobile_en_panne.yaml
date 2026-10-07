@@ -62,43 +62,167 @@ aller_plus_loin:
     texte: |
       Prendre en compte le coefficient de frottement statique $\mu_s$ des pneus de l'automobile sur le sol.
 
+# questions:
+#   - id: q3_1a
+#     parent: "1"
+#     enonce: |
+#       Pour $T_{AB} = 2{,}2\text{ kN}$ et $\alpha = 25^\circ$, quelle doit être la tension $T_{AC}$ pour que la résultante soit axiale ?
+#     solution:
+#       - titre: "Tension dans le câble AC"
+#         texte: |
+#           Par symétrie transversale ($R_y = 0$), $T_{AC} \sin(\beta) = T_{AB} \sin(\alpha)$.
+#           Comme $\beta = \alpha = 25^\circ$, on obtient :
+#           $$T_{AC} = T_{AB} = 2{,}2\text{ kN}$$
+
+#   - id: q3_1b
+#     parent: "1"
+#     enonce: |
+#       Calculer la norme de la résultante $\vec{R}$ dans ce premier cas.
+#     solution:
+#       - titre: "Norme de la résultante"
+#         texte: |
+#           $$R = 2 \cdot T_{AB} \cos(\alpha) = 2 \times 2{,}2 \times \cos(25^\circ) \approx 3{,}99\text{ kN}$$
+
+#   - id: q3_2a
+#     parent: "2"
+#     enonce: |
+#       Dans un second cas où $T_{AB} = 3{,}0\text{ kN}$ et $R = 4{,}8\text{ kN}$, que vaut $T_{AC}$ ?
+#     solution:
+#       - titre: "Tension AC (Cas 2)"
+#         texte: |
+#           Toujours par symétrie de la ligne d'action axiale :
+#           $$T_{AC} = T_{AB} = 3{,}0\text{ kN}$$
+
+#   - id: q3_2b
+#     parent: "2"
+#     enonce: |
+#       Déterminer la valeur de l'angle d'inclinaison $\alpha$ dans ce second cas.
+#     solution:
+#       - titre: "Calcul de l'angle alpha"
+#         texte: |
+#           $$R = 2 T_{AB} \cos(\alpha) \implies \cos(\alpha) = \frac{R}{2 T_{AB}} = \frac{4{,}8}{6{,}0} = 0{,}8$$
+#           $$\alpha = \arccos(0{,}8) \approx 36{,}87^\circ$$
+
 questions:
+  - id: q3_intro
+    enonce: |
+      Une automobile en panne est remorquée à l’aide de deux câbles
+      $AB$ et $AC$.
+
+      La résultante des deux forces exercées en $A$ est dirigée suivant
+      l’axe longitudinal de l’automobile.
+
+    is_intro_only: true 
+
+
   - id: q3_1a
     parent: "1"
     enonce: |
-      Pour $T_{AB} = 2{,}2\text{ kN}$ et $\alpha = 25^\circ$, quelle doit être la tension $T_{AC}$ pour que la résultante soit axiale ?
+      Pour $T_{AB} = 2{,}2\text{ kN}$, $\beta = 30^\circ$ et $\alpha = 25^\circ$, déterminer, à l’aide de considérations trigonométriques, la tension $T_{AC}$ dans le câble $AC$ pour que la résultante soit dirigée suivant l’axe longitudinal de l’automobile.
     solution:
       - titre: "Tension dans le câble AC"
         texte: |
-          Par symétrie transversale ($R_y = 0$), $T_{AC} \sin(\beta) = T_{AB} \sin(\alpha)$.
-          Comme $\beta = \alpha = 25^\circ$, on obtient :
-          $$T_{AC} = T_{AB} = 2{,}2\text{ kN}$$
+          Pour que la résultante soit dirigée suivant l’axe $Ox$, sa composante suivant l’axe transversal doit être nulle :
+          
+          $$
+          \overbrace{\left ( \begin{array}{c} R_x = R \\  R_y = 0 \end{array} \right )}^{\vec{R}} = \overbrace{\left ( \begin{array}{c} T_{AB,x} = T_{AB} \cos(\beta) \\  T_{AB,y} = T_{AB} \sin(\beta) \end{array} \right )}^{\vec{T}_{AB}} + \overbrace{\left ( \begin{array}{c} T_{AC,x} = T_{AC} \cos(\alpha) \\  T_{AC,y} = - T_{AC} \sin(\alpha) \end{array} \right )}^{\vec{T}_{AC}} 
+          $$
+          
+          $$T_{AC}\sin(\alpha) = T_{AB}\sin(\beta)$$
+          
+          On en déduit :
+          $$T_{AC} = T_{AB}\frac{\sin(\beta)}{\sin(\alpha)}$$
+          
+          Avec $T_{AB}=2{,}2\text{ kN}$, $\beta=30^\circ$ et $\alpha=25^\circ$ :
+          $$T_{AC} = 2{,}2\frac{\sin(30^\circ)}{\sin(25^\circ)}
+          \approx 2{,}60\text{ kN}$$
+
+        figure:
+          - ref: td4_ex3_PhV110_enonce
+            legende:
+            # scale: 0.7
+            width: 0.8
+            # height: 4cm       # les deux ensemble : la figure est étirée pour tenir exactement dans ce cadre
+            label: 
 
   - id: q3_1b
     parent: "1"
     enonce: |
-      Calculer la norme de la résultante $\vec{R}$ dans ce premier cas.
+      En déduire la norme de la résultante $\vec{R}$ des deux forces appliquées en $A$.
     solution:
       - titre: "Norme de la résultante"
         texte: |
-          $$R = 2 \cdot T_{AB} \cos(\alpha) = 2 \times 2{,}2 \times \cos(25^\circ) \approx 3{,}99\text{ kN}$$
+          La résultante est dirigée suivant l’axe $Ox$. Sa norme correspond donc à la somme des composantes suivant cet axe :
+          $$R = T_{AB}\cos(\beta) + T_{AC}\cos(\alpha)$$
+          
+          En utilisant les valeurs précédentes :
+          $$R = 2{,}2\cos(30^\circ) + 2{,}60\cos(25^\circ)$$
+          $$R \approx 4{,}30\text{ kN}$$
 
   - id: q3_2a
     parent: "2"
     enonce: |
-      Dans un second cas où $T_{AB} = 3{,}0\text{ kN}$ et $R = 4{,}8\text{ kN}$, que vaut $T_{AC}$ ?
+      La tension dans le câble $AB$ est égale à $T_{AB}=3{,}0\text{ kN}$. On souhaite que la résultante des deux forces appliquées en $A$ soit une force de norme $R=4{,}8\text{ kN}$ dirigée suivant l’axe longitudinal de l’automobile.
+      
+      Déterminer, à l’aide de relations trigonométriques, la tension $T_{AC}$ dans le câble $AC$.
     solution:
-      - titre: "Tension AC (Cas 2)"
+      - titre: "Tension dans le câble AC"
         texte: |
-          Toujours par symétrie de la ligne d'action axiale :
-          $$T_{AC} = T_{AB} = 3{,}0\text{ kN}$$
+          La résultante étant dirigée suivant l’axe $Ox$, les composantes suivant l’axe transversal doivent se compenser :
+          $$T_{AC}\sin(\alpha) = T_{AB}\sin(\beta)$$
+          
+          D’autre part, la composante suivant $Ox$ de la résultante vaut :
+          $$R = T_{AB}\cos(\beta) + T_{AC}\cos(\alpha)$$
+          
+          En combinant ces deux relations, on peut écrire :
+          $$R = T_{AB}\cos(\beta)
+          + T_{AB}\frac{\sin(\beta)}{\sin(\alpha)}\cos(\alpha)$$
+          
+          Soit :
+          $$R = T_{AB}\left[\cos(\beta)
+          + \sin(\beta)\cot(\alpha)\right]$$
+          
+          On peut également utiliser le triangle des forces. La loi des sinus donne :
+          $$\frac{T_{AB}}{\sin(\alpha)}
+          = \frac{T_{AC}}{\sin(\beta)}
+          = \frac{R}{\sin(\alpha+\beta)}$$
+          
+          Ainsi :
+          $$T_{AC}
+          = R\frac{\sin(\beta)}{\sin(\alpha+\beta)}$$
 
   - id: q3_2b
     parent: "2"
     enonce: |
-      Déterminer la valeur de l'angle d'inclinaison $\alpha$ dans ce second cas.
+      En déduire la valeur de l’angle $\alpha$ permettant d’obtenir cette résultante.
     solution:
-      - titre: "Calcul de l'angle alpha"
+      - titre: "Calcul de l’angle alpha"
         texte: |
-          $$R = 2 T_{AB} \cos(\alpha) \implies \cos(\alpha) = \frac{R}{2 T_{AB}} = \frac{4{,}8}{6{,}0} = 0{,}8$$
-          $$\alpha = \arccos(0{,}8) \approx 36{,}87^\circ$$
+          D’après la loi des sinus appliquée au triangle des forces :
+          $$\frac{T_{AB}}{\sin(\alpha)}
+          = \frac{R}{\sin(\alpha+\beta)}$$
+          
+          On obtient donc :
+          $$T_{AB}\sin(\alpha+\beta)
+          = R\sin(\alpha)$$
+          
+          Avec $T_{AB}=3{,}0\text{ kN}$, $R=4{,}8\text{ kN}$ et $\beta=30^\circ$ :
+          $$3{,}0\sin(\alpha+30^\circ)
+          = 4{,}8\sin(\alpha)$$
+          
+          En développant :
+          $$3{,}0\left[\sin(\alpha)\cos(30^\circ)
+          +\cos(\alpha)\sin(30^\circ)\right]
+          =4{,}8\sin(\alpha)$$
+          
+          D'où :
+          $$1{,}5\cos(\alpha)
+          =\left(4{,}8-3{,}0\cos(30^\circ)\right)\sin(\alpha)$$
+          
+          Ainsi :
+          $$\tan(\alpha)
+          =\frac{1{,}5}{4{,}8-3{,}0\cos(30^\circ)}
+          \approx 0{,}952$$
+          
+          Finalement :
+          $$\alpha\approx43{,}6^\circ$$

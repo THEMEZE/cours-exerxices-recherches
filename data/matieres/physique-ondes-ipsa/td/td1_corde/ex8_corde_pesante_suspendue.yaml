@@ -60,6 +60,53 @@ aller_plus_loin:
     texte: |
       Ce problème est celui étudié par D. Bernoulli (1732), première apparition historique des fonctions de Bessel. Les zéros de $J_0$ sont $2{,}405$ ; $5{,}520$ ; $8{,}654$ ; $11{,}79\dots$
 
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi un fouet claque-t-il ?"
+    duree_introduction: "5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Sur une corde horizontale tendue, une bosse avance à vitesse constante. Mais sur une corde {\bf suspendue}, la tension n'est plus la même partout : elle est nulle en bas et maximale en haut. Une bosse lancée en bas va-t-elle accélérer, ralentir, ou rester à vitesse constante en montant ? Et que devient une onde qui {\bf descend} vers l'extrémité libre ?
+    texte: |
+      {\bf Idée clé : si la tension dépend de la position, la célérité aussi.} Avec $x$ mesuré depuis l'extrémité libre, $F(x)=\mu g x$ et l'équation d'onde devient
+      $$\mu\,\partial_t^2y=\partial_x\big(F(x)\,\partial_x y\big)\ \Longrightarrow\ \partial_t^2y=g\,\partial_x(x\,\partial_x y),\qquad c(x)=\sqrt{gx}.$$
+      La bosse monte avec une {\bf accélération constante} $g/2$ ; le temps de montée est $2\sqrt{L/g}$ ; les modes propres sont des fonctions de Bessel $J_0(2\omega\sqrt{x/g})$, de fréquences non harmoniques ; l'amplitude d'une onde descendante {\bf croît} vers l'extrémité libre (effet de fouet).
+
+outils_mathematiques:
+  - titre: "Dérivée d'un produit : $\\partial_x(F\\,\\partial_x y)\\neq F\\,\\partial_x^2y$"
+    texte: |
+      Quand $F$ dépend de $x$, la dérivée porte aussi sur $F$ : $\partial_x(\mu gx\,\partial_x y)=\mu g\,(\partial_x y+x\,\partial_x^2y)$.
+  - titre: "Intégrale impropre convergente"
+    texte: |
+      $\displaystyle\int_0^L\frac{\mathrm dx}{\sqrt{gx}}=\frac2{\sqrt g}\big[\sqrt x\big]_0^L=2\sqrt{\frac Lg}$ : malgré $c(0)=0$, l'intégrale converge. Primitive à connaître : $\int x^{-1/2}\mathrm dx=2\sqrt x$.
+  - titre: "Équation différentielle séparable et changement de variable"
+    texte: |
+      $\dfrac{\mathrm dx_b}{\mathrm dt}=\sqrt{gx_b}$ : en posant $u=\sqrt{x_b}$, $2u\dot u=\sqrt g\,u$, donc $\dot u=\sqrt g/2$ et $x_b=\tfrac g4t^2=\tfrac12\left(\tfrac g2\right)t^2$ : loi horaire d'un mouvement uniformément accéléré (cinématique).
+  - titre: "Dérivée d'une fonction composée"
+    texte: |
+      Avec $u=\alpha\sqrt x$ : $\dfrac{\mathrm du}{\mathrm dx}=\dfrac\alpha{2\sqrt x}=\dfrac{\alpha^2}{2u}$. On l'utilise deux fois pour passer de $Y(x)$ à $Z(u)$.
+  - titre: "Équation et fonctions de Bessel"
+    texte: |
+      $Z''+\dfrac1uZ'+Z=0$ a une solution régulière en $0$, $J_0(u)=1-\dfrac{u^2}{4}+\dfrac{u^4}{64}-\dots$, qui oscille en s'amortissant lentement ; ses zéros $j_{0,n}\approx(n-\tfrac14)\pi$ sont presque équidistants mais non multiples entiers de $j_{0,1}$.
+  - titre: "Conservation et loi de puissance"
+    texte: |
+      $Z(x)v_m^2=\text{cte}$ avec $Z=\mu\sqrt{gx}$ donne $v_m\propto x^{-1/4}$ : rapport $100^{1/4}\approx3{,}2$ entre $x=L$ et $x=L/100$.
+
+liens_autres_disciplines:
+  - discipline: "Mathématiques"
+    texte: |
+      Les fonctions de Bessel apparaissent pour la première fois dans ce problème (D. Bernoulli, chaîne pesante, 1732). Elles décrivent aussi les modes d'une membrane de tambour, les guides d'ondes cylindriques, la diffraction par une ouverture circulaire.
+  - discipline: "Optique et principe de Fermat"
+    texte: |
+      Le temps de parcours $\tau=\int\mathrm dx/c(x)$ est l'analogue du chemin optique $\int n\,\mathrm dx$ dans un milieu d'indice variable ; un milieu inhomogène courbe les rayons (mirages).
+  - discipline: "Océanographie"
+    texte: |
+      Pour des vagues en eau peu profonde, $c=\sqrt{gh}$ avec $h$ la profondeur : même loi en $\sqrt{g\cdot\text{hauteur}}$. Sur une plage en pente, les vagues ralentissent et leur amplitude augmente, comme l'amplitude de l'onde dans la corde pesante : c'est l'origine du déferlement (loi de Green : amplitude $\propto h^{-1/4}$, la même puissance que $v_m\propto x^{-1/4}$ ici).
+  - discipline: "Sismologie"
+    texte: |
+      La vitesse des ondes sismiques varie avec la profondeur ; les trajets sont courbés et le temps de parcours est une intégrale du type $\int\mathrm ds/c$.
+  - discipline: "Mécanique et acoustique"
+    texte: |
+      L'effet de fouet : en descendant dans un milieu où $Z$ diminue, la vitesse du bout du fouet devient supérieure à celle du son, d'où un petit « bang » supersonique.
+
 questions:
   - id: q1
     enonce: |

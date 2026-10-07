@@ -1,0 +1,173 @@
+id: tpO_tp2
+intitule: "Son, Doppler et cône de Mach : de la vitesse du son au bang supersonique"
+tp: tpO
+facultatif: false
+seance: 1
+cours_rattache:
+  - ondes.ondes_sonores
+  - ondes.effet_doppler
+  - ondes.onde_de_choc
+
+metadonnees:
+  duree_estimee: "3 h (extérieur pour la partie Doppler)"
+  difficulte: 3 # Sur une échelle de 1 à 5
+  type_exercice: "TP expérimental (smartphone) et construction géométrique"
+  indispensable: true
+  public_cible: [lycee, cpge, licence, ecole_aviation]
+
+enonce_intro: |
+  Un avion qui passe au-dessus de nous fait entendre un son qui descend d'un ton au moment où il nous dépasse : c'est l'effet Doppler. Quand l'avion va plus vite que le son, il traîne derrière lui un cône d'ondes de choc, le \textbf{cône de Mach}, entendu au sol comme un « bang ». Ce TP reprend ces trois idées (vitesse du son, Doppler, Mach) avec un simple smartphone.
+
+securite:
+  - titre: "Doppler en mouvement"
+    texte: |
+      La source sonore est portée par un véhicule lent ou par une personne à vélo sur un espace fermé, dégagé et sans circulation. Ne jamais faire tourner une source au bout d'une ficelle au-dessus d'autres personnes.
+  - titre: "Son fort"
+    texte: |
+      Ne pas dépasser $85\ \text{dB}$ à l'oreille pour la source sonore ; utiliser une fréquence de $2$ à $4\ \text{kHz}$ à faible volume.
+
+materiel:
+  - "$2$ smartphones avec l'application phyphox (chronomètre acoustique, spectrogramme audio) ou une application d'analyse de fréquence"
+  - "Petit haut-parleur Bluetooth ou buzzer sur piles émettant une note pure (générateur de sons)"
+  - "Mètre ruban long ($\\ge30$ m) ou télémètre laser, thermomètre"
+  - "Véhicule à vitesse mesurable (vélo avec compteur, voiture télécommandée, chariot)"
+  - "Compas, règle, papier millimétré ou feuille de calcul (pour la construction du cône de Mach)"
+
+manipulation:
+  - titre: "1. Vitesse du son par écho ou par chronométrage"
+    texte: |
+      Deux options : (a) écho : se placer à $d=30\ \text{m}$ d'un grand mur, taper dans les mains et enregistrer le signal sur le smartphone ; mesurer le retard entre le claquement et l'écho ; (b) chronomètre acoustique : deux smartphones distants de $d$, le premier détecte un claquement et déclenche le chronomètre, le second l'arrête. Relever la température de l'air.
+  - titre: "2. Effet Doppler"
+    texte: |
+      Émettre une note pure de fréquence $f_0=3000\ \text{Hz}$ avec la source immobile, enregistrer la fréquence reçue (spectrogramme). Puis déplacer la source à vitesse constante $v$ sur une ligne droite passant devant le smartphone récepteur (à quelques mètres). Relever la fréquence $f_a$ pendant l'approche et $f_r$ pendant l'éloignement. Mesurer $v$ avec un compteur ou par chronométrage sur une distance connue.
+  - titre: "3. Cône de Mach sur papier"
+    texte: |
+      Sur une feuille, construire les fronts d'onde émis à des instants successifs par une source qui avance sur l'axe horizontal à vitesse $v$, pour $M=v/c=0{,}5\ ;\ 1\ ;\ 2$ (prendre $c=1\ \text{cm}$ par unité de temps). Mesurer le demi-angle du cône pour $M=2$ et $M=3$.
+
+donnees_exemple: |
+  Écho : $d=30{,}0\ \text{m}$, retard $\Delta t=0{,}175\ \text{s}$ à $\theta=20\ ^\circ\text{C}$. Doppler à vélo ($v=5{,}0\ \text{m}\cdot\text{s}^{-1}$) : $f_0=3000\ \text{Hz}$, $f_a=3044\ \text{Hz}$, $f_r=2957\ \text{Hz}$ ($\pm3\ \text{Hz}$).
+
+prerequis:
+  - titre: "Notions"
+    texte: |
+      Célérité des ondes sonores $c=\sqrt{\gamma RT/M}$, fréquence et période, principe de Huygens pour la construction de fronts d'onde (cf. TD1 exercice 0).
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Mesurer, comprendre et utiliser $c$"
+    texte: |
+      Mesurer $c$ en quelques mesures simples, retrouver la vitesse d'un mobile à partir du décalage de fréquence, et relier la géométrie du cône de Mach au nombre de Mach.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Un même outil pour trois phénomènes"
+    texte: |
+      Le nombre de Mach $M=v/c$ organise les trois observations : $M<1$ Doppler simple ; $M=1$ accumulation des fronts (mur du son) ; $M>1$ cône de Mach d'angle $\sin\mu=1/M$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Mesurer un temps de réponse, pas de propagation"
+    texte: |
+      Un chronomètre déclenché à la main introduit une erreur de $0{,}2\ \text{s}$, plus grande que la durée à mesurer ($0{,}1\ \text{s}$). Utiliser l'enregistrement audio ou le chronomètre acoustique.
+  - titre: "Oublier la température"
+    texte: |
+      $c$ varie de $0{,}6\ \text{m}\cdot\text{s}^{-1}$ par degré : à $0\ ^\circ\text{C}$ elle vaut $331\ \text{m}\cdot\text{s}^{-1}$ et à $30\ ^\circ\text{C}$ elle vaut $349\ \text{m}\cdot\text{s}^{-1}$.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Le bang du fouet"
+    texte: |
+      Le claquement d'un fouet ou d'une serviette mouillée est un petit bang supersonique : l'extrémité dépasse $c$. À filmer au ralenti si possible.
+
+lien_aviation:
+  - titre: "Mach, altitude et hélices"
+    texte: |
+      Un avion de ligne croise à $M\approx0{,}8$. À $11\ \text{km}$ d'altitude, l'air est à $-56{,}5\ ^\circ\text{C}$ et $c\approx295\ \text{m}\cdot\text{s}^{-1}$ : la même vitesse vraie correspond à un Mach bien plus élevé qu'au sol. La vitesse au bout des pales d'une hélice combine rotation et avance : elle limite le régime moteur (bruit et perte d'efficacité quand $M_{\text{pale}}\to1$).
+
+bilan:
+  - titre: "Résultats à retenir"
+    texte: |
+      $c=331{,}3\sqrt{1+\theta/273{,}15}\ \text{m}\cdot\text{s}^{-1}$ ($\theta$ en $^\circ\text{C}$). Doppler : $f_a=\dfrac{f_0}{1-v/c}$, $f_r=\dfrac{f_0}{1+v/c}$ et $v=c\,\dfrac{f_a-f_r}{f_a+f_r}$. Cône de Mach : $\sin\mu=\dfrac{1}{M}$.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Doppler relativiste et Doppler en lumière"
+    texte: |
+      Pour la lumière, il n'y a pas de milieu : le décalage dépend de la vitesse relative $v$ et vaut $\dfrac{\Delta\lambda}{\lambda}\approx\dfrac{v}{c}$ pour $v\ll c$. Il sert au radar Doppler des aéroports et à la détection des vents.
+  - niveau: master
+    titre: "Onde de choc et bang sonique"
+    texte: |
+      L'onde de choc forme une « onde en N » avec une surpression de l'ordre de $50$ à $100\ \text{Pa}$ pour un avion supersonique en croisière ; les niveaux dépendent fortement de l'altitude, de la forme et de la vitesse.
+
+questions:
+  - id: q1
+    enonce: |
+      (a) Calculer $c$ à partir des données de l'écho (le son fait un aller-retour). (b) Estimer l'incertitude en supposant $\Delta d=0{,}2\ \text{m}$ et $\Delta t=0{,}005\ \text{s}$. (c) Comparer avec la formule $c=331{,}3\sqrt{1+\theta/273{,}15}$. (d) Quelle est la variation de $c$ pour une température de $-56{,}5\ ^\circ\text{C}$ ?
+    correction:
+      - titre: "Résultat"
+        texte: |
+          (a) $c=\dfrac{2d}{\Delta t}=\dfrac{60}{0{,}175}=343\ \text{m/s}$. (b) $\dfrac{\Delta c}{c}=\dfrac{0{,}2}{30}+\dfrac{0{,}005}{0{,}175}=0{,}7\ \%+2{,}9\ \%=3{,}5\ \%$ soit $\pm12\ \text{m/s}$. (c) $c(20\ ^\circ\text{C})=343{,}2\ \text{m/s}$ : accord parfait. (d) $c(-56{,}5\ ^\circ\text{C})=295\ \text{m/s}$, soit $14\ \%$ de moins.
+    solution:
+      - titre: "Calcul"
+        texte: |
+          $c=\dfrac{2d}{\Delta t}$ donc $\dfrac{\Delta c}{c}=\dfrac{\Delta d}{d}+\dfrac{\Delta t}{t}$. La durée domine (elle est petite), d'où l'intérêt d'un mur plus éloigné ($d=60\ \text{m}$ divise l'erreur relative sur le temps par $2$).
+          $c(20\ ^\circ\text{C})=331{,}3\sqrt{1+\frac{20}{273{,}15}}=343{,}2\ \text{m/s}$. Pour $-56{,}5\ ^\circ\text{C}$ : $331{,}3\sqrt{\frac{216{,}65}{273{,}15}}=295{,}1\ \text{m/s}$.
+          Remarque : $c$ ne dépend que de la température (pas de la pression ni de la fréquence, en air sec), d'où le fait que la vitesse du son diminue avec l'altitude jusqu'à la tropopause.
+
+  - id: q2
+    enonce: |
+      Mach et altitude. Un avion de ligne vole à la vitesse vraie $v=236\ \text{m}\cdot\text{s}^{-1}$ ($850\ \text{km/h}$). Calculer son nombre de Mach (a) au niveau de la mer à $15\ ^\circ\text{C}$ et (b) à $11\ \text{km}$ où $\theta=-56{,}5\ ^\circ\text{C}$. Un chasseur croise à $M=1{,}5$ : calculer l'angle du cône de Mach. Concorde volait à $M=2{,}02$ à $18\ \text{km}$ d'altitude : à quelle distance derrière l'avion se situe le point du sol où l'on entend le bang au moment où l'avion est à la verticale de ce point ? (voir la construction de la question 4).
+    coup_de_pouce:
+      - titre: "Formule"
+        texte: |
+          $\sin\mu=\dfrac{1}{M}$. Le point du sol touché à l'instant $t$ par le cône est à la distance horizontale $\dfrac{h}{\tan\mu}$ derrière l'avion.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          (a) $M=\dfrac{236}{340{,}3}=0{,}69$. (b) $M=\dfrac{236}{295{,}1}=0{,}80$. Chasseur : $\mu=\arcsin\dfrac{1}{1{,}5}=41{,}8^\circ$. Concorde : $\mu=29{,}7^\circ$ et $\dfrac{h}{\tan\mu}=\dfrac{18}{0{,}570}\approx31{,}6\ \text{km}$ : l'avion est déjà à $31{,}6\ \text{km}$ du point où l'on entend son bang.
+    solution:
+      - titre: "Calcul"
+        texte: |
+          (a) $c(15\ ^\circ\text{C})=340{,}3\ \text{m/s}$, $M=0{,}69$. (b) À $11\ \text{km}$, $c=295{,}1\ \text{m/s}$, $M=0{,}80$. Un avion volant à la même vitesse vraie est donc près de $16\ \%$ plus proche du mur du son en altitude qu'au sol : c'est pourquoi les avions de ligne ont une limite en nombre de Mach (MMO) et pas en vitesse.
+          $\mu=\arcsin\dfrac{1}{M}$ : $M=1{,}5\Rightarrow41{,}8^\circ$ ; $M=2{,}02\Rightarrow29{,}7^\circ$. Pour Concorde, l'onde de choc atteint le sol à la distance horizontale $x=\dfrac{h}{\tan\mu}=\dfrac{18\ \text{km}}{0{,}570}=31{,}6\ \text{km}$ derrière l'avion : l'observateur entend le bang bien après le passage.
+
+  - id: q3
+    enonce: |
+      Doppler. (a) Établir $f_a=\dfrac{f_0}{1-v/c}$ pour une source qui se rapproche d'un récepteur immobile, et $f_r=\dfrac{f_0}{1+v/c}$ pour un éloignement. (b) Montrer que $v=c\,\dfrac{f_a-f_r}{f_a+f_r}$ (indépendante de $f_0$). (c) Calculer $v$ avec les données ($c=343\ \text{m/s}$). (d) Déduire l'incertitude sur $v$ si $\Delta f=3\ \text{Hz}$.
+    coup_de_pouce:
+      - titre: "Longueur d'onde reçue"
+        texte: |
+          Pendant une période $T_0$, la source parcourt $vT_0$. La longueur d'onde reçue est $\lambda_a=(c-v)T_0$, et $f_a=\dfrac{c}{\lambda_a}$.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          (a) $f_a=\dfrac{c}{(c-v)T_0}=\dfrac{f_0}{1-v/c}$ ; $f_r=\dfrac{f_0}{1+v/c}$. (b) $\dfrac{f_a-f_r}{f_a+f_r}=\dfrac{v}{c}$. (c) $v=343\times\dfrac{87}{6001}=4{,}97\ \text{m/s}$. (d) $\Delta v\approx0{,}3\ \text{m/s}$ ($5$ à $7\ \%$).
+    solution:
+      - titre: "Démonstration"
+        texte: |
+          (a) Les fronts sont émis toutes les $T_0=1/f_0$. Pendant ce temps la source avance de $vT_0$ : la longueur d'onde dans le sens du mouvement est $\lambda_a=cT_0-vT_0$ et la fréquence perçue $f_a=\dfrac{c}{\lambda_a}=\dfrac{f_0}{1-v/c}$. Dans le sens opposé, $\lambda_r=(c+v)T_0$ et $f_r=\dfrac{f_0}{1+v/c}$.
+          (b) $\dfrac{f_a-f_r}{f_a+f_r}=\dfrac{\frac{1}{1-\varepsilon}-\frac{1}{1+\varepsilon}}{\frac{1}{1-\varepsilon}+\frac{1}{1+\varepsilon}}=\dfrac{2\varepsilon}{2}=\varepsilon=\dfrac{v}{c}$ avec $\varepsilon=v/c$. Cette forme est pratique : la fréquence d'émission $f_0$ n'a pas besoin d'être connue précisément.
+          (c) $v=343\times\dfrac{3044-2957}{3044+2957}=343\times\dfrac{87}{6001}=4{,}97\ \text{m/s}$, en accord avec le compteur du vélo ($5{,}0$).
+          (d) $\dfrac{\Delta v}{v}=\dfrac{\Delta(f_a-f_r)}{f_a-f_r}+\dots\approx\dfrac{6}{87}=7\ \%$ en somme absolue avec deux erreurs de $3\ \text{Hz}$ (ou $5\ \%$ en quadratique) : $v=(5{,}0\pm0{,}3)\ \text{m/s}$. Utiliser une fréquence plus élevée ou une vitesse plus grande améliore la précision relative.
+
+  - id: q4
+    enonce: |
+      Construction de Mach. Une source se déplace sur un axe à la vitesse $v=Mc$ et émet une impulsion à chaque instant $t_n=n\tau$. (a) Décrire les fronts à l'instant $t=5\tau$ pour $M=0{,}5$, $M=1$ et $M=2$ : la source est-elle devant ou derrière ses propres fronts ? (b) Montrer que pour $M>1$ l'enveloppe des fronts est un cône de demi-angle $\mu$ tel que $\sin\mu=\dfrac{c\,t}{v\,t}=\dfrac{1}{M}$. (c) Mesurer $\mu$ sur la construction pour $M=2$ et $M=3$ et comparer à $30^\circ$ et $19{,}5^\circ$.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $M<1$ : fronts non emboîtés, la source est à l'intérieur ; $M=1$ : tous les fronts tangents au point de la source (mur du son, accumulation d'énergie) ; $M>1$ : la source est en avance sur ses fronts, l'enveloppe est un cône de demi-angle $\sin\mu=1/M$ ($30^\circ$ pour $M=2$, $19{,}5^\circ$ pour $M=3$).
+    solution:
+      - titre: "Justification"
+        texte: |
+          À l'instant $t$, le front émis à $t_n$ est un cercle de rayon $c(t-t_n)$ centré en $x_n=vt_n$. Pour $M>1$, la source à l'instant $t$ est à $vt$ alors que le front émis à $t=0$ est de rayon $ct<vt$ : la source est devant. L'enveloppe de ces cercles est un cône de sommet en $x=vt$. La tangente au cercle émis en $t=0$ (rayon $ct$, centre à l'origine) issue du sommet ($vt$) est perpendiculaire au rayon, donc $\sin\mu=\dfrac{ct}{vt}=\dfrac{1}{M}$.
+          En dimension $3$, les cercles sont des sphères et l'enveloppe est un cône de révolution : c'est le cône de Mach. La surface du cône est l'onde de choc, où la pression varie brusquement ; c'est le « bang » perçu par un observateur au sol quand le cône passe sur lui.
+
+  - id: q5
+    enonce: |
+      (*) Hélice. Une hélice de diamètre $D=1{,}9\ \text{m}$ tourne à $2500\ \text{tr/min}$ ; l'avion vole à $60\ \text{m}\cdot\text{s}^{-1}$ au niveau de la mer ($c=340\ \text{m/s}$). Calculer la vitesse en bout de pale et le nombre de Mach correspondant. Pourquoi la pointe des pales est-elle la partie la plus bruyante ? À quel régime le bout de pale atteindrait-il $M=1$ ?
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $v_{\text{rot}}=\pi Dn=\pi\times1{,}9\times41{,}7=249\ \text{m/s}$ ; vitesse totale $\sqrt{249^2+60^2}=256\ \text{m/s}$, $M=0{,}75$. Bout de pale à $M=1$ pour $v_{\text{rot}}=\sqrt{340^2-60^2}=335\ \text{m/s}$, soit $n=\dfrac{335}{\pi\times1{,}9}=56\ \text{tr/s}=3370\ \text{tr/min}$.
+    solution:
+      - titre: "Calcul"
+        texte: |
+          $n=\dfrac{2500}{60}=41{,}7\ \text{tr/s}$ et $v_{\text{rot}}=\omega\dfrac{D}{2}=2\pi n\dfrac{D}{2}=\pi Dn=249\ \text{m/s}$. Dans le référentiel de l'air, la vitesse d'un point du bord est la somme vectorielle de la rotation et de l'avance : $256\ \text{m/s}$, soit $M_{\text{pale}}=0{,}75$.
+          La vitesse augmente avec le rayon : la pointe a la vitesse la plus grande, et donc l'écoulement y est le plus proche des effets de compressibilité (bruit, traînée d'onde). Au-delà de $M\approx0{,}85$ à $0{,}9$, des ondes de choc locales apparaissent et l'efficacité chute : c'est pourquoi les hélices modernes sont limitées à quelques milliers de tours par minute, ou à des pales fines, recourbées.

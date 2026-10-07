@@ -59,6 +59,53 @@ aller_plus_loin:
     texte: |
       Avec plusieurs lames quart d'onde d'impédances étagées (adaptation de Chebyshev ou binomiale), on élargit la bande de fréquences où $R$ reste faible. C'est le principe des adaptateurs d'impédance en hyperfréquences.
 
+accroche_point_cours_essentiel:
+  - titre: "Comment supprimer une réflexion ?"
+    duree_introduction: "5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Les lentilles d'appareil photo ou de jumelles ont souvent des reflets violets : c'est une fine couche de traitement antireflet. Comment une couche {\bf d'épaisseur bien choisie} peut-elle annuler une réflexion ? Et comment adapter l'échographe au corps humain pour que l'onde y pénètre au lieu de rebondir sur la peau ?
+    texte: |
+      {\bf Idée clé : la réflexion vient d'un saut d'impédance, qu'on peut compenser.} À une interface, avec la même tension :
+      $$\underline r=\frac{Z_1-Z_2}{Z_1+Z_2},\qquad T=\frac{4Z_1Z_2}{(Z_1+Z_2)^2}.$$
+      En intercalant une lame d'épaisseur $\lambda_m/4$ d'impédance $Z_m=\sqrt{Z_1Z_2}$ (soit $\mu_m=\sqrt{\mu_1\mu_2}$), les deux ondes réfléchies ($x=0$ et $x=d$) sont en opposition de phase et s'annulent : $\underline r=0$. L'adaptation est {\bf à bande étroite}, parfaite à $f_0=c_m/(4d)$ et à ses multiples impairs.
+
+outils_mathematiques:
+  - titre: "Continuité de $Y$ et de $Y'$"
+    texte: |
+      Sans masse ponctuelle et avec la même tension, $y$ et $\partial_xy$ sont continues à chaque interface. Avec $k_i=\omega Z_i/F$ (même $F$), les nombres d'onde sont proportionnels aux impédances.
+  - titre: "Moyenne géométrique"
+    texte: |
+      $Z_m=\sqrt{Z_1Z_2}$ donne $\mu_m=\sqrt{\mu_1\mu_2}$ (et $c_m=\sqrt{c_1c_2}$), et non la moyenne arithmétique : pour des rapports ($Z_2/Z_1=\sqrt2$), la moyenne naturelle est géométrique.
+  - titre: "Solution de $Y''+k^2Y=0$ par ses conditions initiales"
+    texte: |
+      $Y(x)=Y(0)\cos kx+\dfrac{Y'(0)}k\sin kx$, d'où $Y'(x)=-kY(0)\sin kx+Y'(0)\cos kx$. À $kd=\pi/2$ : $\cos=0$ et $\sin=1$, donc $Y(d)=Y'(0)/k$ et $Y'(d)=-kY(0)$.
+  - titre: "Valeurs remarquables et périodicité"
+    texte: |
+      $\cos\dfrac\pi2=0$, $\sin\dfrac\pi2=1$, $\sin\pi=0$. La condition $k_md=\dfrac\pi2\ [\pi]$ donne $d=(2p+1)\dfrac{\lambda_m}4$ : fréquences d'adaptation $f_p=(2p+1)f_0$.
+  - titre: "Différence de marche et déphasage"
+    texte: |
+      Un aller-retour dans la lame ajoute un chemin $2d=\lambda_m/2$, soit un déphasage $2k_md=\pi$ : $e^{j\pi}=-1$. Deux ondes de même amplitude et déphasées de $\pi$ s'annulent (interférence destructive).
+  - titre: "Fraction rationnelle et identité remarquable"
+    texte: |
+      $\dfrac{1-\underline r}{1+\underline r}=\rho\Rightarrow\underline r=\dfrac{1-\rho}{1+\rho}$. Pour $R+T=1$ : $(Z_1-Z_2)^2+4Z_1Z_2=(Z_1+Z_2)^2$.
+
+liens_autres_disciplines:
+  - discipline: "Optique"
+    texte: |
+      Le traitement antireflet d'une lentille est une couche mince d'indice $n_m=\sqrt{n_1n_2}$ et d'épaisseur $\lambda/4n_m$ (fluorure de magnésium sur du verre) : même formule, avec $n$ à la place de $Z$. Les bulles de savon et les taches d'huile colorées relèvent de la même interférence en lames minces.
+  - discipline: "Électronique et hyperfréquences"
+    texte: |
+      Un transformateur quart d'onde adapte une ligne d'impédance $Z_1$ à une charge $Z_2$ avec une ligne de longueur $\lambda/4$ et d'impédance $\sqrt{Z_1Z_2}$ : c'est ce qui permet d'éviter les échos dans un câble d'antenne.
+  - discipline: "Imagerie médicale"
+    texte: |
+      En échographie, l'impédance acoustique $Z=\rho c$ de la peau et celle du transducteur piézo-électrique sont très différentes : une couche d'adaptation quart d'onde et un gel évitent que l'onde ne soit réfléchie.
+  - discipline: "Acoustique sous-marine et sismologie"
+    texte: |
+      Les sonars et les revêtements anéchoïques (cuves d'essais, sous-marins) jouent sur les impédances pour absorber ou transmettre les ondes ; en géophysique, l'écho entre deux couches renseigne sur leur contraste d'impédance.
+  - discipline: "Traitement du signal"
+    texte: |
+      L'adaptation à bande étroite se comprend par le spectre : une impulsion brève est composée de nombreuses fréquences, dont seule une partie est adaptée. L'élargissement de la bande demande plusieurs lames étagées.
+
 questions:
   - id: q1
     enonce: |

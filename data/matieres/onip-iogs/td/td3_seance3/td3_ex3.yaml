@@ -1,0 +1,203 @@
+id: td3_ex3
+intitule: "Trame 2D sinusoïdale orientée et FFT 2D"
+td: td3
+facultatif: false
+seance: 3
+cours_rattache:
+  - onip.meshgrid
+  - onip.fft_2d
+  - onip.fftshift
+
+metadonnees:
+  duree_estimee: "35 min"
+  difficulte: 3
+  type_exercice: "Application longue, exercice de synthèse du bloc"
+  indispensable: true
+
+enonce_intro: |
+  1. Réaliser une fonction qui génère une trame 2D sinusoïdale de taille
+     $M$ par $N$, de pas spatial \texttt{step}, selon un angle
+     \texttt{alpha}. \\
+  2. Tester cette fonction : trame de 200 par 100, pas de 10.1, angle de
+     35°. \\
+  3. Utiliser \texttt{np.fft.fftshift} sur la matrice générée. \\
+  4. Faire la TF en 2D de la trame et afficher le résultat.
+
+prerequis:
+  - titre: "Projection sur une direction quelconque"
+    texte: |
+      Pour orienter une sinusoïde 2D selon un angle $\alpha$ quelconque, on
+      projette chaque point $(x, y)$ sur la direction définie par le
+      vecteur unitaire $(\cos\alpha, \sin\alpha)$ : la coordonnée obtenue,
+      $x\cos\alpha + y\sin\alpha$, varie « le long des franges » et sert
+      d'argument à un cosinus de période spatiale \texttt{step}.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Généraliser meshgrid à un motif orienté"
+    texte: |
+      Réutiliser la grille de coordonnées \texttt{X, Y} de l'exercice
+      précédent pour construire un motif dont l'orientation dépend d'un
+      paramètre.
+  - titre: "Interpréter une FFT 2D"
+    texte: |
+      Relier visuellement l'orientation et le pas spatial d'une trame à la
+      position des pics de sa transformée de Fourier 2D.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Dernier exercice du bloc obligatoire"
+    texte: |
+      Il boucle la boucle entre FFT 1D (\texttt{td3\_ex1}) et meshgrid
+      (\texttt{td3\_ex2}). Si le temps manque, il est possible de s'arrêter
+      après la question 2 (génération et affichage de la trame) et de
+      traiter les questions 3-4 (FFT2D) en fin de séance suivante plutôt
+      que de bâcler.
+
+point_cours:
+  - titre: "Fonction \\texttt{generate\\_grating} (extrait commenté)"
+    texte: |
+      \begin{verbatim}
+      import numpy as np
+      import matplotlib.pyplot as plt
+
+      def generate_grating(M: int, N: int, step: float, alpha_deg: float):
+          """Genere une trame (grating) sinusoidale 2D orientee.
+          M : largeur (colonnes) ; N : hauteur (lignes) ; step : pas
+          spatial ; alpha_deg : angle par rapport a l'horizontale."""
+          alpha = np.deg2rad(alpha_deg)
+
+          # Meme convention que td3_ex2 : X, Y ont pour forme (N, M).
+          x = np.arange(M)
+          y = np.arange(N)
+          X, Y = np.meshgrid(x, y)
+
+          # Projection de chaque point sur la direction (cos a, sin a) :
+          # coordonnee "le long des franges", periodisee avec un cosinus.
+          projection = X * np.cos(alpha) + Y * np.sin(alpha)
+          trame = np.cos(2 * np.pi * projection / step)
+          return trame
+
+      M, N = 200, 100
+      trame = generate_grating(M, N, step=10.1, alpha_deg=35)
+      # trame.shape = (100, 200) = (N, M) = (hauteur, largeur)
+      \end{verbatim}
+  - titre: "fftshift spatial puis FFT 2D"
+    texte: |
+      \begin{verbatim}
+      # Question 3 : fftshift applique DIRECTEMENT sur l'image spatiale
+      # (pas encore une TF) pour observer que c'est une simple permutation
+      # de quadrants, independante de la signification physique du tableau.
+      trame_shiftee = np.fft.fftshift(trame)
+
+      # Question 4 : TF2D puis fftshift pour recentrer, affichage en
+      # log1p(module) pour ne pas ecraser les pics lateraux par la
+      # composante centrale (frequence nulle).
+      TF2D = np.fft.fft2(trame)
+      TF2D_shiftee = np.fft.fftshift(TF2D)
+
+      plt.figure()
+      plt.imshow(np.log1p(np.abs(TF2D_shiftee)))
+      plt.colorbar()
+      plt.title("Module de la TF2D (echelle log1p)")
+      plt.show()
+      \end{verbatim}
+      Résultat attendu : deux pics symétriques par rapport au centre,
+      alignés perpendiculairement aux franges, à une distance du centre
+      inversement proportionnelle au pas spatial.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Confusion (largeur, hauteur) vs (lignes, colonnes)"
+    texte: |
+      La même confusion qu'à l'exercice précédent : une image avec les
+      axes inversés, sans erreur Python. Comparer avec l'exemple visuel
+      fourni dans le sujet.
+  - titre: "Oublier fftshift avant d'afficher le module de la TF2D"
+    texte: |
+      Les pics apparaissent alors dans les coins de l'image au lieu d'être
+      centrés, rendant le résultat difficile à interpréter : toujours
+      enchaîner \texttt{fft2} puis \texttt{fftshift} avant tout affichage
+      de spectre 2D.
+  - titre: "Forme de tableau inattendue pour fft2"
+    texte: |
+      \texttt{np.fft.fft2} attend un tableau 2D : une erreur de forme
+      (tableau 1D par erreur) ne lève pas toujours une exception explicite,
+      donc vérifier \texttt{trame.shape} avant l'appel.
+
+bilan:
+  - titre: "De la FFT 1D à la FFT 2D"
+    texte: |
+      Les mêmes précautions que pour la FFT 1D (\texttt{td3\_ex1})
+      s'appliquent en 2D : appliquer \texttt{fftshift} de façon cohérente,
+      et se rappeler qu'un signal réel (ici une image réelle) a un spectre
+      symétrique — ici, deux pics au lieu d'un seul, alignés
+      perpendiculairement aux franges de la trame.
+
+aller_plus_loin:
+  - niveau: ecole_ingenieur
+    titre: "Cas particuliers alpha=0° et alpha=90°"
+    texte: |
+      Vérifier que \texttt{alpha=0°} donne des franges verticales et
+      \texttt{alpha=90°} des franges horizontales, avant de généraliser à
+      un angle quelconque.
+  - niveau: master
+    titre: "Filtrage fréquentiel simple"
+    texte: |
+      Mettre à zéro certaines fréquences de la TF2D puis appliquer une TF2D
+      inverse (\texttt{np.fft.ifft2}) pour visualiser l'effet sur l'image
+      reconstruite — une première approche du filtrage fréquentiel, avec
+      des applications réelles en moiré, réseaux de diffraction et tests
+      de résolution optique (mires USAF).
+
+questions:
+  - id: q1
+    enonce: |
+      Écrire \texttt{generate\_grating(M, N, step, alpha\_deg)} et générer
+      une trame de 200 par 100, pas de 10.1, angle de 35°.
+    coup_de_pouce: |
+      Projetez chaque point de la grille \texttt{meshgrid} sur le vecteur
+      directeur $(\cos\alpha, \sin\alpha)$ avant d'appliquer un cosinus.
+    correction: "projection = X*cos(alpha) + Y*sin(alpha) ; trame = cos(2*pi*projection/step)."
+    solution:
+      - titre: "Implémentation"
+        texte: |
+          Voir le code commenté ci-dessus. Si blocage sur le calcul de la
+          projection, partir des cas simples $\alpha = 0^\circ$ (franges
+          verticales, seul $X$ intervient) et $\alpha = 90^\circ$ (franges
+          horizontales, seul $Y$ intervient) avant de généraliser.
+  - id: q2
+    enonce: |
+      Appliquer \texttt{np.fft.fftshift} directement sur la trame
+      (image spatiale, pas encore une TF). Que constate-t-on ?
+    coup_de_pouce: |
+      \texttt{fftshift} est une opération purement géométrique sur un
+      tableau, indépendante de la signification physique de son contenu.
+    correction: "L'image est simplement réarrangée par permutation de quadrants (haut-gauche <-> bas-droite, etc.)."
+    solution:
+      - titre: "Interprétation"
+        texte: |
+          \texttt{fftshift} permute les quadrants de l'image (haut-gauche
+          avec bas-droite, haut-droite avec bas-gauche), quel que soit le
+          contenu du tableau : ici appliqué à une image spatiale, cela
+          produit simplement une version « recollée » de la trame, sans
+          aucun rapport pour l'instant avec une transformée de Fourier —
+          bonne façon de dissocier la mécanique de \texttt{fftshift} de son
+          usage habituel sur un spectre.
+  - id: q3
+    enonce: |
+      Calculer la FFT 2D de la trame et afficher son module (avec
+      \texttt{fftshift} et une échelle \texttt{log1p} pour la lisibilité).
+      Interpréter la position des pics observés.
+    coup_de_pouce: |
+      La distance des pics au centre est liée au pas spatial \texttt{step},
+      et leur orientation à l'angle \texttt{alpha\_deg} de la trame.
+    correction: "Deux pics symétriques par rapport au centre, perpendiculaires aux franges, à une distance inversement proportionnelle à step."
+    solution:
+      - titre: "Interprétation physique"
+        texte: |
+          Comme pour la FFT 1D, la trame étant réelle, sa TF2D présente une
+          symétrie centrale : deux pics symétriques par rapport au centre
+          de l'image, alignés perpendiculairement à la direction des
+          franges (donc dans la direction $(\cos\alpha, \sin\alpha)$), à
+          une distance du centre d'autant plus grande que le pas spatial
+          \texttt{step} est petit (fréquence spatiale élevée). Si l'on
+          double \texttt{step}, la distance des pics au centre est divisée
+          par deux.

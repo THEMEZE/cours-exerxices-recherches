@@ -1,0 +1,206 @@
+id: tpA_tp4
+intitule: "Pourquoi le ciel est bleu et le Soleil couchant rouge : diffusion de Rayleigh dans un aquarium"
+tp: tpA
+facultatif: false
+seance: 1
+cours_rattache:
+  - optique.diffusion
+  - optique.loi_de_beer_lambert
+  - optique.polarisation
+
+metadonnees:
+  duree_estimee: "2 h 30"
+  difficulte: 3 # Sur une échelle de 1 à 5
+  type_exercice: "TP expérimental visuel"
+  indispensable: true
+  public_cible: [lycee, cpge, licence, ecole_aviation]
+
+enonce_intro: |
+  La lumière du Soleil est blanche, et pourtant le ciel est bleu à midi alors que le Soleil paraît rouge-orangé à l'horizon. Les deux observations viennent de la même cause : la \textbf{diffusion de Rayleigh} de la lumière par les molécules de l'air, dont l'intensité varie en $\lambda^{-4}$. Le bleu est diffusé dans toutes les directions (d'où le ciel bleu) et il est donc retiré du faisceau direct ; plus le trajet dans l'atmosphère est long, plus le faisceau direct devient rouge.
+
+  Dans ce TP, on reproduit l'effet à petite échelle : un bac d'eau très légèrement troublée (quelques gouttes de lait) est éclairé par une lampe blanche. Vu de côté, le faisceau est bleuté ; vu dans l'axe, à travers une grande longueur d'eau, le spot devient orange. On \textbf{mesure} ensuite le rapport des coefficients d'extinction dans le bleu et dans le rouge à l'aide de photographies du smartphone.
+
+securite:
+  - titre: "Produits"
+    texte: |
+      Le lait dilué est inoffensif. Si l'on choisit la version chimique (thiosulfate de sodium et acide chlorhydrique dilué), c'est l'enseignant qui prépare la solution (port de gants et de lunettes, salle aérée).
+  - titre: "Eau et électricité"
+    texte: |
+      Alimenter les lampes sur piles ; ne jamais placer de prise ou de multiprise à proximité de l'aquarium.
+
+materiel:
+  - "Aquarium ou bac transparent allongé (longueur $40$ à $60\\ \\text{cm}$, section $\\ge10\\times10\\ \\text{cm}$), en verre ou plexiglas clair"
+  - "Lampe de poche à LED blanche (ou lampe de smartphone) avec un cache percé d'un trou de $1\\ \\text{cm}$"
+  - "Lait demi-écrémé (pipette ou seringue), eau claire, bécher gradué"
+  - "Smartphone (appareil photo en mode manuel si possible : sensibilité et temps de pose fixes)"
+  - "Filtres colorés (bleu, rouge) ou logiciel d'analyse d'image (ImageJ, ou simple sélecteur de couleur)"
+  - "Deux polariseurs (film polarisant, verres de lunettes polarisantes, ou un écran LCD et des lunettes polarisantes)"
+  - "Feuille de papier noir pour l'arrière-plan et pièce sombre"
+
+manipulation:
+  - titre: "1. Préparation de la suspension"
+    texte: |
+      Remplir le bac d'eau. Ajouter goutte à goutte le lait (environ $1$ à $2\ \text{mL}$ pour $10\ \text{L}$) en agitant, jusqu'à obtenir une eau à peine trouble. La pièce doit être sombre. Le fond et l'arrière du bac sont recouverts de papier noir.
+  - titre: "2. Coucher de soleil dans un bac"
+    texte: |
+      Placer la lampe à une extrémité, fixer le cache, et observer le faisceau : (i) de côté, (ii) dans l'axe, depuis l'autre extrémité. Photographier en manuel (même réglage pour toutes les photographies).
+  - titre: "3. Mesure de l'extinction par couleur"
+    texte: |
+      Placer un écran blanc contre la face de sortie. Pour des longueurs $L$ de $10$, $20$, $30$ et $40\ \text{cm}$ (en remplissant plus ou moins le bac ou en déplaçant la lampe), photographier le spot sur l'écran. Extraire, avec un logiciel ou un sélecteur de couleurs, les intensités $I_R$ et $I_B$ (canaux rouge et bleu) au centre du spot. Reprendre sans lait pour la référence $I_0$.
+  - titre: "4. Polarisation de la lumière diffusée"
+    texte: |
+      Observer le faisceau à $90^\circ$ (de côté) à travers un polariseur que l'on fait tourner. Comparer avec l'observation dans l'axe. Puis regarder le ciel bleu (loin du Soleil, à $90^\circ$ de celui-ci) à travers des lunettes polarisantes que l'on incline.
+  - titre: "5. Observations en extérieur (si possible)"
+    texte: |
+      Photographier le ciel à différentes hauteurs et directions, en particulier à $90^\circ$ du Soleil (bleu foncé et polarisé) et à l'horizon (blanchâtre). Lors d'un coucher de Soleil, photographier le disque solaire à plusieurs hauteurs (utiliser un filtre et ne pas regarder directement).
+
+donnees_exemple: |
+  Pour $L=10\ ;\ 20\ ;\ 30\ ;\ 40\ \text{cm}$, les rapports $I/I_0$ mesurés dans le canal rouge sont $0{,}90\ ;\ 0{,}82\ ;\ 0{,}74\ ;\ 0{,}67$ et dans le canal bleu $0{,}70\ ;\ 0{,}49\ ;\ 0{,}34\ ;\ 0{,}24$.
+
+prerequis:
+  - titre: "Notions"
+    texte: |
+      Longueur d'onde et couleur, loi de Beer-Lambert $I=I_0e^{-\alpha L}$, polarisation (loi de Malus), régression linéaire de $\ln(I/I_0)$ en fonction de $L$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Relier une observation quotidienne à un modèle quantitatif"
+    texte: |
+      Établir que l'extinction est plus forte dans le bleu, mesurer le rapport $\alpha_B/\alpha_R$ et le comparer à la loi en $\lambda^{-4}$, et reconnaître la polarisation partielle de la lumière diffusée.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Distinguer diffusion et absorption"
+    texte: |
+      L'eau du bac n'absorbe pas la lumière (elle la diffuse) ; le bleu n'est pas « consommé  » mais dévié. Cette distinction explique aussi pourquoi la lumière du ciel est polarisée et pourquoi les nuages (gouttes plus grosses, diffusion de Mie) sont blancs.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Trop de lait"
+    texte: |
+      Avec trop de lait, la diffusion multiple domine : le bac devient blanc et le spot disparaît. La loi de Beer-Lambert n'est plus vérifiée.
+  - titre: "« Le ciel reflète la mer  »"
+    texte: |
+      Le bleu du ciel n'est pas le reflet des océans (c'est l'inverse : la mer est bleue en partie à cause du ciel et de l'absorption de l'eau dans le rouge).
+  - titre: "Auto-exposition du smartphone"
+    texte: |
+      L'exposition automatique corrige l'intensité : bloquer la sensibilité et le temps de pose, sinon les rapports $I/I_0$ n'ont aucun sens.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Un « coucher de soleil » à la demande"
+    texte: |
+      Faire éteindre les lumières et ajouter lentement du lait en regardant l'extrémité opposée du bac : le spot blanc devient jaune, orange, puis rouge sombre. Proposer aussi la version « Mars  » : sur Mars, le ciel est rose-orangé (poussière) et le coucher de Soleil est bleu.
+
+lien_aviation:
+  - titre: "Visibilité, brume et altitude"
+    texte: |
+      Les montagnes lointaines paraissent bleutées (lumière diffusée entre l'observateur et l'objet) et perdent leur contraste : la visibilité météorologique est définie par la loi de Koschmieder, $V=\dfrac{3{,}91}{\sigma}$ ($\sigma$ coefficient d'extinction). En altitude, l'air est moins dense : à $12\ \text{km}$ la pression vaut $\approx19\ \%$ de la pression au sol et le ciel au zénith paraît bleu très foncé, presque noir. Le bleu du ciel n'est pas uniforme : la lumière est fortement polarisée à $90^\circ$ du Soleil, ce qui explique pourquoi des lunettes polarisantes modifient le contraste du ciel (voir TP O5).
+
+bilan:
+  - titre: "Résultats à retenir"
+    texte: |
+      $I_{\text{diff}}\propto\lambda^{-4}$ ; $\dfrac{\alpha(450)}{\alpha(650)}=\left(\dfrac{650}{450}\right)^4\approx4{,}4$ ; $I=I_0e^{-\alpha L}$. Ciel bleu : lumière diffusée. Soleil rouge à l'horizon : lumière transmise après un long trajet ($\approx38$ masses d'air).
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Diffusion de Rayleigh et de Mie"
+    texte: |
+      Pour des particules de taille $a\ll\lambda$, la section efficace est $\sigma\propto\dfrac{a^6}{\lambda^4}$ ; pour $a\gtrsim\lambda$ (gouttelettes de nuages, brouillard), la diffusion est presque indépendante de $\lambda$ (Mie) : les nuages sont blancs.
+  - niveau: master
+    titre: "Degré de polarisation"
+    texte: |
+      Pour une diffusion de Rayleigh par des dipôles isotropes, le degré de polarisation vaut $P(\gamma)=\dfrac{\sin^2\gamma}{1+\cos^2\gamma}$ ($\gamma$ angle de diffusion). Il est maximal ($1$ en théorie, $\approx0{,}7$ réellement à cause de la diffusion multiple et du sol) à $90^\circ$ du Soleil.
+
+questions:
+  - id: q1
+    enonce: |
+      Diffusion de Rayleigh. L'intensité diffusée par des particules petites devant $\lambda$ varie comme $\lambda^{-4}$. Calculer les rapports $\dfrac{I(450\ \text{nm})}{I(650\ \text{nm})}$ et $\dfrac{I(400\ \text{nm})}{I(450\ \text{nm})}$. Pourquoi le ciel n'est-il pas violet, alors que le violet est plus diffusé que le bleu ?
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $\left(\dfrac{650}{450}\right)^4\approx4{,}35$ et $\left(\dfrac{450}{400}\right)^4\approx1{,}6$. Le violet est plus diffusé que le bleu, mais le Soleil en émet moins, le haut de l'atmosphère l'absorbe (ozone) et l'œil y est moins sensible : le ciel apparaît bleu clair.
+    solution:
+      - titre: "Discussion"
+        texte: |
+          $\dfrac{I(450)}{I(650)}=\left(\dfrac{650}{450}\right)^4=1{,}444^4=4{,}35$ : le bleu est diffusé $4$ fois plus que le rouge. $\dfrac{I(400)}{I(450)}=\left(\dfrac{450}{400}\right)^4=1{,}6$.
+          Le ciel n'est pas violet parce que (i) le spectre du Soleil décroît vers le violet à la surface de la Terre, (ii) le violet est plus absorbé (ozone et diffusions multiples), (iii) l'œil est bien moins sensible à $400\ \text{nm}$ qu'à $470\ \text{nm}$ (les cônes bleus ont leur maximum de sensibilité vers $440$ à $450\ \text{nm}$, mais leurs signaux se combinent avec ceux des cônes verts). Le produit de ces facteurs donne la teinte cyan/bleu clair du ciel.
+
+  - id: q2
+    enonce: |
+      Atmosphère et coucher de Soleil. L'épaisseur optique verticale de l'atmosphère à $550\ \text{nm}$ vaut $\tau_0\approx0{,}10$ (diffusion de Rayleigh seule). (a) Calculer $\tau$ à $450$, $550$ et $650\ \text{nm}$ pour un faisceau vertical. (b) Pour un Soleil à l'horizon, la masse d'air relative vaut $m\approx38$. Calculer la transmission $e^{-m\tau}$ dans chaque couleur. Quelle est la couleur du Soleil ? (c) Le Soleil est-il plus rouge quand il est bas sur l'horizon ou à $45^\circ$ ($m=1{,}41$) ?
+    coup_de_pouce:
+      - titre: "Loi d'échelle"
+        texte: |
+          $\tau(\lambda)=\tau_0\left(\dfrac{550}{\lambda}\right)^4$ et $T=e^{-m\tau}$.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          (a) $\tau=0{,}223\ ;\ 0{,}100\ ;\ 0{,}051$. (b) Transmission à l'horizon : $2\times10^{-4}$ (bleu), $0{,}022$ (vert), $0{,}14$ (rouge) : il ne reste que le rouge, le Soleil est rouge-orangé et bien moins brillant. (c) À $45^\circ$ : $T_B=0{,}73$, $T_G=0{,}87$, $T_R=0{,}93$ : le Soleil est légèrement jaune.
+    solution:
+      - titre: "Calcul"
+        texte: |
+          (a) $\tau(450)=0{,}10\times\left(\dfrac{550}{450}\right)^4=0{,}10\times2{,}23=0{,}223$ ; $\tau(650)=0{,}10\times\left(\dfrac{550}{650}\right)^4=0{,}051$.
+          (b) $m=38$ : $T_B=e^{-8{,}5}=2{,}1\times10^{-4}$, $T_G=e^{-3{,}8}=0{,}022$, $T_R=e^{-1{,}95}=0{,}14$. Le rapport rouge/bleu vaut $\approx700$ : la lumière directe est rouge. En pratique, l'absorption et la diffusion de Mie par les aérosols renforcent l'effet (couchers de soleil très rouges après une éruption volcanique).
+          (c) À $45^\circ$ : $T_B=e^{-0{,}31}=0{,}73$, $T_G=e^{-0{,}14}=0{,}87$, $T_R=e^{-0{,}072}=0{,}93$ : la lumière directe est un peu jaunie, ce qui est le cas du Soleil « jaune » de l'après-midi. Le Soleil est en réalité blanc au-dessus de l'atmosphère.
+          Le 12 août 2026, l'éclipse partielle avait lieu alors que le Soleil était bas sur l'horizon ouest : le disque était à la fois rouge-orangé (extinction) et partiellement masqué (Lune).
+
+  - id: q3
+    enonce: |
+      Analyse des mesures. Avec les données de l'énoncé, tracer $\ln(I/I_0)$ en fonction de $L$ pour les canaux rouge et bleu. Ajuster deux droites passant par l'origine, en déduire $\alpha_R$, $\alpha_B$ et le rapport $\alpha_B/\alpha_R$. Comparer avec $\left(\dfrac{\lambda_R}{\lambda_B}\right)^4$ pour $\lambda_R=620\ \text{nm}$ et $\lambda_B=450\ \text{nm}$.
+    coup_de_pouce:
+      - titre: "Linéarisation"
+        texte: |
+          $\ln\dfrac{I}{I_0}=-\alpha L$. La pente d'un ajustement par l'origine est $-\dfrac{\sum L_i\ln(I_i/I_0)}{\sum L_i^2}$.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $\alpha_R\approx0{,}0100\ \text{cm}^{-1}$ et $\alpha_B\approx0{,}0358\ \text{cm}^{-1}$, donc $\dfrac{\alpha_B}{\alpha_R}\approx3{,}6$, en accord avec $\left(\dfrac{620}{450}\right)^4=3{,}60$.
+    solution:
+      - titre: "Calcul"
+        texte: |
+          Rouge : $\ln(I/I_0)=-0{,}105\ ;\ -0{,}198\ ;\ -0{,}301\ ;\ -0{,}400$ pour $L=10\ ;\ 20\ ;\ 30\ ;\ 40\ \text{cm}$, donc $\alpha_R=\dfrac{1{,}05+3{,}96+9{,}03+16{,}0}{100+400+900+1600}=\dfrac{30{,}04}{3000}=0{,}0100\ \text{cm}^{-1}$.
+          Bleu : $\ln(I/I_0)=-0{,}357\ ;\ -0{,}713\ ;\ -1{,}079\ ;\ -1{,}427$, donc $\alpha_B=\dfrac{3{,}57+14{,}26+32{,}37+57{,}08}{3000}=\dfrac{107{,}3}{3000}=0{,}0358\ \text{cm}^{-1}$.
+          Rapport $\dfrac{\alpha_B}{\alpha_R}\approx3{,}6$. La loi de Rayleigh prévoit $\left(\dfrac{620}{450}\right)^4=3{,}60$ pour les longueurs d'onde effectives des canaux rouge et bleu d'un capteur RGB (le canal n'est pas monochromatique : l'écart est de l'ordre de $10\ \%$ selon les longueurs d'onde choisies).
+          Mise en garde : les longueurs d'onde effectives des canaux dépendent du capteur ; un accord meilleur que $10\ \%$ serait fortuit.
+
+  - id: q4
+    enonce: |
+      Critique. Citer trois causes d'erreur sur $\alpha_B/\alpha_R$ dans la manipulation et proposer comment les contrôler.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          Saturation du capteur ; diffusion multiple (trop de lait) ; lumière ambiante ; balance des blancs automatique ; largeur des canaux RGB ; homogénéité de la suspension.
+    solution:
+      - titre: "Discussion"
+        texte: |
+          \begin{itemize}[label=$\bullet$]
+            \item {\bf Capteur :} saturation (surexposition du canal rouge) et non-linéarité (gamma) des images JPEG. Utiliser des images RAW, ou vérifier la linéarité avec des filtres gris.
+            \item {\bf Diffusion multiple :} si l'eau est trop trouble, le faisceau n'obéit plus à Beer-Lambert. Contrôle : vérifier que $\ln(I/I_0)$ est linéaire en $L$.
+            \item {\bf Lumière parasite :} lumière ambiante et réflexions sur les parois du bac. Utiliser un cache, un papier noir et une pièce sombre.
+            \item {\bf Balance des blancs automatique :} elle modifie le rapport bleu/rouge. La bloquer.
+            \item {\bf Lumière de la lampe :} une LED blanche a un pic bleu et un large fond jaune ; $I_0$ doit être mesurée dans chaque canal.
+          \end{itemize}
+
+  - id: q5
+    enonce: |
+      Polarisation. Observer le faisceau à $90^\circ$ à travers un polariseur. (a) Que voit-on quand on tourne le polariseur ? (b) Justifier avec le modèle du dipôle rayonnant : le champ $\vec E$ de la lumière incidente est perpendiculaire à la direction de propagation ; il fait osciller les charges de la molécule dans le plan perpendiculaire. (c) Où faut-il regarder dans le ciel pour observer la polarisation maximale ? Pour quelle direction est-elle nulle ?
+    correction:
+      - titre: "Résultat"
+        texte: |
+          (a) L'intensité passe d'un maximum à un minimum presque nul quand on tourne le polariseur de $90^\circ$. (b) Les charges oscillent perpendiculairement au faisceau incident ; un dipôle ne rayonne pas dans sa propre direction, donc la lumière vue à $90^\circ$ est polarisée linéairement, perpendiculairement au plan formé par le faisceau et la direction d'observation. (c) Polarisation maximale à $90^\circ$ du Soleil ; nulle dans la direction du Soleil et à l'opposé (diffusion avant ou arrière).
+    solution:
+      - titre: "Discussion"
+        texte: |
+          Le champ de l'onde incidente est transversal. Vu à $90^\circ$, on observe le rayonnement des dipôles qui oscillent dans la direction perpendiculaire à la fois au faisceau et à la ligne de visée : la lumière est donc polarisée linéairement. Dans l'axe du faisceau, toutes les directions transversales sont possibles : pas de polarisation privilégiée.
+          Dans le ciel, la polarisation est maximale sur un grand cercle à $90^\circ$ du Soleil ($P\approx0{,}7$ à $0{,}8$ dans un ciel clair), avec des directions $\vec E$ tangentes à des cercles centrés sur le Soleil. La polarisation est plus faible en présence de brume ou de nuages (diffusion multiple). De nombreux insectes (abeilles, fourmis) utilisent cette polarisation pour se repérer ; les marins vikings auraient utilisé des cristaux (« pierres de soleil  ») pour la même raison.
+
+  - id: q6
+    enonce: |
+      (*) Aviation et visibilité. La loi de Koschmieder définit la visibilité météorologique par la distance $V$ à laquelle le contraste d'un objet noir sur l'horizon tombe à $2\ \%$ : $V=\dfrac{\ln(1/0{,}02)}{\sigma}=\dfrac{3{,}91}{\sigma}$. (a) Quelle est la visibilité si $\sigma=0{,}4\ \text{km}^{-1}$ ? (b) L'extinction due à la seule diffusion de Rayleigh vaut $\sigma_R\approx1{,}2\times10^{-2}\ \text{km}^{-1}$ à $550\ \text{nm}$ : quelle serait la visibilité maximale dans un air parfaitement pur ? (c) Un pilote voit deux montagnes lointaines : pourquoi la plus éloignée est-elle plus bleue et moins contrastée ?
+    correction:
+      - titre: "Résultat"
+        texte: |
+          (a) $V=3{,}91/0{,}4\approx9{,}8\ \text{km}$. (b) $V_{\max}=3{,}91/0{,}012\approx330\ \text{km}$ (à comparer aux $\approx250$ à $300\ \text{km}$ observés au mieux). (c) Plus la distance est grande, plus la lumière diffusée par l'air entre le pilote et la montagne (bleuâtre) domine la lumière directe atténuée de la montagne.
+    solution:
+      - titre: "Discussion"
+        texte: |
+          (a) $V=\dfrac{3{,}91}{0{,}4}\approx9{,}8\ \text{km}$ (brume légère). (b) $V=\dfrac{3{,}91}{1{,}2\times10^{-2}}\approx326\ \text{km}$ : même dans un air parfaitement pur, la diffusion de Rayleigh limite la visibilité à quelques centaines de kilomètres.
+          (c) La luminance apparente d'un objet à la distance $d$ est $L=L_0e^{-\sigma d}+L_{\text{air}}(1-e^{-\sigma d})$ : le premier terme (objet) décroît et le second (lumière diffusée par l'air, plutôt bleue) augmente. Au loin, l'objet se confond avec l'horizon : c'est pourquoi les massifs lointains sont bleutés et les ombres (contraste) disparaissent, ce que les peintres appellent la perspective atmosphérique.
+          Pour un pilote, c'est un piège connu : dans une brume, les repères lointains paraissent plus éloignés qu'ils ne le sont ; dans un air très clair, ils paraissent plus proches que la réalité, ce qui conduit à sous-estimer les distances en montagne.

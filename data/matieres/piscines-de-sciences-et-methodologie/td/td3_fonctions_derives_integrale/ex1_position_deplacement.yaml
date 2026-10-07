@@ -39,10 +39,12 @@ coup_de_pouce:
 point_cours:
   - titre: "Relations cinématiques fondamentales"
     texte: |
-      * $v_x(t) = \frac{\mathrm{d}x}{\mathrm{d}t} = \dot{x}(t)$
-      * $a_x(t) = \frac{\mathrm{d}v_x}{\mathrm{d}t} = \frac{\mathrm{d}^2 x}{\mathrm{d}t^2} = \ddot{x}(t)$
-      * $x(t) = x_0 + \int_{0}^{t} v_x(u) \, \mathrm{d}u$
-      * $v_x(t) = v_{x,0} + \int_{0}^{t} a_x(u) \, \mathrm{d}u$
+      \begin{itemize}[label = $\bullet$]
+        \item $v_x(t) = \frac{\mathrm{d}x}{\mathrm{d}t} = \dot{x}(t)$
+        \item $a_x(t) = \frac{\mathrm{d}v_x}{\mathrm{d}t} = \frac{\mathrm{d}^2 x}{\mathrm{d}t^2} = \ddot{x}(t)$
+        \item $x(t) = x_0 + \int_{0}^{t} v_x(u) \, \mathrm{d}u$
+        \item $v_x(t) = v_{x,0} + \int_{0}^{t} a_x(u) \, \mathrm{d}u$
+      \end{itemize}
 
 remarques_pedagogiques_ecueils_classiques:
   - titre: "Confusion vitesse/accélération"
@@ -69,7 +71,7 @@ questions:
   - id: q1
     parent: "1"
     enonce: |
-      **Notions fondamentales**
+      {\bf Notions fondamentales}
 
       \begin{enumerate}[label=\alph*)]
         \item Expliquer la différence entre un référentiel et un repère. Citer quelques exemples.
@@ -96,7 +98,8 @@ questions:
       - titre: "Résolution des notions fondamentales"
         texte: |
           \begin{enumerate}[label=\alph*)]
-            \item Un **référentiel** est un solide de référence auquel est liée une horloge. Un **repère** est un système d'axes mathématiques muni d'une origine $O$ et de vecteurs unitaires liant la géométrie au référentiel. *Exemples* : Référentiel terrestre (repère cartésien attaché au laboratoire), référentiel géocentrique.
+            \item Un {\bf référentiel} est un solide de référence auquel est liée une horloge. Un {\bf repère} est un système d'axes mathématiques muni d'une origine $O$ et de vecteurs unitaires liant la géométrie au référentiel.\\
+             {\em Exemples}  : Référentiel terrestre (repère cartésien attaché au laboratoire), référentiel géocentrique.
             \item 
               \begin{itemize}[label=$\bullet$]
                 \item $\Delta x = x(t_2) - x(t_1)$ ; $v_{x,\text{moy}} = \frac{\Delta x}{\Delta t}$ ; $a_{x,\text{moy}} = \frac{\Delta v_x}{\Delta t}$.
@@ -119,7 +122,7 @@ questions:
   - id: q2
     parent: "2"
     enonce: |
-      **Mouvements particuliers**
+      {\bf Mouvements particuliers}
 
       \begin{enumerate}[label=\alph*)]
         \item Décrire les caractéristiques d'un mouvement rectiligne uniforme (MRU).
@@ -131,9 +134,9 @@ questions:
       - titre: "Résolution sur les mouvements particuliers"
         texte: |
           \begin{enumerate}[label=\alph*)]
-            \item **MRU** : Trajectoire droite, $a_x(t) = 0$, $v_x(t) = \text{Cte}$, $x(t) = v_x t + x_0$.
-            \item **Non**. Un mouvement uniforme signifie seulement que la norme de la vitesse est constante ($v = \text{Cte}$). Exemple : le Mouvement Circulaire Uniforme (MCU) où la direction du vecteur vitesse varie en permanence (accélération non nulle).
-            \item **MRUA** : Trajectoire droite, $a_x(t) = a_0 = \text{Cte}$, $v_x(t) = a_0 t + v_0$, $x(t) = \frac{1}{2}a_0 t^2 + v_0 t + x_0$.
+            \item {\bf MRU} : Trajectoire droite, $a_x(t) = 0$, $v_x(t) = \text{Cte}$, $x(t) = v_x t + x_0$.
+            \item {\bf Non}. Un mouvement uniforme signifie seulement que la norme de la vitesse est constante ($v = \text{Cte}$). Exemple : le Mouvement Circulaire Uniforme (MCU) où la direction du vecteur vitesse varie en permanence (accélération non nulle).
+            \item {\bf MRUA} : Trajectoire droite, $a_x(t) = a_0 = \text{Cte}$, $v_x(t) = a_0 t + v_0$, $x(t) = \frac{1}{2}a_0 t^2 + v_0 t + x_0$.
           \end{enumerate}
 
   - id: q3

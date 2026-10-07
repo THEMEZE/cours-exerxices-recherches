@@ -1,0 +1,33 @@
+id: mecanique-de-point-ipsa_cours_chap1
+matiere: mecanique-de-point-ipsa
+type_doc: cours
+titre: "Chapitre 1 — : introduction"
+sous_titre: "Cours"
+seance: 1
+niveau: [cpge, licence]
+sujets: []
+
+sections:
+  - titre: ""
+    contenu: |
+      
+    remarque: |
+      
+
+  - titre: "Équation de d'Alembert"
+    contenu: |
+      
+    figure:
+      ref: td1_ex1_corde_t0
+      legende: ""
+    aller_plus_loin:
+      master: |
+        
+
+  - titre: ""
+    contenu: |
+      
+    animation:
+      ref: anim_corde_onde
+      params: {mode: "onde_progressive", lam: 1.0, T: 1.0, xmax: 4}
+      formats: [gif, mp4, frames_pdf]

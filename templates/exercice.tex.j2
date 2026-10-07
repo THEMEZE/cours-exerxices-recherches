@@ -7,9 +7,15 @@
                     \nopagebreak
                     \BLOCK{if fig.scale}
                         \scalebox{\VAR{fig.scale}}{
-                    \BLOCK{endif}
+                            \input{\VAR{"figures/tikz/" + fig.ref + ".tex"}}
+                        }
+                    \BLOCK{elif fig.width or fig.height}
+                        \resizebox{\BLOCK{if fig.width}\VAR{fig.width|texdim_w}\BLOCK{else}!\BLOCK{endif}}{\BLOCK{if fig.height}\VAR{fig.height|texdim_h}\BLOCK{else}!\BLOCK{endif}}{
+                            \input{\VAR{"figures/tikz/" + fig.ref + ".tex"}}
+                        }
+                    \BLOCK{else}
                         \input{\VAR{"figures/tikz/" + fig.ref + ".tex"}}
-                    \BLOCK{if fig.scale}}\BLOCK{endif}
+                    \BLOCK{endif}
                     \BLOCK{if fig.legende}
                         \captionof{figure}{\VAR{fig.legende}}
                         \BLOCK{if fig.label}\label{\VAR{fig.label}}\BLOCK{endif}
@@ -20,9 +26,15 @@
                     \centering
                     \BLOCK{if fig.scale}
                         \scalebox{\VAR{fig.scale}}{
-                    \BLOCK{endif}
+                            \input{\VAR{"figures/tikz/" + fig.ref + ".tex"}}
+                        }
+                    \BLOCK{elif fig.width or fig.height}
+                        \resizebox{\BLOCK{if fig.width}\VAR{fig.width|texdim_w}\BLOCK{else}!\BLOCK{endif}}{\BLOCK{if fig.height}\VAR{fig.height|texdim_h}\BLOCK{else}!\BLOCK{endif}}{
+                            \input{\VAR{"figures/tikz/" + fig.ref + ".tex"}}
+                        }
+                    \BLOCK{else}
                         \input{\VAR{"figures/tikz/" + fig.ref + ".tex"}}
-                    \BLOCK{if fig.scale}}\BLOCK{endif}
+                    \BLOCK{endif}
                     \BLOCK{if fig.legende}
                         \caption{\VAR{fig.legende}}
                         \BLOCK{if fig.label}\label{\VAR{fig.label}}\BLOCK{endif}
@@ -96,6 +108,58 @@
 \BLOCK{endmacro}
 
 %{# ============================================================================== #}
+%{# MACROS NOUVELLES : accroche / outils mathématiques / liens autres disciplines   #}
+%{# Champs YAML spécifiques (différents de titre/texte) :                           #}
+%{#   accroche_point_cours_essentiel : titre, duree_introduction,                  #}
+%{#                                    question_d_accroche, texte                  #}
+%{#   outils_mathematiques           : titre, texte                                #}
+%{#   liens_autres_disciplines       : discipline, texte                           #}
+%{# ============================================================================== #}
+\BLOCK{macro render_accroche(show_flag, data, show_duree=true)}
+    \BLOCK{if show_flag and data}
+        \BLOCK{for item in data}
+            \begin{accrochecours}\BLOCK{if item.titre}[\VAR{item.titre}]\BLOCK{endif}
+                \BLOCK{if show_duree and item.duree_introduction}
+                    {\small\itshape\color{grayBrume}Durée de l'introduction : \VAR{item.duree_introduction}\par}
+                    \smallskip
+                \BLOCK{endif}
+                \BLOCK{if item.question_d_accroche}
+                    \textbf{\textsf{Question d'accroche.}}\par\smallskip
+                    {\itshape \VAR{item.question_d_accroche}\par}
+                    \medskip
+                \BLOCK{endif}
+                \VAR{item.texte if item.texte is defined else item}
+            \end{accrochecours}
+        \BLOCK{endfor}
+    \BLOCK{endif}
+\BLOCK{endmacro}
+
+\BLOCK{macro render_outils_maths(show_flag, data)}
+    \BLOCK{if show_flag and data}
+        \begin{outilsmathematiques}
+            \begin{itemize}\setlength{\itemsep}{4pt}
+            \BLOCK{for item in data}
+                \item \BLOCK{if item.titre}\textbf{\VAR{item.titre}}\par\BLOCK{endif}
+                    \VAR{item.texte if item.texte is defined else item}
+            \BLOCK{endfor}
+            \end{itemize}
+        \end{outilsmathematiques}
+    \BLOCK{endif}
+\BLOCK{endmacro}
+
+\BLOCK{macro render_liens_disciplines(show_flag, data)}
+    \BLOCK{if show_flag and data}
+        \begin{liensautresdisciplines}
+            \begin{itemize}\setlength{\itemsep}{4pt}
+            \BLOCK{for item in data}
+                \item \BLOCK{if item.discipline}\textbf{\VAR{item.discipline}}\ --- \ \BLOCK{endif}\VAR{item.texte if item.texte is defined else item}
+            \BLOCK{endfor}
+            \end{itemize}
+        \end{liensautresdisciplines}
+    \BLOCK{endif}
+\BLOCK{endmacro}
+
+%{# ============================================================================== #}
 %{# MACRO QUESTION PRINCIPALE                                                       #}
 %{# ============================================================================== #}
 \BLOCK{macro render_question(q)}
@@ -111,6 +175,7 @@
     \VAR{render_section(opts.show_objectifs_pedagogiques_enseignants, q.objectifs_pedagogiques_enseignants, 'objectifspedagogiquesenseignants')}
     \VAR{render_section(opts.show_point_cours, q.point_cours, 'pointcours')}
     \VAR{render_section(opts.show_coup_de_pouce, q.coup_de_pouce, 'coupdepouce')}
+    \VAR{render_section(opts.show_attention, q.attention, 'attention')}
     \VAR{render_section(opts.show_correction, q.correction, 'correction')}
     \VAR{render_section(opts.show_solution, q.solution, 'solutiondetaillee')}
     \VAR{render_section(opts.show_remarques_pedagogiques_ecueils_classiques, q.remarques_pedagogiques_ecueils_classiques, 'remarquespedagogiquesecueilsclassiques')}
@@ -274,6 +339,9 @@
 \BLOCK{endif}
 
 
+%{# Accroche + point de cours essentiel : introduit en tout début d'exercice (avant l'énoncé) #}
+\VAR{render_accroche(opts.show_accroche_point_cours_essentiel is not defined or opts.show_accroche_point_cours_essentiel, ex.accroche_point_cours_essentiel, opts.show_duree_introduction is not defined or opts.show_duree_introduction)}
+
 \VAR{ex.enonce_intro}
 
 \VAR{render_figure(ex)}
@@ -283,17 +351,23 @@
 \VAR{render_section(opts.show_objectifs_pedagogiques_etudiants, ex.objectifs_pedagogiques_etudiants, 'objectifspedagogiquesetudiants')}
 \VAR{render_section(opts.show_objectifs_pedagogiques_enseignants, ex.objectifs_pedagogiques_enseignants, 'objectifspedagogiquesenseignants')}
 \VAR{render_section(opts.show_point_cours, ex.point_cours, 'pointcours')}
+\VAR{render_outils_maths(opts.show_outils_mathematiques is not defined or opts.show_outils_mathematiques, ex.outils_mathematiques)}
 \VAR{render_section(opts.show_coup_de_pouce, ex.coup_de_pouce, 'coupdepouce')}
+\VAR{render_section(opts.show_attention, ex.attention, 'attention')}
 
 \BLOCK{if ex.questions}
 \begin{enumerate}[label=\arabic*.]
 \BLOCK{for item in ex.contenu}
     \BLOCK{if item.kind == 'intro'}
-        \VAR{item.enonce}
+        \item \VAR{item.enonce}
     \BLOCK{elif item.kind == 'single'}
         \item \VAR{render_question(item)}
     \BLOCK{elif item.kind == 'group'}
-        \item 
+        \BLOCK{if loop.previtem is defined and loop.previtem.kind == 'intro'}
+            \VAR{render_question(item)}
+        \BLOCK{else}
+            \item \VAR{render_question(item)}
+        \BLOCK{endif}
         \begin{enumerate}[label=\alph*)]
         \BLOCK{for sub in item.subquestions}
             \item \VAR{render_question(sub)}
@@ -307,6 +381,7 @@
 \VAR{render_section(opts.show_remarques_pedagogiques_ecueils_classiques, ex.remarques_pedagogiques_ecueils_classiques, 'remarquespedagogiquesecueilsclassiques')}
 \VAR{render_section(opts.show_remarques_pedagogiques_conseils_animation, ex.remarques_pedagogiques_conseils_animation, 'remarquespedagogiquesconseilsanimation')}
 \VAR{render_section(opts.show_bilan, ex.bilan, 'bilan')}
+\VAR{render_liens_disciplines(opts.show_liens_autres_disciplines is not defined or opts.show_liens_autres_disciplines, ex.liens_autres_disciplines)}
 \VAR{render_section(opts.aller_plus_loin_niveaux, ex.aller_plus_loin, 'allerplusloin', is_apl=true)}
 
 \BLOCK{if ex.overlay_tikz and opts.show_solution}

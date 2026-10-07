@@ -1,0 +1,13 @@
+id: td1
+titre: "Cinématique en coordonnées cartésiennes"
+chapitre_cours: "Chap. 1 — Cinématique du point matériel"
+seance: 1
+niveau_public: [cpge, licence]
+exercices_ordre:
+  - ex1_mouvement_2d
+  - ex2_balle_golf
+  - ex3_course_automobile
+  - ex4_poisson-archer
+  - ex3_mouvement_circulaire_cartesien
+  - ex4_derivee_vecteur_tournant
+  - ex5_equations_horaires

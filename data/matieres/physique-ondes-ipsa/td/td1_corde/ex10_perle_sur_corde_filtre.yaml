@@ -61,6 +61,53 @@ aller_plus_loin:
     texte: |
       Si la perle est reliée à un support par un ressort de raideur $K$ et un amortisseur, on obtient la résonance d'un absorbeur : pour $\omega=\sqrt{K/m}$ le déplacement de la perle devient nul en régime forcé, et l'onde est entièrement réfléchie. Principe des amortisseurs à masse accordée.
 
+accroche_point_cours_essentiel:
+  - titre: "Une perle sur la corde laisse-t-elle passer l'onde ?"
+    duree_introduction: "5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      On fixe une petite masse sur une corde tendue le long de laquelle on envoie une vibration. Les mouvements lents passent-ils ? Les mouvements rapides ? Pourquoi une masse très lourde se comporte-t-elle comme un point {\bf fixe} aux hautes fréquences et reste-t-elle presque transparente aux basses ? Savez-vous quel circuit électrique ce montage rappelle ?
+    texte: |
+      {\bf Idée clé : un défaut ponctuel impose deux conditions de raccordement.} En $x=0$ : (1) $y$ est continu ; (2) la perle obéit au PFD, $m\,\partial_t^2y=F\,[\partial_xy(0^+)-\partial_xy(0^-)]$ : la pente est discontinue. Avec $Z=\sqrt{F\mu}$ et $\beta=m\omega/(2Z)$ :
+      $$\underline\tau=\frac1{1+j\beta},\qquad\underline r=\frac{-j\beta}{1+j\beta},\qquad R=\frac{\beta^2}{1+\beta^2},\quad T=\frac1{1+\beta^2},\quad R+T=1.$$
+      La perle est un {\bf filtre passe-bas du premier ordre}, de constante de temps $\theta=m/(2Z)$ : elle transmet les basses fréquences et réfléchit les hautes.
+
+outils_mathematiques:
+  - titre: "Notation complexe : dérivées et conditions de raccordement"
+    texte: |
+      Pour $\underline y=\underline A\,e^{j(\omega t\mp kx)}$ : $\partial_t\to j\omega$, $\partial_x\to\mp jk$. L'onde réfléchie a $\partial_xy=+jk\,\underline r\,e^{j(\omega t+kx)}$, l'onde incidente $-jk\,e^{j(\omega t-kx)}$.
+  - titre: "Module et argument d'un complexe"
+    texte: |
+      $\underline\tau=\dfrac1{1+j\beta}=\dfrac{1-j\beta}{1+\beta^2}$ : $|\underline\tau|^2=\dfrac1{1+\beta^2}$ et $\arg\underline\tau=-\arctan\beta$. Multiplier numérateur et dénominateur par le conjugué est le réflexe pour passer en forme algébrique.
+  - titre: "Relation $kF=\\omega Z$"
+    texte: |
+      $kF=\dfrac\omega cF=\omega\sqrt{F\mu}=\omega Z$ : l'impédance remplace la tension et la célérité dans les raccordements. $[Z]=\mathrm{kg\,s^{-1}}$.
+  - titre: "Équation différentielle du premier ordre"
+    texte: |
+      $\theta\dot y_t+y_t=y_i$ : pour un échelon $Y_0$, $y_t=Y_0(1-e^{-t/\theta})$ ; la constante de temps $\theta=m/2Z=2{,}5$ ms donne la fréquence de coupure $f_c=1/(2\pi\theta)\approx63{,}7$ Hz.
+  - titre: "Dérivée d'une onde progressive $s(t-x/c)$"
+    texte: |
+      $\partial_x s(t-x/c)=-\dot s/c$ et $\partial_t s=\dot s$ : on passe d'une dérivée spatiale à une dérivée temporelle en divisant par $\mp c$, d'où $F/c=Z$ dans la condition (2).
+  - titre: "Limites et comportements asymptotiques"
+    texte: |
+      $\beta\to0$ : $\underline\tau\to1$, $\underline r\to0$ ; $\beta\to\infty$ : $\underline\tau\to0$, $\underline r\to-1$. Étudier les limites permet de vérifier un résultat sans calcul.
+
+liens_autres_disciplines:
+  - discipline: "Électrocinétique"
+    texte: |
+      $\underline\tau=1/(1+j\omega\theta)$ est exactement la fonction de transfert d'un filtre RC passe-bas avec $\theta=RC$ ; la fréquence de coupure à $-3$ dB est $1/(2\pi RC)$. La corde joue le rôle de la résistance ($2Z$) et la perle celui d'un condensateur d'inertie.
+  - discipline: "Acoustique"
+    texte: |
+      Un obstacle lourd laisse passer les sons graves (grande longueur d'onde) et arrête les aigus : c'est pourquoi on entend mieux les basses derrière un mur.
+  - discipline: "Génie civil"
+    texte: |
+      L'amortisseur à masse accordée (principe de la perle accrochée à un ressort) équipe les gratte-ciel et les ponts pour absorber les vibrations à une fréquence donnée (par exemple la tour Taipei 101).
+  - discipline: "Physique des matériaux et métamatériaux"
+    texte: |
+      Des résonateurs locaux régulièrement espacés dans un milieu ouvrent des bandes de fréquences interdites : c'est le principe des métamatériaux acoustiques et sismiques.
+  - discipline: "Optique"
+    texte: |
+      $R+T=1$ est la conservation de l'énergie à l'interface : réflexion et transmission d'une lame de verre, avec ici une perte nulle.
+
 questions:
   - id: q1
     enonce: |

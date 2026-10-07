@@ -1,0 +1,176 @@
+id: td3_ex2
+intitule: "Matrices 2D : double boucle vs meshgrid"
+td: td3
+facultatif: false
+seance: 3
+cours_rattache:
+  - onip.meshgrid
+  - onip.mesure_de_temps
+  - onip.vectorisation_2d
+
+metadonnees:
+  duree_estimee: "30 min"
+  difficulte: 2
+  type_exercice: "Application directe + mesure de performance"
+  indispensable: true
+
+enonce_intro: |
+  1. Générer une matrice 2D de taille 200 par 100 avec \texttt{np.ones()}. \\
+  2. Avec une double boucle, générer une matrice 2D (largeur 200, hauteur
+     100 ; $x$ de 0 à 199 pas 1 ; $y$ de 0 à 99 pas 1) dont les valeurs
+     décrivent une sinusoïde de période 10 dans le sens vertical. \\
+  3. Visualiser avec \texttt{plt.imshow()}. \\
+  4. Mesurer le temps d'exécution de cette fonction. \\
+  5. Générer cette même matrice avec un \texttt{meshgrid}. \\
+  6. Visualiser avec \texttt{plt.imshow()}. \\
+  7. Mesurer et comparer le temps d'exécution. Conclusion ?
+
+prerequis:
+  - titre: "Convention largeur/hauteur vs lignes/colonnes"
+    texte: |
+      Une matrice de « 200 par 100 » (largeur $\times$ hauteur, comme
+      énoncé à l'oral) a un \texttt{.shape} Numpy de $(100, 200)$ —
+      c'est-à-dire (hauteur, largeur), l'ordre inverse de celui énoncé.
+      Cette confusion est LE point le plus piégeux de l'exercice, à
+      illustrer avec un dessin.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Construire une grille de coordonnées avec meshgrid"
+    texte: |
+      Savoir utiliser \texttt{np.meshgrid} pour générer, sans boucle
+      explicite, deux matrices \texttt{X} et \texttt{Y} contenant
+      respectivement les coordonnées horizontales et verticales de chaque
+      point d'une grille 2D.
+  - titre: "Comparer une double boucle et une opération vectorisée en 2D"
+    texte: |
+      Vérifier que les deux approches donnent le même résultat
+      (\texttt{np.allclose}) et mesurer l'écart de performance.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Brique indispensable à l'exercice suivant"
+    texte: |
+      Ce résultat (meshgrid $\gg$ double boucle) prolonge directement la
+      comparaison liste/Numpy de la séance 2 (\texttt{td2\_ex3}), mais en
+      2D où l'écart devient encore plus flagrant. C'est la brique
+      indispensable à \texttt{td3\_ex3} (tramage) : ne pas avancer si la
+      notion de \texttt{meshgrid} n'est pas comprise par la majorité de la
+      salle.
+
+point_cours:
+  - titre: "Convention et double boucle (extrait commenté)"
+    texte: |
+      \begin{verbatim}
+      import time
+      import numpy as np
+      import matplotlib.pyplot as plt
+
+      # Convention utilisee dans tout l'exercice, coherente avec l'enonce
+      # ("largeur 200, hauteur 100") :
+      #   - largeur = nombre de COLONNES = axe horizontal = x
+      #   - hauteur = nombre de LIGNES   = axe vertical   = y
+      # Une matrice de largeur L et hauteur H a donc pour .shape (H, L).
+      largeur = 200   # colonnes (x : 0 a 199)
+      hauteur = 100   # lignes   (y : 0 a 99)
+      periode = 10
+
+      matrice_ones = np.ones((hauteur, largeur))   # .shape = (100, 200)
+
+      # "Sinusoide de periode 10 dans le sens VERTICAL" : la valeur ne
+      # depend que de y (coordonnee verticale), pas de x.
+      matrice_boucle = np.zeros((hauteur, largeur))
+
+      debut = time.perf_counter()
+      for y in range(hauteur):
+          valeur = np.sin(2 * np.pi * y / periode)
+          for x in range(largeur):
+              matrice_boucle[y, x] = valeur
+      fin = time.perf_counter()
+      duree_boucle = fin - debut
+
+      plt.figure(); plt.imshow(matrice_boucle); plt.colorbar(); plt.show()
+      \end{verbatim}
+  - titre: "Version meshgrid (vectorisée)"
+    texte: |
+      \begin{verbatim}
+      debut = time.perf_counter()
+      X, Y = np.meshgrid(np.arange(largeur), np.arange(hauteur))
+      matrice_meshgrid = np.sin(2 * np.pi * Y / periode)
+      fin = time.perf_counter()
+      duree_meshgrid = fin - debut
+
+      # Verification : les deux matrices doivent etre identiques.
+      print(np.allclose(matrice_boucle, matrice_meshgrid))   # True
+
+      print(f"Double boucle : {duree_boucle:.6f} s")
+      print(f"Meshgrid      : {duree_meshgrid:.6f} s")
+      \end{verbatim}
+      Temps mesurés (une exécution, ordre de grandeur) : double boucle
+      $\approx 0{,}0027$ s, meshgrid $\approx 0{,}0006$ s, soit environ
+      $\times 4$ plus rapide (le facteur croît fortement avec la taille de
+      la matrice).
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Confondre X et Y dans le calcul final"
+    texte: |
+      Inverser \texttt{X} et \texttt{Y} (\texttt{sin(2*pi*X/10)} au lieu de
+      \texttt{Y}) donne des bandes verticales au lieu d'horizontales, sans
+      provoquer d'erreur Python : bug silencieux, uniquement visible sur le
+      graphique. Comparer visuellement avec l'exemple donné dans le sujet,
+      et vérifier \texttt{np.allclose} entre la version boucle et la
+      version meshgrid.
+  - titre: "Confondre (largeur, hauteur) et (shape[0], shape[1])"
+    texte: |
+      Toujours vérifier \texttt{.shape} explicitement après création et le
+      comparer à ce qui est attendu.
+
+bilan:
+  - titre: "meshgrid généralise la vectorisation à 2D"
+    texte: |
+      \texttt{meshgrid} généralise à 2D le gain de vectorisation Numpy déjà
+      observé en 1D à la séance 2 : à privilégier systématiquement face à
+      une double boucle Python, l'écart de performance croissant fortement
+      avec la taille de la matrice.
+
+aller_plus_loin:
+  - niveau: ecole_ingenieur
+    titre: "Passage à l'échelle"
+    texte: |
+      Refaire la mesure sur une matrice 10 fois plus grande dans chaque
+      dimension (2000×1000) : le facteur d'accélération serait-il le
+      même qu'avec 200×100 ?
+
+questions:
+  - id: q1
+    enonce: |
+      Générer, avec une double boucle, une matrice (hauteur 100, largeur
+      200) dont les valeurs décrivent une sinusoïde de période 10 dans le
+      sens vertical, et l'afficher avec \texttt{plt.imshow()}.
+    coup_de_pouce: |
+      La valeur ne doit dépendre que de la coordonnée verticale $y$
+      (numéro de ligne), pas de $x$.
+    correction: "matrice[y, x] = sin(2*pi*y/10), boucle sur y puis x."
+    solution:
+      - titre: "Implémentation"
+        texte: |
+          Voir le code commenté ci-dessus. Le résultat est une image de
+          bandes horizontales (variation uniquement verticale), avec une
+          période de 10 pixels.
+  - id: q2
+    enonce: |
+      Générer la même matrice avec \texttt{np.meshgrid}, vérifier qu'elle
+      est identique à la version en double boucle, puis mesurer et
+      comparer les deux temps d'exécution.
+    coup_de_pouce: |
+      \texttt{X, Y = np.meshgrid(np.arange(largeur), np.arange(hauteur))}
+      donne deux matrices de forme (hauteur, largeur).
+    correction: "np.allclose(...) -> True ; meshgrid environ 4x plus rapide que la double boucle."
+    solution:
+      - titre: "Comparaison"
+        texte: |
+          Les deux matrices sont identiques (\texttt{np.allclose} renvoie
+          \texttt{True}). Le temps mesuré est d'environ $0{,}0027$ s pour
+          la double boucle contre $0{,}0006$ s pour la version meshgrid,
+          soit un facteur $\approx 4$ sur cette taille modeste — un écart
+          qui s'amplifie fortement sur de plus grandes matrices, exactement
+          comme observé en 1D à la séance 2 entre liste Python et vecteur
+          Numpy.

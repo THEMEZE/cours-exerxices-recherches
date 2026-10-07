@@ -130,7 +130,7 @@ questions:
       - titre: "Allure des courbes MRUA"
         texte: |
           \begin{itemize}[label=$\bullet$]
-            \item **$a_x(t)$** : Droite horizontale d'ordonnée égale à l'accélération constante.
-            \item **$v_x(t)$** : Droite affine de pente $a_x$ et d'ordonnée à l'origine $v_0$.
-            \item **$x(t)$** : Parabole orientée vers le haut ($a_x > 0$) ou vers le bas ($a_x < 0$), avec une tangente en $t=0$ de pente égale à $v_0$.
+            \item {\bf $a_x(t)$} : Droite horizontale d'ordonnée égale à l'accélération constante.
+            \item {\bf $v_x(t)$} : Droite affine de pente $a_x$ et d'ordonnée à l'origine $v_0$.
+            \item {\bf$x(t)$} : Parabole orientée vers le haut ($a_x > 0$) ou vers le bas ($a_x < 0$), avec une tangente en $t=0$ de pente égale à $v_0$.
           \end{itemize}

@@ -1,0 +1,176 @@
+id: td2_ex3
+intitule: "Génération d'un vecteur avec Numpy : vectorisation"
+td: td2
+facultatif: false
+seance: 2
+cours_rattache:
+  - onip.numpy_vecteurs
+  - onip.mesure_de_temps
+  - onip.vectorisation
+
+metadonnees:
+  duree_estimee: "15 min"
+  difficulte: 1
+  type_exercice: "Application directe"
+  indispensable: true
+
+enonce_intro: |
+  1. Importer la bibliothèque Numpy. \\
+  2. Générer un vecteur \texttt{V\_test} de 10 000 nombres réels répartis
+     entre 0 et 1 avec Numpy. \\
+  3. Afficher la taille de ce vecteur. \\
+  4. Afficher le dernier élément de ce vecteur. \\
+  5. Mesurer le temps d'exécution de cette génération. \\
+  6. Comparer à la mesure de l'exercice précédent. Que concluez-vous ?
+
+prerequis:
+  - titre: "np.linspace"
+    texte: |
+      \texttt{np.linspace(start, stop, num)} génère \texttt{num} valeurs
+      régulièrement réparties entre \texttt{start} et \texttt{stop}
+      (bornes incluses) : c'est l'équivalent Numpy, vectorisé, de la
+      fonction \texttt{get\_list} écrite à la main à l'exercice précédent.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Comprendre pourquoi Numpy est plus rapide"
+    texte: |
+      Formuler explicitement la raison de l'écart de performance :
+      vectorisation, exécution en code C compilé, absence de boucle
+      Python interprétée élément par élément.
+  - titre: "Utiliser .size plutôt que len()"
+    texte: |
+      Préférer \texttt{.size} (nombre total d'éléments) à \texttt{len()}
+      sur un tableau Numpy : \texttt{.size} reste correct en 2D et plus,
+      contrairement à \texttt{len()} qui ne renverrait que la taille de la
+      première dimension.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Résultat clé du bloc"
+    texte: |
+      Ce constat (Numpy vectorisé bat une boucle Python) sera réutilisé et
+      amplifié en séance 3 (comparaison boucle / meshgrid) : insister sur
+      le principe général plutôt que sur la valeur numérique précise du
+      facteur d'accélération, qui varie beaucoup d'une machine à l'autre.
+
+point_cours:
+  - titre: "Solution commentée"
+    texte: |
+      \begin{verbatim}
+      import time
+      import numpy as np   # alias quasi universel
+
+      V_test = np.linspace(0, 1, 10_000)
+
+      print("Taille de V_test (.size) :", V_test.size)
+      print("Forme de V_test (.shape) :", V_test.shape)
+      print("Dernier element de V_test :", V_test[-1])
+
+      debut = time.perf_counter()
+      V_test_mesure = np.linspace(0, 1, 10_000)
+      fin = time.perf_counter()
+      duree_numpy = fin - debut
+      print(f"Temps d'execution (Numpy, 10000 points) : {duree_numpy:.6f} s")
+      \end{verbatim}
+  - titre: "Comparaison et conclusion"
+    texte: |
+      \begin{verbatim}
+      print(f"Rappel - temps liste Python (boucle)  : {duree_liste_python:.6f} s")
+      print(f"Temps vecteur Numpy (vectorise)        : {duree_numpy:.6f} s")
+      print(f"Facteur d'acceleration approximatif    : "
+            f"x{duree_liste_python / duree_numpy:.0f}")
+      \end{verbatim}
+      Mesure typique observée (une exécution) : liste Python
+      $\approx 0{,}00067$ s, Numpy $\approx 0{,}00007$ s, soit un facteur
+      $\approx \times 10$ (peut varier de $\times 5$ à $\times 100$ selon
+      la machine). Conclusion attendue : Numpy est plus rapide car
+      vectorisé (code C, pas de boucle Python explicite, pas d'overhead
+      d'interpréteur à chaque élément).
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Conclure sans expliquer"
+    texte: |
+      Se contenter de « Numpy est plus rapide » sans expliquer pourquoi :
+      faire formuler explicitement vectorisation, code compilé C, absence
+      de boucle interprétée.
+  - titre: "Comparaison biaisée"
+    texte: |
+      Vérifier que les deux mesures (liste et Numpy) portent strictement
+      sur la même tâche : même $N$, même intervalle, aucune opération
+      annexe incluse dans le chronométrage.
+  - titre: "Généraliser trop vite"
+    texte: |
+      Pour de très petits $N$ (quelques dizaines de points), Numpy peut
+      être plus lent que la liste Python à cause du coût fixe de création
+      de l'objet \texttt{ndarray} : ne pas généraliser « Numpy toujours
+      plus rapide » sans préciser « à partir d'une certaine taille ».
+
+bilan:
+  - titre: "Vectorisation Numpy"
+    texte: |
+      Préférer les opérations Numpy vectorisées aux boucles Python
+      explicites dès que l'on manipule de grands volumes de données
+      numériques : le gain de performance devient net à partir de
+      quelques milliers d'éléments.
+
+aller_plus_loin:
+  - niveau: ecole_ingenieur
+    titre: "Facteur d'accélération selon la taille"
+    texte: |
+      Refaire la comparaison avec $N=10$ puis $N=1\,000\,000$ : le facteur
+      d'accélération serait-il le même ?
+
+questions:
+  - id: q1
+    enonce: |
+      Générer \texttt{V\_test = np.linspace(0, 1, 10\_000)}. Afficher sa
+      taille (\texttt{.size}), sa forme (\texttt{.shape}) et son dernier
+      élément.
+    coup_de_pouce: |
+      \texttt{.size} donne le nombre total d'éléments ; \texttt{.shape}
+      donne la forme du tableau sous forme de tuple.
+    correction: "\\texttt{V\\_test.size} = 10000 ; \\texttt{V\\_test.shape} = (10000,) ; \\texttt{V\\_test[-1]} = 1.0."
+    solution:
+      - titre: "Résultat"
+        texte: |
+          \texttt{np.linspace(0, 1, 10\_000)} génère 10 000 valeurs entre 0
+          et 1 (bornes incluses), donc \texttt{.size} vaut $10\,000$,
+          \texttt{.shape} vaut $(10\,000,)$ et le dernier élément vaut
+          exactement $1{,}0$.
+  - id: q2
+    enonce: |
+      Mesurer le temps d'exécution de cette génération et le comparer à
+      celui de la fonction \texttt{get\_list} de l'exercice précédent.
+      Conclure.
+    coup_de_pouce: |
+      Recalculez si besoin \texttt{duree\_liste\_python} dans le même
+      script, pour comparer sur la même exécution.
+    correction: "Numpy est nettement plus rapide (souvent x10 à x100) : vectorisation, code C compilé."
+    solution:
+      - titre: "Comparaison"
+        texte: |
+          Sur une exécution typique : liste Python $\approx 0{,}00067$ s,
+          vecteur Numpy $\approx 0{,}00007$ s, soit un facteur d'environ
+          $\times 10$ (le facteur exact varie fortement d'une machine à
+          l'autre, parfois de $\times 5$ à $\times 100$). La cause : une
+          boucle Python réévalue chaque itération une par une (overhead de
+          l'interpréteur CPython à chaque tour), alors que
+          \texttt{np.linspace} est implémenté en C et exécute le calcul de
+          façon vectorisée, en une seule opération sur tout le tableau.
+  - id: q3
+    enonce: |
+      Le facteur d'accélération serait-il le même avec $N=10$ ou
+      $N=1\,000\,000$ ?
+    coup_de_pouce: |
+      Un tableau Numpy a un coût fixe de création, indépendant de $N$.
+    correction: "Non : pour un petit N le coût fixe de création domine, Numpy peut même être plus lent."
+    solution:
+      - titre: "Discussion"
+        texte: |
+          Pour un très petit $N$ (quelques dizaines de points), le coût
+          fixe de création de l'objet \texttt{ndarray} peut dominer le
+          calcul lui-même : Numpy peut alors se révéler plus lent qu'une
+          simple liste Python. À l'inverse, pour un très grand $N$ (par
+          ex. $1\,000\,000$), le coût par élément de la boucle Python
+          domine largement le coût fixe de Numpy, et le facteur
+          d'accélération devient encore plus favorable à Numpy qu'avec
+          $N=10\,000$.

@@ -1,0 +1,98 @@
+id: td1_ex4
+intitule: "Dérivée d'un vecteur unitaire tournant"
+td: td1
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - cinematique.base_polaire
+  - cinematique.vecteurs_unitaires_tournants
+  - cinematique.coordonnees_cartesiennes
+
+metadonnees:
+  duree_estimee: "20 min"
+  difficulte: 2
+  type_exercice: "Cours actif / Fondamental"
+  indispensable: true
+
+enonce_intro: |
+  On se place dans l'espace muni d'un repère cartésien $Oxyz$ et d'une base cartésienne $(\vec\imath,\vec\jmath,\vec k)$.
+  Dans le plan $Oxy$, on considère deux vecteurs unitaires perpendiculaires $\vec u$ et $\vec v$, placés en $O$, tels que
+  $(\vec u,\vec v,\vec k)$ forme un trièdre direct. On note $\theta$ l'angle entre $\vec u$ et l'axe $(Ox)$.
+  L'objectif est d'établir l'expression des dérivées $\mathrm{d}\vec u/\mathrm{d}\theta$ et $\mathrm{d}\vec v/\mathrm{d}\theta$.
+
+prerequis:
+  - titre: "Décomposition d'un vecteur unitaire tournant sur une base fixe"
+    texte: |
+      Tout vecteur unitaire du plan $Oxy$ faisant un angle $\theta$ avec $Ox$ peut s'écrire $\cos\theta\,\vec\imath+\sin\theta\,\vec\jmath$ : c'est la définition même du cosinus et du sinus comme projections orthogonales sur les axes.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Établir les formules fondamentales de la base polaire"
+    texte: |
+      Savoir redémontrer, à partir de la seule décomposition cartésienne, que $\mathrm{d}\vec u/\mathrm{d}\theta = \vec v$ et $\mathrm{d}\vec v/\mathrm{d}\theta = -\vec u$ : ce résultat, une fois acquis, sera systématiquement réutilisé (sans redémonstration) dès que l'on travaillera en coordonnées polaires ou cylindriques, avec $\vec u = \vec u_r$ et $\vec v=\vec u_\theta$.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Exercice fondateur pour la suite du cours"
+    texte: |
+      Ce court exercice est un prérequis technique incontournable avant d'aborder la cinématique en coordonnées polaires : toute la mécanique des mouvements circulaires ou plus généraux en base $(\vec u_r,\vec u_\theta)$ repose sur ces deux dérivées. Il est important que les étudiants comprennent que ce résultat est {\bf purement géométrique} (il ne dépend d'aucune loi horaire particulière $\theta(t)$) : c'est la brique de base qui sera ensuite combinée à la règle de dérivation en chaîne ($\mathrm{d}\vec u/\mathrm{d}t = \dot\theta\,\mathrm{d}\vec u/\mathrm{d}\theta$) pour traiter des mouvements quelconques.
+
+point_cours:
+  - titre: "Trièdre direct"
+    texte: |
+      Un trièdre $(\vec u,\vec v,\vec w)$ est dit direct s'il se déduit du trièdre de référence $(\vec\imath,\vec\jmath,\vec k)$ par une rotation (règle de la main droite / du tire-bouchon) : concrètement, $\vec w = \vec u\wedge\vec v$. Ici, cela impose que $\vec v$ se déduise de $\vec u$ par une rotation de $+90°$ dans le plan $Oxy$ (et non $-90°$).
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Erreur de signe sur $\\vec v$"
+    texte: |
+      Une erreur très fréquente consiste à écrire $\vec v = \sin\theta\,\vec\imath - \cos\theta\,\vec\jmath$ (rotation de $-90°$) au lieu de $-\sin\theta\,\vec\imath+\cos\theta\,\vec\jmath$ (rotation de $+90°$), ce qui inverserait ensuite le signe de $\mathrm{d}\vec v/\mathrm{d}\theta$. Toujours vérifier la condition de trièdre direct en testant $\theta=0$ : on doit retrouver $\vec u=\vec\imath$ et $\vec v=\vec\jmath$ (et non $-\vec\jmath$).
+
+bilan:
+  - titre: "Les deux formules à retenir par cœur"
+    texte: |
+      $$\frac{\mathrm{d}\vec u}{\mathrm{d}\theta} = \vec v, \qquad \frac{\mathrm{d}\vec v}{\mathrm{d}\theta} = -\vec u.$$
+      Ces deux relations, purement géométriques, seront reprises telles quelles (avec $\vec u=\vec u_r$, $\vec v=\vec u_\theta$) dans toute la suite du cours sur les coordonnées polaires, cylindriques et sphériques.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Généralisation : dérivée d'un vecteur de norme constante"
+    texte: |
+      On peut montrer plus généralement que pour tout vecteur $\vec w(t)$ de norme constante, $\vec w\cdot\mathrm{d}\vec w/\mathrm{d}t = 0$ (la dérivée est orthogonale au vecteur lui-même) : c'est cette propriété générale qui explique, sans calcul explicite en coordonnées, pourquoi $\mathrm{d}\vec u/\mathrm{d}\theta$ est nécessairement colinéaire à $\vec v$ (l'unique direction orthogonale à $\vec u$ dans le plan).
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{enumerate}[label=(\alph*)]
+          \item Sur un graphique, représenter le repère $(Oxy)$ et les vecteurs de la base cartésienne $\vec\imath$ et $\vec\jmath$.
+          \item Représenter les vecteurs $\vec u$ et $\vec v$ ainsi que l'angle $\theta$ dans le repère $(O,\vec\imath,\vec\jmath)$.
+      \end{enumerate}
+    coup_de_pouce: |
+      $\vec v$ doit être en avance de $90°$ sur $\vec u$ dans le sens trigonométrique, pour que $(\vec u,\vec v,\vec k)$ soit direct.
+    correction: "Schéma : $\\vec u$ à l'angle $\\theta$ de $Ox$, $\\vec v$ à l'angle $\\theta+90°$ de $Ox$."
+    solution:
+      - titre: "Représentation graphique"
+        texte: |
+          On trace le repère $(O,\vec\imath,\vec\jmath)$ orthonormé, puis le vecteur unitaire $\vec u$ faisant l'angle $\theta$ (compté positivement dans le sens trigonométrique) avec $\vec\imath$. Le vecteur $\vec v$, unitaire et perpendiculaire à $\vec u$, est tracé de sorte que $(\vec u, \vec v)$ tourne dans le même sens que $(\vec\imath,\vec\jmath)$ (condition de trièdre direct) : $\vec v$ est donc obtenu en faisant tourner $\vec u$ de $+90°$, il fait l'angle $\theta+90°$ avec $\vec\imath$.
+
+  - id: q2
+    enonce: |
+      \begin{enumerate}[label=(\alph*)]
+          \item[(c)] Exprimer les vecteurs $\vec u$ et $\vec v$ dans la base cartésienne $(\vec\imath,\vec\jmath)$ en fonction de $\theta$ (composantes suivant $Ox$ et $Oy$).
+          \item[(d)] Calculer les dérivées des vecteurs $\vec u$ et $\vec v$ par rapport à $\theta$.
+      \end{enumerate}.
+    coup_de_pouce: |
+      Pour (c), projetez géométriquement $\vec u$ et $\vec v$ sur $\vec\imath$ et $\vec\jmath$. Pour (d), dérivez composante par composante puisque $(\vec\imath,\vec\jmath)$ est fixe.
+    correction: "$\\vec u=\\cos\\theta\\,\\vec\\imath+\\sin\\theta\\,\\vec\\jmath$, $\\vec v=-\\sin\\theta\\,\\vec\\imath+\\cos\\theta\\,\\vec\\jmath$ ; $\\mathrm{d}\\vec u/\\mathrm{d}\\theta=\\vec v$, $\\mathrm{d}\\vec v/\\mathrm{d}\\theta=-\\vec u$."
+    solution:
+      - titre: "(c) Décomposition cartésienne de $\\vec u$ et $\\vec v$"
+        texte: |
+          Le vecteur $\vec u$, unitaire, faisant l'angle $\theta$ avec $\vec\imath$, a pour projections orthogonales sur $\vec\imath$ et $\vec\jmath$ respectivement $\cos\theta$ et $\sin\theta$ (définition du cosinus et du sinus) :
+          $$\boxed{\vec u = \cos\theta\,\vec\imath + \sin\theta\,\vec\jmath}.$$
+          Le vecteur $\vec v$ fait l'angle $\theta+90°$ avec $\vec\imath$, donc ses projections sont $\cos(\theta+90°)=-\sin\theta$ et $\sin(\theta+90°)=\cos\theta$ :
+          $$\boxed{\vec v = -\sin\theta\,\vec\imath + \cos\theta\,\vec\jmath}.$$
+          On vérifie la cohérence à $\theta=0$ : $\vec u=\vec\imath$ et $\vec v=\vec\jmath$, ce qui correspond bien au trièdre de référence $(\vec\imath,\vec\jmath,\vec k)$, direct.
+      - titre: "(d) Dérivées par rapport à $\\theta$"
+        texte: |
+          La base $(\vec\imath,\vec\jmath)$ étant fixe, on dérive directement chaque composante par rapport à $\theta$ :
+          $$\frac{\mathrm{d}\vec u}{\mathrm{d}\theta} = -\sin\theta\,\vec\imath + \cos\theta\,\vec\jmath = \boxed{\vec v}.$$
+          $$\frac{\mathrm{d}\vec v}{\mathrm{d}\theta} = -\cos\theta\,\vec\imath - \sin\theta\,\vec\jmath = -\big(\cos\theta\,\vec\imath+\sin\theta\,\vec\jmath\big) = \boxed{-\vec u}.$$
+          On retiendra ces deux résultats fondamentaux, qui seront systématiquement réutilisés (avec $\vec u\to\vec u_r$ et $\vec v\to\vec u_\theta$) dès l'introduction des coordonnées polaires : dériver un vecteur unitaire tournant par rapport à son angle revient à lui faire subir une rotation de $+90°$.

@@ -1,0 +1,238 @@
+id: td3_ex4
+intitule: "Si vous vous ennuyez... galerie de motifs avec meshgrid"
+td: td3
+facultatif: true
+seance: 3
+cours_rattache:
+  - onip.meshgrid
+  - onip.numpy_vectorisation
+
+metadonnees:
+  duree_estimee: "20-30 min"
+  difficulte: 2
+  type_exercice: "Exercice facultatif, créativité et prise en main de meshgrid"
+  indispensable: false
+
+enonce_intro: |
+  Si vous avez terminé en avance : écrire des fonctions qui utilisent
+  \texttt{np.meshgrid} pour générer une image représentant : \\
+  1. un disque ; \\
+  2. des anneaux concentriques ; \\
+  3. un damier ; \\
+  4. une mire radiale rectangulaire (secteurs alternés noir/blanc) ; \\
+  5. une mire radiale sinusoïdale ; \\
+  6. une gaussienne en 2D ; \\
+  7. une spirale ; \\
+  8. une étoile.
+  Afficher chaque image avec \texttt{plt.imshow} en niveaux de gris.
+
+prerequis:
+  - titre: "Coordonnées cartésiennes et polaires"
+    texte: |
+      Tous ces motifs s'obtiennent en calculant une formule sur la grille
+      $(X, Y)$ fournie par \texttt{meshgrid}, sans aucune boucle. Pour les
+      motifs circulaires, on passe en coordonnées polaires :
+      $r = \sqrt{X^2 + Y^2}$ et $\theta = \mathrm{atan2}(Y, X)$.
+      Un motif « tout ou rien » s'obtient par un test booléen converti en
+      \texttt{float} ; un motif progressif par un cosinus ou une exponentielle.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Penser en tableaux entiers"
+    texte: |
+      Traduire une forme géométrique en une condition ou une formule
+      appliquée à toute la grille d'un seul coup (vectorisation).
+  - titre: "Passer du cartésien au polaire"
+    texte: |
+      Utiliser $r$ et $\theta$ pour décrire des motifs à symétrie
+      circulaire ou angulaire.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Exercice de remplissage"
+    texte: |
+      Facultatif : à proposer aux étudiants les plus rapides. Les motifs
+      sont réinvestissables plus tard comme images de test pour la FFT 2D
+      (\texttt{td3\_ex3}) ou le tramage.
+
+point_cours:
+  - titre: "Grille centrée et coordonnées polaires"
+    texte: |
+      \begin{verbatim}
+      import numpy as np
+      import matplotlib.pyplot as plt
+
+      def grille(M, N):
+          """Grille centree : X, Y de forme (N, M), origine au centre."""
+          x = np.arange(M) - (M - 1) / 2
+          y = np.arange(N) - (N - 1) / 2
+          return np.meshgrid(x, y)
+
+      # Coordonnees polaires, utiles pour les motifs circulaires :
+      #   r     = np.sqrt(X**2 + Y**2)
+      #   theta = np.arctan2(Y, X)      # angle dans ]-pi, pi]
+      \end{verbatim}
+  - titre: "Disque, anneaux, damier"
+    texte: |
+      \begin{verbatim}
+      def disque(M, N, R):
+          X, Y = grille(M, N)
+          return (X**2 + Y**2 <= R**2).astype(float)
+
+      def anneaux(M, N, largeur):
+          X, Y = grille(M, N)
+          r = np.sqrt(X**2 + Y**2)
+          # partie entiere de r/largeur : pair -> blanc, impair -> noir
+          return (np.floor(r / largeur) % 2 == 0).astype(float)
+
+      def damier(M, N, c):
+          X, Y = grille(M, N)
+          # parite de la somme des indices de case
+          return ((np.floor(X / c) + np.floor(Y / c)) % 2 == 0).astype(float)
+      \end{verbatim}
+  - titre: "Mires radiales"
+    texte: |
+      \begin{verbatim}
+      def mire_radiale_rect(M, N, n_secteurs):
+          """n_secteurs secteurs blancs (etoile de Siemens)."""
+          X, Y = grille(M, N)
+          theta = np.arctan2(Y, X)
+          return (np.floor(theta * n_secteurs / np.pi) % 2 == 0).astype(float)
+
+      def mire_radiale_sin(M, N, n_periodes):
+          X, Y = grille(M, N)
+          theta = np.arctan2(Y, X)
+          return 0.5 * (1 + np.cos(n_periodes * theta))
+      \end{verbatim}
+  - titre: "Gaussienne 2D et spirale"
+    texte: |
+      \begin{verbatim}
+      def gaussienne(M, N, sigma):
+          X, Y = grille(M, N)
+          return np.exp(-(X**2 + Y**2) / (2 * sigma**2))
+
+      def spirale(M, N, n_bras, pas):
+          X, Y = grille(M, N)
+          r = np.sqrt(X**2 + Y**2)
+          theta = np.arctan2(Y, X)
+          # la phase depend a la fois de l'angle et du rayon
+          return 0.5 * (1 + np.cos(n_bras * theta - 2 * np.pi * r / pas))
+      \end{verbatim}
+  - titre: "Étoile et affichage de la galerie"
+    texte: |
+      \begin{verbatim}
+      def etoile(M, N, R, n_branches, creux=0.3):
+          X, Y = grille(M, N)
+          r = np.sqrt(X**2 + Y**2)
+          theta = np.arctan2(Y, X)
+          # rayon limite module par l'angle : maximal (= R) au bout de chaque
+          # branche, minimal (= creux*R) entre deux branches
+          r_max = R * (creux + (1 - creux)
+                       * (1 - np.abs(np.sin(n_branches * theta / 2))))
+          return (r <= r_max).astype(float)
+
+
+      M, N = 300, 300
+      images = {
+          "disque": disque(M, N, 100),
+          "anneaux": anneaux(M, N, 15),
+          "damier": damier(M, N, 30),
+          "mire radiale rect.": mire_radiale_rect(M, N, 12),
+          "mire radiale sin.": mire_radiale_sin(M, N, 8),
+          "gaussienne": gaussienne(M, N, 40),
+          "spirale": spirale(M, N, 3, 60),
+          "etoile": etoile(M, N, 130, 5),
+      }
+      fig, axes = plt.subplots(2, 4, figsize=(12, 6))
+      for ax, (nom, img) in zip(axes.ravel(), images.items()):
+          ax.imshow(img, cmap="gray")
+          ax.set_title(nom)
+          ax.axis("off")
+      plt.tight_layout()
+      plt.show()
+      \end{verbatim}
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Origine de la grille dans un coin"
+    texte: |
+      Sans recentrage (\texttt{- (M - 1) / 2}), les cercles sont centrés
+      sur le coin haut-gauche de l'image : penser à centrer la grille.
+  - titre: "Oublier de convertir le booléen"
+    texte: |
+      Un test comme \texttt{X**2 + Y**2 <= R**2} renvoie un tableau de
+      booléens ; \texttt{.astype(float)} évite des surprises lors des
+      calculs et de l'affichage.
+  - titre: "Discontinuité de l'angle"
+    texte: |
+      \texttt{arctan2} saute de $\pi$ à $-\pi$ sur l'axe des abscisses
+      négatives : pour un nombre entier de périodes, le motif reste
+      cohérent, mais pas avec un nombre non entier.
+
+bilan:
+  - titre: "Une seule idée, plusieurs motifs"
+    texte: |
+      Toutes les images de la galerie reposent sur la même recette :
+      \texttt{meshgrid}, éventuellement conversion en $(r, \theta)$, puis
+      une formule vectorisée. Changer la formule change la forme.
+
+aller_plus_loin:
+  - niveau: ecole_ingenieur
+    titre: "FFT 2D des motifs"
+    texte: |
+      Calculer la FFT 2D du damier, des anneaux et de la mire radiale
+      (comme dans \texttt{td3\_ex3}) et interpréter les spectres obtenus.
+  - niveau: master
+    titre: "Combiner les motifs"
+    texte: |
+      Multiplier une mire par une gaussienne (fenêtrage) ou additionner
+      plusieurs motifs, et observer l'effet sur leur spectre.
+
+questions:
+  - id: q1
+    enonce: |
+      Écrire une fonction \texttt{grille(M, N)} renvoyant une grille
+      centrée, puis \texttt{disque}, \texttt{anneaux} et \texttt{damier}.
+    coup_de_pouce: |
+      Un disque est l'ensemble des points tels que $X^2 + Y^2 \leq R^2$.
+      Pour les anneaux et le damier, utiliser la partie entière
+      (\texttt{np.floor}) et la parité (\texttt{\% 2}).
+    correction: "Disque : X**2 + Y**2 <= R**2 ; anneaux : floor(r/largeur) pair ; damier : floor(X/c) + floor(Y/c) pair."
+    solution:
+      - titre: "Implémentation"
+        texte: |
+          Voir le code commenté ci-dessus.
+  - id: q2
+    enonce: |
+      Écrire \texttt{mire\_radiale\_rect} et \texttt{mire\_radiale\_sin} :
+      secteurs alternés noir/blanc, puis variation sinusoïdale selon l'angle.
+    coup_de_pouce: |
+      Le motif ne dépend que de l'angle $\theta = \mathrm{atan2}(Y, X)$,
+      pas du rayon.
+    correction: "Rect : floor(theta*n/pi) pair ; sinusoidale : 0.5*(1 + cos(n*theta))."
+    solution:
+      - titre: "Implémentation"
+        texte: |
+          Voir le code ci-dessus. Le motif est constant le long de chaque
+          demi-droite issue du centre.
+  - id: q3
+    enonce: |
+      Écrire \texttt{gaussienne} et \texttt{spirale}.
+    coup_de_pouce: |
+      Gaussienne : $e^{-r^2/(2\sigma^2)}$. Spirale : un cosinus dont la
+      phase dépend à la fois de $\theta$ et de $r$.
+    correction: "Gaussienne : exp(-r**2/(2*sigma**2)) ; spirale : 0.5*(1 + cos(n*theta - 2*pi*r/pas))."
+    solution:
+      - titre: "Implémentation"
+        texte: |
+          Voir le code ci-dessus. Pour la spirale, le terme $n\theta$ donne
+          le nombre de bras et le terme en $r$ les enroule.
+  - id: q4
+    enonce: |
+      Écrire \texttt{etoile(M, N, R, n\_branches)}.
+    coup_de_pouce: |
+      Définir un rayon limite qui dépend de l'angle, puis garder les points
+      dont le rayon est inférieur à cette limite.
+    correction: "Garder les points tels que r <= R*(creux + (1-creux)*(1 - abs(sin(n*theta/2))))."
+    solution:
+      - titre: "Implémentation"
+        texte: |
+          Voir le code ci-dessus. Le rayon limite varie avec $\theta$ et
+          présente $n$ maxima : un par branche.

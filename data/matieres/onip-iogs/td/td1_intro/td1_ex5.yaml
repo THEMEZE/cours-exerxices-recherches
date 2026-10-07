@@ -1,0 +1,239 @@
+id: td1_ex5
+intitule: "Régression linéaire bruitée et effets de bord"
+td: td1
+facultatif: false
+seance: 1
+cours_rattache:
+  - intro.regression_lineaire
+  - intro.mutation_et_aliasing
+  - intro.matplotlib_sous_figures
+
+metadonnees:
+  duree_estimee: "30 min"
+  difficulte: 2
+  type_exercice: "Débogage + amélioration de la qualité du code"
+  indispensable: true
+
+enonce_intro: |
+  On fournit \texttt{linear\_regression\_and\_noise0.py}, qui ajoute du
+  bruit à des données idéales, effectue une régression linéaire avec
+  scikit-learn, puis affiche le résultat pour sept niveaux de bruit
+  croissants. Le script ne plante pas, mais son graphique est trompeur :
+  le bruit affiché semble s'accumuler d'un niveau à l'autre.
+
+prerequis:
+  - titre: "Régression linéaire avec scikit-learn"
+    texte: |
+      \texttt{sklearn.linear\_model.LinearRegression} ajuste une droite
+      $y = ax + b$ au sens des moindres carrés à partir de données
+      \texttt{x} (mises en forme en colonne avec
+      \texttt{x.reshape(-1, 1)}) et \texttt{y}. Les attributs
+      \texttt{model.coef\_[0]} et \texttt{model.intercept\_} donnent
+      respectivement la pente et l'ordonnée à l'origine estimées.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Repérer un effet de bord discret"
+    texte: |
+      Comprendre pourquoi \texttt{y += noise} modifie un tableau
+      \texttt{y} partagé entre plusieurs appels de fonction, et pourquoi
+      cela fausse la comparaison entre niveaux de bruit successifs.
+  - titre: "Distinguer données et prédiction"
+    texte: |
+      Ne pas confondre les données bruitées affichées et les valeurs
+      prédites par le modèle de régression.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Un effet de bord plus subtil que le tri à bulles"
+    texte: |
+      Contrairement à \texttt{bubble\_sort} (\texttt{td1\_ex3}), où la
+      mutation en place était le résultat recherché, ici elle est un
+      \emph{bug} : \texttt{y} désigne les données idéales, partagées entre
+      tous les appels de la boucle sur les niveaux de bruit, et
+      \texttt{y += noise} l'altère de façon cumulative et invisible.
+
+point_cours:
+  - titre: "Code original fourni (extrait)"
+    texte: |
+      \begin{verbatim}
+      def plot_linear_regression_with_noise(x, y, noise_level):
+          # Add noise to the y data
+          noise = np.random.normal(0, noise_level, y.shape)
+          y += noise                      # <-- mutation en place de y !
+
+          x_reshaped = x.reshape(-1, 1)
+          model = LinearRegression()
+          model.fit(x_reshaped, y)
+
+          y = model.predict(x_reshaped)   # <-- y devient la PREDICTION
+
+          slope = model.coef_[0]
+          intercept = model.intercept_
+
+          plt.figure()
+          plt.scatter(x, y, color='blue', label='Noisy data ...')  # trace la prediction, pas le bruit !
+          plt.plot(x, y, color='red', linewidth=2, label='Linear regression')
+          ...
+
+      x = np.linspace(0, 10, 20)
+      y = 2.5 * x - 4.2
+
+      noise_levels = [0.5, 1, 2, 3, 5, 7, 10]
+      for noise_level in noise_levels:
+          plot_linear_regression_with_noise(x, y, noise_level)
+      \end{verbatim}
+  - titre: "Deux bugs liés à la même variable y"
+    texte: |
+      \begin{itemize}[label=$\bullet$]
+        \item \texttt{y += noise} modifie \texttt{y} \emph{en place}. Comme
+          \texttt{y} est défini une seule fois avant la boucle et
+          réutilisé à chaque appel, le bruit s'accumule d'un niveau de
+          bruit au suivant : le niveau de bruit affiché au 7\up{e} appel
+          contient en réalité la somme des sept bruits successifs.
+        \item Ensuite, \texttt{y = model.predict(x\_reshaped)}
+          \textbf{réaffecte} \texttt{y} à la prédiction du modèle : le
+          \texttt{plt.scatter(x, y, ...)} sensé afficher les « données
+          bruitées » affiche en fait la droite de régression elle-même,
+          rendue comme un nuage de points confondu avec la droite tracée
+          juste après.
+      \end{itemize}
+  - titre: "Code corrigé et documenté (extrait)"
+    texte: |
+      \begin{verbatim}
+      def plot_linear_regression_with_noise(x, y, noise_level, ax):
+          """Ajoute du bruit, effectue une regression, affiche le resultat."""
+
+          # Bruit genere a chaque appel, jamais reassigne dans y directement.
+          noise = np.random.normal(0, noise_level, y.shape)
+          y_noisy = y + noise             # nouvelle variable, y reste intact
+
+          x_reshaped = x.reshape(-1, 1)
+          model = LinearRegression()
+          model.fit(x_reshaped, y_noisy)
+
+          y_predicted = model.predict(x_reshaped)   # nom distinct de y_noisy
+
+          slope = model.coef_[0]
+          intercept = model.intercept_
+
+          ax.scatter(x, y_noisy, label=f"Bruit = {noise_level}")
+          ax.plot(x, y_predicted, linewidth=2, label="Regression")
+          ...
+
+      np.random.seed(0)
+      x = np.linspace(0, 10, 20)
+      y = 2.5 * x - 4.2          # jamais modifie ensuite
+
+      fig, axes = plt.subplots(2, 3, figsize=(12, 7))
+      axes = axes.ravel()
+      for ax, noise_level in zip(axes, noise_levels):
+          plot_linear_regression_with_noise(x, y, noise_level, ax)
+      \end{verbatim}
+      Amélioration supplémentaire : chaque niveau de bruit est affiché sur
+      un sous-graphique dédié (\texttt{plt.subplots(2, 3)}) plutôt que sur
+      sept figures séparées — plus lisible pour comparer les sept cas.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Confondre += et une nouvelle affectation"
+    texte: |
+      \texttt{y += noise} n'est pas équivalent, pour un tableau Numpy, à
+      \texttt{y = y + noise} du point de vue des effets de bord : les deux
+      calculent la même valeur, mais \texttt{y += noise} modifie l'objet
+      \texttt{y} existant en place (si \texttt{y} est un \texttt{ndarray}),
+      alors qu'une variable \texttt{y\_noisy = y + noise} crée un nouvel
+      objet et laisse \texttt{y} intact.
+  - titre: "Ne pas remarquer l'accumulation du bruit"
+    texte: |
+      Le script original ne plante pas et produit sept figures d'aspect
+      plausible : l'accumulation du bruit n'est visible qu'en comparant
+      soigneusement les niveaux affichés à l'écran (par ex. le nuage de
+      points du niveau « 0.5 » ne doit contenir que le bruit de ce
+      niveau, pas la somme de tous les niveaux précédents).
+
+bilan:
+  - titre: "Isoler les données d'entrée des résultats calculés"
+    texte: |
+      Ne jamais réutiliser le même nom de variable pour désigner
+      successivement une donnée d'entrée puis un résultat calculé à partir
+      d'elle (ici \texttt{y}, tour à tour données idéales, données
+      bruitées, puis prédiction) : cela rend les effets de bord invisibles
+      à la lecture du code.
+
+aller_plus_loin:
+  - niveau: ecole_ingenieur
+    titre: "Étude d'incertitude par répétition"
+    texte: |
+      Pour un niveau de bruit donné, répéter $N$ fois la régression
+      (nouvelles données bruitées à chaque fois) et calculer la moyenne et
+      l'écart-type de la pente estimée. Présenter le résultat pour les six
+      niveaux de bruit sous forme de tableau — une première approche,
+      sans la nommer, d'une étude d'incertitude par répétition de type
+      Monte-Carlo.
+
+questions:
+  - id: q1
+    enonce: |
+      Exécuter \texttt{linear\_regression\_and\_noise0.py}. Comparer
+      visuellement l'allure du nuage de points affiché pour le niveau de
+      bruit « 0.5 » et celui affiché pour le niveau « 10 ». Que
+      remarquez-vous d'anormal si l'on observe successivement toutes les
+      figures produites ?
+    coup_de_pouce: |
+      La variable \texttt{y} est-elle réinitialisée à chaque appel de la
+      fonction, ou réutilisée telle qu'elle a été laissée par l'appel
+      précédent ?
+    correction: "Le bruit affiché à chaque niveau contient en réalité la somme de tous les bruits précédents."
+    solution:
+      - titre: "Diagnostic de l'accumulation"
+        texte: |
+          La ligne \texttt{y += noise} modifie \texttt{y} en place. Comme
+          la même variable \texttt{y}, définie une seule fois avant la
+          boucle, est passée à chaque appel de
+          \texttt{plot\_linear\_regression\_with\_noise}, chaque appel
+          ajoute son propre bruit à un \texttt{y} déjà modifié par les
+          appels précédents : le bruit s'accumule d'un niveau au suivant,
+          au lieu de repartir des données idéales à chaque fois.
+  - id: q2
+    enonce: |
+      Le graphique légendé « Noisy data » affiche-t-il vraiment les
+      données bruitées, ou autre chose ? Justifier en suivant la
+      succession des affectations à la variable \texttt{y} dans la
+      fonction.
+    coup_de_pouce: |
+      Repérez toutes les lignes où \texttt{y} apparaît à gauche du signe
+      \texttt{=} (ou de \texttt{+=}) à l'intérieur de la fonction.
+    correction: "y est réaffecté à model.predict(...) avant le tracé : le scatter affiche la prédiction, pas le bruit."
+    solution:
+      - titre: "Traçage des affectations"
+        texte: |
+          Dans la fonction originale, \texttt{y} désigne successivement :
+          (1) les données idéales bruitées (après \texttt{y += noise}),
+          puis (2) les valeurs prédites par le modèle (après
+          \texttt{y = model.predict(x\_reshaped)}). Le
+          \texttt{plt.scatter(x, y, ..., label='Noisy data ...')} est
+          exécuté \emph{après} cette seconde affectation : il affiche donc
+          la prédiction du modèle, superposée avec la droite de régression
+          elle-même tracée juste après — le nuage « bruité » légendé n'a
+          en réalité plus rien de bruité.
+  - id: q3
+    enonce: |
+      Corriger les deux problèmes en introduisant des noms de variables
+      distincts pour les données idéales, les données bruitées et la
+      prédiction du modèle. Vérifier que chaque sous-figure ne contient
+      plus que le bruit correspondant à son propre niveau.
+    coup_de_pouce: |
+      Une seule règle suffit : ne jamais réaffecter (ni modifier en place)
+      une variable qui doit encore servir de référence pour les appels
+      suivants.
+    correction: 
+      Introduire \texttt{y\_noisy = y + noise et y\_predicted = model.predict(...)} sans jamais modifier y.
+    solution:
+      - titre: "Correction"
+        texte: |
+          En remplaçant \texttt{y += noise} par
+          \texttt{y\_noisy = y + noise} (nouvelle variable, \texttt{y}
+          inchangé) et \texttt{y = model.predict(...)} par
+          \texttt{y\_predicted = model.predict(...)}, chaque appel repart
+          bien des données idéales d'origine : les sept sous-figures
+          affichent alors chacune un bruit indépendant, cohérent avec son
+          propre niveau, et un nuage de points réellement bruité distinct
+          de la droite de régression.

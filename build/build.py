@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 """
 Moteur de génération des TD.
 
@@ -7,6 +8,9 @@ Usage :
     python3 build/build.py td1_enonce       # ne génère que cette cible
     python3 build/build.py --no-pdf         # génère les .tex seulement (pas de pdflatex)
 
+    python3 build/build.py                       # sans log
+    python3 build/build.py td1_enonce --log      # erreurs + avertissements seulement
+    python3 build/build.py td1_enonce --full-log # log complet
 Principe :
     data/*.yaml (une vérité par exercice)
         -> normalisation Python (groupement des questions a/b/c, numérotation)
@@ -22,6 +26,11 @@ from pathlib import Path
 
 import yaml
 from jinja2 import Environment, FileSystemLoader
+
+import threading
+import time
+
+
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
@@ -42,6 +51,15 @@ def load_manifest():
 def save_manifest(manifest):
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     MANIFEST_PATH.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+
+def to_texdim(value, base="\\linewidth"):
+    """Convertit un nombre (fraction de page, ex: 0.7) en dimension LaTeX
+    ('0.700\\linewidth'), ou renvoie tel quel si c'est déjà une unité ('5cm')."""
+    if value is None:
+        return None
+    if isinstance(value, (int, float)):
+        return f"{value:.3f}{base}"
+    return str(value)  # déjà une unité explicite, ex: "8cm", "0.5\\textheight"
 
 # Rendu Jinja2 (délimiteurs adaptés à LaTeX pour éviter les conflits avec {})
 # ----------------------------------------------------------------------
@@ -64,6 +82,8 @@ def make_env():
     # Injecter la date et l'heure courantes
     env.globals["now"] = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
     env.filters["texid"] = lambda s: str(s).replace("_", r"\_")
+    env.filters["texdim_w"] = lambda v: to_texdim(v, base="\\linewidth")
+    env.filters["texdim_h"] = lambda v: to_texdim(v, base="\\textheight")
     return env
 
 
@@ -158,11 +178,118 @@ def compile_pdf(tex_path: Path):
         return dest
     return None
 
+# ----------------------------------------------------------------------
+# Compilation
+# ----------------------------------------------------------------------
+
+GREEN = "\033[1;32m"
+YELLOW = "\033[1;33m"
+RED = "\033[1;31m"
+BLUE = "\033[1;34m"
+MAGENTA = "\033[1;35m"
+CYAN = "\033[1;36m"
+RESET = "\033[0m"
+
+
+def format_time(total_seconds: float) -> str:
+    total_seconds = int(total_seconds)
+    h, rem = divmod(total_seconds, 3600)
+    m, s = divmod(rem, 60)
+    if h > 0:
+        return f"{h:02d}h {m:02d}m {s:02d}s"
+    return f"{m:02d}m {s:02d}s"
+
+
+def format_size(size: int) -> str:
+    if size >= 1024 ** 3:
+        return f"{size / 1024 ** 3:.2f} Go"
+    if size >= 1024 ** 2:
+        return f"{size / 1024 ** 2:.2f} Mo"
+    if size >= 1024:
+        return f"{size / 1024:.2f} Ko"
+    return f"{size} o"
+
+
+def extract_log_issues(log: str, include_warnings: bool = True) -> list[str]:
+    """Extrait les erreurs LaTeX (lignes '!' + 3 lignes de contexte)
+    et, si demandé, les lignes contenant 'warning'."""
+    lines = log.splitlines()
+    out = []
+    for i, line in enumerate(lines):
+        if line.startswith("!") or "Fatal error" in line:
+            out.append(f"{RED}{line}{RESET}")
+            out.extend(f"   {l}" for l in lines[i + 1:i + 4])
+            out.append("")
+        elif include_warnings and "warning" in line.lower():
+            out.append(f"{YELLOW}{line}{RESET}")
+    return out
+
+
+def compile_pdf(tex_path: Path) -> dict:
+    start = time.time()
+    stop = threading.Event()
+
+    def chrono():
+        while not stop.is_set():
+            print(f"\r   ⏱️  Temps compilation : {format_time(time.time() - start)}",
+                  end="", flush=True)
+            stop.wait(1)
+
+    timer = threading.Thread(target=chrono, daemon=True)
+    timer.start()
+
+    log = ""
+    for _ in range(2):
+        res = subprocess.run(
+            [
+                "pdflatex",
+                "-interaction=nonstopmode",
+                "-output-directory", str(tex_path.parent),
+                str(tex_path),
+            ],
+            cwd=ROOT,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            errors="replace",
+            check=False,
+        )
+        log += res.stdout
+
+    stop.set()
+    timer.join()
+    print("\r" + " " * 60 + "\r", end="")  # efface la ligne du chrono
+
+    duration = time.time() - start
+    pdf_path = tex_path.with_suffix(".pdf")
+
+    dest = None
+    size = None
+    if pdf_path.exists():
+        OUT_DIR.mkdir(parents=True, exist_ok=True)
+        dest = OUT_DIR / pdf_path.name
+        shutil.copy(pdf_path, dest)
+        size = dest.stat().st_size
+
+    # Analyse du log (même logique que compile_all_tex.sh)
+    if dest is None or "Fatal error" in log or "! LaTeX Error" in log:
+        status = "fail"
+    elif "warning" in log.lower():
+        status = "warning"
+    else:
+        status = "success"
+
+    return {"pdf": dest, "status": status, "duration": duration, "size": size, "log": log}
+
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("names", nargs="*", help="noms de cibles à générer (défaut : toutes)")
     parser.add_argument("--no-pdf", action="store_true", help="ne pas lancer pdflatex")
+    parser.add_argument("--log", action="store_true",
+                        help="afficher les erreurs et avertissements extraits du log pdflatex")
+    parser.add_argument("--full-log", action="store_true",
+                        help="afficher le log pdflatex complet")
     args = parser.parse_args()
 
     config = yaml.safe_load((ROOT / "build" / "config.yaml").read_text(encoding="utf-8"))
@@ -174,35 +301,74 @@ def main():
     env = make_env()
     manifest = load_manifest()
 
+    counts = {"success": 0, "warning": 0, "fail": 0}
+    global_start = time.time()
+
+    print(f"{BLUE}🔹 Génération et compilation des cibles...{RESET}\n")
+
     for target in targets:
-        print(f"-> Génération de {target['name']} ...")
-        tex = render_target(env, target, config) # <-- Passer config ici
+        print(f"{CYAN}🔄 Génération de{RESET} {target['name']}")
+        tex = render_target(env, target, config)
         tex_path = GEN_DIR / f"{target['name']}.tex"
         tex_path.write_text(tex, encoding="utf-8")
-        print(f"   .tex écrit : {tex_path}")
+        print(f"   📝 .tex écrit : {tex_path}")
 
-        if not args.no_pdf:
-            pdf = compile_pdf(tex_path)
-            if pdf:
-                print(f"   ✅ PDF généré : {pdf}")
-                # Manifeste (matiere, type_doc, doc) -> nom de fichier PDF réel,
-                # consommé par web/export_markdown.py pour ne JAMAIS avoir à
-                # deviner un nom de fichier par convention (bug réel trouvé et
-                # corrigé : un document 'cours' dont le nom de cible ne suivait
-                # pas la convention <id>_<suffixe> ne recevait aucun lien PDF).
-                manifest[target["name"]] = {
-                    "matiere": target["matiere"],
-                    "type_doc": target.get("type_doc", "td"),
-                    "doc": target.get("doc", target.get("td")),
-                    "pdf": pdf.name,
-                }
-            else:
-                print(f"   ❌ Échec de compilation pour {target['name']} "
-                      f"(voir {tex_path.with_suffix('.log')})")
+        if args.no_pdf:
+            print()
+            continue
+
+        result = compile_pdf(tex_path)
+        status = result["status"]
+        color = {"success": GREEN, "warning": YELLOW, "fail": RED}[status]
+        pdf_size = format_size(result["size"]) if result["size"] is not None else "PDF non généré"
+
+        if status == "fail":
+            print(f"   ❌ {RED}Erreur de compilation{RESET} : {target['name']}")
+            print(f"   🔎 Voir {tex_path.with_suffix('.log')}")
+        elif status == "warning":
+            print(f"   ⚠️  {YELLOW}Compilation avec avertissements{RESET} : {target['name']}")
+        else:
+            print(f"   ✅ {GREEN}Compilation réussie{RESET} : {target['name']}")
+
+        print(f"   ⏱️  Temps : {color}{format_time(result['duration'])}{RESET}")
+        print(f"   📄 Taille PDF : {color}{pdf_size}{RESET}")
+        if args.full_log:
+            print(f"   {MAGENTA}──── Log complet ────{RESET}")
+            print(result["log"])
+        elif args.log and status != "success":
+            issues = extract_log_issues(result["log"])
+            if issues:
+                print(f"   {MAGENTA}──── Erreurs / avertissements ────{RESET}")
+                print("\n".join(f"   {l}" for l in issues))
+        elif status == "fail":
+            print(f"   💡 Relancez avec {CYAN}--log{RESET} pour voir les erreurs.")
+        print()
+
+        counts[status] += 1
+
+        if result["pdf"] is not None and status != "fail":
+            manifest[target["name"]] = {
+                "matiere": target["matiere"],
+                "type_doc": target.get("type_doc", "td"),
+                "doc": target.get("doc", target.get("td")),
+                "pdf": result["pdf"].name,
+            }
+
+    global_duration = time.time() - global_start
 
     if not args.no_pdf:
         save_manifest(manifest)
-        print(f"-> Manifeste PDF écrit : {MANIFEST_PATH}")
+        print(f"-> Manifeste PDF écrit : {MANIFEST_PATH}\n")
+
+        print(f"{MAGENTA}──────────── Résumé ────────────{RESET}")
+        print(f"✅ {GREEN}Réussies : {counts['success']}{RESET}")
+        print(f"⚠️  {YELLOW}Avec avertissements : {counts['warning']}{RESET}")
+        print(f"❌ {RED}Échouées : {counts['fail']}{RESET}")
+        print()
+        print(f"🏁 {BLUE}Temps total : {format_time(global_duration)}{RESET}")
+        print(f"{MAGENTA}────────────────────────────────{RESET}")
+
+    return 1 if counts["fail"] else 0
 
 
 if __name__ == "__main__":

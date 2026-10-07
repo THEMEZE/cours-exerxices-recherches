@@ -1,0 +1,176 @@
+id: tpO_tp5
+intitule: "Polarisation : écrans, lunettes de pilote, reflets et plastiques sous contrainte"
+tp: tpO
+facultatif: false
+seance: 1
+cours_rattache:
+  - ondes.polarisation
+  - ondes.loi_de_malus
+  - ondes.incidence_de_brewster
+
+metadonnees:
+  duree_estimee: "2 h"
+  difficulte: 3 # Sur une échelle de 1 à 5
+  type_exercice: "TP expérimental visuel"
+  indispensable: false
+  public_cible: [lycee, cpge, licence, ecole_aviation]
+
+enonce_intro: |
+  Les lunettes de soleil polarisantes éliminent les reflets sur l'eau ou sur une piste mouillée, mais elles peuvent rendre un écran LCD noir quand on incline la tête. Dans un cockpit, cela pose la question de la lisibilité des instruments. Ce TP étudie la polarisation de la lumière avec trois objets du quotidien : un écran, une paire de lunettes polarisantes, et des morceaux de plastique transparent.
+
+  On vérifie la loi de Malus, on explique les reflets par l'angle de Brewster, on observe les couleurs dues à la contrainte dans des plastiques (visibles aussi dans certains pare-brise), et on discute l'orientation de la polarisation des écrans avec des lunettes de pilote.
+
+securite:
+  - titre: "Soleil"
+    texte: |
+      Ne jamais regarder le Soleil à travers un polariseur : les lunettes polarisantes ne protègent pas la vue contre le Soleil direct.
+
+materiel:
+  - "Écran LCD blanc (téléphone, tablette, ordinateur), luminosité maximale"
+  - "Lunettes de soleil polarisantes ou film polarisant, et un second polariseur"
+  - "Capteur de luminosité du smartphone (application phyphox, lumière) ou luxmètre"
+  - "Rapporteur ou disque gradué, ruban adhésif"
+  - "Objets plastiques transparents : boîtier de CD, règle en plexiglas, ruban adhésif transparent, sac plastique, couvercle de boîte, cuillère en plastique"
+  - "Bac d'eau ou plateau brillant, lampe ou fenêtre pour observer les reflets"
+
+manipulation:
+  - titre: "1. Loi de Malus"
+    texte: |
+      Poser le capteur de lumière sur l'écran LCD blanc, recouvert du polariseur ou des lunettes. Tourner le polariseur par pas de $15^\circ$ de $0^\circ$ à $180^\circ$ et relever l'éclairement. Repérer l'angle où l'intensité est maximale et minimale.
+  - titre: "2. Reflets et angle de Brewster"
+    texte: |
+      Observer le reflet d'une lampe sur l'eau (ou sur un carrelage brillant) à travers le polariseur pour différents angles d'observation (de $20^\circ$ à $80^\circ$ par rapport à la verticale). Repérer l'angle de meilleure extinction du reflet et la direction du polariseur à ce moment.
+  - titre: "3. Plastiques sous contrainte"
+    texte: |
+      Placer un objet en plastique transparent entre deux polariseurs croisés, devant l'écran blanc. Déformer légèrement l'objet (plier la règle, presser une cuillère en plastique) et observer les franges colorées. Superposer plusieurs couches de ruban adhésif.
+  - titre: "4. Orientation de l'écran"
+    texte: |
+      Pour chaque appareil disponible (téléphone, tablette, ordinateur, écran de montre), déterminer l'angle du polariseur (lunettes) pour lequel l'écran est éteint, en mode portrait et en mode paysage.
+
+donnees_exemple: |
+  Loi de Malus (éclairement relatif en pourcentage) : $0^\circ$ : $100$ ; $30^\circ$ : $76$ ; $45^\circ$ : $51$ ; $60^\circ$ : $27$ ; $90^\circ$ : $3$.
+
+prerequis:
+  - titre: "Notions"
+    texte: |
+      Onde transversale : polarisation rectiligne d'une onde plane (on retrouve la notion de polarisation des ondes sur la corde, TD1 exercice 0), loi de Malus $I=I_0\cos^2\theta$, lois de Snell-Descartes.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Manipuler une onde transversale"
+    texte: |
+      Comprendre qu'un polariseur sélectionne une direction du champ, que la réflexion polarise la lumière, et que la contrainte mécanique rend certains plastiques biréfringents.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "La polarisation est une preuve de plus que la lumière est une onde transversale"
+    texte: |
+      Comme sur une corde qu'on fait passer à travers une grille verticale : seule l'oscillation verticale passe. Contrairement aux ondes sonores, la lumière est polarisée.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Dire que le polariseur « filtre les couleurs »"
+    texte: |
+      Un polariseur idéal ne change pas les couleurs, il ne transmet que $50\ \%$ d'une lumière naturelle. Les couleurs des plastiques sous contrainte viennent de la biréfringence, pas du polariseur.
+  - titre: "Angle de Brewster et incidence normale"
+    texte: |
+      L'angle de Brewster est mesuré par rapport à la normale (verticale), pas par rapport à la surface ; le rayon réfléchi et le rayon transmis sont alors perpendiculaires.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Effet spectaculaire"
+    texte: |
+      Placer un rapporteur en plastique ou un boîtier de CD entre deux polariseurs croisés sur l'écran d'un téléphone : les fissures et contraintes du moulage deviennent visibles en couleurs.
+
+lien_aviation:
+  - titre: "Lunettes polarisantes dans le cockpit"
+    texte: |
+      Les lunettes polarisantes suppriment les reflets sur l'eau et sur les pistes mouillées, mais peuvent rendre certains écrans LCD (instruments de bord, tablettes de navigation) illisibles selon l'orientation de la tête ou de l'écran. Beaucoup de constructeurs ajoutent une lame quart d'onde pour éviter cet effet. Certains pare-brise en plexiglas montrent des motifs colorés à travers des lunettes polarisantes : ce sont les contraintes internes, sans danger, et non un défaut.
+
+bilan:
+  - titre: "Résultats à retenir"
+    texte: |
+      Loi de Malus : $I=I_0\cos^2\theta$. Angle de Brewster : $\tan\theta_B=n$ ; la lumière réfléchie est alors polarisée parallèlement à la surface. Retard de biréfringence : $\Gamma=\Delta n\,e$ ; une lame entre polariseurs croisés transmet $\sin^2(2\alpha)\sin^2(\pi\Gamma/\lambda)$.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Polarisations circulaire et elliptique"
+    texte: |
+      Une lame quart d'onde convertit la polarisation rectiligne en polarisation circulaire. Un écran avec lame quart d'onde reste lisible à travers un polariseur quel que soit l'angle : l'intensité est divisée par $2$ mais ne dépend pas de l'angle.
+  - niveau: master
+    titre: "Formules de Fresnel"
+    texte: |
+      Les coefficients de réflexion $r_s$ et $r_p$ donnent la réflectivité en fonction de l'angle ; $r_p=0$ à l'angle de Brewster.
+
+questions:
+  - id: q1
+    enonce: |
+      Loi de Malus. Vérifier que les données suivent la loi $I=I_{\max}\cos^2\theta+I_{\min}\sin^2\theta$ avec $I_{\max}=100$ et $I_{\min}=3$. Calculer le rapport d'extinction $I_{\max}/I_{\min}$. Que vaudrait $I$ à $45^\circ$ pour un polariseur idéal ?
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $\theta=30^\circ$ : $75+0{,}75=75{,}8$ ; $45^\circ$ : $50+1{,}5=51{,}5$ ; $60^\circ$ : $25+2{,}25=27{,}3$. Bon accord avec les données. Rapport d'extinction $\approx33$. Polariseur idéal à $45^\circ$ : $50$.
+    solution:
+      - titre: "Calcul"
+        texte: |
+          $\cos^230^\circ=0{,}75$ et $\sin^230^\circ=0{,}25$ donc $I=100\times0{,}75+3\times0{,}25=75{,}75$ ; à $45^\circ$ : $51{,}5$ ; à $60^\circ$ : $27{,}25$. Les données sont compatibles (écart $<1$ unité).
+          Le rapport d'extinction est $\dfrac{100}{3}=33$ : un polariseur réel n'est pas parfait, il laisse passer $3\ \%$ dans la direction croisée. Ce défaut est fréquent dans les films peu coûteux.
+          Le seul ajustement significatif est l'angle où l'intensité est maximale : il donne la direction de polarisation de l'écran.
+
+  - id: q2
+    enonce: |
+      Reflets. (a) Établir que le rayon réfléchi est polarisé totalement lorsque l'angle d'incidence vérifie $\tan\theta_B=n$ (rayon réfléchi $\perp$ rayon réfracté). (b) Calculer $\theta_B$ pour l'eau ($n=1{,}33$) et le verre ($n=1{,}50$). (c) À quelle hauteur au-dessus de l'horizon est le Soleil quand son reflet sur un lac est complètement polarisé ? (d) Dans quelle direction faut-il orienter les lunettes polarisantes pour éliminer ce reflet ?
+    coup_de_pouce:
+      - titre: "Condition"
+        texte: |
+          À l'incidence de Brewster, $\theta_i+\theta_t=90^\circ$. Utiliser $\sin\theta_i=n\sin\theta_t$ et $\cos\theta_i=\sin\theta_t$.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          (a) $\sin\theta_i=n\sin\theta_t=n\cos\theta_i$ donc $\tan\theta_i=n$. (b) Eau : $53{,}1^\circ$ ; verre : $56{,}3^\circ$. (c) hauteur du Soleil $=90^\circ-53{,}1^\circ=36{,}9^\circ$. (d) Le reflet est polarisé horizontalement : les lunettes polarisantes ont leur axe de transmission vertical.
+    solution:
+      - titre: "Démonstration"
+        texte: |
+          (a) Le champ réfléchi vient du rayonnement des dipôles du milieu, oscillant dans la direction du champ transmis. Un dipôle ne rayonne pas dans sa propre direction : si le rayon réfracté est perpendiculaire au rayon réfléchi, la composante $p$ (dans le plan d'incidence) du champ transmis ne peut pas rayonner dans la direction réfléchie. Il ne reste que la composante $s$ (perpendiculaire au plan d'incidence, donc parallèle à la surface). Condition : $\theta_i+\theta_t=90^\circ$, donc $\sin\theta_t=\cos\theta_i$ et $\sin\theta_i=n\cos\theta_i$, soit $\tan\theta_B=n$.
+          (b) $\theta_B=\arctan1{,}33=53{,}1^\circ$ ; $\arctan1{,}50=56{,}3^\circ$.
+          (c) L'angle d'incidence est mesuré par rapport à la normale : hauteur $=90^\circ-53{,}1^\circ=36{,}9^\circ$. Un pilote qui regarde le reflet du Soleil sur un lac ou une piste mouillée quand le Soleil est à $37^\circ$ voit un reflet fortement polarisé.
+          (d) La lumière réfléchie est polarisée parallèlement à la surface (horizontalement). Les lunettes polarisantes ont donc leur axe de transmission vertical, pour éteindre la direction horizontale.
+          À l'incidence de Brewster, la réflectivité de la composante $s$ vaut $\dfrac{\sin^2(\theta_i-\theta_t)}{\sin^2(\theta_i+\theta_t)}=\sin^2(16{,}1^\circ)=7{,}7\ \%$ : le reflet d'une lumière naturelle est $3{,}9\ \%$ de l'intensité et il est entièrement supprimé par un polariseur idéal.
+
+  - id: q3
+    enonce: |
+      Biréfringence sous contrainte. Une plaque de plexiglas d'épaisseur $e=10\ \text{mm}$ subit une contrainte $\sigma=5\ \text{MPa}$. Le retard optique vaut $\Gamma=C\,\sigma\,e$ avec $C=4{,}5\times10^{-12}\ \text{Pa}^{-1}$ (coefficient photoélastique du PMMA). (a) Calculer $\Gamma$. (b) Entre polariseurs croisés, l'intensité transmise pour une lame orientée à $45^\circ$ est $I=I_0\sin^2\left(\dfrac{\pi\Gamma}{\lambda}\right)$ : calculer $I/I_0$ pour $\lambda=450$, $550$ et $650\ \text{nm}$. Quelle est la couleur de la plaque ? (c) Pourquoi voit-on des franges dans les zones où la contrainte varie ?
+    correction:
+      - titre: "Résultat"
+        texte: |
+          (a) $\Gamma=4{,}5\times10^{-12}\times5\times10^{6}\times0{,}010=2{,}25\times10^{-7}\ \text{m}=225\ \text{nm}$. (b) $I/I_0=\sin^2(\pi\Gamma/\lambda)=1{,}00\ ;\ 0{,}92\ ;\ 0{,}79$ pour $450$, $550$ et $650\ \text{nm}$ : plaque blanche légèrement bleutée. (c) Chaque zone de contrainte différente donne un retard différent, donc une couleur différente ; les lignes de même contrainte forment les franges (isochromes).
+    solution:
+      - titre: "Calcul"
+        texte: |
+          (a) $\Gamma=C\sigma e=4{,}5\times10^{-12}\times5\times10^{6}\times10^{-2}=2{,}25\times10^{-7}\ \text{m}$. (b) À $450\ \text{nm}$ : $\sin^2\left(\dfrac{\pi\times225}{450}\right)=\sin^2\dfrac{\pi}{2}=1$ ; à $550\ \text{nm}$ : $\pi\times225/550=1{,}285\ \text{rad}$, $\sin^2=0{,}92$ ; à $650\ \text{nm}$ : $\pi\times225/650=1{,}087\ \text{rad}$, $\sin^2=0{,}79$. Les trois couleurs sont à peu près également transmises avec un léger avantage au bleu : la plaque est blanc-bleuté. Pour une contrainte de $10\ \text{MPa}$ ($\Gamma=450\ \text{nm}$), le bleu ($450\ \text{nm}$) serait éteint et le rouge transmis : les couleurs changent nettement.
+          (c) La contrainte n'est pas uniforme : autour des points de fixation des hublots ou des trous, elle varie fortement ; à chaque valeur de $\sigma$ correspond une couleur, d'où des franges colorées (isochromes) qui cartographient la contrainte. Les ingénieurs utilisent la photoélasticimétrie pour visualiser les contraintes dans des maquettes.
+
+  - id: q4
+    enonce: |
+      Orientation des écrans. Dans le TP, un téléphone en mode portrait est noir à travers les lunettes quand celles-ci sont tournées de $90^\circ$ par rapport à la verticale, et lisible en paysage. (a) Que peut-on dire de la direction de polarisation de l'écran ? (b) Un pilote porte des lunettes polarisantes (axe vertical) et lit une tablette dont la polarisation est verticale ou horizontale selon l'orientation : que se passe-t-il ? (c) Comment une lame quart d'onde placée devant l'écran résout-elle le problème ?
+    correction:
+      - titre: "Résultat"
+        texte: |
+          (a) L'écran émet une lumière polarisée linéairement dans une direction fixe par rapport à l'appareil. (b) Si la polarisation est verticale, l'écran est lisible ; si elle est horizontale (tablette tournée de $90^\circ$), l'écran paraît noir. En inclinant la tête, l'intensité varie en $\cos^2$. (c) La lame quart d'onde à $45^\circ$ transforme la polarisation rectiligne en polarisation circulaire : l'intensité transmise par le polariseur est $I_0/2$ quelle que soit l'orientation.
+    solution:
+      - titre: "Discussion"
+        texte: |
+          (a) Le rétroéclairage traverse un polariseur avant la couche de cristaux liquides et un autre analyseur avant la sortie : la lumière de l'écran est donc polarisée linéairement dans la direction de l'analyseur (verticale, horizontale ou à $45^\circ$ selon les constructeurs).
+          (b) Une lumière polarisée à l'angle $\alpha$ par rapport à l'axe des lunettes est transmise avec l'intensité $\cos^2\alpha$ : $100\ \%$ pour $\alpha=0$, $50\ \%$ à $45^\circ$, $0$ à $90^\circ$. Les pilotes signalent parfois des instruments « qui disparaissent » lorsqu'ils inclinent la tête.
+          (c) Une lame quart d'onde d'axe à $45^\circ$ de la polarisation transforme la lumière en polarisation circulaire, qui a une intensité transmise $I_0/2$ pour tout angle du polariseur. Certains constructeurs ajoutent cette lame dans les écrans de cockpit et dans les tablettes conçues pour être lues avec des lunettes polarisantes.
+          On peut aussi tester les vitres et les pare-brise : le plexiglas moulé montre des motifs colorés à travers les lunettes.
+
+  - id: q5
+    enonce: |
+      (*) Ciel polarisé. On regarde le ciel à $90^\circ$ du Soleil à travers un polariseur que l'on tourne. On mesure $I_{\max}=85$ et $I_{\min}=15$ (unités arbitraires). Calculer le degré de polarisation $P=\dfrac{I_{\max}-I_{\min}}{I_{\max}+I_{\min}}$. Comparer avec la valeur théorique de Rayleigh $P(\gamma)=\dfrac{\sin^2\gamma}{1+\cos^2\gamma}$ pour $\gamma=90^\circ$ et $\gamma=45^\circ$, et expliquer pourquoi la valeur mesurée est plus faible (voir aussi TP A4).
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $P=\dfrac{85-15}{85+15}=0{,}70$. Théorie : $P(90^\circ)=1$ et $P(45^\circ)=\dfrac{0{,}5}{1{,}5}=0{,}33$. La valeur mesurée est plus faible à cause de la diffusion multiple, des aérosols et du sol qui renvoie de la lumière non polarisée.
+    solution:
+      - titre: "Discussion"
+        texte: |
+          $P=\dfrac{85-15}{85+15}=0{,}70$. Pour une diffusion de Rayleigh par des dipôles isotropes, à $\gamma=90^\circ$ du Soleil : $P=1$. Aux autres angles : $P(45^\circ)=\dfrac{\sin^245^\circ}{1+\cos^245^\circ}=\dfrac{0{,}5}{1{,}5}=0{,}33$.
+          Les valeurs mesurées ($\approx0{,}7$ à $0{,}8$ dans un ciel très clair) sont plus faibles parce que : la molécule d'air n'est pas un dipôle isotrope (léger dépolarisant, $\approx5\ \%$), une partie de la lumière a subi plusieurs diffusions (polarisation brouillée), la lumière réfléchie par le sol est reprise par l'atmosphère, et les aérosols (diffusion de Mie) sont peu polarisants. Dans une brume épaisse, $P$ tombe à quelques pourcents.
+          Application : la polarisation du ciel donne la direction du Soleil même sous un ciel partiellement couvert (boussole polarisée utilisée par les abeilles et par des navigateurs polaires, pour les vols dans les régions où les compas magnétiques sont peu fiables).

@@ -39,6 +39,8 @@
 % Prérequis : couleur terre / brun chaud
 \definecolor{colorPrerequis}{HTML}{8B5E3C}
 
+\definecolor{colorAttention}{RGB}{200,60,60}
+
 % Objectifs pédagogiques étudiants : bleu pédagogique
 \definecolor{colorObjectifsPedagogiquesEtudiants}{HTML}{1565C0}
 
@@ -56,6 +58,15 @@
 
 % Bilan : gris anthracite
 \definecolor{colorBilan}{HTML}{4A4A4A}
+
+% Accroche / point de cours essentiel : magenta (introduction de l'exercice)
+\definecolor{colorAccroche}{HTML}{C2185B}
+
+% Outils mathématiques : turquoise
+\definecolor{colorOutilsMaths}{HTML}{00838F}
+
+% Liens avec d'autres disciplines : violet doux
+\definecolor{colorLiensDisciplines}{HTML}{5D4E8C}
 
 % Palette numérotée (colorOne..colorSix) pour les annotations \ptFleche
 % libres (voir templates/styles/macros_annotations.tex) -- reprise dans
@@ -1005,6 +1016,15 @@
   \end{encadrestyle}%
 }
 
+\NewDocumentEnvironment{attention}{o} {% 
+  \IfNoValueTF{#1} {
+    \begin{encadrestyle}{Attention}{}{colorAttention}} 
+      {\begin{encadrestyle}{Attention}{#1}{colorAttention}} 
+    } 
+  {% 
+  \end{encadrestyle}% 
+}
+
 \NewDocumentEnvironment{objectifspedagogiquesetudiants}{o}
 {%
   \IfNoValueTF{#1}
@@ -1119,6 +1139,40 @@
   \end{encadrestyle}%
 }
 
+
+
+% --- Accroche + point de cours essentiel (début d'exercice) -----------
+\NewDocumentEnvironment{accrochecours}{o}
+{%
+  \IfNoValueTF{#1}
+    {\begin{encadrestyle}{Point de cours essentiel}{}{colorAccroche}}
+    {\begin{encadrestyle}{Point de cours essentiel}{#1}{colorAccroche}}
+}
+{%
+  \end{encadrestyle}%
+}
+
+% --- Outils mathématiques --------------------------------------------
+\NewDocumentEnvironment{outilsmathematiques}{o}
+{%
+  \IfNoValueTF{#1}
+    {\begin{encadrestyle}{Outils mathématiques}{}{colorOutilsMaths}}
+    {\begin{encadrestyle}{Outils mathématiques}{#1}{colorOutilsMaths}}
+}
+{%
+  \end{encadrestyle}%
+}
+
+% --- Liens avec d'autres disciplines ---------------------------------
+\NewDocumentEnvironment{liensautresdisciplines}{o}
+{%
+  \IfNoValueTF{#1}
+    {\begin{encadrestyle}{Liens avec d'autres disciplines}{}{colorLiensDisciplines}}
+    {\begin{encadrestyle}{Liens avec d'autres disciplines}{#1}{colorLiensDisciplines}}
+}
+{%
+  \end{encadrestyle}%
+}
 
 % % ============================================================
 % % TITRES PÉDAGOGIQUES AVEC MÉTADONNÉES

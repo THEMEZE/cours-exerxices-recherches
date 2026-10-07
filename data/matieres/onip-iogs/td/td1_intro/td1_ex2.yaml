@@ -1,0 +1,282 @@
+id: td1_ex2
+intitule: |
+  Recherche dichotomique récursive (\texttt{binary\_search})
+td: td1
+facultatif: false
+seance: 1
+cours_rattache:
+  - intro.recursivite
+  - intro.debogage
+  - intro.qualite_de_code
+
+metadonnees:
+  duree_estimee: "25 min"
+  difficulte: 2
+  type_exercice: "Débogage + amélioration de la qualité du code"
+  indispensable: true
+
+enonce_intro: |
+  On fournit \texttt{binary\_search0.py}, une recherche dichotomique
+  récursive dans une liste triée qui renvoie un résultat \emph{faux sans
+  planter} : elle affiche que 10 n'est pas présent dans la liste
+  \texttt{[2, 3, 4, 10, 40]}, alors qu'il est bien à l'indice 3. Il faut
+  localiser le bug avec le débogueur, le corriger, puis améliorer la
+  lisibilité du code (noms, docstring, annotations de type).
+
+prerequis:
+  - titre: "Principe de la recherche dichotomique"
+    texte: |
+      Sur une liste triée par ordre croissant, on compare la cible à
+      l'élément central : si la cible est plus grande, elle se trouve dans
+      la moitié droite ; si elle est plus petite, dans la moitié gauche.
+      On répète récursivement jusqu'à trouver la cible, ou jusqu'à ce que
+      la zone de recherche soit vide (indice de fin \textless\ indice de
+      début), auquel cas la valeur est absente.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Déboguer par hypothèse, pas au hasard"
+    texte: |
+      Observer un symptôme (résultat faux), formuler une hypothèse sur sa
+      cause, puis utiliser le débogueur pour la vérifier — plutôt que de
+      modifier le code par tâtonnement.
+  - titre: "Écrire du code lisible et documenté"
+    texte: |
+      Utiliser des noms de variables explicites, une docstring au format
+      numpydoc et des annotations de type.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Un bug silencieux est le plus dangereux"
+    texte: |
+      Insister sur le fait que le programme ne plante pas et affiche
+      pourtant un résultat faux : c'est le type de bug le plus dangereux,
+      car rien n'attire spontanément l'attention dessus. Encourager
+      l'écriture de cas de test avant même de corriger.
+
+point_cours:
+  - titre: |
+      Code original fourni (\texttt{binary\_search0.py})
+    texte: |
+      \begin{verbatim}
+      def binary_search(arr, low, high, x):
+          if high < low:
+              return -1
+          mid = (low + high) // 2
+          if arr[mid] == x:
+              return mid
+          elif arr[mid] < x:
+              return binary_search(arr, low, mid - 1, x)
+          else:
+              return binary_search(arr, mid + 1, high, x)
+
+      sorted_list = [2, 3, 4, 10, 40]
+      x = 10
+
+      result = binary_search(sorted_list, 0, len(sorted_list) - 1, x)
+      if result != -1:
+          print(f"{x} is present at index {result}")
+      else:
+          print(f"{x} is not present in list")
+      \end{verbatim}
+      Sortie observée : \texttt{"10 is not present in list"} — un résultat
+      \textbf{faux}, puisque 10 est bien à l'indice 3.
+  - titre: "Localisation du bug"
+    texte: |
+      Les deux branches récursives sont \textbf{inversées}. Si
+      \texttt{arr[mid] < x}, la cible est dans la partie \textbf{droite}
+      (indices \texttt{mid+1} à \texttt{high}), mais le code original
+      cherche à gauche (\texttt{low} à \texttt{mid-1}) ; c'est l'inverse
+      dans le \texttt{else}. Trace d'exécution sur
+      \texttt{arr = [2, 3, 4, 10, 40]}, \texttt{x = 10} :
+      \begin{verbatim}
+      appel 1 : low=0, high=4, mid=2, arr[2]=4 < 10 -> appelle (0, 1)   [devrait être (3, 4)]
+      appel 2 : low=0, high=1, mid=0, arr[0]=2 < 10 -> appelle (0, -1)
+      appel 3 : high < low -> renvoie -1
+      \end{verbatim}
+  - titre: |
+      Code corrigé et documenté (\texttt{binary\_search.py})
+    texte: |
+      \begin{verbatim}
+      def binary_search(
+          sorted_values: list[int],
+          lower_index: int,
+          upper_index: int,
+          target: int
+      ) -> int:
+          """
+          Recherche un element dans une liste triee par dichotomie.
+
+          Parameters
+          ----------
+          sorted_values : list[int]
+              Liste d'entiers triee dans l'ordre croissant.
+          lower_index : int
+              Indice de debut de la zone de recherche.
+          upper_index : int
+              Indice de fin de la zone de recherche.
+          target : int
+              Valeur recherchee.
+
+          Returns
+          -------
+          int
+              Indice de la valeur recherchee si elle est presente,
+              -1 sinon.
+          """
+          # Si la zone de recherche est vide, la valeur n'est pas presente.
+          if upper_index < lower_index:
+              return -1
+
+          # On choisit l'indice situe au milieu de la zone de recherche.
+          middle_index = (lower_index + upper_index) // 2
+
+          # Si la valeur centrale est la cible, la recherche est terminee.
+          if sorted_values[middle_index] == target:
+              return middle_index
+
+          # Si la valeur centrale est plus petite que la cible, la cible
+          # se trouve necessairement dans la partie DROITE (liste triee).
+          elif sorted_values[middle_index] < target:
+              return binary_search(
+                  sorted_values, middle_index + 1, upper_index, target
+              )
+
+          # Sinon, la cible se trouve dans la partie gauche.
+          else:
+              return binary_search(
+                  sorted_values, lower_index, middle_index - 1, target
+              )
+      \end{verbatim}
+      Points forts : logique corrigée, noms explicites, docstring
+      numpydoc, annotations de type, commentaires expliquant le
+      raisonnement. Point à améliorer : les variables globales
+      \texttt{sorted\_values} et \texttt{target} masquent (« shadowing »)
+      les paramètres de même nom — bon prétexte pour parler de portée des
+      variables ; il manque aussi une garde
+      \texttt{if \_\_name\_\_ == "\_\_main\_\_":}.
+  - titre: "Démarche de débogage conseillée"
+    texte: |
+      \begin{enumerate}
+        \item Exécuter le code original et constater le message erroné.
+        \item Poser un point d'arrêt sur la ligne du calcul de \texttt{mid}
+          (Ctrl+F8), lancer le débogueur (Maj+F9).
+        \item Observer \texttt{low}, \texttt{high}, \texttt{mid} et
+          \texttt{arr[mid]} à chaque appel dans le panneau Variables.
+        \item Faire remarquer que \texttt{arr[mid]=4 < 10} mais que la
+          recherche continue pourtant vers la gauche.
+        \item Faire formuler la règle : liste triée croissante, valeur
+          centrale plus petite que la cible $\Rightarrow$ chercher à
+          droite.
+        \item Corriger, relancer, valider avec plusieurs cas de test.
+      \end{enumerate}
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Corriger le symptôme plutôt que la cause"
+    texte: |
+      Certains étudiants inversent la comparaison (\texttt{<} en
+      \texttt{>}) au lieu d'inverser les appels : le code renvoie alors un
+      résultat correct sur l'exemple donné par chance, mais le sens de la
+      logique reste faux. Faire tester avec la valeur 2, la valeur 40 et
+      une valeur absente comme 5 pour démasquer ce faux correctif.
+  - titre: "Déboguer sans méthode"
+    texte: |
+      D'autres trient la liste ou ajoutent des \texttt{print} un peu
+      partout sans formuler d'hypothèse claire : reprendre avec le
+      débogueur et, si besoin, dessiner l'arbre des appels récursifs sur
+      papier avec les indices \texttt{low}/\texttt{high} à chaque étape.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Ne pas donner la solution trop vite"
+    texte: |
+      Le bug est un classique : la structure du code est bonne, seules les
+      branches sont inversées. Laisser les étudiants formuler l'hypothèse
+      eux-mêmes après observation du débogueur.
+
+bilan:
+  - titre: "Un résultat correct n'est pas toujours un résultat vrai"
+    texte: |
+      Un programme qui ne plante pas peut quand même être faux : toujours
+      comparer avec un résultat attendu, sur plusieurs cas de test
+      (valeur présente en début, en fin, absente, liste vide).
+
+aller_plus_loin:
+  - niveau: ecole_ingenieur
+    titre: "Version itérative"
+    texte: |
+      Réécrire \texttt{binary\_search} sans récursivité, avec une boucle
+      \texttt{while}, en conservant la même signature et la même valeur de
+      retour. Comparer les deux versions sur les mêmes cas de test : la
+      version itérative n'a pas de limite de pile d'appels.
+  - niveau: ecole_ingenieur
+    titre: "Indices d'une valeur dupliquée"
+    texte: |
+      Modifier la fonction pour renvoyer \emph{tous} les indices d'une
+      valeur qui apparaît plusieurs fois dans la liste triée.
+
+questions:
+  - id: q1
+    enonce: |
+      Exécuter \texttt{binary\_search0.py}. Le résultat affiché
+      (\texttt{"10 is not present in list"}) est-il correct ? Utiliser le
+      débogueur pour identifier précisément où le raisonnement échoue.
+    coup_de_pouce: |
+      Posez un point d'arrêt sur la ligne de calcul de \texttt{mid} et
+      observez \texttt{arr[mid]} comparé à \texttt{x} à chaque appel.
+    correction: "Les branches elif/else de la récursion sont inversées."
+    solution:
+      - titre: "Diagnostic"
+        texte: |
+          Le résultat est faux : 10 est présent à l'indice 3. En suivant
+          l'exécution, on constate qu'à l'appel 1, \texttt{arr[mid]=4} est
+          plus petit que la cible \texttt{10}, ce qui devrait orienter la
+          recherche vers la \emph{droite} (indices 3 à 4) ; or le code
+          appelle \texttt{binary\_search(arr, low, mid-1, x)}, c'est-à-dire
+          la partie \emph{gauche}. Les deux branches récursives sont
+          inverties.
+  - id: q2
+    enonce: |
+      Corriger le bug, puis vérifier le résultat sur les cas de test :
+      cible 10 (attendu : indice 3), cible 2 (indice 0), cible 40 (indice
+      4), cible 5 (absente, -1), liste vide (-1), liste à un seul élément.
+    coup_de_pouce: |
+      Dans la branche \texttt{arr[mid] < x}, il faut appeler
+      \texttt{binary\_search(arr, mid + 1, high, x)}.
+    correction: "Échanger les deux appels récursifs des branches elif et else."
+    solution:
+      - titre: "Correction et validation"
+        texte: |
+          Après échange des deux appels récursifs, tous les cas de test
+          suivants sont vérifiés :
+
+          \begin{center}
+          \begin{tabular}{lcc}
+          \hline
+          Liste & Cible & Résultat attendu \\
+          \hline
+          \texttt{[2,3,4,10,40]} & 10 & 3 \\
+          \texttt{[2,3,4,10,40]} & 2 & 0 \\
+          \texttt{[2,3,4,10,40]} & 40 & 4 \\
+          \texttt{[2,3,4,10,40]} & 5 & -1 \\
+          \texttt{[]} & 1 & -1 \\
+          \texttt{[7]} & 7 & 0 \\
+          \hline
+          \end{tabular}
+          \end{center}
+  - id: q3
+    enonce: |
+      Pourquoi la liste doit-elle impérativement être triée pour que
+      l'algorithme fonctionne ? Combien de comparaisons au maximum sont
+      nécessaires pour une liste de 1 000 000 d'éléments ?
+    coup_de_pouce: |
+      À chaque appel récursif, la zone de recherche est divisée par deux.
+    correction: "Environ log2(1 000 000) $\\approx$ 20 comparaisons au maximum."
+    solution:
+      - titre: "Rôle du tri et complexité"
+        texte: |
+          L'algorithme décide de quel côté chercher en comparant la cible
+          à \texttt{arr[mid]} : ce raisonnement n'est valable que si la
+          liste est triée (sinon la cible pourrait très bien se trouver du
+          « mauvais » côté sans que l'algorithme ne le sache). Comme la
+          zone de recherche est divisée par 2 à chaque appel, il faut au
+          maximum $\lceil \log_2(n) \rceil$ comparaisons, soit environ 20
+          pour $n = 1\,000\,000$ — une complexité logarithmique bien plus
+          favorable qu'une recherche linéaire en $O(n)$.

@@ -3,76 +3,304 @@ intitule: "Corde non homogène, jonction entre deux cordes"
 td: td3
 facultatif: false
 seance: 4
+
 cours_rattache:
   - chap3.reflexion_transmission_corde
   - chap3.impedance_mecanique
+  - chap3.equation_onde_corde
+  - chap3.relation_dispersion
+
+metadonnees:
+  duree_estimee: "45 min"
+  difficulte: 3
+  type_exercice: "Application"
+  indispensable: true
 
 enonce_intro: |
   Deux cordes de longueur $L$ et de masses linéiques $\mu_1$ et $\mu_2=\alpha\mu_1$
-  sont attachées en $O$ ($x=0$), tendues avec une force $F$. Une onde incidente
-  sinusoïdale d'amplitude $A_I$ et de pulsation $\omega$ arrive en $O$ en
-  provenance des $x$ décroissants, donnant naissance à une onde réfléchie
-  ($x$ croissants) et une onde transmise ($x$ décroissants).
+  sont attachées en un point de jonction $O$ pour former une corde tendue
+  horizontalement suivant l'axe $Ox$ avec une force de tension $F$. Le point
+  $O$ se situe en l'abscisse $x=0$.
+
+  Une onde transversale progressive se propageant dans le sens des $x$
+  décroissants (onde incidente) arrive au niveau de la jonction $O$. Il
+  s'agit d'une onde sinusoïdale d'amplitude $A_I$ et de pulsation $\omega$.
+  Elle donne naissance à une onde réfléchie se propageant dans le sens des
+  $x$ croissants ainsi qu'à une onde transmise se propageant dans le sens
+  des $x$ décroissants. Ces deux ondes sont aussi sinusoïdales et
+  progressives, de même pulsation $\omega$.
 
 figure:
-  ref: td3_ex1_corde_double
-  legende: "Jonction entre deux cordes de masses linéiques différentes."
+  - ref: td3_ex1_corde_double
+    legende: |
+      Suggestion : schéma de la corde double, jonction en $O$ ($x=0$) ; représenter la corde 1 (masse linéique $\mu_1$) où vivent l'onde incidente et l'onde réfléchie, et la corde 2 (masse linéique $\mu_2=\alpha\mu_1$) où se propage l'onde transmise, avec des flèches indiquant clairement les trois sens de propagation ($x$ décroissants pour l'incidente et la transmise, $x$ croissants pour la réfléchie).
+    width: 0.7
+    label:
+#   - ref: td3_ex1_superposition
+#     legende: |
+#       Suggestion : à un instant fixé, tracer $y_i(x,t_0)$, $y_r(x,t_0)$ et leur somme $y_1(x,t_0)$ du côté de la corde 1, et $y_2(x,t_0)=y_t(x,t_0)$ du côté de la corde 2, en faisant apparaître la continuité du déplacement (mais pas nécessairement de la pente) en $x=0$.
+#     width: 0.7
+#     label:
+#   - ref: td3_ex1_r_alpha
+#     legende: |
+#       Suggestion : graphe de $r(\alpha)=(1-\sqrt{\alpha})/(1+\sqrt{\alpha})$ en fonction de $\alpha$, faisant apparaître le changement de signe de $r$ selon que $\alpha<1$ (corde 2 plus légère) ou $\alpha>1$ (corde 2 plus lourde), et la valeur $r=0$ en $\alpha=1$.
+#     width: 0.6
+#     label:
+
+prerequis:
+  - titre: "Équation de d'Alembert pour une corde vibrante"
+    texte: |
+      Connaître l'équation de propagation des petites déformations transversales $y(x,t)$ d'une corde tendue avec une tension $F$ et de masse linéique $\mu$ :
+      $$\frac{\partial^2 y}{\partial t^2} = c^2\,\frac{\partial^2 y}{\partial x^2}, \qquad c = \sqrt{\frac{F}{\mu}}.$$
+
+      Connaître la forme générale d'une onde progressive sinusoïdale de pulsation $\omega$ et de déphasage $\varphi$ se propageant vers les $x$ croissants, $y(x,t) = A\cos(\omega t - kx + \varphi)$, et savoir reconnaître qu'un signe $+$ devant $kx$ (au lieu de $-$) inverse le sens de propagation, vers les $x$ décroissants.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Transposer la méthode de raccordement à un nouveau support physique"
+    texte: |
+      Savoir écrire, pour une onde mécanique transversale sur une corde, les deux conditions de continuité pertinentes à une jonction (continuité du déplacement, continuité de la pente liée à la force transverse), les résoudre pour obtenir des coefficients de réflexion et de transmission, et reconnaître la structure universelle de ces coefficients en fonction d'une impédance caractéristique du milieu.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Faire percevoir l'universalité du concept d'impédance"
+    texte: |
+      Cet exercice est le pendant mécanique de l'exercice sur l'interface acoustique (impédance $Z=\rho c$) : on y retrouve exactement la même démarche (deux conditions de continuité, système linéaire, coefficients en $(Z_1-Z_2)/(Z_1+Z_2)$), mais avec une impédance mécanique $Z=\mu c=\sqrt{F\mu}$. Le point pédagogique central est de faire percevoir que le concept d'impédance — et la forme des coefficients de réflexion/transmission qui en découle — n'est pas propre à l'acoustique mais s'applique à toute équation de propagation de type d'Alembert (cordes, lignes électriques, ondes élastiques, optique).
+
+      Attention cependant à un point de convention important à souligner : selon que l'on raccorde le déplacement (comme ici) ou la pression (comme dans le cas acoustique), l'ordre des termes $Z_1-Z_2$ ou $Z_2-Z_1$ au numérateur du coefficient de réflexion peut s'inverser. Ce n'est pas une erreur, mais une conséquence du choix de la grandeur physique servant à définir l'amplitude de l'onde.
+
+point_cours:
+  - titre: "Établissement de l'équation d'onde sur une corde tendue"
+    texte: |
+      On considère un petit élément de corde compris entre les abscisses $x$ et $x+\mathrm{d}x$, de masse $\mu\,\mathrm{d}x$. Dans l'approximation des petites oscillations (angle $\theta(x,t)$ entre la corde et l'horizontale petit, tension $F$ supposée uniforme et constante en norme), la composante verticale de la tension exercée sur cet élément par le reste de la corde vaut, à chaque extrémité, $F\sin\theta \approx F\tan\theta = F\,\partial y/\partial x$.
+
+      Le bilan des forces verticales sur l'élément s'écrit, par la loi de la quantité de mouvement (deuxième loi de Newton projetée sur $Oy$) :
+      $$\mu\,\mathrm{d}x\,\frac{\partial^2 y}{\partial t^2} = F\left[\left.\frac{\partial y}{\partial x}\right|_{x+\mathrm{d}x} - \left.\frac{\partial y}{\partial x}\right|_{x}\right] \approx F\,\frac{\partial^2 y}{\partial x^2}\,\mathrm{d}x,$$
+      d'où, après simplification par $\mathrm{d}x$, l'équation de d'Alembert
+      $$\frac{\partial^2 y}{\partial t^2} = \frac{F}{\mu}\,\frac{\partial^2 y}{\partial x^2}, \qquad c=\sqrt{\frac{F}{\mu}}.$$
+      Cette équation, formellement identique à celle obtenue pour la surpression acoustique (TD2), admet des solutions progressives sinusoïdales $y=A\cos(\omega t \mp kx+\varphi)$ avec la relation de dispersion $\omega = kc$ (non dispersive, comme en acoustique).
+
+  - titre: "Conditions de raccordement à la jonction et impédance mécanique"
+    texte: |
+      À la jonction $O$ entre les deux cordes, deux conditions physiques doivent être satisfaites à tout instant :
+
+      1. \textbf{Continuité du déplacement} : la corde ne se rompt pas, donc $y_1(0,t)=y_2(0,t)$ (sinon il y aurait une discontinuité, physiquement impossible pour une corde inextensible reliée en $O$).
+
+      2. \textbf{Continuité de la force transverse} : le point de jonction étant considéré sans masse, la résultante des forces verticales qui s'y exercent doit être nulle à tout instant (deuxième loi de Newton appliquée à une masse nulle), ce qui, la tension $F$ étant la même de part et d'autre de la jonction, se traduit par la continuité de la pente : $\left.\partial y_1/\partial x\right|_0 = \left.\partial y_2/\partial x\right|_0$.
+
+      On définit l'\textbf{impédance mécanique caractéristique} d'une corde par
+      $$Z = \mu c = \sqrt{F\mu},$$
+      grandeur analogue à l'impédance acoustique $Z=\rho c$ (TD2) : elle mesure la « résistance » qu'oppose la corde à être mise en mouvement transversal pour une force donnée. Comme la tension $F$ est commune aux deux cordes, on peut montrer que $Z$ et $k$ sont \textbf{directement proportionnels} (à $\omega$ et $F$ fixés) :
+      $$k = \omega\sqrt{\frac{\mu}{F}} = \frac{\omega}{F}\sqrt{F\mu} = \frac{\omega}{F}\,Z.$$
+      C'est cette proportionnalité directe (et non inverse) entre $k$ et $Z$ qui permettra, en question 8, de réexprimer les coefficients trouvés en fonction de $k_1,k_2$ directement en fonction de $Z_1,Z_2$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Confusion sur le sens de propagation de l'onde incidente"
+    texte: |
+      Contrairement à la convention la plus fréquente (onde incidente se propageant vers les $x$ croissants), cet énoncé choisit une onde incidente se propageant vers les $x$ \emph{décroissants} : elle s'écrit donc $\cos(\omega t+kx)$ et non $\cos(\omega t-kx)$. Il faut être vigilant à ne pas intervertir machinalement les signes par habitude, en particulier lors des dérivations de la question 7.
+  - titre: "Oublier que $k_1\\neq k_2$"
+    texte: |
+      Une erreur fréquente consiste à garder la même notation $k$ pour l'onde incidente/réfléchie et pour l'onde transmise, alors que $k_1\neq k_2$ dès que $\alpha\neq 1$ (même pulsation $\omega$, mais célérités différentes $c_1\neq c_2$ car $\mu_1\neq\mu_2$).
+  - titre: "Erreur de signe en dérivant $y_1$"
+    texte: |
+      Lors du calcul de $\partial y_1/\partial x$ à la question 7, il faut dériver \emph{séparément} les termes $y_i$ (argument $\omega t+k_1x$, dérivée en $-k_1\sin(\cdot)$) et $y_r$ (argument $\omega t-k_1x$, dérivée en $+k_1\sin(\cdot)$) : les deux contributions n'ont pas le même signe, contrairement à un réflexe de calcul rapide qui les traiterait de façon symétrique.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Démonstration avec deux cordes réelles de diamètres différents"
+    texte: |
+      Si le matériel est disponible, envoyer une impulsion sur une corde légère reliée à une corde plus lourde (et réciproquement) permet de visualiser directement le changement de signe de l'onde réfléchie selon le signe de $r$ : pas d'inversion lorsque l'onde va du léger vers le lourd n'est pas le bon sens à retenir ici — il faut bien vérifier le signe obtenu à la question 8 selon la valeur de $\alpha$ et le comparer à l'observation.
+
+bilan:
+  - titre: "Une structure de coefficients universelle"
+    texte: |
+      On retrouve, pour une onde mécanique sur une corde, une structure de coefficients de réflexion et de transmission en tout point analogue à celle obtenue pour une onde acoustique à une interface fluide-fluide (TD2) : $r=(Z_1-Z_2)/(Z_1+Z_2)$ et $t=2Z_1/(Z_1+Z_2)$, avec une impédance mécanique $Z=\mu c=\sqrt{F\mu}$ jouant exactement le même rôle que l'impédance acoustique $Z=\rho c$. Cette universalité de la notion d'impédance, valable pour toute équation de propagation de type d'Alembert, est le message physique central à retenir de ce TD.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Coefficients énergétiques et bilan de puissance"
+    texte: |
+      La puissance moyenne transportée par une onde progressive sinusoïdale sur une corde s'écrit $\langle P\rangle = \tfrac{1}{2}Z\omega^2 A^2$. On pourra établir les coefficients de réflexion et de transmission en \emph{puissance} $R=r^2$ et $T=(Z_2/Z_1)\,t^2$, et vérifier la conservation de l'énergie $R+T=1$ (à comparer à la démarche déjà suivie pour les coefficients énergétiques acoustiques).
+  - niveau: master
+    titre: "Corde de masse linéique variable, approximation WKB"
+    texte: |
+      Pour une corde dont la masse linéique $\mu(x)$ varie continûment (plutôt qu'une jonction abrupte), la réflexion devient progressive et dépend du rapport entre la longueur d'onde et l'échelle de variation de $\mu(x)$ : lorsque $\mu(x)$ varie lentement devant $\lambda$, l'onde traverse presque sans réflexion (approximation WKB, adaptation d'impédance continue) — principe utilisé par exemple dans la forme des cordes de certains instruments ou dans les cônes de haut-parleurs.
+
+accroche_point_cours_essentiel:
+  - titre: "L'impulsion revient-elle à l'endroit ou renversée ?"
+    duree_introduction: "5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Une corde fine est nouée à une corde épaisse. On envoie une impulsion le long de la corde fine : au nœud, une partie repart en arrière, une autre continue dans la corde épaisse. L'écho est-il {\bf à l'endroit} ou {\bf renversé} ? Et si l'on part de la corde épaisse vers la corde fine ? Que se passe-t-il si les deux cordes sont identiques ?
+    texte: |
+      {\bf Idée clé : à la jonction, deux conditions de raccordement relient les trois ondes.} Le nœud étant sans masse et la tension $F$ commune : (1) le déplacement est continu, $A_I+A_R=A_T$ ; (2) la pente est continue, $k_1(A_I-A_R)=k_2A_T$. Comme $k=\omega Z/F$ avec $Z=\sqrt{F\mu}$ :
+      $$r=\frac{k_1-k_2}{k_1+k_2}=\frac{1-\sqrt\alpha}{1+\sqrt\alpha}=\frac{Z_1-Z_2}{Z_1+Z_2},\qquad t=1+r=\frac{2Z_1}{Z_1+Z_2}.$$
+      $r$ s'annule pour $\alpha=1$ (corde homogène : pas d'interface) ; $r<0$ (écho renversé) quand la seconde corde est plus lourde ($\alpha>1$) ; $r>0$ quand elle est plus légère.
+
+outils_mathematiques:
+  - titre: "Sens de propagation et signe dans l'argument"
+    texte: |
+      $\cos(\omega t+kx)$ se propage vers les $x$ décroissants (argument constant : $x=-ct+\text{cte}$) et $\cos(\omega t-kx)$ vers les $x$ croissants. Il faut surveiller ce signe lors de chaque dérivation.
+  - titre: "Identité vraie à tout instant"
+    texte: |
+      $(A_I+A_R-A_T)\cos\omega t=0\ \forall t$ implique $A_I+A_R=A_T$ : si une égalité est vraie pour tout $t$ et que le facteur commun n'est pas identiquement nul, on le simplifie. Même raisonnement avec $\sin\omega t$ pour la pente.
+  - titre: "Dérivée d'un cosinus composé"
+    texte: |
+      $\dfrac{\partial}{\partial x}\cos(\omega t+k_1x)=-k_1\sin(\omega t+k_1x)$ et $\dfrac{\partial}{\partial x}\cos(\omega t-k_1x)=+k_1\sin(\omega t-k_1x)$ : les deux contributions n'ont pas le même signe.
+  - titre: "Système linéaire à deux équations"
+    texte: |
+      $\begin{cases}A_I+A_R=A_T\\k_1(A_I-A_R)=k_2A_T\end{cases}$ : on substitue $A_T$ puis on isole $A_R$ : $A_I(k_1-k_2)=A_R(k_1+k_2)$. Le résultat ne dépend que du rapport $k_1/k_2$.
+  - titre: "Proportionnalité $k\\propto Z$ et simplification de rapports"
+    texte: |
+      $k_i=\dfrac\omega FZ_i$ : le facteur $\omega/F$ se simplifie dans $\dfrac{k_1-k_2}{k_1+k_2}$. De même, $k_1/k_2=1/\sqrt\alpha$ donne $r=\dfrac{1/\sqrt\alpha-1}{1/\sqrt\alpha+1}=\dfrac{1-\sqrt\alpha}{1+\sqrt\alpha}$ (on multiplie haut et bas par $\sqrt\alpha$).
+  - titre: "Étude de fonction et cas limites"
+    texte: |
+      $r(\alpha)=\dfrac{1-\sqrt\alpha}{1+\sqrt\alpha}$ décroît de $1$ ($\alpha\to0$, corde 2 sans masse : extrémité libre) à $-1$ ($\alpha\to\infty$, corde 2 infiniment lourde : extrémité fixe), en passant par $0$ en $\alpha=1$. Les cas limites retrouvent les réflexions sur extrémité libre ($r=+1$) et fixe ($r=-1$) du chapitre précédent.
+
+liens_autres_disciplines:
+  - discipline: "Mécanique quantique"
+    texte: |
+      Une particule d'énergie $E$ rencontrant une marche de potentiel : $\psi$ et $\psi'$ sont continues en $x=0$, d'où $r=\dfrac{k_1-k_2}{k_1+k_2}$ avec $k=\sqrt{2m(E-V)}/\hbar$ : exactement la même formule que pour la corde.
+  - discipline: "Optique"
+    texte: |
+      Les coefficients de Fresnel en incidence normale, $r=\dfrac{n_1-n_2}{n_1+n_2}$ pour l'amplitude du champ électrique, ont la même structure avec l'indice $n$ à la place de $k$ ou $Z$. L'inversion de signe de l'onde réfléchie se retrouve quand on passe d'un milieu moins réfringent à un milieu plus réfringent.
+  - discipline: "Électricité (lignes de transmission)"
+    texte: |
+      Une impulsion de tension dans un câble d'impédance $Z_0$ terminé par une charge $Z_L$ se réfléchit avec $r=\dfrac{Z_L-Z_0}{Z_L+Z_0}$ : $r=+1$ pour un circuit ouvert (analogue de l'extrémité libre), $r=-1$ pour un court-circuit (extrémité fixe), $r=0$ pour une charge adaptée.
+  - discipline: "Acoustique"
+    texte: |
+      Même structure à l'interface fluide-fluide (chapitre 2). Selon qu'on raccorde le déplacement (corde) ou la pression (acoustique), l'ordre $Z_1-Z_2$ ou $Z_2-Z_1$ s'inverse : c'est une question de grandeur choisie, pas une erreur.
+  - discipline: "Lutherie"
+    texte: |
+      Une corde filée, un nœud de cordes de diamètres différents ou un changement de matériau le long d'un fil ajoutent des échos : c'est l'une des causes de timbre et de perte d'énergie sur les instruments.
 
 questions:
   - id: q1
-    enonce: "Donner l'expression d'une onde incidente $y_i(x,t)$ se déplaçant vers les $x$ décroissants, d'amplitude $A_I$, de déphasage $\\phi=0$."
-    coup_de_pouce: "Une onde progressive vers les $x$ décroissants s'écrit $\\cos(\\omega t + kx)$ (le signe + devant $kx$ est ce qui inverse le sens de propagation)."
+    enonce: "Donner l'expression de l'onde incidente $y_i(x,t)$ se déplaçant dans le sens des $x$ décroissants, d'amplitude $A_I$ et de déphasage $\\phi=0$."
+    coup_de_pouce: |
+      Une onde progressive vers les $x$ décroissants s'écrit $\cos(\omega t + kx)$ (le signe $+$ devant $kx$ est ce qui inverse le sens de propagation par rapport à la convention $\cos(\omega t-kx)$ rappelée dans les prérequis).
     correction: "$y_i(x,t)=A_I\\cos(\\omega t + k_1 x)$."
+    solution:
+      - titre: "Justification du signe"
+        texte: |
+          Une onde progressive s'écrit de façon générale $y=A\cos(\omega t \mp kx)$. Pour un point d'amplitude maximale (crête), l'argument doit rester constant au cours du temps : $\omega t \pm kx = \text{cte}$, soit $x(t) = \mp(\omega/k)t+\text{cte}$. Avec le signe $+$ (celui retenu ici), $\mathrm{d}x/\mathrm{d}t = -\omega/k = -c <0$ : la crête se déplace bien vers les $x$ décroissants, conformément à l'énoncé. On a donc, avec $A_I$ l'amplitude et $\varphi=0$ le déphasage imposé :
+          $$\boxed{y_i(x,t) = A_I\cos(\omega t + k_1 x)}.$$
+          L'indice $1$ sur $k$ signale que cette onde vit dans la corde 1 (de masse linéique $\mu_1$), là où se trouvent à la fois l'onde incidente et l'onde réfléchie.
 
   - id: q2
-    enonce: "Donner l'expression de l'onde réfléchie $y_r(x,t)$ (vers les $x$ croissants), d'amplitude $A_R$."
+    enonce: "Donner l'expression de l'onde réfléchie $y_r(x,t)$ se déplaçant dans le sens des $x$ croissants, d'amplitude $A_R$ et de déphasage $\\phi=0$."
     correction: "$y_r(x,t)=A_R\\cos(\\omega t - k_1 x)$."
+    solution:
+      - titre: "Onde réfléchie"
+        texte: |
+          L'onde réfléchie repart en sens inverse de l'onde incidente, vers les $x$ croissants, tout en restant dans la même corde 1 (même $\mu_1$, donc même $k_1$ que l'onde incidente, la pulsation $\omega$ étant imposée par la source et donc commune à toutes les ondes du problème). En reprenant la convention $y=A\cos(\omega t-kx)$ pour une onde vers les $x$ croissants (cf. question 1) :
+          $$\boxed{y_r(x,t) = A_R\cos(\omega t - k_1 x)}.$$
 
   - id: q3
-    enonce: "Donner l'expression de l'onde transmise $y_t(x,t)$ (vers les $x$ décroissants), d'amplitude $A_T$."
+    enonce: "Donner l'expression de l'onde transmise $y_t(x,t)$ se déplaçant dans le sens des $x$ décroissants, d'amplitude $A_T$ et de déphasage $\\phi=0$."
     correction: "$y_t(x,t)=A_T\\cos(\\omega t + k_2 x)$."
+    solution:
+      - titre: "Onde transmise"
+        texte: |
+          L'onde transmise poursuit sa route dans la corde 2 (masse linéique $\mu_2$, donc nombre d'onde $k_2\neq k_1$ en général), en conservant le même sens de propagation que l'onde incidente (vers les $x$ décroissants) et la même pulsation $\omega$ (imposée par la continuité temporelle en $O$, cf. question 4). D'après la convention établie en question 1 pour une onde vers les $x$ décroissants :
+          $$\boxed{y_t(x,t) = A_T\cos(\omega t + k_2 x)}.$$
 
   - id: q4
-    enonce: "Relation entre $k$, $\\omega$, $c$ pour chaque corde (nom de cette relation) ? Exprimer $k_1$ en fonction de $k_2$ et $\\alpha$."
-    coup_de_pouce: "Relation de dispersion $\\omega=kc$ avec $c=\\sqrt{F/\\mu}$ propre à chaque corde ; même $\\omega$ des deux côtés (continuité temporelle en $O$)."
+    enonce: "Pour chaque corde, donner la relation entre $k$, $\\omega$ et $c$. Comment s'appelle cette relation ? Exprimer $k_1$ en fonction de $k_2$ et $\\alpha$."
+    coup_de_pouce: |
+      Relation de dispersion $\omega=kc$ avec $c=\sqrt{F/\mu}$ propre à chaque corde (cf. point cours) ; la pulsation $\omega$ est la même des deux côtés car le régime est établi et le point $O$ oscille avec une seule et même pulsation (continuité temporelle en $O$).
     correction: "Relation de dispersion. $k_1=\\omega/c_1=\\omega\\sqrt{\\mu_1/F}$ et $k_2=\\omega\\sqrt{\\mu_2/F}=\\omega\\sqrt{\\alpha\\mu_1/F}$, donc $k_1=k_2/\\sqrt{\\alpha}$."
+    solution:
+      - titre: "Relation de dispersion propre à chaque corde"
+        texte: |
+          D'après le point cours, l'équation de d'Alembert admet des solutions progressives sinusoïdales à condition que $\omega=kc$ : c'est la \textbf{relation de dispersion} (ici non dispersive : $c$ ne dépend pas de $\omega$). Pour chaque corde, avec $c_i=\sqrt{F/\mu_i}$ :
+          $$k_1 = \frac{\omega}{c_1} = \omega\sqrt{\frac{\mu_1}{F}}, \qquad k_2 = \frac{\omega}{c_2} = \omega\sqrt{\frac{\mu_2}{F}} = \omega\sqrt{\frac{\alpha\mu_1}{F}} = \sqrt{\alpha}\,k_1.$$
+      - titre: "Relation entre $k_1$ et $k_2$"
+        texte: |
+          On en déduit immédiatement :
+          $$\boxed{k_1 = \frac{k_2}{\sqrt{\alpha}}}.$$
+          Le fait que $\omega$ soit identique pour les trois ondes (incidente, réfléchie, transmise) est une conséquence physique du régime sinusoïdal établi : le point $O$, commun aux deux cordes, oscille avec une unique fréquence, imposée par la source, quelle que soit la corde considérée.
 
   - id: q5
-    enonce: "Exprimer les déplacements $y_1(x,t)$ (corde 1, $x<0$) et $y_2(x,t)$ (corde 2, $x>0$)."
+    enonce: "Exprimer les déplacements verticaux $y_1(x,t)$ et $y_2(x,t)$ sur les cordes 1 et 2 respectivement."
     correction: "$y_1=y_i+y_r=A_I\\cos(\\omega t+k_1x)+A_R\\cos(\\omega t-k_1x)$ ; $y_2=y_t=A_T\\cos(\\omega t+k_2x)$."
+    solution:
+      - titre: "Superposition dans la corde 1, onde unique dans la corde 2"
+        texte: |
+          Dans la corde 1, les deux ondes (incidente et réfléchie) coexistent : par principe de superposition (l'équation de d'Alembert étant linéaire), le déplacement total est leur somme :
+          $$y_1(x,t) = y_i(x,t)+y_r(x,t) = A_I\cos(\omega t+k_1x) + A_R\cos(\omega t-k_1x).$$
+          Dans la corde 2, seule l'onde transmise existe (aucune onde n'y revient vers $O$, la corde étant supposée de longueur $L$ finie mais son extrémité lointaine non concernée par ce problème local de jonction) :
+          $$y_2(x,t) = y_t(x,t) = A_T\cos(\omega t+k_2x).$$
 
   - id: q6
-    enonce: "Écrire la continuité du déplacement en $x=0$. Traduire en termes de $A_I$, $A_R$, $A_T$."
-    coup_de_pouce: "$y_1(0,t)=y_2(0,t)$ à tout instant $t$."
+    enonce: "Écrire la condition de continuité sur le déplacement vertical $y(x,t)$ de la corde à la position $x=0$. Traduire cette relation en termes de $A_I$, $A_R$ et $A_T$."
+    coup_de_pouce: |
+      $y_1(0,t)=y_2(0,t)$ à tout instant $t$ (cf.  point cours, condition 1).
     correction: "$A_I+A_R=A_T$."
+    solution:
+      - titre: "Écriture et évaluation en $x=0$"
+        texte: |
+          La condition physique de continuité du déplacement (la corde ne se rompt pas en $O$) s'écrit $y_1(0,t)=y_2(0,t)$ pour tout $t$. En évaluant les expressions de la question 5 en $x=0$ :
+          $$A_I\cos(\omega t) + A_R\cos(\omega t) = A_T\cos(\omega t).$$
+          Cette égalité devant être vraie à tout instant $t$, et le facteur $\cos(\omega t)$ étant commun et non identiquement nul, on peut le simplifier, ce qui donne directement :
+          $$\boxed{A_I+A_R=A_T}.$$
 
   - id: q7
-    enonce: "La continuité de la force donne $\\partial y_1/\\partial x|_{x=0}=\\partial y_2/\\partial x|_{x=0}$. Traduire cette relation."
-    coup_de_pouce: "Dérivez $y_1$ et $y_2$ par rapport à $x$, puis évaluez en $x=0$ ; les cosinus deviennent des sinus qui s'annulent sauf le terme en $x$ dérivé, attention aux signes de $k_1$ dans $y_i$ et $y_r$."
+    enonce: |
+      La relation de continuité de la force en $x=0$ donne $\left.\partial y_1/\partial x\right|_{x=0} = \left.\partial y_2/\partial x\right|_{x=0}$. Traduire cette relation en termes de $A_I$, $A_R$ et $A_T$.
+    coup_de_pouce: |
+      Dérivez $y_1$ et $y_2$ par rapport à $x$, puis évaluez en $x=0$ ; les cosinus deviennent des sinus qui s'annulent sauf le terme en $x$ dérivé, attention aux signes de $k_1$ dans $y_i$ et $y_r$ (cf. remarque pédagogique sur ce point).
     correction: "$k_1(A_I - A_R) = k_2 A_T$."
+    solution:
+      - titre: "Dérivation de $y_1$ et $y_2$"
+        texte: |
+          On dérive séparément chaque terme de $y_1(x,t)=A_I\cos(\omega t+k_1x)+A_R\cos(\omega t-k_1x)$ par rapport à $x$ (attention au signe de $k_1$ dans chaque terme) :
+          $$\frac{\partial y_1}{\partial x} = -A_I k_1 \sin(\omega t+k_1x) + A_R k_1 \sin(\omega t-k_1x).$$
+          De même pour $y_2(x,t)=A_T\cos(\omega t+k_2x)$ :
+          $$\frac{\partial y_2}{\partial x} = -A_T k_2\sin(\omega t+k_2x).$$
+      - titre: "Évaluation en $x=0$ et simplification"
+        texte: |
+          En $x=0$ :
+          $$\left.\frac{\partial y_1}{\partial x}\right|_0 = k_1(A_R-A_I)\sin(\omega t), \qquad \left.\frac{\partial y_2}{\partial x}\right|_0 = -k_2 A_T\sin(\omega t).$$
+          En égalant (à tout instant $t$, donc en simplifiant par $\sin(\omega t)$) :
+          $$k_1(A_R-A_I) = -k_2 A_T \quad\Longrightarrow\quad \boxed{k_1(A_I-A_R) = k_2 A_T}.$$
 
   - id: q8
-    enonce: "En déduire $r=A_R/A_I$ et $t=A_T/A_I$ en fonction de $\\alpha$. Exprimer $r$, $t$ en fonction des impédances $Z_1$, $Z_2$."
-    coup_de_pouce: "Combinez les deux relations de continuité (q6 et q7) comme un système linéaire en $A_R,A_T$. Impédance d'une corde : $Z=\\mu c=\\sqrt{F\\mu}$."
+    enonce: |
+      En déduire les coefficients de réflexion $r$ et de transmission $t$, en amplitude, en fonction de $\alpha$. Écrire $r$ et $t$ en fonction des impédances des deux milieux après avoir défini $Z_1$ et $Z_2$, lesdites impédances.
+    coup_de_pouce: |
+      Combinez les deux relations de continuité (questions 6 et 7) comme un système linéaire en $A_R,A_T$. Impédance mécanique d'une corde : $Z=\mu c=\sqrt{F\mu}$ (cf. point cours) ; attention, $Z$ et $k$ sont ici \emph{directement} proportionnels (à $\omega,F$ fixés), et non inversement proportionnels.
     correction: |
       $r=\dfrac{k_1-k_2}{k_1+k_2}=\dfrac{1-\sqrt{\alpha}}{1+\sqrt{\alpha}}$,
       $t=\dfrac{2k_1}{k_1+k_2}=\dfrac{2}{1+\sqrt{\alpha}}$. En impédance :
       $r=\dfrac{Z_1-Z_2}{Z_1+Z_2}$, $t=\dfrac{2Z_1}{Z_1+Z_2}$.
-    solution: |
-      Des questions 6 et 7 : $A_I+A_R=A_T$ et $k_1(A_I-A_R)=k_2A_T$. En
-      substituant $A_T$ de la première dans la seconde :
-      \begin{eqnarray}
-        k_1(A_I - A_R) &=& k_2(A_I+A_R) \nonumber\\
-        A_I(k_1-k_2) &=& A_R(k_1+k_2) \nonumber\\
-        r = \frac{A_R}{A_I} &=& \frac{k_1-k_2}{k_1+k_2}.
-      \end{eqnarray}
-      Avec $k_1=k_2/\sqrt{\alpha}$ (question 4), on divise numérateur et
-      dénominateur par $k_2$ : $r=\dfrac{1/\sqrt\alpha - 1}{1/\sqrt\alpha+1}=\dfrac{1-\sqrt\alpha}{1+\sqrt\alpha}$.
-      Puis $t=1+r=\dfrac{2}{1+\sqrt\alpha}$. Comme $Z=\mu c=\sqrt{F\mu}\propto\sqrt{\mu}\propto 1/k$
-      à $\omega$ fixé (car $k=\omega\sqrt{\mu/F}$), on a $k_1/k_2=Z_2/Z_1$, ce qui
-      redonne bien $r=(Z_1-Z_2)/(Z_1+Z_2)$ et $t=2Z_1/(Z_1+Z_2)$.
+    solution:
+      - titre: "Résolution du système en $(A_I,A_R,A_T)$"
+        texte: |
+          On dispose des deux relations
+          $$A_I+A_R=A_T \qquad (\star), \qquad k_1(A_I-A_R)=k_2A_T \qquad (\star\star).$$
+          On substitue $A_T$ de $(\star)$ dans $(\star\star)$ :
+          $$k_1(A_I-A_R) = k_2(A_I+A_R) \quad\Longrightarrow\quad A_I(k_1-k_2) = A_R(k_1+k_2),$$
+          d'où le coefficient de réflexion en amplitude :
+          $$r = \frac{A_R}{A_I} = \frac{k_1-k_2}{k_1+k_2}.$$
+          En reportant dans $(\star)$, $t=A_T/A_I=1+r$ :
+          $$t = 1+\frac{k_1-k_2}{k_1+k_2} = \frac{2k_1}{k_1+k_2}.$$
+      - titre: "Expression en fonction de $\\alpha$"
+        texte: |
+          En utilisant $k_1=k_2/\sqrt{\alpha}$ (question 4), on divise numérateur et dénominateur par $k_2$, puis on multiplie par $\sqrt{\alpha}$ pour éliminer la fraction interne :
+          $$r = \frac{1/\sqrt{\alpha}-1}{1/\sqrt{\alpha}+1} = \boxed{\frac{1-\sqrt{\alpha}}{1+\sqrt{\alpha}}}, \qquad t = \frac{2/\sqrt{\alpha}}{1/\sqrt{\alpha}+1} = \boxed{\frac{2}{1+\sqrt{\alpha}}}.$$
+      - titre: "Définition de l'impédance et expression en fonction de $Z_1,Z_2$"
+        texte: |
+          On définit l'impédance mécanique caractéristique de chaque corde par $Z_i=\mu_i c_i=\sqrt{F\mu_i}$ (cf. point cours). Comme la tension $F$ est commune aux deux cordes, on a montré dans le point cours que $k_i=(\omega/F)\,Z_i$, c'est-à-dire que $k$ et $Z$ sont \textbf{directement proportionnels}, avec le \emph{même} coefficient de proportionnalité $\omega/F$ pour les deux cordes. Le rapport $k_1/k_2$ est donc rigoureusement égal au rapport $Z_1/Z_2$ :
+          $$\frac{k_1}{k_2} = \frac{Z_1}{Z_2}.$$
+          En reportant cette proportionnalité dans les expressions de $r$ et $t$ obtenues ci-dessus (le facteur commun $\omega/F$ se simplifie directement dans le rapport $(k_1-k_2)/(k_1+k_2)$) :
+          $$\boxed{r = \frac{Z_1-Z_2}{Z_1+Z_2}}, \qquad \boxed{t = \frac{2Z_1}{Z_1+Z_2}}.$$
+          On retrouve ainsi, pour une onde mécanique sur corde, exactement la même structure de coefficients que pour l'onde acoustique du TD2 (à un renversement de l'ordre $Z_1\leftrightarrow Z_2$ près dans le numérateur de $r$, qui provient du choix de grandeur physique raccordée — déplacement ici, pression dans le cas acoustique — et non d'une erreur).
 
   - id: q9
-    enonce: "Commenter le cas $\\alpha=1$."
-    coup_de_pouce: "Si $\\alpha=1$, les deux cordes sont identiques : il n'y a plus vraiment de jonction."
+    enonce: "Commenter dans le cas où $\\alpha=1$."
+    coup_de_pouce: |
+      Si $\alpha=1$, les deux cordes sont identiques : il n'y a plus vraiment de jonction.
     correction: "$\\alpha=1 \\Rightarrow r=0,\\ t=1$ : pas de réflexion, l'onde incidente est intégralement transmise -- cohérent, la corde est alors homogène (pas d'interface)."
+    solution:
+      - titre: "Vérification directe et interprétation"
+        texte: |
+          Pour $\alpha=1$, on a $\mu_2=\mu_1$, donc $c_1=c_2$, $k_1=k_2$ et $Z_1=Z_2$. Les formules donnent immédiatement :
+          $$r = \frac{1-\sqrt{1}}{1+\sqrt{1}} = 0, \qquad t = \frac{2}{1+\sqrt{1}} = 1.$$
+          Ce résultat est physiquement attendu : si $\alpha=1$, les deux cordes sont en réalité identiques, et il n'existe alors plus de véritable discontinuité mécanique au point $O$ — on retrouve simplement une corde homogène le long de laquelle l'onde se propage sans aucune réflexion ($r=0$) et se transmet intégralement ($t=1$). Ce cas limite constitue une bonne vérification de cohérence des formules générales obtenues en question 8 : l'absence d'interface physique doit nécessairement se traduire par l'absence de réflexion.

@@ -1,0 +1,189 @@
+id: td2_ex3
+intitule: "Cardioïde"
+td: td2
+facultatif: true
+seance: 2
+
+cours_rattache:
+  - cinematique.coordonnees_polaires
+  - cinematique.base_polaire
+  - cinematique.vecteur_vitesse
+
+metadonnees:
+  duree_estimee: "35 min"
+  difficulte: 4
+  type_exercice: "Entraînement / Approfondissement"
+  indispensable: false
+
+enonce_intro: |
+  Dans le plan $Oxy$, on considère le déplacement d'un mobile assimilé à un point $M$ le long d'une courbe
+  d'équation polaire
+  $$r(\theta)=a\,(1+\cos\theta),$$
+  appelée {\bf cardioïde} (courbe « en forme de cœur »).
+
+prerequis:
+  - titre: "Vitesse en base polaire"
+    texte: |
+      En base polaire, $\overrightarrow{OM}=r\,\vec u_r$ donne $\vec v=\dot r\,\vec u_r+r\dot\theta\,\vec u_\theta$, avec $\|\vec v\|^2=\dot r^2+r^2\dot\theta^2$. Ici $r$ varie avec le temps, donc la composante radiale $\dot r$ n'est plus nulle.
+  - titre: "Formules trigonométriques de duplication"
+    texte: |
+      $\cos(2x)=2\cos^2x-1$ et $\sin(2x)=2\sin x\cos x$. En posant $x=\theta/2$ : $1+\cos\theta=2\cos^2(\theta/2)$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Étudier un mouvement le long d'une courbe polaire"
+    texte: |
+      Savoir tracer une courbe $r(\theta)$ point par point, en déduire $r(t)$ quand $\theta(t)$ est connu, calculer $\vec v$ avec ses deux composantes, simplifier la norme grâce à une identité trigonométrique et localiser le maximum de vitesse.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Un mouvement où $r$ varie : première vraie utilisation de $\\dot r\\neq0$"
+    texte: |
+      Contrairement à l'exercice précédent, la composante radiale de la vitesse est non nulle. Cet exercice entraîne au calcul complet en base polaire et à la {\bf lecture géométrique} du résultat (où le point va-t-il le plus vite ? s'arrête-t-il ?). La simplification $\sqrt{2+2\cos\theta}=2|\cos(\theta/2)|$ est le point technique à surveiller.
+
+point_cours:
+  - titre: "Mouvement le long d'une courbe $r(\theta)$"
+    texte: |
+      Si $\theta(t)$ est connu, on obtient $r(t)=r(\theta(t))$ puis $\dot r=r'(\theta)\,\dot\theta$ (règle de la chaîne). Les deux composantes de la vitesse, radiale $\dot r$ et orthoradiale $r\dot\theta$, sont orthogonales : $\|\vec v\|=\sqrt{\dot r^2+r^2\dot\theta^2}$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Écrire $\\vec v=r\\dot\\theta\\,\\vec u_\\theta$ comme pour le cercle"
+    texte: |
+      Cette formule n'est valable que si $r$ est constant. Ici $\dot r=-a\omega\sin\omega t\neq0$ : oublier la composante radiale conduit à une norme fausse.
+  - titre: "Oublier la valeur absolue dans $\\sqrt{\\cos^2(\\theta/2)}$"
+    texte: |
+      $\sqrt{x^2}=|x|$, pas $x$. Pour $\theta\in\,]\pi,2\pi[$, $\cos(\theta/2)<0$ mais la norme reste positive : $\|\vec v\|=2a\omega\,|\cos(\theta/2)|$.
+  - titre: "Confondre $\\theta$ et $\\theta/2$"
+    texte: |
+      L'identité $1+\cos\theta=2\cos^2(\theta/2)$ fait apparaître le demi-angle. Le maximum de $\|\vec v\|$ correspond à $\cos(\theta/2)=\pm1$, c'est-à-dire $\theta=0\ [2\pi]$ et non $\theta=\pi$.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Prédire avant de calculer"
+    texte: |
+      Après le tracé, demander : « où le mobile va-t-il le plus vite ? où ralentit-il ? ». Beaucoup pensent que la vitesse est maximale au point où la courbe « tourne vite » (le creux). Le calcul montre que la vitesse s'annule au point de rebroussement en $O$ et est maximale au point opposé.
+
+bilan:
+  - titre: "Vitesse sur une cardioïde parcourue à $\\dot\\theta=\\omega$"
+    texte: |
+      $r=a(1+\cos\omega t)$, $\vec v=-a\omega\sin\omega t\,\vec u_r+a\omega(1+\cos\omega t)\,\vec u_\theta$ et $\|\vec v\|=2a\omega\,|\cos(\omega t/2)|$. La vitesse est maximale ($2a\omega$) pour $\theta=0$ (point le plus éloigné de $O$) et nulle au point de rebroussement $\theta=\pi$ (en $O$).
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Longueur et aire de la cardioïde"
+    texte: |
+      La longueur parcourue en un tour est $L=\int_0^{T}\|\vec v\|\,\mathrm dt=\int_0^{2\pi}2a|\cos(\theta/2)|\,\mathrm d\theta=8a$. L'aire intérieure est $\mathcal A=\tfrac12\int_0^{2\pi}r^2\,\mathrm d\theta=\tfrac32\pi a^2$. Refaire les deux calculs et vérifier que la longueur ne demande aucune hypothèse sur $\omega$ (elle ne dépend que de la forme de la courbe).
+  - niveau: master
+    titre: "Une cardioïde comme épicycloïde"
+    texte: |
+      La cardioïde est la trajectoire d'un point d'un cercle de rayon $a/2$ qui roule sans glisser à l'extérieur d'un cercle fixe de même rayon $a/2$ (épicycloïde à une seule pointe). En notation complexe, le contour de la cardioïde principale de l'ensemble de Mandelbrot s'écrit $c(t)=\tfrac12e^{it}-\tfrac14e^{2it}$. Montrer que l'on obtient la même courbe, à une similitude près (translation, rotation, homothétie), que $r=a(1+\cos\theta)$.
+
+accroche_point_cours_essentiel:
+  - titre: "Où va-t-on le plus vite sur un cœur ?"
+    duree_introduction: "3 à 5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Un point parcourt une courbe en forme de cœur, en tournant autour de l'origine à vitesse angulaire constante. Va-t-il à vitesse constante ? Où va-t-il le plus vite : au creux du cœur ou à sa pointe ? Est-ce qu'il s'arrête quelque part ? Faites votre pari avant de calculer.
+    texte: |
+      {\bf Idée clé : sur une courbe polaire dont $r$ varie, la vitesse a deux composantes perpendiculaires.}
+      $$\vec v=\dot r\,\vec u_r+r\dot\theta\,\vec u_\theta,\qquad\|\vec v\|=\sqrt{\dot r^2+r^2\dot\theta^2}.$$
+      Si $\theta(t)$ est donné, on trouve $r(t)=r(\theta(t))$ puis $\dot r=r'(\theta)\,\dot\theta$. Une identité trigonométrique (duplication) transforme ensuite la racine en une expression simple.
+
+outils_mathematiques:
+  - titre: "Formule de duplication : $\\cos(2x)=2\\cos^2x-1$"
+    texte: |
+      Avec $x=\theta/2$ : $1+\cos\theta=2\cos^2(\theta/2)$. Le calcul $\sin^2\theta+(1+\cos\theta)^2=2+2\cos\theta=4\cos^2(\theta/2)$ en découle.
+  - titre: "Formule de duplication du sinus : $\\sin(2x)=2\\sin x\\cos x$ et symétries"
+    texte: |
+      $\sin\theta=2\sin(\theta/2)\cos(\theta/2)$. Symétries utiles : $\cos(\pi-x)=-\cos x$ et $\sin(\pi-x)=\sin x$ (la cardioïde est symétrique par rapport à $Ox$ : $r(-\theta)=r(\theta)$ et $r(2\pi-\theta)=r(\theta)$).
+  - titre: "Racine d'un carré et valeur absolue"
+    texte: |
+      $\sqrt{u^2}=|u|$. Ici $\sqrt{4\cos^2(\theta/2)}=2|\cos(\theta/2)|$, nul pour $\theta=\pi$ et maximal pour $\theta=0\ [2\pi]$.
+  - titre: "Dérivée composée"
+    texte: |
+      $\dfrac{\mathrm d}{\mathrm dt}\cos(\omega t)=-\omega\sin(\omega t)$, donc $\dot r=-a\omega\sin(\omega t)$.
+  - titre: "Tracé d'une courbe polaire par points"
+    texte: |
+      On dresse un tableau $\theta\mapsto r(\theta)$, on convertit chaque point en cartésien par $x=r\cos\theta$, $y=r\sin\theta$ et on relie. Une valeur $r=0$ donne l'origine.
+  - titre: "Longueur d'une courbe par intégration"
+    texte: |
+      La longueur parcourue est $\displaystyle L=\int\|\vec v\|\,\mathrm dt$ : c'est l'aire sous la courbe $\|\vec v\|(t)$, comme pour une distance parcourue.
+
+liens_autres_disciplines:
+  - discipline: "Acoustique"
+    texte: |
+      Un {\bf microphone cardioïde} a une sensibilité en fonction de l'angle d'incidence proportionnelle à $1+\cos\theta$ : maximale en face, nulle derrière. Son diagramme de directivité est exactement cette courbe.
+  - discipline: "Optique"
+    texte: |
+      La lumière d'une source ponctuelle placée sur le bord d'une tasse circulaire se réfléchit sur la paroi et forme une courbe lumineuse (caustique) qui est une cardioïde. Pour un faisceau parallèle, c'est une néphroïde.
+  - discipline: "Mathématiques"
+    texte: |
+      Courbes polaires (limaçons $r=a+b\cos\theta$), épicycloïdes, intégrales de longueur et d'aire. La cardioïde est aussi le contour de la partie principale de l'ensemble de Mandelbrot.
+  - discipline: "Mécanique"
+    texte: |
+      Un point matériel peut s'arrêter sans que le mouvement soit terminé : au point de rebroussement, $\vec v=\vec0$ puis le mobile repart en changeant de direction, comme une balle au sommet de sa trajectoire verticale.
+
+questions:
+  - id: q1
+    enonce: |
+      Étude de la courbe.
+      \begin{enumerate}[label=(\alph*)]
+          \item Quelle est la dimension de $a$ ?
+          \item Choisir une valeur pour $a$ et représenter la cardioïde en plaçant les points correspondant à $\theta=0$, $\theta=\dfrac\pi3$, $\theta=\dfrac\pi2$, $\theta=\dfrac{2\pi}3$, $\theta=\pi$, $\theta=\dfrac{4\pi}3$, $\theta=2\pi$.
+          \item Représenter la base polaire $(\vec u_r,\vec u_\theta)$ en un point $P$ de la cardioïde, correspondant à $\theta=\dfrac\pi3$.
+      \end{enumerate}
+    coup_de_pouce: |
+      $r$ est une distance. Pour placer un point, calculez $r(\theta)$, puis $x=r\cos\theta$ et $y=r\sin\theta$. En $P$, $\vec u_r$ est dirigé selon $\overrightarrow{OP}$ et $\vec u_\theta$ en est la rotation de $+90^\circ$.
+    correction: |
+      $[a]=\mathrm L$. Pour $a=2$ cm : $r=4,\ 3,\ 2,\ 1,\ 0,\ 1,\ 4$ cm pour les sept angles ; courbe symétrique par rapport à $Ox$ avec un point de rebroussement en $O$.
+    solution:
+      - titre: "(a) Dimension de $a$"
+        texte: |
+          $r=a(1+\cos\theta)$ est une longueur et $1+\cos\theta$ est sans dimension : $[a]=\mathrm L$.
+      - titre: "(b) Points de la cardioïde"
+        texte: |
+          On choisit $a=2$ cm. On calcule $r=a(1+\cos\theta)$ puis $x=r\cos\theta$, $y=r\sin\theta$ :
+          $$
+          \begin{array}{c|ccccccc}
+          \theta & 0 & \pi/3 & \pi/2 & 2\pi/3 & \pi & 4\pi/3 & 2\pi\\
+          \hline
+          r~(\mathrm{cm}) & 4 & 3 & 2 & 1 & 0 & 1 & 4\\
+          x~(\mathrm{cm}) & 4 & 1{,}5 & 0 & -0{,}5 & 0 & -0{,}5 & 4\\
+          y~(\mathrm{cm}) & 0 & 2{,}6 & 2 & 0{,}87 & 0 & -0{,}87 & 0
+          \end{array}
+          $$
+          La courbe est fermée, symétrique par rapport à $Ox$ ($r(2\pi-\theta)=r(\theta)$). Elle passe par $(2a,0)$ pour $\theta=0$ (point le plus éloigné de $O$) et revient à l'origine pour $\theta=\pi$, où elle présente un {\bf point de rebroussement} (« creux » du cœur).
+      - titre: "(c) Base polaire en $P$"
+        texte: |
+          Pour $\theta=\pi/3$, $P$ est à la distance $r=\tfrac32a$ de $O$, et
+          $$\vec u_r=\cos\tfrac\pi3\,\vec\imath+\sin\tfrac\pi3\,\vec\jmath=\tfrac12\vec\imath+\tfrac{\sqrt3}2\vec\jmath,\qquad\vec u_\theta=-\tfrac{\sqrt3}2\vec\imath+\tfrac12\vec\jmath.$$
+          On trace $\vec u_r$ le long de la droite $(OP)$, en s'éloignant de $O$, et $\vec u_\theta$ perpendiculaire, orienté dans le sens des $\theta$ croissants. Contrairement au cercle, $\vec u_\theta$ n'est pas tangent à la courbe ici (car $r$ varie avec $\theta$).
+
+  - id: q2
+    enonce: |
+      La courbe est parcourue avec une vitesse angulaire $\dot\theta=\omega$ constante, avec $\theta(0)=0$.
+      \begin{enumerate}[label=(\alph*),start=4]
+          \item Déterminer l'expression de $\theta(t)$ et en déduire $r(t)$.
+          \item Déterminer l'expression du vecteur vitesse $\vec v$ de $M$ dans la base $(\vec u_r,\vec u_\theta)$ et calculer sa norme.
+          \item Représenter la vitesse du mobile lorsqu'il se situe au point $P$.
+          \item En quel point de la trajectoire la vitesse de $M$ est-elle maximale ?
+      \end{enumerate}
+    coup_de_pouce: |
+      Intégrez $\dot\theta=\omega$. Pour la vitesse, utilisez $\vec v=\dot r\,\vec u_r+r\dot\theta\,\vec u_\theta$ avec $\dot r=-a\omega\sin\omega t$. Pour simplifier la norme, développez $\sin^2+(1+\cos)^2$.
+    correction: |
+      $\theta=\omega t$, $r=a(1+\cos\omega t)$ ; $\vec v=-a\omega\sin(\omega t)\,\vec u_r+a\omega(1+\cos\omega t)\,\vec u_\theta$ ; $\|\vec v\|=2a\omega\,|\cos(\omega t/2)|$ ; vitesse maximale ($2a\omega$) en $\theta=0$, point $(2a,0)$.
+    solution:
+      - titre: "(d) Équations horaires"
+        texte: |
+          $\dot\theta=\omega$ constant et $\theta(0)=0$ donnent $\boxed{\theta(t)=\omega t}$, donc
+          $$\boxed{r(t)=a\,(1+\cos\omega t)}.$$
+      - titre: "(e) Vecteur vitesse"
+        texte: |
+          $\dot r=-a\omega\sin\omega t$ et $r\dot\theta=a\omega(1+\cos\omega t)$ :
+          $$\boxed{\vec v=-a\omega\sin(\omega t)\,\vec u_r+a\omega\,(1+\cos\omega t)\,\vec u_\theta}.$$
+          Les deux composantes sont orthogonales, donc
+          $$\|\vec v\|^2=a^2\omega^2\left[\sin^2\omega t+(1+\cos\omega t)^2\right]=a^2\omega^2\,(2+2\cos\omega t).$$
+          Avec $1+\cos\omega t=2\cos^2(\omega t/2)$ :
+          $$\boxed{\|\vec v\|=2a\omega\,\left|\cos\frac{\omega t}2\right|}.$$
+      - titre: "(f) Vitesse au point $P$ ($\\theta=\\pi/3$)"
+        texte: |
+          Pour $\omega t=\pi/3$ : $v_r=-a\omega\sin\frac\pi3=-\frac{\sqrt3}2a\omega\approx-0{,}87\,a\omega$ et $v_\theta=a\omega\left(1+\frac12\right)=\frac32a\omega$. D'où $\|\vec v\|=a\omega\sqrt{\tfrac34+\tfrac94}=\sqrt3\,a\omega\approx1{,}73\,a\omega$, ce qui coïncide avec $2a\omega\cos\frac\pi6=\sqrt3\,a\omega$. En $P$, on trace $\vec v$ avec une composante {\bf rentrante} ($v_r<0$ : le point se rapproche de $O$) et une grande composante orthoradiale ($v_\theta>0$ : le point tourne dans le sens trigonométrique).
+      - titre: "(g) Vitesse maximale"
+        texte: |
+          $\|\vec v\|$ est maximale lorsque $|\cos(\omega t/2)|=1$, soit $\omega t=0\ [2\pi]$, c'est-à-dire $\theta=0$ : le point $(2a,0)$, le plus éloigné de $O$. La vitesse vaut alors $v_{\max}=2a\omega$, dirigée selon $\vec u_\theta=\vec\jmath$ ($v_r=0$ en ce point). À l'inverse, $\|\vec v\|=0$ pour $\omega t=\pi$ : le point passe en $O$, point de rebroussement, où il s'arrête un instant avant de repartir.

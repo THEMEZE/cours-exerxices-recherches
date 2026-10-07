@@ -1,0 +1,10 @@
+id: td2
+titre: "Cinématique en coordonnées polaires (2D) et Cylindriques (3D)"
+chapitre_cours: "Chap. 1 — Cinématique du point matériel"
+seance: 1
+niveau_public: [cpge, licence]
+exercices_ordre:
+  - ex1_cartesien_polaire
+  - ex2_mouvement_circulaire_polaire
+  - ex3_cardioide
+  - ex4_mouvement_helicoidal

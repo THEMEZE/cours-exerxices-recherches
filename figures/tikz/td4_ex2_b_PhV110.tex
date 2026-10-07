@@ -1,0 +1,144 @@
+
+% 3. Environnement unique et superposition directe
+\begin{tikzpicture}
+  % On dessine les deux éléments sur le MÊME repère absolu
+  \clip[](-5.0, -4.5) rectangle (5.0 , 4.5)  ;
+
+  \node[transform canvas={scale=1}] at (0,0) {
+    \begin{tikzpicture}
+
+        \begin{scope}[shift={(-0.0,0.0)}, xscale=1,yscale=1]
+            % Grille principale
+            \draw[opacity=0.2,very thin,line width=0.05cm,color=colorThree](-3.5,-3.5)grid(5.9,4.5);
+            % Sous-grille
+            \draw[opacity=0.2,very thin,line width=0.03cm,color=colorThree](-3.4,-3.4)grid[step=0.5](5.7,4.4);
+
+            % Graduations X
+            \foreach \x in {-3.0,-2.5,...,5} {
+                \draw[line width=0.03cm,color=colorOne](\x,0-0.2)--(\x,0+0.2);
+            }
+            \foreach \x in {-3,...,5} {
+                \draw[line width=0.05cm,color=colorOne](\x,0-0.3)--(\x,0+0.3)
+                node[pos = -0.1 ,shift={(0,- 0.05)},font=\fontsize{0.5cm}{0.05cm}\bfseries\selectfont]{\x};
+            }
+            % Graduations Y
+             \foreach \y in {-3.0,-2.5,...,4} {
+                \draw[line width=0.03cm,color=colorOne,](0-0.2,\y)--(0+0.2,\y);
+            }
+            \foreach \y in {-3,...,4} {
+                \draw[line width=0.05cm,color=colorOne,](0-0.3,\y)--(0+0.3,\y)
+                node[pos = -0.1 , shift={(-0.5,0)},font=\fontsize{0.5cm}{0.05cm}\bfseries\selectfont]{\y};
+            }
+
+            % 2. Axe des abscisses (x)
+            \draw[line width=0.1cm,color=colorOne,->,
+            >={Computer Modern Rightarrow[length=0.4cm, width=0.6cm]}
+            ] (-3.6,0) -- (6,0) 
+                node[pos=0.95, below, color=colorOne, font=\fontsize{0.5cm}{0.05cm}\bfseries\selectfont] {$x$};
+
+            % 3. Axe des ordonnées (S(x))
+            \draw[line width=0.1cm,color=colorOne,->,
+            >={Computer Modern Rightarrow[length=0.4cm, width=0.6cm]}
+            ] (0,-3.6) -- (0,5) 
+                node[pos=1.0, xshift=-0.5cm,yshift=-0.06cm, color=colorOne, font=\fontsize{0.5cm}{0.05cm}\bfseries\selectfont] {$y$}
+                ;
+
+        \end{scope}
+
+
+        %\draw[dashed, color=colorThree, line width=0.1cm] (1,1) circle (3);
+
+        %\draw[color=colorThree,line width=0.1cm](1,1) ++(0:1) arc[start angle=0, end angle=60, radius=1]  node[pos=0.5, above right,color=colorOne,font=\fontsize{0.4cm}{0.4cm}\bfseries\selectfont,] {$\theta$};
+
+        \draw[opacity = 1,line width=0.1cm,shift={(0,0)}]
+            (1,1)edge[shift={(0,0)},color=colorFour,-{Computer Modern Rightarrow[length=0.4cm,width=0.6cm]}]node[pos=0.8,above,color=colorFour,font=\fontsize{0.4cm}{0.04cm}\bfseries\selectfont, rotate = 0]{$ \vec{F}_1$}(4,0)
+            %(-3,1)edge[shift={(0,0)}, dashed, color=colorThree]node[pos=0.8,shift={(0.02cm,0.1cm)},color=colorOne,font=\fontsize{0.1cm}{0.04cm}\bfseries\selectfont, rotate = 0]{$ \vec{F}_2$}(5,1)
+            (1,1)edge[opacity = 0.5,shift={(0,0)},color=colorFour,-{Computer Modern Rightarrow[length=0.4cm,width=0.6cm]}]node[opacity = 0.5,pos=0.5,above,color=colorFour,font=\fontsize{0.4cm}{0.04cm}\bfseries\selectfont, rotate = 0]{$ \vec{F}_2$}({1+3*cos(60)},{1+3*sin(60)})
+            (4,0)edge[opacity = 0.5,shift={(0,0)},color=colorFour,-{Computer Modern Rightarrow[length=0.4cm,width=0.6cm]}]node[opacity = 0.5,pos=0.5,above,color=colorFour,font=\fontsize{0.4cm}{0.04cm}\bfseries\selectfont, rotate = 0]{$ \vec{F}_2$}({4+3*cos(60)},{0+3*sin(60)})
+            (1,1)edge[opacity = 1,shift={(0,0)},color=colorFour,-{Computer Modern Rightarrow[length=0.4cm,width=0.6cm]}]node[opacity = 1,pos=0.5,above,color=colorFour,font=\fontsize{0.4cm}{0.04cm}\bfseries\selectfont, rotate = 0]{$ \vec{F}_1+\vec{F}_2$}({4+3*cos(60)},{0+3*sin(60)})
+        ;
+
+        \fill[color=colorSix] (1,1) circle (0.1);
+        \node[color=colorSix, font=\fontsize{0.5cm}{0.5cm}\bfseries\selectfont] at (0.7,0.7)  {$M$};
+
+        
+        
+
+        
+
+        % \draw[opacity = 0.5,line width=0.01cm,shift={(\vzero*\dt*9,\h - 0.5*\g*\dt*\dt*9*9)}]
+        %     (0,0)edge[shift={(0,0)},color=colorOne,-{Computer Modern Rightarrow[length=0.04cm,width=0.06cm]}]node[pos=0.5,shift={(0.02cm,0.03cm)},color=colorOne,font=\fontsize{0.03cm}{0.04cm}\bfseries\selectfont, rotate = 0]{$ \vec{v}(t_{10})$}(\vzero/10,-\g*\dt*10/10)
+        %     (0,0)edge[shift={(\vzero/10,-\g*\dt*10/10)},color=colorOne,-{Computer Modern Rightarrow[length=0.04cm,width=0.06cm]}]node[pos=0.5,shift={(0.02cm,0.03cm)},color=colorOne,font=\fontsize{0.03cm}{0.04cm}\bfseries\selectfont, rotate = 0]{$- \vec{v}(t_{8})$}(-\vzero/10,\g*\dt*8/10)
+        %     (0,0)edge[shift={(0,0)},color=colorFour,{Computer Modern Rightarrow[length=0.04cm,width=0.06cm]}-{Computer Modern Rightarrow[length=0.04cm,width=0.06cm]}]node[pos=0.5,above=-1.4mm,color=colorFour,font=\fontsize{0.05cm}{0.04cm}\bfseries\selectfont, rotate = -45]{$\vec{v}(t_{10}) - \vec{v}(t_{8})$}(0,-\g*\dt*2/10)
+        % ;
+
+        % \draw[opacity = 1,line width=0.01cm,shift={(\vzero*\dt*8,\h - 0.5*\g*\dt*\dt*8*8)}]
+        %     (0,0)edge[shift={(0,0)},color=colorOne,-{Computer Modern Rightarrow[length=0.04cm,width=0.06cm]}]node[pos=0.5,shift={(0.02cm,0.03cm)},color=colorOne,font=\fontsize{0.03cm}{0.04cm}\bfseries\selectfont, rotate = 0]{$ \vec{v}_x(t_8)$}(\vzero/10,0)
+        %     (0,0)edge[shift={(\vzero/10,0)},color=colorOne,-{Computer Modern Rightarrow[length=0.04cm,width=0.06cm]}]node[pos=0.5,shift={(0.04cm,0)},color=colorOne,font=\fontsize{0.03cm}{0.04cm}\bfseries\selectfont, rotate = -90]{$ \vec{v}_y(t_9)$}(0,-\g*\dt*8/10)
+        % ;
+
+        % \draw[opacity = 1,line width=0.01cm,shift={(\vzero*\dt*10,\h - 0.5*\g*\dt*\dt*10*10)}]
+        %     (0,0)edge[shift={(0,0)},color=colorOne,-{Computer Modern Rightarrow[length=0.04cm,width=0.06cm]}]node[pos=0.5,shift={(0.02cm,0.03cm)},color=colorOne,font=\fontsize{0.03cm}{0.04cm}\bfseries\selectfont, rotate = 0]{$ \vec{v}_x(t_{10})$}(\vzero/10,0)
+        %     (0,0)edge[shift={(\vzero/10,0)},color=colorOne,-{Computer Modern Rightarrow[length=0.04cm,width=0.06cm]}]node[pos=0.5,shift={(0.04cm,0)},color=colorOne,font=\fontsize{0.03cm}{0.04cm}\bfseries\selectfont, rotate = -90]{$ \vec{v}_y(t_{10})$}(0,-\g*\dt*10/10)
+        % ;
+
+
+
+        
+
+
+
+
+        
+        
+        %\foreach \n in {0,...,7} { \pgfmathsetmacro{\t}{\n*\dt} \pgfmathsetmacro{\x}{\vzero*\t} \pgfmathsetmacro{\y}{\h - 0.5*\g*\t*\t} 
+        %\fill[color=colorFour] (\x,\y) circle (0.8); }
+
+        % \draw[ opacity = 0.5, dashed, smooth, line width=1.0ex, color=colorFour, domain=0:1, samples=100 ] plot ({\vzero*\x}, {\h - 0.5*\g*\x*\x});
+
+        % \draw[ dashed, smooth, line width=1.0ex, color=colorFour, domain=0:1, samples=100 ] plot (\vzero, {-\g*\x});
+
+        % \node[below right, color=colorFour, font=\fontsize{15pt}{10pt}\bfseries\selectfont , rotate = 80] at (-2.4, -4.4) {$z(t) = 1-2t^2$};
+
+        % \draw[dashed, smooth, line width=0.8ex, color=colorFive, domain=-0.5:3, samples=100] 
+        %     plot (\x, {-4*\x+3});
+
+        % \node[below right, color=colorFive, font=\fontsize{7pt}{10pt}\bfseries\selectfont , rotate = -75] at (2.5, -5.0) {$\dot{z}(a)(t-a)+z(a)$};
+
+        % \draw[line width=0.8ex, color=colorOne] (1,0.3) -- (1,-0.3) 
+        %     node[pos=-0.1, above , color=colorOne, font=\fontsize{20pt}{10pt}\bfseries\selectfont] {$a$};
+        % \draw[line width=0.8ex, color=colorOne] (2,0.3) -- (2,-0.3) 
+        %     node[pos=-0.1, above, color=colorOne, shift={(0.8,-0.0)},  font=\fontsize{20pt}{10pt}\bfseries\selectfont] {$a + \mathrm{d} a$};
+
+        % \draw[dashed, line width=0.5ex, color=colorOne] (1,0) -- (1,-8);
+        % \draw[dashed, line width=0.5ex, color=colorOne] (-2.5,-1) -- (4,-1)
+        %     node[pos=-0.0, left, color=colorOne, font=\fontsize{20pt}{10pt}\bfseries\selectfont] {$z(a)$};
+        % \draw[dashed, line width=0.5ex, color=colorOne] (2,0) -- (2,-8);
+        % \draw[dashed, line width=0.5ex, color=colorOne] (-2.5,-7) -- (4,-7)
+        %     node[pos=-0.0, left, color=colorOne, font=\fontsize{20pt}{10pt}\bfseries\selectfont] {$z(a + \mathrm{d} a )$};
+
+        % \draw[dashed, line width=0.5ex, color=colorOne] (-2.5,-5) -- (4,-5)
+        %     node[pos=-0.0, left, color=colorOne, font=\fontsize{20pt}{10pt}\bfseries\selectfont] {$\dot{z}(a)\mathrm{d} a+z(a)$};
+
+        % \draw[dashed, line width=0.5ex, color=colorOne , -{Latex[length=4mm,width=3mm]}] (1,1.2) -- (1.2,1.2);
+        % \draw[dashed, line width=0.5ex, color=colorOne , {Latex[length=4mm,width=3mm]}- ] (1.8,1.2) -- (2,1.2);
+        % \node[color=colorOne, font=\fontsize{10pt}{10pt}\bfseries\selectfont ] at (1.5, 1.2) {$\mathrm{d} a$};
+
+        % \draw[line width=0.5ex, color=colorOne , {Latex[length=4mm,width=3mm]}- ] (3,-5) -- (3,-3.5);
+        % \draw[line width=0.5ex, color=colorOne , -{Latex[length=4mm,width=3mm]} ] (3,-2.5) -- (3,-1);
+        % \node[color=colorOne, font=\fontsize{10pt}{10pt}\bfseries\selectfont , rotate = 90 ] at (3, -3) {$\mathrm{d} z(a)$};
+
+        % \draw[line width=0.5ex, color=colorOne , {Latex[length=4mm,width=3mm]}- ] (4.0,-7) -- (4.0,-4.5);
+        % \draw[line width=0.5ex, color=colorOne , -{Latex[length=4mm,width=3mm]} ] (4,-3.5) -- (4,-1);
+        % \node[color=colorOne, font=\fontsize{10pt}{10pt}\bfseries\selectfont , rotate = 90 ] at (4.0,-4) {$\Delta z(a)$};
+
+
+
+     \end{tikzpicture}
+};
+        
+
+  % Grille de repérage
+  %\draw[line width=0.5ex , color = red] (-5.0, -4.5) rectangle (5.0 , 4.5) ;
+  %\drawgrid{-6.1}{6.2}{-5.5}{4.5}{1}{1}
+\end{tikzpicture}

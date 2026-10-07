@@ -1,0 +1,233 @@
+id: td3_ex1
+intitule: "Transformée de Fourier discrète (FFT) d'un signal sinusoïdal"
+td: td3
+facultatif: false
+seance: 3
+cours_rattache:
+  - onip.fft_1d
+  - onip.fftshift
+  - onip.resolution_frequentielle
+
+metadonnees:
+  duree_estimee: "45 min"
+  difficulte: 3
+  type_exercice: "Application longue, exercice charnière du bloc"
+  indispensable: true
+
+enonce_intro: |
+  1. Créer une fonction générant une sinusoïde (amplitude, fréquence,
+     vecteur temps en paramètres). \\
+  2. Générer un signal sinusoïdal de fréquence 200 Hz, période
+     d'échantillonnage 300 µs, sur un intervalle de temps de 0.1 s. \\
+  3. Afficher ce signal. \\
+  4. Calculer la TF discrète du signal (algorithme FFT). \\
+  5. Afficher le résultat (parties réelle et imaginaire). Titre, axes,
+     légende. Préciser le rôle de \texttt{np.fft.fftshift()}. \\
+  6. Reconstruire l'axe des fréquences. \\
+  7. Afficher le module de la TF discrète. Est-ce le résultat voulu ?
+
+prerequis:
+  - titre: "FFT et ordre naturel des fréquences"
+    texte: |
+      \texttt{np.fft.fft} calcule la Transformée de Fourier Discrète via
+      l'algorithme FFT (rapide, $O(N\log N)$), un résultat de $N$ nombres
+      complexes. Par défaut, l'ordre de sortie place d'abord les
+      fréquences \emph{positives} croissantes, puis les fréquences
+      \emph{négatives} croissantes : la fréquence nulle est donc en tout
+      début de tableau, pas au centre.
+  - titre: "Symétrie hermitienne d'un signal réel"
+    texte: |
+      Le spectre d'un signal réel (non complexe) vérifie
+      $\mathrm{TF}(-f) = \overline{\mathrm{TF}(f)}$ : il est toujours
+      symétrique par rapport à 0 Hz. Deux pics symétriques pour une
+      sinusoïde pure sont donc normaux et attendus, pas une erreur.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Manipuler fftshift et l'axe des fréquences ensemble"
+    texte: |
+      Comprendre que \texttt{fftshift} doit être appliqué IDENTIQUEMENT à
+      la TF et à l'axe des fréquences (\texttt{fftfreq}), sinon les deux
+      courbes ne sont plus alignées indice par indice.
+  - titre: "Relier résolution fréquentielle et durée du signal"
+    texte: |
+      Retenir que la résolution fréquentielle du spectre vaut
+      $1/\text{durée}$, indépendamment du nombre de points ou de $T_e$
+      seuls.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Exercice charnière du bloc 1"
+    texte: |
+      La FFT sera réutilisée telle quelle en 2D dans \texttt{td3\_ex3}.
+      Bien faire manipuler \texttt{fftshift} ET l'axe des fréquences
+      ensemble : c'est le point le plus souvent source d'erreur
+      silencieuse (le graphique s'affiche sans erreur Python, mais avec un
+      axe décalé).
+
+point_cours:
+  - titre: "Génération du signal et FFT (extrait commenté)"
+    texte: |
+      \begin{verbatim}
+      import numpy as np
+      import matplotlib.pyplot as plt
+
+      def generate_sine_signal(amplitude, frequency, time_vector):
+          """Genere un signal sinusoidal."""
+          return amplitude * np.sin(2 * np.pi * frequency * time_vector)
+
+      frequency = 200          # Hz
+      Te = 300e-6              # 300 microsecondes
+      duration = 0.1           # s
+      amplitude = 3
+
+      # np.arange(0, duration, Te) : N decoule de Te et duration, cohérent
+      # avec l'enonce qui donne Te et la duree plutot qu'un nombre de points.
+      time_vector = np.arange(0, duration, Te)
+      N = len(time_vector)   # ~334 points (a l'arrondi flottant pres)
+
+      signal = generate_sine_signal(amplitude, frequency, time_vector)
+
+      # np.fft.fft calcule la TFD via l'algorithme FFT : resultat COMPLEXE,
+      # de meme taille N que le signal d'entree.
+      TF = np.fft.fft(signal)
+      \end{verbatim}
+  - titre: "fftshift et reconstruction de l'axe des fréquences"
+    texte: |
+      \begin{verbatim}
+      # fftshift replace la frequence nulle au CENTRE du tableau, et les
+      # frequences dans l'ordre croissant de gauche a droite : un simple
+      # rearrangement d'affichage, qui ne change ni les valeurs ni leur
+      # interpretation physique.
+      TF_shifted = np.fft.fftshift(TF)
+
+      # fftfreq(N, Te) donne le vecteur des frequences correspondant a
+      # CHAQUE case du resultat de fft, dans le MEME ordre naturel : il
+      # faut donc lui appliquer EXACTEMENT le meme fftshift que TF.
+      freq_axis = np.fft.fftfreq(N, d=Te)
+      freq_axis_shifted = np.fft.fftshift(freq_axis)
+
+      plt.figure()
+      plt.plot(freq_axis_shifted, np.real(TF_shifted), label="Partie reelle")
+      plt.plot(freq_axis_shifted, np.imag(TF_shifted), label="Partie imaginaire")
+      plt.xlabel("Frequence (Hz)"); plt.ylabel("Amplitude de la TF")
+      plt.legend(); plt.grid(); plt.show()
+      \end{verbatim}
+  - titre: "Module de la TF et interprétation"
+    texte: |
+      \begin{verbatim}
+      module_TF = np.abs(TF_shifted)
+
+      plt.figure()
+      plt.plot(freq_axis_shifted, module_TF)
+      plt.xlim(-1000, 1000)   # zoom pour bien voir les deux pics
+      plt.xlabel("Frequence (Hz)"); plt.ylabel("Module de la TF")
+      plt.grid(); plt.show()
+
+      pic = freq_axis_shifted[np.argmax(module_TF)]
+      print(f"Frequence du plus grand pic detecte : {pic:.1f} Hz")
+      print(f"Resolution frequentielle (1/duree) : {1/duration:.1f} Hz")
+      \end{verbatim}
+      Résultat observé : deux pics symétriques détectés à environ
+      $\pm 200$ Hz (pic exact mesuré : $-199{,}6$ Hz, à la résolution
+      fréquentielle près, $1/\text{durée} = 10$ Hz).
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "fftshift appliqué à un seul des deux tableaux"
+    texte: |
+      Appliquer \texttt{fftshift} à \texttt{TF} mais pas à
+      \texttt{freq\_axis} (ou l'inverse) : le pic semble alors apparaître à
+      une fréquence incorrecte sur le graphique. Vérifier explicitement
+      que les deux \texttt{fftshift} sont bien présents, l'un à côté de
+      l'autre dans le code.
+  - titre: "Ne pas comprendre pourquoi il y a deux pics"
+    texte: |
+      Rappeler la symétrie hermitienne du spectre d'un signal réel :
+      $\mathrm{TF}(-f) = \overline{\mathrm{TF}(f)}$.
+  - titre: "Nombre de points 'bizarre'"
+    texte: |
+      \texttt{np.arange(0, duration, Te)} génère parfois 333 ou 334 points
+      au lieu d'une valeur ronde : effet d'arrondi flottant sur la borne
+      supérieure de \texttt{arange}, sans conséquence sur le raisonnement
+      physique.
+
+bilan:
+  - titre: "Ce qu'il faut retenir"
+    texte: |
+      Un signal réel a un spectre symétrique : deux pics, pas un seul,
+      pour une sinusoïde pure. La résolution fréquentielle d'un spectre
+      dépend de la \textbf{durée totale} du signal analysé ($1/\text{durée}$),
+      pas du nombre de points seul. \texttt{fftshift} doit toujours être
+      appliqué de façon cohérente entre le spectre et son axe des
+      fréquences associé.
+
+aller_plus_loin:
+  - niveau: ecole_ingenieur
+    titre: "Normalisation de l'amplitude"
+    texte: |
+      L'amplitude de la TF brute est proportionnelle à $N$ (nombre de
+      points), pas directement comparable à l'amplitude du signal temporel
+      sans normalisation (division par $N$, et facteur 2 sauf pour la
+      composante continue).
+  - niveau: ecole_ingenieur
+    titre: "Effet de la durée et de Te sur le spectre"
+    texte: |
+      Que devient le spectre si l'on augmente la durée du signal sans
+      changer $T_e$ ? Et si l'on diminue $T_e$ sans changer la durée ?
+
+questions:
+  - id: q1
+    enonce: |
+      Écrire \texttt{generate\_sine\_signal(amplitude, frequency,
+      time\_vector)}, puis générer le signal demandé (200 Hz,
+      $T_e = 300\,\mu s$, durée 0,1 s) et l'afficher.
+    coup_de_pouce: |
+      \texttt{time\_vector = np.arange(0, duration, Te)} ; le nombre de
+      points $N$ en découle, il n'est pas fixé a priori.
+    correction: "\\texttt{signal = amplitude * np.sin(2*pi*frequency*time\\_vector)} ; N $\\approx$ 334 points."
+    solution:
+      - titre: "Génération"
+        texte: |
+          Avec \texttt{duration=0.1} s et \texttt{Te=300e-6} s, on obtient
+          $N \approx 334$ points (peut varier de 1 point selon les
+          arrondis flottants). Le signal tracé montre bien une sinusoïde
+          de fréquence 200 Hz sur l'intervalle de 0,1 s.
+  - id: q2
+    enonce: |
+      Calculer la TF du signal, puis afficher ses parties réelle et
+      imaginaire après \texttt{fftshift}. À quoi sert
+      \texttt{np.fft.fftshift()} ?
+    coup_de_pouce: |
+      Comparez l'ordre des fréquences renvoyé par défaut par
+      \texttt{np.fft.fft} à un ordre « naturel » croissant de $-f_{max}$ à
+      $+f_{max}$.
+    correction: "fftshift replace la fréquence nulle au centre du tableau, pour un affichage plus lisible."
+    solution:
+      - titre: "Rôle de fftshift"
+        texte: |
+          Par défaut, \texttt{np.fft.fft} renvoie d'abord les fréquences
+          positives croissantes, puis les négatives croissantes : la
+          fréquence nulle est donc en tout début de tableau.
+          \texttt{np.fft.fftshift} réordonne ce tableau pour placer 0 Hz
+          au centre et les fréquences dans l'ordre croissant de gauche à
+          droite — un simple réarrangement d'affichage, sans effet sur les
+          valeurs elles-mêmes.
+  - id: q3
+    enonce: |
+      Reconstruire l'axe des fréquences correspondant à \texttt{TF}, puis
+      afficher le module de la TF. Le résultat est-il celui attendu ?
+    coup_de_pouce: |
+      \texttt{np.fft.fftfreq(N, d=Te)} doit recevoir le même
+      \texttt{fftshift} que \texttt{TF} pour rester aligné avec elle.
+    correction: "Deux pics symétriques à environ ±200 Hz : résultat attendu pour un signal réel."
+    solution:
+      - titre: "Interprétation"
+        texte: |
+          On retrouve bien deux pics, situés (à la résolution
+          fréquentielle près, ici 10 Hz) à environ $+200$ Hz et $-200$ Hz,
+          cohérents avec la fréquence du signal généré. La présence de
+          deux pics symétriques est normale : un signal réel a toujours un
+          spectre symétrique par rapport à 0 Hz. Le pic n'est pas
+          exactement à 200 Hz mais au multiple de la résolution
+          fréquentielle le plus proche, ce qui relie directement la
+          résolution du spectre à la durée du signal analysé
+          ($1/\text{durée} = 10$ Hz ici), et non au nombre de points ni à
+          $T_e$ seuls.

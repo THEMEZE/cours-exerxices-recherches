@@ -25,6 +25,56 @@ enonce_intro: |
   les forces de pesanteur. Le déplacement transversal $y(x,t)$ obéit à l'équation :
   $$\dfrac{\partial^2 y}{\partial x^2} = \dfrac{1}{c^2}\dfrac{\partial^2 y}{\partial t^2}$$
 
+figure:
+    ref: td1_ex3_PhV212_Demo
+    legende: "Schémat tronçon de corde"
+    scale: 0.7
+    label: "fig:???"
+
+accroche_point_cours_essentiel:
+  - titre: "D'où vient l'équation d'onde sur une corde ?"
+    duree_introduction: "5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      On vous donne l'équation de d'Alembert et la célérité $c=\sqrt{F/\mu}$. Mais pourquoi cette équation et pourquoi cette célérité ? Si on {\bf double la tension}, de combien change $c$ ? Et sur une vraie corde, pourquoi suppose-t-on que les angles restent {\bf petits} ?
+    texte: |
+      {\bf Idée clé : le PFD appliqué à un petit tronçon de corde, linéarisé pour de petits angles.} Pour un tronçon $[x,x+\mathrm dx]$, de masse $\mu\,\mathrm dx$, la composante verticale des tensions $F\sin\alpha(x+\mathrm dx)-F\sin\alpha(x)$ vaut $F\,\partial_x^2y\,\mathrm dx$ et le PFD donne
+      $$\mu\,\frac{\partial^2y}{\partial t^2}=F\,\frac{\partial^2y}{\partial x^2}\quad\Longleftrightarrow\quad c=\sqrt{F/\mu}.$$
+      Le déplacement est {\bf transversal} ; le mouvement horizontal est négligeable (ordre 2 en $\alpha$) ; le poids, lui, ne modifie pas $c$.
+
+outils_mathematiques:
+  - titre: "Développements limités pour $|\\alpha|\\ll1$"
+    texte: |
+      $\sin\alpha\approx\tan\alpha\approx\alpha$ et $\cos\alpha\approx1-\dfrac{\alpha^2}{2}$ ; $\sqrt{1+u}\approx1+\dfrac u2$ pour $|u|\ll1$. On garde l'ordre 1 : les termes en $\alpha^2$ sont négligés (c'est ce qui rend l'équation {\bf linéaire}).
+  - titre: "Pente et dérivée : $\\tan\\alpha=\\partial y/\\partial x$"
+    texte: |
+      L'angle de la tangente à la corde avec l'horizontale est donné par la dérivée spatiale du déplacement : $\tan\alpha=\partial_x y$.
+  - titre: "Dérivée comme limite (accroissement)"
+    texte: |
+      $g(x+\mathrm dx)-g(x)=g'(x)\,\mathrm dx+o(\mathrm dx)$, ici avec $g=\partial_x y$ : $\partial_x y(x+\mathrm dx)-\partial_x y(x)\approx\partial_x^2y\,\mathrm dx$. C'est le passage du discret au continu (dérivée seconde).
+  - titre: "Longueur d'un tronçon et masse"
+    texte: |
+      $\mathrm d\ell=\sqrt{\mathrm dx^2+\mathrm dy^2}=\mathrm dx\sqrt{1+(\partial_x y)^2}\approx\mathrm dx$, d'où $\mathrm dm=\mu\,\mathrm d\ell\approx\mu\,\mathrm dx$.
+  - titre: "Maximum d'un cosinus et phase"
+    texte: |
+      Pour $y=a\cos\Phi$ : $v_y=\partial_t y=a\omega\sin\Phi$ et $T_y=F\,\partial_x y=-Fka\sin\Phi$ sont maximales quand $|\sin\Phi|=1$, donc quand $\cos\Phi=0$, c'est-à-dire $y=0$ : la vitesse est maximale au passage par l'équilibre.
+  - titre: "Ordre de grandeur"
+    texte: |
+      $v_{\max}=a\omega=a\dfrac{2\pi c}{\lambda}=2\pi c\,\dfrac a\lambda$ : comme $a\ll\lambda$, on a $v_{\max}\ll c$. Rapport $a/\lambda$ = pente typique de l'onde.
+
+liens_autres_disciplines:
+  - discipline: "Mécanique du point et milieux continus"
+    texte: |
+      On applique le PFD à une « tranche » de milieu de taille $\mathrm dx$ : c'est la méthode de base de la mécanique des milieux continus (cordes, barres, fluides, solides).
+  - discipline: "Électricité (lignes de transmission)"
+    texte: |
+      L'équation des télégraphistes s'établit de la même façon sur une tranche de câble de longueur $\mathrm dx$ : $c=1/\sqrt{LC}$ avec $L$ et $C$ l'inductance et la capacité linéiques, analogue de $c=\sqrt{F/\mu}$ (masse linéique $\mu\leftrightarrow L$, $1/F\leftrightarrow C$).
+  - discipline: "Acoustique"
+    texte: |
+      Même démarche pour une tranche de fluide : bilan de quantité de mouvement et de masse, linéarisation, équation d'onde avec $c=\sqrt{1/(\rho\chi_S)}$.
+  - discipline: "Physique non linéaire"
+    texte: |
+      Si l'amplitude est grande, $\mathrm d\ell\neq\mathrm dx$ et la tension varie avec la déformation : l'équation devient non linéaire (cordes de piano, câbles). L'approximation des petits angles est donc ce qui rend le principe de superposition valable.
+
 questions:
   - id: q1
     enonce: |
@@ -280,7 +330,7 @@ questions:
           L'amplitude maximale de cette vitesse est $v_{\text{max}} = a\,\omega$.
           Comme $\omega = 2\pi f = \dfrac{2\pi c}{\lambda}$ :
           $$v_{\text{max}} = a \frac{2\pi c}{\lambda} = 2\times 10^{-3} \times \frac{2\pi \times 12.91}{0.25} \approx 0.649\ \text{m/s}$$
-          **Remarque :** La vitesse maximale de déplacement de la matière ($0.65$ m/s) est très inférieure à la vitesse de propagation du signal/de l'onde $c$ ($12.91$ m/s).
+          {\bf Remarque :} La vitesse maximale de déplacement de la matière ($0.65$ m/s) est très inférieure à la vitesse de propagation du signal/de l'onde $c$ ($12.91$ m/s).
 
   - id: q3c
     parent: "3"

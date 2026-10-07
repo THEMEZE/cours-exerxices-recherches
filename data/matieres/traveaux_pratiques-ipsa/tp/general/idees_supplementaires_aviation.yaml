@@ -1,0 +1,82 @@
+id: tpO_idees
+intitule: "Idées de TP ondes visuels et amusants pour une école d'aviation (catalogue)"
+tp: tpO
+facultatif: true
+seance: 1
+cours_rattache:
+  - ondes.divers
+
+metadonnees:
+  duree_estimee: "à définir selon l'idée retenue"
+  difficulte: 2 # Sur une échelle de 1 à 5
+  type_exercice: "Catalogue d'idées (à développer en fiche TP)"
+  indispensable: false
+  public_cible: [ecole_aviation, cpge, licence]
+
+enonce_intro: |
+  Ce catalogue rassemble des idées de manipulations sur les ondes, spectaculaires à observer et reliées à l'aviation. Chaque idée précise le principe, le matériel très simple, la mesure possible et le lien avec le métier. Les fiches complètes existantes sont : ressort long (tpO1), son, Doppler et Mach (tpO2), micro-ondes (tpO3), laser (tpO4), polarisation (tpO5).
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Comment choisir"
+    texte: |
+      Faire voter la classe entre trois idées : une qui se voit (lumière ou vidéo), une qui s'entend (son), une qui se mesure. Prévoir toujours une comparaison mesure-modèle avec incertitude. Filmer en ralenti : les étudiants adorent revoir le phénomène.
+
+idees:
+  - titre: "Figures de Chladni : les modes d'une plaque"
+    principe: |
+      Une plaque métallique fixée en son centre et excitée par un archet ou par un haut-parleur fait apparaître, avec du sel ou du sucre fin, les lignes nodales des modes propres : des dessins étonnants qui changent avec la fréquence.
+    materiel: "Plaque métallique de $20\\ \\text{cm}$, tige de fixation, haut-parleur ou archet, sel fin, générateur de sons."
+    mesure: "Fréquence des modes ($100$ à $3000$ Hz), nombre de lignes nodales, comparaison avec la loi $f\\propto e/a^2$ pour une plaque d'épaisseur $e$ et de taille $a$."
+    lien_aviation: "Modes de vibration d'une aile, d'une pale ou d'un panneau de fuselage ; essais de vibration au sol ; flottement (flutter)."
+  - titre: "Résonateur de Helmholtz avec une bouteille"
+    principe: |
+      Souffler sur le goulot d'une bouteille fait entendre une note $f=\dfrac{c}{2\pi}\sqrt{\dfrac{S}{V\,\ell}}$. En versant de l'eau, on change $V$ et la note monte.
+    materiel: "Bouteilles de tailles différentes, eau, application d'analyse de fréquence (smartphone)."
+    mesure: "Fréquence en fonction du volume d'air $V$ ; tracé de $f^2$ en fonction de $1/V$ (droite)."
+    lien_aviation: "Les carénages acoustiques des réacteurs (« liners ») sont des réseaux de résonateurs de Helmholtz qui absorbent le bruit des turbines."
+  - titre: "Ombres des courants d'air (strioscopie maison)"
+    principe: |
+      Une lampe ponctuelle éloignée éclairant un mur derrière un briquet ou un sèche-cheveux révèle les gradients de l'indice de l'air (l'air chaud dévie la lumière) : on « voit » les panaches invisibles.
+    materiel: "Lampe LED ponctuelle (téléphone à $3$ m du mur), bougie, briquet ou sèche-cheveux, mur blanc."
+    mesure: "Vitesse de montée du panache (vidéo) ; indice de l'air chaud $n-1\\approx2{,}9\\times10^{-4}\\times\\dfrac{273\\ \\text{K}}{T}$ ; comparaison à $293$ et $600\\ \\text{K}$."
+    lien_aviation: "Visualisation des sillages, des écoulements autour d'une aile, des ondes de choc en soufflerie (la strioscopie et l'ombroscopie sont des outils standards)."
+  - titre: "Altimètre radar avec un capteur à ultrasons"
+    principe: |
+      Un capteur à ultrasons (type HC-SR04, $40\ \text{kHz}$) mesure la distance à une surface par le temps aller-retour de l'onde. On l'étalonne à l'aide d'un thermomètre, puis on vérifie l'influence de la température sur la mesure.
+    materiel: "Capteur HC-SR04, carte Arduino (ou micro:bit), règle graduée, réflecteur (planche)."
+    mesure: "Distance mesurée en fonction de la distance réelle ; écart en fonction de la température ($0{,}18\\ \\%$ par kelvin) ; portée et angle d'ouverture du faisceau (diffraction, voir tpO4)."
+    lien_aviation: "Principe de l'altimètre radar (avec des ondes radio au lieu d'ultrasons) et de la mesure de distance par temps de vol ; erreurs dues au milieu."
+  - titre: "Tube de Kundt et tube de Rijke"
+    principe: |
+      Un tube horizontal contenant de la poudre légère (liège, sucre glace) et un haut-parleur en bout révèle l'onde stationnaire sonore par des tas régulièrement espacés de $\lambda/2$. Un tube vertical avec une grille chauffée « chante » spontanément (Rijke).
+    materiel: "Tube transparent de $1$ m, haut-parleur, générateur de sons, poudre fine."
+    mesure: "Distance entre les tas et la fréquence : $c=2fd$ ; comparaison avec la température."
+    lien_aviation: "Instabilités de combustion (« combustion instabilities ») dans les chambres de turbines et les moteurs-fusées : le tube de Rijke est leur modèle simplifié."
+  - titre: "Ondes à la surface de l'eau : cuve à ondes maison"
+    principe: |
+      Une cuve peu profonde, une lampe au-dessus et une feuille en dessous font apparaître les ombres des ondes créées par un vibreur (moteur de téléphone) : on voit les fronts d'onde, la diffraction et les interférences de deux sources.
+    materiel: "Plat transparent, eau, lampe LED ponctuelle, feuille blanche, vibreur avec pointes, smartphone (vidéo)."
+    mesure: "Longueur d'onde $\\lambda$ et fréquence $f$ : $c=\\lambda f$ ; nombre de franges de deux sources ; le sillage d'un objet qu'on tire à vitesse constante (angle de Kelvin $19{,}5^\\circ$, indépendant de la vitesse pour les ondes de gravité, à comparer avec le cône de Mach, tpO2)."
+    lien_aviation: "Sillages, tourbillons de bout d'aile, ondes de choc ; comparaison ondes dispersives (eau) et non dispersives (son)."
+  - titre: "Balise de détresse et localisation par ondes radio (jeu de piste)"
+    principe: |
+      Un émetteur à faible puissance caché dans le campus, des récepteurs (radio à antenne directive ou goniomètre simplifié) : trouver la balise par triangulation en mesurant la direction du maximum ou le déphasage.
+    materiel: "Émetteur jouet (bande libre) ou téléphone diffusant un tonalité en Bluetooth ; antenne directive artisanale (Yagi en bois), boussole."
+    mesure: "Direction du maximum, précision angulaire ($\\approx10^\\circ$), intersection de deux relèvements (triangulation), incertitude sur la position."
+    lien_aviation: "Balise de détresse (ELT, $121{,}5$ et $406\\ \\text{MHz}$), radiogoniomètre (ADF), VOR : principe de navigation radio et de recherche et sauvetage."
+  - titre: "Hélice de ventilateur et son : « le bruit du bout de pale »"
+    principe: |
+      Un ventilateur de PC ou de plafond dont on fait varier la vitesse de rotation : le spectre sonore présente une raie à la fréquence de passage des pales ($f=N\times n$ avec $N$ pales et $n$ tours par seconde) et ses harmoniques.
+    materiel: "Ventilateur à vitesse variable, smartphone (spectrogramme), tachymètre (ou stroboscope)."
+    mesure: "Fréquence de la raie en fonction de la vitesse ; puissance sonore en fonction de la vitesse (loi en $v^6$ empirique)."
+    lien_aviation: "Bruit d'hélice et de rotor (note de passage de pale), cadence des hélices, limitation de vitesse en bout de pale (voir tpO2 question 5)."
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Trop d'idées pour une séance"
+    texte: |
+      Choisir une seule idée par séance de $2$ h et la traiter jusqu'à l'incertitude : mieux vaut peu de manipulations mais une analyse complète.
+
+bilan:
+  - titre: "Fil rouge"
+    texte: |
+      Toutes ces idées relient une observation qualitative spectaculaire à une mesure simple et à un enjeu d'ingénierie aéronautique : vibrations, bruit, navigation, visibilité.

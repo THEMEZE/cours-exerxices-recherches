@@ -3,31 +3,219 @@ intitule: "Onde stationnaire, tube de Kundt fermé (à faire à la maison)"
 td: td2
 facultatif: true
 seance: 3
+
 cours_rattache:
   - chap2.ondes_stationnaires_acoustiques
   - chap2.reflexion_extremite_fermee
+
+metadonnees:
+  duree_estimee: "25 min (à la maison)"
+  difficulte: 3
+  type_exercice: "Application (facultatif)"
+  indispensable: false
 
 enonce_intro: |
   Même dispositif que l'exercice 2, mais le tube est ouvert en $x=0$ et
   fermé en $x=L$. Déplacement réfléchi : $\Psi_R(x,t)=-A_I e^{i(\omega t-k(2L-x))}$.
 
+# figure:
+#   - ref: td2_ex3_tube_schema
+#     legende: |
+#       Suggestion : schéma du tube ouvert en $x=0$ et fermé par une paroi rigide en $x=L$ ; représenter la paroi par un hachurage classique et faire apparaître les flèches des ondes incidente et réfléchie.
+#     width: 0.6
+#     label:
+#   - ref: td2_ex3_stationnaire
+#     legende: |
+#       Suggestion : profil spatial de $|\Psi(x)|$ montrant un ventre en $x=0$ (extrémité ouverte) et un nœud strict en $x=L$ (paroi rigide), à comparer visuellement à la figure analogue de l'exercice 2 (tube ouvert-ouvert).
+#     width: 0.6
+#     label:
+#   - ref: td2_ex3_harmoniques
+#     legende: |
+#       Suggestion : quatre sous-graphes représentant le profil spatial de la dilatation $|\tilde\theta(x)|$ pour les quatre premiers harmoniques impairs ($n=1,2,3,4$, soit des fréquences en $c/4L$, $3c/4L$, $5c/4L$, $7c/4L$), en faisant apparaître qu'un seul quart d'onde (ou un nombre impair de quarts d'onde) tient dans le tube.
+#     width: 0.8
+#     label:
+
+prerequis:
+  - titre: "Résultats de l'exercice 2 (tube ouvert-ouvert)"
+    texte: |
+      Cet exercice réutilise directement la méthode de l'exercice 2 (construction de l'onde stationnaire par superposition, lien entre déplacement et surpression/dilatation via $\chi_S$). Il est vivement conseillé de le traiter après avoir bien assimilé le cas ouvert-ouvert, afin de se concentrer ici sur l'unique différence : la condition à l'extrémité $x=L$, désormais fermée.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Transposer une méthode à une nouvelle condition aux limites"
+    texte: |
+      Savoir adapter la méthode de résolution développée pour un cas (tube ouvert-ouvert) à un cas voisin (tube ouvert-fermé), en identifiant précisément ce qui change dans les conditions aux limites et ce qui reste inchangé dans la structure de la solution.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Consolider par le contraste plutôt que par la répétition"
+    texte: |
+      L'intérêt pédagogique de cet exercice « miroir » de l'exercice 2 est de faire travailler les étudiants sur la comparaison des deux configurations plutôt que sur une résolution isolée : insister, en correction, sur le tableau comparatif tube ouvert-ouvert / tube ouvert-fermé (nature des conditions aux limites, expression des fréquences propres, présence ou non des harmoniques pairs).
+
+point_cours:
+  - titre: "Configuration « quart d'onde » et harmoniques impairs"
+    texte: |
+      Dans la configuration ouverte-fermée, la condition en $x=0$ reste un nœud de pression / ventre de déplacement (extrémité ouverte), tandis qu'en $x=L$ on impose désormais un nœud de déplacement / ventre de pression (extrémité fermée). La distance entre un nœud et le ventre adjacent valant $\lambda/4$, le mode fondamental correspond à un quart de longueur d'onde contenu dans le tube : $L = \lambda_1/4$.
+
+      Cette dissymétrie des conditions aux limites a une conséquence remarquable : seuls les harmoniques \textbf{impairs} du mode fondamental sont des solutions du problème (contrairement au cas ouvert-ouvert où tous les harmoniques sont permis), d'où l'expression $f_n=(2n-1)c/(4L)$.
+
+      \textbf{Remarque méthodologique} (comme dans l'exercice 2) : l'expression de $\Psi_R$ encode déjà, par construction, le nœud de déplacement en $x=L$. La quantification des fréquences provient donc, ici encore, de l'imposition de la condition à l'\emph{autre} extrémité $x=0$ — mais cette condition porte cette fois sur la \textbf{dilatation} (nœud en $x=0$, car cette extrémité est ouverte), et non sur le déplacement.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Reporter mécaniquement la formule de l'exercice précédent"
+    texte: |
+      Un écueil fréquent est de vouloir réutiliser directement $f_n=nc/(2L)$ de l'exercice 2 en changeant seulement une des extrémités « à l'œil », sans reprendre la construction complète des conditions aux limites. Il faut impérativement refaire (ou faire refaire) le calcul de superposition avec le bon déphasage à la réflexion pour obtenir naturellement la disparition des harmoniques pairs.
+
+bilan:
+  - titre: "Comparaison des deux configurations"
+    texte: |
+      $$
+      \begin{array}{c|c|c}
+        \textbf{Configuration} & \textbf{Fréquences propres} & \textbf{Harmoniques} \\ 
+        \hline
+        \textbf{Ouvert-ouvert (ex. 2)} &  f_n = nc/(2L) & \text{tous}\\
+        \textbf{Ouvert-fermé (ex. 3)} & f_n = (2n-1)c/(4L) & \text{impairs seulement}
+      \end{array}
+      $$
+      
+
+      Pour une même longueur $L$, un tube fermé à une extrémité résonne donc à une fréquence fondamentale deux fois plus basse qu'un tube ouvert aux deux extrémités.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Timbre des instruments à vent : clarinette contre flûte"
+    texte: |
+      La clarinette (anche fermant quasiment le tube côté bouche) se comporte acoustiquement comme un tube fermé-ouvert, tandis que la flûte traversière se comporte comme un tube ouvert-ouvert. On pourra expliquer pourquoi, à longueur de tube comparable, la clarinette sonne environ une octave plus grave que la flûte, et pourquoi son timbre est perçu comme plus « creux » (absence des harmoniques pairs dans le spectre théorique du tube fermé).
+  - niveau: master
+    titre: "Facteur de qualité et pertes aux parois"
+    texte: |
+      En réalité, les couches limites visqueuse et thermique au voisinage des parois du tube dissipent de l'énergie acoustique, ce qui élargit chaque résonance autour de $f_n$ (facteur de qualité $Q_n$ fini) au lieu d'un pic infiniment fin prédit par le modèle sans pertes. On pourra établir, à partir d'un modèle d'oscillateur amorti équivalent, comment $Q_n$ dépend de la fréquence, du rayon du tube et des propriétés de transport du fluide (viscosité, diffusivité thermique).
+
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi la clarinette sonne-t-elle une octave plus grave ?"
+    duree_introduction: "5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      À longueur égale, une clarinette sonne environ une octave plus bas qu'une flûte, avec un timbre plus « creux ». Notre conduit auditif, fermé au fond par le tympan, mesure environ $2{,}5$ cm : à quelle fréquence résonne-t-il ? Et pourquoi y a-t-il {\bf moins} de notes possibles quand on ferme un bout du tube ?
+    texte: |
+      {\bf Idée clé : fermer un bout change la condition aux limites, donc les fréquences.} Une paroi rigide impose un nœud de déplacement (ventre de pression) en $x=L$, tandis que l'extrémité ouverte est un nœud de pression en $x=0$. Le déplacement réfléchi change de signe : $\Psi_R=-A_Ie^{i(\omega t-k(2L-x))}$. Il vient $\tilde\theta\propto\cos(k(L-x))$ et la condition $\tilde\theta(0)=0$ donne $\cos(kL)=0$ :
+      $$kL=(2n-1)\frac\pi2,\qquad f_n=(2n-1)\frac c{4L}.$$
+      Le fondamental tient en {\bf un quart de longueur d'onde} ($L=\lambda_1/4$), deux fois plus grave que pour un tube ouvert-ouvert, et {\bf seuls les harmoniques impairs} existent.
+
+outils_mathematiques:
+  - titre: "Signe moins à la réflexion : $e^{i\\pi}=-1$"
+    texte: |
+      Une réflexion sur paroi rigide inverse le déplacement, donc multiplie l'amplitude par $-1=e^{i\pi}$ (déphasage de $\pi$). Vérification : $\Psi_I(L)+\Psi_R(L)=A_Ie^{i(\omega t-kL)}-A_Ie^{i(\omega t-kL)}=0$.
+  - titre: "Formule d'Euler : $e^{iu}-e^{-iu}=2i\\sin u$"
+    texte: |
+      Avec $u=k(L-x)$ : $\Psi=2iA_I\sin(k(L-x))e^{i(\omega t-kL)}$. Contrairement au cas ouvert-ouvert (somme, $\cos$), on trouve ici une différence ($\sin$).
+  - titre: "Dérivée de $\\sin(k(L-x))$"
+    texte: |
+      $\dfrac{\partial}{\partial x}\sin\big(k(L-x)\big)=-k\cos\big(k(L-x)\big)$ : la dilatation $\tilde\theta=\partial_x\Psi$ varie en $\cos$, en quadrature avec le déplacement.
+  - titre: "Zéros du cosinus : $\\cos u=0\\iff u=\\dfrac{(2n-1)\\pi}2$"
+    texte: |
+      $\cos(kL)=0$ impose $kL=\dfrac\pi2,\dfrac{3\pi}2,\dfrac{5\pi}2,\dots$ (multiples {\bf impairs} de $\pi/2$) ; on renumérote $n=m+1$ pour que $n$ commence à $1$. À comparer avec $\sin(kL)=0$ du cas ouvert-ouvert, qui autorise tous les entiers.
+  - titre: "Décalage de phase : $\\sin\\!\\left(\\dfrac\\pi2-u\\right)=\\cos u$"
+    texte: |
+      Pour changer de repère (d'une extrémité à l'autre), un sinus devient un cosinus par décalage de $\pi/2$ : ce qui est nœud pour l'un est ventre pour l'autre.
+  - titre: "Dénombrement"
+    texte: |
+      Le mode $n$ a exactement $n$ nœuds et $n$ ventres de dilatation, avec un nœud en $x=0$ et un ventre en $x=L$ ; les positions sont $x=L-(2m-1)\lambda_n/4$.
+
+liens_autres_disciplines:
+  - discipline: "Musique"
+    texte: |
+      Clarinette, tuyau d'orgue bouché (bourdon), flûte de Pan : tubes fermés à un bout. Sans harmoniques pairs, le timbre est plus « creux » (ou « rond »), et la note est une octave plus grave qu'un tube ouvert de même longueur.
+  - discipline: "Physiologie de l'audition"
+    texte: |
+      Le conduit auditif ($L\approx2{,}5$ cm, fermé par le tympan) résonne à $f_1=c/(4L)\approx3{,}4$ kHz : c'est la zone où l'oreille est la plus sensible.
+  - discipline: "Cordes vibrantes (chapitre 1)"
+    texte: |
+      Une corde fixe-libre a les mêmes fréquences $f_N=(2N-1)c/(4L)$ : le tube fermé à un bout est l'analogue exact (exercice 6 du chapitre 1).
+  - discipline: "Électricité et antennes"
+    texte: |
+      L'antenne monopole quart d'onde sur plan de masse est un résonateur fermé à un bout : $L=\lambda/4$ et seulement les multiples impairs.
+  - discipline: "Mathématiques"
+    texte: |
+      Conditions aux limites de Dirichlet (la fonction s'annule) et de Neumann (la dérivée s'annule) : le mélange des deux (Dirichlet-Neumann) donne les valeurs propres $(2n-1)\pi/(2L)$.
+
 questions:
   - id: q1
     enonce: "Justifier ce signe moins par un schéma."
-    coup_de_pouce: "Une extrémité fermée (paroi rigide) impose un nœud de déplacement : le déplacement doit s'annuler en $x=L$, d'où le changement de signe à la réflexion."
+    coup_de_pouce: |
+      Une extrémité fermée (paroi rigide) impose un nœud de déplacement : le déplacement doit s'annuler en $x=L$, d'où le changement de signe à la réflexion.
+    solution:
+      - titre: "Réflexion avec inversion de signe"
+        texte: |
+          À l'inverse de l'exercice 2, l'extrémité en $x=L$ est ici une paroi rigide : le fluide ne peut pas la traverser, donc son déplacement doit y être nul à tout instant, $\Psi(L,t)=0$. En reprenant l'idée de l'onde image utilisée en exercice 2, on constate qu'il faut cette fois imposer que la contribution réfléchie \emph{s'oppose exactement} à la contribution incidente en $x=L$, ce qui impose un signe moins : $\Psi_R(x,t)=-A_I e^{i(\omega t-k(2L-x))}$. Physiquement, cela correspond exactement au cas de la réflexion d'une impulsion sur l'extrémité fixée d'une corde : l'onde repart inversée, contrairement au cas d'une extrémité libre (exercice 2).
+      - titre: "Vérification directe"
+        texte: |
+          On vérifie qu'en $x=L$ : $\Psi_I(L,t)=A_I e^{i(\omega t-kL)}$ et $\Psi_R(L,t)=-A_I e^{i(\omega t-kL)}$, donc $\Psi_I(L,t)+\Psi_R(L,t)=0$ à tout instant $t$ et pour toute valeur de $k$ : le nœud de déplacement en $x=L$ est bien automatiquement vérifié, quelle que soit la fréquence — exactement comme le nœud de pression en $x=L$ était automatiquement vérifié dans l'exercice 2.
 
   - id: q2
     enonce: "Montrer que $\\Psi(x,t)=2iA_I\\sin(k(L-x))e^{i(\\omega t-kL)}$. Justifier le nom d'onde stationnaire."
-    coup_de_pouce: "Même démarche qu'à l'exercice 2 : sommez $\\Psi_I+\\Psi_R$."
+    coup_de_pouce: |
+      Même démarche qu'à l'exercice 2 : sommez $\Psi_I+\Psi_R$ et mettez le même facteur de phase en évidence.
+    solution:
+      - titre: "Calcul de la somme"
+        texte: |
+          On part de
+          $$\Psi(x,t) = A_I e^{i(\omega t-kx)} - A_I e^{i(\omega t-k(2L-x))}.$$
+          En procédant exactement comme à l'exercice 2 (mise en facteur de $A_I e^{i\omega t}$ puis de $e^{-ikL}$) :
+          $$\Psi(x,t) = A_I e^{i(\omega t-kL)}\left[e^{ik(L-x)} - e^{-ik(L-x)}\right].$$
+          En reconnaissant $e^{iu}-e^{-iu}=2i\sin u$ avec $u=k(L-x)$ :
+          $$\boxed{\Psi(x,t) = 2i A_I\sin\big(k(L-x)\big)\,e^{i(\omega t-kL)}}.$$
+      - titre: "Interprétation stationnaire"
+        texte: |
+          Comme en exercice 2, cette expression se met sous la forme $f(x)\,e^{i(\omega t+\varphi_0)}$, avec ici $f(x)=2iA_I\sin(k(L-x))$ (le facteur $i$ supplémentaire n'introduit qu'un déphasage global constant de $\pi/2$ par rapport au cas ouvert-ouvert, sans changer la nature du phénomène) : le profil spatial est figé, seule la phase temporelle oscille — l'onde est donc bien stationnaire.
 
   - id: q3
     enonce: "La dilatation $\\theta(x,t)=\\Delta V/V$ vérifie $\\tilde\\theta=\\partial\\Psi/\\partial x$. En déduire son expression."
-    coup_de_pouce: "Dérivez simplement l'expression de $\\Psi(x,t)$ trouvée en 2)."
+    coup_de_pouce: |
+      Dérivez simplement l'expression de $\Psi(x,t)$ trouvée en 2) par rapport à $x$.
+    solution:
+      - titre: "Dérivation et expression de $\\tilde\\theta$"
+        texte: |
+          On dérive $\Psi(x,t)=2iA_I\sin(k(L-x))\,e^{i(\omega t-kL)}$ par rapport à $x$ (attention au signe, comme en exercice 2, à cause de l'argument $k(L-x)$) :
+          $$\frac{\partial\Psi}{\partial x} = 2iA_I\,k\,\cos\big(k(L-x)\big)\,e^{i(\omega t-kL)},$$
+          d'où directement :
+          $$\boxed{\tilde\theta(x,t) = 2iA_I\,k\,\cos\big(k(L-x)\big)\,e^{i(\omega t-kL)}}.$$
+          On retrouve la même structure qu'en exercice 2 (à un facteur $i$ et $\rho_0 c\,\omega \leftrightarrow k$ près selon la grandeur choisie) : le profil de la dilatation, en cosinus, est en quadrature spatiale avec celui du déplacement, en sinus.
 
   - id: q4
     enonce: "Fréquences $f_n$ de résonance en dilatation, en fonction de $n\\in\\mathbb{N}^*$, $c$, $L$."
-    coup_de_pouce: "Extrémité ouverte (x=0) : ventre de déplacement / nœud de pression-dilatation. Extrémité fermée (x=L) : nœud de déplacement / ventre de dilatation. C'est la configuration \"quart d'onde\"."
+    coup_de_pouce: |
+      Extrémité ouverte (x=0) : ventre de déplacement / nœud de pression-dilatation. Extrémité fermée (x=L) : nœud de déplacement / ventre de dilatation. C'est la configuration "quart d'onde". Comme en exercice 2, la condition en $x=L$ est déjà automatiquement vérifiée ; il reste à imposer la bonne condition en $x=0$.
     correction: "$f_n=(2n-1)\\,c/(4L)$, $n\\in\\mathbb{N}^*$ (harmoniques impairs seulement)."
+    solution:
+      - titre: "Vérification en $x=L$ (automatique)"
+        texte: |
+          À partir de l'expression de $\tilde\theta$ trouvée en question 3, on vérifie qu'en $x=L$ : $\cos(k(L-L))=\cos(0)=1\neq 0$ : la dilatation y est \emph{maximale} (ventre), quelle que soit la fréquence — cohérent avec le fait que $x=L$ est une extrémité fermée (ventre de pression/dilatation, nœud de déplacement). Cette condition ne fournit donc, comme en exercice 2, aucune information nouvelle sur $k$.
+      - titre: "Condition en $x=0$ (extrémité ouverte) : quantification"
+        texte: |
+          En $x=0$, l'extrémité est ouverte, donc un nœud de dilatation (pression) doit s'y trouver :
+          $$\tilde\theta(0,t) = 2iA_I k \cos(kL)\,e^{i(\omega t-kL)} = 0 \quad\Longrightarrow\quad \cos(kL)=0.$$
+          Cette équation n'est vérifiée que pour :
+          $$kL = \frac{\pi}{2} + m\pi = \frac{(2m+1)\pi}{2}, \qquad m\in\mathbb{N},$$
+          soit, en renumérotant $n=m+1$ (de sorte que $n$ démarre à $1$) :
+          $$kL = \frac{(2n-1)\pi}{2}, \qquad n\in\mathbb{N}^*.$$
+          En utilisant $k=2\pi f/c$ :
+          $$\frac{2\pi f_n}{c}L = \frac{(2n-1)\pi}{2} \quad\Longrightarrow\quad \boxed{f_n = \frac{(2n-1)\,c}{4L}}, \qquad n\in\mathbb{N}^*.$$
+          Seuls les harmoniques impairs de la fréquence $c/(4L)$ apparaissent : c'est la différence essentielle avec le tube ouvert-ouvert de l'exercice 2, où \emph{tous} les harmoniques ($\sin(kL)=0$, condition moins restrictive que $\cos(kL)=0$) étaient permis.
 
   - id: q5
     enonce: "Position des maxima/minima de dilatation ; représenter jusqu'à la 3e harmonique (n=4)."
+    solution:
+      - titre: "Formule générale des nœuds et ventres"
+        texte: |
+          Pour le mode $n$, on a $k_n L = (2n-1)\pi/2$, soit une longueur d'onde $\lambda_n = 2\pi/k_n = 4L/(2n-1)$. Le profil $|\cos(k_n(L-x))|$ s'annule (nœuds de dilatation) lorsque $k_n(L-x) = (2m-1)\pi/2$, soit :
+          $$x_m^{\text{nœud}} = L - (2m-1)\frac{\lambda_n}{4}, \qquad m=1,\dots,n,$$
+          ce qui donne exactement $n$ nœuds (dont systématiquement $x=0$, l'extrémité ouverte). Les ventres se situent où $k_n(L-x)=m\pi$, soit :
+          $$x_m^{\text{ventre}} = L - m\,\frac{\lambda_n}{2}, \qquad m=0,\dots,n-1,$$
+          ce qui donne $n$ ventres, dont systématiquement $x=L$ (l'extrémité fermée).
+      - titre: "Application aux quatre premiers harmoniques impairs"
+        texte: |
+          \begin{itemize}[label = $\bullet$]
+            \item $n=1$ ($f_1=c/4L$, $\lambda_1=4L$) : 1 seul nœud ($x=0$), 1 seul ventre ($x=L$) — le quart d'onde fondamental.
+            \item $n=2$ ($f_2=3c/4L$, $\lambda_2=4L/3$) : 2 nœuds ($x=0,\,2L/3$), 2 ventres ($x=L/3,\,L$).
+            \item $n=3$ ($f_3=5c/4L$, $\lambda_3=4L/5$) : 3 nœuds ($x=0,\,2L/5,\,4L/5$), 3 ventres ($x=L/5,\,3L/5,\,L$).
+            \item $n=4$ ($f_4=7c/4L$, $\lambda_4=4L/7$) : 4 nœuds ($x=0,\,2L/7,\,4L/7,\,6L/7$), 4 ventres ($x=L/7,\,3L/7,\,5L/7,\,L$).
+          \end{itemize}
+          On retrouve la dissymétrie caractéristique de la configuration quart d'onde : chaque mode $n$ possède exactement $n$ nœuds et $n$ ventres (au lieu de $n$ ventres et $n+1$ nœuds dans le cas ouvert-ouvert), avec systématiquement un nœud en $x=0$ et un ventre en $x=L$.

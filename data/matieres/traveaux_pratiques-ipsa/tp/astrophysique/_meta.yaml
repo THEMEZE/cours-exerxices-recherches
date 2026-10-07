@@ -1,0 +1,11 @@
+id: tpA
+titre: "TP d'astrophysique : de la balance de Cavendish à la densité du Soleil, et couleurs du ciel"
+chapitre_cours: "Gravitation, optique géométrique et diffusion de la lumière"
+seance: 1
+niveau_public: [lycee, cpge, licence, ecole_aviation]
+type_tp: "astrophysique"
+exercices_ordre:
+  - tpA1_cavendish_mesure_de_G
+  - tpA2_stenope_soleil_eclipse
+  - tpA3_densite_du_soleil
+  - tpA4_couleurs_du_ciel

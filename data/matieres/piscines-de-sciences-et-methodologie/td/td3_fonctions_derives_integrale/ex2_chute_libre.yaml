@@ -67,7 +67,7 @@ questions:
   - id: q1
     #parent: "1"
     enonce: |
-      **Étude expérimentale**
+      {\bf Étude expérimentale}
 
       Une bille est photographiée toutes les $\tau = 1/30\text{ s}$.
 
@@ -89,13 +89,13 @@ questions:
             \item $x(t^2)$ est une droite passant par l'origine de pente $k \approx 4,9\text{ m}\cdot\text{s}^{-2} \implies x(t) = k t^2$.
             \item $v_x(t)$ est une droite linéaire : $v_x(t) = a t$ avec $a \approx 9,8\text{ m}\cdot\text{s}^{-2}$.
             \item Par calcul : $v_x(t) = \frac{\mathrm{d}x}{\mathrm{d}t} = 2k t = 9,8 t\text{ m}\cdot\text{s}^{-1}$.
-            \item $a_x = \frac{\mathrm{d}v_x}{\mathrm{d}t} \approx 9,8\text{ m}\cdot\text{s}^{-2} = \text{Cte}$. Le mouvement est **rectiligne uniformément accéléré (MRUA)**.
+            \item $a_x = \frac{\mathrm{d}v_x}{\mathrm{d}t} \approx 9,8\text{ m}\cdot\text{s}^{-2} = \text{Cte}$. Le mouvement est {\bf rectiligne uniformément accéléré (MRUA)}.
           \end{enumerate}
 
   - id: q2
     #parent: "2"
     enonce: |
-      **Modélisation théorique**
+      {\bf Modélisation théorique}
 
       Une masse $m$ est en chute libre sans vitesse initiale dans le champ $\vec{g}$.
 
@@ -121,7 +121,7 @@ questions:
   - id: q3
     #parent: "3"
     enonce: |
-      **Applications**
+      {\bf Applications}
 
       \begin{enumerate}[label=\alph*)]
         \item Une pierre tombe dans un puits et touche l'eau après $1,5\text{ s}$. Déterminer la profondeur du puits et la vitesse d'impact ($g = 9,81\text{ m}\cdot\text{s}^{-2}$).

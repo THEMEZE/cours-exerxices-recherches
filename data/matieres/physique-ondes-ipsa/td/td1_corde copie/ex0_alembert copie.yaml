@@ -1,0 +1,1233 @@
+id: td1_ex0
+intitule: "Solutions de l'équation de d'Alembert"
+td: td1
+facultatif: false
+seance: 1
+
+cours_rattache: # a faire 
+  - chap1.equation_d_alembert
+  - chap1.ondes_progressives
+  - chap1.celerite_onde
+
+
+metadonnees: # a faire 
+  duree_estimee: "??? min"
+  difficulte: 2 # Sur une échelle de 1 à 5
+  type_exercice: "???"
+
+enonce_intro: |
+  Le déplacement transversal $y(x,t)$ d'une corde est solution de l'équation
+  de d'Alembert :
+
+  $$
+  \frac{\partial^2 y}{\partial x^2}
+  =
+  \frac{1}{c^2}
+  \frac{\partial^2 y}{\partial t^2},
+  $$
+
+  où $c$ désigne la célérité des ondes transversales se propageant le long
+  de la corde.
+
+prerequis : 
+  - titre: "???"
+    texte: |
+      ???
+    figure:
+      - ref: ???
+        legende: |
+          ???
+        scale: ???
+        label: "???"
+
+objectifs_pedagogiques_etudiants :
+  - titre: "???"
+    texte: |
+      ???
+
+objectifs_pedagogiques_enseignants :
+  - titre: "???"
+    texte: |
+      ???
+
+point_cours :
+  - titre: "???"
+    texte: |
+      ???
+    figure:
+      - ref: ???
+        legende: |
+          ???
+        scale: ???
+        label: "???"
+
+remarques_pedagogiques_ecueils_classiques: 
+  - titre: "???"
+    texte: |
+      ???
+
+remarques_pedagogiques_conseils_animation: 
+  - titre: "???"
+    texte: |
+      ???
+
+bilan: 
+  - titre: "???"
+    texte: |
+      ???
+
+aller_plus_loin_niveaux: 
+  - niveau: lycee
+    titre: "???"
+    texte: |
+      ???
+
+  - niveau: prepa
+    titre: "???"
+    texte: |
+      ???
+
+  - niveau: licence
+    titre: "???"
+    texte: |
+      ???
+
+  - niveau: master
+    titre: "???"
+    texte: |
+      ???
+
+questions:
+
+  - id: q1
+    enonce: |
+      Soit $f$ une fonction de classe $\mathcal{C}^2$. Montrer que
+
+      $$
+      y(x,t)=f(x-ct)
+      $$
+
+      est solution de l'équation de d'Alembert.
+
+    prerequis : 
+      - titre: "???"
+        texte: |
+          ???
+        figure:
+          - ref: ???
+            legende: |
+              ???
+            scale: ???
+            label: "???"
+
+    objectifs_pedagogiques_etudiants :
+      - titre: "???"
+        texte: |
+          ???
+
+    objectifs_pedagogiques_enseignants :
+      - titre: "???"
+        texte: |
+          ???
+
+    point_cours :
+      - titre: "???"
+        texte: |
+          ???
+        figure:
+          - ref: ???
+            legende: |
+              ???
+            scale: ???
+            label: "???"
+
+    coup_de_pouce:
+      - titre: "Changement de variable"
+        texte: |
+          Poser $u=x-ct$. La fonction s'écrit alors $y(x,t)=f(u)$.
+          Calculer successivement les dérivées partielles premières puis
+          secondes par rapport à $x$ et à $t$ en utilisant la règle de
+          dérivation des fonctions composées.
+
+      - titre: "Attention aux dérivées temporelles"
+        texte: |
+          On a
+
+          $$
+          \frac{\partial u}{\partial x}=1
+          \qquad\text{et}\qquad
+          \frac{\partial u}{\partial t}=-c.
+          $$
+
+          Le facteur $-c$ apparaît donc dans chaque dérivée temporelle.
+
+    correction:
+      - titre: "Dérivées spatiales"
+        texte: |
+          En posant $u=x-ct$, on obtient :
+
+          $$
+          \frac{\partial y}{\partial x}
+          =
+          f'(u)\frac{\partial u}{\partial x}
+          =
+          f'(x-ct).
+          $$
+
+          Par conséquent :
+
+          $$
+          \frac{\partial^2 y}{\partial x^2}
+          =
+          f''(x-ct).
+          $$
+
+      - titre: "Dérivées temporelles"
+        texte: |
+          De même :
+
+          $$
+          \frac{\partial y}{\partial t}
+          =
+          f'(u)\frac{\partial u}{\partial t}
+          =
+          -c\,f'(x-ct).
+          $$
+
+          En dérivant une seconde fois :
+
+          $$
+          \frac{\partial^2 y}{\partial t^2}
+          =
+          c^2f''(x-ct).
+          $$
+
+      - titre: "Conclusion"
+        texte: |
+          On a donc :
+
+          $$
+          \frac{1}{c^2}
+          \frac{\partial^2 y}{\partial t^2}
+          =
+          \frac{1}{c^2}
+          c^2f''(x-ct)
+          =
+          f''(x-ct)
+          =
+          \frac{\partial^2 y}{\partial x^2}.
+          $$
+
+          Ainsi $y(x,t)=f(x-ct)$ vérifie bien l'équation de d'Alembert.
+
+    solution:
+      - titre: "Démonstration détaillée"
+        texte: |
+          Introduisons la variable intermédiaire :
+
+          $$
+          u=x-ct.
+          $$
+
+          La fonction étudiée s'écrit donc $y(x,t)=f(u)$.
+
+          Comme $u$ dépend de $x$ et de $t$, les dérivées partielles sont
+          obtenues par la règle de dérivation des fonctions composées.
+
+          Pour la dérivée spatiale :
+
+          $$
+          \frac{\partial y}{\partial x}
+          =
+          f'(u)\frac{\partial u}{\partial x}
+          =
+          f'(u),
+          $$
+
+          car $\partial u/\partial x=1$. On obtient alors :
+
+          $$
+          \frac{\partial^2y}{\partial x^2}
+          =
+          f''(u)
+          =
+          f''(x-ct).
+          $$
+
+          Pour la dérivée temporelle :
+
+          $$
+          \frac{\partial y}{\partial t}
+          =
+          f'(u)\frac{\partial u}{\partial t}
+          =
+          -c\,f'(u),
+          $$
+
+          puisque $\partial u/\partial t=-c$.
+
+          On dérive une seconde fois :
+
+          $$
+          \frac{\partial^2y}{\partial t^2}
+          =
+          -c\,f''(u)
+          \frac{\partial u}{\partial t}
+          =
+          c^2f''(u).
+          $$
+
+          Ainsi :
+
+          $$
+          \frac{1}{c^2}
+          \frac{\partial^2y}{\partial t^2}
+          =
+          f''(x-ct)
+          =
+          \frac{\partial^2y}{\partial x^2}.
+          $$
+
+          La fonction $y(x,t)=f(x-ct)$ est donc bien une solution de
+          l'équation de d'Alembert.
+
+    remarques_pedagogiques_ecueils_classiques: 
+      - titre: "???"
+        texte: |
+          ???
+
+    remarques_pedagogiques_conseils_animation: 
+      - titre: "???"
+        texte: |
+          ???
+
+    bilan: 
+      - titre: "???"
+        texte: |
+          ???
+
+    aller_plus_loin_niveaux: 
+      - niveau: lycee
+        titre: "???"
+        texte: |
+          ???
+
+      - niveau: prepa
+        titre: "???"
+        texte: |
+          ???
+
+      - niveau: licence
+        titre: "???"
+        texte: |
+          ???
+
+      - niveau: master
+        titre: "???"
+        texte: |
+          ???
+
+  - id: q2
+    enonce: |
+      Soit $g$ une fonction de classe $\mathcal{C}^2$. Montrer que
+
+      $$
+      y(x,t)=g(x+ct)
+      $$
+
+      est également solution de l'équation de d'Alembert.
+
+    prerequis : 
+      - titre: "???"
+        texte: |
+          ???
+        figure:
+          - ref: ???
+            legende: |
+              ???
+            scale: ???
+            label: "???"
+
+    objectifs_pedagogiques_etudiants :
+      - titre: "???"
+        texte: |
+          ???
+
+    objectifs_pedagogiques_enseignants :
+      - titre: "???"
+        texte: |
+          ???
+
+    point_cours :
+      - titre: "???"
+        texte: |
+          ???
+        figure:
+          - ref: ???
+            legende: |
+              ???
+            scale: ???
+            label: "???"
+
+    coup_de_pouce:
+      - titre: "Même méthode"
+        texte: |
+          Poser cette fois :
+
+          $$
+          u=x+ct.
+          $$
+
+          Calculer les dérivées secondes par rapport à $x$ et à $t$.
+
+      - titre: "Comparaison avec la question précédente"
+        texte: |
+          La seule différence est le signe de $c$ dans la dérivée première
+          par rapport au temps. Que devient ce signe après deux dérivations ?
+
+    correction:
+      - titre: "Calcul des dérivées"
+        texte: |
+          Pour $u=x+ct$ :
+
+          $$
+          \frac{\partial^2y}{\partial x^2}
+          =
+          g''(x+ct).
+          $$
+
+          De plus :
+
+          $$
+          \frac{\partial y}{\partial t}
+          =
+          c\,g'(x+ct),
+          $$
+
+          puis :
+
+          $$
+          \frac{\partial^2y}{\partial t^2}
+          =
+          c^2g''(x+ct).
+          $$
+
+      - titre: "Conclusion"
+        texte: |
+          Ainsi :
+
+          $$
+          \frac{1}{c^2}
+          \frac{\partial^2y}{\partial t^2}
+          =
+          g''(x+ct)
+          =
+          \frac{\partial^2y}{\partial x^2}.
+          $$
+
+          La fonction $y(x,t)=g(x+ct)$ est donc également solution de
+          l'équation de d'Alembert.
+
+    solution:
+      - titre: "Démonstration détaillée"
+        texte: |
+          Posons :
+
+          $$
+          u=x+ct.
+          $$
+
+          On a alors $y(x,t)=g(u)$.
+
+          Pour les dérivées spatiales :
+
+          $$
+          \frac{\partial y}{\partial x}
+          =
+          g'(u)\frac{\partial u}{\partial x}
+          =
+          g'(u),
+          $$
+
+          puis :
+
+          $$
+          \frac{\partial^2y}{\partial x^2}
+          =
+          g''(u)
+          =
+          g''(x+ct).
+          $$
+
+          Pour les dérivées temporelles :
+
+          $$
+          \frac{\partial y}{\partial t}
+          =
+          g'(u)\frac{\partial u}{\partial t}
+          =
+          c\,g'(u).
+          $$
+
+          En dérivant une seconde fois :
+
+          $$
+          \frac{\partial^2y}{\partial t^2}
+          =
+          c\,g''(u)
+          \frac{\partial u}{\partial t}
+          =
+          c^2g''(u).
+          $$
+
+          Il vient donc :
+
+          $$
+          \frac{1}{c^2}
+          \frac{\partial^2y}{\partial t^2}
+          =
+          g''(x+ct)
+          =
+          \frac{\partial^2y}{\partial x^2}.
+          $$
+
+          La fonction $y(x,t)=g(x+ct)$ est donc solution de l'équation
+          de d'Alembert.
+
+    remarques_pedagogiques_ecueils_classiques: 
+      - titre: "???"
+        texte: |
+          ???
+
+    remarques_pedagogiques_conseils_animation: 
+      - titre: "???"
+        texte: |
+          ???
+
+    bilan: 
+      - titre: "???"
+        texte: |
+          ???
+
+    aller_plus_loin_niveaux: 
+      - niveau: lycee
+        titre: "???"
+        texte: |
+          ???
+
+      - niveau: prepa
+        titre: "???"
+        texte: |
+          ???
+
+      - niveau: licence
+        titre: "???"
+        texte: |
+          ???
+
+      - niveau: master
+        titre: "???"
+        texte: |
+          ???
+
+  - id: q3
+    enonce: |
+      En déduire que toute fonction de la forme
+
+      $$
+      y(x,t)=f(x-ct)+g(x+ct)
+      $$
+
+      est également solution de l'équation de d'Alembert.
+
+    prerequis : 
+      - titre: "???"
+        texte: |
+          ???
+        figure:
+          - ref: ???
+            legende: |
+              ???
+            scale: ???
+            label: "???"
+
+    objectifs_pedagogiques_etudiants :
+      - titre: "???"
+        texte: |
+          ???
+
+    objectifs_pedagogiques_enseignants :
+      - titre: "???"
+        texte: |
+          ???
+
+    point_cours :
+      - titre: "???"
+        texte: |
+          ???
+        figure:
+          - ref: ???
+            legende: |
+              ???
+            scale: ???
+            label: "???"
+
+    coup_de_pouce:
+      - titre: "Linéarité"
+        texte: |
+          L'équation de d'Alembert est une équation différentielle
+          linéaire homogène.
+
+          Si deux fonctions sont solutions, étudier ce que deviennent les
+          dérivées secondes de leur somme.
+
+    correction:
+      - titre: "Principe de superposition"
+        texte: |
+          Les fonctions
+
+          $$
+          y_1(x,t)=f(x-ct)
+          $$
+
+          et
+
+          $$
+          y_2(x,t)=g(x+ct)
+          $$
+
+          sont toutes deux solutions de l'équation de d'Alembert.
+
+          Comme les dérivées partielles sont linéaires :
+
+          $$
+          \frac{\partial^2(y_1+y_2)}{\partial x^2}
+          =
+          \frac{\partial^2y_1}{\partial x^2}
+          +
+          \frac{\partial^2y_2}{\partial x^2},
+          $$
+
+          et :
+
+          $$
+          \frac{\partial^2(y_1+y_2)}{\partial t^2}
+          =
+          \frac{\partial^2y_1}{\partial t^2}
+          +
+          \frac{\partial^2y_2}{\partial t^2}.
+          $$
+
+          La somme $y=y_1+y_2$ est donc également solution.
+
+    solution:
+      - titre: "Principe de superposition"
+        texte: |
+          Posons :
+
+          $$
+          y_1(x,t)=f(x-ct)
+          \qquad\text{et}\qquad
+          y_2(x,t)=g(x+ct).
+          $$
+
+          D'après les deux questions précédentes :
+
+          $$
+          \frac{\partial^2y_1}{\partial x^2}
+          =
+          \frac{1}{c^2}
+          \frac{\partial^2y_1}{\partial t^2}
+          $$
+
+          et :
+
+          $$
+          \frac{\partial^2y_2}{\partial x^2}
+          =
+          \frac{1}{c^2}
+          \frac{\partial^2y_2}{\partial t^2}.
+          $$
+
+          Pour $y=y_1+y_2$, la linéarité des dérivées donne :
+
+          $$
+          \frac{\partial^2y}{\partial x^2}
+          =
+          \frac{\partial^2y_1}{\partial x^2}
+          +
+          \frac{\partial^2y_2}{\partial x^2}.
+          $$
+
+          En utilisant les équations vérifiées par $y_1$ et $y_2$ :
+
+          $$
+          \frac{\partial^2y}{\partial x^2}
+          =
+          \frac{1}{c^2}
+          \left(
+          \frac{\partial^2y_1}{\partial t^2}
+          +
+          \frac{\partial^2y_2}{\partial t^2}
+          \right).
+          $$
+
+          Finalement :
+
+          $$
+          \boxed{
+          \frac{\partial^2y}{\partial x^2}
+          =
+          \frac{1}{c^2}
+          \frac{\partial^2y}{\partial t^2}
+          }
+          $$
+
+          et donc :
+
+          $$
+          \boxed{
+          y(x,t)=f(x-ct)+g(x+ct)
+          }
+          $$
+
+          est une solution de l'équation de d'Alembert.
+
+    remarques_pedagogiques_ecueils_classiques: 
+      - titre: "???"
+        texte: |
+          ???
+
+    remarques_pedagogiques_conseils_animation: 
+      - titre: "???"
+        texte: |
+          ???
+
+    bilan: 
+      - titre: "???"
+        texte: |
+          ???
+
+    aller_plus_loin_niveaux: 
+      - niveau: lycee
+        titre: "???"
+        texte: |
+          ???
+
+      - niveau: prepa
+        titre: "???"
+        texte: |
+          ???
+
+      - niveau: licence
+        titre: "???"
+        texte: |
+          ???
+
+      - niveau: master
+        titre: "???"
+        texte: |
+          ???
+
+  - id: q4_intro
+    enonce: |
+      On rappelle qu'une onde progressive correspond à un profil qui se
+      déplace sans se déformer.
+
+      On suit un point identifiable du profil, par exemple une crête ou un
+      creux, repéré par une valeur constante de l'argument de la fonction.
+
+    is_intro_only: true
+
+    prerequis : 
+      - titre: "???"
+        texte: |
+          ???
+        figure:
+          - ref: ???
+            legende: |
+              ???
+            scale: ???
+            label: "???"
+
+    objectifs_pedagogiques_etudiants :
+      - titre: "???"
+        texte: |
+          ???
+
+    objectifs_pedagogiques_enseignants :
+      - titre: "???"
+        texte: |
+          ???
+
+    point_cours :
+      - titre: "???"
+        texte: |
+          ???
+        figure:
+          - ref: ???
+            legende: |
+              ???
+            scale: ???
+            label: "???"
+
+    remarques_pedagogiques_ecueils_classiques: 
+      - titre: "???"
+        texte: |
+          ???
+
+    remarques_pedagogiques_conseils_animation: 
+      - titre: "???"
+        texte: |
+          ???
+
+    bilan: 
+      - titre: "???"
+        texte: |
+          ???
+
+    aller_plus_loin_niveaux: 
+      - niveau: lycee
+        titre: "???"
+        texte: |
+          ???
+
+      - niveau: prepa
+        titre: "???"
+        texte: |
+          ???
+
+      - niveau: licence
+        titre: "???"
+        texte: |
+          ???
+
+      - niveau: master
+        titre: "???"
+        texte: |
+          ???
+
+  - id: q4a
+    parent: "4"
+    enonce: |
+      Pour une onde :
+
+      $$
+      y(x,t)=f(x-ct),
+      $$
+
+      on note $(x_1,t_1)$ puis $(x_2,t_2)$, avec $t_2>t_1$, les coordonnées
+      de ce même point du profil à deux instants différents.
+
+      Montrer que :
+
+      $$
+      x_2=x_1+c(t_2-t_1).
+      $$
+
+      Représenter schématiquement le profil de l'onde aux instants $t_1$
+      et $t_2$ sur un même graphique, en faisant apparaître le déplacement
+      du point considéré. Conclure quant au sens de propagation de l'onde.
+
+    figure:
+      - ref: td1_ex0_onde_x_minus_ct
+        legende: |
+          Translation du profil d'une onde $y(x,t)=f(x-ct)$ entre
+          les instants $t_1$ et $t_2$.
+        scale: 0.7
+        label: "fig:onde_x_minus_ct"
+
+    prerequis : 
+      - titre: "???"
+        texte: |
+          ???
+        figure:
+          - ref: ???
+            legende: |
+              ???
+            scale: ???
+            label: "???"
+
+    objectifs_pedagogiques_etudiants :
+      - titre: "???"
+        texte: |
+          ???
+
+    objectifs_pedagogiques_enseignants :
+      - titre: "???"
+        texte: |
+          ???
+
+    point_cours :
+      - titre: "???"
+        texte: |
+          ???
+        figure:
+          - ref: ???
+            legende: |
+              ???
+            scale: ???
+            label: "???"
+
+    coup_de_pouce:
+      - titre: "Même point du profil"
+        texte: |
+          Une crête donnée correspond à la même valeur de l'argument de
+          la fonction $f$ aux deux instants :
+
+          $$
+          x_1-ct_1=x_2-ct_2.
+          $$
+
+          Isoler ensuite $x_2$.
+
+      - titre: "Interprétation"
+        texte: |
+          Puisque $t_2>t_1$ et $c>0$, comparer $x_2$ et $x_1$.
+
+    correction:
+      - titre: "Position du même point du profil"
+        texte: |
+          Pour suivre exactement le même motif, l'argument de la fonction
+          doit rester constant :
+
+          $$
+          x_1-ct_1=x_2-ct_2.
+          $$
+
+          On obtient alors :
+
+          $$
+          x_2=x_1+c(t_2-t_1).
+          $$
+
+      - titre: "Sens de propagation"
+        texte: |
+          Comme $t_2>t_1$ et $c>0$ :
+
+          $$
+          x_2>x_1.
+          $$
+
+          Le point suivi se déplace donc vers les valeurs croissantes de
+          $x$.
+
+          L'onde $f(x-ct)$ se propage dans le sens des $x$ croissants.
+
+    solution:
+      - titre: "Suivi d'une crête"
+        texte: |
+          Considérons une crête particulière du profil. Sa position
+          correspond à une valeur constante de l'argument de la fonction
+          $f$.
+
+          À l'instant $t_1$, son argument vaut :
+
+          $$
+          x_1-ct_1.
+          $$
+
+          À l'instant $t_2$, ce même point du profil est situé en $x_2$.
+          Son argument est donc :
+
+          $$
+          x_2-ct_2.
+          $$
+
+          Puisqu'il s'agit du même point du profil :
+
+          $$
+          x_1-ct_1=x_2-ct_2.
+          $$
+
+          En isolant $x_2$, on obtient :
+
+          $$
+          \boxed{
+          x_2=x_1+c(t_2-t_1)
+          }.
+          $$
+
+          Le déplacement spatial du motif vaut donc :
+
+          $$
+          \Delta x=x_2-x_1=c(t_2-t_1).
+          $$
+
+          Puisque $c>0$ et $t_2-t_1>0$, on a $\Delta x>0$.
+
+          Le profil entier est donc translaté vers la droite, c'est-à-dire
+          dans le sens des $x$ croissants.
+
+          Ainsi :
+
+          $$
+          \boxed{
+          y(x,t)=f(x-ct)
+          \quad\text{est une onde se propageant vers les }x\text{ croissants.}
+          }
+          $$
+
+    remarques_pedagogiques_ecueils_classiques: 
+      - titre: "???"
+        texte: |
+          ???
+
+    remarques_pedagogiques_conseils_animation: 
+      - titre: "???"
+        texte: |
+          ???
+
+    bilan: 
+      - titre: "???"
+        texte: |
+          ???
+
+    aller_plus_loin_niveaux: 
+      - niveau: lycee
+        titre: "???"
+        texte: |
+          ???
+
+      - niveau: prepa
+        titre: "???"
+        texte: |
+          ???
+
+      - niveau: licence
+        titre: "???"
+        texte: |
+          ???
+
+      - niveau: master
+        titre: "???"
+        texte: |
+          ???
+
+  - id: q4b
+    parent: "4"
+    enonce: |
+      Reprendre les mêmes questions pour une onde :
+
+      $$
+      y(x,t)=g(x+ct).
+      $$
+
+      Conclure quant au sens de propagation de cette onde.
+
+    figure:
+      - ref: td1_ex0_onde_x_plus_ct
+        legende: |
+          Translation du profil d'une onde $y(x,t)=g(x+ct)$ entre
+          les instants $t_1$ et $t_2$.
+        scale: 0.7
+        label: "fig:onde_x_plus_ct"
+
+    prerequis : 
+      - titre: "???"
+        texte: |
+          ???
+        figure:
+          - ref: ???
+            legende: |
+              ???
+            scale: ???
+            label: "???"
+
+    objectifs_pedagogiques_etudiants :
+      - titre: "???"
+        texte: |
+          ???
+
+    objectifs_pedagogiques_enseignants :
+      - titre: "???"
+        texte: |
+          ???
+
+    point_cours :
+      - titre: "???"
+        texte: |
+          ???
+        figure:
+          - ref: ???
+            legende: |
+              ???
+            scale: ???
+            label: "???"
+
+    coup_de_pouce:
+      - titre: "Argument constant"
+        texte: |
+          Pour suivre le même point du profil :
+
+          $$
+          x_1+ct_1=x_2+ct_2.
+          $$
+
+          Isoler $x_2$ et comparer sa valeur à $x_1$.
+
+    correction:
+      - titre: "Position du même point du profil"
+        texte: |
+          Le même motif est caractérisé par une valeur constante de
+          l'argument :
+
+          $$
+          x_1+ct_1=x_2+ct_2.
+          $$
+
+          On obtient :
+
+          $$
+          x_2=x_1-c(t_2-t_1).
+          $$
+
+      - titre: "Sens de propagation"
+        texte: |
+          Puisque $t_2>t_1$ et $c>0$ :
+
+          $$
+          x_2<x_1.
+          $$
+
+          Le point du profil se déplace donc vers les valeurs décroissantes
+          de $x$.
+
+          L'onde $g(x+ct)$ se propage dans le sens des $x$ décroissants.
+
+    solution:
+      - titre: "Suivi d'un motif"
+        texte: |
+          Pour suivre un même point identifiable du profil, l'argument de
+          la fonction $g$ doit rester constant.
+
+          On écrit donc :
+
+          $$
+          x_1+ct_1=x_2+ct_2.
+          $$
+
+          En isolant $x_2$ :
+
+          $$
+          x_2=x_1-c(t_2-t_1).
+          $$
+
+          Le déplacement du motif vaut ainsi :
+
+          $$
+          \Delta x=x_2-x_1=-c(t_2-t_1).
+          $$
+
+          Comme $t_2>t_1$ et $c>0$, on a :
+
+          $$
+          \Delta x<0.
+          $$
+
+          Le profil se déplace donc vers les valeurs décroissantes de $x$.
+
+          Ainsi :
+
+          $$
+          \boxed{
+          y(x,t)=g(x+ct)
+          \quad\text{est une onde se propageant vers les }x\text{ décroissants.}
+          }
+          $$
+
+    remarques_pedagogiques_ecueils_classiques: 
+      - titre: "???"
+        texte: |
+          ???
+
+    remarques_pedagogiques_conseils_animation: 
+      - titre: "???"
+        texte: |
+          ???
+
+    bilan: 
+      - titre: "???"
+        texte: |
+          ???
+
+    aller_plus_loin:
+      - niveau: lycee
+        titre: "Sens de propagation"
+        texte: |
+          Retenir la règle pratique :
+
+          $$
+          f(x-ct)
+          $$
+
+          correspond à une propagation vers la droite, dans le sens des
+          $x$ croissants, tandis que :
+
+          $$
+          g(x+ct)
+          $$
+
+          correspond à une propagation vers la gauche, dans le sens des
+          $x$ décroissants.
+
+      - niveau: prepa
+        titre: "Vitesse de phase"
+        texte: |
+          Pour une onde sinusoïdale :
+
+          $$
+          y(x,t)=A\cos(kx-\omega t+\phi),
+          $$
+
+          une surface de phase constante vérifie :
+
+          $$
+          kx-\omega t=\text{constante}.
+          $$
+
+          On retrouve ainsi une vitesse de propagation :
+
+          $$
+          v_\varphi=\frac{\omega}{k}=c.
+          $$
+
+      - niveau: licence
+        titre: "Solution générale de d'Alembert"
+        texte: |
+          La solution générale de l'équation de d'Alembert à une dimension
+          peut s'écrire :
+
+          $$
+          y(x,t)=f(x-ct)+g(x+ct).
+          $$
+
+          Elle correspond à la superposition de deux ondes progressives se
+          propageant en sens opposés.
+
+      - niveau: master
+        titre: "Lien avec les coordonnées caractéristiques"
+        texte: |
+          Introduire les coordonnées caractéristiques :
+
+          $$
+          \xi=x-ct,
+          \qquad
+          \eta=x+ct.
+          $$
+
+          Dans ces coordonnées, l'opérateur d'onde se factorise :
+
+          $$
+          \frac{\partial^2}{\partial x^2}
+          -
+          \frac{1}{c^2}
+          \frac{\partial^2}{\partial t^2}
+          =
+          4
+          \frac{\partial^2}{\partial\xi\partial\eta}.
+          $$
+
+          Les fonctions $f(\xi)$ et $g(\eta)$ sont alors directement
+          identifiées comme les deux familles d'ondes se propageant dans
+          les directions opposées.

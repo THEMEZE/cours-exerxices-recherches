@@ -1,0 +1,272 @@
+id: td2_ex6
+intitule: "Matrices Numpy : indexation, axes et pièges de dtype"
+td: td2
+facultatif: false
+seance: 2
+cours_rattache:
+  - onip.numpy_matrices
+  - onip.produit_matriciel
+
+metadonnees:
+  duree_estimee: "35 min"
+  difficulte: 3
+  type_exercice: "Application longue"
+  indispensable: true
+
+enonce_intro: |
+  Soit la matrice
+  $A = \begin{pmatrix} 4 & 6 & -2 & 3 \\ 2 & -1 & 0 & 1 \\ -7 & 0 & 1 & 12
+  \end{pmatrix}$. \\
+  1. Créer \texttt{A} avec \texttt{np.array} et l'afficher. \\
+  2. Afficher le type de \texttt{A}, le type d'un élément, la taille de
+     \texttt{A}. \\
+  3. Afficher la seconde colonne puis la troisième ligne. \\
+  4. Afficher la moyenne de tous les éléments, par colonne, par ligne. \\
+  5. Affichage formaté : « la moyenne de tous les éléments vaut ... ». \\
+  6. Modifier \texttt{A} : 2 premières lignes $\times 2$, puis dernière
+     colonne $/3$. Quel est le type des éléments de \texttt{A} alors ? \\
+  7. Créer \texttt{B} (3×4, que des 2), remplacer sa première colonne par
+     0. \\
+  8. Que représente \texttt{A*B} ? Comment faire un produit matriciel
+     entre \texttt{A} et \texttt{B} ? \\
+  9. Créer \texttt{CC} : éléments de \texttt{A*B} supérieurs à 5 conservés,
+     sinon 0.
+
+prerequis:
+  - titre: "shape, dtype, axis"
+    texte: |
+      \texttt{A.shape} donne (nombre de lignes, nombre de colonnes) ;
+      \texttt{A.dtype} donne le type des nombres stockés (indépendant du
+      type Python de l'objet \texttt{A} lui-même, qui est toujours
+      \texttt{numpy.ndarray}). Pour \texttt{np.mean(A, axis=k)}, l'axe
+      \texttt{axis=0} \emph{parcourt les lignes} (résultat par colonne),
+      \texttt{axis=1} \emph{parcourt les colonnes} (résultat par ligne).
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Distinguer type d'objet et type de données"
+    texte: |
+      Ne pas confondre \texttt{type(A)} (toujours \texttt{numpy.ndarray})
+      et \texttt{A.dtype} (le type des nombres stockés, ex. \texttt{int64}
+      ou \texttt{float64}).
+  - titre: "Distinguer produit élément par élément et produit matriciel"
+    texte: |
+      \texttt{*} est toujours terme à terme sur des tableaux Numpy ; le
+      produit matriciel au sens de l'algèbre linéaire s'écrit avec
+      \texttt{@} (ou \texttt{np.dot} / \texttt{np.matmul}).
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Le piège de troncature entière, point le plus formateur"
+    texte: |
+      Diviser une colonne d'un tableau Numpy d'\textbf{entiers} et
+      réassigner le résultat \emph{dans ce même tableau} tronque
+      silencieusement le résultat, sans erreur ni avertissement. Préparer
+      un contre-exemple où la troncature change visiblement le résultat
+      (par ex. diviser par 5 au lieu de 3), à montrer en direct si personne
+      dans la salle ne l'a remarqué spontanément.
+
+point_cours:
+  - titre: "Questions 1 à 5 : création, type, indexation, moyennes"
+    texte: |
+      \begin{verbatim}
+      import numpy as np
+
+      A = np.array([[4, 6, -2, 3], [2, -1, 0, 1], [-7, 0, 1, 12]])
+      print("A =\n", A)
+
+      print(type(A))            # numpy.ndarray (toujours)
+      print(type(A[0, 0]))      # numpy.int64
+      print(A.dtype)            # int64
+      print(A.shape)            # (3, 4) : 3 lignes, 4 colonnes
+      print(A.size)             # 12
+
+      print(A[:, 1])            # seconde colonne (indice 1)
+      print(A[2, :])            # troisieme ligne (indice 2)
+
+      # axis=0 parcourt les LIGNES -> resultat par COLONNE
+      # axis=1 parcourt les COLONNES -> resultat par LIGNE
+      print(np.mean(A))                  # moyenne totale ~ 1.583
+      print(np.mean(A, axis=0))          # [-0.333, 1.667, -0.333, 5.333]
+      print(np.mean(A, axis=1))          # [2.75, 0.5, 1.5]
+
+      moyenne_totale = np.mean(A)
+      print(f"La moyenne de tous les elements vaut {moyenne_totale:.2f}")
+      \end{verbatim}
+  - titre: "Question 6 : le piège de la division entière en place"
+    texte: |
+      \begin{verbatim}
+      # PIEGE : diviser une colonne d'entiers et reassigner DANS le meme
+      # tableau tronque silencieusement le resultat (sans erreur !).
+      A_piege = A.copy()
+      A_piege[0:2, :] *= 2
+      A_piege[:, -1] = A_piege[:, -1] / 3   # 2/3 -> 0 au lieu de 0.667 !
+      print(A_piege.dtype)   # int64 : toujours des entiers, silencieusement
+
+      # BONNE METHODE : convertir en float AVANT toute division.
+      A = A.astype(float)
+      A[0:2, :] = A[0:2, :] * 2
+      A[:, -1] = A[:, -1] / 3
+      print(A.dtype)   # float64
+      \end{verbatim}
+      À partir d'ici, \texttt{A} désigne la matrice \textbf{modifiée}
+      (float, 2 premières lignes doublées, dernière colonne divisée par
+      3) : les questions suivantes portent sur cette version, pas sur la
+      matrice d'entiers d'origine.
+  - titre: "Questions 7-9 : produit élément par élément vs matriciel, np.where"
+    texte: |
+      \begin{verbatim}
+      B = np.full((3, 4), 2)
+      B[:, 0] = 0
+
+      # '*' entre deux tableaux de meme forme : produit de HADAMARD
+      # (element par element), PAS un produit matriciel.
+      produit_elementwise = A * B
+
+      # Produit matriciel : nombre de colonnes du 1er = nombre de lignes
+      # du 2nd. A et B sont toutes deux 3x4 : A @ B est IMPOSSIBLE
+      # directement (ValueError). Deux solutions usuelles :
+      produit_3x3 = A @ B.T     # (3x4) @ (4x3) -> matrice 3x3
+      produit_4x4 = A.T @ B     # (4x3) @ (3x4) -> matrice 4x4
+
+      # np.where(condition, si_vrai, si_faux) : filtrage conditionnel
+      # element par element, plus lisible et plus rapide qu'une boucle.
+      CC = np.where(produit_elementwise > 5, produit_elementwise, 0)
+      \end{verbatim}
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Ne pas remarquer la troncature entière"
+    texte: |
+      Beaucoup d'étudiants ne remarqueront pas que leur division a été
+      tronquée si le résultat « tombe juste » par coïncidence (par ex.
+      $12/3=4$). Choisir un exemple en séance où la troncature change
+      visiblement le résultat.
+  - titre: "Confondre axis=0 et axis=1"
+    texte: |
+      Erreur d'inversion très fréquente. Moyen mnémotechnique : « axis=0
+      fait disparaître la première dimension (les lignes), donc on obtient
+      une valeur par colonne ».
+  - titre: "Confondre * et @ (réflexe Matlab)"
+    texte: |
+      Confusion quasi systématique chez les étudiants venant d'autres
+      langages (Matlab, où \texttt{*} est le produit matriciel par
+      défaut) : insister particulièrement ici.
+  - titre: "Utiliser A @ B directement"
+    texte: |
+      \texttt{A @ B} lève \texttt{ValueError} (dimensions incompatibles
+      3×4 @ 3×4). Faire chercher la condition de compatibilité (nombre de
+      colonnes = nombre de lignes) et proposer \texttt{A @ B.T} ou
+      \texttt{A.T @ B}.
+
+bilan:
+  - titre: "Trois règles à retenir"
+    texte: |
+      \begin{itemize}[label=$\bullet$]
+        \item Convertir en \texttt{float} avant toute division réassignée
+          dans un tableau d'entiers.
+        \item \texttt{axis=0} $\rightarrow$ résultat par colonne ;
+          \texttt{axis=1} $\rightarrow$ résultat par ligne.
+        \item \texttt{*} est toujours terme à terme ; le produit matriciel
+          s'écrit \texttt{@}.
+      \end{itemize}
+
+aller_plus_loin:
+  - niveau: ecole_ingenieur
+    titre: "Généralisation à d'autres opérations en place"
+    texte: |
+      Reproduire le piège de troncature avec d'autres opérations
+      (\texttt{//}, exponentiation à puissance négative) sur un tableau
+      d'entiers, pour vérifier systématiquement quelles opérations
+      tronquent silencieusement et lesquelles lèvent une erreur explicite.
+
+questions:
+  - id: q1
+    enonce: |
+      Créer \texttt{A} avec \texttt{np.array}, afficher son type, le type
+      d'un élément, et sa taille (\texttt{.shape}, \texttt{.size}).
+    coup_de_pouce: |
+      \texttt{type(A)} et \texttt{A.dtype} répondent à deux questions
+      différentes.
+    correction: "type(A) -> numpy.ndarray ; A.dtype -> int64 ; A.shape -> (3, 4)."
+    solution:
+      - titre: "Résultat"
+        texte: |
+          \texttt{type(A)} vaut \texttt{numpy.ndarray} (le type de
+          l'objet), \texttt{A.dtype} vaut \texttt{int64} (le type des
+          nombres stockés, car tous les éléments saisis sont des entiers),
+          \texttt{A.shape} vaut $(3, 4)$ et \texttt{A.size} vaut $12$.
+  - id: q2
+    enonce: |
+      Afficher la seconde colonne puis la troisième ligne de \texttt{A}.
+      Puis calculer la moyenne de tous les éléments, par colonne, par
+      ligne.
+    coup_de_pouce: |
+      Les indices commencent à 0 : « seconde colonne » = indice 1,
+      « troisième ligne » = indice 2.
+    correction: "A[:, 1] et A[2, :] ; moyennes via np.mean(A, axis=0) et axis=1."
+    solution:
+      - titre: "Résultat"
+        texte: |
+          Seconde colonne (indice 1) : $[6, -1, 0]$ ; troisième ligne
+          (indice 2) : $[-7, 0, 1, 12]$. Moyenne totale $\approx 1{,}583$ ;
+          moyenne par colonne (\texttt{axis=0}) :
+          $[-0{,}333,\ 1{,}667,\ -0{,}333,\ 5{,}333]$ ; moyenne par ligne
+          (\texttt{axis=1}) : $[2{,}75,\ 0{,}5,\ 1{,}5]$.
+  - id: q3
+    enonce: |
+      Multiplier les deux premières lignes de \texttt{A} par 2, puis
+      diviser sa dernière colonne par 3. Quel est le type des éléments de
+      \texttt{A} après cette opération ? Que se passe-t-il si l'on oublie
+      de convertir \texttt{A} en \texttt{float} au préalable ?
+    coup_de_pouce: |
+      Testez la division par 3 sur la valeur 6 de la dernière colonne, puis
+      sur une valeur qui ne tombe pas juste, comme 2.
+    correction: "Sans conversion, la division est tronquée silencieusement (int64) ; avec .astype(float) au préalable, on obtient bien float64."
+    solution:
+      - titre: "Le piège et sa correction"
+        texte: |
+          Sans conversion préalable, \texttt{A[:, -1] = A[:, -1] / 3} sur
+          un tableau \texttt{int64} tronque le résultat sans lever
+          d'erreur : $12/3=4$ reste correct par coïncidence, mais $2/3$
+          devient $0$ au lieu de $0{,}667$. Pour éviter ce piège, il faut
+          convertir \texttt{A} en \texttt{float} \emph{avant} toute
+          division réassignée dans le tableau, avec
+          \texttt{A = A.astype(float)}. Après conversion, \texttt{A.dtype}
+          vaut bien \texttt{float64}.
+  - id: q4
+    enonce: |
+      Créer \texttt{B} (3×4, que des 2), remplacer sa première colonne par
+      des 0. Que représente \texttt{A*B} ? Comment obtenir un véritable
+      produit matriciel entre \texttt{A} et \texttt{B} ?
+    coup_de_pouce: |
+      Vérifiez si les dimensions de \texttt{A} et \texttt{B} permettent un
+      produit matriciel direct \texttt{A @ B}.
+    correction: "A*B est un produit élément par élément (Hadamard). A @ B est impossible (3x4 @ 3x4) ; utiliser A @ B.T ou A.T @ B."
+    solution:
+      - titre: "Produit élément par élément vs matriciel"
+        texte: |
+          \texttt{A*B} effectue une multiplication terme à terme, valable
+          car \texttt{A} et \texttt{B} ont la même forme $(3,4)$ : ce
+          n'est pas un produit matriciel. Le produit matriciel classique
+          nécessite que le nombre de colonnes du premier facteur soit égal
+          au nombre de lignes du second : \texttt{A} et \texttt{B} étant
+          toutes deux $3\times 4$, \texttt{A @ B} est impossible
+          directement. On peut néanmoins calculer \texttt{A @ B.T} (donne
+          une matrice $3\times3$) ou \texttt{A.T @ B} (donne une matrice
+          $4\times4$).
+  - id: q5
+    enonce: |
+      Créer \texttt{CC}, une matrice qui ne conserve que les éléments de
+      \texttt{A*B} supérieurs à 5, et force les autres à 0.
+    coup_de_pouce: |
+      \texttt{np.where(condition, valeur\_si\_vrai, valeur\_si\_faux)} est
+      l'outil adapté à ce filtrage conditionnel élément par élément.
+    correction: "CC = np.where(A*B > 5, A*B, 0)"
+    solution:
+      - titre: "Utilisation de np.where"
+        texte: |
+          \texttt{CC = np.where(produit\_elementwise > 5,
+          produit\_elementwise, 0)} calcule, pour chaque élément de
+          \texttt{A*B}, la valeur elle-même si elle dépasse 5, et 0 sinon
+          — un filtrage à la fois plus lisible et plus rapide qu'une
+          double boucle \texttt{for} explicite. Ce calcul utilise
+          \texttt{A} déjà modifiée par la question précédente (float,
+          lignes doublées, dernière colonne divisée par 3).

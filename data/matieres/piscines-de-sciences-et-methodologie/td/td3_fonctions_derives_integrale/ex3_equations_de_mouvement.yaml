@@ -82,10 +82,10 @@ questions:
         texte: |
           \begin{enumerate}[label=\alph*)]
             \item $v_x(t) = 12t - 3t^2\text{ m}\cdot\text{s}^{-1}$ ; $a_x(t) = 12 - 6t\text{ m}\cdot\text{s}^{-2}$.
-            \item $0 < t < 2\text{ s}$ : $v_x > 0$ et $a_x > 0 \implies$ le mobile se déplace vers les $x$ croissants en **accélérant**.
-            \item $2 < t < 4\text{ s}$ : $v_x > 0$ et $a_x < 0 \implies$ le mobile avance toujours vers les $x$ croissants mais en **décélérant**.
-            \item $4 < t < 6\text{ s}$ : à $t=4\text{ s}$, $v_x=0$. Pour $4 < t < 6\text{ s}$, $v_x < 0$ et $a_x < 0 \implies$ le mobile a fait demi-tour et se déplace vers les $x$ négatifs en **accélérant**.
-            \item $t > 6\text{ s}$ : $x(t) < 0$, $v_x < 0$, $a_x < 0 \implies$ poursuite du mouvement vers les $x$ négatifs en **accélérant**.
+            \item $0 < t < 2\text{ s}$ : $v_x > 0$ et $a_x > 0 \implies$ le mobile se déplace vers les $x$ croissants en {\bf accélérant}.
+            \item $2 < t < 4\text{ s}$ : $v_x > 0$ et $a_x < 0 \implies$ le mobile avance toujours vers les $x$ croissants mais en {\bf décélérant}.
+            \item $4 < t < 6\text{ s}$ : à $t=4\text{ s}$, $v_x=0$. Pour $4 < t < 6\text{ s}$, $v_x < 0$ et $a_x < 0 \implies$ le mobile a fait demi-tour et se déplace vers les $x$ négatifs en {\bf accélérant}.
+            \item $t > 6\text{ s}$ : $x(t) < 0$, $v_x < 0$, $a_x < 0 \implies$ poursuite du mouvement vers les $x$ négatifs en {\bf accélérant}.
           \end{enumerate}
 
   - id: q2
@@ -125,5 +125,5 @@ questions:
           \begin{enumerate}[label=\alph*)]
             \item $v(t) = \int (12t - 6)\mathrm{d}t = 6t^2 - 6t + v_0 = 6t^2 - 6t + 4\text{ m}\cdot\text{s}^{-1}$.
             \item $x(t) = \int (6t^2 - 6t + 4)\mathrm{d}t = 2t^3 - 3t^2 + 4t + x_0 = 2t^3 - 3t^2 + 4t - 3\text{ m}$.
-            \item $v(t) = 0 \implies 6t^2 - 6t + 4 = 0 \implies 3t^2 - 3t + 2 = 0$. Le discriminant $\Delta = 9 - 24 = -15 < 0$. **La vitesse ne s'annule jamais** sur $\mathbb{R}$.
+            \item $v(t) = 0 \implies 6t^2 - 6t + 4 = 0 \implies 3t^2 - 3t + 2 = 0$. Le discriminant $\Delta = 9 - 24 = -15 < 0$. {\bf La vitesse ne s'annule jamais} sur $\mathbb{R}$.
           \end{enumerate}

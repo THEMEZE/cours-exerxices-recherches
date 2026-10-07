@@ -1,0 +1,170 @@
+id: td1_ex1
+intitule: "Création d'un projet sous PyCharm"
+td: td1
+facultatif: false
+seance: 1
+cours_rattache:
+  - intro.environnement_pycharm
+  - intro.interpreteur_python
+  - intro.gestion_paquets
+
+metadonnees:
+  duree_estimee: "20 min"
+  difficulte: 1
+  type_exercice: "Prise en main de l'outil"
+  indispensable: true
+
+enonce_intro: |
+  Avant tout calcul scientifique, il faut un environnement de travail
+  fonctionnel. Cet exercice fait obtenir à chaque étudiant un projet
+  PyCharm associé à un interpréteur Python 3, contenant un fichier
+  \texttt{main.py} qui s'exécute sans erreur. Les paquets \texttt{numpy},
+  \texttt{matplotlib} et \texttt{scikit-learn} devront être installés dans
+  cet interpréteur : ils sont utilisés dès les exercices suivants.
+
+prerequis:
+  - titre: "Vocabulaire : projet, interpréteur, paquet"
+    texte: |
+      Un \textbf{projet} PyCharm est un dossier de travail. Un
+      \textbf{interpréteur} Python est le programme qui exécute le code :
+      il possède ses propres bibliothèques installées (\texttt{numpy},
+      \texttt{matplotlib}, ...). Un même poste peut avoir plusieurs
+      interpréteurs (système, Anaconda, environnements virtuels), chacun
+      avec son propre jeu de paquets installés indépendamment des autres.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Obtenir un environnement de travail fonctionnel"
+    texte: |
+      Savoir créer un projet PyCharm, lui associer un interpréteur Python 3
+      valide, exécuter un script et lire la sortie dans la console.
+  - titre: "Découvrir le débogueur"
+    texte: |
+      Repérer les raccourcis essentiels : exécuter (Maj+F10), déboguer
+      (Maj+F9), poser un point d'arrêt (Ctrl+F8) — utilisés dans tous les
+      exercices suivants de ce bloc.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Sécuriser le reste de la séance"
+    texte: |
+      Les problèmes d'interpréteur mal configuré bloquent tout le reste de
+      la séance : il faut circuler activement dans les 10 premières
+      minutes et valider un interpréteur fonctionnel pour chaque étudiant
+      avant de lancer les exercices de code.
+
+point_cours:
+  - titre: "Déroulement attendu"
+    texte: |
+      \begin{enumerate}
+        \item Lancer PyCharm puis \texttt{File > New Project}.
+        \item Renseigner \texttt{Location} : un dossier dédié et vide, sans
+          espace ni accent dans le chemin, hors OneDrive ou lecteur réseau.
+        \item Interpréteur : choisir « Previously configured » s'il existe
+          déjà, sinon \texttt{Add Interpreter > Add Local Interpreter >
+          System Interpreter} et choisir un Python 3 (par ex. Anaconda 3).
+        \item Cocher « Create a main.py welcome script » puis \texttt{Create}.
+        \item Exécuter \texttt{main.py} (Maj+F10) et observer la sortie dans
+          l'onglet \texttt{Run}.
+      \end{enumerate}
+      Résultat attendu : l'interpréteur s'affiche en bas à droite de la
+      fenêtre (« Python 3.x »), et \texttt{main.py} s'exécute avec une
+      sortie visible.
+  - titre: "Où PyCharm va-t-il chercher les bibliothèques ?"
+    texte: |
+      Quand le code contient \texttt{import numpy}, PyCharm cherche le
+      paquet \texttt{numpy} uniquement dans l'interpréteur associé au
+      projet courant — jamais dans un autre interpréteur du même poste.
+      C'est pour cette raison qu'un même paquet peut être « installé » sur
+      la machine et pourtant introuvable dans un projet particulier.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Aucun interpréteur configuré"
+    texte: |
+      Symptôme : bandeau « No Python interpreter configured for the
+      project ». Cause : aucun interpréteur sélectionné à la création, ou
+      projet ouvert depuis un dossier existant. Remède : \texttt{File >
+      Settings > Project > Python Interpreter > Add Interpreter}.
+  - titre: "Module introuvable malgré l'installation"
+    texte: |
+      \texttt{ModuleNotFoundError: No module named 'numpy'} signifie que le
+      paquet n'est pas installé dans l'interpréteur \emph{sélectionné}
+      (souvent un autre Python que celui où l'étudiant a fait
+      \texttt{pip install}). Utiliser la fenêtre \texttt{Python Packages}
+      de PyCharm, ou \texttt{python -m pip install numpy matplotlib
+      scikit-learn} avec l'interpréteur du projet.
+  - titre: "Projet imbriqué dans le mauvais dossier"
+    texte: |
+      Si l'étudiant saisit un chemin déjà existant, PyCharm peut créer un
+      sous-dossier supplémentaire : faire vérifier l'arborescence dans le
+      panneau \texttt{Project}.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Un exercice de mise en route, pas un test"
+    texte: |
+      Les incidents techniques sont normaux et ne doivent pas être perçus
+      comme un échec. Profiter de cet exercice pour montrer les raccourcis
+      utiles : Maj+F10 (exécuter), Maj+F9 (déboguer), Ctrl+F8 (point
+      d'arrêt), Alt+Entrée (correction rapide), Ctrl+Alt+L (reformater).
+
+bilan:
+  - titre: "Un environnement fiable avant tout"
+    texte: |
+      Un projet mal configuré (mauvais interpréteur, paquets manquants)
+      produit des erreurs qui n'ont rien à voir avec la logique du
+      programme : toujours vérifier l'environnement avant de chercher un
+      bug dans le code lui-même.
+
+aller_plus_loin:
+  - niveau: ecole_ingenieur
+    titre: "Environnement virtuel (venv)"
+    texte: |
+      Créer un second projet avec un environnement virtuel dédié
+      (\texttt{Add Interpreter > Add Local Interpreter > Virtualenv
+      Environment}) et y installer \texttt{numpy}. Vérifier dans le
+      panneau \texttt{Python Packages} que \texttt{numpy} n'apparaît pas
+      dans le premier projet : cela illustre l'isolation des dépendances
+      entre projets.
+  - niveau: ecole_ingenieur
+    titre: "Git intégré"
+    texte: |
+      Initialiser un dépôt Git dans le projet (\texttt{VCS > Enable
+      Version Control}), commiter \texttt{main.py}, puis le modifier et
+      observer les marges colorées (diff) dans l'éditeur.
+
+questions:
+  - id: q1
+    enonce: |
+      Où PyCharm va-t-il chercher les bibliothèques quand vous écrivez
+      \texttt{import numpy} ? Quelle est la différence entre le projet
+      PyCharm et l'interpréteur Python ?
+    coup_de_pouce: |
+      Un projet est un dossier ; un interpréteur est un exécutable Python
+      avec ses propres paquets installés à côté de lui, indépendamment du
+      dossier de travail.
+    correction: "L'interpréteur, pas le projet, détermine les paquets disponibles."
+    solution:
+      - titre: "Projet vs interpréteur"
+        texte: |
+          Le projet ne contient que le code source et sa configuration
+          (fichiers \texttt{.idea}). Les bibliothèques Python sont
+          installées à l'intérieur de l'interpréteur choisi (dossier
+          \texttt{site-packages}). Deux projets peuvent donc partager le
+          même interpréteur (et les mêmes paquets), ou au contraire
+          utiliser des interpréteurs différents avec des jeux de paquets
+          totalement indépendants.
+  - id: q2
+    enonce: |
+      Que se passerait-il si deux projets avaient besoin de deux versions
+      différentes d'une même bibliothèque ?
+    coup_de_pouce: |
+      Un interpréteur ne peut avoir qu'une seule version installée d'un
+      paquet donné à la fois.
+    correction: "Il faut deux interpréteurs distincts (ex. deux environnements virtuels)."
+    solution:
+      - titre: "Isolation par environnement virtuel"
+        texte: |
+          Un même interpréteur ne peut contenir qu'une seule version d'un
+          paquet donné. Pour faire cohabiter deux versions différentes, il
+          faut créer deux environnements virtuels distincts (un par
+          projet), chacun avec sa propre version installée : c'est
+          précisément le rôle des \texttt{venv}, introduits en
+          prolongement de cet exercice.
