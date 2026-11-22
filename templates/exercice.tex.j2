@@ -47,7 +47,7 @@
 
 \BLOCK{macro render_animation(q)}
     \BLOCK{if opts.show_animation_note and q.animation}
-        \BLOCK{set anim_list = [q.animation] if ex.animation is mapping else q.animation}
+        \BLOCK{set anim_list = [q.animation] if q.animation is mapping else q.animation}
         \BLOCK{for anim in anim_list}
             \par\smallskip\textit{(Animation disponible : \texttt{\VAR{anim.ref|texid}})}
         \BLOCK{endfor}
@@ -108,7 +108,7 @@
 \BLOCK{endmacro}
 
 %{# ============================================================================== #}
-%{# MACROS NOUVELLES : accroche / outils mathématiques / liens autres disciplines   #}
+%{# MACROS : accroche / outils mathématiques / liens autres disciplines             #}
 %{# Champs YAML spécifiques (différents de titre/texte) :                           #}
 %{#   accroche_point_cours_essentiel : titre, duree_introduction,                  #}
 %{#                                    question_d_accroche, texte                  #}
@@ -160,6 +160,13 @@
 \BLOCK{endmacro}
 
 %{# ============================================================================== #}
+%{# MACRO : titre de partie au niveau TD (utilisé uniquement en phase 'fin')         #}
+%{# ============================================================================== #}
+\BLOCK{macro render_titre_td(txt)}
+    \par\medskip\noindent{\large\bfseries\sffamily \VAR{txt}}\par\nopagebreak\smallskip
+\BLOCK{endmacro}
+
+%{# ============================================================================== #}
 %{# MACRO QUESTION PRINCIPALE                                                       #}
 %{# ============================================================================== #}
 \BLOCK{macro render_question(q)}
@@ -183,10 +190,9 @@
     \VAR{render_section(opts.show_bilan, q.bilan, 'bilan')}
     \VAR{render_section(opts.aller_plus_loin_niveaux, q.aller_plus_loin, 'allerplusloin', is_apl=true)}
 
-
     %{# --- ENCADRÉ GÉNÉRIQUE DATA-DRIVEN --- #}
     \BLOCK{if q.encadre}
-        \EncadreDeux{\VAR{q.encadre.type}}{\VAR{q.encadre.titre}}{\VAR{q.encadre.couleur}}{\VAR{q.encadre.contenu}} 
+        \EncadreDeux{\VAR{q.encadre.type}}{\VAR{q.encadre.titre}}{\VAR{q.encadre.couleur}}{\VAR{q.encadre.contenu}}
     \BLOCK{endif}
 
     %{# --- OVERLAY TIKZ AU NIVEAU QUESTION --- #}
@@ -197,11 +203,11 @@
     \BLOCK{endif}
 \BLOCK{endmacro}
 
-% ============================================================
-% NIVEAU 1
-% ============================================================
-
-\BLOCK{if titre_exercice}
+%{# ============================================================================== #}
+%{# TITRE DE L'EXERCICE (niveau 1) + ancre + lien retour vers le plan de séance     #}
+%{# Rendu uniquement si titre_exercice est vrai (pas pour l'ouverture/clôture du TD) #}
+%{# ============================================================================== #}
+\BLOCK{if titre_exercice is defined and titre_exercice}
 
 \BLOCK{if opts.show_metadonnees and ex.metadonnees}
 \TitreNiveauUn[
@@ -222,127 +228,38 @@
 \TitreNiveauUn{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
 \BLOCK{endif}
 
-
-\BLOCK{if false}
-
-\TitreNiveauUnOld{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
-
+\phantomsection
+\addcontentsline{toc}{subsection}{Exercice \VAR{ex.numero}. \VAR{ex.intitule}}
+\BLOCK{if ex.id}\label{\VAR{ex.id}}\BLOCK{endif}
 
 
-
-% ============================================================
-% NIVEAU 2
-% ============================================================
-
-\TitreNiveauDeuxOld{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
-
-\BLOCK{if opts.show_metadonnees and ex.metadonnees}
-
-\TitreNiveauDeux[
-  \BLOCK{if ex.metadonnees.indispensable}
-    indispensable=\VAR{ex.metadonnees.indispensable},
-  \BLOCK{endif}
-  \BLOCK{if ex.metadonnees.difficulte}
-    difficulte=\VAR{ex.metadonnees.difficulte},
-  \BLOCK{endif}
-  \BLOCK{if ex.metadonnees.duree_estimee}
-    duree={\VAR{ex.metadonnees.duree_estimee}},
-  \BLOCK{endif}
-  \BLOCK{if ex.metadonnees.type_exercice}
-    type={\VAR{ex.metadonnees.type_exercice}}
-  \BLOCK{endif}
-]{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
-\BLOCK{else}
-\TitreNiveauDeux{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
+%{# Lien retour : seulement si le plan de séance existe (cible du \label{plandelaseance}) #}
+\BLOCK{if (opts.show_plan_seance is not defined or opts.show_plan_seance) and exercices is defined and exercices}
+\hyperref[plandelaseance]{\large\bfseries\sffamily $\triangleleft$ Plan de la séance}
 \BLOCK{endif}
 
-
-
-% ============================================================
-% NIVEAU 3
-% ============================================================
-
-\TitreNiveauTroisOld{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
-
-\BLOCK{if opts.show_metadonnees and ex.metadonnees}
-\TitreNiveauTrois[
-  \BLOCK{if ex.metadonnees.indispensable}
-    indispensable=\VAR{ex.metadonnees.indispensable},
-  \BLOCK{endif}
-  \BLOCK{if ex.metadonnees.difficulte}
-    difficulte=\VAR{ex.metadonnees.difficulte},
-  \BLOCK{endif}
-  \BLOCK{if ex.metadonnees.duree_estimee}
-    duree={\VAR{ex.metadonnees.duree_estimee}},
-  \BLOCK{endif}
-  \BLOCK{if ex.metadonnees.type_exercice}
-    type={\VAR{ex.metadonnees.type_exercice}}
-  \BLOCK{endif}
-]{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
-\BLOCK{else}
-\TitreNiveauTrois{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
-\BLOCK{endif}
-
-
-% ============================================================
-% NIVEAU 4
-% ============================================================
-
-\TitreNiveauQuatreOld{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
-
-\BLOCK{if opts.show_metadonnees and ex.metadonnees}
-\TitreNiveauQuatre[
-  \BLOCK{if ex.metadonnees.indispensable}
-    indispensable=\VAR{ex.metadonnees.indispensable},
-  \BLOCK{endif}
-  \BLOCK{if ex.metadonnees.difficulte}
-    difficulte=\VAR{ex.metadonnees.difficulte},
-  \BLOCK{endif}
-  \BLOCK{if ex.metadonnees.duree_estimee}
-    duree={\VAR{ex.metadonnees.duree_estimee}},
-  \BLOCK{endif}
-  \BLOCK{if ex.metadonnees.type_exercice}
-    type={\VAR{ex.metadonnees.type_exercice}}
-  \BLOCK{endif}
-]{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
-\BLOCK{else}
-\TitreNiveauQuatre{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
-\BLOCK{endif}
-
-
-% ============================================================
-% NIVEAU 5
-% ============================================================
-
-\TitreNiveauCinqOld{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
-
-\BLOCK{if opts.show_metadonnees and ex.metadonnees}
-\TitreNiveauCinq[
-  \BLOCK{if ex.metadonnees.indispensable}
-    indispensable=\VAR{ex.metadonnees.indispensable},
-  \BLOCK{endif}
-  \BLOCK{if ex.metadonnees.difficulte}
-    difficulte=\VAR{ex.metadonnees.difficulte},
-  \BLOCK{endif}
-  \BLOCK{if ex.metadonnees.duree_estimee}
-    duree={\VAR{ex.metadonnees.duree_estimee}},
-  \BLOCK{endif}
-  \BLOCK{if ex.metadonnees.type_exercice}
-    type={\VAR{ex.metadonnees.type_exercice}}
-  \BLOCK{endif}
-]{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
-\BLOCK{else}
-\TitreNiveauCinq{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
-\BLOCK{endif}
-\BLOCK{endif}
+\bigskip
 
 \BLOCK{endif}
 
 
+%{# ============================================================================== #}
+%{# PHASES DE RENDU                                                                 #}
+%{#   td_phase non défini ou 'all' : exercice complet (comportement historique)    #}
+%{#   td_phase = 'debut'  : ouverture du TD (cadrage, prérequis, objectifs, cours)  #}
+%{#   td_phase = 'fin'    : clôture du TD (écueils, animation, bilan, liens, APL)   #}
+%{# ============================================================================== #}
+\BLOCK{set _phase = td_phase if td_phase is defined else 'all'}
+\BLOCK{set _head = _phase in ['all', 'debut']}
+\BLOCK{set _tail = _phase in ['all', 'fin']}
+
+\BLOCK{if _head}
 %{# Accroche + point de cours essentiel : introduit en tout début d'exercice (avant l'énoncé) #}
 \VAR{render_accroche(opts.show_accroche_point_cours_essentiel is not defined or opts.show_accroche_point_cours_essentiel, ex.accroche_point_cours_essentiel, opts.show_duree_introduction is not defined or opts.show_duree_introduction)}
 
+\BLOCK{if ex.enonce_intro}
 \VAR{ex.enonce_intro}
+\BLOCK{endif}
 
 \VAR{render_figure(ex)}
 \VAR{render_animation(ex)}
@@ -354,8 +271,9 @@
 \VAR{render_outils_maths(opts.show_outils_mathematiques is not defined or opts.show_outils_mathematiques, ex.outils_mathematiques)}
 \VAR{render_section(opts.show_coup_de_pouce, ex.coup_de_pouce, 'coupdepouce')}
 \VAR{render_section(opts.show_attention, ex.attention, 'attention')}
+\BLOCK{endif}
 
-\BLOCK{if ex.questions}
+\BLOCK{if _phase == 'all' and ex.questions}
 \begin{enumerate}[label=\arabic*.]
 \BLOCK{for item in ex.contenu}
     \BLOCK{if item.kind == 'intro'}
@@ -378,11 +296,16 @@
 \end{enumerate}
 \BLOCK{endif}
 
+\BLOCK{if _tail}
+\BLOCK{if _phase == 'fin'}
+\VAR{render_titre_td(opts.titre_cloture_td if opts.titre_cloture_td is defined else "Bilan et prolongements du TD")}
+\BLOCK{endif}
 \VAR{render_section(opts.show_remarques_pedagogiques_ecueils_classiques, ex.remarques_pedagogiques_ecueils_classiques, 'remarquespedagogiquesecueilsclassiques')}
 \VAR{render_section(opts.show_remarques_pedagogiques_conseils_animation, ex.remarques_pedagogiques_conseils_animation, 'remarquespedagogiquesconseilsanimation')}
 \VAR{render_section(opts.show_bilan, ex.bilan, 'bilan')}
 \VAR{render_liens_disciplines(opts.show_liens_autres_disciplines is not defined or opts.show_liens_autres_disciplines, ex.liens_autres_disciplines)}
 \VAR{render_section(opts.aller_plus_loin_niveaux, ex.aller_plus_loin, 'allerplusloin', is_apl=true)}
+\BLOCK{endif}
 
 \BLOCK{if ex.overlay_tikz and opts.show_solution}
     \begin{tikzpicture}[remember picture, overlay]

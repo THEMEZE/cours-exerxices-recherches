@@ -1,0 +1,173 @@
+id: td5_ex3
+intitule: "Travail d'une force de rappel"
+td: td5
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - energie.travail_force_variable
+  - energie.energie_potentielle_elastique
+  - energie.energie_mecanique
+  - energie.frottement_solide_et_energie
+
+metadonnees:
+  duree_estimee: "45 min"
+  difficulte: 3
+  type_exercice: "Application / Cours actif"
+  indispensable: true
+
+enonce_intro: |
+  Un cube $M$ de masse $m$, assimilé à un point matériel, est relié à un ressort de raideur $k=32~\mathrm{N\,m^{-1}}$ et glisse sur un plan horizontal. L'axe $(Ox)$ a pour origine $O$ la position d'équilibre. On écarte $M$ jusqu'à $x=a$ (point $A$) puis on le lâche avec la vitesse initiale $v_A$. Le poly ne donne pas $m$ : on prendra $m=6$ kg comme dans la correction officielle. Frottements négligés sauf aux questions (g) et suivantes.
+
+prerequis:
+  - titre: "Force de rappel d'un ressort"
+    texte: |
+      $\vec F=-k\,x\,\vec u_x$ avec $x$ l'allongement algébrique (origine à la longueur à vide) ; conservative, $E_p=\tfrac12kx^2$.
+  - titre: "Intégrale d'une force dépendant de la position"
+    texte: |
+      $W_{A\to B}=\displaystyle\int_{x_A}^{x_B}F(x)\,\mathrm dx$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Travail et énergie d'un ressort"
+    texte: |
+      Savoir intégrer le travail de la force de rappel, en déduire $E_p$, écrire $E_m$ et l'utiliser pour trouver une vitesse et une amplitude ; savoir prendre en compte un frottement constant.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Première force non constante"
+    texte: |
+      Le travail du ressort ne se calcule plus par $\vec F\cdot\Delta\vec r$ : il faut intégrer $-kx\,\mathrm dx$. Occasion d'introduire la notion de {\bf différentielle exacte}. L'exercice contient trois pièges : (i) le signe de $W_{A\to O}=+\tfrac12ka^2$ (force motrice, on se rapproche de $O$) ; (ii) l'amplitude maximale $x_{\max}=\sqrt{2E_m/k}=5{,}29$ cm ({\bf la correction papier écrit $5{,}3$ cm via une écriture $\sqrt{0{,}28\times10^{-4}}=0{,}53\times10^{-2}$ qui est fausse}, car $2E_m/k=2{,}8\times10^{-3}$ m$^2$ et non $0{,}28\times10^{-4}$ ; le résultat final est correct à l'arrondi) ; (iii) avec le frottement de la question (g), l'énergie cinétique en $O$ peut être négative : le cube s'arrête avant.
+
+point_cours:
+  - titre: "Énergie potentielle élastique"
+    texte: |
+      $\delta W=-kx\,\mathrm dx=-\mathrm d\big(\tfrac12kx^2\big)$, donc $E_p=\tfrac12kx^2$ (avec $E_p(0)=0$). $E_m=\tfrac12mv^2+\tfrac12kx^2$.
+  - titre: "Oscillateur harmonique"
+    texte: |
+      $m\ddot x=-kx$, $\omega_0=\sqrt{k/m}$ ; l'énergie $E_m=\tfrac12kx_{\max}^2$ fixe l'amplitude ; $v_{\max}=\omega_0x_{\max}$ en $O$.
+  - titre: "Frottement de glissement constant"
+    texte: |
+      Force $\vec f$ opposée à la vitesse, norme $f=\mu mg$ (plan horizontal) : $W_f=-f\,\ell$ avec $\ell$ la {\bf distance parcourue} ; $\Delta E_m=W_f$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Signe du travail du ressort"
+    texte: |
+      De $A$ ($x=a>0$) vers $O$, la force est dirigée vers $-x$ et le déplacement aussi : $W_{A\to O}=+\tfrac12ka^2>0$. En s'éloignant de $O$, $W<0$ (le ressort freine).
+  - titre: "Mettre $E_m=\\tfrac12mv_A^2$ seulement"
+    texte: |
+      En $A$ il y a de l'énergie cinétique $\tfrac12mv_A^2$ {\bf et} de l'énergie élastique $\tfrac12ka^2$. Oublier l'un des deux est l'erreur numéro un.
+  - titre: "Unités : cm et cm/s"
+    texte: |
+      $v_A=4~\mathrm{cm/s}=0{,}04~\mathrm{m/s}$ ; $a=5~\mathrm{cm}=0{,}05$ m. Les convertir avant le calcul.
+  - titre: "Frottement : $\\mu$ trop grand"
+    texte: |
+      Avec $\mu=0{,}1$, $\mu mg\,a=0{,}29$ J $\gg E_m=0{,}045$ J : le terme sous la racine est négatif, {\bf le cube n'atteint jamais $O$}. Interpréter, ne pas calculer une racine d'un nombre négatif.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Tracer le graphe $E_p(x)$ et $E_m$"
+    texte: |
+      Faire tracer la parabole $E_p=\tfrac12kx^2$ et la droite horizontale $E_m$ : les points d'intersection sont les rebroussements $\pm x_{\max}$ ; $E_c=E_m-E_p$ est l'écart vertical.
+  - titre: "Adhérence au démarrage"
+    texte: |
+      Lorsque le cube est lâché sans vitesse, la force de rappel $ka$ doit dépasser l'adhérence maximale $\mu_smg$ pour qu'il bouge : $\mu_s<ka/(mg)=0{,}027$ ici.
+
+bilan:
+  - titre: "Résultats"
+    texte: |
+      $W_{A\to O}=\tfrac12ka^2$ ; $E_p=\tfrac12kx^2$ ; $E_m=\tfrac12mv_A^2+\tfrac12ka^2=44{,}8$ mJ ; $v_O=\sqrt{v_A^2+ka^2/m}=0{,}122$ m/s ; $x_{\max}=\sqrt{2E_m/k}=5{,}29$ cm ; avec frottement $v_O=\sqrt{v_A^2+ka^2/m-2\mu ga}$ (existe si $\mu<\mu_c\approx0{,}015$).
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Oscillateur avec frottement solide : amplitudes successives"
+    texte: |
+      Avec un frottement constant $f=\mu mg$, montrer que l'amplitude diminue de $\dfrac{2f}{k}$ à chaque demi-période (décroissance {\bf linéaire}, et non exponentielle) et que le mouvement s'arrête quand $|x|<f/k$. Comparer au frottement fluide.
+  - niveau: licence
+    titre: "Ressort non linéaire"
+    texte: |
+      Pour une force $F=-kx-\beta x^3$, trouver $E_p$, la vitesse en $O$ et discuter la période (dépend de l'amplitude : oscillateur de Duffing).
+
+accroche_point_cours_essentiel:
+  - titre: "L'énergie d'un ressort : de quoi dépend-elle ?"
+    duree_introduction: "3 min"
+    question_d_accroche: |
+      Un ressort comprimé de $5$ cm lance un cube. Si on le comprime de $10$ cm, {\bf quelle sera la vitesse} : deux fois plus, quatre fois plus ? Que devient l'énergie quand on double l'étirement ?
+    texte: |
+      {\bf Idée clé : l'énergie élastique est quadratique : $E_p=\tfrac12kx^2$.} Doubler la compression multiplie l'énergie par $4$ et la vitesse par $2$.
+
+outils_mathematiques:
+  - titre: "Différentielle exacte"
+    texte: |
+      $\mathrm d\big(\tfrac12x^2\big)=x\,\mathrm dx$ ; une expression $\delta W=-kx\,\mathrm dx$ est une différentielle exacte.
+  - titre: "Racine carrée"
+    texte: |
+      $\sqrt{2{,}8\times10^{-3}}=5{,}29\times10^{-2}$ ; vérifier toujours en élevant au carré.
+
+liens_autres_disciplines:
+  - discipline: "Ingénierie"
+    texte: |
+      Amortisseurs, suspensions, ressorts d'horlogerie ; énergie stockée $\tfrac12kx^2$ dans un ressort de $k\approx10^4$ N/m comprimé de $5$ cm : $12{,}5$ J.
+  - discipline: "Physique des matériaux"
+    texte: |
+      Loi de Hooke et limite d'élasticité : au-delà, la déformation est plastique et l'énergie dissipée.
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{itemize}
+        \item[(a)] Quel est le travail de la force de rappel lorsque $M$ revient de $A$ à $O$ ?
+        \item[(b)] Quelle est alors la vitesse $v_O$ de $M$ à son arrivée en $O$ ?
+        \item[(c)] Montrer que la force de rappel est conservative. En déduire l'énergie potentielle associée et la représenter en fonction de $x$.
+        \item[(d)] Donner l'expression de l'énergie mécanique. Est-elle conservée ? En quelle position $E_c$ est-elle maximale ? minimale ?
+      \end{itemize}
+    coup_de_pouce: |
+      Force $\vec F=-kx\,\vec u_x$ : $\delta W=-kx\,\mathrm dx$. Reconnaître une différentielle exacte pour (c). Le TEC entre $A$ et $O$ donne la vitesse en (b).
+    correction: |
+      (a) $W_{A\to O}=\tfrac12ka^2$ ; (b) $v_O=\sqrt{v_A^2+ka^2/m}$ ; (c) $E_p=\tfrac12kx^2$ ; (d) $E_m=\tfrac12mv^2+\tfrac12kx^2$ conservée ; $E_c$ max en $O$, min (nulle) en $\pm x_{\max}$.
+    solution:
+      - titre: "(a) Travail de $A$ à $O$"
+        texte: |
+          $\delta W=\vec F\cdot\mathrm d\overrightarrow{OM}=-kx\,\mathrm dx$, d'où
+          $$W_{A\to O}=\int_a^0(-kx)\,\mathrm dx=-k\Big[\tfrac12x^2\Big]_a^0=\boxed{\tfrac12ka^2}>0.$$
+      - titre: "(b) Vitesse en $O$"
+        texte: |
+          Seule la force de rappel travaille (le poids et la réaction sont verticaux, perpendiculaires à $\mathrm d\overrightarrow{OM}$). TEC entre $A$ et $O$ :
+          $$\tfrac12mv_O^2-\tfrac12mv_A^2=\tfrac12ka^2\ \Rightarrow\ \boxed{v_O=\sqrt{v_A^2+\frac{ka^2}m}}\ \ge v_A.$$
+          Dimension : $[ka^2/m]=\mathrm{N\,m^{-1}\,m^2\,kg^{-1}}=\mathrm{m^2\,s^{-2}}$ $\sird$.
+      - titre: "(c) Force conservative et énergie potentielle"
+        texte: |
+          $\delta W=-kx\,\mathrm dx=-\mathrm d\big(\tfrac12kx^2\big)$ est la différentielle (au signe près) d'une fonction de $x$ seul : le travail ne dépend que des positions extrêmes, la force est conservative et
+          $$\boxed{E_p(x)=\tfrac12kx^2+C}\ ,\quad C=0\text{ en prenant }E_p(0)=0.$$
+          Graphe : parabole de sommet $O$, convexe, minimum en $x=0$ (équilibre stable).
+      - titre: "(d) Énergie mécanique"
+        texte: |
+          $E_m=\tfrac12mv^2+\tfrac12kx^2$. Les forces qui travaillent sont conservatives ($W_{\rm nc}=0$) : $\Delta E_m=0$, {\bf $E_m$ est conservée}. $E_c=E_m-E_p$ est maximale quand $E_p$ est minimale, soit en $x=0$ ($E_{c,\max}=E_m$), et minimale (nulle) quand $E_p=E_m$, soit aux points de rebroussement $x=\pm x_{\max}$.
+
+  - id: q2
+    enonce: |
+      \begin{itemize}
+        \item[(e)] Exprimer l'énergie mécanique en $A$ et en $O$. Calculer sa valeur pour $v_A=4~\mathrm{cm/s}$, $a=5~\mathrm{cm}$ et $m=6$ kg. Compléter le graphique de (c) avec $E_m$.
+        \item[(f)] Déterminer l'allongement maximal $x_{\max}$ du ressort et calculer sa valeur.
+        \item[(g)] On suppose maintenant que le glissement de $M$ sur le plan se fait avec un frottement cinétique $\mu$, de norme $f=\mu mg$. Quelle est la vitesse de $M$ en $O$ ? Pour $\mu=0{,}1$, que se passe-t-il ? Quelle est la valeur maximale de $\mu$ pour que le cube atteigne $O$ ?
+      \end{itemize}
+    coup_de_pouce: |
+      (e) $E_m(A)=\tfrac12mv_A^2+\tfrac12ka^2$, tout en SI. (f) $E_c=0$ en $x_{\max}$. (g) Ajouter le travail du frottement $-\mu mg\,a$ au TEC ; attention au signe sous la racine.
+    correction: |
+      (e) $E_m(A)=\tfrac12mv_A^2+\tfrac12ka^2=4{,}8\times10^{-3}+4{,}0\times10^{-2}=44{,}8$ mJ ; $E_m(O)=\tfrac12mv_O^2$. (f) $x_{\max}=\sqrt{2E_m/k}\approx5{,}29$ cm. (g) $v_O=\sqrt{v_A^2+ka^2/m-2\mu ga}$ ; pour $\mu=0{,}1$ le terme est négatif : le cube s'arrête avant $O$ ; $\mu_c\approx0{,}015$.
+    solution:
+      - titre: "(e) Énergie mécanique : valeurs"
+        texte: |
+          $E_m(A)=\tfrac12mv_A^2+\tfrac12ka^2$ et $E_m(O)=\tfrac12mv_O^2$. Numériquement :
+          $$\tfrac12\times6\times(4\times10^{-2})^2=4{,}8\times10^{-3}~\mathrm J,\qquad\tfrac12\times32\times(5\times10^{-2})^2=4{,}0\times10^{-2}~\mathrm J,$$
+          $$E_m=\boxed{4{,}48\times10^{-2}~\mathrm J}\ (=44{,}8~\mathrm{mJ}),\qquad v_O=\sqrt{\tfrac{2E_m}m}=\sqrt{\tfrac{2\times0{,}0448}6}\approx0{,}122~\mathrm{m/s}.$$
+          Sur le graphe, $E_m$ est la droite horizontale à $44{,}8$ mJ qui coupe la parabole en $\pm x_{\max}$.
+      - titre: "(f) Allongement maximal"
+        texte: |
+          En $x_{\max}$, $v=0$ :
+          $$\tfrac12kx_{\max}^2=E_m\ \Rightarrow\ x_{\max}=\sqrt{\frac{2E_m}k}=\sqrt{\frac{2\times4{,}48\times10^{-2}}{32}}=\sqrt{2{,}80\times10^{-3}}\approx\boxed{5{,}29\times10^{-2}~\mathrm m}.$$
+          Contrôle : $x_{\max}>a=5$ cm $\sird$ (le cube est lancé vers l'extérieur avec $v_A>0$).
+      - titre: "(g) Avec frottement"
+        texte: |
+          Sur $A\to O$ (distance $a$), le frottement constant opposé au mouvement travaille $W_f=-\mu mg\,a$. TEC :
+          $$\tfrac12mv_O^2-\tfrac12mv_A^2=\tfrac12ka^2-\mu mg\,a\ \Rightarrow\ \boxed{v_O=\sqrt{v_A^2+\frac{ka^2}m-2\mu g\,a}}.$$
+          {\bf Discussion.} $v_A^2+ka^2/m=1{,}49\times10^{-2}~\mathrm{m^2/s^2}$ et $2\mu ga=2\times0{,}1\times9{,}81\times0{,}05=0{,}098$ : le radicande est négatif, le cube {\bf s'arrête avant d'atteindre $O$} (la correction ne s'applique plus). Il atteint $O$ seulement si
+          $$\mu<\mu_c=\frac{v_A^2+ka^2/m}{2ga}=\frac{0{,}0149}{0{,}981}\approx\boxed{0{,}015}.$$
+          Une valeur aussi faible n'existe que sur coussin d'air : pour un cube sur table, le ressort ne vainc même pas l'adhérence ($ka=1{,}6$ N contre $\mu_smg\approx5{,}9$ N pour $\mu_s=0{,}1$).

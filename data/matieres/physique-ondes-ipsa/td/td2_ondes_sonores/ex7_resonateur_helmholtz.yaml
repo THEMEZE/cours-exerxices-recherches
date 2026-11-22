@@ -1,0 +1,262 @@
+id: td2_ex7
+intitule: "Résonateur de Helmholtz : la bouteille qui chante"
+td: td2
+facultatif: true
+seance: 3
+
+cours_rattache:
+  - chap2.compressibilite
+  - chap2.celerite_son
+  - chap2.impedance_acoustique
+  - thermo.lois_de_laplace
+
+metadonnees:
+  duree_estimee: "45 min"
+  difficulte: 4
+  priorite: 2
+  type_exercice: "Modélisation / Approfondissement"
+  indispensable: false
+
+enonce_intro: |
+  Lorsqu'on souffle en travers du goulot d'une bouteille, on entend une note grave bien définie. On modélise la
+  bouteille par une cavité de volume $V$ communiquant avec l'extérieur par un goulot cylindrique de section $S$ et de
+  longueur $\ell$. Les dimensions du goulot et de la cavité sont petites devant la longueur d'onde. Le «~bouchon~»
+  d'air contenu dans le goulot oscille comme un piston rigide, de masse $m=\rho_0S\ell'$, où
+  $\ell'=\ell+1{,}7\,a$ est une longueur effective tenant compte de l'air entraîné aux deux extrémités du goulot
+  (on l'admet, $a$ est le rayon du goulot). L'air de la cavité subit des compressions-détentes rapides.
+
+  Données : $V=0{,}75$ L, $a=9$ mm, $\ell=8$ cm, $P_0=10^5$ Pa, $\rho_0=1{,}2~\text{kg}\cdot\text{m}^{-3}$,
+  $\gamma=1{,}4$, $c=340~\text{m}\cdot\text{s}^{-1}$. On note $\xi(t)$ le déplacement du bouchon vers l'intérieur de la cavité.
+
+# figure:
+#   - ref: td2_ex7_schema
+#     legende: |
+#       Suggestion : coupe d'une bouteille avec la cavité (volume $V$, surpression uniforme $p$), le goulot (section $S$, longueur $\ell$) et le «~bouchon~» d'air, déplacé de $\xi$ vers l'intérieur ; représenter le ressort équivalent (cavité) et la masse équivalente (bouchon).
+#     width: 0.5
+#     label:
+#   - ref: td2_ex7_rlc
+#     legende: |
+#       Suggestion : côte à côte, le schéma de la bouteille et le circuit électrique $L_aC_a$ équivalent (pression $\leftrightarrow$ tension, débit volumique $\leftrightarrow$ courant).
+#     width: 0.7
+#     label:
+
+prerequis:
+  - titre: "Compressibilité isentropique"
+    texte: |
+      Connaître $\chi_S=-\dfrac1V\left(\dfrac{\partial V}{\partial P}\right)_S=\dfrac1{\gamma P_0}$ pour un gaz parfait et le lien $c^2=\gamma P_0/\rho_0=1/(\rho_0\chi_S)$ (exercice 1).
+  - titre: "Oscillateur harmonique"
+    texte: |
+      Savoir que $m\ddot\xi=-K\xi$ conduit à $\omega_0=\sqrt{K/m}$ et à un mouvement sinusoïdal à cette pulsation, et connaître l'analogie avec le circuit $LC$ ($\omega_0=1/\sqrt{LC}$).
+  - titre: "Notion de «~onde longue~» (acoustique en basses fréquences)"
+    texte: |
+      Si la plus grande dimension $D$ d'un système est très inférieure à $\lambda$, la pression est uniforme dans chaque cavité à tout instant et le fluide d'un conduit étroit se déplace d'un bloc.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Reconnaître un oscillateur masse-ressort dans un système acoustique"
+    texte: |
+      Savoir identifier, dans un système de fluide à petites dimensions, l'élément qui stocke l'énergie potentielle (la cavité compressible, «~ressort~») et celui qui stocke l'énergie cinétique (le bouchon d'air, «~masse~»), écrire l'équation du mouvement et en déduire une fréquence propre.
+
+      Savoir utiliser une mesure de fréquence pour discriminer hypothèses isotherme et isentropique (comme à l'exercice 1).
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Montrer le poids de la thermodynamique dans un résultat acoustique et tisser le lien avec l'électrocinétique"
+    texte: |
+      Cet exercice est une «~reprise~» concrète de l'exercice 1 : la raideur du ressort est directement $1/\chi_S$, et l'écart entre $\chi_T$ et $\chi_S$ se traduit par un écart de fréquence mesurable à l'oreille ($\sqrt\gamma=1{,}18$, soit près de trois demi-tons). Le passage au circuit $LC$ sert à introduire l'analogie électro-acoustique utilisée dans l'industrie (haut-parleurs, silencieux, instruments).
+
+point_cours:
+  - titre: "Éléments acoustiques localisés (« lumped elements »)"
+    texte: |
+      Lorsque les dimensions sont petites devant $\lambda$, on remplace la propagation par des éléments localisés : un conduit étroit de section $S$ et de longueur effective $\ell'$ se comporte comme une \textbf{masse} (inertance) $m=\rho_0S\ell'$ ; une cavité de volume $V$ se comporte comme un \textbf{ressort} (compliance) : une variation de volume $\Delta V$ crée une surpression $p=-\Delta V/(\chi_SV)$. Un résonateur de Helmholtz est l'association d'une masse et d'un ressort : c'est le plus simple des résonateurs acoustiques.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Utiliser $\\lambda/4$ ou $\\lambda/2$ pour un résonateur de Helmholtz"
+    texte: |
+      Les étudiants appliquent par réflexe les formules d'un tube (exercices 2 et 3) : $f_1=c/(4\ell)\approx1{,}1$ kHz pour $\ell=8$ cm, très éloigné des $\approx100$ Hz observés. Dans une bouteille, la fréquence n'est pas fixée par la longueur du goulot seul mais par le \emph{compromis} entre la cavité (ressort) et le goulot (masse) : c'est une résonance de «~basse fréquence~» ($\lambda\gg$ dimensions).
+  - titre: "Oublier la longueur effective"
+    texte: |
+      Négliger l'air entraîné aux extrémités ($\ell'\neq\ell$) fait surestimer $f$ de près de $10\ \%$ ici. Faire comparer avec une mesure.
+  - titre: "Signe du déplacement"
+    texte: |
+      Pour $\xi>0$ vers l'intérieur, $\Delta V=-S\xi$ et la pression augmente : la force sur le bouchon est dirigée vers l'extérieur (rappel). Une erreur de signe donne une exponentielle divergente.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Expérience : la note monte quand la bouteille se remplit"
+    texte: |
+      Faire souffler en travers de bouteilles de volumes différents ou remplies à différentes hauteurs d'eau et mesurer la fréquence avec une application de smartphone : la note monte quand le volume d'air diminue. Comparer à la prédiction $f\propto V^{-1/2}$ de la question 5.
+
+bilan:
+  - titre: "Fréquence de Helmholtz"
+    texte: |
+      $$f_0=\frac c{2\pi}\sqrt{\frac{S}{V\ell'}}.$$
+      Pour $V=0{,}75$ L et un goulot de $\ell=8$ cm, $a=9$ mm : $f_0\approx102$ Hz (au lieu de $\approx110$ Hz sans longueur effective et de $\approx86$ Hz en isotherme). La raideur est $K=\gamma P_0S^2/V$ ; l'analogue électrique est un circuit $LC$ avec $L_a=\rho_0\ell'/S$ et $C_a=V/(\rho_0c^2)$.
+
+aller_plus_loin:
+  - niveau: master
+    titre: "Amortissement et facteur de qualité"
+    texte: |
+      Les pertes par rayonnement (le goulot rayonne comme un piston dans un écran infini), par viscosité et par conduction thermique aux parois ajoutent un terme d'amortissement $\dfrac{\omega_0}{Q}\dot\xi$ dans l'équation du mouvement. On pourra établir la largeur de la résonance $\Delta f=f_0/Q$ et estimer le facteur de qualité lié au seul rayonnement à partir de la puissance rayonnée par le goulot, en comparant à l'énergie stockée $\tfrac12K\xi_m^2$.
+  - niveau: licence
+    titre: "Résonateurs en acoustique des salles : bass traps"
+    texte: |
+      Un résonateur de Helmholtz accordé sur un mode propre de la salle sert d'absorbeur très sélectif. On pourra dimensionner le volume nécessaire pour absorber le mode axial fondamental d'une salle de $5$ m (question 7).
+  - niveau: master
+    titre: "Génération du son : instabilités de cisaillement"
+    texte: |
+      Le souffle en travers du goulot crée une couche de cisaillement instable qui excite le résonateur : c'est un mécanisme de «~retour acoustique~» identique à celui de la flûte. Il explique pourquoi on entend la fréquence propre quand on souffle à la bonne vitesse.
+
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi la bouteille chante-t-elle plus aigu quand on la remplit ?"
+    duree_introduction: "5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      En soufflant en travers d'une bouteille, on entend une note. En remplissant un peu d'eau, la note monte. Pourtant, la longueur du goulot n'a pas changé, et ni sa section ! Qu'est-ce qui a changé ? Et pourquoi la note est-elle bien plus {\bf grave} que ce qu'un tube de $8$ cm laisserait prévoir ($\approx1$ kHz) ?
+    texte: |
+      {\bf Idée clé : une masse (bouchon d'air) et un ressort (air comprimé dans la cavité).} Le goulot oscille comme un piston ; la cavité est un ressort de raideur $K=\gamma P_0S^2/V$. L'oscillateur masse-ressort a pour pulsation $\omega_0=\sqrt{K/m}=c\sqrt{S/(V\ell')}$. Moins d'air dans la bouteille, ressort plus raide, note plus aiguë.
+
+outils_mathematiques:
+  - titre: "Équation différentielle de l'oscillateur harmonique"
+    texte: |
+      $\ddot\xi+\omega_0^2\xi=0\Longrightarrow\xi=\xi_m\cos(\omega_0t+\phi)$. La pulsation propre est lue directement sur le coefficient de $\xi$.
+  - titre: "Différentielle logarithmique"
+    texte: |
+      $f_0\propto V^{-1/2}$ donne $\dfrac{\mathrm df_0}{f_0}=-\dfrac12\dfrac{\mathrm dV}{V}$ : $10\ \%$ de volume en moins donne $\approx+5\ \%$ de fréquence.
+  - titre: "Ordres de grandeur et petits paramètres"
+    texte: |
+      L'hypothèse «~$k\ell\ll1$~» se vérifie par $k\ell=2\pi\ell/\lambda$ ; on veut $\ll1$ pour justifier que le bouchon est incompressible.
+  - titre: "Linéarisation de $p=p(V)$"
+    texte: |
+      $p=-\dfrac{\Delta V}{\chi_SV}$ est la linéarisation à l'ordre 1 de $P=P_0(V_0/V)^\gamma$ : $P\approx P_0\big(1-\gamma\Delta V/V_0\big)$.
+  - titre: "Racines carrées de rapports"
+    texte: |
+      $\sqrt{\gamma}=1{,}18$ ; $\sqrt{1{,}5}=1{,}22$ ; $\sqrt{2}=1{,}41$ (une octave $=\times2$ en fréquence, donc $\times4$ en volume).
+
+liens_autres_disciplines:
+  - discipline: "Électrocinétique"
+    texte: |
+      Analogie électro-acoustique : surpression $\leftrightarrow$ tension, débit volumique $q=S\dot\xi\leftrightarrow$ courant, masse $\leftrightarrow$ inductance, cavité $\leftrightarrow$ capacité. Le résonateur de Helmholtz est un circuit $LC$ série.
+  - discipline: "Automobile et aéronautique"
+    texte: |
+      Le battement ($\sim15$ à $30$ Hz) ressenti quand on ouvre une seule vitre en roulant, et le grondement des toits ouvrants, sont des résonances de Helmholtz de l'habitacle (cavité) et de l'ouverture (goulot). Les silencieux d'échappement utilisent aussi des chambres de Helmholtz.
+  - discipline: "Instruments de musique"
+    texte: |
+      Le corps d'une guitare acoustique, avec sa rosace, a une résonance de Helmholtz vers $100$ Hz qui renforce les graves ; l'ocarina est un résonateur de Helmholtz presque pur.
+  - discipline: "Biologie"
+    texte: |
+      La vessie natatoire d'un poisson, les sacs vocaux des grenouilles, la bulle d'air en oscillation (bulle de Minnaert) sont des résonateurs de ce type.
+  - discipline: "Acoustique architecturale"
+    texte: |
+      Panneaux perforés devant une cavité d'air, bass traps : absorbeurs sélectifs fondés sur la résonance de Helmholtz.
+
+questions:
+  - id: q1
+    enonce: |
+      Calculer $S$, la fréquence approximative $f_0$ (voir question 3) et la longueur d'onde associée.
+      Justifier que le bouchon peut être traité comme un bloc rigide et la pression dans la cavité
+      comme uniforme.
+    coup_de_pouce: |
+      Comparez $\lambda$ aux dimensions de la bouteille (goulot : $\ell'\approx10$ cm ; cavité : $\sim20$ cm) via les produits $k\ell'$ et $kD$.
+    correction: "$S=2{,}5\\times10^{-4}$ m$^2$ ; $f_0\\approx102$ Hz ; $\\lambda\\approx3{,}3$ m ; $k\\ell'\\approx0{,}2\\ll1$ : hypothèses de basse fréquence satisfaites."
+    solution:
+      - titre: "Section et fréquence"
+        texte: |
+          $S=\pi a^2=\pi(9\times10^{-3})^2\approx2{,}5\times10^{-4}~\text{m}^2$ ; $\ell'=0{,}08+1{,}7\times0{,}009=0{,}0953$ m. On trouvera à la question 3 $f_0\approx102$ Hz, donc $\lambda=c/f_0\approx3{,}3$ m.
+      - titre: "Validité de l'hypothèse de basse fréquence"
+        texte: |
+          $$k\ell'=\frac{2\pi\ell'}{\lambda}\approx\frac{2\pi\times0{,}095}{3{,}3}\approx0{,}18\ll1,\qquad kD\sim\frac{2\pi\times0{,}2}{3{,}3}\approx0{,}4.$$
+          Sur la longueur du goulot, la phase de l'onde varie de moins de $0{,}2$ rad : tout le bouchon se déplace en bloc (fluide incompressible à cette échelle). De même, la cavité est petite devant $\lambda$ et la pression y est uniforme à chaque instant. Les hypothèses d'éléments localisés sont satisfaites, avec une précision de l'ordre de $10\ \%$.
+
+  - id: q2
+    enonce: |
+      Exprimer la surpression $p(t)$ dans la cavité en fonction de $\xi$ (compression isentropique), puis
+      écrire l'équation du mouvement du bouchon. En déduire la pulsation propre $\omega_0$ en fonction de $c$,
+      $S$, $V$ et $\ell'$.
+    coup_de_pouce: |
+      Pour un déplacement $\xi$ vers l'intérieur, $\Delta V=-S\xi$. Utilisez la définition de $\chi_S$ pour obtenir $p$. La pression extérieure $P_0$ agit sur la face externe du bouchon : seule la surpression compte dans le bilan de forces.
+    correction: "$p=\\gamma P_0S\\xi/V$ ; $\\ddot\\xi+\\omega_0^2\\xi=0$ avec $\\omega_0=c\\sqrt{S/(V\\ell')}$."
+    solution:
+      - titre: "Surpression dans la cavité"
+        texte: |
+          La compression est isentropique ($\chi_S=1/(\gamma P_0)$). Pour une petite variation de volume $\Delta V=-S\xi$ :
+          $$\frac{\Delta V}{V}=-\chi_S\,p\quad\Longrightarrow\quad p=-\frac{\Delta V}{\chi_SV}=\frac{\gamma P_0S}{V}\,\xi.$$
+      - titre: "Équation du mouvement"
+        texte: |
+          La surpression $p$ de la cavité pousse le bouchon vers l'extérieur avec la force $-pS$ (le bouchon se déplace dans le sens $+\xi$ vers l'intérieur) :
+          $$\rho_0S\ell'\,\ddot\xi=-pS=-\frac{\gamma P_0S^2}{V}\,\xi\quad\Longrightarrow\quad\ddot\xi+\frac{\gamma P_0S}{\rho_0\ell'V}\xi=0.$$
+          Avec $c^2=\gamma P_0/\rho_0$ :
+          $$\boxed{\omega_0=c\sqrt{\frac{S}{V\ell'}}},\qquad f_0=\frac{c}{2\pi}\sqrt{\frac{S}{V\ell'}}.$$
+          La raideur équivalente est $K=\gamma P_0S^2/V$ et la masse $m=\rho_0S\ell'$ : on retrouve bien $\omega_0=\sqrt{K/m}$.
+
+  - id: q3
+    enonce: |
+      Calculer numériquement $f_0$. Comparer au résultat sans longueur effective ($\ell'\to\ell$) et à l'estimation
+      d'un tube quart d'onde $c/(4\ell)$. Une mesure donne $f_{\mathrm{exp}}=103$ Hz : conclure.
+    correction: "$f_0\\approx102$ Hz ; sans correction $\\approx111$ Hz ; $c/(4\\ell)\\approx1{,}06$ kHz ; accord à $1\\ \\%$ avec l'expérience."
+    solution:
+      - titre: "Calcul"
+        texte: |
+          $$f_0=\frac{340}{2\pi}\sqrt{\frac{2{,}54\times10^{-4}}{7{,}5\times10^{-4}\times0{,}0953}}=54{,}1\times\sqrt{3{,}56}\approx54{,}1\times1{,}89\approx102~\text{Hz}.$$
+          Sans correction de longueur : $f=54{,}1\times\sqrt{2{,}54\times10^{-4}/(7{,}5\times10^{-4}\times0{,}08)}\approx111$ Hz, soit $9\ \%$ d'écart. Un tube quart d'onde de même longueur donnerait $c/(4\ell)=340/0{,}32\approx1{,}06$ kHz, une dizaine de fois plus : ce n'est pas le bon modèle.
+      - titre: "Comparaison à l'expérience"
+        texte: |
+          $f_{\mathrm{exp}}=103$ Hz est en excellent accord (à $1\ \%$) avec la prédiction du modèle masse-ressort avec longueur effective. Il confirme à la fois l'hypothèse des éléments localisés et la correction d'extrémité.
+
+  - id: q4
+    enonce: |
+      Refaire le calcul en supposant que l'air de la cavité subit une transformation isotherme. Quelle fréquence
+      prédit-on ? L'expérience de la question 3 permet-elle de trancher, comme à l'exercice 1 ?
+    coup_de_pouce: |
+      Remplacez $\chi_S$ par $\chi_T=1/P_0$ dans l'expression de $p(\xi)$.
+    correction: "$f_T=f_0/\\sqrt\\gamma\\approx86$ Hz : en désaccord à $16\\ \\%$ avec $f_{\\mathrm{exp}}=103$ Hz ; l'hypothèse isentropique est la bonne."
+    solution:
+      - titre: "Cas isotherme"
+        texte: |
+          Avec $\chi_T=1/P_0$ : $p=P_0S\xi/V$, $K_T=P_0S^2/V$ et $\omega_T=\omega_0/\sqrt\gamma$, soit
+          $$f_T=\frac{f_0}{\sqrt{1{,}4}}\approx\frac{102}{1{,}18}\approx86~\text{Hz}.$$
+      - titre: "Conclusion"
+        texte: |
+          L'écart de $16\ \%$ avec la mesure ($103$ Hz) est très supérieur à l'incertitude expérimentale : comme à l'exercice 1, le modèle isotherme est exclu. À $100$ Hz, la période est de $10$ ms et le temps caractéristique de diffusion thermique sur les dimensions de la bouteille ($\sim D^2/D_{\mathrm{th}}\sim(0{,}1)^2/(2\times10^{-5})\sim500$ s) est incomparablement plus long : la compression de l'air est bien adiabatique. (Le gradient thermique reste efficace dans une fine couche limite proche des parois, ce qui explique l'amortissement.)
+
+  - id: q5
+    enonce: |
+      On verse de l'eau dans la bouteille de façon que le volume d'air tombe à $V'=0{,}50$ L. Calculer la nouvelle
+      fréquence et vérifier le sens de variation observé expérimentalement. Dans quel rapport faut-il changer
+      $V$ pour monter d'une octave ?
+    correction: "$f'=f_0\\sqrt{V/V'}\\approx125$ Hz ; une octave exige $V'=V/4$."
+    solution:
+      - titre: "Dépendance en volume"
+        texte: |
+          À $S$ et $\ell'$ fixés, $f_0\propto V^{-1/2}$. Donc
+          $$f'=f_0\sqrt{\frac V{V'}}=102\times\sqrt{1{,}5}\approx102\times1{,}22\approx125~\text{Hz}.$$
+          La note monte quand la bouteille se remplit : le ressort est plus raide ($K\propto1/V$) pour la même masse. Pour gagner une octave ($f'=2f_0$), il faut diviser le volume par quatre : $V'=V/4$.
+
+  - id: q6
+    enonce: |
+      Montrer que le résonateur est analogue à un circuit $LC$. On définit le débit volumique
+      $q=S\dot\xi$. Identifier la tension, le courant, l'inductance $L_a$ et la capacité $C_a$, et retrouver
+      $\omega_0=1/\sqrt{L_aC_a}$.
+    coup_de_pouce: |
+      Écrivez la loi du bouchon sous la forme $p=L_a\dot q$ et la loi de la cavité sous la forme $\dot p=q/C_a$ (au signe près selon l'orientation).
+    correction: "$L_a=\\rho_0\\ell'/S$ ; $C_a=V/(\\rho_0c^2)$ ; $\\omega_0=1/\\sqrt{L_aC_a}$."
+    solution:
+      - titre: "Identification terme à terme"
+        texte: |
+          Le bouchon obéit à $\rho_0\ell'\,\dot q/S=-p$, c'est-à-dire $p=-L_a\dot q$ avec $L_a=\rho_0\ell'/S$ (inertance, en kg$\cdot$m$^{-4}$). La cavité obéit à $\dot p=\dfrac{\gamma P_0}{V}q=\dfrac{\rho_0c^2}{V}q$ (le volume diminue de $q\,\mathrm dt$), c'est-à-dire $q=C_a\dot p$ avec $C_a=V/(\rho_0c^2)$ (compliance). On reconnaît les équations d'un circuit $LC$ avec $p\leftrightarrow u$, $q\leftrightarrow i$, et
+          $$\omega_0=\frac1{\sqrt{L_aC_a}}=\sqrt{\frac{S}{\rho_0\ell'}\times\frac{\rho_0c^2}{V}}=c\sqrt{\frac S{V\ell'}}.$$
+          Cette analogie permet de traiter de grands systèmes (silencieux, instruments, haut-parleurs) comme des circuits électriques.
+
+  - id: q7
+    enonce: |
+      Une salle parallélépipédique de longueur $L=5$ m (murs rigides) possède un mode axial gênant (boum
+      de basses). Calculer sa fréquence. On veut absorber ce mode avec un résonateur de Helmholtz de goulot
+      $S=1{,}0\times10^{-2}$ m$^2$ et $\ell'=10$ cm. Quel volume de cavité faut-il ? Commenter.
+    coup_de_pouce: |
+      Entre deux parois rigides, les modes de pression ont des ventres aux deux bouts : $f_n=nc/(2L)$ (comme le tube ouvert-ouvert de l'exercice 2, mais ici avec des ventres de pression).
+    correction: "$f_1=c/(2L)=34$ Hz ; $V=c^2S/(\\omega_0^2\\ell')\\approx0{,}25$ m$^3$ = 250 L."
+    solution:
+      - titre: "Mode de la salle"
+        texte: |
+          Le champ de pression entre deux parois rigides est un cosinus avec un ventre de pression en chaque paroi (vitesse nulle) : $kL=n\pi$, $f_n=nc/(2L)$, soit $f_1=340/10=34$ Hz.
+      - titre: "Dimensionnement du résonateur"
+        texte: |
+          On impose $\omega_0=2\pi\times34\approx214~\text{rad}\cdot\text{s}^{-1}$ :
+          $$V=\frac{c^2S}{\omega_0^2\ell'}=\frac{340^2\times10^{-2}}{214^2\times0{,}10}\approx\frac{1156}{4580}\approx0{,}25~\text{m}^3.$$
+          Il faut une cavité de $250$ L : les basses fréquences exigent de grands volumes ($V\propto1/\omega_0^2$), ce qui explique pourquoi l'absorption des graves est coûteuse en place. Pour un résonateur plus compact, on réduit $S$ ou on allonge le col, au prix d'un amortissement plus fort et d'une bande plus étroite.

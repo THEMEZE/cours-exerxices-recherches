@@ -1,0 +1,189 @@
+id: td7
+titre: "Composition du mouvement et changement de référentiels"
+chapitre_cours: "Chap. 5 — Cinématique et dynamique dans des référentiels non galiléens"
+seance: 7
+niveau_public: [cpge, licence]
+exercices_ordre:
+  - ex1_vitesse_entrainement
+  - ex2_riviere
+  - ex3_coordonnees_polaires
+  - ex4_manege
+  - ex5_pendule_wagon
+  - ex6_perle_cerceau
+  - ex7_coriolis_terrestre
+
+enonce_intro: |
+  {\bf Conventions valables pour tout le TD.} $\mathcal R$ est le référentiel « absolu » (supposé galiléen, par exemple le sol), $\mathcal R'$ le référentiel « relatif » en mouvement par rapport à $\mathcal R$. Le point $M$ est le point matériel étudié. On note $\vec v_a=\vec v_{M/\mathcal R}$, $\vec v_r=\vec v_{M/\mathcal R'}$, $\vec a_a$, $\vec a_r$ les vitesses et accélérations absolue et relative ; $\vec v_e$, $\vec a_e$ la vitesse et l'accélération d'entraînement, $\vec a_c$ l'accélération de Coriolis. Dans toute la suite $\vec\Omega=\vec\Omega_{\mathcal R'/\mathcal R}$ est le vecteur rotation de $\mathcal R'$ par rapport à $\mathcal R$. Les exercices 1 à 4 sont ceux du poly ; les exercices 5 à 7 sont des compléments originaux (dynamique dans un référentiel non galiléen, équilibres relatifs, effet Coriolis terrestre).
+
+prerequis:
+  - titre: "Dérivée d'un vecteur dans une base mobile"
+    texte: |
+      Pour un vecteur $\vec A$ : $\left(\dfrac{\mathrm d\vec A}{\mathrm dt}\right)_{\mathcal R}=\left(\dfrac{\mathrm d\vec A}{\mathrm dt}\right)_{\mathcal R'}+\vec\Omega\wedge\vec A$. Pour une base tournant autour de $Oz$ avec $\dot\theta=\omega$ : $\dot{\vec e}_x{}'=\omega\,\vec e_y{}'$ et $\dot{\vec e}_y{}'=-\omega\,\vec e_x{}'$.
+  - titre: "Cinématique du point dans une base cartésienne et polaire"
+    texte: |
+      $\vec v=\dot x\,\vec e_x+\dot y\,\vec e_y$ ; en polaire $\vec v=\dot r\,\vec e_r+r\dot\theta\,\vec e_\theta$ et $\vec a=(\ddot r-r\dot\theta^2)\,\vec e_r+(r\ddot\theta+2\dot r\dot\theta)\,\vec e_\theta$.
+  - titre: "Les trois lois de Newton"
+    texte: |
+      Dans un référentiel galiléen, $m\vec a=\sum\vec F$ ; le principe d'inertie définit les référentiels galiléens.
+  - titre: "Produit vectoriel"
+    texte: |
+      Règle de la main droite, double produit vectoriel $\vec a\wedge(\vec b\wedge\vec c)=\vec b(\vec a\cdot\vec c)-\vec c(\vec a\cdot\vec b)$, norme $\|\vec a\wedge\vec b\|=ab\sin\alpha$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Composer vitesses et accélérations"
+    texte: |
+      Savoir écrire et appliquer $\vec v_a=\vec v_r+\vec v_e$ et $\vec a_a=\vec a_r+\vec a_e+\vec a_c$, identifier à chaque fois le mouvement relatif, d'entraînement, et savoir calculer $\vec a_e$ et $\vec a_c=2\vec\Omega\wedge\vec v_r$.
+  - titre: "Reconnaître un référentiel galiléen"
+    texte: |
+      Savoir qu'un référentiel en {\bf translation rectiligne uniforme} par rapport à un galiléen est galiléen (exercice 1) et que les accélérations y sont identiques.
+  - titre: "Faire de la dynamique en référentiel non galiléen"
+    texte: |
+      Savoir écrire le principe fondamental $m\vec a_r=\sum\vec F+\vec F_{ie}+\vec F_{ic}$ avec $\vec F_{ie}=-m\vec a_e$ et $\vec F_{ic}=-m\vec a_c$, et en déduire équilibres relatifs et petites oscillations (exercices 5 à 7).
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Positionnement du TD"
+    texte: |
+      Dernier TD du bloc mécanique du point. Il clôt la dynamique en introduisant les référentiels non galiléens : après les théorèmes énergétiques (TD5) et les lois de conservation (TD6), on apprend à {\bf changer de point de vue}. Le fil conducteur est : cinématique d'abord (ex. 1 à 4), dynamique ensuite (ex. 5 à 7).
+  - titre: "Trois parcours selon le temps disponible"
+    texte: |
+      {\bf Parcours essentiel} (environ 2 h 30) : exercices 1, 2, 3 et 4 (tout le cours de cinématique, avec le manège comme exemple fil rouge).
+
+      {\bf Parcours renforcé} (environ $+1$ h) : exercice 5 (pendule dans un wagon accéléré, force d'inertie d'entraînement) et exercice 6 (perle sur un cerceau tournant).
+
+      {\bf Parcours approfondi} (CPGE/licence) : exercice 7 (effet Coriolis terrestre : déviation vers l'est, pendule de Foucault) et les compléments de l'exercice 3 (lien avec la base de Frenet et les coordonnées polaires).
+  - titre: "Compétences évaluables"
+    texte: |
+      {\bf S'approprier} : repérer $\mathcal R$, $\mathcal R'$ et le point $M$. {\bf Analyser} : choisir le référentiel dans lequel la dynamique est la plus simple. {\bf Réaliser} : dériver correctement des vecteurs de bases mobiles. {\bf Valider} : vérifier les dimensions et les cas limites ($\omega\to0$, $v_r\to0$).
+  - titre: "Points de vigilance sur la gestion de séance"
+    texte: |
+      Les exercices 2 et 4 reposent sur une {\bf figure} : la distribuer. Dans l'exercice 1, l'énoncé donne les deux jeux de coordonnées avec le même nom d'axes ($\vec i,\vec j,\vec k$) : $\mathcal R'$ est donc en {\bf translation} par rapport à $\mathcal R$, ce qui évite toute rotation. L'exercice 3 est la {\bf démonstration générale} dont l'exercice 4 est un cas particulier ($X=v_0t$, $\dot\theta=\omega$) : proposer de la traiter en premier à la classe renforcée.
+
+point_cours:
+  - titre: "Mouvement absolu, relatif, d'entraînement"
+    texte: |
+      Le mouvement de $M$ dans $\mathcal R$ est le {\bf mouvement absolu}, dans $\mathcal R'$ le {\bf mouvement relatif}. Le {\bf mouvement d'entraînement} est celui du point $M'$ {\bf fixe dans $\mathcal R'$} qui coïncide à l'instant $t$ avec $M$, vu depuis $\mathcal R$ : c'est le mouvement que $M$ aurait s'il était fixé à $\mathcal R'$.
+  - titre: "Composition des vitesses"
+    texte: |
+      $$\vec v_a=\vec v_r+\vec v_e,\qquad\vec v_e=\vec v_{O'/\mathcal R}+\vec\Omega\wedge\overrightarrow{O'M}.$$
+      Cas particuliers : translation ($\vec\Omega=\vec0$) $\Rightarrow\vec v_e=\vec v_{O'}$ ; rotation autour d'un axe fixe ($O'=O$) $\Rightarrow\vec v_e=\vec\Omega\wedge\overrightarrow{OM}$.
+  - titre: "Composition des accélérations"
+    texte: |
+      $$\vec a_a=\vec a_r+\vec a_e+\vec a_c,\qquad\vec a_c=2\vec\Omega\wedge\vec v_r,$$
+      $$\vec a_e=\vec a_{O'/\mathcal R}+\frac{\mathrm d\vec\Omega}{\mathrm dt}\wedge\overrightarrow{O'M}+\vec\Omega\wedge(\vec\Omega\wedge\overrightarrow{O'M}).$$
+      Pour une rotation uniforme autour de $Oz$ : $\vec a_e=-\Omega^2\,\overrightarrow{HM}$ où $H$ est le projeté orthogonal de $M$ sur l'axe (accélération {\bf centripète}).
+  - titre: "Démonstration de la composition des vitesses"
+    texte: |
+      $\overrightarrow{OM}=\overrightarrow{OO'}+\overrightarrow{O'M}$ avec $\overrightarrow{O'M}=x'\vec e_x{}'+y'\vec e_y{}'+z'\vec e_z{}'$. On dérive dans $\mathcal R$ : les composantes donnent $\vec v_r$ ; les dérivées des vecteurs de base donnent $\vec\Omega\wedge\overrightarrow{O'M}$ ; il reste $\vec v_{O'}$. D'où $\vec v_a=\vec v_r+\vec v_{O'}+\vec\Omega\wedge\overrightarrow{O'M}$.
+  - titre: "Référentiels galiléens"
+    texte: |
+      Si $\mathcal R$ est galiléen, $\mathcal R'$ l'est ssi $\vec a_e=\vec0$ et $\vec a_c=\vec0$ pour tout $M$ : $\mathcal R'$ est en {\bf translation rectiligne uniforme} par rapport à $\mathcal R$. Le référentiel terrestre est « galiléen » pour des durées courtes devant un jour ; le référentiel de Copernic est un meilleur galiléen.
+  - titre: "Dynamique en référentiel non galiléen"
+    texte: |
+      Le principe fondamental s'écrit $m\vec a_r=\vec F_{\rm vraies}-m\vec a_e-m\vec a_c$. On pose $\vec F_{ie}=-m\vec a_e$ (inertie d'entraînement, pour une rotation : force {\bf centrifuge} $m\Omega^2\overrightarrow{HM}$) et $\vec F_{ic}=-2m\,\vec\Omega\wedge\vec v_r$ (Coriolis). La force de Coriolis {\bf ne travaille pas} ($\perp\vec v_r$) ; la force d'inertie d'entraînement dérive d'une énergie potentielle dans une rotation uniforme : $E_{p,ie}=-\tfrac12m\Omega^2HM^2$.
+  - titre: "Théorème de l'énergie dans $\\mathcal R'$"
+    texte: |
+      $\dfrac{\mathrm d}{\mathrm dt}E_{c,r}=\sum P(\vec F_{\rm vraies})+P(\vec F_{ie})$ (Coriolis ne contribue pas). Pour une rotation uniforme et des forces conservatives : $E_{m}'=\tfrac12mv_r^2+E_p-\tfrac12m\Omega^2HM^2=\text{cte}$.
+  - titre: "Équilibre relatif et stabilité"
+    texte: |
+      À l'équilibre relatif ($\vec v_r=\vec0$ et $\vec a_r=\vec0$), les forces d'inertie d'entraînement s'ajoutent aux forces vraies : $\sum\vec F+\vec F_{ie}=\vec0$. La stabilité s'étudie sur le potentiel effectif $E_{p,\rm eff}=E_p+E_{p,ie}$ (minimum $\Rightarrow$ stable).
+  - titre: "Le référentiel terrestre"
+    texte: |
+      Rotation à $\Omega=\dfrac{2\pi}{23\,{\rm h}\,56\,{\rm min}\,4\,{\rm s}}=7{,}292\times10^{-5}\ {\rm rad\cdot s^{-1}}$. Pesanteur effective $\vec g=\vec g_0+\Omega^2\overrightarrow{HM}$ (correction $\le3{,}4\times10^{-2}\ {\rm m\cdot s^{-2}}$ à l'équateur, soit 0,35 \%). Coriolis : déviation vers la droite dans l'hémisphère Nord ; composante verticale de $\vec\Omega$ à la latitude $\lambda$ : $\Omega\sin\lambda$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Confondre vitesse d'entraînement et vitesse de $\\mathcal R'$"
+    texte: |
+      $\vec v_e$ dépend du {\bf point $M$} considéré (sauf en translation) : $\vec v_e=\vec v_{O'}+\vec\Omega\wedge\overrightarrow{O'M}$. Ce n'est pas la vitesse de l'origine $O'$ seule.
+  - titre: "Oublier l'accélération de Coriolis"
+    texte: |
+      Si $\vec v_r\ne\vec0$ dans un référentiel en rotation, $\vec a_c=2\vec\Omega\wedge\vec v_r\ne\vec0$ : il faut {\bf toujours} la calculer. Elle est nulle si $\vec v_r=\vec0$ ou $\vec\Omega\parallel\vec v_r$.
+  - titre: "Confondre $\\vec a_e$ avec $-\\Omega^2 r$ sans le justifier"
+    texte: |
+      Pour une rotation uniforme et un point à la distance $r$ de l'axe, $\vec a_e=-\Omega^2\vec r_{\perp}$, avec $r_\perp$ {\bf distance à l'axe}, non distance à $O'$.
+  - titre: "Dériver les vecteurs de base comme des constantes"
+    texte: |
+      Dans $\mathcal R'$ tournant, $\vec e_x{}'$ et $\vec e_y{}'$ ne sont pas constants dans $\mathcal R$ : $\dot{\vec e}_x{}'=\omega\vec e_y{}'$, $\dot{\vec e}_y{}'=-\omega\vec e_x{}'$. L'oubli de ces termes supprime Coriolis et le terme centripète.
+  - titre: "Ajouter une force d'inertie dans un référentiel galiléen"
+    texte: |
+      Les forces d'inertie ne sont à introduire que dans un référentiel {\bf non galiléen} (ou lorsqu'on travaille dans $\mathcal R'$). Dans $\mathcal R$ galiléen : $m\vec a_a=\sum\vec F_{\rm vraies}$, rien d'autre.
+  - titre: "Signe de la force de Coriolis"
+    texte: |
+      $\vec F_{ic}=-2m\vec\Omega\wedge\vec v_r$ : le signe moins vient de $\vec F_{ic}=-m\vec a_c$. Vérifier avec un cas simple (bille lancée radialement sur un manège : déviée dans le sens opposé à la rotation).
+  - titre: "Composantes dans la mauvaise base"
+    texte: |
+      Un vecteur exprimé dans $(\vec e_x{}',\vec e_y{}')$ ne se compare pas directement à un vecteur exprimé dans $(\vec e_x,\vec e_y)$ : il faut préciser la base. Relire la question « dans la base $(\vec e_x{}',\vec e_y{}',\vec e_z{}')$ ».
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Manège dans la cour ou plateau tournant"
+    texte: |
+      Lancer une balle de tennis sur un plateau tournant (vidéo, ou expérience) : le même mouvement est rectiligne dans $\mathcal R$ et courbe dans $\mathcal R'$. Les étudiants {\bf voient} la force de Coriolis comme un artefact du point de vue.
+  - titre: "Le pendule dans le train"
+    texte: |
+      Un fil à plomb accroché au plafond d'un train qui démarre : prédire l'angle d'inclinaison (ex. 5) avant de calculer. C'est l'expérience la plus parlante pour introduire $-m\vec a_e$.
+  - titre: "Foucault et cyclones"
+    texte: |
+      Pendule de Foucault au Panthéon (plan d'oscillation qui tourne de $11{,}3^\circ$ par heure à Paris) ; sens de rotation des cyclones (antihoraire au Nord, horaire au Sud) : à relier à l'exercice 7.
+  - titre: "Gestion du temps"
+    texte: |
+      Les exercices 1 et 2 sont rapides (10 à 15 min). Les exercices 3 et 4 forment un bloc : démonstration générale ($X(t)$, $\theta(t)$ quelconques), puis cas particulier. Ne pas passer plus de 30 min sur chacun.
+
+bilan:
+  - titre: "Formules à retenir"
+    texte: |
+      $\vec v_a=\vec v_r+\vec v_e$ ; $\vec a_a=\vec a_r+\vec a_e+\vec a_c$ ; $\vec v_e=\vec v_{O'}+\vec\Omega\wedge\overrightarrow{O'M}$ ; $\vec a_c=2\vec\Omega\wedge\vec v_r$ ; en rotation uniforme $\vec a_e=-\Omega^2\overrightarrow{HM}$.
+  - titre: "Méthode"
+    texte: |
+      (1) Choisir $\mathcal R$ et $\mathcal R'$ (et $M$). (2) Calculer $\vec v_r,\vec a_r$ dans $\mathcal R'$. (3) Calculer $\vec v_e,\vec a_e$ (point fixe dans $\mathcal R'$). (4) Calculer $\vec a_c$. (5) Sommer ; vérifier par un calcul direct dans $\mathcal R$ si possible. En dynamique : ajouter $-m\vec a_e$ et $-m\vec a_c$ dans le bilan des forces.
+  - titre: "Résultats clés du TD"
+    texte: |
+      Ex. 1 : $\vec v_e=-5\,\vec i$, $\vec a_e=\vec0$ ; ex. 2 : $\|\vec v\|=\sqrt{34}\approx5{,}83\ {\rm m\cdot s^{-1}}$ ; ex. 4 : $\vec a_a=-\omega^2v_0t\,\vec e_x{}'+2\omega v_0\,\vec e_y{}'$ ; ex. 5 : $\tan\alpha=a/g$ ; ex. 6 : bifurcation à $\omega_c=\sqrt{g/R}$ ; ex. 7 : déviation $\tfrac13\Omega g\cos\lambda\,t^3$ vers l'est.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Équilibre d'un fil à plomb sur Terre"
+    texte: |
+      Montrer que la direction du fil à plomb à la latitude $\lambda$ est inclinée par rapport à la direction du centre de la Terre d'un angle $\approx\dfrac{\Omega^2R_T\sin\lambda\cos\lambda}{g}$ ; valeur maximale $\approx0{,}1^\circ$ à $45^\circ$.
+  - niveau: licence
+    titre: "Rotation uniforme : potentiel centrifuge"
+    texte: |
+      Montrer que dans un référentiel en rotation uniforme autour de $Oz$ à la vitesse $\Omega$, $\vec F_{ie}=m\Omega^2\overrightarrow{HM}=-\vec\nabla\!\left(-\tfrac12m\Omega^2\rho^2\right)$ ; retrouver l'équilibre de la perle sur le cerceau (ex. 6) par la recherche des extrema du potentiel effectif et discuter la stabilité par le signe de $E_{p,\rm eff}''$.
+  - niveau: master
+    titre: "Formalisme de Lagrange en référentiel tournant"
+    texte: |
+      Écrire le lagrangien d'une particule libre dans $\mathcal R'$ tournant : $\mathcal L=\tfrac12m(\dot{\vec r}+\vec\Omega\wedge\vec r)^2-U$. Retrouver Coriolis et centrifuge ; montrer que $\mathcal L$ fait apparaître l'invariant de Jacobi $h=\tfrac12m\dot r^2+U-\tfrac12m(\vec\Omega\wedge\vec r)^2$ (énergie du référentiel tournant, ex. 6).
+
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi une balle lancée droit sur un manège semble-t-elle courber ?"
+    duree_introduction: "5 min"
+    question_d_accroche: |
+      Un enfant sur un manège lance une balle droit vers un ami situé en face de lui. La balle atteint-elle l'ami ? Qu'en dit un observateur au sol ? Et un astronaute qui lance une balle vers l'équateur depuis le pôle Nord ?
+    texte: |
+      {\bf Idée clé : le mouvement est relatif ; les forces d'inertie sont le prix à payer pour décrire le monde dans un référentiel non galiléen.} Pour l'observateur au sol, la trajectoire est droite ; pour l'enfant, elle est courbée par la force de Coriolis $-2m\vec\Omega\wedge\vec v_r$.
+
+outils_mathematiques:
+  - titre: "Dérivation de vecteurs"
+    texte: |
+      Règle de dérivation de $\vec A=A_x'\vec e_x{}'+A_y'\vec e_y{}'$ dans $\mathcal R$ : $\dot{\vec A}=\dot A_x'\vec e_x{}'+\dot A_y'\vec e_y{}'+\vec\Omega\wedge\vec A$.
+  - titre: "Produit vectoriel en composantes"
+    texte: |
+      $\vec e_z\wedge\vec e_x=\vec e_y$, $\vec e_z\wedge\vec e_y=-\vec e_x$ ; $\vec\Omega=\Omega\vec e_z$ : $\vec\Omega\wedge(x\vec e_x+y\vec e_y)=\Omega(-y\vec e_x+x\vec e_y)$.
+  - titre: "Petites oscillations"
+    texte: |
+      $\ddot\theta=f(\theta)$, équilibre $f(\theta_0)=0$ stable si $f'(\theta_0)<0$ ; pulsation $\omega_0^2=-f'(\theta_0)$.
+  - titre: "Développement limité à l'ordre 1"
+    texte: |
+      $\sin\varphi\approx\varphi$, $\cos\varphi\approx1-\varphi^2/2$, $\cosh\varphi\approx1+\varphi^2/2$ (pour le cas Coriolis et le pendule dans le train).
+
+liens_autres_disciplines:
+  - discipline: "Géophysique et météorologie"
+    texte: |
+      Cyclones et anticyclones (Coriolis), alizés, courants océaniques (spirale d'Ekman), aplatissement terrestre (potentiel centrifuge).
+  - discipline: "Astronomie"
+    texte: |
+      Référentiels de Copernic, géocentrique, héliocentrique ; marées (force d'inertie d'entraînement dans le référentiel géocentrique).
+  - discipline: "Transport et sécurité"
+    texte: |
+      Virages (exercice 9 du TD4 : routes relevées), accélération latérale dans les trains et avions, centrifugeuses des astronautes.
+  - discipline: "Ingénierie"
+    texte: |
+      Gyroscopes et centrifugeuses, turbines, machines tournantes (équilibrage), sismologie.

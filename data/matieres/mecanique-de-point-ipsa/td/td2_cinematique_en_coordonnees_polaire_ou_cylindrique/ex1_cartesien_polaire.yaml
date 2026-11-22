@@ -12,6 +12,7 @@ cours_rattache:
 metadonnees:
   duree_estimee: "20 min"
   difficulte: 2
+  priorite: 5
   type_exercice: "Cours actif / Fondamental"
   indispensable: true
 

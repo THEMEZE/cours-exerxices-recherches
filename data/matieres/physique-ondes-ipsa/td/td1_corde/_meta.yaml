@@ -16,3 +16,249 @@ exercices_ordre:
   - ex9_chaine_de_masses_dispersion
   - ex10_perle_sur_corde_filtre
   - ex11_lame_quart_d_onde
+  - ex12_corde_pincee
+  - ex13_corde_raide_piano
+  - ex14_corde_amortie
+  - ex15_masse_en_bout
+
+enonce_intro: |
+  {\bf Conventions valables pour tout le TD (sauf mention contraire).} Une corde est un milieu unidimensionnel, homogène, de masse linéique $\mu$, tendue par une force $F$ très supérieure à son poids (la pesanteur est négligée sauf dans l'exercice de la corde pesante). Les mouvements sont {\bf transversaux} et de {\bf petite amplitude} : $|\partial_xy|\ll1$, la tension reste égale à $F$ et la corde ne s'allonge pas. L'écart à l'équilibre est noté $y(x,t)$, la {\bf célérité} $c=\sqrt{F/\mu}$ et on utilise la notation complexe en $\mathrm e^{j\omega t}$ pour les régimes sinusoïdaux. Les ondes progressives s'écrivent $f(x-ct)$ (vers les $x$ croissants) et $g(x+ct)$ (vers les $x$ décroissants). Les grandeurs sont en unités du système international ; les résultats littéraux doivent être établis avant toute application numérique et vérifiés par homogénéité et par des cas limites. Les exercices marqués {\it (facultatif)} sont des approfondissements.
+
+prerequis:
+  - titre: "Dérivées partielles et équations aux dérivées partielles"
+    texte: |
+      Savoir dériver une fonction de deux variables $y(x,t)$ par rapport à $x$ ou à $t$ ($\partial_xy$, $\partial_t^2y$), dériver une fonction composée ($\partial_xf(x-ct)=f'$, $\partial_tf(x-ct)=-cf'$) et reconnaître qu'une EDP linéaire se résout par superposition.
+  - titre: "Mécanique du point : deuxième loi de Newton"
+    texte: |
+      Principe fondamental de la dynamique appliqué à un élément de corde $[x,x+\mathrm dx]$ de masse $\mu\,\mathrm dx$ soumis aux tensions en $x$ et en $x+\mathrm dx$ ; décomposition d'une force sur deux axes ; approximation des petits angles $\sin\alpha\simeq\tan\alpha\simeq\alpha$.
+  - titre: "Trigonométrie et fonctions sinusoïdales"
+    texte: |
+      $\cos(kx-\omega t+\phi)$, périodes spatiale $\lambda=2\pi/k$ et temporelle $T=2\pi/\omega$, formules d'addition ($\sin(a-b)$, $\cos a\cos b$, produit en somme), $\cos^2+\sin^2=1$, déphasage et conversion degrés $\leftrightarrow$ radians.
+  - titre: "Nombres complexes et notation complexe"
+    texte: |
+      Écrire un signal sinusoïdal comme partie réelle de $\underline a\,\mathrm e^{j\omega t}$, dériver ($\partial_t\to j\omega$), calculer module et argument, notation $\underline k=k'-jk''$ (utile pour l'amortissement). Les exercices 5 et 14 utilisent systématiquement $j$ ($j^2=-1$).
+  - titre: "Équations différentielles linéaires à coefficients constants"
+    texte: |
+      Résoudre $y''+k^2y=0$ ($\cos$, $\sin$), $y''-\kappa^2y=0$ ($\mathrm e^{\pm\kappa x}$, $\cosh$, $\sinh$), $\ddot\theta+\gamma\dot\theta+\omega_0^2\theta=0$ (équation caractéristique, régime pseudo-périodique), avec des conditions aux limites ou initiales.
+  - titre: "Séries de Fourier, orthogonalité des modes"
+    texte: |
+      $\displaystyle\int_0^L\sin\frac{n\pi x}L\sin\frac{m\pi x}L\,\mathrm dx=\frac L2\,\delta_{nm}$ ; décomposition d'une fonction en série de sinus et calcul des coefficients par projection.
+  - titre: "Analyse dimensionnelle et ordres de grandeur"
+    texte: |
+      $[F]=\mathrm{kg\,m\,s^{-2}}$, $[\mu]=\mathrm{kg\,m^{-1}}$, $[c]=\mathrm{m\,s^{-1}}$ ; ordres de grandeur : corde de guitare $c\sim100$--$400$ m/s, fréquences $\sim100$--$1000$ Hz ; câble de pont $c\sim100$ m/s, $f\sim1$ Hz.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Établir et interpréter l'équation de d'Alembert"
+    texte: |
+      Savoir appliquer le principe fondamental à un élément de corde, utiliser l'approximation des petits angles, obtenir $\partial_x^2y=\dfrac1{c^2}\partial_t^2y$ avec $c=\sqrt{F/\mu}$ et en déduire que la célérité ne dépend que du {\bf milieu}, pas de l'onde.
+  - titre: "Manipuler les solutions de l'équation d'onde"
+    texte: |
+      Reconnaître et écrire des ondes progressives $f(x\mp ct)$ et sinusoïdales $a\cos(kx-\omega t+\phi)$ ; relier $\lambda$, $T$, $k$, $\omega$, $c$ ; distinguer la {\bf célérité} de l'onde de la {\bf vitesse transversale} d'un point $\partial_ty$ ; dessiner un profil à un instant ultérieur par simple translation.
+  - titre: "Passer de la propagation aux modes propres"
+    texte: |
+      Traduire des conditions aux limites (extrémité fixe, libre, masse, vibreur) en conditions sur $y$ ou $\partial_xy$ ; obtenir les ondes stationnaires $\sin(kx)\cos(\omega t)$, les fréquences propres $f_n=nc/(2L)$ ou $(2n-1)c/(4L)$ ; calculer les coefficients d'une décomposition modale par projection sur les modes.
+  - titre: "Étudier un régime forcé et une résonance"
+    texte: |
+      Calculer le profil d'une corde excitée par un vibreur (Melde), repérer les résonances et expliquer pourquoi l'amplitude reste finie en présence d'amortissement ($A\sim Qa$) ; connaître le lien entre $Q$, la largeur de résonance et le temps d'extinction.
+  - titre: "Aborder énergie, impédance, réflexion et transmission"
+    texte: |
+      Écrire les densités d'énergie cinétique et potentielle d'une onde, la puissance transportée et l'impédance caractéristique $Z_c=\sqrt{\mu F}$ ; décrire la réflexion et la transmission à une discontinuité de $\mu$, l'adaptation d'impédance (lame quart d'onde).
+  - titre: "Reconnaître les limites du modèle de la corde idéale"
+    texte: |
+      Savoir qu'une corde réelle peut avoir une tension variable (corde pesante), être dispersive (raideur de flexion, chaîne de masses discrètes), être amortie (frottement) ou avoir une charge locale (perle, masse) ; calculer une relation de dispersion $\omega(k)$ et les vitesses de phase et de groupe.
+  - titre: "Compétences transversales"
+    texte: |
+      Faire un schéma soigné (corde, axes, repères de phase), mener des calculs trigonométriques et complexes sans erreur, {\bf valider} (homogénéité, cas limites, ordre de grandeur) et utiliser Python pour tracer des profils, des animations et des spectres.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Positionnement du TD et progression"
+    texte: |
+      Ce TD est le premier du chapitre sur les ondes : il installe le vocabulaire (célérité, longueur d'onde, période, phase, nœud, ventre), la méthode (PFD sur un élément de corde, équation de d'Alembert) et les trois « solutions » de l'équation (ondes progressives, ondes stationnaires et modes propres, régime forcé). La progression se fait en cinq temps : (1) {\bf célérité et ondes progressives} (ex. 0, 1, 2), (2) {\bf établissement de l'équation et modes fixes-fixes} (ex. 3, 4), (3) {\bf régimes forcé et stationnaire} (ex. 5, 6), (4) {\bf énergie, impédance, milieu inhomogène ou dispersif} (ex. 7 à 11), (5) {\bf synthèse et modélisation avancée} (ex. 12 à 15 : corde pincée, corde raide, corde amortie, masse en bout).
+  - titre: "Quatre parcours selon le temps disponible"
+    texte: |
+      {\bf Parcours essentiel} (environ 2 h) : exercices 0, 1, 2, 3 et 4 (célérité, onde progressive sinusoïdale, équation de d'Alembert, corde fixée).
+
+      {\bf Parcours renforcé} (environ 3 h 30) : ajouter les exercices 5 (Melde) et 6 (extrémité libre), puis l'exercice 7 (énergie et impédance).
+
+      {\bf Parcours approfondi} (CPGE/licence, 2\textsuperscript{e} séance ou travail personnel, environ 4 h) : exercices 8 à 11 (corde pesante, chaîne de masses et dispersion, perle sur corde, lame quart d'onde).
+
+      {\bf Parcours « excellence »} (colle, projet, environ 3 h) : exercices 12 à 15. L'exercice 12 (corde pincée) est le meilleur complément du cours sur les modes ; les exercices 13 et 14 prolongent respectivement l'exercice 9 (dispersion) et l'exercice 5 (résonance avec amortissement) ; l'exercice 15 prolonge les exercices 4 et 6 (conditions aux limites).
+  - titre: "Compétences évaluables"
+    texte: |
+      {\bf S'approprier} (identifier le système, les conditions aux limites et initiales), {\bf Analyser} (choisir entre solution progressive, stationnaire ou modale ; traduire une condition physique en équation), {\bf Réaliser} (calculs littéraux et numériques, développements limités, intégrales de projection), {\bf Valider} (homogénéité, cas limites $M\to0$ ou $\infty$, $\gamma\to0$, $EI\to0$, ordre de grandeur de $c$ et de $f$) et {\bf Communiquer} (schéma avec axes et phases, rédaction en étapes). Presque tous les exercices contiennent un cas limite qui redonne un résultat connu : le point sur lequel insister auprès des étudiants.
+  - titre: "Points de vigilance sur la gestion de séance"
+    texte: |
+      Prévoir 10 minutes de rappel sur les dérivées partielles et la notation complexe. Imposer le schéma {\bf avant} le calcul (corde, axes, sens de propagation, point étudié). Faire distinguer systématiquement célérité $c$ et vitesse transversale $\partial_ty$, nœud et ventre, onde progressive et stationnaire. Donner les corrigés progressivement (coup de pouce, correction courte, solution détaillée) et chronométrer. Les exercices de modélisation avancée (12 à 15) sont longs : les donner en travail préparatoire et faire corriger les questions clés au tableau.
+
+point_cours:
+  - titre: "Équation de d'Alembert pour la corde"
+    texte: |
+      Le PFD sur un élément $[x,x+\mathrm dx]$ pour de petits angles donne
+      $$\mu\,\mathrm dx\,\partial_t^2y=F\,\partial_x^2y\,\mathrm dx\ \Longrightarrow\ \boxed{\partial_x^2y-\frac1{c^2}\,\partial_t^2y=0},\qquad c=\sqrt{\frac F\mu}.$$
+      La célérité ne dépend que de la tension et de la masse linéique.
+  - titre: "Solutions : ondes progressives et stationnaires"
+    texte: |
+      Solution générale : $y(x,t)=f(x-ct)+g(x+ct)$. Onde sinusoïdale progressive : $y=a\cos(kx-\omega t+\phi)$ avec $k=\dfrac{2\pi}\lambda$, $\omega=\dfrac{2\pi}T$, $c=\dfrac\lambda T=\dfrac\omega k$. Onde stationnaire : $y=A\sin(kx+\varphi)\cos(\omega t+\phi)$ : les points oscillent en phase ou en opposition, avec des {\bf nœuds} fixes et des {\bf ventres}. Vitesse transversale d'un point : $v_y=\partial_ty$ (à ne pas confondre avec $c$).
+  - titre: "Modes propres et conditions aux limites"
+    texte: |
+      Fixe : $y=0$ (nœud). Libre : $\partial_xy=0$ (ventre). Corde fixe-fixe de longueur $L$ : $k_nL=n\pi$, $f_n=n\dfrac c{2L}$ ; fixe-libre : $k_nL=(2n-1)\dfrac\pi2$, $f_n=(2n-1)\dfrac c{4L}$. Toute solution libre est une {\bf superposition de modes} $\sum(A_n\cos\omega_nt+B_n\sin\omega_nt)\sin k_nx$ dont les coefficients se calculent par projection sur les conditions initiales.
+  - titre: "Régime forcé et résonance (Melde)"
+    texte: |
+      Vibreur en $x=0$ : $\underline y(0,t)=a\,\mathrm e^{j\omega t}$ ; extrémité fixée en $x=\ell$ : $\underline Y(x)=a\dfrac{\sin k(\ell-x)}{\sin k\ell}$. Résonance quand $\sin k\ell=0$ ($f=Nc/(2\ell)$). Avec amortissement, l'amplitude reste finie, de l'ordre de $Q\,a$.
+  - titre: "Énergie, puissance, impédance"
+    texte: |
+      Densités linéiques : énergie cinétique $\tfrac12\mu(\partial_ty)^2$, potentielle $\tfrac12F(\partial_xy)^2$ ; puissance transportée par une onde progressive $\mathcal P=Z_c\,(\partial_ty)^2$ avec l'{\bf impédance caractéristique} $Z_c=\sqrt{\mu F}=\mu c$. À l'interface entre deux cordes d'impédances $Z_1$ et $Z_2$ : $r=\dfrac{Z_1-Z_2}{Z_1+Z_2}$, $t=\dfrac{2Z_1}{Z_1+Z_2}$.
+  - titre: "Dispersion, vitesse de phase et de groupe"
+    texte: |
+      Pour un milieu où $\omega$ n'est pas proportionnel à $k$, $v_\varphi=\omega/k$ et $v_g=\mathrm d\omega/\mathrm dk$. Exemples : chaîne de masses ($\omega=2\omega_0|\sin(ka/2)|$), corde raide ($\omega^2=c^2k^2(1+\kappa k^2)$), corde amortie ($\underline k^2=(\omega^2-j\gamma\omega)/c^2$).
+  - titre: "Méthode d'étude d'un problème de corde"
+    texte: |
+      (1) Schéma, repère, conventions, sens de propagation. (2) Écrire l'équation du mouvement (d'Alembert ou modifiée pour la perturbation étudiée). (3) Identifier la nature de la solution cherchée : progressive, stationnaire, modes, régime forcé. (4) Imposer les conditions aux limites et initiales. (5) Calculer les grandeurs demandées ($c$, $f_n$, amplitudes, énergie, $Q$). (6) {\bf Valider} : homogénéité, cas limites, ordre de grandeur.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Confondre célérité $c$ et vitesse transversale $\\partial_ty$"
+    texte: |
+      $c=\sqrt{F/\mu}$ est la vitesse du motif (à $F$ et $\mu$ donnés, elle est constante) ; $\partial_ty$ est la vitesse d'un point de la corde, perpendiculaire à $x$, et varie sinusoïdalement avec une valeur maximale $a\omega$. Une onde peut se propager vite avec une amplitude petite.
+  - titre: "Croire que la célérité dépend de la fréquence ou de l'amplitude"
+    texte: |
+      Pour la corde idéale, $c$ est fixée par le milieu ; changer la fréquence change $\lambda=c/f$, pas $c$. Cette propriété tombe pour les milieux dispersifs (chaîne de masses, corde raide).
+  - titre: "Erreurs de signe dans la propagation $f(x\\mp ct)$"
+    texte: |
+      $f(x-ct)$ se propage vers les $x$ {\bf croissants} (le motif de $x_0$ à $t=0$ se retrouve en $x_0+ct$). Décaler un profil de $\Delta t$ revient à le translater de $c\Delta t$ dans le sens de propagation.
+  - titre: "Confondre nœud de déplacement, de pente et de tension"
+    texte: |
+      Extrémité fixe : $y=0$ (nœud de déplacement, ventre de pente). Extrémité libre : $\partial_xy=0$ (ventre de déplacement, nœud de pente). Un anneau sans frottement sur une tige est « libre ».
+  - titre: "Oublier les conditions initiales ou aux limites"
+    texte: |
+      Une solution $\sin(kx)\cos(\omega t)$ n'est pas « la » solution : l'équation est linéaire, la solution générale est une somme de modes dont les coefficients dépendent des conditions initiales. Sans conditions aux limites, $k$ reste quelconque.
+  - titre: "Résonance « infinie » prise au pied de la lettre"
+    texte: |
+      La divergence en $1/\sin k\ell$ vient de l'absence d'amortissement. Toute corde réelle a un $Q$ fini : l'amplitude à la résonance est de l'ordre de $Qa$.
+  - titre: "Confondre harmoniques et modes propres"
+    texte: |
+      Les fréquences propres d'une corde idéale sont des multiples du fondamental (harmoniques). Avec raideur, masse en bout ou pesanteur, elles ne le sont plus (inharmonicité) ; un « harmonique » n'est alors plus un entier multiple.
+  - titre: "Oublier la valeur absolue dans l'amplitude de Melde"
+    texte: |
+      L'amplitude des ventres de Melde est $a/|\sin k\ell|$ : toujours positive et supérieure à $a$. Les signes alternent dans le profil mais pas dans l'amplitude.
+  - titre: "Erreurs d'unités et de puissances de dix"
+    texte: |
+      Diamètre en mm, masse linéique en g/m : convertir en SI avant de calculer. $\mu=\rho\pi d^2/4$ avec $d$ en mètres ; vérifier $c\sim10^2$ m/s pour une corde musicale.
+  - titre: "Appliquer une formule sans en vérifier les hypothèses"
+    texte: |
+      $c=\sqrt{F/\mu}$ suppose une corde idéale, de petits angles, tension uniforme ; $f_n=nc/(2L)$ suppose deux extrémités fixes et un milieu non dispersif. Pour une corde pesante, la tension varie ; pour une corde raide, il y a dispersion.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Démarrer par une expérience"
+    texte: |
+      Un cordon élastique ou une longue corde souple : envoyer une impulsion et la voir se réfléchir (inversée si le bout est fixe, non inversée si le bout est libre) ; une corde de guitare ou un ressort de Slinky pour la dispersion ; la machine de Melde pour les fuseaux. Les étudiants construisent les idées avant les formules.
+  - titre: "Prédire avant de calculer"
+    texte: |
+      Pour chaque exercice, poser une question de pronostic : « quelle impulsion arrive la première ? », « où pincer pour supprimer un harmonique ? », « la note est-elle plus grave ou plus aiguë avec une masse en bout ? ». Comparer ensuite au calcul.
+  - titre: "Python en séance"
+    texte: |
+      Tracer en quelques lignes (\texttt{numpy}, \texttt{matplotlib}) : un profil $y(x,t)$ à plusieurs instants, la somme de quelques modes d'une corde pincée (convergence en $1/n^2$), la relation de dispersion $\omega(k)$ d'une chaîne de masses, un spectre. Une animation \texttt{FuncAnimation} d'une onde stationnaire ou d'un paquet d'ondes dispersif est très efficace.
+  - titre: "Travail en binômes et mise en commun"
+    texte: |
+      Pour les exercices de modélisation (12 à 15), demander à chaque binôme d'écrire d'abord l'équation du mouvement et les conditions aux limites avant tout calcul, puis comparer au tableau. Les groupes avancés enchaînent 12 puis 14, les autres consolident 5 et 6.
+  - titre: "Tableau synthétique de fin de séance"
+    texte: |
+      En 5 minutes : « milieu $\to$ équation $\to$ relation de dispersion $\to$ modes propres $\to$ cas limite » pour : corde idéale, corde pesante, corde raide, corde amortie, chaîne de masses, corde avec masse en bout.
+  - titre: "Insister sur la phase « Valider »"
+    texte: |
+      À chaque exercice : « le résultat est-il homogène ? que donne-t-il quand $M\to0$, $EI\to0$, $\gamma\to0$ ? l'ordre de grandeur de $c$ est-il plausible ? ». Cette habitude est la plus rentable sur le long terme.
+
+bilan:
+  - titre: "Ce qu'il faut savoir faire à la fin du TD"
+    texte: |
+      Établir l'équation de d'Alembert ; calculer $c$, $\lambda$, $T$, $f$ ; écrire une onde progressive et une onde stationnaire ; imposer des conditions aux limites (fixe, libre, vibreur, masse) ; calculer les fréquences propres et décomposer une condition initiale sur les modes ; analyser une résonance ; relier énergie, puissance et impédance ; connaître l'effet d'une perturbation du modèle (raideur, amortissement, charge, pesanteur) sur $\omega(k)$.
+  - titre: "Résultats marquants du TD"
+    texte: |
+      $c=\sqrt{F/\mu}$ ; $y=a\cos(kx-\omega t+\phi)$, $c=\lambda/T=\omega/k$ ; corde fixe-fixe : $f_n=nc/(2L)$ ; fixe-libre : $f_n=(2n-1)c/(4L)$ ; Melde : $\underline Y=a\sin k(\ell-x)/\sin k\ell$, résonance en $f=Nc/(2\ell)$ ; $Z_c=\sqrt{\mu F}$ ; corde pincée : $b_n=\dfrac{2h}{\pi^2\beta(1-\beta)}\dfrac{\sin n\pi\beta}{n^2}$ ; corde raide : $f_n=nf_0\sqrt{1+Bn^2}$, $B=\pi^2EI/(FL^2)$ ; corde amortie : $\delta=2c/\gamma$, $Q=\omega_n/\gamma$, $A_v\simeq2Q_Na/(N\pi)$ ; masse en bout : $kL\tan kL=\mu L/M$, $\omega_1^2\simeq F/[L(M+m/3)]$.
+  - titre: "Ce qui sera réutilisé dans la suite"
+    texte: |
+      L'équation d'onde, les modes propres et la notion d'impédance se retrouveront pour les ondes sonores dans un tuyau (conditions fixe-libre), les ondes électromagnétiques dans un câble coaxial (équation des télégraphistes), la mécanique quantique (puits de potentiel, quantification de $k$) et l'optique (interférences, cavités). La dispersion et la vitesse de groupe sont réutilisées pour les ondes dans les milieux matériels et les paquets d'ondes.
+
+aller_plus_loin:
+  - niveau: lycee
+    titre: "Hauteur d'une note et instruments à cordes"
+    texte: |
+      Comment un guitariste change-t-il la hauteur d'une note ? (tension, longueur vibrante par appui sur la touche, choix de la corde). Mesurer, avec un smartphone et une application de spectre, la fréquence $f_1$ d'une corde et vérifier $f_1=\dfrac1{2L}\sqrt{F/\mu}$.
+  - niveau: prepa
+    titre: "Simulation numérique de l'équation d'onde"
+    texte: |
+      Discrétiser $\partial_t^2y=c^2\partial_x^2y$ par différences finies ($y_i^{n+1}=2y_i^n-y_i^{n-1}+\sigma^2(y_{i+1}^n-2y_i^n+y_{i-1}^n)$ avec $\sigma=c\Delta t/\Delta x$) ; vérifier la condition de stabilité $\sigma\le1$ (CFL), simuler une corde pincée et comparer à la série de modes de l'exercice 12.
+  - niveau: licence
+    titre: "Solution de d'Alembert et conditions initiales"
+    texte: |
+      Montrer que, pour $y(x,0)=y_0(x)$ et $\partial_ty(x,0)=v_0(x)$ sur une corde infinie, $y(x,t)=\tfrac12[y_0(x-ct)+y_0(x+ct)]+\dfrac1{2c}\displaystyle\int_{x-ct}^{x+ct}v_0(s)\,\mathrm ds$ ; adapter à la corde finie par prolongement impair $2L$-périodique.
+  - niveau: licence
+    titre: "Équation des télégraphistes et analogie électrique"
+    texte: |
+      Établir l'équation d'onde pour la tension et le courant dans un câble ($L_\ell$, $C_\ell$ par unité de longueur), montrer que $c=1/\sqrt{L_\ell C_\ell}$ et $Z_c=\sqrt{L_\ell/C_\ell}$, et reprendre l'analogie corde $\leftrightarrow$ câble ($\mu\leftrightarrow L_\ell$, $1/F\leftrightarrow C_\ell$) : réflexion, adaptation d'impédance, ondes stationnaires dans un câble ouvert ou court-circuité.
+  - niveau: master
+    titre: "Paquets d'ondes et dispersion"
+    texte: |
+      Pour un paquet d'ondes de largeur spectrale $\Delta k$ autour de $k_0$ dans un milieu dispersif $\omega(k)$, montrer que l'enveloppe se déplace à $v_g(k_0)=\omega'(k_0)$ et s'étale avec un coefficient $\omega''(k_0)$ ; appliquer aux ondes sur la chaîne de masses et à la corde raide (chirp après impact).
+  - niveau: master
+    titre: "Quantification de la corde : phonons"
+    texte: |
+      Écrire l'énergie d'une corde fixée aux deux bouts comme somme d'oscillateurs harmoniques indépendants (un par mode), $E=\sum\tfrac12m_n(\dot q_n^2+\omega_n^2q_n^2)$, et indiquer comment la quantification de ces oscillateurs conduit aux {\bf phonons} ; capacité thermique d'une corde (modèle de Debye à une dimension).
+
+accroche_point_cours_essentiel:
+  - titre: "Une corde de guitare, un pont suspendu, un câble coaxial : une seule équation ?"
+    duree_introduction: "5 à 8 min, avant les exercices"
+    question_d_accroche: |
+      Pourquoi une corde plus fine ou plus tendue sonne-t-elle plus aigu ? Pourquoi une impulsion se renverse-t-elle quand elle se réfléchit sur une extrémité fixe, mais pas sur une extrémité libre ? Comment un vibreur peut-il faire apparaître de beaux « fuseaux » à certaines fréquences seulement ? Et pourquoi une corde de piano, pourtant décrite par la même équation, est-elle accordée « faux » ?
+    texte: |
+      {\bf Idée clé : l'équation de d'Alembert résume la dynamique d'un milieu élastique linéaire.} Une perturbation se propage à la vitesse $c=\sqrt{F/\mu}$ fixée par le milieu :
+      $$\partial_x^2y=\frac1{c^2}\,\partial_t^2y,\qquad y=f(x-ct)+g(x+ct).$$
+      Quand la corde est limitée par des extrémités, les ondes se réfléchissent et se superposent : les {\bf conditions aux limites} sélectionnent des fréquences discrètes (modes propres, $f_n=nc/2L$). Quand une source impose une fréquence, la corde répond à cette fréquence avec un profil fixé par les conditions aux limites : c'est le {\bf régime forcé}, avec résonance près des fréquences propres. Enfin, les écarts à l'idéal (raideur, amortissement, charge locale, tension variable) {\bf modifient la relation de dispersion} $\omega(k)$ ou les conditions aux limites, et c'est ce qui rend les instruments réels intéressants.
+
+outils_mathematiques:
+  - titre: "Dérivées partielles et dérivée composée"
+    texte: |
+      $\partial_xf(x-ct)=f'$ et $\partial_tf(x-ct)=-cf'$ ; $\partial_x^2$ et $\partial_t^2$ donnent $f''$ et $c^2f''$, d'où $f$ solution de l'équation de d'Alembert. Pour $y=a\cos(kx-\omega t)$ : $\partial_ty=a\omega\sin(kx-\omega t)$ et $\partial_t^2y=-\omega^2y$.
+  - titre: "Notation complexe et relation de dispersion"
+    texte: |
+      $y=\Re[\underline a\,\mathrm e^{j(\omega t-kx)}]$ : $\partial_t\to j\omega$, $\partial_x\to-jk$ ; une EDP linéaire devient une équation algébrique $D(\omega,k)=0$. $v_\varphi=\omega/k$, $v_g=\mathrm d\omega/\mathrm dk$. Avec amortissement, $k=k'-jk''$ et l'amplitude décroît en $\mathrm e^{-k''x}$.
+  - titre: "Trigonométrie : produits, sommes, angles complexes"
+    texte: |
+      $\sin(a-b)=\sin a\cos b-\cos a\sin b$ ; $\cos a\cos b=\tfrac12[\cos(a+b)+\cos(a-b)]$ ; $\sin(a-jb)=\sin a\cosh b-j\cos a\sinh b$ ; $|\sin(a-jb)|^2=\sin^2a+\sinh^2b$ ; $1-\cos a=2\sin^2\tfrac a2$ (chaîne de masses).
+  - titre: "Séries de Fourier en sinus et orthogonalité"
+    texte: |
+      $y_0(x)=\sum b_n\sin\dfrac{n\pi x}L\Rightarrow b_n=\dfrac2L\displaystyle\int_0^Ly_0\sin\dfrac{n\pi x}L\,\mathrm dx$. Pour un profil à pente discontinue, $b_n\propto1/n^2$ ; pour une vitesse initiale concentrée, $b_n\propto1/n$. $\displaystyle\sum_{n\ge1}\dfrac{\sin^2n\theta}{n^2}=\dfrac{\theta(\pi-\theta)}2$ pour $0\le\theta\le\pi$.
+  - titre: "Équations transcendantes et résolution graphique"
+    texte: |
+      Pour $u\tan u=\varepsilon$ : chercher les intersections de $\tan u$ et de $\varepsilon/u$ ; une solution par intervalle ; développements limités autour de $0$ ($\tan u\simeq u+u^3/3$) et de $n\pi$ ($\tan(n\pi+\delta)\simeq\delta$).
+  - titre: "Équation caractéristique et régimes d'un oscillateur"
+    texte: |
+      $\ddot\theta+\gamma\dot\theta+\omega_0^2\theta=0$ : $s=-\dfrac\gamma2\pm j\sqrt{\omega_0^2-\gamma^2/4}$ ; régime pseudo-périodique, critique ou apériodique ; facteur de qualité $Q=\omega_0/\gamma$ ; temps de décroissance de l'amplitude $\tau=2/\gamma$.
+  - titre: "Développements limités et ordres de grandeur"
+    texte: |
+      $\sqrt{1+\varepsilon}\simeq1+\varepsilon/2$, $\sqrt{1-j\varepsilon}\simeq1-j\varepsilon/2$, $\sin\varepsilon\simeq\varepsilon$, $\ln(1+\varepsilon)\simeq\varepsilon$. Conversion en {\bf cents} : $1200\log_2(f'/f)$.
+  - titre: "Énergie et puissance d'une onde"
+    texte: |
+      $e=\tfrac12\mu(\partial_ty)^2+\tfrac12F(\partial_xy)^2$ ; flux $\mathcal P=-F\,\partial_xy\,\partial_ty$ ; pour une onde progressive $y=f(x-ct)$, $\mathcal P=Z_c(\partial_ty)^2$ avec $Z_c=\sqrt{\mu F}$ ; valeur moyenne d'une onde sinusoïdale $\langle\mathcal P\rangle=\tfrac12Z_c\omega^2a^2$.
+
+liens_autres_disciplines:
+  - discipline: "Musique, acoustique musicale et lutherie"
+    texte: |
+      $f_1=\dfrac1{2L}\sqrt{F/\mu}$ explique l'accord des instruments à cordes (tension, longueur, masse linéique) ; le point de pincement ou de frappe fixe le timbre (exercice 12) ; l'inharmonicité du piano (exercice 13) conduit à l'accord étiré ; les instruments à vent sont l'analogue du cas fixe-libre (exercice 6).
+  - discipline: "Électricité, lignes et câbles"
+    texte: |
+      L'équation de d'Alembert est celle d'un câble sans pertes (télégraphistes) avec $c=1/\sqrt{L_\ell C_\ell}$ et $Z_c=\sqrt{L_\ell/C_\ell}$ ; la réflexion sur un circuit ouvert ou fermé est l'analogue de la réflexion sur une extrémité libre ou fixe ; l'adaptation d'impédance par une ligne quart d'onde est celle de l'exercice 11 ; les pertes ohmiques correspondent au frottement de l'exercice 14.
+  - discipline: "Optique et ondes électromagnétiques"
+    texte: |
+      Réflexion et transmission à l'interface de deux milieux (en indice, $r=\frac{n_1-n_2}{n_1+n_2}$ à incidence normale), traitements antireflets (couche quart d'onde), cavités Fabry-Pérot (modes propres), dispersion (prisme, fibre optique).
+  - discipline: "Mécanique des solides et génie civil"
+    texte: |
+      Haubans de pont, câbles de téléphérique, poutres en flexion (équation d'Euler-Bernoulli, $\omega\propto k^2$), masses accordées (Taipei 101), passerelle du Millennium Bridge (résonance). La mesure de la fréquence propre d'un hauban donne sa tension : $F=4\mu L^2f_1^2$.
+  - discipline: "Mécanique quantique et physique du solide"
+    texte: |
+      Les ondes stationnaires sur une corde préfigurent les états stationnaires d'une particule dans un puits (quantification de $k$, $E\propto n^2$) ; la chaîne de masses est le modèle des phonons dans un cristal (relation de dispersion $\omega=2\omega_0|\sin(ka/2)|$, zone de Brillouin).
+  - discipline: "Sismologie et géophysique"
+    texte: |
+      Ondes sismiques : réflexion et transmission aux interfaces entre couches ; mesure des retards ; dispersion des ondes de surface ; modes propres de la Terre (« sonnerie » après un séisme majeur).
+  - discipline: "Informatique, traitement du signal et synthèse sonore"
+    texte: |
+      Série de Fourier et spectres, algorithme de Karplus-Strong (synthèse de cordes pincées), simulation numérique de l'équation d'onde (différences finies, stabilité CFL), filtrage.

@@ -1,0 +1,195 @@
+id: td2_ex5
+intitule: "Perle sur une tige tournante"
+td: td2
+facultatif: true
+seance: 2
+
+cours_rattache:
+  - cinematique.coordonnees_polaires
+  - cinematique.base_polaire
+  - cinematique.vecteur_vitesse
+  - cinematique.vecteur_acceleration
+
+metadonnees:
+  duree_estimee: "40 min"
+  difficulte: 4
+  priorite: 3
+  type_exercice: "Entraînement / Approfondissement"
+  indispensable: false
+
+enonce_intro: |
+  Dans un plan horizontal, une tige rectiligne $OA$ tourne autour de $O$ à vitesse angulaire {\bf constante}
+  $\omega$ : l'angle $\theta$ entre $Ox$ et la tige vaut $\theta(t)=\omega t$. Une petite perle $M$ coulisse sur la
+  tige ; sa position est repérée par $r(t)=OM$. On étudie deux mouvements de la perle sur la tige :
+  \begin{itemize}
+    \item {\bf cas A} : la perle est entraînée à vitesse radiale constante $u$ à partir de $O$, soit $r(t)=ut$ ;
+    \item {\bf cas B} : la perle est {\bf libre} sur une tige lisse : la tige ne peut exercer sur elle qu'une action perpendiculaire à la tige, donc l'accélération n'a {\bf aucune composante radiale}, $a_r=0$. La perle est lâchée à $r(0)=r_0$ avec $\dot r(0)=0$.
+  \end{itemize}
+
+prerequis:
+  - titre: "Vitesse et accélération en base polaire"
+    texte: |
+      $\vec v=\dot r\,\vec u_r+r\dot\theta\,\vec u_\theta$ et $\vec a=(\ddot r-r\dot\theta^2)\,\vec u_r+(r\ddot\theta+2\dot r\dot\theta)\,\vec u_\theta$.
+  - titre: "Fonctions hyperboliques"
+    texte: |
+      $\cosh x=\dfrac{\mathrm e^x+\mathrm e^{-x}}2$, $\sinh x=\dfrac{\mathrm e^x-\mathrm e^{-x}}2$, $\cosh^2x-\sinh^2x=1$, $\cosh'=\sinh$, $\sinh'=\cosh$ et $\cosh2x=\cosh^2x+\sinh^2x$. L'équation $\ddot r=\omega^2r$ a pour solutions $\mathrm e^{\pm\omega t}$, donc $\cosh\omega t$ et $\sinh\omega t$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Interpréter chaque terme de l'accélération polaire"
+    texte: |
+      Identifier le terme centripète $-r\dot\theta^2$ et le terme $2\dot r\dot\theta$ (accélération de Coriolis), savoir à quelle situation physique conduit une condition portant sur une composante de $\vec a$ ($a_r=0$ ici), et résoudre l'équation différentielle obtenue.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Premier contact avec une équation différentielle issue de la cinématique polaire"
+    texte: |
+      Le cas A montre que $\vec a\neq\vec0$ alors que la vitesse radiale est constante : tout le terme $2\dot r\dot\theta$ est « invisible » pour qui ne regarde que $r$. Le cas B introduit une {\bf condition sur une composante de $\vec a$} (préparation à la dynamique : une force de contact orthogonale à la tige) et conduit à $\cosh$. C'est aussi l'occasion de montrer que l'accélération n'est pas dirigée vers le centre.
+
+point_cours:
+  - titre: "Accélération en coordonnées polaires"
+    texte: |
+      $$a_r=\ddot r-r\dot\theta^2,\qquad a_\theta=r\ddot\theta+2\dot r\dot\theta=\frac1r\frac{\mathrm d}{\mathrm dt}\left(r^2\dot\theta\right).$$
+      Le terme $-r\dot\theta^2$ est l'accélération {\bf centripète} ; le terme $2\dot r\dot\theta$ est l'accélération {\bf de Coriolis} : il apparaît dès que l'on s'éloigne de l'axe en tournant.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Croire que $\\dot r=$ cte implique $a_r=0$"
+    texte: |
+      $a_r=\ddot r-r\dot\theta^2$ : même si $\ddot r=0$, il reste $-r\dot\theta^2\neq0$. Pour $r=ut$, $a_r=-\omega^2ut$.
+  - titre: "Oublier le terme $2\\dot r\\dot\\theta$"
+    texte: |
+      Avec $\ddot\theta=0$, on est tenté d'écrire $a_\theta=0$. Or $a_\theta=2\dot r\dot\theta=2u\omega\neq0$ dans le cas A.
+  - titre: "Confondre $a_r=0$ et $\\vec a=\\vec0$"
+    texte: |
+      Dans le cas B, $a_r=0$ mais $a_\theta=2r_0\omega^2\sinh\omega t\neq0$ pour $t>0$ : la perle est bien accélérée.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Une expérience simple"
+    texte: |
+      Faire marcher quelqu'un de l'axe vers le bord d'un plateau tournant, ou faire glisser un palet sur un disque de vinyle en rotation : on {\bf ressent} la poussée orthoradiale ($2\dot r\dot\theta$) alors que rien ne pousse vers le côté dans le référentiel du sol.
+
+bilan:
+  - titre: "Deux mouvements sur une tige tournante"
+    texte: |
+      Cas A : $\vec v=u\,\vec u_r+u\omega t\,\vec u_\theta$, $\vec a=-u\omega^2t\,\vec u_r+2u\omega\,\vec u_\theta$, trajectoire $r=u\theta/\omega$ (spirale d'Archimède). Cas B : $r=r_0\cosh\omega t$, $\vec v=r_0\omega(\sinh\omega t\,\vec u_r+\cosh\omega t\,\vec u_\theta)$, $\vec a=2r_0\omega^2\sinh\omega t\,\vec u_\theta$, $\|\vec v\|=r_0\omega\sqrt{\cosh2\omega t}$. La croissance est exponentielle : la perle est éjectée.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "La perle libre : interprétation dynamique"
+    texte: |
+      Dans le référentiel de la tige, la perle est soumise à la force d'inertie d'entraînement centrifuge $m\omega^2r\,\vec u_r$ : son équation du mouvement radial est $\ddot r=\omega^2r$, exactement celle du cas B. Montrer que la grandeur $\dot r^2-\omega^2r^2$ est conservée (c'est $-\omega^2r_0^2$) et l'interpréter comme conservation de l'énergie dans le référentiel tournant.
+  - niveau: master
+    titre: "Perle avec rappel élastique"
+    texte: |
+      On attache la perle à $O$ par un ressort (raideur $k$, longueur à vide nulle). L'équation radiale devient $\ddot r=(\omega^2-k/m)\,r$. Discuter les trois régimes selon le signe de $\omega^2-k/m$ ($\cosh$, mouvement uniforme, $\cos$) et la notion de {\bf vitesse critique de rotation}.
+
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi la perle est-elle éjectée ?"
+    duree_introduction: "3 à 5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Une perle enfilée sur une tige lisse que l'on fait tourner. Aucune force ne pousse la perle le long de la tige, et pourtant elle s'éloigne de plus en plus vite. Dans quelle direction l'accélération pointe-t-elle ? Vers le centre ? Vers l'extérieur ? Autre chose ?
+    texte: |
+      {\bf Idée clé : en polaire, l'accélération a deux composantes qui mélangent $r$ et $\theta$.}
+      $$a_r=\ddot r-r\dot\theta^2,\qquad a_\theta=r\ddot\theta+2\dot r\dot\theta.$$
+      Imposer une condition sur l'une des composantes (par exemple $a_r=0$) fournit une équation différentielle sur $r(t)$.
+
+outils_mathematiques:
+  - titre: "Équation $\\ddot r=\\omega^2r$"
+    texte: |
+      Solution générale $r=A\cosh\omega t+B\sinh\omega t$. Avec $r(0)=r_0$ et $\dot r(0)=0$ : $A=r_0$, $B=0$. Attention : c'est $+\omega^2$ (exponentielles réelles), pas $-\omega^2$ (sinusoïdes).
+  - titre: "Identités hyperboliques"
+    texte: |
+      $\cosh^2x-\sinh^2x=1$ et $\cosh^2x+\sinh^2x=\cosh2x$. Donc $\sinh^2\omega t+\cosh^2\omega t=\cosh2\omega t$. Pour inverser : $\operatorname{arcosh}y=\ln\left(y+\sqrt{y^2-1}\right)$.
+  - titre: "Rayon de courbure d'une trajectoire plane"
+    texte: |
+      $\rho=\dfrac{\|\vec v\|^3}{\|\vec v\wedge\vec a\|}$ avec, dans le plan, $\|\vec v\wedge\vec a\|=|v_ra_\theta-v_\theta a_r|$.
+  - titre: "Angle entre la vitesse et la tige"
+    texte: |
+      L'angle $\beta$ entre $\vec v$ et $\vec u_r$ vérifie $\tan\beta=\dfrac{r\dot\theta}{\dot r}$.
+
+liens_autres_disciplines:
+  - discipline: "Mécanique"
+    texte: |
+      Référentiel tournant : forces centrifuge et de Coriolis, bille sur un plateau tournant, essoreuse à salade, régulateur centrifuge.
+  - discipline: "Météorologie et océanographie"
+    texte: |
+      La déviation des masses d'air ou d'eau qui se déplacent à la surface de la Terre est due à la même accélération $2\dot r\dot\theta$ : sens de rotation des cyclones.
+  - discipline: "Ingénierie"
+    texte: |
+      Tri centrifuge (bols vibrants, tambours), turbines et pompes centrifuges : une particule libre sur une pale radiale suit un mouvement en $\cosh\omega t$.
+
+questions:
+  - id: q1
+    enonce: |
+      {\bf Cas A : $r(t)=ut$, $\theta(t)=\omega t$.}
+      \begin{enumerate}[label=(\alph*)]
+          \item Déterminer l'équation polaire $r(\theta)$ de la trajectoire et la nommer. Quel est l'écart radial entre deux tours successifs ?
+          \item Calculer $\vec v$ et $\vec a$ dans la base polaire, puis leurs normes. Identifier dans $\vec a$ le terme centripète et le terme de Coriolis.
+      \end{enumerate}
+    coup_de_pouce: |
+      Éliminez $t=\theta/\omega$ dans $r=ut$. Pour $\vec a$, utilisez $a_r=\ddot r-r\dot\theta^2$ et $a_\theta=r\ddot\theta+2\dot r\dot\theta$ avec $\ddot r=0$ et $\ddot\theta=0$.
+    correction: |
+      (a) $r=u\theta/\omega$, spirale d'Archimède, écart $2\pi u/\omega$. (b) $\vec v=u\,\vec u_r+u\omega t\,\vec u_\theta$, $\|\vec v\|=u\sqrt{1+\omega^2t^2}$ ; $\vec a=-u\omega^2t\,\vec u_r+2u\omega\,\vec u_\theta$, $\|\vec a\|=u\omega\sqrt{4+\omega^2t^2}$.
+    solution:
+      - titre: "(a) Trajectoire"
+        texte: |
+          $t=\theta/\omega$ donne $\boxed{r=\dfrac u\omega\,\theta}$ : c'est une {\bf spirale d'Archimède}. Entre $\theta$ et $\theta+2\pi$, $r$ augmente de $2\pi u/\omega$ : les spires sont {\bf régulièrement espacées}.
+      - titre: "(b) Vitesse"
+        texte: |
+          $\dot r=u$ et $r\dot\theta=ut\cdot\omega$ :
+          $$\boxed{\vec v=u\,\vec u_r+u\omega t\,\vec u_\theta},\qquad\|\vec v\|=u\sqrt{1+\omega^2t^2}.$$
+      - titre: "(b) Accélération"
+        texte: |
+          $a_r=\ddot r-r\dot\theta^2=-u\omega^2t$ et $a_\theta=r\ddot\theta+2\dot r\dot\theta=2u\omega$ :
+          $$\boxed{\vec a=-u\omega^2t\,\vec u_r+2u\omega\,\vec u_\theta},\qquad\|\vec a\|=u\omega\sqrt{4+\omega^2t^2}.$$
+          Le terme $-u\omega^2t\,\vec u_r=-r\omega^2\vec u_r$ est l'accélération {\bf centripète} ; le terme $2u\omega\,\vec u_\theta=2\dot r\dot\theta\,\vec u_\theta$ est l'accélération {\bf de Coriolis}. Ce dernier existe même si la vitesse radiale est constante et la rotation uniforme.
+
+  - id: q2
+    enonce: |
+      \begin{enumerate}[label=(\alph*),start=3]
+          \item Calculer l'angle $\beta$ entre $\vec v$ et la tige. Que devient-il quand $t\to\infty$ ?
+          \item Calculer le rayon de courbure $\rho(t)$ de la trajectoire. Donner sa valeur en $t=0$ et son comportement aux temps longs. Commenter.
+      \end{enumerate}
+    coup_de_pouce: |
+      $\tan\beta=r\dot\theta/\dot r$. Pour $\rho$, calculez $v_ra_\theta-v_\theta a_r$ avec les composantes de la question (b).
+    correction: |
+      $\tan\beta=\omega t\to\infty$ donc $\beta\to\pi/2$. $\rho=\dfrac u\omega\dfrac{(1+\omega^2t^2)^{3/2}}{2+\omega^2t^2}$ ; $\rho(0)=\dfrac u{2\omega}$ ; $\rho\sim ut=r$ aux temps longs (la spirale ressemble à un cercle).
+    solution:
+      - titre: "(c) Angle avec la tige"
+        texte: |
+          $\tan\beta=\dfrac{u\omega t}{u}=\omega t$. En $t=0$ la vitesse est radiale ($\beta=0$). Quand $t\to\infty$, $\beta\to\pi/2$ : la vitesse devient presque orthoradiale, la perle tourne de plus en plus comme sur un cercle.
+      - titre: "(d) Rayon de courbure"
+        texte: |
+          $v_ra_\theta-v_\theta a_r=u\cdot2u\omega-u\omega t\cdot(-u\omega^2t)=u^2\omega\,(2+\omega^2t^2)$. Donc
+          $$\rho=\frac{v^3}{|v_ra_\theta-v_\theta a_r|}=\boxed{\frac u\omega\,\frac{(1+\omega^2t^2)^{3/2}}{2+\omega^2t^2}}.$$
+          En $t=0$ : $\rho=\dfrac u{2\omega}$ (la perle quitte $O$ avec une trajectoire déjà courbée). Pour $\omega t\gg1$ : $\rho\simeq\dfrac u\omega\,\omega t=ut=r$ : localement, la spirale se confond avec un cercle de rayon $r$.
+
+  - id: q3
+    enonce: |
+      {\bf Cas B : perle libre, $a_r=0$, $r(0)=r_0$, $\dot r(0)=0$.}
+      \begin{enumerate}[label=(\alph*),start=5]
+          \item Montrer que la condition $a_r=0$ conduit à $\ddot r=\omega^2r$ et en déduire $r(t)$.
+          \item Déterminer $\vec v$ et $\vec a$ et calculer $\|\vec v\|$. Vérifier que $\vec a\ne\vec0$.
+          \item Donner l'équation polaire $r(\theta)$ de la trajectoire et la limite de l'angle $\beta$ entre $\vec v$ et la tige quand $t\to\infty$.
+          \item Application numérique : $r_0=10$ cm, tige de longueur $1{,}00$ m tournant à $1$ tour par seconde. À quel instant la perle quitte-t-elle la tige ? Avec quelle vitesse ?
+      \end{enumerate}
+    coup_de_pouce: |
+      $a_r=\ddot r-r\omega^2$ car $\dot\theta=\omega$. L'équation $\ddot r=\omega^2r$ a pour solutions $\cosh\omega t$ et $\sinh\omega t$ : lesquelles vérifient $\dot r(0)=0$ ?
+    correction: |
+      $r(t)=r_0\cosh\omega t$ ; $\vec v=r_0\omega(\sinh\omega t\,\vec u_r+\cosh\omega t\,\vec u_\theta)$, $\|\vec v\|=r_0\omega\sqrt{\cosh2\omega t}$ ; $\vec a=2r_0\omega^2\sinh\omega t\,\vec u_\theta$ ; $r=r_0\cosh\theta$, $\beta\to45^\circ$ ; $t\approx0{,}48$ s, $v\approx8{,}9$ m/s.
+    solution:
+      - titre: "(e) Équation et solution"
+        texte: |
+          $a_r=\ddot r-r\omega^2=0$ donne $\ddot r=\omega^2r$. Solution générale $r=A\cosh\omega t+B\sinh\omega t$ ; $r(0)=r_0$ fixe $A=r_0$ et $\dot r(0)=B\omega=0$ fixe $B=0$ :
+          $$\boxed{r(t)=r_0\cosh\omega t}.$$
+      - titre: "(f) Vitesse et accélération"
+        texte: |
+          $\dot r=r_0\omega\sinh\omega t$, $r\dot\theta=r_0\omega\cosh\omega t$ :
+          $$\boxed{\vec v=r_0\omega\left(\sinh\omega t\,\vec u_r+\cosh\omega t\,\vec u_\theta\right)},\qquad\|\vec v\|=r_0\omega\sqrt{\sinh^2\omega t+\cosh^2\omega t}=\boxed{r_0\omega\sqrt{\cosh2\omega t}}.$$
+          $a_\theta=2\dot r\dot\theta=2r_0\omega^2\sinh\omega t$ et $a_r=0$ :
+          $$\boxed{\vec a=2r_0\omega^2\sinh\omega t\,\vec u_\theta}\neq\vec0\ \text{pour }t>0.$$
+          L'accélération est {\bf perpendiculaire à la tige} : c'est cohérent avec une action de la tige qui ne peut être que normale à la tige.
+      - titre: "(g) Trajectoire et angle limite"
+        texte: |
+          Avec $\theta=\omega t$ : $\boxed{r=r_0\cosh\theta}$. L'angle $\beta$ vérifie $\tan\beta=\dfrac{r\dot\theta}{\dot r}=\coth\omega t\to1$ : $\beta\to45^\circ$ aux temps longs, la vitesse radiale devient égale à la vitesse orthoradiale ($\mathrm e^{\omega t}$ domine dans $\cosh$ et $\sinh$), et $r$ croît exponentiellement.
+      - titre: "(h) Application numérique"
+        texte: |
+          $\omega=2\pi$ rad/s. La perle quitte la tige quand $r_0\cosh\omega t=1{,}00$ m, soit $\cosh\omega t=10$ et $\omega t=\ln(10+\sqrt{99})\approx2{,}99$ rad : $t\approx0{,}48$ s (la tige a tourné de $\approx0{,}48$ tour). On a alors $v_r=r_0\omega\sinh\omega t\approx6{,}25$ m/s et $v_\theta=r_0\omega\cosh\omega t\approx6{,}28$ m/s, soit $\|\vec v\|=r_0\omega\sqrt{2\cdot100-1}\approx8{,}9$ m/s. Ordre de grandeur plausible : la perle, partie quasiment du repos, atteint $9$ m/s en une demi-seconde, car l'éjection est exponentielle.

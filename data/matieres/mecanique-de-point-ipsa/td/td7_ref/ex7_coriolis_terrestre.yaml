@@ -1,0 +1,182 @@
+id: td7_ex7
+intitule: "Effet Coriolis terrestre : chute libre et pendule de Foucault"
+td: td7
+facultatif: true
+seance: 7
+
+cours_rattache:
+  - dynamique.referentiel_terrestre
+  - dynamique.force_de_coriolis
+  - dynamique.pesanteur_effective
+
+metadonnees:
+  duree_estimee: "1 h"
+  difficulte: 5
+  type_exercice: "Complément original / Référentiel terrestre"
+  indispensable: false
+
+enonce_intro: |
+  On étudie des mouvements à la surface de la Terre à la latitude $\lambda=48{,}85^\circ$ N (Paris). Le référentiel terrestre $\mathcal R'$ tourne autour de l'axe des pôles à la vitesse angulaire $\Omega=7{,}292\times10^{-5}\ {\rm rad\cdot s^{-1}}$ par rapport au référentiel géocentrique $\mathcal R$, supposé galiléen. On utilise le repère local $(O,\vec e_x,\vec e_y,\vec e_z)$ : $\vec e_x$ vers l'est, $\vec e_y$ vers le nord, $\vec e_z$ vertical ascendant. On prend $g=9{,}81\ {\rm m\cdot s^{-2}}$ ({\bf pesanteur effective}, qui inclut déjà le terme centrifuge) et on néglige $\Omega^2$ devant $\Omega$ pour les effets de Coriolis.
+
+prerequis:
+  - titre: "Vecteur rotation dans le repère local"
+    texte: |
+      $\vec\Omega=\Omega\,(\cos\lambda\,\vec e_y+\sin\lambda\,\vec e_z)$.
+  - titre: "Force de Coriolis"
+    texte: |
+      $\vec F_{ic}=-2m\,\vec\Omega\wedge\vec v_r$.
+  - titre: "Produit vectoriel en composantes"
+    texte: |
+      $\vec e_x\wedge\vec e_y=\vec e_z$, $\vec e_y\wedge\vec e_z=\vec e_x$, $\vec e_z\wedge\vec e_x=\vec e_y$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Calculer une déviation par perturbation"
+    texte: |
+      Savoir intégrer l'équation du mouvement à l'ordre 1 en $\Omega$ (la trajectoire d'ordre 0 est celle sans rotation).
+  - titre: "Interpréter les effets de Coriolis terrestres"
+    texte: |
+      Déviation vers l'est d'un corps qui tombe, vers la droite pour une trajectoire horizontale (hémisphère Nord), rotation du plan d'oscillation du pendule de Foucault.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Méthode perturbative"
+    texte: |
+      Ordre 0 : chute libre $\vec v_0=-gt\,\vec e_z$. Ordre 1 : on injecte $\vec v_0$ dans le terme de Coriolis et on intègre. La déviation est un petit effet ($\sim$ cm pour 100 m) : bon exemple d'ordre de grandeur.
+  - titre: "Foucault"
+    texte: |
+      Le pendule de Foucault est l'{\bf expérience historique} (1851) qui prouve la rotation de la Terre sans regarder le ciel. Le plan d'oscillation tourne à $\Omega\sin\lambda$ : $11{,}3^\circ$/h à Paris, $15^\circ$/h au pôle, $0$ à l'équateur.
+
+point_cours:
+  - titre: "Équation du mouvement"
+    texte: |
+      $\dfrac{\mathrm d\vec v_r}{\mathrm dt}=\vec g+\dfrac{\vec F}{m}-2\vec\Omega\wedge\vec v_r$.
+  - titre: "Composantes de Coriolis"
+    texte: |
+      Pour $\vec v=(v_x,v_y,v_z)$ : $-2\vec\Omega\wedge\vec v=2\Omega\big(v_y\sin\lambda-v_z\cos\lambda,\ -v_x\sin\lambda,\ v_x\cos\lambda\big)$.
+  - titre: "Ordres de grandeur"
+    texte: |
+      $2\Omega v\approx1{,}5\times10^{-4}\,v$ (m/s²) : négligeable pour des mouvements courts ($t\ll1/\Omega\approx3{,}8$ h) ; important pour les masses d'air (cyclones), les courants marins, la balistique à longue portée.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Chute libre « déviée vers l'ouest »"
+    texte: |
+      La déviation est vers l'{\bf est} : le sommet de la tour tourne plus vite (rayon plus grand) que le pied ; le corps garde sa vitesse $\Omega(R+h)\cos\lambda$ vers l'est, supérieure à celle du pied de la tour.
+  - titre: "Oublier la composante verticale de $\\vec\\Omega$"
+    texte: |
+      Le pendule de Foucault ne dépend que de $\Omega\sin\lambda$ (composante verticale), pas de $\Omega\cos\lambda$.
+  - titre: "Sens de rotation"
+    texte: |
+      Hémisphère Nord : déviation vers la droite, plan de Foucault tourne dans le sens horaire (vu de dessus) ; hémisphère Sud : l'inverse.
+  - titre: "Résoudre en négligeant l'ordre 0"
+    texte: |
+      Il faut d'abord la solution d'ordre 0 ($v_z=-gt$) avant de calculer Coriolis.
+  - titre: "Confondre bille sur la Terre et Terre « fixe »"
+    texte: |
+      Dans le référentiel terrestre la force centrifuge existe aussi ; elle est incluse dans $\vec g$. Pas de double comptage.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Foucault au Panthéon"
+    texte: |
+      Visite virtuelle ou vidéo : demander aux étudiants de calculer la période de rotation du plan ($31{,}8$ h).
+  - titre: "Cyclones"
+    texte: |
+      Lien avec le sens de rotation des dépressions (antihoraire au Nord) : déviation vers la droite des masses d'air convergeant vers un centre de basses pressions.
+
+bilan:
+  - titre: "Résultats"
+    texte: |
+      Chute libre de $h=100$ m : $t=4{,}52$ s, déviation vers l'est $\dfrac13\Omega g\cos\lambda\,t^3=1{,}44$ cm. Obus horizontal ($500$ m/s, $40$ s) : déviation $\Omega\sin\lambda\,vt^2=43{,}9$ m vers la droite. Pendule de Foucault : plan tournant à $\Omega\sin\lambda$, période $T=\dfrac{T_{\rm sid}}{\sin\lambda}=31{,}8$ h, soit $11{,}3^\circ/{\rm h}$.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Fil à plomb"
+    texte: |
+      Montrer que la verticale locale (fil à plomb) est écartée de la direction du centre de la Terre d'un angle $\approx\dfrac{\Omega^2R_T\sin\lambda\cos\lambda}{g}\approx0{,}1^\circ$ à $45^\circ$ ; comparer la correction centrifuge $\Omega^2R_T=0{,}034\ {\rm m\cdot s^{-2}}$ à l'effet Coriolis d'une chute.
+  - niveau: licence
+    titre: "Déviation vers le sud"
+    texte: |
+      Montrer qu'à l'ordre $\Omega^2$ la chute libre est aussi déviée vers l'équateur (terme en $\Omega^2\sin\lambda\cos\lambda\,gt^4/\ldots$) ; calculer son ordre de grandeur ($\sim10^{-5}$ m pour 100 m).
+  - niveau: master
+    titre: "Pendule de Foucault : solution complète"
+    texte: |
+      Poser $\zeta=x+\mathrm iy$ : $\ddot\zeta+2\mathrm i\Omega\sin\lambda\,\dot\zeta+\omega_0^2\zeta=0$ ; solution $\zeta=\mathrm e^{-\mathrm i\Omega\sin\lambda\,t}\big(A\,\mathrm e^{\mathrm i\omega't}+B\,\mathrm e^{-\mathrm i\omega't}\big)$ avec $\omega'=\sqrt{\omega_0^2+\Omega^2\sin^2\lambda}$ ; discuter la précession de Foucault et la précession parasite due à l'ellipticité.
+
+accroche_point_cours_essentiel:
+  - titre: "Une pierre lâchée du haut d'une tour tombe-t-elle exactement au pied de la tour ?"
+    duree_introduction: "3 min"
+    question_d_accroche: |
+      Newton, Hooke puis Reich ont tenté l'expérience : la pierre tombe légèrement à l'est. Pourquoi, et de combien pour une tour de 100 m ?
+    texte: |
+      {\bf Idée clé : la Terre est un référentiel tournant.} Dans $\mathcal R'$ un corps en mouvement subit $-2m\vec\Omega\wedge\vec v_r$ ; la déviation est faible (cm) mais mesurable.
+
+outils_mathematiques:
+  - titre: "Intégration successive"
+    texte: |
+      $\ddot x=2\Omega gt\cos\lambda\Rightarrow\dot x=\Omega gt^2\cos\lambda\Rightarrow x=\tfrac13\Omega gt^3\cos\lambda$.
+  - titre: "Notation complexe"
+    texte: |
+      $\zeta=x+\mathrm iy$ transforme le système couplé du pendule en une seule équation.
+  - titre: "Développement perturbatif"
+    texte: |
+      $\vec r=\vec r_0+\Omega\vec r_1+\dots$
+
+liens_autres_disciplines:
+  - discipline: "Météorologie et océanographie"
+    texte: |
+      Équilibre géostrophique, cyclones, courants de Coriolis, spirale d'Ekman.
+  - discipline: "Balistique"
+    texte: |
+      Tir longue portée : correction de Coriolis.
+  - discipline: "Histoire des sciences"
+    texte: |
+      Pendule de Foucault (1851), preuve expérimentale de la rotation de la Terre.
+
+questions:
+  - id: q1
+    enonce: |
+      Un corps de masse $m$ est lâché sans vitesse initiale d'une hauteur $h=100$ m.
+      \begin{itemize}
+        \item[(a)] Écrire l'équation du mouvement dans $\mathcal R'$ et projeter $-2\vec\Omega\wedge\vec v_r$ sur $(\vec e_x,\vec e_y,\vec e_z)$.
+        \item[(b)] Résoudre à l'ordre 0 puis à l'ordre 1 en $\Omega$ ; en déduire la déviation vers l'est $x(t)$.
+        \item[(c)] Calculer la durée de chute et la déviation pour $h=100$ m à $\lambda=48{,}85^\circ$.
+      \end{itemize}
+    coup_de_pouce: |
+      (a) $\vec\Omega=\Omega(\cos\lambda\vec e_y+\sin\lambda\vec e_z)$. (b) À l'ordre 0, $\vec v_0=-gt\,\vec e_z$ ; reporter dans le terme de Coriolis.
+    correction: |
+      (a) $\ddot x=2\Omega(\dot y\sin\lambda-\dot z\cos\lambda)$, $\ddot y=-2\Omega\dot x\sin\lambda$, $\ddot z=-g+2\Omega\dot x\cos\lambda$ ; (b) $x=\tfrac13\Omega g\cos\lambda\,t^3$ ; (c) $t=4{,}52$ s, $x=1{,}44$ cm vers l'est.
+    solution:
+      - titre: "(a) Équation du mouvement"
+        texte: |
+          $\ddot{\vec r}=\vec g-2\vec\Omega\wedge\vec v$. Avec $\vec\Omega\wedge\vec v=\Omega\big[(\cos\lambda\,v_z-\sin\lambda\,v_y)\vec e_x+\sin\lambda\,v_x\vec e_y-\cos\lambda\,v_x\vec e_z\big]$ :
+          $$\ddot x=2\Omega(\dot y\sin\lambda-\dot z\cos\lambda),\quad\ddot y=-2\Omega\dot x\sin\lambda,\quad\ddot z=-g+2\Omega\dot x\cos\lambda.$$
+      - titre: "(b) Résolution perturbative"
+        texte: |
+          Ordre 0 ($\Omega=0$) : $\dot z_0=-gt$, $z_0=h-\tfrac12gt^2$, $x_0=y_0=0$. Ordre 1 : $\ddot x=-2\Omega\dot z_0\cos\lambda=2\Omega gt\cos\lambda$, donc $\dot x=\Omega gt^2\cos\lambda$ et
+          $$\boxed{x(t)=\tfrac13\,\Omega g\cos\lambda\,t^3}\ \text{(vers l'est)}.$$
+          Les termes en $\dot x$ dans $\ddot y$ et $\ddot z$ sont d'ordre $\Omega^2$ : négligés ($y=0$ à cet ordre).
+      - titre: "(c) Application numérique"
+        texte: |
+          $t=\sqrt{2h/g}=\sqrt{200/9{,}81}=4{,}52$ s ; $x=\tfrac13\times7{,}292\times10^{-5}\times9{,}81\times\cos48{,}85^\circ\times4{,}52^3=\boxed{1{,}44\ {\rm cm}}$ vers l'est. Pour comparaison : accélération de Coriolis en fin de chute $2\Omega gt\cos\lambda=4{,}3\times10^{-3}\ {\rm m\cdot s^{-2}}$.
+
+  - id: q2
+    enonce: |
+      \begin{itemize}
+        \item[(d)] Un obus est tiré horizontalement à $v=500$ m/s (vers l'est) : calculer la déviation latérale après $t=40$ s (on néglige la chute et les frottements).
+        \item[(e)] Pendule de Foucault : le pendule oscille dans le plan horizontal avec une petite amplitude. Écrire les équations du mouvement horizontal (en négligeant $\ddot z$, $\dot z$) et montrer que le plan d'oscillation tourne à la vitesse angulaire $-\Omega\sin\lambda$.
+        \item[(f)] Calculer la période de rotation du plan à Paris, et la rotation par heure ; comparer au pôle Nord et à l'équateur.
+      \end{itemize}
+    coup_de_pouce: |
+      (d) Pour $\vec v=v\vec e_x$ (vers l'est), $-2\vec\Omega\wedge\vec v$ a pour composante horizontale $-2\Omega v\sin\lambda\,\vec e_y$ : force vers la droite du mouvement, donc vers le sud. (e) Équations : $\ddot x=-\omega_0^2x+2\Omega\sin\lambda\,\dot y$, $\ddot y=-\omega_0^2y-2\Omega\sin\lambda\,\dot x$. Poser $\zeta=x+\mathrm iy$. (f) $T=T_{\rm sid}/\sin\lambda$.
+    correction: |
+      (d) Déviation vers la droite (le sud) $\Omega\sin\lambda\,vt^2=43{,}9$ m ; (e) $\zeta=\zeta_0\mathrm e^{-\mathrm i\Omega\sin\lambda\,t}$ : rotation horaire ; (f) $T=31{,}8$ h, $11{,}3^\circ$/h ; pôle : $23{,}93$ h, $15^\circ$/h ; équateur : pas de rotation.
+    solution:
+      - titre: "(d) Obus horizontal"
+        texte: |
+          Avec $\vec v=v\vec e_x$ : $\ddot y=-2\Omega v\sin\lambda$ (force vers la droite du mouvement dans l'hémisphère Nord), donc $y=-\Omega v\sin\lambda\,t^2=-7{,}292\times10^{-5}\times0{,}7527\times500\times1600=-43{,}9$ m : déviation de $\boxed{43{,}9\ \rm m}$ vers la droite (ici, le sud) après $40$ s. Elle croît comme $t^2$ : sur $120$ s, $395$ m.
+      - titre: "(e) Pendule de Foucault"
+        texte: |
+          Pour un pendule de grande longueur et de petite amplitude, $\ddot z\approx0$ et la tension compense le poids ; la rappel horizontal est $-m\omega_0^2(x,y)$ avec $\omega_0^2=g/\ell$. Coriolis horizontal $=2m\Omega\sin\lambda(\dot y,-\dot x)$ (la composante en $\cos\lambda$ est négligeable car $\dot z\approx0$ et son effet est d'ordre supérieur) :
+          $$\ddot x=-\omega_0^2x+2\Omega_z\dot y,\qquad\ddot y=-\omega_0^2y-2\Omega_z\dot x,\qquad\Omega_z=\Omega\sin\lambda.$$
+          Avec $\zeta=x+\mathrm iy$ : $\ddot\zeta+2\mathrm i\Omega_z\dot\zeta+\omega_0^2\zeta=0$. Poser $\zeta=u\,\mathrm e^{-\mathrm i\Omega_zt}$ : $\ddot u+(\omega_0^2+\Omega_z^2)u=0$, d'où $u$ oscille à $\omega'\approx\omega_0$ en gardant une direction fixe : le plan d'oscillation tourne à $-\Omega_z$ ({\bf sens horaire} dans l'hémisphère Nord).
+      - titre: "(f) Application numérique"
+        texte: |
+          Paris ($\lambda=48{,}85^\circ$) : $\Omega_z=\Omega\sin\lambda=5{,}49\times10^{-5}$ rad/s ; $T=\dfrac{2\pi}{\Omega\sin\lambda}=\dfrac{23{,}93\ {\rm h}}{\sin\lambda}=\boxed{31{,}8\ {\rm h}}$, soit $\boxed{11{,}3^\circ/{\rm h}}$ ($271^\circ$ par jour). Pôle Nord : $\sin\lambda=1$, $T=23{,}93$ h ($15{,}04^\circ$/h). Équateur : $\sin\lambda=0$, pas de rotation du plan.

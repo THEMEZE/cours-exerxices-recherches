@@ -17,7 +17,9 @@
 # corrections par erreur après une mise à jour de code.
 #
 # Usage :
-#   ./web/publish_profile.sh <profil> [--matiere <matiere_slug>]
+#   ./web/publish_profile.sh auto                 # profil de chaque cours/TP/TD d'après build/config.yaml (publication:)
+#   ./web/publish_profile.sh <profil> [--matiere <matiere_slug>]   # force UN profil partout
+#   CREATE_MISSING=1 ./web/publish_profile.sh <profil>   # crée aussi les pages-sujets absentes de Quartz
 # ============================================================
 set -e
 
@@ -25,18 +27,29 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 cd "$ROOT"
 
-PROFILE="$1"
-shift || true
+# Sans argument (ou si le 1er argument est une option --xxx) : mode « auto ».
+if [ -z "$1" ] || [[ "$1" == --* ]]; then
+    PROFILE="auto"
+else
+    PROFILE="$1"
+    shift
+fi
 
-if [ -z "$PROFILE" ]; then
-    echo "Usage: $0 <profil> [--matiere <matiere_slug>]"
-    echo "Profils disponibles :"
-    python3 - <<'EOF'
-import yaml
+# « auto » = profil de CHAQUE document d'après publication: dans build/config.yaml ;
+# tout autre nom = ce profil est forcé pour tous les documents.
+if ! python3 - "$PROFILE" <<'PYCHECK'
+import sys, yaml
 p = yaml.safe_load(open("web/visibility_profiles.yaml"))["profiles"]
-for name in p:
-    print(f"  - {name}")
-EOF
+name = sys.argv[1]
+if name != "auto" and name not in p:
+    print(f"Profil inconnu : {name}")
+    print("Usage: ./web/publish_profile.sh [auto | <profil>] [--matiere <matiere_slug>]")
+    print("  - auto   (profil de chaque document, d'après build/config.yaml)")
+    for n in p:
+        print(f"  - {n}")
+    sys.exit(1)
+PYCHECK
+then
     exit 1
 fi
 
@@ -65,7 +78,7 @@ fi
 
 echo "4bis) Injection des liens de sujets (data/graph/sujets.yaml) ..."
 if [ -d "$QUARTZ_CONTENT" ]; then
-    python3 web/build_subject_links.py --quartz-content "$QUARTZ_CONTENT"
+    python3 web/build_subject_links.py --quartz-content "$QUARTZ_CONTENT" ${CREATE_MISSING:+--create-missing}
 else
     echo "   ⚠️  $QUARTZ_CONTENT introuvable -- injection sautée."
 fi
@@ -76,11 +89,24 @@ python3 notebooks/build_notebooks.py --profile "$PROFILE" "$@"
 echo "6) QCM (QR code) ..."
 python3 web/build_qcm_artifact.py
 
+echo "6bis) Hébergement : PDF faits/défaits (profil $PROFILE), pages QCM, graph.json ..."
+python3 web/publish_hosting.py --profile "$PROFILE"
+
+if [ -d "$QUARTZ_CONTENT" ]; then
+    echo "6ter) Médias (figures, animations, PDF publiés) -> content/ de Quartz ..."
+    python3 web/sync_quartz_assets.py --quartz-content "$QUARTZ_CONTENT"
+fi
+
 if [ -f "$QUARTZ_DIR/package.json" ]; then
     echo "7) Build Quartz ..."
     (cd "$QUARTZ_DIR" && npx quartz build)
 else
     echo "7) Quartz 5 introuvable dans $QUARTZ_DIR -- build sauté (voir DEPLOY_RASPBERRY.md)."
+fi
+
+if [ -d "$QUARTZ_CONTENT" ]; then
+    echo "8) Vérification des liens (wikilinks du graphe, PDF, QCM) ..."
+    python3 tools/check_quartz_links.py --quartz-content "$QUARTZ_CONTENT" || echo "   ⚠️  liens à corriger (voir ci-dessus) -- le site est publié quand même."
 fi
 
 echo "✅ Profil '$PROFILE' publié."

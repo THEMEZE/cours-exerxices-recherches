@@ -1,0 +1,159 @@
+id: td7_ex2
+intitule: "Traversée d'une rivière"
+td: td7
+facultatif: false
+seance: 2
+
+cours_rattache:
+  - cinematique.composition_des_vitesses
+
+metadonnees:
+  duree_estimee: "20 min"
+  difficulte: 2
+  type_exercice: "Application directe + extension"
+  indispensable: true
+
+enonce_intro: |
+  Un nageur plonge dans la rivière au point $A$ avec l'intention de la traverser : il nage avec une vitesse de $5\ {\rm m\cdot s^{-1}}$ {\bf par rapport à l'eau}, en direction du point $B$ situé en face de $A$ sur l'autre rive. La rivière a un courant de $3\ {\rm m\cdot s^{-1}}$ parallèle aux berges. On prend un repère $(O,\vec i,\vec j)$ avec $\vec i$ parallèle au courant, $\vec j$ dirigé de $A$ vers $B$.
+
+prerequis:
+  - titre: "Composition des vitesses"
+    texte: |
+      $\vec v_a=\vec v_r+\vec v_e$ : ici $\mathcal R$ = berges, $\mathcal R'$ = eau, $M$ = nageur.
+  - titre: "Norme et angle d'un vecteur"
+    texte: |
+      $\|\vec v\|=\sqrt{v_x^2+v_y^2}$ ; $\tan\alpha=v_x/v_y$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Identifier $\\mathcal R$, $\\mathcal R'$ et $M$"
+    texte: |
+      Savoir que $\vec v_r$ est la vitesse du nageur {\bf par rapport à l'eau}, $\vec v_e$ la vitesse du courant {\bf par rapport aux berges} (c'est l'eau qui entraîne), $\vec v_a$ la vitesse par rapport aux berges.
+  - titre: "Résoudre un problème de traversée"
+    texte: |
+      Savoir calculer la dérive subie et le cap à tenir pour aboutir exactement en face.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Exercice très classique"
+    texte: |
+      Deux questions du poly sont immédiates ; on ajoute (c)--(e) : dérive, cap de compensation, comparaison des temps de traversée. Insister sur le choix des référentiels : « à qui est la vitesse ? »
+
+point_cours:
+  - titre: "Translation uniforme"
+    texte: |
+      $\vec v_e$ est la vitesse du courant (translation de l'eau par rapport aux berges). La vitesse absolue est la somme vectorielle (règle du parallélogramme).
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Additionner les normes"
+    texte: |
+      $\|\vec v_a\|\ne5+3$ : les vecteurs sont perpendiculaires, $\|\vec v_a\|=\sqrt{5^2+3^2}$.
+  - titre: "Se tromper de référentiel"
+    texte: |
+      $5\ {\rm m\cdot s^{-1}}$ est la vitesse {\bf par rapport à l'eau} ($\vec v_r$), pas par rapport aux berges.
+  - titre: "Cap et trajectoire"
+    texte: |
+      Le nageur {\bf dirige} son corps vers $B$ mais sa {\bf trajectoire} par rapport aux berges est inclinée.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Prédire avant de calculer"
+    texte: |
+      Demander : arrive-t-il en $B$ ? à droite ou à gauche de $B$ ? Faire dessiner le triangle des vitesses avant tout calcul.
+
+bilan:
+  - titre: "Résultats"
+    texte: |
+      $\vec v_a=3\vec i+5\vec j$, $\|\vec v_a\|=\sqrt{34}\approx5{,}83\ {\rm m\cdot s^{-1}}$, angle $31^\circ$ avec la normale. Pour une rivière de largeur $d=50$ m : dérive $30$ m en $10$ s ; en visant en amont à $\arcsin(3/5)=36{,}9^\circ$ : $v_a=4\ {\rm m\cdot s^{-1}}$, $12{,}5$ s.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Cap minimisant la dérive"
+    texte: |
+      Pour $v_e>v_r$ on ne peut plus aboutir en face. Soit $\theta$ l'angle entre la nage et la berge dirigée vers l'amont : la dérive vaut $D(\theta)=d\,\dfrac{v_e-v_r\cos\theta}{v_r\sin\theta}$. Montrer qu'elle est minimale pour $\cos\theta=v_r/v_e$ et vaut $D_{\min}=d\,\dfrac{\sqrt{v_e^2-v_r^2}}{v_r}$ ; application numérique pour $v_e=6$, $v_r=5$, $d=50$ m ($D_{\min}\approx33{,}2$ m).
+  - niveau: licence
+    titre: "Courant non uniforme"
+    texte: |
+      Courant $v_e(y)=v_0\,\dfrac{y(d-y)}{(d/2)^2}$ (profil parabolique) : calculer la dérive totale pour un nageur qui garde le cap $\vec j$ par rapport à l'eau.
+  - niveau: master
+    titre: "Problème de Zermelo"
+    texte: |
+      Trouver le cap $\beta(t)$ qui minimise le temps de traversée en présence d'un courant $v_e(y)$ : problème de contrôle optimal (équation de Zermelo).
+
+accroche_point_cours_essentiel:
+  - titre: "Peut-on traverser un fleuve en ligne droite ?"
+    duree_introduction: "3 min"
+    question_d_accroche: |
+      Un nageur nage à $5\ {\rm m\cdot s^{-1}}$, le courant est de $3\ {\rm m\cdot s^{-1}}$. Où arrive-t-il s'il vise la berge opposée en face ?
+    texte: |
+      {\bf Idée clé : la vitesse par rapport aux berges est la somme vectorielle de la vitesse par rapport à l'eau et de la vitesse de l'eau.}
+
+outils_mathematiques:
+  - titre: "Triangle des vitesses"
+    texte: |
+      Théorème de Pythagore, $\sin\alpha=v_e/v_r$, règle du parallélogramme.
+
+liens_autres_disciplines:
+  - discipline: "Navigation et aviation"
+    texte: |
+      Cap et route (vent pour un avion, courant pour un bateau) : le « triangle des vitesses » du pilote.
+  - discipline: "Hydrologie"
+    texte: |
+      Profil de vitesse d'un fleuve, charriage de sédiments.
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{itemize}
+        \item[(a)] Rappeler la loi de composition des vitesses.
+        \item[(b)] Déterminer la vitesse du nageur par rapport aux berges. Calculer sa norme.
+      \end{itemize}
+    coup_de_pouce: |
+      Identifier $M$ (le nageur), $\mathcal R$ (les berges), $\mathcal R'$ (l'eau, en translation par rapport aux berges). Que vaut $\vec v_e$ ?
+    correction: |
+      (a) $\vec v_a=\vec v_r+\vec v_e$ ; (b) $\vec v_a=3\vec i+5\vec j$, $\|\vec v_a\|=\sqrt{34}\approx5{,}83\ {\rm m\cdot s^{-1}}$.
+    solution:
+      - titre: "(a) Loi de composition des vitesses"
+        texte: |
+          $\vec v_{M/\mathcal R}=\vec v_{M/\mathcal R'}+\vec v_e$ avec $\vec v_e=\vec v_{O'/\mathcal R}+\vec\Omega\wedge\overrightarrow{O'M}$. Ici $\mathcal R'$ (l'eau) est en translation par rapport à $\mathcal R$ (les berges) : $\vec\Omega=\vec0$, $\vec v_e=\vec v_{\rm courant}$.
+      - titre: "(b) Vitesse par rapport aux berges"
+        texte: |
+          $\vec v_r=5\,\vec j$ (le nageur nage vers $B$) et $\vec v_e=3\,\vec i$ (courant). Donc
+          $$\boxed{\vec v_a=3\vec i+5\vec j},\qquad\|\vec v_a\|=\sqrt{3^2+5^2}=\sqrt{34}\approx5{,}83\ {\rm m\cdot s^{-1}}.$$
+          La trajectoire est une droite inclinée de $\alpha=\arctan(3/5)\approx31{,}0^\circ$ par rapport à la normale aux berges : le nageur {\bf n'arrive pas en $B$} mais en aval.
+
+  - id: q2
+    enonce: |
+      La rivière a pour largeur $d=50$ m.
+      \begin{itemize}
+        \item[(c)] Calculer la durée de traversée et la dérive en aval (distance entre $B$ et le point d'arrivée).
+        \item[(d)] Sous quel angle $\beta$ par rapport à $\vec j$ le nageur doit-il se diriger (vers l'amont) pour atteindre exactement $B$ ? Calculer alors sa vitesse par rapport aux berges et la durée.
+        \item[(e)] Que se passe-t-il si le courant vaut $6\ {\rm m\cdot s^{-1}}$ ?
+      \end{itemize}
+    coup_de_pouce: |
+      (c) La composante transversale de $\vec v_a$ est $v_{a,y}=5$. (d) Il faut $v_{a,x}=0$ : $-v_r\sin\beta+v_e=0$. (e) Peut-on annuler $v_{a,x}$ ?
+    correction: |
+      (c) $t=d/v_{a,y}=10$ s, dérive $30$ m ; (d) $\sin\beta=3/5$, $\beta=36{,}9^\circ$, $v_a=4$ m/s, $t=12{,}5$ s ; (e) $\sin\beta=6/5>1$ impossible : le nageur est emporté en aval.
+    solution:
+      - titre: "(c) Traversée en visant $B$"
+        texte: |
+          La composante selon $\vec j$ de $\vec v_a$ est $v_r=5$ m/s : $t_1=\dfrac{d}{v_r}=\dfrac{50}{5}=10$ s. Pendant ce temps le courant l'entraîne de $\Delta x=v_e\,t_1=3\times10=\boxed{30\ \rm m}$ en aval.
+      - titre: "(d) Cap de compensation"
+        texte: |
+          Soit $\beta$ l'angle entre le cap du nageur et $\vec j$, orienté vers l'amont : $\vec v_r=v_r(-\sin\beta\,\vec i+\cos\beta\,\vec j)$. Pour que $\vec v_a\parallel\vec j$ il faut $v_{a,x}=-v_r\sin\beta+v_e=0$, soit
+          $$\sin\beta=\frac{v_e}{v_r}=\frac35\ \Rightarrow\ \beta=36{,}9^\circ.$$
+          Alors $v_a=v_r\cos\beta=5\times0{,}8=\boxed{4\ \rm m\cdot s^{-1}}$ et $t_2=d/v_a=\boxed{12{,}5\ \rm s}$. Le trajet est plus long (aller droit coûte du temps) : $t_2>t_1$.
+      - titre: "(e) Courant plus rapide que le nageur"
+        texte: |
+          Si $v_e=6>v_r=5$, $\sin\beta=6/5>1$ : {\bf impossible}. Le nageur est forcément entraîné vers l'aval ; la dérive est minimale en nageant à l'angle $\theta$ de la berge amont tel que $\cos\theta=v_r/v_e$, soit $D_{\min}=d\sqrt{v_e^2-v_r^2}/v_r\approx33{,}2$ m (cas de l'aller plus loin).
+
+  - id: q3
+    enonce: |
+      \begin{itemize}
+        \item[(f)] Quelle est la durée minimale de traversée, indépendamment du lieu d'arrivée ? Comparer avec (d).
+      \end{itemize}
+    coup_de_pouce: |
+      Le courant n'a aucune composante transversale : il ne change pas le temps de traversée.
+    correction: |
+      $t_{\min}=d/v_r=10$ s, atteint en visant en face (cap $\vec j$) ; plus rapide que $12{,}5$ s de (d).
+    solution:
+      - titre: "(f) Durée minimale"
+        texte: |
+          La vitesse transversale est $v_r\cos\beta\le v_r$, maximale pour $\beta=0$ : $t_{\min}=d/v_r=10$ s. Le courant, parallèle aux berges, {\bf n'intervient pas} dans le temps de traversée ; il intervient seulement dans le {\bf point d'arrivée}. Aboutir en $B$ coûte $2{,}5$ s de plus.

@@ -1,0 +1,170 @@
+id: td7_ex4
+intitule: "Mouvement sur un manège"
+td: td7
+facultatif: false
+seance: 4
+
+cours_rattache:
+  - cinematique.composition_des_vitesses
+  - cinematique.composition_des_accelerations
+  - cinematique.rotation_uniforme
+
+metadonnees:
+  duree_estimee: "40 min"
+  difficulte: 3
+  type_exercice: "Cours actif / Application fondamentale"
+  indispensable: true
+
+enonce_intro: |
+  Un manège pour enfants tourne à une vitesse angulaire constante $\omega>0$ par rapport au sol. Le propriétaire (point $M$) parcourt la plate-forme pour ramasser les tickets. $\mathcal R$ est le référentiel du sol (repère $(Oxyz)$, base $(\vec e_x,\vec e_y,\vec e_z)$), $\mathcal R'$ celui du manège (repère $(Ox'y'z')$, base $(\vec e_x{}',\vec e_y{}',\vec e_z{}')$) ; les origines et les axes $Oz$, $Oz'$ coïncident (axe de rotation). Partant du centre à $t=0$, le propriétaire suit un mouvement uniforme de vitesse $v_0$ le long de l'axe $Ox'$ du manège.
+
+prerequis:
+  - titre: "Rotation uniforme"
+    texte: |
+      $\vec\Omega=\omega\vec e_z$, $\theta=\omega t$ ; $\dot{\vec e}_x{}'=\omega\vec e_y{}'$, $\dot{\vec e}_y{}'=-\omega\vec e_x{}'$.
+  - titre: "Composition des vitesses et accélérations"
+    texte: |
+      $\vec v_a=\vec v_r+\vec v_e$ ; $\vec a_a=\vec a_r+\vec a_e+\vec a_c$.
+  - titre: "Résultat de l'exercice 3"
+    texte: |
+      Pour un point sur un axe tournant : $\vec a_e=-X\dot\theta^2\vec e_X+X\ddot\theta\vec e_Y$, $\vec a_c=2\dot X\dot\theta\vec e_Y$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Caractériser le mouvement de $\\mathcal R'$ par rapport à $\\mathcal R$"
+    texte: |
+      Savoir que c'est une rotation uniforme de vecteur $\vec\Omega=\omega\vec e_z$.
+  - titre: "Trajectoire relative et absolue"
+    texte: |
+      Savoir que la trajectoire est une droite dans $\mathcal R'$ mais une spirale d'Archimède dans $\mathcal R$.
+  - titre: "Calculer $\\vec v_a$ et $\\vec a_a$"
+    texte: |
+      Savoir appliquer les lois de composition en rotation uniforme et exprimer le résultat dans la base du manège.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Exemple fil rouge de tout le TD"
+    texte: |
+      Exemple le plus simple où apparaissent {\bf les trois termes} : relatif ($\vec a_r=\vec0$ ici), centripète ($-\omega^2\vec r$) et Coriolis ($2\omega v_0\vec e_y{}'$). Comparer avec l'exercice 3 : $X=v_0t$, $\dot\theta=\omega$ constant.
+  - titre: "Difficulté de lecture"
+    texte: |
+      La question « dans la base $(\vec e_x{}',\vec e_y{}',\vec e_z{}')$ » est essentielle : les vecteurs sont {\bf exprimés} dans la base mobile mais restent des vecteurs absolus.
+
+point_cours:
+  - titre: "Rotation uniforme"
+    texte: |
+      $\vec v_e=\vec\Omega\wedge\overrightarrow{OM}$, $\vec a_e=-\omega^2\,\overrightarrow{HM}$ (ici $H=O$ si $M$ est dans le plan), $\vec a_c=2\vec\Omega\wedge\vec v_r$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Trajectoire relative $\\neq$ absolue"
+    texte: |
+      Dans $\mathcal R'$ : droite $Ox'$. Dans $\mathcal R$ : spirale d'Archimède $r=\dfrac{v_0}{\omega}\theta$. Ne pas confondre.
+  - titre: "Ne garder que $-\\omega^2\\vec r$"
+    texte: |
+      L'accélération de Coriolis $2\omega v_0\vec e_y{}'$ n'est pas nulle : l'oublier fausse $\vec a_a$.
+  - titre: "Oublier $\\vec a_r=\\vec0$"
+    texte: |
+      Le mouvement relatif est uniforme : $\vec a_r=\vec0$, mais $\vec a_a\ne\vec0$.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Tracer la spirale"
+    texte: |
+      Demander de tracer, point par point, $r=v_0t$, $\theta=\omega t$ avec $v_0=1$ m/s, $\omega=2$ rad/s, pour $t=0;0{,}5;1;1{,}5;2$ s.
+  - titre: "Interprétation des termes de $\\vec a_a$"
+    texte: |
+      $-\omega^2v_0t\,\vec e_x{}'$ : centripète (vers l'axe, il faut une force qui le « retient » sur la plate-forme) ; $2\omega v_0\,\vec e_y{}'$ : l'enfant doit lutter contre la tendance à être dévié.
+
+bilan:
+  - titre: "Résultats"
+    texte: |
+      $\vec\Omega=\omega\vec e_z$ ; $\vec r=v_0t\,\vec e_x{}'$ ; $\vec v_r=v_0\vec e_x{}'$ ; $\vec v_a=v_0\vec e_x{}'+\omega v_0t\,\vec e_y{}'$ ; $\vec a_a=-\omega^2v_0t\,\vec e_x{}'+2\omega v_0\,\vec e_y{}'$.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Force exercée sur le propriétaire"
+    texte: |
+      Pour $m=70$ kg, $v_0=1$ m/s, $\omega=2$ rad/s, à $t=2$ s : calculer la force horizontale (frottement) que le sol du manège doit exercer pour réaliser ce mouvement.
+  - niveau: licence
+    titre: "Trajectoire en spirale"
+    texte: |
+      Montrer que la trajectoire dans $\mathcal R$ est la spirale d'Archimède $r=(v_0/\omega)\theta$ ; calculer sa longueur de $\theta=0$ à $\theta=2\pi$ ($L=\dfrac{v_0}{2\omega}[\theta\sqrt{1+\theta^2}+{\rm arsinh}\,\theta]_0^{2\pi}$).
+  - niveau: master
+    titre: "Mouvement libre sur le plateau"
+    texte: |
+      Un objet lancé librement ($\vec F=\vec0$) depuis le centre à $v_0$ le long de $Ox'$ à $t=0$ : décrire sa trajectoire dans $\mathcal R'$ (spirale logarithmique ?) ; comparer avec le mouvement imposé.
+
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi un enfant marchant du centre vers le bord d'un manège est-il « tiré de côté » ?"
+    duree_introduction: "3 min"
+    question_d_accroche: |
+      Quelle force tire l'enfant de côté ? Existe-t-elle vraiment, ou est-ce un effet de point de vue ?
+    texte: |
+      {\bf Idée clé : un mouvement rectiligne dans le manège devient une spirale dans le sol.} L'accélération perpendiculaire ($2\omega v_0$) est celle de Coriolis.
+
+outils_mathematiques:
+  - titre: "Dérivation dans une base tournante"
+    texte: |
+      $\dfrac{\mathrm d}{\mathrm dt}(t\,\vec e_x{}')=\vec e_x{}'+\omega t\,\vec e_y{}'$.
+  - titre: "Spirale d'Archimède"
+    texte: |
+      $r=a\theta$ avec $a=v_0/\omega$ ; pas de la spirale $2\pi a$.
+
+liens_autres_disciplines:
+  - discipline: "Centrifugeuses et vol spatial"
+    texte: |
+      Astronautes dans des stations tournantes : effet Coriolis lors des déplacements radiaux.
+  - discipline: "Biologie"
+    texte: |
+      Centrifugation (séparation de macromolécules).
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{itemize}
+        \item[(a)] Quelle grandeur caractérise le mouvement de $\mathcal R'$ par rapport à $\mathcal R$ ?
+        \item[(b)] Partant du centre à $t=0$, $M$ suit un mouvement uniforme de vitesse $v_0$ le long de $Ox'$. Quelle est la nature de sa trajectoire par rapport à $\mathcal R'$ ? Déterminer son équation horaire $\vec r(t)=\overrightarrow{OM}(t)$ dans $\mathcal R'$, puis sa vitesse relative $\vec v_r$ dans la base $(\vec e_x{}',\vec e_y{}',\vec e_z{}')$.
+      \end{itemize}
+    coup_de_pouce: |
+      (a) Le référentiel $\mathcal R'$ tourne autour de l'axe commun $Oz$ à vitesse angulaire constante. (b) Dans $\mathcal R'$, la base $(\vec e_x{}',\vec e_y{}',\vec e_z{}')$ est fixe.
+    correction: |
+      (a) Le vecteur rotation $\vec\Omega=\omega\vec e_z$ ; (b) droite (demi-axe $Ox'$), $\vec r=v_0t\,\vec e_x{}'$, $\vec v_r=v_0\vec e_x{}'$.
+    solution:
+      - titre: "(a) Vecteur rotation"
+        texte: |
+          $\mathcal R'$ est en {\bf rotation uniforme} autour de l'axe $Oz$ ($O'=O$) : $\vec\Omega_{\mathcal R'/\mathcal R}=\omega\,\vec e_z$, avec $\theta=\omega t$ (si $\theta(0)=0$). On a $\dot{\vec e}_x{}'=\omega\vec e_y{}'$ et $\dot{\vec e}_y{}'=-\omega\vec e_x{}'$.
+      - titre: "(b) Mouvement relatif"
+        texte: |
+          Dans $\mathcal R'$, $M$ part de $O$ avec la vitesse constante $v_0$ le long de $Ox'$ :
+          $$\boxed{\vec r(t)=\overrightarrow{OM}=v_0t\,\vec e_x{}'},\qquad\boxed{\vec v_r=\frac{\mathrm d\vec r}{\mathrm dt}\Big|_{\mathcal R'}=v_0\,\vec e_x{}'}.$$
+          La trajectoire dans $\mathcal R'$ est une {\bf droite} (demi-droite $Ox'$), parcourue à vitesse constante : $\vec a_r=\vec0$.
+
+  - id: q2
+    enonce: |
+      Étude du mouvement dans le référentiel absolu $\mathcal R$.
+      \begin{itemize}
+        \item[(c)] Rappeler la loi de composition des vitesses. En déduire $\vec v_a$ dans la base $(\vec e_x{}',\vec e_y{}',\vec e_z{}')$.
+        \item[(d)] Rappeler la loi de composition des accélérations. En déduire $\vec a_a$.
+        \item[(e)] Retrouver $\vec v_a$ et $\vec a_a$ par un calcul direct dans $\mathcal R$ (dériver $\overrightarrow{OM}$ dans $\mathcal R$).
+        \item[(f)] Écrire l'équation polaire de la trajectoire dans $\mathcal R$. Application numérique : $v_0=1$ m/s, $\omega=2$ rad/s, valeurs de $\vec v_a$, $\vec a_a$ et de leurs normes à $t=2$ s.
+      \end{itemize}
+    coup_de_pouce: |
+      (c) $\vec v_e=\vec\Omega\wedge\overrightarrow{OM}$. (d) $\vec a_e=-\omega^2\overrightarrow{OM}$, $\vec a_c=2\vec\Omega\wedge\vec v_r$. (e) Dériver $\overrightarrow{OM}=v_0t\,\vec e_x{}'$ dans $\mathcal R$ avec $\dot{\vec e}_x{}'=\omega\vec e_y{}'$.
+    correction: |
+      (c) $\vec v_a=v_0\vec e_x{}'+\omega v_0t\,\vec e_y{}'$ ; (d) $\vec a_a=-\omega^2v_0t\,\vec e_x{}'+2\omega v_0\,\vec e_y{}'$ ; (f) $r=(v_0/\omega)\theta$ ; à $t=2$ s : $\vec v_a=\vec e_x{}'+4\vec e_y{}'$, $\|\vec v_a\|=\sqrt{17}\approx4{,}12$ m/s ; $\vec a_a=-8\vec e_x{}'+4\vec e_y{}'$, $\|\vec a_a\|=\sqrt{80}\approx8{,}94$ m/s².
+    solution:
+      - titre: "(c) Composition des vitesses"
+        texte: |
+          $\vec v_a=\vec v_r+\vec v_e$ avec $\vec v_e=\vec\Omega\wedge\overrightarrow{OM}=\omega\vec e_z\wedge v_0t\vec e_x{}'=\omega v_0t\,\vec e_y{}'$ (point $M$ pris fixe dans $\mathcal R'$ ; $\vec v_{O'}=\vec0$). Donc
+          $$\boxed{\vec v_a=v_0\,\vec e_x{}'+\omega v_0t\,\vec e_y{}'}.$$
+          Composante radiale constante $v_0$, composante orthoradiale croissante : $\|\vec v_a\|=v_0\sqrt{1+\omega^2t^2}$.
+      - titre: "(d) Composition des accélérations"
+        texte: |
+          $\vec a_a=\vec a_r+\vec a_e+\vec a_c$ avec
+          $\vec a_r=\vec0$ ; $\vec a_e=\vec\Omega\wedge(\vec\Omega\wedge\overrightarrow{OM})=-\omega^2\overrightarrow{OM}=-\omega^2v_0t\,\vec e_x{}'$ (rotation uniforme, $\dot{\vec\Omega}=\vec0$) ; $\vec a_c=2\vec\Omega\wedge\vec v_r=2\omega\vec e_z\wedge v_0\vec e_x{}'=2\omega v_0\,\vec e_y{}'$. D'où
+          $$\boxed{\vec a_a=-\omega^2v_0t\,\vec e_x{}'+2\omega v_0\,\vec e_y{}'}.$$
+          Le premier terme est {\bf centripète}, le second est l'accélération de {\bf Coriolis}.
+      - titre: "(e) Vérification par calcul direct dans $\\mathcal R$"
+        texte: |
+          $\overrightarrow{OM}=v_0t\,\vec e_x{}'$ ; $\vec v_a=v_0\vec e_x{}'+v_0t\,\omega\vec e_y{}'$ ; $\vec a_a=v_0\omega\vec e_y{}'+v_0\omega\vec e_y{}'+v_0t\omega(-\omega\vec e_x{}')=-\omega^2v_0t\,\vec e_x{}'+2\omega v_0\vec e_y{}'$ $\surd$. Le facteur 2 en $\vec e_y{}'$ vient de deux contributions égales : $\omega v_0\vec e_y{}'$ issu de la dérivée de $v_0\vec e_x{}'$ (la direction radiale tourne) et $\omega v_0\vec e_y{}'$ issu de la dérivée de $\omega v_0t\,\vec e_y{}'$ (la composante orthoradiale croît) ; c'est exactement $\vec a_c=2\omega v_0\vec e_y{}'$, tandis que $-\omega^2v_0t\,\vec e_x{}'$ est $\vec a_e$.
+      - titre: "(f) Trajectoire et application numérique"
+        texte: |
+          Dans $\mathcal R$ : $r=v_0t$ et $\theta=\omega t$, soit $\boxed{r=\dfrac{v_0}{\omega}\theta}$ : {\bf spirale d'Archimède}.
+          À $t=2$ s ($v_0=1$, $\omega=2$) : $\vec v_a=\vec e_x{}'+4\vec e_y{}'$, $\|\vec v_a\|=\sqrt{17}\approx4{,}12\ {\rm m\cdot s^{-1}}$ ; $\vec a_a=-8\vec e_x{}'+4\vec e_y{}'$, $\|\vec a_a\|=\sqrt{80}\approx8{,}94\ {\rm m\cdot s^{-2}}$.

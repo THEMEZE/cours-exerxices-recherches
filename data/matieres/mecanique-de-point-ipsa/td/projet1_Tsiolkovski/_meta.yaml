@@ -1,0 +1,167 @@
+id: mp_phv111
+titre: "Mini-projet Phv111 -- Conservation de la quantité de mouvement et équation de Tsiolkovski"
+chapitre_cours: "Application à la propulsion spatiale"
+seance: 1
+niveau_public: [cpge, licence]
+
+exercices_ordre:
+  - s1_theorie_choc
+  - s1_lois_newton_trajectoires
+  - s1_conservation_p_et_ec
+  - ext1_choc_elastique_2d
+  - s2_tsiolkovski
+  - s2_falcon9
+  - ext2_etagement_pertes_gravite
+
+organisation:
+  - titre: "Séance 1 (choc et quantité de mouvement)"
+    texte: |
+      Partie I.1 théorie du choc (30 min), I.2 exploitation de la chronophotographie de l'annexe : vitesses, quantités de mouvement, forces (60 min), I.3--I.4 conservation de $\vec p$ et bilan d'énergie (30 min). À l'issue de la séance 1 : {\bf synthèse} (rappel théorique, tracés, résultats) déposée en PDF sur Moodle {\bf sous deux semaines}.
+  - titre: "Séance 2 (propulsion)"
+    texte: |
+      Partie II.1 équation de Tsiolkovski (60 min), II.2 application à un lanceur à deux étages inspiré du Falcon 9 avec le fichier tableur fourni (60 min). Les exercices d'extension sont facultatifs.
+  - titre: "Rendu final"
+    texte: |
+      {\bf Compte rendu final} à déposer avant le {\bf vendredi 10 décembre} : démarches, résultats numériques avec incertitudes, discussion critique.
+
+prerequis:
+  - titre: "Cinématique du point"
+    texte: |
+      Vecteur vitesse, mouvement rectiligne uniforme, repérage par coordonnées cartésiennes, échelle d'une figure.
+  - titre: "Lois de Newton"
+    texte: |
+      Principe d'inertie, $\sum\vec F=\mathrm d\vec p/\mathrm dt$, action--réaction ; notions de système et de force extérieure.
+  - titre: "Énergie cinétique"
+    texte: |
+      $E_c=\tfrac12mv^2$, grandeur scalaire additive.
+  - titre: "Outils numériques"
+    texte: |
+      Tableur (formules, graphique), logarithme népérien, incertitudes de mesure.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Comprendre la conservation de la quantité de mouvement"
+    texte: |
+      Démontrer $\vec p_{\rm tot}=\text{cte}$ à partir de la 3\textsuperscript{e} loi, la vérifier expérimentalement sur une chronophotographie, la classer parmi les lois de conservation (énergie, moment cinétique).
+  - titre: "Mesurer et exploiter des données expérimentales"
+    texte: |
+      Passer d'une feuille de points à des vitesses, des impulsions, des forces et des énergies, estimer les incertitudes, comparer à la théorie avec esprit critique.
+  - titre: "Établir et utiliser l'équation de Tsiolkovski"
+    texte: |
+      Écrire un bilan de quantité de mouvement sur un système {\bf fermé} à masse apparente variable, intégrer, interpréter, puis dimensionner un lanceur à plusieurs étages avec pesanteur.
+  - titre: "Rédiger un compte rendu scientifique"
+    texte: |
+      Structurer un rapport (introduction, méthode, résultats, discussion), justifier les approximations, présenter les résultats avec leurs unités et incertitudes.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Un fil conducteur : une même loi, du billard à la fusée"
+    texte: |
+      Le projet montre que la propulsion par réaction est un {\bf choc continu} : même conservation de $\vec p$ que la collision de deux mobiles. La séance 1 donne une base expérimentale ; la séance 2 la transpose à un système à éjection de masse. Garder cette continuité dans les mots : « le gaz éjecté joue le rôle du second mobile ».
+  - titre: "Évaluation"
+    texte: |
+      Synthèse après la séance 1 : tracés corrects, vecteurs à l'échelle, vérification de $\vec p$ avec barre d'erreur. Compte rendu final : démonstration de Tsiolkovski rédigée, calculs du lanceur réel avec le tableur, analyse critique (gravité, traînée). Le barème valorise la {\bf discussion des incertitudes} autant que la valeur numérique.
+  - titre: "Données"
+    texte: |
+      Les valeurs de l'annexe fournies ici sont issues d'un pointage {\bf numérique} de la feuille (incertitude $\approx5$ à $10\%$) : les étudiants obtiendront des valeurs légèrement différentes à la règle ; ne pas sanctionner les écarts de l'ordre de l'incertitude. Pour le Falcon 9 : le fichier tableur du projet remplace les valeurs de l'exemple fictif.
+
+point_cours:
+  - titre: "Quantité de mouvement et deuxième loi"
+    texte: |
+      $\vec p=m\vec v$ ; $\dfrac{\mathrm d\vec p}{\mathrm dt}=\sum\vec F_{\rm ext}$ ; $\Delta\vec p=\bar{\vec F}\,\Delta t$. Pour un système isolé : $\vec p_{\rm tot}=\text{cte}$.
+  - titre: "Chocs"
+    texte: |
+      $\vec p_{\rm tot}$ est conservée dans tout choc d'un système isolé ; $E_c$ est conservée seulement pour un choc élastique ; choc mou : $\vec v_f=\dfrac{m_1\vec v_1+m_2\vec v_2}{m_1+m_2}$.
+  - titre: "Propulsion par réaction"
+    texte: |
+      $m\,\mathrm dv=-v_e\,\mathrm dm$ donc $\Delta V=v_e\ln\dfrac{m_0}{m_f}$ ; poussée $F=Dv_e$ ; avec pesanteur : $v=v_e\ln\dfrac{m_0}{m}-gt$.
+  - titre: "Étagement"
+    texte: |
+      Les $\Delta V$ des étages s'ajoutent ; un étage unique est limité à $v_e\ln(1/\varepsilon)$ ($\varepsilon$ : coefficient de structure).
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Se tromper de système"
+    texte: |
+      La conservation de $\vec p$ vaut pour un système {\bf fermé et isolé} : pour la fusée, il faut inclure le gaz éjecté ; pour le choc, les deux mobiles.
+  - titre: "Confondre vecteurs et normes"
+    texte: |
+      La quantité de mouvement, ses variations et les forces sont vectorielles : on ne soustrait ni n'additionne des normes.
+  - titre: "Ignorer l'échelle et les incertitudes"
+    texte: |
+      Toute mesure à la règle sur la feuille est à convertir avec l'échelle ; un écart de quelques pour cent n'est pas une violation d'une loi.
+  - titre: "Prendre $\\Delta t=\\tau$ pour la durée du choc"
+    texte: |
+      $\tau$ est la période d'échantillonnage ; la durée du choc est plus courte et inconnue.
+  - titre: "Confondre le $\\Delta V$ de Tsiolkovski et la vitesse réelle"
+    texte: |
+      Avec pesanteur, la vitesse en fin de combustion est $v_e\ln R-g\,t_b$ ; le $\Delta V$ idéal surestime la vitesse atteinte.
+  - titre: "Mauvaise masse initiale d'un étage"
+    texte: |
+      Après largage de l'étage 1, le rapport de masses de l'étage 2 doit utiliser la masse {\bf restante} (étage 2 $+$ charge utile).
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Rythme"
+    texte: |
+      Séance 1 : ne pas dépasser $30$ min de théorie ; l'essentiel est le travail graphique. Séance 2 : la démonstration de Tsiolkovski au tableau (20 min) puis tableur en autonomie.
+  - titre: "Travail en binômes"
+    texte: |
+      Binôme pour l'annexe (un étudiant par mobile), puis mise en commun ; binôme pour le tableur.
+  - titre: "Ressources"
+    texte: |
+      Vidéos de lancements (paliers de séparation), vidéo du billard, Tracker pour reproduire l'expérience avec vidéo.
+
+bilan:
+  - titre: "Ce que le projet doit avoir montré"
+    texte: |
+      (1) $\vec p_{\rm tot}$ est conservée dans un choc (écart $\lesssim5\%$ ici) ; (2) $\Delta\vec p_A\simeq-\Delta\vec p_B$ : la 3\textsuperscript{e} loi en acte ; (3) le choc de l'annexe est quasi élastique ($E_c$ perdue $\approx7\%$) ; (4) $\Delta V=v_e\ln(m_0/m_f)$ ; (5) l'étagement est indispensable ; (6) la gravité prélève $\approx40\%$ du $\Delta V$ du premier étage.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Mesurer $g$ ou $v_e$ à partir d'une vidéo"
+    texte: |
+      Filmer un jet d'eau ou un ballon qui se vide, déterminer la vitesse d'éjection et comparer avec la poussée mesurée.
+  - niveau: licence
+    titre: "Moment cinétique et précession"
+    texte: |
+      Étendre aux chocs avec rotation : conservation de $\vec L$ et glissement/roulement d'une boule de billard.
+  - niveau: master
+    titre: "Mécanique relativiste de la propulsion"
+    texte: |
+      Établir l'équation de la fusée relativiste $\Delta V=c\tanh\Big(\dfrac{v_e}{c}\ln\dfrac{m_0}{m_f}\Big)$ (rapidité $\eta=\dfrac{v_e}{c}\ln R$).
+
+accroche_point_cours_essentiel:
+  - titre: "Du billard à la fusée : une seule loi"
+    duree_introduction: "5 min"
+    question_d_accroche: |
+      Deux boules de billard qui s'entrechoquent et une fusée qui accélère dans le vide : quel point commun ? Quelle grandeur se conserve dans les deux cas, et pourquoi ?
+    texte: |
+      {\bf Idée clé : la quantité de mouvement totale d'un système isolé est conservée.} Dans un choc, elle se redistribue entre deux mobiles ; dans une fusée, entre la fusée et son gaz d'éjection. La 3\textsuperscript{e} loi de Newton garantit que ce que l'un gagne, l'autre le perd.
+
+outils_mathematiques:
+  - titre: "Vecteurs"
+    texte: |
+      Somme, différence, composantes, norme ; construction à l'échelle.
+  - titre: "Logarithme, exponentielle"
+    texte: |
+      $\ln(ab)=\ln a+\ln b$ ; $\int\mathrm dm/m=\ln m$ ; $e^{x}$ pour inverser une relation logarithmique.
+  - titre: "Incertitudes"
+    texte: |
+      Incertitude relative : $\delta(ab)/ab\approx\delta a/a+\delta b/b$ ; $\delta(v^2)/v^2=2\,\delta v/v$.
+  - titre: "Tableur"
+    texte: |
+      Formules, références absolues, graphique $v(t)$ ; comparaison de plusieurs jeux de paramètres.
+
+liens_autres_disciplines:
+  - discipline: "Astronautique et ingénierie"
+    texte: |
+      Budget $\Delta V$ d'une mission, étagement, réutilisation, poussée/poids.
+  - discipline: "Histoire des sciences"
+    texte: |
+      Newton (1687), Tsiolkovski (1903), Goddard, von Braun ; le Falcon 9 de SpaceX comme application contemporaine.
+  - discipline: "Biologie"
+    texte: |
+      Propulsion des céphalopodes par éjection d'eau.
+  - discipline: "Sécurité routière"
+    texte: |
+      Chocs, déformations programmées et force moyenne $\Delta p/\Delta t$.
+  - discipline: "Économie"
+    texte: |
+      Coût au kilogramme en orbite et lanceurs réutilisables.

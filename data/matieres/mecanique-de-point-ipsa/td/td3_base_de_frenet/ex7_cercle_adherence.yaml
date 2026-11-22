@@ -1,0 +1,214 @@
+id: td3_ex7
+intitule: "Cercle d'adhérence : freiner et tourner en même temps"
+td: td3
+facultatif: true
+seance: 3
+
+cours_rattache:
+  - cinematique.base_frenet
+  - cinematique.acceleration_tangentielle_normale
+  - cinematique.rayon_courbure
+
+metadonnees:
+  duree_estimee: "40 min"
+  difficulte: 4
+  priorite: 3
+  type_exercice: "Entraînement / Application technique"
+  indispensable: false
+
+enonce_intro: |
+  Une voiture roule sur une route horizontale. Les seules forces horizontales qu'elle subit sont les forces de
+  frottement des pneus sur le sol, dont la norme est bornée par l'{\bf adhérence} : $F\le\mu\,mg$ où $\mu$ est le
+  coefficient d'adhérence (admis ici ; sa justification relève de la dynamique). D'après la deuxième loi de Newton, la
+  norme de l'accélération est donc limitée :
+  $$\|\vec a\|=\sqrt{a_T^2+a_N^2}\le\mu g.$$
+  Dans le plan $(a_N,a_T)$, les accélérations réalisables sont donc à l'intérieur du {\bf cercle d'adhérence} de rayon
+  $\mu g$ : tout ce qu'on utilise pour tourner ($a_N=v^2/R$) n'est plus disponible pour freiner ($a_T<0$) ou accélérer
+  ($a_T>0$). On prendra $g=9{,}81\ \mathrm{m\,s^{-2}}$ et $\mu=0{,}8$ (route sèche), sauf mention contraire.
+
+prerequis:
+  - titre: "Composantes tangentielle et normale"
+    texte: |
+      $\vec a=a_T\,\vec\tau+a_N\,\vec n$, $a_T=\dot v$, $a_N=v^2/R$, $\|\vec a\|^2=a_T^2+a_N^2$.
+  - titre: "Mouvement rectiligne uniformément varié"
+    texte: |
+      $v=v_0+a_Tt$, $d=v_0t+\tfrac12a_Tt^2$, $v^2=v_0^2+2a_Td$.
+  - titre: "Rayon de courbure d'une parabole"
+    texte: |
+      $R(x)=\dfrac{(1+4k^2x^2)^{3/2}}{2k}$ pour $y=kx^2$ (exercice 2).
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Utiliser la décomposition de Frenet pour résoudre un problème d'ingénierie"
+    texte: |
+      Traduire une contrainte physique (adhérence) en inégalité sur les composantes $a_T$ et $a_N$, en déduire les vitesses limites en virage, les décélérations possibles en courbe et un profil de vitesse maximale le long d'une trajectoire de courbure variable.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Préparer l'utilisation de Frenet en dynamique"
+    texte: |
+      L'exercice ne fait pas de dynamique : la contrainte $\|\vec a\|\le\mu g$ est donnée. Il s'agit de manipuler $a_T$ et $a_N$ et de montrer l'intérêt de la base de Frenet : le cercle d'adhérence est un {\bf disque} dans le plan $(a_N,a_T)$, ce qui rend la question « freiner en virage » presque immédiate. À la fin, les étudiants ont une intuition quantitative : on peut perdre de la vitesse en ligne droite à $0{,}8\,g$, mais pas dans un virage pris à la limite. Lien avec Monaco (exercice 3) : la vitesse maximale est plus faible dans l'épingle.
+
+point_cours:
+  - titre: "Cercle d'adhérence"
+    texte: |
+      $a_T^2+a_N^2\le(\mu g)^2$ avec $a_N=v^2/R$. En virage stationnaire ($a_T=0$) : $v_{\max}=\sqrt{\mu gR}$. En ligne droite ($a_N=0$) : $a_T\ge-\mu g$, soit une distance de freinage $d=\dfrac{v^2}{2\mu g}$. En virage, la décélération possible est $|a_T|\le\sqrt{(\mu g)^2-v^4/R^2}$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Additionner $a_T$ et $a_N$ arithmétiquement"
+    texte: |
+      Les deux composantes sont orthogonales : la norme est $\sqrt{a_T^2+a_N^2}$ et non $|a_T|+|a_N|$. La condition d'adhérence est un {\bf disque}, pas un losange.
+  - titre: "Oublier que $a_N$ dépend de $v^2$"
+    texte: |
+      Si $v$ diminue, $a_N=v^2/R$ diminue aussi : freiner « libère » de l'adhérence pour tourner. Un conducteur qui freine à la limite en entrant dans un virage peut rester dans le disque d'adhérence grâce à la baisse de $v$.
+  - titre: "Utiliser $v_{\\max}$ pour une trajectoire non circulaire sans tenir compte de $R(s)$"
+    texte: |
+      $v_{\max}(s)=\sqrt{\mu gR(s)}$ varie le long d'une trajectoire de courbure variable. Elle est minimale là où $R$ est minimal (le sommet de la parabole).
+  - titre: "Confondre vitesse de passage et vitesse de freinage"
+    texte: |
+      La distance d'arrêt $d=v^2/(2\mu g)$ est en $v^2$ : doubler la vitesse multiplie par 4 la distance.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Dessiner le disque d'adhérence"
+    texte: |
+      Faire tracer un disque dans le plan $(a_N,a_T)$ et y placer des points représentant : freinage en ligne droite (point en bas), virage stationnaire (point à droite), freinage en virage (point intérieur, bas-droite). Les étudiants voient immédiatement ce qu'un conducteur peut ou ne peut pas faire.
+  - titre: "Un cas concret"
+    texte: |
+      « Pourquoi dit-on de ne pas freiner fort dans un virage ? » : parce que $a_N$ occupe déjà une grande partie du disque et laisse peu de place pour $a_T$.
+
+bilan:
+  - titre: "Cercle d'adhérence"
+    texte: |
+      $a_T^2+a_N^2\le(\mu g)^2$. Virage : $v_{\max}=\sqrt{\mu gR}$ ($\mu=0{,}8$, $R=50\ \mathrm m$ : $19{,}8\ \mathrm{m/s}=71\ \mathrm{km/h}$). Freinage droit : $d=\dfrac{v^2}{2\mu g}$ ($39{,}8\ \mathrm m$ à $90\ \mathrm{km/h}$, $318\ \mathrm m$ sur verglas $\mu=0{,}1$). Freinage en virage : $|a_T|_{\max}=\sqrt{(\mu g)^2-(v^2/R)^2}$. Profil sur une parabole de rayon de sommet $50\ \mathrm m$ : $v_{\max}=19{,}8\ \mathrm{m/s}$ au sommet, $33{,}3\ \mathrm{m/s}$ à $50\ \mathrm m$ du sommet.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Appui aérodynamique"
+    texte: |
+      Pour une voiture de F1, l'appui aérodynamique augmente la force normale avec la vitesse : $\mu_{\rm eff}\,g=\mu g(1+\kappa v^2)$. Montrer que $v_{\max}$ en virage vérifie $v^2=\mu gR(1+\kappa v^2)$, soit $v_{\max}^2=\dfrac{\mu gR}{1-\mu g\kappa R}$, valable si $\mu g\kappa R<1$ : au-delà, il n'y a plus de limite d'adhérence (le virage est « plat »). Appliquer aux virages de Monaco (exercice 3).
+  - niveau: licence
+    titre: "Profil de vitesse optimal"
+    texte: |
+      Sur un circuit de courbure $\kappa(s)$ donnée, le profil de vitesse le plus rapide vérifie $v\dot v=a_T v$ avec $a_T=\pm\sqrt{(\mu g)^2-v^4\kappa^2}$ (freinage en entrée, accélération en sortie) : intégrer numériquement l'équation $\dfrac{\mathrm dv}{\mathrm ds}=\dfrac{a_T(v,s)}v$ pour la parabole de la question 4 et comparer au profil de vitesse stationnaire $\sqrt{\mu g R(s)}$.
+  - niveau: master
+    titre: "Frottement anisotrope et glissement"
+    texte: |
+      Dans un modèle plus réaliste, le disque devient une ellipse (adhérence longitudinale différente de l'adhérence latérale). Comparer au « diagramme g-g » des ingénieurs de course.
+
+accroche_point_cours_essentiel:
+  - titre: "Freiner ou tourner : il faut choisir ?"
+    duree_introduction: "3 à 5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Sur route mouillée, on vous conseille de ne pas freiner dans un virage mais avant. Pourquoi ? Si un virage consomme déjà « presque toute » l'adhérence disponible, combien de décélération reste-t-il pour freiner ? Peut-on freiner dans un virage sans sortir de la route ?
+    texte: |
+      {\bf Idée clé : l'adhérence est un budget partagé entre $a_T$ et $a_N$.} Elle limite la norme totale de l'accélération, pas chaque composante : $a_T^2+a_N^2\le(\mu g)^2$. Un virage pris à la limite ($a_N=\mu g$) ne laisse {\bf aucun} budget pour freiner.
+
+outils_mathematiques:
+  - titre: "Inéquation du disque"
+    texte: |
+      $a_T^2\le(\mu g)^2-a_N^2$, soit $|a_T|\le\sqrt{(\mu g)^2-a_N^2}$ : valable si $a_N\le\mu g$.
+  - titre: "Racine quatrième"
+    texte: |
+      $v_0^4\le R^2\left[(\mu g)^2-b^2\right]$ conduit à $v_0\le\left(R^2\left[(\mu g)^2-b^2\right]\right)^{1/4}$.
+  - titre: "Mouvement rectiligne uniformément décéléré"
+    texte: |
+      $d=\dfrac{v_0^2}{2|a_T|}$ et $t=\dfrac{v_0}{|a_T|}$.
+
+liens_autres_disciplines:
+  - discipline: "Sécurité routière"
+    texte: |
+      Distance de freinage : $d=v^2/(2\mu g)$ ; adhérence sur sec ($\mu\approx0{,}8$), mouillé ($\approx0{,}5$), neige ($\approx0{,}2$), verglas ($\approx0{,}1$). Les systèmes ESP et ABS cherchent à maintenir le véhicule à l'intérieur du disque d'adhérence.
+  - discipline: "Sport automobile"
+    texte: |
+      Le « diagramme g-g » (accélération latérale en abscisse, longitudinale en ordonnée) est l'outil standard des ingénieurs de course ; la trajectoire idéale est celle qui reste au bord du disque.
+  - discipline: "Robotique et véhicules autonomes"
+    texte: |
+      La planification de vitesse sur une trajectoire donnée impose $v(s)\le\sqrt{\mu g/\kappa(s)}$ ; un véhicule autonome ralentit à l'avance avant un virage serré.
+
+schemas_proposes:
+  - titre: "Cercle d'adhérence dans le plan $(a_N,a_T)$"
+    description: |
+      Axes $a_N$ (horizontal, $\ge0$) et $a_T$ (vertical). Demi-disque de rayon $\mu g$. Placer trois points : (1) freinage en ligne droite : $(0,-\mu g)$ ; (2) virage stationnaire à la limite : $(\mu g,0)$ ; (3) freinage en virage : $(v^2/R,-b)$, à l'intérieur ; faire apparaître le triangle rectangle de côtés $a_N$, $a_T$ et d'hypoténuse $\le\mu g$.
+    tikz: |
+      \begin{tikzpicture}[>=stealth,scale=0.6]
+        \draw[->] (-0.5,0)--(9,0) node[right]{$a_N$};
+        \draw[->] (0,-8.5)--(0,3) node[above]{$a_T$};
+        \draw[thick,blue] (0,-7.85) arc (-90:90:7.85);
+        \node[blue] at (6,2.5) {$\|\vec a\|=\mu g$};
+        \fill (0,-7.85) circle (2pt) node[left]{frein.};
+        \fill (7.85,0) circle (2pt) node[below right]{virage limite};
+        \fill[red] (4.5,-4) circle (2pt) node[right]{freinage en virage};
+        \draw[dashed] (4.5,-4)--(4.5,0) (4.5,-4)--(0,-4);
+      \end{tikzpicture}
+  - titre: "Virage circulaire avec freinage"
+    description: |
+      Virage de rayon $R=50\ \mathrm m$ à 3 instants ($t=0$, $t_1$, $t_2$) avec $\vec v$ de norme décroissante, $a_T\,\vec\tau$ (vers l'arrière) et $a_N\,\vec n$ (vers le centre, de norme décroissante), et $\vec a$ somme. Montrer que la direction de $\vec a$ passe de « surtout vers le centre » à « surtout vers l'arrière ».
+
+questions:
+  - id: q1
+    enonce: |
+      {\bf 1/ Virage stationnaire et freinage droit.}
+      \begin{enumerate}[label=(\alph*)]
+          \item Une voiture roule à vitesse constante sur un arc de cercle de rayon $R$. Établir la vitesse maximale $v_{\max}$ en fonction de $\mu$, $g$ et $R$. Application numérique pour $R=50\ \mathrm m$ et $\mu=0{,}8\ ;\ 0{,}5\ ;\ 0{,}1$.
+          \item En ligne droite, établir la distance de freinage $d$ en fonction de $v_0$, $\mu$ et $g$. Calculer $d$ pour $v_0=90\ \mathrm{km/h}$ sur route sèche ($\mu=0{,}8$) et sur verglas ($\mu=0{,}1$).
+      \end{enumerate}
+    coup_de_pouce: |
+      (a) $a_T=0$ : $a_N=v^2/R\le\mu g$. (b) $a_N=0$ : $|a_T|\le\mu g$ ; utiliser le mouvement uniformément décéléré.
+    correction: |
+      (a) $v_{\max}=\sqrt{\mu gR}$ : $19{,}8\ \mathrm{m/s}\ (71\ \mathrm{km/h})$, $15{,}7\ \mathrm{m/s}\ (56\ \mathrm{km/h})$, $7{,}0\ \mathrm{m/s}\ (25\ \mathrm{km/h})$. (b) $d=\dfrac{v_0^2}{2\mu g}$ : $39{,}8\ \mathrm m$ et $318\ \mathrm m$.
+    solution:
+      - titre: "(a) Virage stationnaire"
+        texte: |
+          $v=$ cte donc $a_T=0$ et $\|\vec a\|=a_N=\dfrac{v^2}R\le\mu g$, soit
+          $$\boxed{v_{\max}=\sqrt{\mu gR}}.$$
+          $R=50\ \mathrm m$ : $\mu=0{,}8$ : $\sqrt{392{,}4}=19{,}8\ \mathrm{m/s}=71\ \mathrm{km/h}$ ; $\mu=0{,}5$ : $15{,}7\ \mathrm{m/s}=56\ \mathrm{km/h}$ ; $\mu=0{,}1$ : $7{,}0\ \mathrm{m/s}=25\ \mathrm{km/h}$. La vitesse limite varie en $\sqrt{\mu}$ et en $\sqrt R$ : quadrupler le rayon double la vitesse limite.
+      - titre: "(b) Freinage en ligne droite"
+        texte: |
+          $R=\infty$ : $a_N=0$ et $a_T\ge-\mu g$. Décélération maximale constante $b=\mu g$ : $v^2=v_0^2-2bd$ donne $v=0$ pour
+          $$\boxed{d=\frac{v_0^2}{2\mu g}}.$$
+          $v_0=25\ \mathrm{m/s}$ : $\mu=0{,}8$ : $d=\dfrac{625}{15{,}7}\approx39{,}8\ \mathrm m$ ; $\mu=0{,}1$ : $d=\dfrac{625}{1{,}96}\approx318\ \mathrm m$. Résultat à rapprocher des distances de sécurité sur verglas.
+
+  - id: q2
+    enonce: |
+      {\bf 2/ Freiner dans un virage.} La voiture parcourt maintenant un arc de cercle de rayon $R=50\ \mathrm m$ ($\mu=0{,}8$) en freinant.
+      \begin{enumerate}[label=(\alph*),start=3]
+          \item Établir la décélération maximale $b_{\max}(v)$ possible à la vitesse $v$. Calculer $b_{\max}$ pour $v=15\ \mathrm{m/s}$ et pour $v=19\ \mathrm{m/s}$. Commenter.
+          \item Le conducteur freine avec une décélération constante $b=4\ \mathrm{m\,s^{-2}}$ dès l'entrée dans le virage. Quelle est la vitesse d'entrée maximale $v_0$ pour que la voiture ne sorte pas du disque d'adhérence ? Que se passe-t-il ensuite ?
+          \item Représenter l'évolution de $(a_N,a_T)$ dans le plan du disque d'adhérence.
+      \end{enumerate}
+    coup_de_pouce: |
+      $b^2+a_N^2\le(\mu g)^2$ avec $a_N=v^2/R$. Pour (d), c'est à $t=0$ que $a_N$ est maximale (la vitesse décroît), donc la condition la plus contraignante est à l'entrée.
+    correction: |
+      (c) $b_{\max}=\sqrt{(\mu g)^2-v^4/R^2}$ : $6{,}43\ \mathrm{m\,s^{-2}}$ à $15\ \mathrm{m/s}$ ; $3{,}08\ \mathrm{m\,s^{-2}}$ à $19\ \mathrm{m/s}$. (d) $v_0^4\le R^2\left[(\mu g)^2-b^2\right]$ : $v_0\le18{,}4\ \mathrm{m/s}=66\ \mathrm{km/h}$.
+    solution:
+      - titre: "(c) Décélération maximale en virage"
+        texte: |
+          $a_T=-b$, $a_N=\dfrac{v^2}R$ : $b^2+\dfrac{v^4}{R^2}\le(\mu g)^2$ donc
+          $$\boxed{b_{\max}(v)=\sqrt{(\mu g)^2-\frac{v^4}{R^2}}}.$$
+          $\mu g=7{,}85\ \mathrm{m\,s^{-2}}$. $v=15$ : $a_N=4{,}5$, $b_{\max}=\sqrt{61{,}6-20{,}3}=6{,}43\ \mathrm{m\,s^{-2}}$ ($82\ \%$ de $\mu g$). $v=19$ : $a_N=7{,}22$, $b_{\max}=\sqrt{61{,}6-52{,}1}=3{,}08\ \mathrm{m\,s^{-2}}$ ($39\ \%$ de $\mu g$) : à $19\ \mathrm{m/s}$, quasiment toute l'adhérence est consommée pour tenir le virage ; il ne reste presque rien pour freiner. À $19{,}8\ \mathrm{m/s}$ ($=v_{\max}$), $b_{\max}=0$ : impossible de freiner sans sortir de la trajectoire.
+      - titre: "(d) Freinage constant à l'entrée"
+        texte: |
+          Avec $v=v_0-bt$, $a_N=v^2/R$ décroît au cours du temps : la condition la plus sévère est à $t=0$ :
+          $$b^2+\frac{v_0^4}{R^2}\le(\mu g)^2\ \Longrightarrow\ v_0\le\left(R^2\left[(\mu g)^2-b^2\right]\right)^{1/4}=\left(2\,500\times(61{,}6-16)\right)^{1/4}\approx\boxed{18{,}4\ \mathrm{m/s}\approx66\ \mathrm{km/h}}.$$
+          (à comparer à $v_{\max}=71\ \mathrm{km/h}$ sans freinage). Si $v_0$ est inférieur à cette valeur, la voiture reste dans le disque ensuite, car $a_N$ diminue.
+      - titre: "(e) Trajet dans le plan $(a_N,a_T)$"
+        texte: |
+          Au point d'entrée : $(a_N,a_T)=(v_0^2/R,-b)$ = $(6{,}75\ ;\ -4)$ avec $v_0=18{,}4$, point situé {\bf sur le bord} du disque ($\|\vec a\|=\sqrt{6{,}75^2+4^2}\approx7{,}85\ \mathrm{m\,s^{-2}}=\mu g$) : c'est le cas limite. Ensuite $a_N$ décroît (la voiture ralentit) tandis que $a_T=-4$ reste constant : le point se déplace horizontalement vers la gauche à l'intérieur du disque. À la fin du freinage, la voiture est à l'arrêt : le point arrive sur l'axe $a_N=0$.
+
+  - id: q3
+    enonce: |
+      {\bf 3/ Trajectoire de courbure variable.} Une voiture parcourt à la limite d'adhérence la parabole $y=kx^2$ avec $k=0{,}01\ \mathrm m^{-1}$ (rayon de courbure au sommet $R_0=50\ \mathrm m$), avec $\mu=0{,}8$.
+      \begin{enumerate}[label=(\alph*),start=6]
+          \item Exprimer la vitesse maximale $v_{\max}(x)$ qui peut être tenue en chaque point si la vitesse était constante, et la calculer au sommet ($x=0$) puis en $x=50\ \mathrm m$.
+          \item En déduire où le conducteur doit freiner et où il peut accélérer.
+      \end{enumerate}
+    coup_de_pouce: |
+      $R(x)=\dfrac{(1+4k^2x^2)^{3/2}}{2k}$ ; $v_{\max}(x)=\sqrt{\mu gR(x)}$.
+    correction: |
+      $v_{\max}(x)=\sqrt{\mu g\,R(x)}$ ; $19{,}8\ \mathrm{m/s}\ (71\ \mathrm{km/h})$ en $x=0$ ($R=50$ m), $33{,}3\ \mathrm{m/s}\ (120\ \mathrm{km/h})$ en $x=50\ \mathrm m$ ($R=141\ \mathrm m$).
+    solution:
+      - titre: "(f) Profil de vitesse limite"
+        texte: |
+          $$v_{\max}(x)=\sqrt{\mu g\,\frac{(1+4k^2x^2)^{3/2}}{2k}}.$$
+          Sommet : $R=\dfrac1{2k}=50\ \mathrm m$, $v_{\max}=\sqrt{0{,}8\times9{,}81\times50}=19{,}8\ \mathrm{m/s}=71\ \mathrm{km/h}$. En $x=50\ \mathrm m$ : $4k^2x^2=4\times10^{-4}\times2\,500=1$, $R=\dfrac{2^{3/2}}{0{,}02}=141\ \mathrm m$, $v_{\max}=\sqrt{0{,}8\times9{,}81\times141}=33{,}3\ \mathrm{m/s}=120\ \mathrm{km/h}$.
+      - titre: "(g) Stratégie"
+        texte: |
+          $v_{\max}$ est minimale au sommet (virage le plus serré) et croît quand on s'en éloigne. La voiture doit donc {\bf freiner avant} le sommet (de manière à y arriver à moins de $71\ \mathrm{km/h}$) et peut {\bf accélérer après} le sommet (puisque $R$ augmente). Le freinage doit être terminé {\bf avant} la zone la plus courbée : dans la zone serrée, la voiture ne peut plus décélérer (disque presque saturé par $a_N$). Une stratégie « freiner tard puis tourner » est dangereuse.

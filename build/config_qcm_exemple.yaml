@@ -1,0 +1,209 @@
+# =====================================================================================
+#  EXEMPLE COMPLET « QCM » pour build/config.yaml   (fichier de référence, pas lu par le build)
+#  Copie les blocs dont tu as besoin dans build/config.yaml :
+#     - le bloc `qcm:`            -> au niveau racine (déjà présent dans ton config.yaml)
+#     - les blocs `- name: …`     -> dans la liste `targets:` (PDF imprimables)
+#  Rappel : les questions elles-mêmes sont dans data/matieres/<matiere>/qcm/<chapitre>.yaml
+#           (modèle commenté : data/qcm_modele.yaml). Rien à déclarer dans config.yaml pour
+#           qu'un chapitre existe dans l'appli web : il suffit que le fichier existe.
+# =====================================================================================
+#
+# ┌───────────────────────────────────────────────────────────────────────────────────┐
+# │ 0. À SAVOIR (résumé)                                                              │
+# └───────────────────────────────────────────────────────────────────────────────────┘
+#  * Ajouter des questions = éditer le .yaml du chapitre. Aucun redémarrage : le serveur relit
+#    les fichiers quand ils changent. Pour mettre à jour les compteurs / QR des pages Quartz :
+#    relancer ./web/publish_profile.sh auto (ou export_markdown.py).
+#  * Les PDF QCM ne sont reconstruits que si leurs sources changent : python3 build/build.py --stale
+#  * Vérifier les fichiers :  python3 tools/qcm.py check     (1 seule bonne réponse, ids uniques…)
+#                             python3 tools/qcm.py stats     (nombre de questions par chapitre)
+#  * Créer un chapitre :      python3 tools/qcm.py new physique-ondes-ipsa chap3_interferences "Chap. 3 — Interférences"
+#  * Images / animations d'une question : voir data/qcm_modele.yaml et web/README_QCM.md
+#       figure:    {ref: fig_x}  -> web/public/figures/fig_x.svg
+#       animation: {ref: anim_y} -> animations/outputs/anim_y/animation.gif
+#    (PDF : pip install cairosvg pillow ; l'animation joue dans Adobe Reader seulement)
+#  * Données élèves : UUID pseudonyme tiré au hasard dans le navigateur (aucune IP stockée).
+#    Prévenir les étudiants du suivi de progression (RGPD).
+#  * Base de données : web/server/qcm_data.sqlite3 (créée toute seule). À sauvegarder, à ne PAS
+#    mettre dans git (ajouter *.sqlite3* au .gitignore). Variable QCM_DB_PATH pour la déplacer.
+#  * Les bonnes réponses ne quittent jamais le serveur avant que l'élève ait répondu.
+#
+# ┌───────────────────────────────────────────────────────────────────────────────────┐
+# │ 1. TESTER EN LOCAL (debug)                                                        │
+# └───────────────────────────────────────────────────────────────────────────────────┘
+#   cd <racine du projet>
+#   pip install flask segno pyyaml cairosvg pillow            # une fois (idéalement dans le venv)
+#   python3 tools/qcm.py check                                # valide les questions
+#   ./web/publish_profile.sh auto                             # génère les pages /qcm/<matiere>/ (build/public/qcm/) et Quartz
+#
+#   # jeton enseignant de TEST (invente ce que tu veux) + base jetable :
+#   export QCM_TEACHER_TOKEN=test123
+#   export QCM_DB_PATH=/tmp/qcm_test.sqlite3                  # supprime ce fichier pour repartir de zéro
+#   FLASK_DEBUG=1 python3 -m web.server.app                   # http://127.0.0.1:5000/qcm/<matiere>/
+#       - FLASK_DEBUG=1 recharge le serveur à chaque modification du code Python ;
+#         les .yaml de questions sont relus tout seuls (pas besoin de recharger).
+#       - /figures/… et /animations/… sont servis par le serveur en local (nginx le fait en prod).
+#       - PORT=8000 pour changer de port ; HOST=0.0.0.0 pour tester depuis un téléphone du même
+#         Wi-Fi (alors SANS FLASK_DEBUG : le débogueur Flask est un accès à distance !).
+#       - Vue enseignant : bascule « Élève / Enseignant » en haut de l'appli -> saisir test123.
+#       - Pas de session ? Test élève immédiat : http://127.0.0.1:5000/qcm/<matiere>/?c=<chapitre>
+#   Tester un PDF seul :     python3 build/build.py qcm_ondes_chap2_enonce --log
+#   Tester les pages Quartz: python3 web/export_markdown.py   puis ouvrir Quartz en local (npx quartz build --serve)
+#   Si une ancienne version de la base provoque une erreur de schéma : supprimer le fichier .sqlite3.
+#
+# ┌───────────────────────────────────────────────────────────────────────────────────┐
+# │ 2. DÉPLOYER SUR LE RASPBERRY PI                                                   │
+# └───────────────────────────────────────────────────────────────────────────────────┘
+#   (guide détaillé : DEPLOY_QCM_PI.md)
+#   a) Sur ton PC :  git add -A && git commit -m "QCM" && git push
+#   b) Sur le Pi :   cd /mnt/mariage_data/CoursOndes && git pull
+#                    ./venv/bin/pip install flask segno pyyaml cairosvg pillow gunicorn
+#   c) Jeton enseignant, une fois :
+#        echo "QCM_TEACHER_TOKEN=$(python3 -c 'import secrets;print(secrets.token_urlsafe(24))')" | sudo tee /etc/gunicorn-cours.env
+#        sudo chmod 640 /etc/gunicorn-cours.env ; sudo cat /etc/gunicorn-cours.env    # note-le
+#   d) Service + nginx (une fois, ou si deploy/ change) :
+#        sudo cp deploy/gunicorn-cours.service /etc/systemd/system/ && sudo systemctl daemon-reload
+#        sudo cp deploy/nginx-cours.conf /etc/nginx/sites-available/cours && sudo nginx -t && sudo systemctl reload nginx
+#   e) Publier (régénère Quartz + pages QCM + QR) :  ./web/publish_profile.sh auto
+#   f) Redémarrer le serveur SEULEMENT si le code Python a changé :  sudo systemctl restart gunicorn-cours
+#      (changer un .yaml de questions ou un réglage `qcm:` de ce fichier ne demande PAS de restart)
+#   g) Vérifier :  curl -s https://cours.sunset-evasion.fr/health
+#                  sudo journalctl -u gunicorn-cours -n 30 --no-pager
+#   Garder 1 à 2 workers gunicorn : SQLite en mode WAL suffit pour une classe entière.
+#   Sauvegarde conseillée (cron hebdo) :
+#        sqlite3 /mnt/mariage_data/CoursOndes/web/server/qcm_data.sqlite3 ".backup '/chemin/qcm_$(date +%F).sqlite3'"
+#   Si le Pi n'a pas de pdflatex : construis les PDF sur ton PC et pousse-les (comme tes autres PDF).
+#
+# ┌───────────────────────────────────────────────────────────────────────────────────┐
+# │ 3. EN COURS (enseignant)                                                          │
+# └───────────────────────────────────────────────────────────────────────────────────┘
+#   Appli -> bascule « Enseignant » -> jeton -> « Nouvelle séance » :
+#     direct : tu lances les questions une à une ; les élèves répondent au rythme que tu donnes ;
+#     série  : un ensemble de questions que chacun fait à son rythme.
+#   Un QR code de la séance s'affiche pour le tableau. « Clôturer » ouvre les statistiques de classe
+#   aux élèves ; « Rapport » / export CSV ensuite. L'entraînement libre n'a pas besoin de séance.
+#
+# =====================================================================================
+#  BLOC `qcm:`  (racine de build/config.yaml) — TOUS les réglages
+# =====================================================================================
+qcm:
+  # --- réponse « Je ne sais pas encore » ajoutée AUTOMATIQUEMENT aux fichiers au format compact.
+  #     (Les anciens fichiers au format liste — id/td/moment/choix… — ne sont jamais modifiés.)
+  #     Surchargeable par fichier (clé `defauts:`) ou par question. Changer ceci rend les PDF
+  #     QCM « périmés » : build.py --stale les refait.
+  ajouter_neutre: true
+  libelle_neutre: "Je ne sais pas encore"
+
+  # --- adresse PUBLIQUE du site : encodée dans les QR codes des pages Quartz.
+  #     Les liens cliquables restent relatifs (/qcm/<matiere>/?c=<chapitre>) ; seuls les QR sont absolus.
+  #     Vide = pas de QR code dans Quartz (un QR doit contenir une adresse complète).
+  base_url: "https://cours.sunset-evasion.fr"
+
+  # --- ACCÈS LIBRE : quels chapitres sont ouverts à l'entraînement hors cours.
+  #     Un chapitre NON libre :
+  #       - n'est pas proposé dans l'appli en accès libre (et le serveur refuse l'ouverture : erreur 403) ;
+  #       - n'a pas de lien/QR dans les pages Quartz ;
+  #       - reste utilisable EN CLASSE par l'enseignant (séances direct / série), PDF compris.
+  #     Priorité : chapitre  >  matière  >  défaut global.   Sans bloc acces_libre : tout est libre.
+  #     Raccourci : `acces_libre: false` ferme tout ; `acces_libre: true` ouvre tout.
+  #     Effet immédiat côté serveur (pas de restart) ; relancer publish_profile.sh pour les pages Quartz.
+  acces_libre:
+    defaut: true                                   # défaut global : tout ouvert…
+    matieres:
+      physique-ondes-ipsa:
+        defaut: true                               # cette matière : ouverte…
+        chapitres:
+          chap3_examen_blanc: false                # …sauf ce chapitre, gardé pour la classe / un contrôle
+          chap2_ondes_sonores: true                # (true explicite : utile si la matière était fermée)
+      agregation-mathematiques:
+        defaut: false                              # matière fermée par défaut (pas encore prête)…
+        chapitres:
+          chap1_algebre: true                      # …sauf ce chapitre, ouvert aux étudiants
+      mecanique-de-point-ipsa: false               # raccourci : toute la matière fermée
+
+# =====================================================================================
+#  CIBLES PDF `type_doc: qcm`  (à copier dans la liste `targets:` de build/config.yaml)
+#  Champs communs identiques aux TD : titre, matiere, etablissement, promo, annee, auteur, publier…
+#  `doc` = nom du fichier du chapitre (data/matieres/<matiere>/qcm/<doc>.yaml, ou la clé `chapitre:`
+#          du fichier) ; `all` = toute la matière.
+#  Un suffixe _enonce / _corrige dans `name` suit la même convention que les TD (publication par profil).
+#  Un PDF n'est publié que selon `publier:` et le profil de visibilité (publication: / publish_profile.sh).
+#  NB : le PDF QCM ignore acces_libre (c'est un document que TU décides d'imprimer).
+# =====================================================================================
+targets:
+
+  # 1) Énoncé simple d'un chapitre : cases à cocher, sans réponses
+  - name: qcm_ondes_chap2_enonce
+    titre: "QCM — Ondes sonores"
+    matiere: physique-ondes-ipsa
+    type_doc: qcm
+    doc: chap2_ondes_sonores
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_solution: false                # pas de bonne réponse ni explication
+
+  # 2) Corrigé du même chapitre : bonne réponse en vert + explication + grille de réponses
+  - name: qcm_ondes_chap2_corrige
+    titre: "QCM — Ondes sonores"
+    matiere: physique-ondes-ipsa
+    type_doc: qcm
+    doc: chap2_ondes_sonores
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    show_solution: true
+    publier: false                      # fichier de travail : jamais publié
+
+  # 3) Contrôle : 20 questions tirées au sort, ordre mélangé mais REPRODUCTIBLE (graine fixe)
+  - name: qcm_ondes_controle_enonce
+    titre: "Contrôle — Ondes (QCM)"
+    matiere: physique-ondes-ipsa
+    type_doc: qcm
+    doc: all                            # toutes les questions de la matière
+    etablissement: IPSA
+    show_solution: false
+    nb_questions: 20                    # coupe à 20 questions (dans l'ordre, après mélange)
+    melanger: true                      # mélange
+    graine: 7                           # change la graine pour un autre tirage (défaut 1)
+
+  # 4) Seulement les questions de début de cours, niveau facile/moyen
+  - name: qcm_ondes_reveil_enonce
+    titre: "QCM de réveil — Ondes"
+    matiere: physique-ondes-ipsa
+    type_doc: qcm
+    doc: chap2_ondes_sonores
+    etablissement: IPSA
+    moments: [debut]                    # debut | milieu | fin (champ `moment:` des questions)
+    difficultes: [facile, moyen]        # champ `difficulte:` des questions
+    show_solution: false
+
+  # 5) Imprimer aussi la réponse « Je ne sais pas encore » (pour un QCM de positionnement)
+  - name: qcm_ondes_positionnement
+    titre: "Positionnement — Ondes"
+    matiere: physique-ondes-ipsa
+    type_doc: qcm
+    doc: chap1_ondes_mecaniques
+    etablissement: IPSA
+    inclure_neutre: true                # défaut false : la case neutre n'est pas imprimée
+    show_solution: false
+
+  # 6) Toute une matière, version corrigée (révisions)
+  - name: qcm_agregation_all_corrige
+    titre: "Banque de QCM — Agrégation de mathématiques"
+    matiere: agregation-mathematiques
+    type_doc: qcm
+    doc: all
+    etablissement: Préparation agrégation
+    show_solution: true
+
+# =====================================================================================
+#  OÙ ÇA S'AFFICHE (rappel)
+# =====================================================================================
+#  Appli web      : /qcm/<matiere>/                 (séances en classe + entraînement libre)
+#  Entraînement   : /qcm/<matiere>/?c=<chapitre>    (lien/QR dans Quartz ; ?c=all = toute la matière libre)
+#  Quartz         : callouts « QCM de réveil » (questions avec `moment:` debut/milieu/fin) sur les
+#                   pages de TD/cours + section « QCM d'entraînement » (lien + QR) sur la page matière.
+#                   Les centaines de questions d'entraînement ne sont PAS listées dans Quartz.
+#  PDF            : cibles `type_doc: qcm` ci-dessus.

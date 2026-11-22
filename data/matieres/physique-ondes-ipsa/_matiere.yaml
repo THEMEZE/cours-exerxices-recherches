@@ -3,7 +3,7 @@ nom: "Physique des ondes"
 niveau: [cpge, licence]
 description: >
   Cours d'ondes mécaniques et acoustiques enseigné à l'IPSA (aéronautique).
-quartz_namespace: physique/ipsa-ondes
+quartz_namespace: physique/IPSA/ipsa-physique-ondes
 sujets: [ondes-mecaniques, ondes-acoustiques, reflexion-transmission]
 
 # Thème visuel de l'appli QCM (web/qcm_app_template.html) pour cette

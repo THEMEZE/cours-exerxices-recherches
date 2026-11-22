@@ -1,0 +1,221 @@
+id: tp1_partB
+intitule: "Partie B — Effet de la tension sur les modes propres d'une corde {\\color{blue}(Part B — Effect of tension on the normal modes of a string)}"
+td: tp1
+facultatif: false
+seance: 1
+cours_rattache:
+  - chap1.celerite_corde
+  - chap1.modes_propres
+  - chap1.oscillations_forcees
+
+metadonnees:
+  duree_estimee: "60 min"
+  difficulte: 3 # Sur une échelle de 1 à 5
+  priorite: 1
+  type_exercice: "Manipulation guidée"
+  indispensable: true
+
+enonce_intro: |
+  Une corde de longueur effective $L=55$ cm est excitée par le vibreur (montage de Melde, cf. TD1 ex. 5) sous trois tensions : $F=0{,}6\ ;\ 0{,}8\ ;\ 1{,}0$ N. Pour chacune, on relève les six premières fréquences propres. {\bf Question scientifique :} comment la tension modifie-t-elle les fréquences propres et la célérité ?
+
+  {\color{blue}A string of effective length $L=55$ cm is driven by the vibrator (Melde setup, see TD1 ex. 5) at three tensions: $F=0.6,\ 0.8,\ 1.0$ N. For each one the first six natural frequencies are recorded. {\bf Scientific question:} how does tension change the natural frequencies and the wave speed?}
+
+# figure:
+#   ref: tp_corde_montage
+#   legende: "Longueur effective $L=55$ cm de la corde (Fig. 4 du guide). {\\color{blue}Effective length $L=55$ cm of the string (Fig. 4 of the guide).}"
+#   scale: 0.6
+#   label: "fig:corde_L"
+
+accroche_point_cours_essentiel:
+  - titre: "Accorder une corde : que fait la tension ? {\\color{blue}(Tuning a string: what does tension do?)}"
+    duree_introduction: "3 min, avant les mesures"
+    question_d_accroche: |
+      Quand on tend la corde d'une guitare, la note monte. À $L$ fixée, que prévoir pour $f_1$ quand $F$ passe de $0{,}6$ à $1{,}0$ N ? Le vibreur impose la fréquence : impose-t-il aussi la vitesse de l'onde ?
+
+      {\color{blue}When a guitar string is tightened the note rises. At fixed $L$, what do you expect for $f_1$ when $F$ goes from 0.6 to 1.0 N? The vibrator sets the frequency: does it also set the wave speed?}
+    texte: |
+      {\bf Idée clé : $c=\sqrt{F/\mu}$ est fixée par le milieu.} $f_n=\dfrac{n}{2L}\sqrt{F/\mu}$ : à $n$ donné, $f_n\propto\sqrt F$. Prévision : $f_1(1{,}0)/f_1(0{,}6)=\sqrt{1{,}0/0{,}6}\approx1{,}29$.
+
+      {\color{blue}{\bf Key idea: $c=\sqrt{F/\mu}$ is set by the medium.} $f_n=\dfrac{n}{2L}\sqrt{F/\mu}$: at given $n$, $f_n\propto\sqrt F$. Prediction: $f_1(1.0)/f_1(0.6)=\sqrt{1.0/0.6}\approx1.29$.}
+
+outils_mathematiques:
+  - titre: "Racine carrée et proportionnalité {\\color{blue}(Square root and proportionality)}"
+    texte: |
+      $c\propto\sqrt F$ : multiplier $F$ par $4/3$ (de $0{,}6$ à $0{,}8$) multiplie $c$ par $\sqrt{4/3}\approx1{,}15$.
+
+      {\color{blue}$c\propto\sqrt F$: multiplying $F$ by $4/3$ (from 0.6 to 0.8) multiplies $c$ by $\sqrt{4/3}\approx1.15$.}
+  - titre: "Propagation d'incertitude {\\color{blue}(Uncertainty propagation)}"
+    texte: |
+      $\dfrac{\Delta c}{c}=\dfrac{\Delta L}{L}+\dfrac{\Delta\alpha}{\alpha}$ avec $c=2L\alpha$.
+
+      {\color{blue}$\dfrac{\Delta c}{c}=\dfrac{\Delta L}{L}+\dfrac{\Delta\alpha}{\alpha}$ with $c=2L\alpha$.}
+
+liens_autres_disciplines:
+  - discipline: "Musique et lutherie {\\color{blue}(Music and instrument making)}"
+    texte: |
+      Les clés d'accord règlent $F$ pour ajuster $f_1$ (TD1 ex. 1 et 4).
+
+      {\color{blue}Tuning pegs adjust $F$ to set $f_1$ (TD1 ex. 1 and 4).}
+  - discipline: "Génie civil {\\color{blue}(Civil engineering)}"
+    texte: |
+      La tension d'un hauban se déduit de sa fréquence propre : $F=4\mu L^2f_1^2$.
+
+      {\color{blue}A stay cable's tension is deduced from its natural frequency: $F=4\mu L^2f_1^2$.}
+
+questions:
+  - id: q1
+    enonce: |
+      B1 — Régler $L=55$ cm, mesurer $L_0$ et $m$ (ou prendre $m=(3{,}0\pm0{,}1)$ g), puis proposer une incertitude $\Delta F$ sur la tension en la justifiant.
+
+      {\color{blue}B1 — Set $L=55$ cm, measure $L_0$ and $m$ (or take $m=(3.0\pm0.1)$ g), then propose an uncertainty $\Delta F$ on the tension and justify it.}
+    coup_de_pouce:
+      - titre: "Sources d'incertitude sur $F$ {\\color{blue}(Sources of uncertainty on $F$)}"
+        texte: |
+          Graduation du dynamomètre, fluctuation de la lecture quand le vibreur tourne, frottement sur la poulie, alignement.
+
+          {\color{blue}Dynamometer graduation, reading fluctuation while the vibrator runs, pulley friction, alignment.}
+    correction:
+      - titre: "Valeurs provisoires {\\color{blue}(Provisional values)}"
+        texte: |
+          $L=0{,}550$ m ($\Delta L=0{,}002$ m) ; $L_0=1{,}500$ m ($\Delta L_0=0{,}005$ m) ; $m=3{,}0$ g ($\Delta m=0{,}1$ g) ; $\Delta F=0{,}03$ N.
+
+          {\color{blue}$L=0.550$ m ($\Delta L=0.002$ m); $L_0=1.500$ m ($\Delta L_0=0.005$ m); $m=3.0$ g ($\Delta m=0.1$ g); $\Delta F=0.03$ N.}
+    solution:
+      - titre: "Justification de $\\Delta F$ {\\color{blue}(Justification of $\\Delta F$)}"
+        texte: |
+          Demi-graduation du dynamomètre ($\approx0{,}02$ N) combinée à la fluctuation observée pendant la vibration ($\approx0{,}02$ N) : on retient $\Delta F=0{,}03$ N. Noter que $\Delta F/F$ vaut $5\,\%$ à $0{,}6$ N et $3\,\%$ à $1{,}0$ N.
+
+          {\color{blue}Half the dynamometer graduation ($\approx0.02$ N) combined with the fluctuation seen during vibration ($\approx0.02$ N): we adopt $\Delta F=0.03$ N. Note that $\Delta F/F$ is $5\,\%$ at 0.6 N and $3\,\%$ at 1.0 N.}
+
+  - id: q2
+    enonce: |
+      B2 — Pour chaque tension, repérer les six premiers modes et noter les fréquences de résonance.
+
+      {\color{blue}B2 — For each tension, find the first six modes and record the resonance frequencies.}
+    coup_de_pouce:
+      - titre: "Rappel de montage {\\color{blue}(Setup reminder)}"
+        texte: |
+          Après chaque changement de $F$ : revérifier $L=55$ cm, l'alignement, et que le vibreur ne supporte pas la tension statique. Amplitude $\le5$ V. Attendre quelques secondes avant de conclure.
+
+          {\color{blue}After each change of $F$: recheck $L=55$ cm, alignment, and that the vibrator does not carry the static tension. Amplitude $\le5$ V. Wait a few seconds before concluding.}
+    correction:
+      - titre: "Valeurs provisoires (Hz) {\\color{blue}(Provisional values, Hz)}"
+        texte: |
+          \begin{center}
+          \begin{tabular}{|c|c|c|c|c|c|c|}
+          \hline
+          $F\backslash n$ & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+          $0{,}6$ N & 15,6 & 31,4 & 47,0 & 62,9 & 78,5 & 94,2 \\ \hline
+          $0{,}8$ N & 18,0 & 36,2 & 54,3 & 72,4 & 90,6 & 108,7 \\ \hline
+          $1{,}0$ N & 20,2 & 40,5 & 60,7 & 81,0 & 101,2 & 121,5 \\ \hline
+          \end{tabular}
+          \end{center}
+          Incertitude de lecture : $\pm0{,}1$ Hz.
+
+          {\color{blue}Reading uncertainty: $\pm0.1$ Hz. Table above: provisional frequencies for $n=1,\dots,6$.}
+    solution:
+      - titre: "Repères pour l'encadrant {\\color{blue}(Reference points for the supervisor)}"
+        texte: |
+          Valeurs théoriques avec $\mu=2{,}0\times10^{-3}$ kg/m : $f_1=15{,}7\ ;\ 18{,}2\ ;\ 20{,}3$ Hz. Les valeurs mesurées sont légèrement plus basses (longueur effective un peu plus grande). Si un étudiant trouve $f_1$ très différente, vérifier qu'il n'a pas pris un mode d'ordre supérieur pour le fondamental (compter les fuseaux).
+
+          {\color{blue}Theoretical values with $\mu=2.0\times10^{-3}$ kg/m: $f_1=15.7,\ 18.2,\ 20.3$ Hz. Measured values are slightly lower (effective length a bit larger). If a student finds a very different $f_1$, check they did not take a higher mode for the fundamental (count the loops).}
+
+  - id: q3
+    enonce: |
+      B3 — Que remarque-t-on quand la tension augmente ?
+
+      {\color{blue}B3 — What do you notice as the tension increases?}
+    correction:
+      - titre: "Réponse attendue {\\color{blue}(Expected answer)}"
+        texte: |
+          Toutes les fréquences propres augmentent ; l'espacement entre modes consécutifs augmente aussi ; le motif de chaque mode reste le même (même nombre de fuseaux).
+
+          {\color{blue}All natural frequencies increase; the spacing between consecutive modes also increases; the pattern of each mode stays the same (same number of loops).}
+    solution:
+      - titre: "Interprétation {\\color{blue}(Interpretation)}"
+        texte: |
+          $f_n=\dfrac{n}{2L}\sqrt{F/\mu}$ : plus $F$ est grande, plus $c$ est grande, plus $f_n$ est grande à $L$ fixée. Le nombre de fuseaux ne dépend que de $n$.
+
+          {\color{blue}$f_n=\dfrac{n}{2L}\sqrt{F/\mu}$: the larger $F$, the larger $c$ and the larger $f_n$ at fixed $L$. The number of loops depends only on $n$.}
+
+  - id: q4
+    enonce: |
+      B4 — Tracer le graphique B.1 ($f_n$ en fonction de $n$ pour les trois tensions) et relever les équations des ajustements.
+
+      {\color{blue}B4 — Plot graph B.1 ($f_n$ versus $n$ for the three tensions) and read the fit equations.}
+    coup_de_pouce:
+      - titre: "Graphique {\\color{blue}(Graph)}"
+        texte: |
+          Trois séries sur le même graphique, titre, axes, unités, droites d'ajustement et équations affichées.
+
+          {\color{blue}Three series on the same graph, title, axes, units, fit lines and displayed equations.}
+    correction:
+      - titre: "Valeurs provisoires {\\color{blue}(Provisional values)}"
+        texte: |
+          $F=0{,}6$ N : $f_n=15{,}69\,n+0{,}0$ ; $F=0{,}8$ N : $f_n=18{,}11\,n+0{,}0$ ; $F=1{,}0$ N : $f_n=20{,}25\,n+0{,}0$ (Hz).
+
+          {\color{blue}Fit equations above, in Hz; slopes 15.69, 18.11, 20.25 Hz.}
+    solution:
+      - titre: "Contrôle {\\color{blue}(Check)}"
+        texte: |
+          Les trois droites passent près de l'origine et ont des pentes croissantes. Rapport des pentes : $18{,}11/15{,}69=1{,}15$ et $20{,}25/15{,}69=1{,}29$, en accord avec $\sqrt{4/3}$ et $\sqrt{5/3}$.
+
+          {\color{blue}The three lines pass near the origin with increasing slopes. Slope ratios: $18.11/15.69=1.15$ and $20.25/15.69=1.29$, in agreement with $\sqrt{4/3}$ and $\sqrt{5/3}$.}
+
+  - id: q5
+    enonce: |
+      B5 — Déduire des pentes la célérité $c_{\exp}$ pour chaque tension.
+
+      {\color{blue}B5 — Deduce from the slopes the speed $c_{\exp}$ for each tension.}
+    coup_de_pouce:
+      - titre: "Formule {\\color{blue}(Formula)}"
+        texte: |
+          $c_{\exp}=2L\alpha$ avec $L=0{,}55$ m.
+
+          {\color{blue}$c_{\exp}=2L\alpha$ with $L=0.55$ m.}
+    correction:
+      - titre: "Valeurs provisoires {\\color{blue}(Provisional values)}"
+        texte: |
+          \begin{center}
+          \begin{tabular}{|c|c|c|}
+          \hline
+          $F$ (N) & $\alpha$ (Hz) & $c_{\exp}$ (m/s) \\ \hline
+          0,6 & 15,69 & 17,26 \\ \hline
+          0,8 & 18,11 & 19,92 \\ \hline
+          1,0 & 20,25 & 22,28 \\ \hline
+          \end{tabular}
+          \end{center}
+
+          {\color{blue}Table above: $c_{\exp}=2L\alpha$ gives 17.26, 19.92 and 22.28 m/s.}
+    solution:
+      - titre: "Calcul {\\color{blue}(Computation)}"
+        texte: |
+          $c_{\exp}(0{,}6)=2\times0{,}55\times15{,}69=17{,}26$ m/s ; $c_{\exp}(0{,}8)=2\times0{,}55\times18{,}11=19{,}92$ m/s ; $c_{\exp}(1{,}0)=2\times0{,}55\times20{,}25=22{,}28$ m/s. Incertitude typique $\Delta c/c\approx0{,}4\ \%+0{,}5\ \%\approx1\ \%$, soit $\Delta c\approx0{,}2$ m/s.
+
+          {\color{blue}Same computation; typical uncertainty $\Delta c/c\approx0.4\,\%+0.5\,\%\approx1\,\%$, i.e. $\Delta c\approx0.2$ m/s.}
+
+  - id: q6
+    enonce: |
+      B6 — La célérité dépend-elle de la tension ? Justifier brièvement.
+
+      {\color{blue}B6 — Does the wave speed depend on tension? Justify briefly.}
+    correction:
+      - titre: "Réponse attendue {\\color{blue}(Expected answer)}"
+        texte: |
+          Oui : $c$ passe de $17{,}3$ à $22{,}3$ m/s quand $F$ passe de $0{,}6$ à $1{,}0$ N, bien au-delà des incertitudes ($\approx0{,}2$ m/s). La hausse est compatible avec $c\propto\sqrt F$ : $22{,}28/17{,}26=1{,}29\approx\sqrt{1{,}0/0{,}6}$.
+
+          {\color{blue}Yes: $c$ goes from 17.3 to 22.3 m/s when $F$ goes from 0.6 to 1.0 N, far beyond the uncertainties ($\approx0.2$ m/s). The increase is compatible with $c\propto\sqrt F$: $22.28/17.26=1.29\approx\sqrt{1.0/0.6}$.}
+    solution:
+      - titre: "Message à faire passer {\\color{blue}(Message to convey)}"
+        texte: |
+          Le générateur impose $f$, pas $c$ : la célérité est fixée par le milieu ($F$ et $\mu$) ; changer $f$ change $\lambda$, changer $F$ change $c$.
+
+          {\color{blue}The generator sets $f$, not $c$: the speed is fixed by the medium ($F$ and $\mu$); changing $f$ changes $\lambda$, changing $F$ changes $c$.}
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Fréquences de résonance et amortissement {\\color{blue}(Resonance frequencies and damping)}"
+    texte: |
+      Mesurer la largeur $\Delta f$ du pic du mode 1 à $F=0{,}8$ N ; si $\Delta f\approx0{,}8$ Hz, alors $\gamma=2\pi\Delta f\approx5$ s$^{-1}$ et $Q\approx f_1/\Delta f\approx22$ (TD1 ex. 14).
+
+      {\color{blue}Measure the width $\Delta f$ of the mode-1 peak at $F=0.8$ N; if $\Delta f\approx0.8$ Hz, then $\gamma=2\pi\Delta f\approx5$ s$^{-1}$ and $Q\approx f_1/\Delta f\approx22$ (TD1 ex. 14).}

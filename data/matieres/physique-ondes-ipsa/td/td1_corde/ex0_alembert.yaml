@@ -12,6 +12,7 @@ cours_rattache:
 metadonnees:
   duree_estimee: "40 min"
   difficulte: 2 # Sur une échelle de 1 à 5
+  priorite: 2
   type_exercice: "Application directe du cours"
   indispensable: true
 

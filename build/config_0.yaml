@@ -1,0 +1,1796 @@
+profils:
+  IPSA:
+    nom: "Guillaume THÉMÈZE"
+    email: "guillaume.themeze@ipsa.fr"
+    statut: ""
+    bureau: ""
+  LPTMS:
+    nom: "Guillaume THÉMÈZE"
+    email: "guillaume.themeze@universite-paris-saclay.fr"
+    statut: "Chercheur en Physique Théorique"
+    bureau: "Bât. 510"
+  DEFAULT:
+    nom: "Guillaume THÉMÈZE"
+    email: "contact@themeze.fr"
+    statut: "Ingénieur & Enseignant"
+    bureau: ""
+
+
+# python3 ./build/build.py test --log
+#td1_PhV110_enonce  td1_PhV110_corrige td1_PhV110_fiche td2_PhV110_enonce td2_PhV110_corrige td2_PhV110_fiche td3_PhV110 td1_PhV212_enonce td1_PhV212_aides td1_PhV212_corrige TP_IPSA_Generale_fiche TP_IPSA_Astrophysique_fiche td4_PhV110
+
+#qpdf --encrypt "4321" "1234" 256 --print=none --extract=n -- ./build/output/TP_IPSA_Generale_fiche.pdf TP_IPSA_Generale_fiche_pro.pdf
+
+# Chaque entrée = un PDF généré.
+#   matiere       : dossier dans data/matieres/<matiere>/
+#   type_doc      : "td" | "tp" | "cours" (défaut "td")
+#   doc           : nom du document
+#   auteur        : (optionnel) surcharge l'auteur du document
+#   etablissement : (optionnel) ex: IPSA, Sorbonne, etc.
+#   promo         : (optionnel) ex: A2, L3, M1
+#   annee         : (optionnel) ex: 2025-2026
+
+# =====================================================================
+# Couleur de l'ANGLAIS (titres et textes écrits {\color{blue} ...} dans les YAML)
+# Un seul réglage pour les PDF (LaTeX) et pour le site (Quartz).
+# Valeur : un hex ("#1565C0") ou un nom de couleur ("blue", "teal").
+# `anglais_web` (optionnel) : autre teinte pour le site seulement -- utile si la
+# couleur choisie est trop sombre sur le thème sombre de Quartz (ex. "#4A90E2").
+# Changer ce réglage rend les PDF « périmés » (build.py --stale les refait).
+# =====================================================================
+couleurs:
+  anglais: "#1565C0"
+  # anglais_web: "#4A90E2"
+
+# =====================================================================
+# Publication : quel PROFIL de visibilité pour chaque cours, TP et TD
+# (voir web/visibility_profiles.yaml : avant_seance, pendant_seance_avec_indices,
+#  corrige_resultats_seuls, corrige_complet, all)
+#
+#   ./web/publish_profile.sh auto        -> applique CE bloc, document par document
+#   ./web/publish_profile.sh <profil>    -> force UN profil partout (ignore ce bloc)
+#
+# Exemple d'usage en classe :
+#   chapitre terminé        -> corrige_complet   (tout : corrections et solutions)
+#   chapitre en cours       -> pendant_seance_avec_indices   (énoncés + aides)
+#   pas encore abordé       -> avant_seance      (énoncés seulement)
+#
+# Le profil d'un document règle À LA FOIS : le contenu des pages Quartz / JSON /
+# notebooks (corrections, solutions, coups de pouce) ET les PDF mis en ligne
+# (énoncé / aides / corrigé / fiche enseignant, via `pdf_publies` du profil).
+#
+# Forme courte :   <document>: <profil>
+# Forme détaillée (surcharger certains exercices) :
+#   <document>:
+#     profil: pendant_seance_avec_indices
+#     exercices:
+#       ex3_equation_ondes: corrige_complet     # cet exercice-là est déjà corrigé en classe
+# Un document non listé prend le `defaut` de sa matière, puis le `defaut` global.
+# =====================================================================
+publication:
+  defaut: all
+  matieres:
+    agregation-mathematiques:   # Préparation Agrégation de Mathématiques
+      defaut: all
+      td:
+        dev1_exemple: all   # Développement — exemple (gabarit à compléter)
+    agregation-physique:   # Préparation Agrégation de Physique
+      defaut: all
+      cours:
+        lecon_oscillateurs: all   # Leçon — Oscillateurs mécaniques, portrait de phase
+    mecanique-de-point-ipsa:   # Mécanique du point — IPSA
+      defaut: all
+      cours:
+        chap1_intro: all   # Chapitre 1 — : introduction
+      td:
+        td1_cinematique_cartesiennes: all  # Cinématique en coordonnées cartésiennes
+        td2_cinematique_en_coordonnees_polaire_ou_cylindrique: all   # Cinématique en coordonnées polaires (2D) et cylindriques (3D)
+        td3_base_de_frenet: # avant_seance   # Base de Frenet, rayon de courbure et accélérations tangentielle et nor
+          profil: all
+          exercices:
+            ex1_base_frenet: all
+            ex2_mouvement_curviligne_uniforme: all
+            ex3_circuit_monaco: all
+            ex4_abscisse_curviligne: all
+            ex5_cycloide: all
+            ex6_raccordement_clothoide: all
+            ex7_cercle_adherence: all
+            ex8_tir_parabolique_frenet: all
+    
+    onip-iogs:   # Outils Numériques pour l'Ingénieur·e en Physique (ONIP)
+      defaut: all
+      td:
+        td1_intro: all   # Intro — Prise en main de PyCharm, débogage et bonnes pratiques Python
+        td2_seance2: all   # Séance 2 — Listes, fonctions, Numpy et matplotlib
+        td3_seance3: all  # Séance 3 — FFT 1D/2D, meshgrid et tramage
+    physique-ondes-ipsa:   # Physique des ondes
+      defaut: all
+      cours:
+        chap1_intro: all   # Chapitre 1 — Ondes mécaniques : introduction
+      td:
+        td1_corde: all   # Propagation des ondes mécaniques sur une corde
+        td2_ondes_sonores: all   # Propagation des ondes sonores dans un fluide
+        td3_reflexion_transmission: all   # Coefficients de réflexion et transmission, impédance
+      tp:
+        tp1_corde_ressort: pendant_seance_avec_indices   # 
+    piscines-de-sciences-et-methodologie:   # Piscine de sciences et méthodologie
+      defaut: all 
+      td:
+        td1_grandeurs_physiques: all    # GRANDEURS PHYSIQUES Dimensions, unités et analyse dimensionnelle
+        td2_derivation_et_differentielle: all    # DÉRIVATION ET DIFFÉRENTIELLE (6h) Interprétation en Physique
+        td3_fonctions_derives_integrale: all    # FONCTIONS, DERIVES, INTEGRALE (4h) Description mathématique du mouveme
+        td4_vecteurs_en_physique: all    # VECTEURS EN PHYSIQUE (4h)
+    recherche-integrabilite-quantique:   # Recherche personnelle — Intégrabilité quantique
+      defaut: all 
+      cours:
+        intro_bethe: all   # Notes — Introduction à l'ansatz de Bethe
+    traveaux_pratiques-ipsa:   # Travaux pratiques — IPSA
+      defaut: all 
+      tp:
+        astrophysique: all   # TP d'astrophysique : de la balance de Cavendish à la densité du Soleil
+        general: all    # TP sur les ondes : visuels, amusants, orientés aviation
+
+targets:
+
+  # ---------------- test ----------------
+
+  - name: test
+    titre: "Test"
+    matiere: mecanique-de-point-ipsa
+    type_doc: td
+    doc: td1_cinematique_cartesiennes
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    exercices: [ex1_mouvement_2d]
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: false
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: false
+    show_accroche_point_cours_essentiel: false
+    show_outils_mathematiques: false
+    show_liens_autres_disciplines: false
+    show_coup_de_pouce: false
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master, doctorat]
+
+  # ---------------- Physique des ondes (IPSA) ----------------
+
+  # ---------------- TP ----------------
+
+  - name: TP_IPSA_Generale_fiche
+    titre: "Traveaux pratiques Général (Moi) -- Test"
+    matiere: traveaux_pratiques-ipsa
+    type_doc: tp
+    doc: general
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: true
+    show_objectifs_pedagogiques_etudiants: true
+    show_objectifs_pedagogiques_enseignants: true
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: true
+    show_remarques_pedagogiques_conseils_animation: true
+    show_bilan: true
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master]
+
+  - name: TP_IPSA_Astrophysique_fiche
+    titre: "Traveaux pratiques Astrophysique (Moi) -- Test"
+    matiere: traveaux_pratiques-ipsa
+    type_doc: tp
+    doc: astrophysique
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: true
+    show_objectifs_pedagogiques_etudiants: true
+    show_objectifs_pedagogiques_enseignants: true
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: true
+    show_remarques_pedagogiques_conseils_animation: true
+    show_bilan: true
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master]
+
+
+    
+# ---------------- Picsine ----------------
+
+  - name: td1_PhV110_enonce
+    titre: "TD 1 -- GRANDEURS PHYSIQUES  Dimensions, unités et analyse dimensionnelle -- Test"
+    matiere: piscines-de-sciences-et-methodologie
+    type_doc: td
+    doc: td1_grandeurs_physiques
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: false
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td1_PhV110_corrige
+    titre: "TD 1 -- GRANDEURS PHYSIQUES  Dimensions, unités et analyse dimensionnelle -- Test"
+    matiere: piscines-de-sciences-et-methodologie
+    type_doc: td
+    doc: td1_grandeurs_physiques
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: false
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td1_PhV110_fiche
+    titre: "TD 1 -- GRANDEURS PHYSIQUES  Dimensions, unités et analyse dimensionnelle -- Test"
+    matiere: piscines-de-sciences-et-methodologie
+    type_doc: td
+    doc: td1_grandeurs_physiques
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: true
+    show_objectifs_pedagogiques_etudiants: true
+    show_objectifs_pedagogiques_enseignants: true
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: true
+    show_remarques_pedagogiques_conseils_animation: true
+    show_bilan: true
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master]
+
+  - name: td2_PhV110_enonce
+    titre: "TD 2 -- DÉRIVATION ET DIFFÉRENTIELLE (4h) Interprétation en Physique -- Test"
+    matiere: piscines-de-sciences-et-methodologie
+    type_doc: td
+    doc: td2_derivation_et_differentielle
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: false
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td2_PhV110_corrige
+    titre: "TD 2 -- DÉRIVATION ET DIFFÉRENTIELLE (4h) Interprétation en Physique -- Test"
+    matiere: piscines-de-sciences-et-methodologie
+    type_doc: td
+    doc: td2_derivation_et_differentielle
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: false
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td2_PhV110_fiche
+    titre: "TD 2 -- DÉRIVATION ET DIFFÉRENTIELLE (4h) Interprétation en Physique -- Test"
+    matiere: piscines-de-sciences-et-methodologie
+    type_doc: td
+    doc: td2_derivation_et_differentielle
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: true
+    show_objectifs_pedagogiques_etudiants: true
+    show_objectifs_pedagogiques_enseignants: true
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: true
+    show_remarques_pedagogiques_conseils_animation: true
+    show_bilan: true
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master]
+
+  - name: td3_PhV110
+    titre: "TD 3 -- FONCTIONS, DERIVES, INTEGRALE (4h) Description mathématique du mouvement à 1D"
+    matiere: piscines-de-sciences-et-methodologie
+    type_doc: td
+    doc: td3_fonctions_derives_integrale
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: true
+    show_objectifs_pedagogiques_etudiants: true
+    show_objectifs_pedagogiques_enseignants: true
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: true
+    show_remarques_pedagogiques_conseils_animation: true
+    show_bilan: true
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master]
+
+  - name: td3_PhV110_corrige
+    titre: "TD 3 -- FONCTIONS, DERIVES, INTEGRALE (4h) Description mathématique du mouvement à 1D"
+    matiere: piscines-de-sciences-et-methodologie
+    type_doc: td
+    doc: td3_fonctions_derives_integrale
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: [lycee, prepa, licence]
+
+  - name: td3_PhV110_fiche
+    titre: "TD 3 -- FONCTIONS, DERIVES, INTEGRALE (4h) Description mathématique du mouvement à 1D -- Fiche"
+    matiere: piscines-de-sciences-et-methodologie
+    type_doc: td
+    doc: td3_fonctions_derives_integrale
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: true
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: true
+    show_objectifs_pedagogiques_enseignants: true
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: true
+    show_remarques_pedagogiques_conseils_animation: true
+    show_bilan: true
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master]
+
+  - name: td4_PhV110_corrige
+    titre: "TD 4 -- VECTEURS EN PHYSIQUE (4h)"
+    matiere: piscines-de-sciences-et-methodologie
+    type_doc: td
+    doc: td4_vecteurs_en_physique
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: [lycee, prepa, licence]
+
+  - name: td4_PhV110_fiche
+    titre: "TD 4 -- VECTEURS EN PHYSIQUE (4h)"
+    matiere: piscines-de-sciences-et-methodologie
+    type_doc: td
+    doc: td4_vecteurs_en_physique
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: true
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: true
+    show_objectifs_pedagogiques_enseignants: true
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: true
+    show_remarques_pedagogiques_conseils_animation: true
+    show_bilan: true
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master]
+
+  # ---------------- Mécanique du points ----------------
+
+  - name: td1_PhV111_enonces
+    titre: "TD 1 -- CINÉMATIQUE EN COORDONNÉES CARTÉSIENNES -- Énoncés"
+    matiere: mecanique-de-point-ipsa
+    type_doc: td
+    doc: td1_cinematique_cartesiennes
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: false
+    show_coup_de_pouce: false
+    show_accroche_point_cours_essentiel: false
+    show_outils_mathematiques: false
+    show_liens_autres_disciplines: false
+    show_correction: false
+    show_solution: false
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td1_PhV111_aides
+    titre: "TD 1 -- CINÉMATIQUE EN COORDONNÉES CARTÉSIENNES -- Aides"
+    matiere: mecanique-de-point-ipsa
+    type_doc: td
+    doc: td1_cinematique_cartesiennes
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_accroche_point_cours_essentiel: true
+    show_outils_mathematiques: true
+    show_liens_autres_disciplines: false
+    show_coup_de_pouce: true
+    show_correction: false
+    show_solution: false
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td1_PhV111_corrige
+    titre: "TD 1 -- CINÉMATIQUE EN COORDONNÉES CARTÉSIENNES -- Corrigé"
+    matiere: mecanique-de-point-ipsa
+    type_doc: td
+    doc: td1_cinematique_cartesiennes
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_accroche_point_cours_essentiel: true
+    show_outils_mathematiques: true
+    show_liens_autres_disciplines: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master]
+
+  - name: td1_PhV111_fiche
+    titre: "TD 1 -- CINÉMATIQUE EN COORDONNÉES CARTÉSIENNES -- Détailles"
+    matiere: mecanique-de-point-ipsa
+    type_doc: td
+    doc: td1_cinematique_cartesiennes
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: true
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: true
+    show_objectifs_pedagogiques_enseignants: true
+    show_point_cours: true
+    show_accroche_point_cours_essentiel: true
+    show_outils_mathematiques: true
+    show_liens_autres_disciplines: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: true
+    show_remarques_pedagogiques_conseils_animation: true
+    show_bilan: true
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master, doctorat]
+
+  - name: td2_PhV111_enonces
+    titre: "TD 2 -- Cinématique en coordonnées polaires (2D) et Cylindriques (3D) -- Énoncé"
+    matiere: mecanique-de-point-ipsa
+    type_doc: td
+    doc: td2_cinematique_en_coordonnees_polaire_ou_cylindrique
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: false
+    show_coup_de_pouce: false
+    show_accroche_point_cours_essentiel: false
+    show_outils_mathematiques: false
+    show_liens_autres_disciplines: false
+    show_correction: false
+    show_solution: false
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td2_PhV111_aides
+    titre: "TD 2 -- Cinématique en coordonnées polaires (2D) et Cylindriques (3D) -- Aides"
+    matiere: mecanique-de-point-ipsa
+    type_doc: td
+    doc: td2_cinematique_en_coordonnees_polaire_ou_cylindrique
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_accroche_point_cours_essentiel: true
+    show_outils_mathematiques: true
+    show_liens_autres_disciplines: false
+    show_coup_de_pouce: true
+    show_correction: false
+    show_solution: false
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td2_PhV111_corrige
+    titre: "TD 2 -- Cinématique en coordonnées polaires (2D) et Cylindriques (3D) -- Corrigé"
+    matiere: mecanique-de-point-ipsa
+    type_doc: td
+    doc: td2_cinematique_en_coordonnees_polaire_ou_cylindrique
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_accroche_point_cours_essentiel: true
+    show_outils_mathematiques: true
+    show_liens_autres_disciplines: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master]
+
+  - name: td2_PhV111_fiche
+    titre: "TD 2 -- Cinématique en coordonnées polaires (2D) et Cylindriques (3D) -- Détailles"
+    matiere: mecanique-de-point-ipsa
+    type_doc: td
+    doc: td2_cinematique_en_coordonnees_polaire_ou_cylindrique
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_plan_seance: true
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: true
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: true
+    show_objectifs_pedagogiques_enseignants: true
+    show_point_cours: true
+    show_accroche_point_cours_essentiel: true
+    show_outils_mathematiques: true
+    show_liens_autres_disciplines: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: true
+    show_remarques_pedagogiques_conseils_animation: true
+    show_bilan: true
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master, doctorat]
+
+  - name: td3_PhV111_enonces
+    titre: "TD 3 -- Base de Frenet, rayon de courbure et accélérations tangentielle et normale -- Énoncé"
+    matiere: mecanique-de-point-ipsa
+    type_doc: td
+    doc: td3_base_de_frenet
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: false
+    show_coup_de_pouce: false
+    show_accroche_point_cours_essentiel: false
+    show_outils_mathematiques: false
+    show_liens_autres_disciplines: false
+    show_correction: false
+    show_solution: false
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td3_PhV111_aides
+    titre: "TD 3 -- Base de Frenet, rayon de courbure et accélérations tangentielle et normale -- Aides"
+    matiere: mecanique-de-point-ipsa
+    type_doc: td
+    doc: td3_base_de_frenet
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_accroche_point_cours_essentiel: true
+    show_outils_mathematiques: true
+    show_liens_autres_disciplines: false
+    show_coup_de_pouce: true
+    show_correction: false
+    show_solution: false
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td3_PhV111_corrige
+    titre: "TD 3 -- Base de Frenet, rayon de courbure et accélérations tangentielle et normale -- Corrigé"
+    matiere: mecanique-de-point-ipsa
+    type_doc: td
+    doc: td3_base_de_frenet
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_accroche_point_cours_essentiel: true
+    show_outils_mathematiques: true
+    show_liens_autres_disciplines: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master]
+
+  - name: td3_PhV111_fiche
+    titre: "TD 3 -- Base de Frenet, rayon de courbure et accélérations tangentielle et normale -- Détailles"
+    matiere: mecanique-de-point-ipsa
+    type_doc: td
+    doc: td3_base_de_frenet
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_plan_seance: true
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: true
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: true
+    show_objectifs_pedagogiques_enseignants: true
+    show_point_cours: true
+    show_accroche_point_cours_essentiel: true
+    show_outils_mathematiques: true
+    show_liens_autres_disciplines: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: true
+    show_remarques_pedagogiques_conseils_animation: true
+    show_bilan: true
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master, doctorat]
+
+  - name: td4_PhV111_enonces
+    titre: "TD 4 -- Loi de Newton -- Énoncé"
+    matiere: mecanique-de-point-ipsa
+    type_doc: td
+    doc: td4_loi_de_newton
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: false
+    show_coup_de_pouce: false
+    show_accroche_point_cours_essentiel: false
+    show_outils_mathematiques: false
+    show_liens_autres_disciplines: false
+    show_correction: false
+    show_solution: false
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td4_PhV111_aides
+    titre: "TD 4 -- Loi de Newton -- Aides"
+    matiere: mecanique-de-point-ipsa
+    type_doc: td
+    doc: td4_loi_de_newton
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_accroche_point_cours_essentiel: true
+    show_outils_mathematiques: true
+    show_liens_autres_disciplines: false
+    show_coup_de_pouce: true
+    show_correction: false
+    show_solution: false
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td4_PhV111_corrige
+    titre: "TD 4 -- Loi de Newton -- Corrigé"
+    matiere: mecanique-de-point-ipsa
+    type_doc: td
+    doc: td4_loi_de_newton
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_accroche_point_cours_essentiel: true
+    show_outils_mathematiques: true
+    show_liens_autres_disciplines: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master]
+
+  - name: td4_PhV111_fiche
+    titre: "TD 4 -- Loi de Newton -- Détailles"
+    matiere: mecanique-de-point-ipsa
+    type_doc: td
+    doc: td4_loi_de_newton
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_plan_seance: true
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: true
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: true
+    show_objectifs_pedagogiques_enseignants: true
+    show_point_cours: true
+    show_accroche_point_cours_essentiel: true
+    show_outils_mathematiques: true
+    show_liens_autres_disciplines: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: true
+    show_remarques_pedagogiques_conseils_animation: true
+    show_bilan: true
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master, doctorat]
+
+  - name: projet1_PhV111_enonces
+    titre: "Projet 1 -- Conservation de la quantité de mouvement & équation de Tsiolkovski. -- Énoncé"
+    matiere: mecanique-de-point-ipsa
+    type_doc: projet
+    doc: projet1_Tsiolkovski
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: false
+    show_coup_de_pouce: false
+    show_accroche_point_cours_essentiel: false
+    show_outils_mathematiques: false
+    show_liens_autres_disciplines: false
+    show_correction: false
+    show_solution: false
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: projet1_PhV111_aides
+    titre: "Projet 1 -- Conservation de la quantité de mouvement & équation de Tsiolkovski. -- Aides"
+    matiere: mecanique-de-point-ipsa
+    type_doc: projet
+    doc: projet1_Tsiolkovski
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_accroche_point_cours_essentiel: true
+    show_outils_mathematiques: true
+    show_liens_autres_disciplines: false
+    show_coup_de_pouce: true
+    show_correction: false
+    show_solution: false
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: projet1_PhV111_corrige
+    titre: "Projet 1 -- Conservation de la quantité de mouvement & équation de Tsiolkovski. -- Corrigé"
+    matiere: mecanique-de-point-ipsa
+    type_doc: projet
+    doc: projet1_Tsiolkovski
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_accroche_point_cours_essentiel: true
+    show_outils_mathematiques: true
+    show_liens_autres_disciplines: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master]
+
+  - name: projet1_PhV111_fiche
+    titre: "Projet 1 -- Conservation de la quantité de mouvement & équation de Tsiolkovski. -- Détailles"
+    matiere: mecanique-de-point-ipsa
+    type_doc: projet
+    doc: projet1_Tsiolkovski
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_plan_seance: true
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: true
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: true
+    show_objectifs_pedagogiques_enseignants: true
+    show_point_cours: true
+    show_accroche_point_cours_essentiel: true
+    show_outils_mathematiques: true
+    show_liens_autres_disciplines: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: true
+    show_remarques_pedagogiques_conseils_animation: true
+    show_bilan: true
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master, doctorat]
+
+  - name: td1_test_Ph110_0
+    titre: "TD 2 -- DÉRIVATION ET DIFFÉRENTIELLE (4h) Interprétation en Physique -- Test"
+    matiere: piscines-de-sciences-et-methodologie
+    type_doc: td
+    doc: td4_vecteurs_en_physique
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: true
+    show_objectifs_pedagogiques_etudiants: true
+    show_objectifs_pedagogiques_enseignants: true
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: true
+    show_remarques_pedagogiques_conseils_animation: true
+    show_bilan: true
+    aller_plus_loin_niveaux: [licence]
+
+  # ---------------- Physique des ondes  ----------------
+
+  - name: td1_PhV212_enonce
+    titre: "TD 1 -- Propagation des ondes mécaniques sur une corde -- Énoncés"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td1_corde
+    etablissement: IPSA
+    promo: A2
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_figure: true
+    show_animation_note: false
+    show_prerequis: false
+    show_attention: false
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: false
+    show_coup_de_pouce: false
+    show_correction: false
+    show_solution: false
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td1_PhV212_aides
+    titre: "TD 1 -- Propagation des ondes mécaniques sur une corde -- Aides"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td1_corde
+    etablissement: IPSA
+    promo: A2
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: false
+    show_solution: false
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td1_PhV212_corrige
+    titre: "TD 1 -- Propagation des ondes mécaniques sur une corde -- Corrigé"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td1_corde
+    etablissement: IPSA
+    promo: A2
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master, doctorat]
+
+  - name: td1_PhV212_fiche
+    titre: "TD 1 -- Propagation des ondes mécaniques sur une corde -- Détaille"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td1_corde
+    etablissement: IPSA
+    promo: A2
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_plan_seance: true
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: true
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: true
+    show_objectifs_pedagogiques_enseignants: true
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: true
+    show_remarques_pedagogiques_conseils_animation: true
+    show_bilan: true
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master, doctorat]
+
+  - name: td1_PhV212_exs_maison_aide
+    titre: "TD 1 -- Propagation des ondes mécaniques sur une corde -- Maison"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td1_corde
+    exercices: [ex5_melde,ex6_stationaire_libre,ex7_bilan_energetique_impedance,ex8_corde_pesante_suspendue,ex9_chaine_de_masses_dispersion,ex10_perle_sur_corde_filtre,ex11_lame_quart_d_onde]
+    etablissement: IPSA
+    promo: A2
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: false
+    show_solution: false
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: tp1_PhV212_enonce
+    titre: "TP 1 -- Ondes stationnaires : modes propres d'un ressort hélicoïdal et d'une corde vibrante {\\color{blue}(Standing Waves: normal modes of a helical spring and a vibrating string)} -- Énoncés"
+    matiere: physique-ondes-ipsa
+    type_doc: tp
+    doc: tp1_corde_ressort
+    etablissement: IPSA
+    promo: A2
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_figure: true
+    show_animation_note: false
+    show_prerequis: false
+    show_attention: false
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: false
+    show_coup_de_pouce: false
+    show_correction: false
+    show_solution: false
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: tp1_PhV212_aides
+    titre: "TD 1 -- Ondes stationnaires : modes propres d'un ressort hélicoïdal et d'une corde vibrante {\\color{blue}(Standing Waves: normal modes of a helical spring and a vibrating string)} -- Aides"
+    matiere: physique-ondes-ipsa
+    type_doc: tp
+    doc: tp1_corde_ressort
+    etablissement: IPSA
+    promo: A2
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_accroche_point_cours_essentiel: true
+    show_outils_mathematiques: true
+    show_liens_autres_disciplines: true
+    show_correction: false
+    show_solution: false
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: tp1_PhV212_corrige
+    titre: "TD 1 -- Ondes stationnaires : modes propres d'un ressort hélicoïdal et d'une corde vibrante {\\color{blue}(Standing Waves: normal modes of a helical spring and a vibrating string)} -- Corrigé"
+    matiere: physique-ondes-ipsa
+    type_doc: tp
+    doc: tp1_corde_ressort
+    etablissement: IPSA
+    promo: A2
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master, doctorat]
+
+  - name: tp1_PhV212_fiche
+    titre: "TD 1 -- Ondes stationnaires : modes propres d'un ressort hélicoïdal et d'une corde vibrante {\\color{blue}(Standing Waves: normal modes of a helical spring and a vibrating string)} -- Détaille"
+    matiere: physique-ondes-ipsa
+    type_doc: tp
+    doc: tp1_corde_ressort
+    etablissement: IPSA
+    promo: A2
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_plan_seance: true
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: true
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: true
+    show_objectifs_pedagogiques_enseignants: true
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_accroche_point_cours_essentiel: true
+    show_outils_mathematiques: true
+    show_liens_autres_disciplines: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: true
+    show_remarques_pedagogiques_conseils_animation: true
+    show_bilan: true
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master, doctorat]
+
+  - name: td2_PhV212_enonce
+    titre: "TD 2 -- Propagation des ondes sonores dans un fluide -- Énoncés"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td2_ondes_sonores
+    etablissement: IPSA
+    promo: A2
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_figure: true
+    show_animation_note: false
+    show_prerequis: false
+    show_attention: false
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: false
+    show_coup_de_pouce: false
+    show_correction: false
+    show_solution: false
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td2_PhV212_aides
+    titre: "TD 2 -- Propagation des ondes sonores dans un fluide -- Aides"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td2_ondes_sonores
+    etablissement: IPSA
+    promo: A2
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: false
+    show_solution: false
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td2_PhV212_corrige
+    titre: "TD 2 -- Propagation des ondes sonores dans un fluide -- Corrigé"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td2_ondes_sonores
+    etablissement: IPSA
+    promo: A2
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master, doctorat]
+
+  - name: td2_PhV212_fiche
+    titre: "TD 2 -- Propagation des ondes sonores dans un fluide -- Détaille"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td2_ondes_sonores
+    etablissement: IPSA
+    promo: A2
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_plan_seance: true
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: true
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: true
+    show_objectifs_pedagogiques_enseignants: true
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: true
+    show_remarques_pedagogiques_conseils_animation: true
+    show_bilan: true
+    aller_plus_loin_niveaux: [lycee, prepa, cpge, CPGE, licence, master, doctorat]
+
+  - name: td2_PhV212_exs_maison_aide
+    titre: "TD 2 -- Propagation des ondes sonores dans un fluide -- Maison"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td2_ondes_sonores
+    exercices: [ex3_kundt_ferme,ex4_reflexion_transmition]
+    etablissement: IPSA
+    promo: A2
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: false
+    show_solution: false
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+
+  - name: td3_PhV212_enonce
+    titre: "TD 3 -- Coefficients de réflexion et transmission, impédance -- Énoncés"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td3_reflexion_transmission
+    etablissement: IPSA
+    promo: A2
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_figure: true
+    show_animation_note: false
+    show_prerequis: false
+    show_attention: false
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: false
+    show_coup_de_pouce: false
+    show_correction: false
+    show_solution: false
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td3_PhV212_aides
+    titre: "TD 3 -- Coefficients de réflexion et transmission, impédance -- Aides"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td3_reflexion_transmission
+    etablissement: IPSA
+    promo: A2
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: false
+    show_solution: false
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: [lycee, cpge, CPGE,  prepa, licence]
+
+
+  - name: td3_PhV212_corrige
+    titre: "TD 3 -- Coefficients de réflexion et transmission, impédance -- Corrigé"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td3_reflexion_transmission
+    etablissement: IPSA
+    promo: A2
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master, doctorat]
+
+  - name: td3_PhV212_fiche
+    titre: "TD 3 -- Coefficients de réflexion et transmission, impédance -- Fiche"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td3_reflexion_transmission
+    etablissement: IPSA
+    promo: A2
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_plan_seance: true
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: true
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: true
+    show_objectifs_pedagogiques_enseignants: true
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: true
+    show_remarques_pedagogiques_conseils_animation: true
+    show_bilan: true
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master, doctorat]
+
+  - name: td1_exs_maison_fiche
+    titre: "TD 3 -- Coefficients de réflexion et transmission, impédance -- Fiche"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td1_corde
+    exercices: [ex1_corde_nylon]
+    etablissement: IPSA
+    promo: A2
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: true
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: true
+    show_objectifs_pedagogiques_enseignants: true
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: true
+    show_remarques_pedagogiques_conseils_animation: true
+    show_bilan: true
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master, doctorat]
+
+# ---------------- IOGS ----------------
+
+  - name: td1_ONIP1_fiche
+    titre: "TD 1 --  -- Fiche"
+    matiere: onip-iogs
+    type_doc: td
+    doc: td1_intro
+    #exercices: [td1_ex1]
+    etablissement: IOGS
+    promo: 3
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: true
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: true
+    show_objectifs_pedagogiques_enseignants: true
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: true
+    show_remarques_pedagogiques_conseils_animation: true
+    show_bilan: true
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master, doctorat]
+  
+  - name: td2_ONIP1_fiche
+    titre: "TD 2 --  -- Fiche"
+    matiere: onip-iogs
+    type_doc: td
+    doc: td2_seance2
+    #exercices: [td1_ex1]
+    etablissement: IOGS
+    promo: 3
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: true
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: true
+    show_objectifs_pedagogiques_enseignants: true
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: true
+    show_remarques_pedagogiques_conseils_animation: true
+    show_bilan: true
+    aller_plus_loin_niveaux: [lycee, cpge,prepa, licence, master, doctorat]
+
+  - name: td3_ONIP1_fiche
+    titre: "TD 3 --  -- Fiche"
+    matiere: onip-iogs
+    type_doc: td
+    doc: td3_seance3
+    #exercices: [td1_ex1]
+    etablissement: IOGS
+    promo: 3
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: true
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: true
+    show_objectifs_pedagogiques_enseignants: true
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: true
+    show_remarques_pedagogiques_conseils_animation: true
+    show_bilan: true
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master, doctorat]
+
+# ---------------- Exemples pour les autres matières ----------------
+  - name: td1_ex1_fiche
+    titre: "Fiche -- Corde de nylon"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td1_corde
+    exercices: [ex1_corde_nylon]
+    etablissement: IPSA
+    promo: A2
+    annee: "2025-2026"
+    show_figure: true
+    show_animation_note: true
+    show_coup_de_pouce: true
+    show_correction: true
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master, doctorat]
+
+  - name: td1_ex1_coup_de_pouce
+    titre: "TD 1 Ex.1 -- Coup de pouce (sans corrigé)"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td1_corde
+    exercices: [ex1_corde_nylon]
+    etablissement: IPSA
+    promo: A2
+    show_figure: true
+    show_animation_note: false
+    show_coup_de_pouce: true
+    show_correction: false
+    show_solution: false
+    aller_plus_loin_niveaux: []
+
+  - name: td1_ex1_solution_detaillee
+    titre: "TD 1 Ex.1 -- Solution détaillée (à projeter en fin de séance)"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td1_corde
+    exercices: [ex1_corde_nylon]
+    etablissement: IPSA
+    promo: A2
+    show_figure: true
+    show_animation_note: true
+    show_coup_de_pouce: false
+    show_correction: true
+    show_solution: true
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master, doctorat]
+
+  - name: td2_enonce
+    titre: "TD 2 -- Propagation des ondes sonores dans un fluide"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td2_ondes_sonores
+    etablissement: IPSA
+    promo: A2
+    show_figure: true
+    show_animation_note: false
+    show_coup_de_pouce: false
+    show_correction: false
+    show_solution: false
+    aller_plus_loin_niveaux: []
+
+  - name: td2_corrige
+    titre: "TD 2 -- Corrigé"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td2_ondes_sonores
+    etablissement: IPSA
+    promo: A2
+    show_figure: true
+    show_animation_note: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master, doctorat]
+
+  - name: td3_enonce
+    titre: "TD 3 -- Coefficients de réflexion et transmission, impédance"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td3_reflexion_transmission
+    etablissement: IPSA
+    promo: A2
+    show_figure: true
+    show_animation_note: false
+    show_coup_de_pouce: false
+    show_correction: false
+    show_solution: false
+    aller_plus_loin_niveaux: []
+
+  - name: td3_corrige
+    titre: "TD 3 -- Corrigé"
+    matiere: physique-ondes-ipsa
+    type_doc: td
+    doc: td3_reflexion_transmission
+    etablissement: IPSA
+    promo: A2
+    show_figure: true
+    show_animation_note: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    aller_plus_loin_niveaux: [licence, master]
+
+  - name: cours_chap1
+    titre: "Chapitre 1 -- Ondes mécaniques : introduction"
+    matiere: physique-ondes-ipsa
+    type_doc: cours
+    doc: chap1_intro
+    etablissement: IPSA
+    promo: A2
+    show_figure: true
+    show_animation_note: true
+    aller_plus_loin_niveaux: [licence, master]
+
+  # ---------------- Exemples pour les autres matières ----------------
+
+  - name: agregation_physique_lecon_oscillateurs
+    titre: "Agrégation physique -- Leçon : Oscillateurs mécaniques"
+    matiere: agregation-physique
+    type_doc: cours
+    doc: lecon_oscillateurs
+    etablissement: Université
+    promo: Agrégation
+    show_figure: true
+    show_animation_note: true
+    aller_plus_loin_niveaux: [doctorat]
+
+  - name: agregation_maths_dev1
+    titre: "Agrégation mathématiques -- Développement 1 (gabarit)"
+    matiere: agregation-mathematiques
+    type_doc: td
+    doc: dev1_exemple
+    etablissement: Université
+    promo: Agrégation
+    show_figure: true
+    show_animation_note: false
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    aller_plus_loin_niveaux: []
+
+  - name: recherche_intro_bethe
+    titre: "Recherche -- Introduction à l'ansatz de Bethe"
+    matiere: recherche-integrabilite-quantique
+    type_doc: cours
+    doc: intro_bethe
+    etablissement: LPTMS
+    show_figure: true
+    show_animation_note: false
+    aller_plus_loin_niveaux: [doctorat]

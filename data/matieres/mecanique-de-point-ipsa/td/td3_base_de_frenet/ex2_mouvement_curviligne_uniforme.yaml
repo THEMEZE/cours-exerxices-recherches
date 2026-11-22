@@ -1,0 +1,222 @@
+id: td3_ex2
+intitule: "Mouvement curviligne uniforme : cercle, parabole, applications"
+td: td3
+facultatif: false
+seance: 3
+
+cours_rattache:
+  - cinematique.base_frenet
+  - cinematique.rayon_courbure
+  - cinematique.mouvement_circulaire
+  - cinematique.cercle_osculateur
+
+metadonnees:
+  duree_estimee: "40 min"
+  difficulte: 3
+  priorite: 5
+  type_exercice: "Cours actif / Application directe"
+  indispensable: true
+
+enonce_intro: |
+  Un point matériel $M$ suit une trajectoire plane avec une vitesse $\vec v$ dont la {\bf norme} $\|\vec v\|=v$ est
+  {\bf constante}. On étudie ce mouvement pour une trajectoire circulaire, puis pour une trajectoire parabolique, et on
+  l'applique à des situations réelles (voiture, satellite, voltige aérienne).
+
+prerequis:
+  - titre: "Base de Frenet et accélération"
+    texte: |
+      $\vec v=v\,\vec\tau$, $\vec a=\dfrac{\mathrm dv}{\mathrm dt}\,\vec\tau+\dfrac{v^2}R\,\vec n$, $R=\dfrac{(1+y'^2)^{3/2}}{|y''|}$ pour $y(x)$. Centre de courbure : $C=M+R\,\vec n$.
+  - titre: "Mouvement circulaire"
+    texte: |
+      Cercle de rayon $R$, vitesse angulaire $\omega=\dot\theta$, période $T=2\pi/\omega$, $v=R\omega$, $\vec a=-R\omega^2\,\vec u_r$ en polaire.
+  - titre: "Conversions d'unités"
+    texte: |
+      $1\ \mathrm{km/h}=\dfrac1{3{,}6}\ \mathrm{m/s}$ ; $1\ \mathrm{min}=60\ \mathrm s$ ; $1\ \mathrm{km}=10^3\ \mathrm m$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Relier les grandeurs du mouvement circulaire à la base de Frenet"
+    texte: |
+      Identifier $\vec\tau=\vec u_\theta$ et $\vec n=-\vec u_r$, retrouver $a=v^2/R=R\omega^2$, calculer le rayon de courbure d'une parabole, tracer des cercles osculateurs et placer l'accélération, appliquer à des ordres de grandeur réels.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Consolider la formule $a_N=v^2/R$ sur deux exemples contrastés"
+    texte: |
+      Le cercle est le cas où $R$ est constant (tout est simple) ; la parabole est un cas où $R$ varie : même à vitesse constante, $\|\vec a\|$ varie le long de la trajectoire. Les cercles osculateurs sont l'objet central : demander un tracé {\bf précis} (compas) pour que les étudiants voient l'accélération maximale au sommet. Les applications numériques fixent les ordres de grandeur ($0{,}4\,g$ pour une voiture, $8\ \mathrm{m\,s^{-2}}$ pour un satellite).
+
+point_cours:
+  - titre: "Mouvement uniforme sur une courbe"
+    texte: |
+      Si $v=$ cte : $\vec a=\dfrac{v^2}{R(s)}\,\vec n$. L'accélération est toujours normale, dirigée vers le centre de courbure, d'autant plus grande que $R$ est petit. Cercle : $R=R_0$ et $a=v^2/R_0=R_0\omega^2$ constante en norme.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Penser que $a=0$ car $v$ est constante"
+    texte: |
+      L'accélération est non nulle dès que la trajectoire est courbe. Elle a la norme $v^2/R$ et est perpendiculaire à la vitesse.
+  - titre: "Confondre $\\vec n$ et $\\vec u_r$ dans le cercle"
+    texte: |
+      Pour un cercle centré en $O$, $\vec n=-\vec u_r$ (vers le centre) et $\vec\tau=\pm\vec u_\theta$ (signe de $\dot\theta$). L'accélération $-R\omega^2\,\vec u_r=R\omega^2\,\vec n$.
+  - titre: "Oublier de convertir les unités"
+    texte: |
+      $72\ \mathrm{km/h}=20\ \mathrm{m/s}$, pas $72$. $98{,}0\ \mathrm{min}=5\,880\ \mathrm s$. L'altitude du satellite s'ajoute au rayon terrestre : $r=R_T+h$.
+  - titre: "Prendre la distance à la surface pour le rayon de l'orbite"
+    texte: |
+      Pour un satellite à $640\ \mathrm{km}$ d'altitude, le rayon de l'orbite est $R_T+h=7{,}01\times10^6\ \mathrm m$ et non $6{,}4\times10^5\ \mathrm m$.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Faire tracer les cercles osculateurs au compas"
+    texte: |
+      Distribuer une parabole imprimée sur papier millimétré ($y=x^2$ avec $1\ \mathrm{cm}$ pour $0{,}5\ \mathrm m$). Les étudiants tracent $\vec n$ en $x=0$ et $x=1$, placent $C$ à la distance $R$, tracent le cercle au compas et constatent que le cercle {\bf épouse} la courbe localement.
+  - titre: "Estimer avant de calculer"
+    texte: |
+      « Un satellite de basse orbite fait un tour en environ une heure et demie : quelle vitesse ? » ($\sim8\ \mathrm{km/s}$). « Un TGV prend un virage à $300\ \mathrm{km/h}$ avec un rayon $\geq4\ \mathrm{km}$ : quelle accélération ? » ($\sim1{,}7\ \mathrm{m\,s^{-2}}$).
+
+bilan:
+  - titre: "Mouvement uniforme"
+    texte: |
+      $\vec a=\dfrac{v^2}R\,\vec n$ ; cercle : $R=$ cte, $a=R\omega^2$, $\vec\tau=\vec u_\theta$, $\vec n=-\vec u_r$. Parabole $y=kx^2$ : $R(x)=\dfrac{(1+4k^2x^2)^{3/2}}{2k}$ ; $R(0)=\dfrac1{2k}$ ; $a$ maximale au sommet : $a=2kv^2$. Voiture : $a=4\ \mathrm{m\,s^{-2}}$ ; satellite : $v\approx7{,}49\ \mathrm{km/s}$, $a\approx8{,}0\ \mathrm{m\,s^{-2}}$.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Parabole et lois d'échelle"
+    texte: |
+      Montrer que pour la parabole $y=kx^2$ le centre de courbure en $x$ est $C=\left(-4kx^3,\ \dfrac1{2k}+3kx^2\right)$ et que la développée est une parabole semi-cubique. Vérifier avec $k=1$, $x=1$ : $C=(-4;3{,}5)$.
+  - niveau: master
+    titre: "Courbure maximale d'une ellipse et d'une orbite"
+    texte: |
+      Pour l'ellipse de Kepler, l'accélération est maximale au périhélie : $\vec a=-\dfrac{C^2}{p\,r^2}\vec u_r$. Montrer que $R=p$ au périhélie ($R=b^2/a$) et que $a_N=v_{\max}^2/p$ retrouve $a=\mathcal GM/r_{\min}^2$ avec $v_{\max}^2=\dfrac{C^2(1+e)^2}{p^2}$.
+
+accroche_point_cours_essentiel:
+  - titre: "Aller vite sans accélérer ?"
+    duree_introduction: "3 à 5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Le compteur d'une voiture reste bloqué à $72$ km/h pendant un virage. Le conducteur a-t-il « accéléré » ? Et dans un virage deux fois plus serré, à la même vitesse, l'accélération est-elle la même ?
+    texte: |
+      {\bf Idée clé : à vitesse constante, tout est dans la courbure.} $\vec a=\dfrac{v^2}R\,\vec n$ : l'accélération est perpendiculaire à la vitesse et inversement proportionnelle au rayon de courbure. Virage deux fois plus serré : accélération deux fois plus grande.
+
+outils_mathematiques:
+  - titre: "Rayon de courbure d'une parabole"
+    texte: |
+      $y=kx^2$, $y'=2kx$, $y''=2k$ : $R(x)=\dfrac{(1+4k^2x^2)^{3/2}}{2k}$. Minimal en $x=0$.
+  - titre: "Position du centre de courbure"
+    texte: |
+      $C=M+R\,\vec n$ avec $\vec n$ unitaire vers la concavité. Pour $y=x^2$ en $x=1$ : $\vec\tau=\dfrac{(1,2)}{\sqrt5}$, $\vec n=\dfrac{(-2,1)}{\sqrt5}$ (la parabole est concave vers le haut), $R=\dfrac{5\sqrt5}2$ : $C=(1,1)+\dfrac{5\sqrt5}2\cdot\dfrac{(-2,1)}{\sqrt5}=(-4;\ 3{,}5)$.
+  - titre: "Relation période, rayon, vitesse"
+    texte: |
+      $v=\dfrac{2\pi r}T$, $a=\dfrac{v^2}r=\dfrac{4\pi^2r}{T^2}$.
+
+liens_autres_disciplines:
+  - discipline: "Astronomie"
+    texte: |
+      Le satellite en orbite circulaire basse a $v\approx7{,}5\ \mathrm{km/s}$ et une période d'environ $90$ minutes. La station spatiale fait $16$ tours par jour.
+  - discipline: "Transport et sécurité routière"
+    texte: |
+      Un virage non relevé accepte $a_N\lesssim0{,}3$ à $0{,}7\,g$ selon l'adhérence ; la vitesse conseillée dans un virage est $v=\sqrt{a_{\max}R}$ (voir exercice 7).
+  - discipline: "Aviation et voltige"
+    texte: |
+      Le facteur de charge d'un avion en virage ou en boucle est $n=1+a_N/g$ ; un pilote de voltige subit jusqu'à $8$--$10\,g$ dans une boucle serrée.
+
+schemas_proposes:
+  - titre: "Mouvement circulaire uniforme avec la base de Frenet"
+    description: |
+      Cercle de centre $O$ et de rayon $R$ ; 4 points ($\theta=0,\pi/2,\pi,3\pi/2$). En chaque point : $\vec v$ (tangent), $\vec a$ (vers $O$), $\vec\tau$ (même sens que $\vec v$), $\vec n$ (vers $O$). Faire figurer aussi $\vec u_r$ et $\vec u_\theta$ avec une couleur différente pour montrer $\vec n=-\vec u_r$.
+  - titre: "Parabole $y=x^2$ avec cercles osculateurs et accélérations"
+    description: |
+      Tracer la parabole pour $-2\le x\le2$ (échelle $1\ \mathrm{cm}=0{,}5\ \mathrm m$). En $x=0$ : $\vec v$ horizontal, $\vec a$ vertical vers le haut, cercle de rayon $0{,}5$ centré en $(0;0{,}5)$. En $x=1$ : $\vec\tau$, $\vec n$, cercle de rayon $5{,}6$ centré en $(-4;3{,}5)$, $\vec a$ le long de $\vec n$ (petit). Montrer que $\|\vec a(0)\|\approx11{,}2\,\|\vec a(1)\|$.
+    tikz: |
+      \begin{tikzpicture}[>=stealth,scale=0.55]
+        \draw[->] (-9,0)--(3,0) node[right]{$x$};
+        \draw[->] (0,-1)--(0,6) node[above]{$y$};
+        \draw[thick,domain=-2.4:2.1,samples=80] plot (\x,{\x*\x});
+        \draw[dashed,red] (0,0.5) circle (0.5);
+        \draw[dashed,blue] (-4,3.5) circle (5.59);
+        \fill (0,0) circle (2pt) node[below]{$O$}; \fill (1,1) circle (2pt) node[right]{$P$};
+        \fill[red] (0,0.5) circle (2pt); \fill[blue] (-4,3.5) circle (2pt) node[left]{$C_1$};
+        \draw[->,thick,red] (0,0)--(1.2,0) node[below]{$\vec v$};
+        \draw[->,very thick,red] (0,0)--(0,1.5) node[left]{$\vec a$};
+        \draw[->,thick,blue] (1,1)--++(0.45,0.9) node[right]{$\vec v$};
+        \draw[->,very thick,blue] (1,1)--++(-0.45,0.22) node[above left]{$\vec a$};
+      \end{tikzpicture}
+  - titre: "Orbite circulaire du satellite"
+    description: |
+      Terre (rayon $R_T$), orbite concentrique à l'altitude $h=640\ \mathrm{km}$ (échelle déformée : exagérer $h$), satellite avec $\vec v$ tangent et $\vec a$ dirigé vers le centre de la Terre. Indiquer $r=R_T+h$.
+
+questions:
+  - id: q1
+    enonce: |
+      {\bf 1/ Mouvement circulaire uniforme.}
+      \begin{enumerate}[label=(\alph*)]
+          \item Rappeler les grandeurs géométriques et cinématiques qui caractérisent le mouvement circulaire uniforme et les relations entre elles.
+          \item Mettre les expressions obtenues en relation avec les expressions de la vitesse et de l'accélération dans la base de Frenet.
+          \item Représenter la trajectoire sur un graphique et préciser, en différents points, la vitesse, l'accélération et la base de Frenet.
+      \end{enumerate}
+    coup_de_pouce: |
+      Pour (a), pensez à $R$, $\omega$, $T$, $f$, $v$, $a$. Pour (b), identifiez $\vec\tau$ et $\vec n$ dans la base polaire.
+    correction: |
+      (a) $R$, $\omega=\dot\theta$, $T=2\pi/\omega$, $f=1/T$, $v=R\omega$, $a=R\omega^2=v^2/R$, $s=R\theta=R\omega t$. (b) $\vec\tau=\vec u_\theta$, $\vec n=-\vec u_r$, $\vec v=R\omega\,\vec\tau$, $\vec a=\dfrac{v^2}R\,\vec n$. (c) $\vec v$ tangent, $\vec a$ vers le centre.
+    solution:
+      - titre: "(a) Grandeurs caractéristiques"
+        texte: |
+          {\bf Géométriques} : rayon $R$, centre $O$, angle $\theta$, abscisse curviligne $s=R\theta$ (arc parcouru). {\bf Cinématiques} : vitesse angulaire $\omega=\dot\theta$ constante, période $T=\dfrac{2\pi}\omega$, fréquence $f=\dfrac1T=\dfrac\omega{2\pi}$, vitesse $v=R\omega$, accélération $a=R\omega^2=\dfrac{v^2}R=v\omega$. Relations : $\theta=\omega t$, $s=vt$, $v=\dfrac{2\pi R}T$.
+      - titre: "(b) Lien avec la base de Frenet"
+        texte: |
+          En polaire, $\vec v=R\omega\,\vec u_\theta$ et $\vec a=-R\omega^2\,\vec u_r$. Comparons avec Frenet : $\vec\tau=\vec u_\theta$ (sens du mouvement pour $\omega>0$), $\vec n=-\vec u_r$ (vers le centre). Alors
+          $$\vec v=v\,\vec\tau,\qquad\vec a=\frac{v^2}R\,\vec n,\qquad\dot v=0.$$
+          La base de Frenet s'identifie à $(\vec u_\theta,-\vec u_r)$ : {\bf elle tourne avec le mobile à la vitesse $\omega$}. Le rayon de courbure est le rayon du cercle : $R=R_0$ en tout point.
+      - titre: "(c) Représentation"
+        texte: |
+          On dessine le cercle de centre $O$ et on place, aux points $\theta=0,\ \pi/2,\ \pi,\ 3\pi/2$, le vecteur $\vec v$ tangent au cercle (dans le sens trigonométrique pour $\omega>0$), le vecteur $\vec a$ dirigé de $M$ vers $O$ (même direction que $\vec n$), $\vec\tau$ et $\vec n$ unitaires. Les vecteurs $\vec v$ et $\vec a$ ont {\bf même norme en tout point} ($R\omega$ et $R\omega^2$) mais {\bf changent de direction}. Le centre de courbure est $O$ pour tous les points.
+
+  - id: q2
+    enonce: |
+      {\bf 2/ Mouvement parabolique.} Le point $M$ décrit la parabole d'équation $y(x)=kx^2$ avec $k=1\ \mathrm{m^{-1}}$, à vitesse $v$ de norme constante.
+      \begin{enumerate}[label=(\alph*)]
+          \item Calculer le rayon de courbure $R$, puis l'accélération $\vec a$ en $x=0$, puis en $x=1\ \mathrm m$.
+          \item Représenter la trajectoire sur un graphique.
+          \item Tracer sur la trajectoire les cercles osculateurs correspondant aux points $x=0$ et $x=1\ \mathrm m$, et représenter le vecteur accélération $\vec a$ en ces points.
+      \end{enumerate}
+    coup_de_pouce: |
+      Utilisez $R=\dfrac{(1+y'^2)^{3/2}}{|y''|}$ avec $y'=2kx$ et $y''=2k$. Puis $a=v^2/R$, dirigée selon $\vec n$ (vers le haut, côté concave). Pour le centre : $C=M+R\,\vec n$.
+    correction: |
+      $R(x)=\dfrac{(1+4k^2x^2)^{3/2}}{2k}$ ; $R(0)=0{,}5$ m, $a(0)=2v^2$ (vertical vers le haut) ; $R(1)=\dfrac{5\sqrt5}2\approx5{,}59$ m, $a(1)=\dfrac{2v^2}{5\sqrt5}\approx0{,}179\,v^2$, dirigée selon $\vec n=\dfrac{(-2,1)}{\sqrt5}$.
+    solution:
+      - titre: "(a) Rayon de courbure et accélération"
+        texte: |
+          $y'=2kx$, $y''=2k$ :
+          $$\boxed{R(x)=\frac{\left(1+4k^2x^2\right)^{3/2}}{2k}}.$$
+          En $x=0$ : $R=\dfrac1{2k}=0{,}5\ \mathrm m$ et, $v$ étant constante, $a=\dfrac{v^2}R=2kv^2=2v^2$ ; $\vec a=2v^2\,\vec u_y$ (vers le haut, vers le centre $C_0=(0;0{,}5)$).
+
+          En $x=1\ \mathrm m$ : $y'=2$, $R=\dfrac{5^{3/2}}2=\dfrac{5\sqrt5}2\approx5{,}59\ \mathrm m$, donc $a=\dfrac{v^2}R=\dfrac{2v^2}{5\sqrt5}\approx0{,}179\,v^2$. La direction de $\vec a$ est $\vec n$ : $\vec\tau=\dfrac{(1,2)}{\sqrt5}$, $\vec n=\dfrac{(-2,1)}{\sqrt5}$, soit $\vec a=a\,\vec n\approx v^2\,(-0{,}16;\ 0{,}08)$.
+
+          {\bf Rapport :} $\dfrac{a(0)}{a(1)}=\dfrac{R(1)}{R(0)}=5\sqrt5\approx11{,}2$ : l'accélération est plus de {\bf dix fois plus grande} au sommet qu'en $x=1$, à vitesse égale.
+      - titre: "(b) Trajectoire"
+        texte: |
+          Parabole de sommet $O$, d'axe $Oy$, ouverte vers le haut, passant par $(\pm1;1)$, $(\pm2;4)$. Elle est parcourue à vitesse de norme constante : le mobile « va plus vite horizontalement » au sommet et plus vite verticalement sur les bras.
+      - titre: "(c) Cercles osculateurs"
+        texte: |
+          Pour $x=0$ : cercle de rayon $0{,}5$ centré en $(0;0{,}5)$ : il est tangent à la parabole en $O$ et reste {\bf à l'intérieur} d'elle près du sommet (la parabole s'élargit plus vite que le cercle). Pour $x=1$ : centre $C_1=M+R\,\vec n=(1;1)+\dfrac{5\sqrt5}2\cdot\dfrac{(-2,1)}{\sqrt5}=(-4;\ 3{,}5)$ et rayon $5{,}59\ \mathrm m$ : un grand cercle de faible courbure. Le vecteur $\vec a$ est porté par la droite $MC$ en chaque point, dirigé vers le centre : court en $x=1$, long en $x=0$.
+
+  - id: q3
+    enonce: |
+      {\bf 3/ (*) Applications.}
+      \begin{enumerate}[label=(\alph*)]
+          \item Une voiture se déplace à la vitesse constante de $72\ \mathrm{km/h}$ sur une trajectoire de $100\ \mathrm m$ de rayon. Quelle est son accélération ?
+          \item Un satellite est en orbite circulaire, à $640\ \mathrm{km}$ de la surface de la Terre, avec une période de $98{,}0$ minutes. Son mouvement étant circulaire uniforme, déterminer la vitesse du satellite. On donne le rayon de la Terre $R_T=6{,}37\times10^6\ \mathrm m$.
+          \item La figure de couverture représente les voltiges d'avions acrobatiques. Représenter sur la figure les cercles osculateurs des trajectoires des trois avions aux points où se trouvent les trois avions.
+      \end{enumerate}
+    coup_de_pouce: |
+      (a) $a=v^2/R$ avec $v$ en $\mathrm{m/s}$. (b) $r=R_T+h$ puis $v=2\pi r/T$ avec $T$ en secondes. (c) Pour chaque avion : tangent à la trajectoire, centre du côté concave.
+    correction: |
+      (a) $a=4\ \mathrm{m\,s^{-2}}\approx0{,}41\,g$. (b) $r=7{,}01\times10^6\ \mathrm m$, $v=\dfrac{2\pi r}T\approx7{,}49\ \mathrm{km/s}$, $a=\dfrac{v^2}r\approx8{,}0\ \mathrm{m\,s^{-2}}$. (c) Construction géométrique.
+    solution:
+      - titre: "(a) Voiture"
+        texte: |
+          $v=72/3{,}6=20\ \mathrm{m/s}$ ; $a=\dfrac{v^2}R=\dfrac{400}{100}=\boxed{4{,}0\ \mathrm{m\,s^{-2}}}\approx0{,}41\,g$. L'accélération est horizontale, perpendiculaire à la vitesse, dirigée vers le centre du virage. C'est l'ordre de grandeur d'un virage sportif sur route.
+      - titre: "(b) Satellite"
+        texte: |
+          Rayon de l'orbite : $r=R_T+h=6{,}37\times10^6+0{,}640\times10^6=7{,}01\times10^6\ \mathrm m$. Période : $T=98{,}0\times60=5\,880\ \mathrm s$.
+          $$v=\frac{2\pi r}T=\frac{2\pi\times7{,}01\times10^6}{5\,880}\approx\boxed{7{,}49\times10^3\ \mathrm{m/s}=7{,}49\ \mathrm{km/s}}\ (\approx27\,000\ \mathrm{km/h}).$$
+          Accélération : $a=\dfrac{v^2}r\approx8{,}0\ \mathrm{m\,s^{-2}}$, très proche de $g(R_T/r)^2\approx8{,}1\ \mathrm{m\,s^{-2}}$ : le satellite est « en chute libre » autour de la Terre, ce qui prépare la dynamique.
+      - titre: "(c) Cercles osculateurs des avions"
+        texte: |
+          Pour chaque avion : (1) tracer la tangente à la trajectoire à la position de l'avion ; (2) tracer la normale, du côté {\bf concave} de la trajectoire ; (3) estimer le rayon en cherchant le cercle qui « colle » à la trajectoire sur un petit arc autour du point ; (4) tracer ce cercle. Un avion au sommet d'une boucle a un cercle osculateur dont le centre est {\bf en dessous} ; un avion en bas de boucle a un centre {\bf au-dessus} ; un avion sur un tronçon presque rectiligne a un très grand rayon (cercle presque une droite). Plus la trajectoire est serrée, plus le rayon est petit et plus le pilote subit une forte accélération $v^2/R$.
+

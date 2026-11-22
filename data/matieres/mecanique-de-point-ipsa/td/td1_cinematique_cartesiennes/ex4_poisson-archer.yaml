@@ -1,4 +1,4 @@
-id: td1_ex4
+id: td1_ex4_p
 intitule: "Le poisson-archer, expert en balistique"
 td: td1
 facultatif: true
@@ -14,6 +14,7 @@ cours_rattache:
 metadonnees:
   duree_estimee: "30 min"
   difficulte: 3
+  priorite: 2
   type_exercice: "Entraînement / Exercice non guidé"
   indispensable: false
 

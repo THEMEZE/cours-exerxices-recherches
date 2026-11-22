@@ -32,15 +32,15 @@
 sujets:
   - id: ondes-mecaniques
     nom: "Ondes mécaniques"
-    quartz_path: physique/ipsa-ondes
+    quartz_path: physique/IPSA/ipsa-physique-ondes
 
   - id: ondes-acoustiques
     nom: "Ondes acoustiques"
-    quartz_path: physique/ipsa-ondes
+    quartz_path: physique/IPSA/ipsa-physique-ondes
 
   - id: reflexion-transmission
     nom: "Réflexion / transmission, impédance"
-    quartz_path: physique/ipsa-ondes
+    quartz_path: physique/IPSA/ipsa-physique-ondes
 
   - id: agregation-physique
     nom: "Agrégation de physique"
@@ -74,8 +74,24 @@ sujets:
     nom: "Bethe ansatz"
     quartz_path: mathematiques/bethe-ansatz
 
-liens:
-  # --- Hiérarchies (parent -> sous-sujet) ---
+  # --- Ajoutés pour les matières qui n'avaient pas de page-sujet ---
+  - id: mecanique-du-point
+    nom: "Mécanique du point"
+    quartz_path: physique/IPSA/ipsa-mecanique-point
+
+  - id: onip
+    nom: "Outils numériques (ONIP)"
+    quartz_path: physique/IOGS/iogs-onip
+
+  - id: grandeurs-physiques
+    nom: "Grandeurs physiques et analyse dimensionnelle"
+    quartz_path: physique/IPSA/ipsa-piscines-sciences-methodologie
+
+  - id: tp-ipsa
+    nom: "Travaux pratiques IPSA"
+    quartz_path: physique/IPSA/ipsa-tp
+
+liens:  # --- Hiérarchies (parent -> sous-sujet) ---
   - de: theorie-m
     a: supergravite
     poids: 0.9
@@ -132,3 +148,26 @@ liens:
     poids: 0.1
     type: associe
     note: "Lien faible -- à ce stade juste une note, pas encore de contenu commun réel."
+
+  # --- Liens proposés pour les matières ajoutées (à ajuster à ton goût) ---
+  - de: mecanique-du-point
+    a: ondes-mecaniques
+    poids: 0.5
+    type: associe
+    note: "La cinématique/dynamique du point précède l'étude des ondes."
+
+  - de: grandeurs-physiques
+    a: mecanique-du-point
+    poids: 0.4
+    type: associe
+    note: "Dimensions et unités servent à vérifier chaque résultat de mécanique."
+
+  - de: onip
+    a: mecanique-du-point
+    poids: 0.3
+    type: associe
+
+  - de: tp-ipsa
+    a: ondes-mecaniques
+    poids: 0.6
+    type: associe

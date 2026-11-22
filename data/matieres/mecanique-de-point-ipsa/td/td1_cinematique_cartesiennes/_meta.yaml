@@ -7,7 +7,256 @@ exercices_ordre:
   - ex1_mouvement_2d
   - ex2_balle_golf
   - ex3_course_automobile
+  - ex6_feu_orange
   - ex4_poisson-archer
+  - ex7_parabole_surete
+  - ex8_balle_rebondissante
   - ex3_mouvement_circulaire_cartesien
   - ex4_derivee_vecteur_tournant
+  - ex10_helice
+  - ex9_cycloide
   - ex5_equations_horaires
+
+enonce_intro: |
+  {\bf Conventions valables pour tout le TD (sauf mention contraire).} Les mouvements étudiés sont ceux d'un {\bf point matériel} dans le référentiel terrestre, supposé galiléen. L'intensité de la pesanteur est $g=9{,}81~\mathrm{m\,s^{-2}}$ et les frottements de l'air sont négligés. Les repères sont cartésiens et orthonormés directs ; les grandeurs sont données en unités du système international. Les exercices marqués {\it (facultatif)} sont des approfondissements ; ceux qui portent une étoile $(*)$ sont des questions d'entraînement non guidées. Les résultats littéraux doivent être établis avant toute application numérique, et vérifiés par homogénéité.
+
+prerequis:
+  - titre: "Dérivation et primitives usuelles"
+    texte: |
+      Dériver un polynôme, $\sin$, $\cos$, $\mathrm e^{at}$, une fonction composée ($\dfrac{\mathrm d}{\mathrm dt}f(\theta(t))=\dot\theta\,f'(\theta)$) ; retrouver une primitive avec une constante d'intégration fixée par une condition initiale. Notations : $\dot x=\dfrac{\mathrm dx}{\mathrm dt}$ et $\ddot x=\dfrac{\mathrm d^2x}{\mathrm dt^2}$.
+  - titre: "Calcul vectoriel dans le plan et dans l'espace"
+    texte: |
+      Composantes d'un vecteur dans une base orthonormée $(\vec u_x,\vec u_y,\vec u_z)$, norme $\|\vec A\|=\sqrt{A_x^2+A_y^2+A_z^2}$, somme de vecteurs, produit scalaire $\vec A\cdot\vec B=A_xB_x+A_yB_y+A_zB_z$ (orthogonalité si nul), produit vectoriel (règle de la main droite). Un vecteur se dérive composante par composante {\bf quand la base est fixe}.
+  - titre: "Trigonométrie"
+    texte: |
+      Cercle trigonométrique, valeurs remarquables ($0,\ \pi/6,\ \pi/4,\ \pi/3,\ \pi/2$), $\cos^2+\sin^2=1$, formules d'addition et de duplication ($\sin2a=2\sin a\cos a$), formules de l'angle moitié ($1-\cos a=2\sin^2\dfrac a2$), décalages de $\pi/2$ et de $\pi$, passage radian $\leftrightarrow$ degré. Vérifier le mode de la calculatrice.
+  - titre: "Équations algébriques"
+    texte: |
+      Résolution d'une équation du second degré (discriminant, deux racines, racine double), d'un système de deux équations à deux inconnues, élimination d'un paramètre entre deux relations (c'est ce qui donne une équation de trajectoire).
+  - titre: "Fonctions et courbes"
+    texte: |
+      Allure de la droite, de la parabole, du cercle, de la sinusoïde. Lecture d'un graphe : pente $\leftrightarrow$ dérivée, aire sous la courbe $\leftrightarrow$ intégrale. Tracer une courbe point par point à partir d'un tableau de valeurs.
+  - titre: "Unités, dimensions et chiffres significatifs"
+    texte: |
+      Unités du système international, analyse dimensionnelle ($[v]=\mathrm{L\,T^{-1}}$, $[a]=\mathrm{L\,T^{-2}}$), conversions ($1~\mathrm{km/h}=1/3{,}6~\mathrm{m/s}$), ordres de grandeur usuels, écriture scientifique, nombre de chiffres significatifs d'un résultat numérique.
+  - titre: "Notions de référentiel, repère, trajectoire"
+    texte: |
+      Un {\bf référentiel} est un solide de référence muni d'une horloge ; un {\bf repère} est un système d'axes lié à ce référentiel. La trajectoire dépend du référentiel (elle est rectiligne dans le référentiel du wagon, parabolique dans celui du quai, pour un objet qui tombe).
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Décrire un mouvement : position, vitesse, accélération"
+    texte: |
+      Savoir écrire et dériver un vecteur position en coordonnées cartésiennes, en déduire $\vec v$ et $\vec a$, calculer leurs normes, et reconnaître la nature du mouvement (uniforme, uniformément varié, circulaire, hélicoïdal).
+  - titre: "Établir des équations horaires par intégration"
+    texte: |
+      Savoir intégrer une accélération connue, fixer les constantes d'intégration grâce aux conditions initiales (position et vitesse à $t=0$), et obtenir ainsi $v(t)$ et $x(t)$. Cas centraux : accélération nulle, accélération constante, accélération centripète.
+  - titre: "Étudier une trajectoire"
+    texte: |
+      Savoir éliminer le temps entre les équations horaires pour obtenir l'équation $y(x)$ de la trajectoire, la reconnaître (droite, parabole, cercle, hélice, cycloïde), la tracer, et placer sur le graphique les vecteurs vitesse et accélération.
+  - titre: "Modéliser et résoudre un problème concret"
+    texte: |
+      Savoir traduire une situation (course, tir, rebond, freinage) en lois horaires, poser une condition de rencontre ou d'arrivée, résoudre l'équation obtenue, discuter les solutions physiquement acceptables, et passer d'un résultat littéral à une application numérique.
+  - titre: "Valider et interpréter un résultat"
+    texte: |
+      Savoir vérifier l'homogénéité d'une formule, tester des cas limites, comparer à un ordre de grandeur, commenter un résultat (« la portée est $6$ fois plus grande sur la Lune », « la vitesse maximale vaut $2V$ au sommet de la roue »).
+  - titre: "Compétences transversales"
+    texte: |
+      Faire un schéma propre avec repère et vecteurs, rédiger un raisonnement en étapes numérotées, manipuler les formules trigonométriques sans erreur de signe, utiliser Python pour tracer une trajectoire (ouverture).
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Positionnement du TD et progression"
+    texte: |
+      Ce TD est le premier de l'année : il fixe les {\bf réflexes de rigueur} (repère, notations, unités, vérifications) et les trois outils fondamentaux du chapitre — {\bf dériver}, {\bf intégrer avec conditions initiales}, {\bf éliminer le temps}. Il prépare la dynamique (TD2) : savoir passer de $\vec a$ à $\vec v$ et $\vec r$ est la condition pour résoudre le principe fondamental. L'exercice « dérivée d'un vecteur unitaire tournant » est le prérequis technique de la cinématique en coordonnées polaires.
+  - titre: "Trois parcours selon le temps disponible"
+    texte: |
+      {\bf Parcours essentiel} (environ 2 h) : exercices indispensables — mouvement à 2 dimensions, balle de golf, mouvement circulaire en cartésien, dérivée du vecteur unitaire tournant (environ 125 min).
+
+      {\bf Parcours renforcé} (environ 3 h 30) : ajouter la course automobile, le feu orange et le poisson-archer (modélisation et projectile, environ 90 min).
+
+      {\bf Parcours approfondi} (CPGE/licence, ensuite en travail personnel ou en 2\textsuperscript{e} séance) : parabole de sûreté et tir sur une pente, balle rebondissante, hélice du planeur, cycloïde et équations horaires 2D/3D (environ 4 h supplémentaires). Les exercices facultatifs peuvent aussi servir de sujets de colle ou d'enrichissement.
+  - titre: "Compétences évaluables"
+    texte: |
+      Le TD permet d'évaluer, selon la grille usuelle : {\bf S'approprier} (lire l'énoncé, identifier les données et le repère), {\bf Analyser} (choisir une méthode : intégration, élimination de $t$, condition de rencontre), {\bf Réaliser} (calculs littéraux, numériques, graphiques), {\bf Valider} (homogénéité, cas limites, ordre de grandeur, discussion des racines) et {\bf Communiquer} (schéma, rédaction, présentation des résultats). Insister sur « Valider », trop souvent oubliée.
+  - titre: "Points de vigilance sur la gestion de séance"
+    texte: |
+      Prévoir en début de séance un rappel de 10 min sur les prérequis (dérivation composée, trigonométrie) : l'expérience montre que les erreurs de calcul sur $\sin$ et $\cos$ coûtent plus de temps que la physique. Donner des repères horaires (par exemple, passage à la correction au bout de 25 min pour un exercice de 35 min) et donner les corrigés progressivement (coup de pouce, puis correction courte, puis solution détaillée).
+
+point_cours:
+  - titre: "Vecteurs position, vitesse, accélération en cartésien"
+    texte: |
+      Dans un repère cartésien fixe $(O,\vec u_x,\vec u_y,\vec u_z)$ :
+      $$\overrightarrow{OM}=x\,\vec u_x+y\,\vec u_y+z\,\vec u_z,\qquad\vec v=\frac{\mathrm d\overrightarrow{OM}}{\mathrm dt}=\dot x\,\vec u_x+\dot y\,\vec u_y+\dot z\,\vec u_z,\qquad\vec a=\frac{\mathrm d\vec v}{\mathrm dt}=\ddot x\,\vec u_x+\ddot y\,\vec u_y+\ddot z\,\vec u_z .$$
+      Les normes sont $v=\sqrt{\dot x^2+\dot y^2+\dot z^2}$ et $a=\sqrt{\ddot x^2+\ddot y^2+\ddot z^2}$. Le vecteur vitesse est {\bf tangent} à la trajectoire.
+  - titre: "Intégration avec conditions initiales"
+    texte: |
+      Connaissant $\vec a(t)$, on a
+      $$\vec v(t)=\vec v_0+\int_0^t\vec a(t')\,\mathrm dt',\qquad\overrightarrow{OM}(t)=\overrightarrow{OM}_0+\int_0^t\vec v(t')\,\mathrm dt'.$$
+      Chaque intégration fait apparaître une constante, fixée par une condition initiale : sans conditions initiales, le mouvement n'est pas déterminé.
+  - titre: "Trois mouvements de référence"
+    texte: |
+      {\bf Mouvement rectiligne uniforme} ($\vec a=\vec0$) : $\overrightarrow{OM}=\overrightarrow{OM}_0+\vec v_0t$.
+
+      {\bf Accélération constante} ($\vec a=\vec a_0$) : $\vec v=\vec v_0+\vec a_0t$, $\overrightarrow{OM}=\overrightarrow{OM}_0+\vec v_0t+\tfrac12\vec a_0t^2$ ; la trajectoire est une {\bf parabole} (ou une droite si $\vec v_0\parallel\vec a_0$). Cas du projectile : $\vec a_0=-g\,\vec u_z$.
+
+      {\bf Mouvement circulaire uniforme} ($x=R\cos\omega t$, $y=R\sin\omega t$) : $v=R\omega$ constante, $\vec a=-\omega^2\overrightarrow{OM}$, de norme $R\omega^2$, dirigée vers le centre.
+  - titre: "Méthode d'étude d'un mouvement"
+    texte: |
+      (1) Faire un schéma, choisir le repère (origine, axes, sens) et l'origine des temps. (2) Écrire les équations horaires $x(t),y(t),z(t)$. (3) Éliminer $t$ pour obtenir la trajectoire. (4) Dériver pour obtenir $\vec v$ et $\vec a$, en calculer les normes. (5) Interpréter : nature du mouvement, instants et positions remarquables (vitesse nulle, vitesse extrémale, rencontre), cas limites. (6) Vérifier les dimensions et les ordres de grandeur.
+  - titre: "Dérivée d'un vecteur unitaire tournant"
+    texte: |
+      Pour $\vec u=\cos\theta\,\vec\imath+\sin\theta\,\vec\jmath$ et $\vec v=-\sin\theta\,\vec\imath+\cos\theta\,\vec\jmath$ : $\dfrac{\mathrm d\vec u}{\mathrm d\theta}=\vec v$ et $\dfrac{\mathrm d\vec v}{\mathrm d\theta}=-\vec u$. Si $\theta$ dépend du temps, $\dfrac{\mathrm d\vec u}{\mathrm dt}=\dot\theta\,\vec v$ (dérivée composée).
+  - titre: "Ordres de grandeur"
+    texte: |
+      $g\approx9{,}81~\mathrm{m\,s^{-2}}$ ; marche $\approx1~\mathrm{m/s}$ ; vélo $\approx5$--$10~\mathrm{m/s}$ ; voiture en ville $14~\mathrm{m/s}$ ($50$ km/h) ; autoroute $36~\mathrm{m/s}$ ($130$ km/h) ; son dans l'air $\approx340~\mathrm{m/s}$ ; accélération d'une voiture $\approx3$ à $5~\mathrm{m\,s^{-2}}$ ; freinage d'urgence $\approx7~\mathrm{m\,s^{-2}}$ ; temps de réaction d'un conducteur $\approx1~\mathrm{s}$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Confusion entre loi horaire, trajectoire et vitesse"
+    texte: |
+      La {\bf loi horaire} donne la position en fonction du temps $x(t)$ ; la {\bf trajectoire} est la courbe $y(x)$ (le temps n'y apparaît plus) ; la {\bf vitesse} est la dérivée de la loi horaire. Deux mouvements peuvent avoir la même trajectoire et des lois horaires différentes (parcours à vitesse constante ou croissante sur le même cercle).
+  - titre: "Oublier les conditions initiales"
+    texte: |
+      Une double intégration sans constantes donne $x=\tfrac12at^2$ même si le mobile partait de $x_0\ne0$ avec une vitesse $v_0\ne0$. Écrire systématiquement $x(t)=x_0+v_0t+\tfrac12at^2$ avant de simplifier.
+  - titre: "Erreur de décalage temporel"
+    texte: |
+      Un mobile qui part à l'instant $t_d$ suit $x=\tfrac12a\,(t-t_d)^2$ (et non $\tfrac12at^2-\text{cte}$), et seulement pour $t\ge t_d$. Penser à vérifier le domaine de validité de chaque loi horaire.
+  - titre: "Mélanger $\\|\\vec v\\|$, $v_x$ et $\\mathrm d\\|\\vec v\\|/\\mathrm dt$"
+    texte: |
+      La dérivée de la norme $\mathrm d\|\vec v\|/\mathrm dt$ n'est {\bf pas} la norme de la dérivée $\|\vec a\|$. Dans un mouvement circulaire uniforme, $\|\vec v\|$ est constante mais $\|\vec a\|=R\omega^2\neq0$ : la vitesse change de direction.
+  - titre: "Confondre « vitesse nulle » et « accélération nulle »"
+    texte: |
+      Au sommet d'une trajectoire de projectile, $v_z=0$ mais $a_z=-g\neq0$ ; au contact d'une roue qui roule, $\vec v=\vec0$ mais $\vec a\ne\vec0$. Une accélération non nulle sans vitesse produit un démarrage, pas un arrêt.
+  - titre: "Erreurs de signe sur les composantes et sur $g$"
+    texte: |
+      Avec $Oz$ vertical ascendant, $a_z=-g$ ; avec $Oz$ vertical descendant, $a_z=+g$. Toute erreur de signe vient souvent d'un repère mal défini au départ. Toujours faire un schéma avec les axes {\bf avant} d'écrire la première équation.
+  - titre: "Radians et degrés"
+    texte: |
+      Les formules de dérivation $(\sin\omega t)'=\omega\cos\omega t$ ne sont valables que si l'angle est en radians. Contrôler le mode de la calculatrice et ne pas confondre $\omega$ (rad/s) et $f$ (tours par seconde).
+  - titre: "Garder une racine non physique ou ne garder qu'une racine"
+    texte: |
+      Une équation du second degré donne deux racines. Il faut {\bf discuter} : rejeter celle qui sort du domaine de validité (temps antérieur au départ, distance négative) mais conserver les deux quand elles sont physiques (tir tendu et tir en cloche).
+  - titre: "Appliquer les formules avant de les comprendre"
+    texte: |
+      Utiliser $d=v_0^2\sin2\alpha/g$ sans savoir qu'elle vaut pour un tir depuis le sol et vers un sol de même altitude. Vérifier systématiquement les hypothèses d'une formule avant de l'appliquer.
+  - titre: "Résultat numérique sans unité ni ordre de grandeur"
+    texte: |
+      Un résultat de $37$ au lieu de $37~\mathrm{m/s}$ n'est pas un résultat. Une vitesse de voiture de $1500~\mathrm{m/s}$ ou une portée de $4$ mm ne doit pas être écrite sans réaction : toujours confronter à un ordre de grandeur.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Démarrer par une expérience ou une question"
+    texte: |
+      Lancer une balle devant la classe et demander de prédire où elle retombe, ou filmer un mouvement avec un smartphone et l'analyser avec un logiciel de pointage (Tracker, Avimeca). Les étudiants construisent ainsi l'idée de loi horaire à partir de données réelles.
+  - titre: "Travail en binômes puis mise en commun"
+    texte: |
+      Pour les exercices non guidés (course automobile, feu orange), demander à chaque binôme de poser seul le problème (repère, origine des temps, lois horaires) avant toute résolution, puis comparer les choix au tableau. Faire remarquer que des choix de repère différents conduisent au même résultat physique.
+  - titre: "Exploiter Python en séance"
+    texte: |
+      Une courte mise en œuvre de \texttt{numpy} et \texttt{matplotlib} (tracer une trajectoire, superposer les vecteurs $\vec v$ et $\vec a$ avec \texttt{quiver}) rend visibles des résultats abstraits : parabole de sûreté, cycloïde, hélice. Prévoir un fichier de départ à compléter.
+  - titre: "Tableau synthétique de fin de séance"
+    texte: |
+      Demander en 5 min de remplir un tableau « mouvement $\to$ loi horaire $\to$ trajectoire $\to$ vitesse $\to$ accélération » pour tous les mouvements du TD : uniforme, uniformément accéléré, projectile, circulaire uniforme, hélicoïdal. Cela soude les notions.
+  - titre: "Gestion de l'hétérogénéité"
+    texte: |
+      Les étudiants rapides abordent les exercices facultatifs (parabole de sûreté, cycloïde) ; les autres terminent les indispensables et se concentrent sur la rédaction. Utiliser les « coups de pouce » progressivement, pas tous d'un coup, et demander un schéma systématique avant toute aide.
+  - titre: "Insister sur la phase « Valider »"
+    texte: |
+      À chaque exercice, poser la question : « Votre résultat est-il homogène ? Que donne-t-il dans un cas limite ? Est-il du bon ordre de grandeur ? » Cette habitude est la plus rentable sur le long terme.
+
+bilan:
+  - titre: "Ce qu'il faut savoir faire à la fin du TD"
+    texte: |
+      Passer de la loi horaire à la vitesse et à l'accélération (dérivation), et de l'accélération à la loi horaire (intégration + conditions initiales) ; éliminer $t$ pour obtenir la trajectoire ; connaître et redémontrer les trois mouvements de référence (uniforme, accélération constante, circulaire uniforme) ; utiliser la dérivée d'un vecteur unitaire tournant, $\dfrac{\mathrm d\vec u}{\mathrm d\theta}=\vec v$ et $\dfrac{\mathrm d\vec v}{\mathrm d\theta}=-\vec u$, qui servira dans tout le cours en coordonnées polaires, cylindriques et sphériques.
+  - titre: "Résultats marquants du TD"
+    texte: |
+      Projectile : $z(x)=x\tan\alpha-\dfrac{gx^2}{2v_0^2\cos^2\alpha}$, portée $\dfrac{v_0^2\sin2\alpha}{g}$, flèche $\dfrac{v_0^2\sin^2\alpha}{2g}$, deux angles complémentaires pour la même portée, parabole de sûreté. Distance d'arrêt : $v_0t_r+\dfrac{v_0^2}{2a}$. Rencontre de deux mobiles : égalité des positions et {\bf tri des racines}. Rebonds : suites géométriques et durée totale finie. Mouvement circulaire uniforme : $v=R\omega$, $a=R\omega^2$ vers le centre. Hélice : $\vec a\perp\vec v$, $\rho=R+\dfrac{v_z^2}{R\omega^2}$. Cycloïde : $v\in[0,2V]$ et $\|\vec a\|=R\omega^2$.
+  - titre: "Ce qui sera réutilisé dans la suite"
+    texte: |
+      Les équations horaires à accélération constante serviront de solution à la chute libre et aux mouvements dans un champ uniforme (TD2 : lois de Newton) ; les mouvements circulaires, la base polaire et la dérivée de vecteurs tournants reviendront en TD3 (coordonnées polaires, cylindriques) ; l'étude d'un mouvement par phases et la discussion des racines serviront aussi en mécanique du solide et en électricité.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Intégration numérique d'un mouvement avec Python"
+    texte: |
+      Implémenter la méthode d'Euler explicite ($\vec v_{n+1}=\vec v_n+\vec a_n\,\Delta t$, $\vec r_{n+1}=\vec r_n+\vec v_n\,\Delta t$) pour un projectile sans frottement, et comparer à la solution analytique en faisant varier $\Delta t$. Observer que l'erreur est proportionnelle à $\Delta t$ (méthode d'ordre 1). Tester ensuite un schéma plus précis (Euler semi-implicite, point milieu, \texttt{scipy.integrate.solve\_ivp}).
+  - niveau: cpge
+    titre: "Repère de Frenet : accélérations tangentielle et normale"
+    texte: |
+      Montrer que, pour tout mouvement, $\vec a=\dfrac{\mathrm dv}{\mathrm dt}\,\vec\tau+\dfrac{v^2}{\rho}\,\vec n$, où $\rho$ est le rayon de courbure. Appliquer à la balle de golf (au sommet, $\rho=v_x^2/g$), à la cycloïde (au sommet, $\rho=4R$) et à l'hélice du planeur ($\rho=R+v_z^2/(R\omega^2)$).
+  - niveau: licence
+    titre: "Frottement fluide : linéaire et quadratique"
+    texte: |
+      Résoudre le mouvement vertical d'une bille dans un fluide avec frottement $-\lambda\,\vec v$ (équation différentielle du premier ordre, vitesse limite $v_\ell=mg/\lambda$, temps caractéristique $\tau=m/\lambda$), puis discuter qualitativement le cas du frottement quadratique en $-kv\,\vec v$ (balle de golf, parachutiste). Comparer l'asymétrie de la trajectoire réelle avec la parabole du modèle idéal.
+  - niveau: licence
+    titre: "Équation de la trajectoire et enveloppe"
+    texte: |
+      Pour une famille de trajectoires dépendant d'un paramètre ($\alpha$ pour un tir à $v_0$ fixé), l'enveloppe de la famille s'obtient en éliminant le paramètre entre $F(x,z,\alpha)=0$ et $\partial F/\partial\alpha=0$. Retrouver la parabole de sûreté et discuter la signification de l'enveloppe (frontière de la zone atteignable).
+  - niveau: master
+    titre: "Cinématique relativiste : accélération propre constante"
+    texte: |
+      En relativité restreinte, un mouvement à accélération {\bf propre} constante $\alpha$ n'est pas parabolique mais hyperbolique : $x(t)=\dfrac{c^2}{\alpha}\Big(\sqrt{1+(\alpha t/c)^2}-1\Big)$. Montrer que ce mouvement redonne $\tfrac12\alpha t^2$ pour $\alpha t\ll c$ et que la vitesse reste inférieure à $c$ ; calculer le temps propre écoulé pour un voyage avec accélération constante de $1\,g$ jusqu'à la galaxie d'Andromède.
+  - niveau: doctorat
+    titre: "Brachistochrone et calcul des variations"
+    texte: |
+      Trouver la courbe qui minimise la durée de descente d'un point matériel sans frottement entre deux points : formuler le problème $\min\int\dfrac{\mathrm ds}{v}$ avec $v=\sqrt{2gy}$, écrire l'équation d'Euler--Lagrange et vérifier que la solution est une cycloïde (lien avec l'exercice sur la roue qui roule). Cette approche prépare la mécanique lagrangienne.
+
+accroche_point_cours_essentiel:
+  - titre: "Une balle, une voiture, une valve de vélo : un seul outil ?"
+    duree_introduction: "5 à 8 min, avant les exercices"
+    question_d_accroche: |
+      Comment {\bf décrire avec les mêmes équations} une balle de golf lancée sur la Lune, deux voitures qui se rattrapent, un ballon qui rebondit, un planeur qui spirale et la valve de votre vélo ? Quels sont les {\bf trois gestes mathématiques} qui permettent de tout faire : dériver, intégrer, éliminer le temps ?
+    texte: |
+      {\bf Idée clé : la cinématique, c'est trois outils.}
+      \begin{itemize}
+        \item {\bf Dériver} : de la position à la vitesse puis à l'accélération, $\vec v=\dfrac{\mathrm d\overrightarrow{OM}}{\mathrm dt}$ et $\vec a=\dfrac{\mathrm d\vec v}{\mathrm dt}$.
+        \item {\bf Intégrer avec les conditions initiales} : de l'accélération à la vitesse puis à la position, $\vec v=\vec v_0+\int\vec a\,\mathrm dt$.
+        \item {\bf Éliminer le temps} : de la loi horaire à l'équation de la trajectoire $y(x)$.
+      \end{itemize}
+      Avec ces trois gestes, on traite tous les mouvements du TD : uniforme ($\vec a=\vec0$), accélération constante (projectile, voiture), circulaire ($\vec a=-\omega^2\vec r$), hélicoïdal (somme d'un circulaire et d'un uniforme), cycloïde. La suite du cours (dynamique) consistera à {\bf déduire $\vec a$ des forces}, puis à appliquer ces trois gestes.
+
+outils_mathematiques:
+  - titre: "Tableau de dérivées et de primitives"
+    texte: |
+      $(t^n)'=nt^{n-1}$, $(\sin\omega t)'=\omega\cos\omega t$, $(\cos\omega t)'=-\omega\sin\omega t$, $(\mathrm e^{at})'=a\,\mathrm e^{at}$ ; primitives : $\int t^n\,\mathrm dt=\dfrac{t^{n+1}}{n+1}$, $\int\cos\omega t\,\mathrm dt=\dfrac{\sin\omega t}{\omega}$, $\int\sin\omega t\,\mathrm dt=-\dfrac{\cos\omega t}\omega$.
+  - titre: "Dérivée d'une fonction composée"
+    texte: |
+      $\dfrac{\mathrm d}{\mathrm dt}f(u(t))=u'(t)\,f'(u(t))$ : pour $\cos(2t^2)$, la dérivée est $-4t\sin(2t^2)$ ; pour $\vec u(\theta(t))$, $\dot{\vec u}=\dot\theta\,\dfrac{\mathrm d\vec u}{\mathrm d\theta}$.
+  - titre: "Formules trigonométriques"
+    texte: |
+      $\cos^2a+\sin^2a=1$, $\sin2a=2\sin a\cos a$, $\cos2a=\cos^2a-\sin^2a$, $1-\cos a=2\sin^2\dfrac a2$, $\sin(a\pm b)=\sin a\cos b\pm\cos a\sin b$, $\sin(\pi-a)=\sin a$, $\dfrac1{\cos^2a}=1+\tan^2a$.
+  - titre: "Équation du second degré"
+    texte: |
+      $At^2+Bt+C=0$ : $\Delta=B^2-4AC$, $t=\dfrac{-B\pm\sqrt\Delta}{2A}$ si $\Delta\ge0$. Somme des racines $-B/A$, produit $C/A$. Les racines sont des abscisses d'intersection de deux courbes.
+  - titre: "Norme et produit scalaire"
+    texte: |
+      $\|\vec A\|^2=\vec A\cdot\vec A$, $\dfrac{\mathrm d\|\vec v\|^2}{\mathrm dt}=2\,\vec v\cdot\vec a$ : une vitesse de norme constante a une accélération orthogonale à la vitesse. Deux vecteurs sont orthogonaux si $\vec A\cdot\vec B=0$.
+  - titre: "Développements limités d'ordre 1 et petits angles"
+    texte: |
+      Pour $\varepsilon\ll1$ : $\sin\varepsilon\approx\varepsilon$, $\cos\varepsilon\approx1$, $\sqrt{1+\varepsilon}\approx1+\varepsilon/2$, $(1+\varepsilon)^n\approx1+n\varepsilon$. Utiles pour étudier des cas limites et pour la dérivée géométrique d'un vecteur unitaire tournant.
+  - titre: "Suites et séries géométriques"
+    texte: |
+      $\sum_{k=0}^{\infty}q^k=\dfrac1{1-q}$ pour $|q|<1$ : une somme infinie de durées positives peut être finie (balle qui rebondit).
+  - titre: "Aire sous la courbe et intégrale"
+    texte: |
+      Un déplacement est l'aire algébrique sous la courbe $v(t)$ ; une variation de vitesse est l'aire sous la courbe $a(t)$. Aires de référence : rectangle, triangle, trapèze.
+
+liens_autres_disciplines:
+  - discipline: "Mathématiques"
+    texte: |
+      Dérivation et intégration, courbes paramétrées, coniques (parabole, cercle, hélice), séries, équation du second degré, notion de vecteur dérivé.
+  - discipline: "Sport et biomécanique"
+    texte: |
+      Lancers (golf, javelot, basket), course (rattrapage, freinage), saut à la perche, mouvement d'un cycliste ; analyse vidéo des gestes sportifs et optimisation des angles de tir.
+  - discipline: "Ingénierie des transports et sécurité routière"
+    texte: |
+      Distances d'arrêt, durées de feux, zones de dilemme, dimensionnement des rampes d'accélération ; trajectoires de trains (boudin de roue) et d'avions (décollage, atterrissage).
+  - discipline: "Astronomie et planétologie"
+    texte: |
+      Mouvement dans des champs de pesanteur différents ($g_{\rm Lune}\approx g/6$), mouvement circulaire des planètes et des satellites, trajectoires balistiques et ellipses de sûreté.
+  - discipline: "Informatique et simulation"
+    texte: |
+      Moteurs physiques de jeux vidéo (mise à jour de la position et de la vitesse pas à pas), intégration numérique (méthodes d'Euler et de Runge--Kutta), animation de trajectoires avec Python.
+  - discipline: "Électricité et électromagnétisme"
+    texte: |
+      Particule chargée dans un champ électrique uniforme (parabole, avec $g\to qE/m$) ou magnétique (cercle, hélice) ; champ tournant des moteurs ; phaseurs et vecteurs tournants.
+  - discipline: "Biologie et éthologie"
+    texte: |
+      Tir du poisson-archer, saut d'un insecte, course d'un prédateur et d'une proie : les lois horaires donnent des critères d'optimisation du comportement animal.

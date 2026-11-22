@@ -1,0 +1,160 @@
+id: td1_ex15
+intitule: "Masse en bout de corde : condition aux limites dynamique et équation transcendante"
+td: td1
+facultatif: true
+seance: 1
+cours_rattache:
+  - chap1.conditions_aux_limites
+  - chap1.modes_propres
+  - chap1.modes_propres_libre
+
+metadonnees:
+  duree_estimee: "50 min"
+  difficulte: 5 # Sur une échelle de 1 à 5
+  type_exercice: "Approfondissement / Problème de synthèse"
+  indispensable: false
+
+enonce_intro: |
+  Une corde homogène de longueur $L$, de masse linéique $\mu$ (masse totale $m=\mu L$), tendue avec la force $F$
+  ($c=\sqrt{F/\mu}$), est fixée en $x=0$. Son autre extrémité $x=L$ est attachée à une {\bf masse ponctuelle} $M$ qui
+  peut se déplacer transversalement sans frottement (par exemple le long d'une tige verticale lisse) ; on néglige la pesanteur.
+  Pour de petits mouvements, la tension reste égale à $F$ et la composante transversale de la force exercée par la corde
+  sur la masse est $-F\,\partial_xy(L,t)$.
+
+accroche_point_cours_essentiel:
+  - titre: "Entre « fixe » et « libre » : que se passe-t-il avec une masse ?"
+    duree_introduction: "5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Dans le cours, une extrémité est soit {\bf fixe} ($y=0$), soit {\bf libre} ($\partial_xy=0$). Une masse $M$ attachée au bout de la corde est un cas intermédiaire : si $M\to\infty$, elle ne bouge pas (extrémité fixe) ; si $M\to0$, elle n'oppose aucune inertie (extrémité libre). Que valent les fréquences propres pour une masse $M$ quelconque ? Sont-elles encore multiples d'un fondamental ?
+    texte: |
+      {\bf Idée clé : une condition aux limites peut être dynamique.} Au lieu d'imposer $y$ ou $\partial_xy$, on applique la loi de Newton à la masse : $M\,\partial_t^2y(L,t)=-F\,\partial_xy(L,t)$. Pour un mode $y=A\sin(kx)\cos(\omega t)$ avec $\omega=ck$, cela donne l'{\bf équation transcendante}
+      $$kL\,\tan(kL)=\frac mM,\qquad m=\mu L,$$
+      qu'on résout graphiquement. Les fréquences propres ne sont plus des multiples entiers d'un fondamental ; les cas limites $M\to\infty$ et $M\to0$ redonnent respectivement la corde fixe-fixe et la corde fixe-libre.
+
+outils_mathematiques:
+  - titre: "Loi de Newton pour un point"
+    texte: |
+      Pour la masse $M$ : $M\,\ddot y_M=\sum F_{\text{transv}}$. La force de la corde sur l'extrémité est $-F\sin\alpha\simeq-F\,\partial_xy(L,t)$ pour des angles $\alpha$ petits.
+  - titre: "Résolution graphique d'une équation transcendante"
+    texte: |
+      Poser $u=kL$ et chercher l'intersection des courbes $u\mapsto\tan u$ et $u\mapsto\dfrac{m/M}u$ : la première est croissante par branches, la seconde décroissante. Il y a exactement une solution par intervalle $](n-1)\pi,(n-1)\pi+\tfrac\pi2[$.
+  - titre: "Développements limités de $\\tan$"
+    texte: |
+      $\tan u\simeq u+\dfrac{u^3}3$ pour $u\ll1$, donc $u\tan u\simeq u^2\left(1+\dfrac{u^2}3\right)$. Autour de $n\pi$ : $\tan(n\pi+\delta)=\tan\delta\simeq\delta$.
+  - titre: "Cas limites"
+    texte: |
+      $M\to\infty$ : $m/M\to0$, $u\tan u=0$, $u=n\pi$. $M\to0$ : $m/M\to\infty$, $\tan u\to\infty$, $u=(2n-1)\pi/2$. À vérifier systématiquement.
+  - titre: "Masse effective de Rayleigh"
+    texte: |
+      Un système continu de masse $m$ oscillant lentement avec un profil linéaire équivaut à une masse ponctuelle $m/3$ ; ici $\omega^2\simeq\dfrac F{L(M+m/3)}$.
+
+liens_autres_disciplines:
+  - discipline: "Mécanique (ressorts réels)"
+    texte: |
+      La masse d'un ressort n'est pas négligeable : un ressort de masse $m_r$ portant une masse $M$ a pour pulsation $\omega^2=k/(M+m_r/3)$. C'est le même résultat que celui de l'exercice.
+  - discipline: "Acoustique"
+    texte: |
+      Un tuyau fermé par un piston mobile, un résonateur de Helmholtz, un haut-parleur chargé : mêmes conditions aux limites dynamiques, avec un {\bf impédance} de charge.
+  - discipline: "Génie civil"
+    texte: |
+      Un câble de pont portant une masse concentrée (cabine de téléphérique, panneau) ; une poutre en console avec une masse en bout (mât d'antenne, éolienne) : les fréquences propres se calculent avec la même équation transcendante.
+  - discipline: "Mathématiques"
+    texte: |
+      Problème de Sturm-Liouville avec condition aux limites dépendant du paramètre propre ($\omega^2$) ; équations transcendantes et théorème des valeurs intermédiaires.
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{enumerate}[label=(\alph*)]
+        \item Écrire la condition aux limites en $x=0$ et la condition dynamique en $x=L$.
+        \item Pour un mode $y=A\sin(kx)\cos(\omega t)$ avec $\omega=ck$, établir $kL\tan(kL)=m/M$.
+        \item Vérifier les cas limites $M\to\infty$ et $M\to0$ en les comparant aux exercices sur la corde fixée aux deux bouts et à extrémité libre.
+      \end{enumerate}
+    coup_de_pouce:
+      - titre: "Newton"
+        texte: |
+          $M\,\partial_t^2y(L,t)=-F\,\partial_xy(L,t)$ ; reportez $y=A\sin(kx)\cos\omega t$ et utilisez $c^2=F/\mu$.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $y(0,t)=0$ ; $-M\omega^2\sin kL=-Fk\cos kL$ soit $kL\tan kL=\dfrac{\mu L}M=\dfrac mM$. $M\to\infty$ : $kL=n\pi$ (fixe-fixe) ; $M\to0$ : $kL=(2n-1)\dfrac\pi2$ (fixe-libre).
+    solution:
+      - titre: "(a)-(b) Équation transcendante"
+        texte: |
+          En $x=0$ : $y=0$, d'où $y=A\sin(kx)\cos\omega t$. En $x=L$ : $M\,\partial_t^2y=-F\,\partial_xy$ donne $-M\omega^2A\sin kL=-FkA\cos kL$, soit $M\omega^2\sin kL=Fk\cos kL$. Avec $\omega=ck$ et $c^2=F/\mu$ : $M\dfrac F\mu k^2\sin kL=Fk\cos kL$, soit $\dfrac M\mu\,k\tan kL=1$ et finalement
+          $$\boxed{kL\tan(kL)=\frac{\mu L}M=\frac mM}.$$
+      - titre: "(c) Cas limites"
+        texte: |
+          $M\to\infty$ : second membre nul, $\tan kL=0$, $kL=n\pi$ : corde fixée aux deux bouts, $f_n=nc/(2L)$ $\surd$. $M\to0$ : second membre infini, $\tan kL\to\infty$, $kL=(2n-1)\pi/2$ : corde fixe-libre, $f_n=(2n-1)c/(4L)$ (exercice 6) $\surd$. Le comportement est donc continu entre les deux cas : la masse $M$ interpole entre « fixe » et « libre ».
+
+  - id: q2
+    enonce: |
+      \begin{enumerate}[label=(\alph*),start=4]
+        \item Résoudre graphiquement l'équation pour $m/M=1$ en traçant $\tan u$ et $1/u$ ($u=kL$). Combien de solutions par intervalle ? Où se situent-elles ?
+        \item Pour $M\gg m$ (masse lourde), établir $\omega_1\simeq\sqrt{\dfrac F{ML}}$. Interpréter (pendule : tension $F$, longueur $L$). Montrer que la correction d'ordre suivant est $M\to M+m/3$.
+        \item Pour $M\gg m$, montrer que les modes supérieurs vérifient $kL\simeq n\pi+\dfrac m{n\pi M}$ ($n\ge1$). En déduire que ces fréquences sont proches de celles de la corde fixe-fixe, légèrement plus élevées.
+      \end{enumerate}
+    coup_de_pouce:
+      - titre: "Petits $u$"
+        texte: |
+          Pour $u\ll1$ : $u\tan u\simeq u^2+\tfrac{u^4}3$ ; posez $\varepsilon=m/M$ et résolvez à l'ordre un en $\varepsilon$.
+      - titre: "Autour de $n\\pi$"
+        texte: |
+          Posez $u=n\pi+\delta$ avec $\delta\ll1$ : $u\tan u\simeq n\pi\delta$.
+    correction:
+      - titre: "Résultats"
+        texte: |
+          Une solution par intervalle $](n-1)\pi,(n-1)\pi+\tfrac\pi2[$ ; $u_1^2\simeq\dfrac m{M+m/3}$, $\omega_1^2=\dfrac F{L\,(M+m/3)}$ ; $u_n\simeq n\pi+\dfrac m{n\pi M}$.
+    solution:
+      - titre: "(d) Résolution graphique"
+        texte: |
+          Les courbes $\tan u$ (croissante sur chaque branche) et $\dfrac1u$ (décroissante) se coupent en un point unique sur chaque intervalle $](n-1)\pi,(n-1)\pi+\tfrac\pi2[$ : on trouve $u_1\approx0{,}86$, $u_2\approx3{,}43$, $u_3\approx6{,}44$, \dots{} (pour $m/M=1$). Il y a une infinité de modes, mais le $n$-ième est dans la {\bf première moitié} de l'intervalle $](n-1)\pi,n\pi[$.
+      - titre: "(e) Masse lourde : mode fondamental"
+        texte: |
+          Pour $u\ll1$ : $u^2+\dfrac{u^4}3=\varepsilon$. À l'ordre un : $u^2=\varepsilon$, donc $\omega_1^2=\dfrac{c^2u^2}{L^2}=\dfrac{F}{\mu L^2}\cdot\dfrac{\mu L}M=\boxed{\dfrac F{ML}}$ : c'est la pulsation d'un pendule de longueur $L$ sous la tension $F$, la corde se comportant comme un ressort de raideur $F/L$. À l'ordre suivant, $u^2\simeq\varepsilon\left(1-\dfrac\varepsilon3\right)\simeq\dfrac\varepsilon{1+\varepsilon/3}$, soit
+          $$\omega_1^2=\frac F{L\,(M+m/3)}.$$
+          On retrouve la {\bf masse effective de Rayleigh} : la corde contribue pour un tiers de sa masse à l'inertie.
+      - titre: "(f) Modes supérieurs"
+        texte: |
+          $u=n\pi+\delta$ : $\tan u=\tan\delta\simeq\delta$ et $u\tan u\simeq n\pi\delta=\varepsilon$, soit $\delta=\dfrac\varepsilon{n\pi}=\dfrac m{n\pi M}$. Les fréquences $f_n\simeq\dfrac c{2L}\left(n+\dfrac m{n\pi^2M}\right)$ sont légèrement {\bf supérieures} à celles de la corde fixe-fixe (la masse n'est pas infinie : l'extrémité est un peu mobile, ce qui allonge la corde effective) ; le décalage décroît en $1/n$.
+
+  - id: q3
+    enonce: |
+      \begin{enumerate}[label=(\alph*),start=7]
+        \item Application : $L=1{,}00$ m, $\mu=10$ g/m, $F=100$ N, $M=100$ g. Calculer $c$, $m/M$, la valeur exacte de $u_1=kL$ (équation transcendante), $f_1$ et la comparer aux approximations de la question (e). Calculer $u_2$ et $f_2$ ; $f_2/f_1$ est-il entier ?
+        \item Exprimer l'amplitude de la masse en fonction de l'amplitude $A$ du mode et de $u_n$. La calculer pour les modes 1 et 2 de la question (g).
+        \item Dans la limite $M\to0$, montrer que l'extrémité est un ventre ; dans la limite $M\to\infty$, un nœud. Quelle est l'amplitude de la masse pour $m/M=1$ au premier mode ?
+      \end{enumerate}
+    coup_de_pouce:
+      - titre: "Résolution numérique"
+        texte: |
+          Pour $\varepsilon=0{,}1$, partez de $u\simeq\sqrt\varepsilon\approx0{,}316$ et corrigez par $u\tan u=\varepsilon$ (itération simple ou dichotomie).
+      - titre: "Amplitude de la masse"
+        texte: |
+          $y_M(t)=A\sin(kL)\cos\omega t$ : comparez $\sin u_1$ à la valeur maximale $1$.
+    correction:
+      - titre: "Résultats"
+        texte: |
+          $c=100$ m/s ; $m/M=0{,}1$ ; $u_1\approx0{,}311$ ; $f_1=\dfrac{cu_1}{2\pi L}\approx4{,}95$ Hz (approx. d'ordre un : $5{,}03$ Hz ; avec $m/3$ : $4{,}95$ Hz). $u_2\approx3{,}173$ ; $f_2\approx50{,}5$ Hz ; $f_2/f_1\approx10{,}2$, non entier.
+    solution:
+      - titre: "(g) Application numérique"
+        texte: |
+          $c=\sqrt{100/0{,}010}=100$ m/s, $m=\mu L=10$ g, donc $\varepsilon=m/M=0{,}1$. L'équation $u\tan u=0{,}1$ a pour solution $u_1\approx0{,}311$ ($0{,}311\times\tan0{,}311=0{,}311\times0{,}3216=0{,}1000$ $\surd$). Alors $f_1=\dfrac{c\,u_1}{2\pi L}=\dfrac{100\times0{,}311}{6{,}283}=4{,}95$ Hz. Approximations : ordre un $\omega_1=\sqrt{F/(ML)}=31{,}6$ rad/s, soit $5{,}03$ Hz (écart $1{,}6\,\%$) ; avec masse effective $M+m/3=0{,}1033$ kg : $\omega_1=31{,}1$ rad/s, soit $4{,}95$ Hz (écart $<0{,}1\,\%$ : excellent).
+          Mode 2 : $u=\pi+\delta$ avec $(\pi+\delta)\delta=0{,}1$, soit $\delta\approx0{,}0315$, $u_2\approx3{,}173$ ; $f_2=\dfrac{100\times3{,}173}{2\pi}\approx50{,}5$ Hz, très proche de $c/(2L)=50$ Hz (corde fixe-fixe). $f_2/f_1\approx10{,}2$ n'est pas entier : le spectre n'est pas harmonique.
+      - titre: "(h)-(i) Amplitudes et limites"
+        texte: |
+          Le mode $n$ a pour profil $\sin(u_nx/L)$ : en $x=L$, l'amplitude vaut $A\sin u_n$. Pour $m/M=0{,}1$ et $n=1$ : $\sin0{,}311\approx0{,}306$, la masse oscille avec une amplitude trois fois plus petite que celle d'un ventre ($=A$). Pour le mode 2, $\sin(3{,}173)\approx-0{,}031$ : la masse est presque à un {\bf nœud} (corde quasi fixe-fixe). Limites : $M\to0$, $u_n\to(2n-1)\pi/2$ et $|\sin u_n|\to1$ : ventre (extrémité libre) ; $M\to\infty$, $u_n\to n\pi$ et $\sin u_n\to0$ : nœud (extrémité fixe). Le coefficient $|\sin u_n|$ mesure donc à quel point la masse est « libre ». Pour $m/M=1$ et $n=1$ ($u_1\approx0{,}860$) : $\sin u_1\approx0{,}76$, la masse oscille avec $76\,\%$ de l'amplitude maximale $A$ du mode.
+
+    aller_plus_loin:
+      - niveau: prepa
+        titre: "Deux masses aux extrémités"
+        texte: |
+          Pour une corde avec une masse $M_1$ en $x=0$ et $M_2$ en $x=L$ (même condition dynamique à gauche, de signe opposé), montrer que les fréquences propres vérifient $\tan kL=\dfrac{(M_1+M_2)k\mu}{M_1M_2k^2-\mu^2}$. Retrouver le cas $M_1=M_2\to\infty$.
+      - niveau: licence
+        titre: "Orthogonalité modifiée des modes"
+        texte: |
+          Les modes $\sin(u_nx/L)$ ne sont plus orthogonaux au sens usuel $\int_0^Ly_ny_p\,\mathrm dx=0$ : montrer que la condition correcte est $\int_0^L\mu\,y_ny_p\,\mathrm dx+M\,y_n(L)y_p(L)=0$ (la masse contribue à l'inertie du système). Calculer la norme d'un mode et en déduire l'énergie de chaque mode.
+      - niveau: master
+        titre: "Impédance de charge et coefficient de réflexion"
+        texte: |
+          Une onde progressive $y_i=a\,\mathrm e^{j(\omega t-kx)}$ arrive sur la masse $M$ à l'extrémité. Montrer que le coefficient de réflexion en amplitude, défini en $x=L$, vaut $r=\dfrac{Z_c-j\omega M}{Z_c+j\omega M}$ avec $Z_c=\sqrt{\mu F}$ l'impédance caractéristique de la corde, et que $|r|=1$ (réflexion totale, avec un déphasage qui dépend de la fréquence). Retrouver les cas fixe et libre.

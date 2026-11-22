@@ -1,0 +1,102 @@
+id: tp1_partE
+intitule: "Synthèse scientifique du TP {\\color{blue}(Scientific summary of the lab)}"
+td: tp1
+facultatif: false
+seance: 1
+cours_rattache:
+  - chap1.modes_propres
+  - chap1.celerite_corde
+
+metadonnees:
+  duree_estimee: "20 min"
+  difficulte: 2 # Sur une échelle de 1 à 5
+  priorite: 1
+  type_exercice: "Bilan et conclusion"
+  indispensable: true
+
+enonce_intro: |
+  L'étudiant reporte les résultats clés dans un tableau, puis conclut sur la validité du modèle des modes propres. Il doit appuyer chaque affirmation sur un graphique ou une valeur.
+
+  {\color{blue}Students record the key results in a table, then conclude on the validity of the normal-mode model. Each statement must be supported by a graph or a value.}
+
+accroche_point_cours_essentiel:
+  - titre: "Conclure, ce n'est pas répéter {\\color{blue}(Concluding is not repeating)}"
+    duree_introduction: "2 min"
+    question_d_accroche: |
+      En trois phrases : le modèle marche-t-il, jusqu'où, et qu'est-ce qui limite la comparaison ?
+
+      {\color{blue}In three sentences: does the model work, how far, and what limits the comparison?}
+    texte: |
+      {\bf Idée clé : valider un modèle, c'est quantifier l'accord et nommer ses limites.}
+
+      {\color{blue}{\bf Key idea: validating a model means quantifying the agreement and naming its limits.}}
+
+outils_mathematiques:
+  - titre: "Écart relatif {\\color{blue}(Relative deviation)}"
+    texte: |
+      $\dfrac{|x_1-x_2|}{x_2}$ à comparer à l'incertitude relative cumulée.
+
+      {\color{blue}$\dfrac{|x_1-x_2|}{x_2}$ to be compared with the cumulative relative uncertainty.}
+
+liens_autres_disciplines:
+  - discipline: "Démarche expérimentale {\\color{blue}(Experimental method)}"
+    texte: |
+      Hypothèse, mesure, comparaison, discussion des écarts.
+
+      {\color{blue}Hypothesis, measurement, comparison, discussion of deviations.}
+
+questions:
+  - id: q1
+    enonce: |
+      E1 — Reporter dans le tableau de synthèse : célérité dans le ressort ; célérité dans la corde pour $F=0{,}6\ ;\ 0{,}8\ ;\ 1{,}0$ N ; $\mu$ par les ondes ; $\mu$ par mesure directe.
+
+      {\color{blue}E1 — Fill in the summary table: speed in the spring; speed in the string for $F=0.6,\ 0.8,\ 1.0$ N; $\mu$ from waves; $\mu$ from direct measurement.}
+    correction:
+      - titre: "Valeurs provisoires {\\color{blue}(Provisional values)}"
+        texte: |
+          \begin{center}
+          \begin{tabular}{|l|c|}
+          \hline
+          Grandeur & Valeur \\ \hline
+          Célérité dans le ressort & $5{,}05\pm0{,}05$ m/s \\ \hline
+          Célérité dans la corde ($0{,}6$ N) & $17{,}3\pm0{,}2$ m/s \\ \hline
+          Célérité dans la corde ($0{,}8$ N) & $19{,}9\pm0{,}2$ m/s \\ \hline
+          Célérité dans la corde ($1{,}0$ N) & $22{,}3\pm0{,}2$ m/s \\ \hline
+          $\mu$ par les ondes & $2{,}01\times10^{-3}$ kg/m \\ \hline
+          $\mu$ par mesure directe & $(2{,}00\pm0{,}07)\times10^{-3}$ kg/m \\ \hline
+          \end{tabular}
+          \end{center}
+
+          {\color{blue}Provisional values in the table above.}
+    solution:
+      - titre: "Vigilance {\\color{blue}(Watch point)}"
+        texte: |
+          Vérifier la cohérence des unités et des chiffres significatifs avec les incertitudes.
+
+          {\color{blue}Check consistency of units and significant figures with the uncertainties.}
+
+  - id: q2
+    enonce: |
+      E2 — Le modèle des modes propres décrit-il les résultats ? Comment la tension influence-t-elle $c$ ? Les deux méthodes donnent-elles le même $\mu$ ? Quelles sont les deux principales limites du modèle ou de l'expérience ?
+
+      {\color{blue}E2 — Does the normal-mode model describe the results? How does tension affect $c$? Do the two methods give the same $\mu$? What are the two main limitations of the model or the experiment?}
+    correction:
+      - titre: "Conclusion type {\\color{blue}(Typical conclusion)}"
+        texte: |
+          Oui : $f_n$ proportionnelle à $n$ (ressort et corde), $c\propto\sqrt F$ ($22{,}3/17{,}3=1{,}29\approx\sqrt{1{,}0/0{,}6}$), $\mu_{\text{ondes}}$ et $\mu_{\text{direct}}$ compatibles ($0{,}5\ \%$ d'écart pour $3{,}7\ \%$ d'incertitude). Limites : (1) le vibreur est un nœud quasi fixe, donc longueur effective incertaine ; (2) peu de tensions (trois points) et incertitude de $3$ à $5\ \%$ sur $F$, avec un repérage subjectif de la résonance.
+
+          {\color{blue}Yes: $f_n$ proportional to $n$ (spring and string), $c\propto\sqrt F$ ($22.3/17.3=1.29\approx\sqrt{1.0/0.6}$), $\mu_{\text{waves}}$ and $\mu_{\text{direct}}$ compatible (0.5% deviation for 3.7% uncertainty). Limits: (1) the vibrator is a quasi-fixed node, so the effective length is uncertain; (2) few tensions (three points) and 3 to 5% uncertainty on $F$, with a subjective location of the resonance.}
+    solution:
+      - titre: "Critères d'évaluation {\\color{blue}(Grading criteria)}"
+        texte: |
+          Valoriser une conclusion {\bf chiffrée} (écarts en \%, comparaison aux incertitudes), des limites argumentées, et le lien avec le modèle ($c=\sqrt{F/\mu}$). Pénaliser une conclusion qualitative sans valeur.
+
+          {\color{blue}Reward a {\bf quantitative} conclusion (deviations in \%, comparison with uncertainties), argued limits, and the link with the model ($c=\sqrt{F/\mu}$). Penalize a purely qualitative conclusion with no value.}
+
+aller_plus_loin:
+  - niveau: master
+    titre: "Au-delà du modèle idéal {\\color{blue}(Beyond the ideal model)}"
+    texte: |
+      Proposer une expérience pour séparer les effets de raideur (TD1 ex. 13), d'amortissement (ex. 14) et de masse d'attache (ex. 15) sur $f_n$.
+
+      {\color{blue}Propose an experiment to separate the effects of stiffness (TD1 ex. 13), damping (ex. 14) and attachment mass (ex. 15) on $f_n$.}

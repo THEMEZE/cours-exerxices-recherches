@@ -1,0 +1,198 @@
+id: mp_s2_tsiolkovski
+intitule: "Séance 2 -- Équation de Tsiolkovski : propulsion par éjection de masse"
+td: mp_phv111
+facultatif: false
+seance: 2
+
+cours_rattache:
+  - dynamique.quantite_de_mouvement
+  - dynamique.systeme_a_masse_variable
+  - dynamique.propulsion_par_reaction
+
+metadonnees:
+  duree_estimee: "60 min"
+  difficulte: 4
+  type_exercice: "Démonstration / Modélisation"
+  indispensable: true
+
+enonce_intro: |
+  Une fusée de masse initiale $m_0$ (ergols compris) évolue dans l'espace, loin de tout astre : aucune force extérieure ne s'exerce sur elle. Elle éjecte, par sa tuyère, un gaz à la vitesse $\vec v_e$ {\bf par rapport à la fusée}, dirigée vers l'arrière, de norme $v_e$ constante. À l'instant $t$, la masse de la fusée est $m(t)$ et sa vitesse $v(t)$ dans le référentiel galiléen $\mathcal R$. Pendant $\mathrm dt$, elle éjecte la masse $\delta m_e>0$ (donc $\mathrm dm=-\delta m_e<0$). On cherche la variation de vitesse $\Delta V$ de la fusée en fonction de $v_e$, $m_0$ et de la masse finale $m_f$.
+
+prerequis:
+  - titre: "Conservation de $\\vec p$ d'un système isolé"
+    texte: |
+      Vu en séance 1 : pour un système isolé {\bf fermé}, $\vec p_{\rm tot}$ est constante. Ici, le système est choisi {\bf fermé} : {fusée à $t$} $=$ {fusée à $t+\mathrm dt$} $+$ {gaz éjecté pendant $\mathrm dt$}.
+  - titre: "Composition des vitesses"
+    texte: |
+      La vitesse du gaz dans $\mathcal R$ est $\vec v_{\rm gaz}=\vec v+\vec v_e$ (vitesse de la fusée plus vitesse relative). En 1D avec l'axe de la fusée : $v_{\rm gaz}=v-v_e$.
+  - titre: "Primitive de $1/m$"
+    texte: |
+      $\displaystyle\int_{m_0}^{m_f}\frac{\mathrm dm}{m}=\ln\frac{m_f}{m_0}$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Établir et interpréter l'équation de Tsiolkovski"
+    texte: |
+      Savoir choisir un système {\bf fermé}, écrire la conservation de $\vec p$ entre $t$ et $t+\mathrm dt$, négliger l'infiniment petit d'ordre 2, intégrer et obtenir $\Delta V=v_e\ln\dfrac{m_0}{m_f}$ ; savoir ce que devient ce résultat en présence de forces extérieures (gravité, traînée) ; interpréter le rôle de $v_e$ et du rapport de masses.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "L'erreur numéro un : le système ouvert"
+    texte: |
+      La plupart des étudiants écrivent « $p(t+\mathrm dt)=(m-\delta m)(v+\mathrm dv)$ » en oubliant le gaz éjecté : la quantité de mouvement semble alors ne pas se conserver, ou on applique $\vec F=m\vec a$ à une masse variable (faux). Faire {\bf dessiner} le système fermé à $t$ et à $t+\mathrm dt$ avec la fusée et la {\bf bouffée de gaz}. La deuxième difficulté est le {\bf signe} de $\mathrm dm$ : $\mathrm dm=-\delta m_e$. Insister enfin sur le fait que $\Delta V$ ne dépend ni du débit, ni de la durée de la combustion (en l'absence de forces extérieures), mais seulement de $v_e$ et du rapport $m_0/m_f$.
+
+point_cours:
+  - titre: "Équation de Tsiolkovski"
+    texte: |
+      En l'absence de force extérieure, $m\,\dfrac{\mathrm dv}{\mathrm dt}=-v_e\,\dfrac{\mathrm dm}{\mathrm dt}$, soit $\boxed{\Delta V=v_e\ln\dfrac{m_0}{m_f}}$. Avec le débit massique $D=-\dfrac{\mathrm dm}{\mathrm dt}$, la poussée vaut $F=D\,v_e$.
+  - titre: "Avec une force extérieure $\\vec F_{\\rm ext}$"
+    texte: |
+      $m\dfrac{\mathrm d\vec v}{\mathrm dt}=\vec F_{\rm ext}+D\,\vec v_e'$ où $\vec v_e'=-\vec v_e$ est dirigée vers l'avant : par exemple la pesanteur en vol vertical donne $v(t)=v_e\ln\dfrac{m_0}{m(t)}-gt$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Appliquer $\\vec F=m\\vec a$ avec $m$ variable"
+    texte: |
+      La relation $\vec F=m\vec a$ n'est valable que pour une masse constante. On l'utilise à $m$ {\bf fixée} sur chaque instant, en ajoutant la poussée comme force : $m\vec a=\vec F_{\rm ext}+\vec F_{\rm poussée}$. L'équation de Tsiolkovski vient de la conservation de $\vec p$ du système {\bf fermé}.
+  - titre: "Se tromper de signe de $\\mathrm dm$"
+    texte: |
+      La masse de la fusée diminue : $\mathrm dm<0$. Si l'on écrit $\mathrm dv=+v_e\,\mathrm dm/m$ on trouve $\Delta V<0$ : la fusée ralentirait. Le bon signe est $\mathrm dv=-v_e\,\mathrm dm/m>0$.
+  - titre: "Confondre vitesse d'éjection relative et absolue"
+    texte: |
+      Le gaz a la vitesse $v_e$ {\bf par rapport à la fusée} ; dans $\mathcal R$ elle vaut $v-v_e$. Utiliser $-v_e$ dans $\mathcal R$ conduit à une relation fausse (la poussée serait identique mais la conservation de $p$ ne serait pas respectée).
+  - titre: "Croire qu'il faut une « surface d'appui » pour avancer"
+    texte: |
+      La fusée n'« appuie » pas sur l'air : elle avance dans le vide car la quantité de mouvement {\bf totale} est conservée ; le gaz part vers l'arrière, la fusée vers l'avant.
+  - titre: "Oublier de passer de $\\ln$ au rapport"
+    texte: |
+      $\ln\dfrac{m_0}{m_f}=-\ln\dfrac{m_f}{m_0}$ ; une erreur de signe donne $\Delta V<0$. Vérifier que $m_0>m_f$.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Expérience mentale : le patineur et la brique"
+    texte: |
+      Un patineur sur glace lance une brique vers l'arrière : il part vers l'avant. Chaque brique lancée est un « bout de masse éjecté ». Montrer que lancer $N$ petites briques est plus efficace qu'une grosse (même masse totale) car les briques suivantes sont lancées depuis un patineur déjà en mouvement : c'est la limite continue de Tsiolkovski.
+  - titre: "Analyse dimensionnelle"
+    texte: |
+      Faire vérifier l'homogénéité : $v_e\ln(m_0/m_f)$ est une vitesse ($\ln$ est sans dimension). Demander quelle masse on devrait emporter pour $\Delta V=3v_e$ ($m_0/m_f=e^3\approx20$) : 95\% de la masse initiale est du carburant.
+
+bilan:
+  - titre: "L'essentiel de l'équation de Tsiolkovski"
+    texte: |
+      Pour un système fermé {fusée $+$ gaz}, $\vec p$ est conservée : $m\,\mathrm dv=-v_e\,\mathrm dm$ et $\Delta V=v_e\ln\dfrac{m_0}{m_f}$. La seule manière d'augmenter $\Delta V$ est d'augmenter $v_e$ (ergols plus énergétiques) ou le rapport $m_0/m_f$ (mais la dépendance est {\bf logarithmique}, d'où le recours aux {\bf étages}). Avec la pesanteur, $\Delta V_{\rm effectif}=v_e\ln\dfrac{m_0}{m_f}-g\,t_b$ : les « pertes par gravité » imposent une combustion rapide.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Poussée et rapport poussée/poids"
+    texte: |
+      Montrer que $m\dot v=D\,v_e-mg$ en vol vertical. À quelle condition sur $D\,v_e$ la fusée décolle-t-elle ? Calculer le rapport poussée/poids d'une fusée de masse initiale $560$ t, de débit $D=2531$ kg/s, $v_e=2900$ m/s.
+  - niveau: licence
+    titre: "Impulsion spécifique"
+    texte: |
+      On définit $I_{sp}=\dfrac{v_e}{g_0}$ (en secondes). Calculer $I_{sp}$ pour $v_e=2900$ m/s et $3400$ m/s, et expliquer pourquoi $I_{sp}$ est plus élevée dans le vide qu'au sol.
+  - niveau: master
+    titre: "Propulsion ionique : $v_e$ grand, poussée faible"
+    texte: |
+      Un propulseur ionique éjecte du xénon à $v_e=30$ km/s avec une poussée de $0{,}1$ N. Estimer la durée nécessaire pour atteindre $\Delta V=5$ km/s pour une sonde de $1000$ kg, avec $m_f=800$ kg. Quel est l'intérêt/l'inconvénient par rapport à un moteur chimique ?
+
+accroche_point_cours_essentiel:
+  - titre: "Comment avancer dans le vide, sans rien pour pousser ?"
+    duree_introduction: "5 min"
+    question_d_accroche: |
+      Dans l'espace, il n'y a ni air ni sol sur lequel s'appuyer. Pourtant les fusées accélèrent. Quelle grandeur se conserve pour que ce soit possible ? Pourquoi une fusée de $560$ t ne se pose-t-elle que $10$ t de charge utile en orbite ?
+    texte: |
+      {\bf Idée clé : on obtient la propulsion par conservation de la quantité de mouvement totale}, comme dans le choc de la séance 1 : fusée $+$ gaz forment un système isolé. Si le gaz part vers l'arrière avec $\vec p_{\rm gaz}$, la fusée part vers l'avant avec $-\vec p_{\rm gaz}$. En répétant ce processus de manière continue, on obtient $\Delta V=v_e\ln(m_0/m_f)$.
+
+outils_mathematiques:
+  - titre: "Différentielle et infiniment petits d'ordre 2"
+    texte: |
+      $(\mathrm dm)(\mathrm dv)$ est négligeable devant $m\,\mathrm dv$ et $v_e\,\mathrm dm$ quand $\mathrm dt\to0$.
+  - titre: "Séparation des variables"
+    texte: |
+      $\mathrm dv=-v_e\dfrac{\mathrm dm}{m}$ s'intègre directement : $v-v_0=-v_e\ln\dfrac{m}{m_0}=v_e\ln\dfrac{m_0}{m}$.
+  - titre: "Propriétés du logarithme"
+    texte: |
+      $\ln(ab)=\ln a+\ln b$ : les $\Delta V$ des étages s'ajoutent si les rapports de masses se multiplient. $\ln10\approx2{,}30$, $\ln2\approx0{,}69$.
+  - titre: "Développement limité"
+    texte: |
+      Pour $\delta m\ll m$ : $\ln\dfrac{m_0}{m_0-\delta m}\approx\dfrac{\delta m}{m_0}$, d'où $\Delta V\approx v_e\dfrac{\delta m}{m_0}$ (petite éjection).
+
+liens_autres_disciplines:
+  - discipline: "Astronautique"
+    texte: |
+      Konstantin Tsiolkovski (1903) ; le « budget $\Delta V$ » d'une mission (orbite basse $\approx9{,}4$ km/s depuis le sol, avec pertes) se calcule avec cette équation.
+  - discipline: "Biologie et éthologie"
+    texte: |
+      Les calmars, méduses et pieuvres se propulsent par éjection d'eau : même principe par conservation de $\vec p$.
+  - discipline: "Économie des lanceurs"
+    texte: |
+      Le coût d'un lancement croît exponentiellement avec le $\Delta V$ visé ($m_0/m_f=e^{\Delta V/v_e}$) : d'où l'enjeu de la réutilisation des étages.
+
+questions:
+  - id: q1
+    enonce: |
+      On considère le système {\bf fermé} $\Sigma$ constitué, à l'instant $t$, de la fusée seule (masse $m$, vitesse $v$) et, à l'instant $t+\mathrm dt$, de la fusée (masse $m+\mathrm dm$, vitesse $v+\mathrm dv$) et du gaz éjecté pendant $\mathrm dt$ (masse $\delta m_e=-\mathrm dm$, vitesse $v-v_e$ dans $\mathcal R$).
+      \begin{itemize}
+        \item[1.] Pourquoi le système $\Sigma$ est-il isolé ? Écrire sa quantité de mouvement $p(t)$ puis $p(t+\mathrm dt)$.
+        \item[2.] En déduire une relation entre $m\,\mathrm dv$, $v_e$ et $\mathrm dm$. Quel terme néglige-t-on ?
+      \end{itemize}
+    coup_de_pouce: |
+      Faites un dessin avant/après. La masse du gaz est $-\mathrm dm$ ($>0$). Développez $(m+\mathrm dm)(v+\mathrm dv)$ et simplifiez. Le terme en $\mathrm dm\,\mathrm dv$ est un infiniment petit d'ordre 2.
+    correction: |
+      $p(t)=mv$ ; $p(t+\mathrm dt)=(m+\mathrm dm)(v+\mathrm dv)+(-\mathrm dm)(v-v_e)$ ; égalité $\Rightarrow m\,\mathrm dv+v_e\,\mathrm dm=0$ (en négligeant $\mathrm dm\,\mathrm dv$).
+    solution:
+      - titre: "1. Système et quantités de mouvement"
+        texte: |
+          Dans l'espace, loin de tout astre, aucune force extérieure n'agit ; les forces de poussée entre la fusée et le gaz sont des {\bf forces intérieures} à $\Sigma$. Donc $\vec p_{\rm tot}$ de $\Sigma$ est conservée (le système est fermé : on suit les mêmes particules).
+          $$p(t)=m\,v,$$
+          $$p(t+\mathrm dt)=(m+\mathrm dm)(v+\mathrm dv)+(-\mathrm dm)(v-v_e).$$
+      - titre: "2. Relation différentielle"
+        texte: |
+          $mv=mv+m\,\mathrm dv+v\,\mathrm dm+\mathrm dm\,\mathrm dv-v\,\mathrm dm+v_e\,\mathrm dm$, soit
+          $$0=m\,\mathrm dv+v_e\,\mathrm dm+\mathrm dm\,\mathrm dv.$$
+          On néglige l'infiniment petit d'ordre 2, $\mathrm dm\,\mathrm dv$ : $\boxed{m\,\mathrm dv=-v_e\,\mathrm dm}$. Comme $\mathrm dm<0$, on a $\mathrm dv>0$ : la fusée accélère. On remarque que {\bf $v$ disparaît} : le résultat est le même dans tout référentiel galiléen (principe de relativité de Galilée).
+
+  - id: q2
+    enonce: |
+      \begin{itemize}
+        \item[3.] Intégrer la relation obtenue entre l'instant initial ($m_0$, $v_0$) et un instant $t$ ($m$, $v$). Donner $\Delta V=v-v_0$ en fonction de $v_e$ et de $m_0/m$.
+        \item[4.] Application numérique : $v_e=3{,}0$ km/s. Quel rapport $m_0/m_f$ faut-il pour atteindre $\Delta V=7{,}8$ km/s (vitesse orbitale) ? Quelle fraction de $m_0$ est du carburant ? Commenter.
+        \item[5.] Le résultat dépend-il du débit massique $D$ ? De la durée de combustion ? Commenter.
+      \end{itemize}
+    coup_de_pouce: |
+      $\mathrm dv=-v_e\,\mathrm dm/m$ : séparation des variables, intégrale de $m_0$ à $m$. Pour (4), inversez : $m_0/m_f=\exp(\Delta V/v_e)$.
+    correction: |
+      $\Delta V=v_e\ln\dfrac{m_0}{m}$ ; $m_0/m_f=e^{2{,}6}\approx13{,}5$, soit $93\%$ de carburant ; $\Delta V$ indépendant de $D$ et de la durée.
+    solution:
+      - titre: "3. Intégration"
+        texte: |
+          $$\int_{v_0}^{v}\mathrm dv'=-v_e\int_{m_0}^{m}\frac{\mathrm dm'}{m'}\ \Rightarrow\ v-v_0=-v_e\ln\frac{m}{m_0}$$
+          $$\boxed{\Delta V=v_e\,\ln\frac{m_0}{m}}.$$
+          Pour la masse finale $m_f$ (fin de combustion) on a $\Delta V=v_e\ln\dfrac{m_0}{m_f}$ (formule de {\bf Tsiolkovski}).
+      - titre: "4. Application numérique"
+        texte: |
+          $\dfrac{m_0}{m_f}=\exp\Big(\dfrac{\Delta V}{v_e}\Big)=\exp\Big(\dfrac{7{,}8}{3{,}0}\Big)=e^{2{,}6}\approx\boxed{13{,}5}$, donc $m_f=0{,}074\,m_0$ et la fraction de carburant est $1-\dfrac{1}{13{,}5}\approx\boxed{93\%}$. Les structures, moteurs et charge utile doivent donc tenir dans $7\%$ de la masse initiale : c'est un défi technique, et c'est la raison de l'{\bf étagement} ; de plus on a négligé la pesanteur et la traînée, qui augmentent le besoin réel (environ $9{,}4$ km/s pour atteindre l'orbite basse).
+      - titre: "5. Rôle du débit et de la durée"
+        texte: |
+          $D$ et $t_b$ n'apparaissent pas : $\Delta V$ est fixé par $v_e$ et le {\bf rapport de masses} seul. Le débit ne change que la {\bf poussée} $F=Dv_e$ et la durée $t_b=(m_0-m_f)/D$. En l'absence de gravité, brûler vite ou lentement est équivalent ; en présence de gravité, brûler lentement coûte $g\,t_b$ de vitesse : il vaut mieux brûler vite (voir la séance 2, partie suivante).
+
+  - id: q3
+    enonce: |
+      \begin{itemize}
+        \item[6.] La fusée est maintenant soumise à une force extérieure $\vec F_{\rm ext}$ (par exemple son poids $m\vec g$ pour un vol vertical). Reprendre le bilan de quantité de mouvement entre $t$ et $t+\mathrm dt$ et montrer que $m\dfrac{\mathrm dv}{\mathrm dt}=-v_e\dfrac{\mathrm dm}{\mathrm dt}+F_{\rm ext}$. Que représente le terme $-v_e\,\mathrm dm/\mathrm dt$ ?
+        \item[7.] Pour $F_{\rm ext}=-mg$ (vol vertical, $g$ supposé constant) et un débit constant $D$, intégrer et montrer que $v(t)=v_e\ln\dfrac{m_0}{m(t)}-g\,t$ avec $m(t)=m_0-Dt$.
+        \item[8.] À quelle condition sur $D$ la fusée décolle-t-elle (à $t=0$, vitesse nulle) ? Interpréter $-gt$.
+      \end{itemize}
+    coup_de_pouce: |
+      Théorème de la quantité de mouvement : $p(t+\mathrm dt)-p(t)=F_{\rm ext}\,\mathrm dt$. Pour l'intégration, divisez par $m$ : $\dfrac{\mathrm dv}{\mathrm dt}=\dfrac{Dv_e}{m_0-Dt}-g$. Décollage : $\dot v(0)>0$.
+    correction: |
+      $m\dot v=Dv_e-mg$ : $-v_e\dot m=Dv_e$ est la {\bf poussée}. $v(t)=v_e\ln\dfrac{m_0}{m_0-Dt}-gt$. Décollage : $Dv_e>m_0g$.
+    solution:
+      - titre: "6. Bilan avec force extérieure"
+        texte: |
+          Sur $\Sigma$, le théorème de la quantité de mouvement donne $p(t+\mathrm dt)-p(t)=F_{\rm ext}\,\mathrm dt$. Avec le calcul de la question 2 : $m\,\mathrm dv+v_e\,\mathrm dm=F_{\rm ext}\,\mathrm dt$, soit
+          $$\boxed{m\frac{\mathrm dv}{\mathrm dt}=-v_e\frac{\mathrm dm}{\mathrm dt}+F_{\rm ext}}.$$
+          Le terme $-v_e\,\mathrm dm/\mathrm dt=D\,v_e$ est la {\bf poussée} $F_p$ : force exercée par le gaz éjecté sur la fusée, dirigée vers l'avant.
+      - titre: "7. Vol vertical"
+        texte: |
+          $\dfrac{\mathrm dv}{\mathrm dt}=\dfrac{Dv_e}{m_0-Dt}-g$. Avec $v(0)=0$ :
+          $$v(t)=-v_e\ln\Big(1-\frac{Dt}{m_0}\Big)-gt=\boxed{v_e\ln\frac{m_0}{m(t)}-g\,t}.$$
+      - titre: "8. Décollage et pertes par gravité"
+        texte: |
+          À $t=0$ : $\dot v(0)=\dfrac{Dv_e}{m_0}-g>0$ si $\boxed{D\,v_e>m_0\,g}$ : la poussée doit {\bf dépasser le poids}. Le terme $-g\,t$ est la {\bf perte par gravité} : à la fin de la combustion ($t_b$), $\Delta V_{\rm gravité}=-g\,t_b$ ; plus la combustion est longue, plus on perd : c'est pourquoi la poussée est grande et la combustion brève ($t_b\sim$ 2--3 min pour un premier étage).

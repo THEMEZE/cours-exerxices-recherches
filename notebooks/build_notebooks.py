@@ -26,7 +26,8 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 from common_data import (  # noqa: E402
     list_matieres, list_docs_td_like, load_td, apply_visibility_to_exercice,
-    enrich_media_paths, clean_exercice_for_web, niveau_label,
+    enrich_media_paths, clean_exercice_for_web, niveau_label, blocks_to_markdown,
+    title_parts, en_span, resolve_profile,
 )
 
 DEFAULT_OUT = ROOT / "notebooks" / "generated"
@@ -82,9 +83,12 @@ def build_call_for(animation: dict) -> str:
 
 def question_markdown(q: dict) -> str:
     parts = [q["enonce"].strip()]
-    if q.get("coup_de_pouce"):
-        parts.append(f"> 💡 **Coup de pouce** — {q['coup_de_pouce'].strip()}")
-    for niveau, texte in q.get("aller_plus_loin", {}).items():
+    cdp = blocks_to_markdown(q.get("coup_de_pouce")).strip()
+    if cdp:
+        parts.append(f"> 💡 **Coup de pouce** — {cdp}")
+    apl = q.get("aller_plus_loin")
+    items = apl.items() if isinstance(apl, dict) else [(it.get("niveau", ""), blocks_to_markdown([it])) for it in (apl or [])]
+    for niveau, texte in items:
         parts.append(f"> 🔭 **Aller plus loin — {niveau_label(niveau)}** — {texte.strip()}")
     return "\n\n".join(parts)
 
@@ -96,8 +100,9 @@ def build_notebook(ex: dict, meta: dict) -> "nbf.NotebookNode":
     header = f"# TD — {meta['titre']}\n## Exercice {ex['numero']}. {ex['intitule']}\n\n{ex.get('enonce_intro','').strip()}"
     cells.append(nbf.v4.new_markdown_cell(header))
 
-    if ex.get("figure"):
-        cells.append(nbf.v4.new_markdown_cell(f"![{ex['figure'].get('legende','')}]({ex['figure']['src']})"))
+    figs = ex.get("figure")
+    for f in (figs if isinstance(figs, list) else [figs] if figs else []):
+        cells.append(nbf.v4.new_markdown_cell(f"![{(f.get('legende') or '').strip()}]({f['src']})"))
 
     if ex.get("animation"):
         module = ex["animation"]["ref"]
@@ -115,11 +120,11 @@ def build_notebook(ex: dict, meta: dict) -> "nbf.NotebookNode":
         elif item["kind"] == "single":
             cells.append(nbf.v4.new_markdown_cell(f"**Question {item.get('id','')}.** " + question_markdown(item)))
             if item.get("correction"):
-                c = nbf.v4.new_markdown_cell(f"✅ **Correction** — {item['correction'].strip()}")
+                c = nbf.v4.new_markdown_cell(f"✅ **Correction** — {blocks_to_markdown(item['correction']).strip()}")
                 c["metadata"]["tags"] = ["solution"]
                 cells.append(c)
             if item.get("solution"):
-                s = nbf.v4.new_markdown_cell(f"📝 **Solution détaillée**\n\n{item['solution'].strip()}")
+                s = nbf.v4.new_markdown_cell(f"📝 **Solution détaillée**\n\n{blocks_to_markdown(item['solution']).strip()}")
                 s["metadata"]["tags"] = ["solution"]
                 cells.append(s)
         elif item["kind"] == "group":
@@ -128,11 +133,11 @@ def build_notebook(ex: dict, meta: dict) -> "nbf.NotebookNode":
                 letter = chr(ord("a") + i)
                 cells.append(nbf.v4.new_markdown_cell(f"**{letter})** " + question_markdown(sq)))
                 if sq.get("correction"):
-                    c = nbf.v4.new_markdown_cell(f"✅ **Correction** — {sq['correction'].strip()}")
+                    c = nbf.v4.new_markdown_cell(f"✅ **Correction** — {blocks_to_markdown(sq['correction']).strip()}")
                     c["metadata"]["tags"] = ["solution"]
                     cells.append(c)
                 if sq.get("solution"):
-                    s = nbf.v4.new_markdown_cell(f"📝 **Solution détaillée**\n\n{sq['solution'].strip()}")
+                    s = nbf.v4.new_markdown_cell(f"📝 **Solution détaillée**\n\n{blocks_to_markdown(sq['solution']).strip()}")
                     s["metadata"]["tags"] = ["solution"]
                     cells.append(s)
 
@@ -141,33 +146,42 @@ def build_notebook(ex: dict, meta: dict) -> "nbf.NotebookNode":
     return nb
 
 
-def export_td(matiere: str, doc_slug: str, type_doc: str, opts: dict, out_dir: Path):
+def _with_en(raw: str) -> str:
+    fr, en = title_parts(raw)
+    return fr + (f" {en_span(en)}" if en else "")
+
+
+def export_td(matiere: str, doc_slug: str, type_doc: str, profiles: dict, forced, out_dir: Path):
     meta, exercices = load_td(matiere, doc_slug, type_doc=type_doc)
+    meta = {**meta, "titre": _with_en(meta["titre"]), "chapitre_cours": _with_en(meta.get("chapitre_cours", ""))}
     td_out = out_dir / matiere / doc_slug
     td_out.mkdir(parents=True, exist_ok=True)
+    pname = resolve_profile(matiere, type_doc, doc_slug, forced=forced)
     for ex in exercices:
-        ex_filtered = clean_exercice_for_web(apply_visibility_to_exercice(enrich_media_paths(ex), opts))
+        ex_opts = profiles[resolve_profile(matiere, type_doc, doc_slug, ex_slug=ex["slug"], forced=forced)]
+        ex_filtered = clean_exercice_for_web(apply_visibility_to_exercice(enrich_media_paths(ex), ex_opts))
+        ex_filtered["intitule"] = _with_en(ex["intitule"])      # français + anglais en couleur
         nb = build_notebook(ex_filtered, meta)
         fname = f"ex{ex['numero']}_{ex['slug']}.ipynb"
         path = td_out / fname
         nbf.write(nb, path)
         # validité du fichier généré
         nbf.read(path, as_version=4)
-        print(f"   -> {path.relative_to(out_dir)}")
+        print(f"   -> {path.relative_to(out_dir)} [profil : {pname}]")
 
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--profile", required=True)
+    p.add_argument("--profile", required=True, help="profil forcé partout, ou « auto » (profil de chaque document, build/config.yaml)")
     p.add_argument("--matiere", default=None, help="ne traiter qu'une matière ; défaut : toutes")
     p.add_argument("--out", default=str(DEFAULT_OUT))
     args = p.parse_args()
 
     profiles = yaml.safe_load((ROOT / "web" / "visibility_profiles.yaml").read_text())["profiles"]
-    if args.profile not in profiles:
-        print(f"!! profil inconnu : {args.profile}")
+    forced = None if args.profile == "auto" else args.profile
+    if forced and forced not in profiles:
+        print(f"!! profil inconnu : {args.profile} (disponibles : auto, {', '.join(profiles)})")
         return
-    opts = profiles[args.profile]
     out_dir = Path(args.out).expanduser()
     matieres = [args.matiere] if args.matiere else list_matieres()
 
@@ -175,7 +189,7 @@ def main():
     for matiere in matieres:
         for type_doc in ("td", "tp"):
             for doc_slug in list_docs_td_like(matiere, type_doc):
-                export_td(matiere, doc_slug, type_doc, opts, out_dir)
+                export_td(matiere, doc_slug, type_doc, profiles, forced, out_dir)
 
 
 if __name__ == "__main__":

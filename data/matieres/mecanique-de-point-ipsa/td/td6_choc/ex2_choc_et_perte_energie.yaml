@@ -1,0 +1,166 @@
+id: td6_ex2
+intitule: "Choc dans le plan et perte d'énergie"
+td: td6
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - collisions.conservation_quantite_de_mouvement_vectorielle
+  - collisions.choc_non_frontal
+  - collisions.nature_du_choc
+
+metadonnees:
+  duree_estimee: "40 min"
+  difficulte: 3
+  type_exercice: "Application / Cours actif"
+  indispensable: true
+
+enonce_intro: |
+  Deux boules identiques $A$ et $B$, de masse $m$, sont mobiles sans frottement sur un plan horizontal. La boule $B$, initialement au repos, est heurtée par la boule $A$ de vitesse $v_A=4~\mathrm{m/s}$. Après le choc, les trajectoires de $A$ et $B$ font respectivement les angles $30^\circ$ et $45^\circ$ avec la trajectoire incidente, de part et d'autre de celle-ci. On note $\vec v_A'$ et $\vec v_B'$ les vitesses après le choc ; l'axe $(Ox)$ est la direction incidente de $A$, $(Oy)$ perpendiculaire dans le plan.
+
+prerequis:
+  - titre: "Conservation vectorielle de $\\vec p$"
+    texte: |
+      $\vec p_A+\vec p_B=\vec p_A'+\vec p_B'$ : deux équations scalaires.
+  - titre: "Trigonométrie"
+    texte: |
+      $\cos30^\circ=\tfrac{\sqrt3}2$, $\sin30^\circ=\tfrac12$, $\cos45^\circ=\sin45^\circ=\tfrac{\sqrt2}2$.
+  - titre: "Nature d'un choc"
+    texte: |
+      Élastique si $E_c$ est conservée ; partiellement élastique si $E_c$ diminue sans que les corps restent liés ; parfaitement mou si les corps restent liés.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Résoudre un choc plan à partir des angles"
+    texte: |
+      Savoir projeter la conservation de $\vec p$, résoudre pour les deux normes, calculer l'énergie avant/après pour identifier la nature du choc, et démontrer le résultat de l'angle droit pour deux masses identiques.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Deux inconnues, deux équations"
+    texte: |
+      Les deux angles sont donnés : $p$ suffit pour les deux normes ; la nature du choc est ensuite une {\bf conséquence}, non une hypothèse. La question (f) est un résultat remarquable de billard : $\vec v_A=\vec v_A'+\vec v_B'$ et $v_A^2=v_A'^2+v_B'^2$ (choc élastique) donnent $\vec v_A'\cdot\vec v_B'=0$. La réciproque est vraie pour deux masses identiques. Ici, $30^\circ+45^\circ=75^\circ<90^\circ$ : le choc est inélastique, il reste $80{,}4~\%$ de l'énergie.
+
+point_cours:
+  - titre: "Choc plan : méthode"
+    texte: |
+      (1) Schéma avec angles ; (2) $\vec p$ avant et après ; (3) projections sur $Ox,Oy$ ; (4) résolution ; (5) énergie avant/après.
+  - titre: "Billes identiques, une au repos, choc élastique"
+    texte: |
+      $\vec v=\vec v_1'+\vec v_2'$ et $v^2=v_1'^2+v_2'^2$ $\Rightarrow$ $\vec v_1'\perp\vec v_2'$ ; $v_1'=v\cos\theta_1$, $v_2'=v\sin\theta_1$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Signe de la composante $y$ pour $B$"
+    texte: |
+      Les deux billes partent de part et d'autre de la direction incidente : si $A$ est déviée vers $+y$, $B$ est déviée vers $-y$ ($p_{B,y}'=-mv_B'\sin45^\circ$). Sans ce signe, la conservation de $p_y=0$ ne peut pas être satisfaite.
+  - titre: "Conclure « élastique » parce que $p$ est conservée"
+    texte: |
+      La conservation de $\vec p$ est vraie pour {\bf tout} choc (pseudo-isolé). Seule $E_c$ permet de distinguer élastique et inélastique.
+  - titre: "Oublier les deux composantes"
+    texte: |
+      Ne pas additionner les normes des vitesses : $v_A\ne v_A'+v_B'$ ; seul $\vec v_A=\vec v_A'+\vec v_B'$ est vrai, vectoriellement.
+  - titre: "Sommes d'angles"
+    texte: |
+      Les angles sont mesurés par rapport à la trajectoire incidente ; l'angle entre les deux trajectoires {\bf finales} vaut $30^\circ+45^\circ=75^\circ$ (et non $15^\circ$).
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Billard"
+    texte: |
+      Sur une table de billard, une bille en percute une autre sans effet : les trajectoires sont perpendiculaires (si le choc est quasi élastique). Demander de mesurer l'angle.
+  - titre: "Variante : angle de $B$ imposé à $60^\\circ$"
+    texte: |
+      Pour $\theta_A=30^\circ$ et $\theta_B=60^\circ$ (somme $90^\circ$) : $v_A'=v\cos30^\circ=3{,}46$ m/s et $v_B'=v\sin30^\circ=2$ m/s, énergie conservée. Faire vérifier.
+
+bilan:
+  - titre: "Résultats"
+    texte: |
+      $v_A'=\dfrac{2v_A}{1+\sqrt3}=2{,}93$ m/s ; $v_B'=\dfrac{\sqrt2v_A}{1+\sqrt3}=2{,}07$ m/s ; $\dfrac{E_c'}{E_c}=\dfrac6{(1+\sqrt3)^2}=0{,}804$ : choc partiellement élastique, $19{,}6~\%$ de l'énergie dissipée ; somme des angles $=90^\circ\Rightarrow$ choc élastique.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Billes de masses différentes"
+    texte: |
+      Pour $m_A\ne m_B$ avec choc élastique, montrer que $\theta_A+\theta_B\ne90^\circ$ : $\theta_A+\theta_B<90^\circ$ si $m_A>m_B$, $>90^\circ$ si $m_A<m_B$. Vérifier par un exemple numérique.
+  - niveau: licence
+    titre: "Angle de diffusion maximal"
+    texte: |
+      Pour un choc élastique avec $m_A>m_B$ (cible au repos), montrer que l'angle de diffusion de $A$ ne peut pas dépasser $\arcsin(m_B/m_A)$.
+  - niveau: master
+    titre: "Chocs dans le référentiel du centre de masse"
+    texte: |
+      Dans $\mathcal R^*$ (de vitesse $v_A/2$ pour deux masses égales), les billes se déplacent à $v_A/2$ en sens opposés ; après le choc élastique, elles repartent en sens opposés à $v_A/2$ avec un angle de diffusion $\chi$ ; retrouver $\theta_A=\chi/2$ et $\theta_B=90^\circ-\chi/2$.
+
+accroche_point_cours_essentiel:
+  - titre: "Billard : où vont les deux billes ?"
+    duree_introduction: "3 min"
+    question_d_accroche: |
+      Au billard, une bille en frappe une autre {\bf de côté}. Les deux billes repartent dans des directions différentes. {\bf Que peut-on dire de ces directions ?} Si on mesure les angles, comment savoir si le choc est élastique ?
+    texte: |
+      {\bf Idée clé : $\vec p$ est conservée (vectoriellement) pour tout choc ; $E_c$ seulement pour un choc élastique.} Pour deux billes identiques, la conservation de $\vec p$ et de $E_c$ imposent un angle droit entre les trajectoires.
+
+outils_mathematiques:
+  - titre: "Projections et angles"
+    texte: |
+      Une vitesse de norme $v$ faisant l'angle $\theta$ avec $Ox$ a pour composantes $(v\cos\theta,\ v\sin\theta)$.
+  - titre: "Produit scalaire"
+    texte: |
+      $\|\vec a+\vec b\|^2=a^2+2\vec a\cdot\vec b+b^2$ ; si $\vec a\perp\vec b$ (Pythagore) : $a^2+b^2$.
+  - titre: "Rationaliser une expression"
+    texte: |
+      $\dfrac2{\sqrt3+1}=\sqrt3-1\approx0{,}732$, d'où $v_A'=v_A(\sqrt3-1)=4\times0{,}732\approx2{,}93$ m/s ; et $v_B'=\dfrac{v_A'}{\sqrt2}\approx2{,}07$ m/s.
+
+liens_autres_disciplines:
+  - discipline: "Billard et sport"
+    texte: |
+      Règle de l'angle de $90^\circ$ des billes identiques ; effet (rotation) qui modifie la règle.
+  - discipline: "Physique des particules"
+    texte: |
+      Diffusion de particules ; un angle de $90^\circ$ est un test de non-relativisme (aux hautes vitesses l'angle entre deux particules identiques est inférieur à $90^\circ$).
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{itemize}
+        \item[(a)] Faire un schéma avant et après le choc, en prenant l'axe $(Ox)$ suivant la trajectoire incidente de $A$ ; représenter les données.
+        \item[(b)] Écrire la conservation de la quantité de mouvement et la projeter sur $(Ox)$ et $(Oy)$.
+        \item[(c)] Établir les expressions de $v_A'$ et $v_B'$ en fonction de $v_A$.
+        \item[(d)] Calculer $v_A'$ et $v_B'$ pour $v_A=4~\mathrm{m/s}$.
+      \end{itemize}
+    coup_de_pouce: |
+      Avant : $\vec p=(mv_A,0)$. Après : $\vec p_A'=mv_A'(\cos30^\circ,\sin30^\circ)$, $\vec p_B'=mv_B'(\cos45^\circ,-\sin45^\circ)$. La composante selon $Oy$ donne $v_B'$ en fonction de $v_A'$.
+    correction: |
+      $v_A=v_A'\cos30^\circ+v_B'\cos45^\circ$ ; $0=v_A'\sin30^\circ-v_B'\sin45^\circ$ ; $v_A'=\dfrac{2v_A}{1+\sqrt3}\approx2{,}93$ m/s ; $v_B'=\dfrac{\sqrt2v_A}{1+\sqrt3}\approx2{,}07$ m/s.
+    solution:
+      - titre: "(a) Schéma"
+        texte: |
+          Avant : $A$ vient de la gauche avec $\vec v_A=v_A\,\vec u_x$, $B$ est au repos à l'origine. Après : $A$ part avec un angle de $+30^\circ$ par rapport à $Ox$ (vers $+y$), $B$ part avec $-45^\circ$ (vers $-y$). Les deux billes sont de part et d'autre de la direction incidente.
+      - titre: "(b) Conservation de $\\vec p$ et projections"
+        texte: |
+          Système $\{A,B\}$ pseudo-isolé pendant le choc (pas de frottement sur le plan horizontal, poids et réaction se compensent) : $\vec p_A+\vec p_B=\vec p_A'+\vec p_B'$, soit, après division par $m$ :
+          $$(Ox):\ v_A=v_A'\cos30^\circ+v_B'\cos45^\circ,\qquad(Oy):\ 0=v_A'\sin30^\circ-v_B'\sin45^\circ.$$
+      - titre: "(c) Résolution"
+        texte: |
+          $$(Ox):\ v_A=\frac{\sqrt3}2v_A'+\frac{\sqrt2}2v_B',\qquad(Oy):\ \frac12v_A'=\frac{\sqrt2}2v_B'\ \Rightarrow\ v_B'=\frac{v_A'}{\sqrt2}.$$
+          On reporte : $v_A=\dfrac{\sqrt3}2v_A'+\dfrac12v_A'=\dfrac{\sqrt3+1}2v_A'$, d'où
+          $$\boxed{v_A'=\frac{2v_A}{\sqrt3+1}},\qquad\boxed{v_B'=\frac{\sqrt2\,v_A}{\sqrt3+1}}.$$
+      - titre: "(d) Applications numériques"
+        texte: |
+          $\sqrt3+1=2{,}732$ : $v_A'=\dfrac{2\times4}{2{,}732}\approx\boxed{2{,}93~\mathrm{m/s}}$ ; $v_B'=\dfrac{1{,}414\times4}{2{,}732}\approx\boxed{2{,}07~\mathrm{m/s}}$. Vérification en $x$ : $2{,}93\times0{,}866+2{,}07\times0{,}707=2{,}536+1{,}464=4{,}00$ $\surd$.
+
+  - id: q2
+    enonce: |
+      \begin{itemize}
+        \item[(e)] Quelle est la nature de ce choc (parfaitement élastique, partiellement élastique ou parfaitement mou) ? Calculer le pourcentage d'énergie cinétique perdue.
+        \item[(f)] Montrer que, si la somme des angles de déviation est égale à $90^\circ$, le choc est élastique (deux masses identiques). Que valent alors $v_A'$ et $v_B'$ pour $\theta_A=30^\circ$ ?
+      \end{itemize}
+    coup_de_pouce: |
+      (e) Comparer $\tfrac12mv_A^2$ à $\tfrac12m(v_A'^2+v_B'^2)$. (f) $\vec v_A=\vec v_A'+\vec v_B'$ (masses égales) ; élever au carré.
+    correction: |
+      (e) $E_c'/E_c=\dfrac6{(1+\sqrt3)^2}=0{,}804$ : choc partiellement élastique, $19{,}6~\%$ perdus. (f) $\vec v_A'\cdot\vec v_B'=0\Rightarrow v_A^2=v_A'^2+v_B'^2$ : $E_c$ conservée ; $v_A'=3{,}46$ m/s, $v_B'=2{,}0$ m/s.
+    solution:
+      - titre: "(e) Nature du choc"
+        texte: |
+          Avant : $E_c=\tfrac12mv_A^2$. Après :
+          $$E_c'=\tfrac12m\big(v_A'^2+v_B'^2\big)=\tfrac12mv_A^2\Big[\frac4{(\sqrt3+1)^2}+\frac2{(\sqrt3+1)^2}\Big]=\tfrac12mv_A^2\cdot\frac6{(\sqrt3+1)^2}.$$
+          Numériquement $\dfrac6{7{,}464}=0{,}804$ : $E_c'=0{,}804\,E_c\ne E_c$. Le choc n'est pas élastique, mais les billes ne restent pas liées : {\bf choc partiellement élastique} ; l'énergie perdue vaut $19{,}6~\%$, soit $\Delta E_c=-0{,}196\times\tfrac12m\times16=-1{,}57\,m$ (en J avec $m$ en kg).
+      - titre: "(f) Angle droit pour un choc élastique"
+        texte: |
+          Masses identiques : $m\vec v_A=m\vec v_A'+m\vec v_B'\Rightarrow\vec v_A=\vec v_A'+\vec v_B'$. En élevant au carré : $v_A^2=v_A'^2+v_B'^2+2\vec v_A'\cdot\vec v_B'$. Si $\theta_A+\theta_B=90^\circ$, les vitesses sont perpendiculaires : $\vec v_A'\cdot\vec v_B'=0$ et $v_A^2=v_A'^2+v_B'^2$, d'où $\tfrac12mv_A^2=\tfrac12mv_A'^2+\tfrac12mv_B'^2$ : {\bf $E_c$ conservée, choc élastique}. Réciproquement un choc élastique entre masses égales impose $\vec v_A'\cdot\vec v_B'=0$ (trajectoires perpendiculaires). Application $\theta_A=30^\circ$, $\theta_B=60^\circ$ : $v_A'=v_A\cos30^\circ=3{,}46$ m/s, $v_B'=v_A\sin30^\circ=2{,}0$ m/s ; ici, avec $45^\circ$ et $30^\circ$ la somme est $75^\circ<90^\circ$ : choc inélastique, cohérent avec (e).

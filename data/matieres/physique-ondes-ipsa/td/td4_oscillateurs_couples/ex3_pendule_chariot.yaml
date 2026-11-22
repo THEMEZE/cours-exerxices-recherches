@@ -1,0 +1,355 @@
+id: td4_ex3
+intitule: "Oscillations libres et forcées d'un couplage pendule-chariot"
+td: td4
+facultatif: false
+seance: 5
+
+cours_rattache:
+  - chap4.oscillateurs_couples
+  - chap4.matrices_masse_raideur
+  - chap4.modes_propres
+  - chap4.oscillations_forcees
+  - chap4.petits_angles_et_developpements_limites
+
+metadonnees:
+  duree_estimee: "60 min"
+  difficulte: 4 # Sur une échelle de 1 à 5
+  priorite: 2
+  type_exercice: "Approfondissement, problème guidé"
+  indispensable: false
+
+enonce_intro: |
+  On considère un pendule simple de longueur $\ell=OA$ et de masse $m$ supposée ponctuelle au point $A$, couplé au système oscillant constitué du chariot de masse $m$ et du ressort de raideur $k$, dont l'extrémité $O'$ est fixée. Le ressort qui est responsable du couplage est horizontal et de raideur $k_c$. L'extrémité $O$ du pendule est fixée. À l'équilibre, le pendule est vertical et les deux ressorts sont non déformés. On pose $\omega_1=\sqrt{\dfrac km}$, $\omega_2=\sqrt{\dfrac g\ell}$ et $\Omega=\sqrt{\dfrac{k_c}m}$. De plus, on considère que les déplacements $x_1(t)$ du centre de masse $G$ du chariot, et $x_2(t)$, de l'extrémité $A$ du pendule, à partir de leur position d'équilibre respectif, sont suffisamment petits pour admettre que les deux ressorts peuvent être considérés comme horizontaux.
+
+  \textbf{1\textsuperscript{ère} partie : Oscillations libres et modes propres} (questions $1$ à $3$ de l'énoncé, notées q1 à q3). \textbf{2\textsuperscript{ème} partie : Oscillations forcées} (questions $1$ à $3$ de l'énoncé, notées q4 à q6) : l'extrémité $O'$ du ressort de raideur $k$ est maintenant soumise à un déplacement sinusoïdal imposé $x_0'=a_0\cos(\omega t)$.
+
+# figure:
+#   - ref: td4_ex3_chariot_pendule
+#     legende: "Chariot et pendule couplés par un ressort."
+#     width: 0.7
+#     label: "fig:chariot_pendule"
+#   - ref: td4_ex3_geometrie
+#     legende: |
+#       Suggestion : pendule écarté de l'angle $\theta$, base locale $(\vec e_r,\vec e_\theta)$, point $A$ légèrement surélevé de $h=\ell(1-\cos\theta)$ par rapport à l'axe du ressort $k_c$ (échelle très exagérée), vecteur $\overrightarrow{GA}=u\,\vec e_x+h\,\vec e_y$.
+#     width: 0.7
+#     label:
+#   - ref: td4_ex3_resonance
+#     legende: |
+#       Suggestion : amplitudes $|A_1(\omega)|$ et $|A_2(\omega)|$ en régime forcé : deux résonances en $\omega'$ et $\omega''$, et un zéro de $|A_1|$ en $\omega=\sqrt{\omega_2^2+\Omega^2}$ (antirésonance).
+#     width: 0.8
+#     label:
+
+prerequis:
+  - titre: "Pendule simple : tangente et base locale"
+    texte: |
+      Pour un pendule, $\vec e_\theta=\cos\theta\,\vec e_x+\sin\theta\,\vec e_y$ est perpendiculaire au fil ; la projection du principe fondamental sur $\vec e_\theta$ élimine la tension (voir l'exercice 1).
+  - titre: "Exercices 1 et 2"
+    texte: |
+      Équations couplées, modes propres, déterminant, découplage par symétrie ou par diagonalisation.
+  - titre: "Régime sinusoïdal forcé en notation complexe"
+    texte: |
+      $x_j=\mathrm{Re}\big[\underline A_je^{i\omega t}\big]$ ; en régime permanent, tous les éléments oscillent à la pulsation d'excitation ; on résout un système linéaire sur les amplitudes complexes (formules de Cramer).
+  - titre: "Équation bicarrée"
+    texte: |
+      $\omega^4-s\,\omega^2+p=0$ se résout en $\omega^2$ : $\omega^2=\tfrac12\big(s\pm\sqrt{s^2-4p}\big)$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Linéariser un système mixte (translation et rotation)"
+    texte: |
+      Savoir écrire les équations exactes d'un chariot couplé à un pendule, identifier les hypothèses « ressort horizontal » et « petits angles », et les justifier par l'ordre des termes négligés.
+  - titre: "Déterminer pulsations et modes d'un système couplé asymétrique"
+    texte: |
+      Savoir obtenir l'équation bicarrée, ses racines, le rapport des amplitudes $a_2/a_1$ dans chaque mode, et en discuter le signe.
+  - titre: "Résoudre un problème d'oscillations forcées"
+    texte: |
+      Savoir écrire les équations avec second membre, résoudre par les amplitudes complexes, identifier résonances et antirésonance, et calculer la période qui immobilise le chariot.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Montrer qu'un amortisseur est un oscillateur couplé"
+    texte: |
+      L'immobilisation du chariot par le pendule (antirésonance) est le principe de l'amortisseur à masse accordée utilisé dans les gratte-ciel et les ponts. C'est l'application concrète à retenir de l'exercice.
+  - titre: "Relier le cas général aux cas particuliers"
+    texte: |
+      Si $\omega_1=\omega_2$ le système est symétrique et on retrouve les modes $(1,\pm1)$ de l'exercice 1 ; si $\Omega\to0$ les modes se localisent sur un seul oscillateur. L'étude du rapport des amplitudes dans ces limites vaut vérification.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Prendre $F=mg$ pour la tension du fil"
+    texte: |
+      Le corrigé de l'établissement écrit $F\sin\theta$ avec $F\simeq mg$. C'est correct à l'ordre $1$ mais il vaut mieux projeter sur la tangente $\vec e_\theta$ et éliminer la tension : $T=mg\cos\theta+\dots$ n'est égale à $mg$ qu'à l'ordre $0$.
+  - titre: "Oublier la masse du pendule dans le second membre"
+    texte: |
+      Dans la deuxième équation, le terme de gravité est $-(mg/\ell)x_2$, donc $-\omega_2^2x_2$ après division par $m$ ; le terme du ressort de couplage est $-\Omega^2(x_2-x_1)$.
+  - titre: "Compter quatre pulsations propres"
+    texte: |
+      L'équation est du quatrième degré en $\omega$ mais bicarrée : deux racines positives $\omega'$ et $\omega''$ (les négatives sont leurs opposées).
+  - titre: "Chercher une résonance infinie sans amortissement"
+    texte: |
+      Les amplitudes divergent en $\omega'$ et $\omega''$ parce que le modèle n'a pas de frottement ; un amortissement, même faible, les rend finies.
+  - titre: "Confondre « chariot immobile » avec « pendule immobile »"
+    texte: |
+      L'antirésonance annule $A_1$ (chariot), non $A_2$ : le pendule bouge, avec une amplitude $-(k/k_c)\,a_0$, et c'est lui qui absorbe l'excitation.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Prédire avant de calculer"
+    texte: |
+      Quel est le signe du rapport $a_2/a_1$ dans le mode de plus basse fréquence ? Réponse : positif (les deux masses vont dans le même sens, pas de nœud). Dans le mode haut : négatif.
+  - titre: "Faire le lien avec les absorbeurs"
+    texte: |
+      Montrer la photographie ou la vidéo d'un amortisseur à masse accordée : le pendule géant du Taipei 101 ou de la tour Citicorp.
+
+bilan:
+  - titre: "Résultats à retenir"
+    texte: |
+      $$\ddot x_1+(\omega_1^2+\Omega^2)x_1-\Omega^2x_2=0,\quad\ddot x_2+(\omega_2^2+\Omega^2)x_2-\Omega^2x_1=0,$$
+      $$\omega^4-(\omega_1^2+\omega_2^2+2\Omega^2)\omega^2+\omega_1^2\omega_2^2+\Omega^2(\omega_1^2+\omega_2^2)=0,\qquad\frac{a_2}{a_1}=\frac{\omega_1^2+\Omega^2-\omega^2}{\Omega^2}.$$
+      Régime forcé : $\underline A_1=a_0\dfrac{\omega_1^2(\omega_2^2+\Omega^2-\omega^2)}{\Delta(\omega)}$, $\underline A_2=a_0\dfrac{\omega_1^2\Omega^2}{\Delta(\omega)}$ avec $\Delta=(\omega'^2-\omega^2)(\omega''^2-\omega^2)$ ; le chariot est immobile pour $\omega^2=\omega_2^2+\Omega^2$, soit $T=1{,}26$ s.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Anticroisement des niveaux"
+    texte: |
+      Montrer que $\omega''^2-\omega'^2=\sqrt{(\omega_1^2-\omega_2^2)^2+4\Omega^4}\ge2\Omega^2$ : les deux pulsations propres ne peuvent pas se croiser quand on varie $\omega_1$ ou $\omega_2$ (répulsion de niveaux). Tracer $\omega'^2$ et $\omega''^2$ en fonction de $\omega_1^2-\omega_2^2$.
+  - niveau: licence
+    titre: "Pourquoi le mode bas est toujours en phase"
+    texte: |
+      Montrer que $\omega'^2<\min(\omega_1^2,\omega_2^2)+\Omega^2$ et $\omega''^2>\max(\omega_1^2,\omega_2^2)+\Omega^2$, ce qui donne $a_2/a_1>0$ pour le mode bas et $<0$ pour le mode haut : le mode fondamental n'a pas de nœud (cas particulier d'un théorème de Perron--Frobenius).
+  - niveau: master
+    titre: "Amortisseur à masse accordée"
+    texte: |
+      Avec un petit frottement visqueux sur le pendule, calculer la réponse du chariot à l'excitation ; montrer que l'amplitude du chariot est réduite dans une bande de fréquences autour de $\sqrt{\omega_2^2+\Omega^2}$, et optimiser le frottement.
+  - niveau: master
+    titre: "Corrections non linéaires"
+    texte: |
+      Les termes cubiques ($\sin\theta\simeq\theta-\theta^3/6$, courbure du ressort $k_c$) rendent les fréquences dépendantes de l'amplitude et peuvent désaccorder l'absorbeur ; voir la méthode de Poincaré--Lindstedt de l'exercice 8.
+
+accroche_point_cours_essentiel:
+  - titre: "Un pendule peut-il immobiliser un chariot ?"
+    duree_introduction: "5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Un chariot est relié à un mur par un ressort ; on agite l'extrémité du ressort. Normalement le chariot oscille à la fréquence d'excitation. {\bf Peut-on, en accrochant un pendule au chariot par un second ressort, rendre le chariot parfaitement immobile ?} À quelle fréquence ?
+    texte: |
+      {\bf Idée clé : à une fréquence bien choisie, le pendule exerce sur le chariot une force exactement opposée à celle de l'excitation.} À la pulsation $\omega^2=g/\ell+k_c/m$ (pulsation propre du pendule retenu par le ressort de couplage seul), la force du ressort de couplage compense la force imposée par l'extrémité $O'$, et le chariot reste immobile alors que le pendule oscille avec l'amplitude $-(k/k_c)a_0$. C'est le principe des amortisseurs à masse accordée.
+
+outils_mathematiques:
+  - titre: "Linéarisation de la longueur d'un ressort presque horizontal"
+    texte: |
+      $\ell_s=\sqrt{u^2+h^2}=u+\dfrac{h^2}{2u}+\dots$ avec $h=\ell(1-\cos\theta)=O(\theta^2)$ : le terme correctif est d'ordre $4$.
+  - titre: "Système linéaire $2\\times2$ et règle de Cramer"
+    texte: |
+      Pour $\begin{pmatrix}a&b\\c&d\end{pmatrix}\begin{pmatrix}X\\Y\end{pmatrix}=\begin{pmatrix}f\\g\end{pmatrix}$ : $X=\dfrac{fd-bg}{ad-bc}$, $Y=\dfrac{ag-fc}{ad-bc}$.
+  - titre: "Équation bicarrée et discriminant"
+    texte: |
+      Discriminant $(\omega_1^2-\omega_2^2)^2+4\Omega^4>0$ : les deux racines en $\omega^2$ sont réelles et distinctes.
+  - titre: "Factorisation du dénominateur"
+    texte: |
+      $\Delta(\omega)=(\omega_1^2+\Omega^2-\omega^2)(\omega_2^2+\Omega^2-\omega^2)-\Omega^4=(\omega'^2-\omega^2)(\omega''^2-\omega^2)$ : les zéros sont les pulsations propres.
+  - titre: "Application numérique"
+    texte: |
+      $\omega_2^2=g/\ell=9{,}81/0{,}66=14{,}86\ \mathrm{s^{-2}}$, $\Omega^2=k_c/m=1/0{,}1=10\ \mathrm{s^{-2}}$ ; $\omega^2=24{,}86$, $\omega=4{,}99\ \mathrm{rad\cdot s^{-1}}$.
+
+liens_autres_disciplines:
+  - discipline: "Génie civil"
+    texte: |
+      Amortisseur à masse accordée : une masse suspendue (pendule) dans le sommet d'un gratte-ciel, accordée sur la fréquence propre de la structure, réduit sa réponse au vent ou au séisme.
+  - discipline: "Électrocinétique"
+    texte: |
+      Filtre coupe-bande : un circuit $LC$ parallèle placé en dérivation annule la transmission à sa fréquence de résonance, de même que le pendule annule le mouvement du chariot.
+  - discipline: "Acoustique"
+    texte: |
+      Le résonateur de Helmholtz fixé sur un conduit annule le bruit à sa fréquence propre (TD2, exercice 7).
+
+questions:
+  - id: q1
+    enonce: |
+      \textbf{(1\textsuperscript{ère} partie, question 1).} Écrire les deux équations différentielles du mouvement en $x_1(t)$ et $x_2(t)$, à l'aide des paramètres $\omega_1=\sqrt{\dfrac km}$, $\omega_2=\sqrt{\dfrac g\ell}$ et $\Omega=\sqrt{\dfrac{k_c}m}$.
+    coup_de_pouce:
+      - titre: "Deux systèmes, deux projections"
+        texte: |
+          Le chariot se déplace en translation : le principe fondamental projeté sur $\vec e_x$ suffit. Le pendule tourne : projetez sur la tangente $\vec e_\theta=\cos\theta\,\vec e_x+\sin\theta\,\vec e_y$ pour éliminer la tension du fil.
+      - titre: "Le ressort de couplage"
+        texte: |
+          Calculez l'allongement algébrique de $k_c$ : $\overrightarrow{GA}$ a une composante horizontale $L_c+x_2-x_1$ et une composante verticale $h=\ell(1-\cos\theta)$. De quel ordre est $h$ ? Que devient l'allongement à l'ordre $1$ ?
+      - titre: "Linéariser"
+        texte: |
+          $x_2=\ell\sin\theta\simeq\ell\theta$ ; $\sin\theta\simeq x_2/\ell$. Écrivez chaque équation en $x_1$ et $x_2$ et divisez par $m$.
+    correction:
+      - titre: "Système"
+        texte: |
+          $$m\ddot x_1=-kx_1+k_c(x_2-x_1),\qquad m\ddot x_2=-k_c(x_2-x_1)-\frac{mg}\ell x_2,$$
+          soit $\ddot x_1+(\omega_1^2+\Omega^2)x_1=\Omega^2x_2$ et $\ddot x_2+(\omega_2^2+\Omega^2)x_2=\Omega^2x_1$.
+    solution:
+      - titre: "Système, repère, variables"
+        texte: |
+          Deux systèmes : le chariot $G$ (translation le long de l'axe horizontal $O'x$, variable $x_1$) et la masse $A$ du pendule (variable $\theta$). Référentiel du laboratoire galiléen ; axe $O'x$ vers la droite, $\vec e_y$ vers le haut. Le pendule est repéré par l'angle $\theta$ depuis la verticale descendante, positif vers $+x$ : base locale $\vec e_r=\sin\theta\,\vec e_x-\cos\theta\,\vec e_y$ (de $O$ vers $A$), $\vec e_\theta=\cos\theta\,\vec e_x+\sin\theta\,\vec e_y$ (voir l'exercice 1 pour la construction par produits scalaires). Par rapport à sa position d'équilibre, $A$ a pour coordonnées $\big(\ell\sin\theta,\ \ell(1-\cos\theta)\big)$ : $x_2=\ell\sin\theta$ \emph{exactement}, et $h=\ell(1-\cos\theta)$ est d'ordre $2$.
+      - titre: "Géométrie exacte du ressort de couplage"
+        texte: |
+          Soit $L_c$ la longueur à vide de $k_c$, égale à la distance $GA$ à l'équilibre. Alors $\overrightarrow{GA}=u\,\vec e_x+h\,\vec e_y$ avec $u=L_c+x_2-x_1$ et $\ell_s=\sqrt{u^2+h^2}$ : l'allongement algébrique est $\ell_s-L_c$. Le ressort étiré tire $A$ vers $G$ : $\vec F_A=-k_c(\ell_s-L_c)\,\overrightarrow{GA}/\ell_s$ et $\vec F_G=-\vec F_A$.
+      - titre: "Équations exactes"
+        texte: |
+          \begin{itemize}[label = $\bullet$]
+            \item {\bf Chariot} (projection sur $\vec e_x$ ; la composante verticale est équilibrée par le rail) : $m\ddot x_1=-kx_1+k_c(\ell_s-L_c)\dfrac{u}{\ell_s}$.
+            \item {\bf Pendule} (projection sur $\vec e_\theta$ : le poids donne $-mg\sin\theta$, la tension $0$, le ressort $\vec F_A\cdot\vec e_\theta=-k_c\dfrac{\ell_s-L_c}{\ell_s}(u\cos\theta+h\sin\theta)$) : $m\ell\ddot\theta=-mg\sin\theta-k_c\dfrac{\ell_s-L_c}{\ell_s}(u\cos\theta+h\sin\theta)$.
+          \end{itemize}
+          Ces équations sont non linéaires et couplées (comme à l'exercice 1) ; elles sont exactes. Elles ne sont ici \emph{pas} intégrables analytiquement.
+      - titre: "Linéarisation"
+        texte: |
+          On développe à l'ordre $1$ en $x_1,\theta$ : $\ell_s=u+h^2/(2u)+\dots$ avec $h=O(\theta^2)$, donc $\ell_s-L_c=x_2-x_1+O(4)$ ; $u/\ell_s=1+O(4)$ ; $(u\cos\theta+h\sin\theta)/\ell_s=\cos\theta+O(3)=1+O(2)$ ; $\sin\theta\simeq x_2/\ell$ ; $\ddot x_2=\ell\ddot\theta+O(3)$. Les hypothèses de l'énoncé (« ressorts horizontaux ») sont donc cohérentes à l'ordre $1$ : l'inclinaison du ressort est d'ordre $2$ et ne modifie sa force qu'à l'ordre $3$. Les équations linéarisées sont
+          $$m\ddot x_1=-kx_1+k_c(x_2-x_1),\qquad m\ddot x_2=-\frac{mg}\ell x_2-k_c(x_2-x_1).$$
+          (Le corrigé de l'établissement projette sur $\vec e_x$ la tension $F\simeq mg$ du fil, soit $F\sin\theta\simeq mg\,x_2/\ell$ : c'est correct à l'ordre $1$ car $T=mg+O(\theta^2)$, mais la projection tangentielle évite d'avoir à le justifier.)
+      - titre: "Forme canonique et contrôles"
+        texte: |
+          En divisant par $m$ :
+          $$\boxed{\ddot x_1+(\omega_1^2+\Omega^2)\,x_1-\Omega^2x_2=0},\qquad\boxed{\ddot x_2+(\omega_2^2+\Omega^2)\,x_2-\Omega^2x_1=0}.$$
+          \emph{Contrôles} : dimensions homogènes ($\mathrm s^{-2}$) ; $\Omega=0$ : chariot sur ressort et pendule indépendants ; les couplages $-\Omega^2$ sont égaux (réciprocité) ; le système n'est symétrique par échange des deux oscillateurs que si $\omega_1=\omega_2$.
+
+  - id: q2
+    enonce: |
+      \textbf{(1\textsuperscript{ère} partie, question 2).} Établir l'équation du 4\textsuperscript{ème} degré en $\omega$ dont les solutions sont les pulsations propres $\omega'$ et $\omega''$ de ce système (calcul facultatif des pulsations propres).
+    coup_de_pouce:
+      - titre: "Solution harmonique"
+        texte: |
+          Cherchez $x_j=A_j\cos(\omega t+\varphi_j)$ (ou en complexe) : vous obtenez un système homogène en $A_1,A_2$. Quelle condition sur son déterminant ?
+      - titre: "Équation bicarrée"
+        texte: |
+          Le déterminant ne contient que $\omega^2$. Posez $X=\omega^2$ et résolvez le trinôme.
+    correction:
+      - titre: "Équation caractéristique"
+        texte: |
+          $$\omega^4-(\omega_1^2+\omega_2^2+2\Omega^2)\,\omega^2+\omega_1^2\omega_2^2+\Omega^2(\omega_1^2+\omega_2^2)=0,$$
+          $$\omega'^2,\omega''^2=\frac12\Big[\omega_1^2+\omega_2^2+2\Omega^2\mp\sqrt{(\omega_1^2-\omega_2^2)^2+4\Omega^4}\Big].$$
+    solution:
+      - titre: "Système sur les amplitudes et déterminant"
+        texte: |
+          Avec $\ddot x_j=-\omega^2x_j$ :
+          $$(\omega_1^2+\Omega^2-\omega^2)A_1-\Omega^2A_2=0,\qquad-\Omega^2A_1+(\omega_2^2+\Omega^2-\omega^2)A_2=0.$$
+          La solution $A_1=A_2=0$ correspond à l'équilibre ; une solution non nulle exige
+          $$\Delta(\omega)=(\omega_1^2+\Omega^2-\omega^2)(\omega_2^2+\Omega^2-\omega^2)-\Omega^4=0.$$
+          En développant : $\omega^4-(\omega_1^2+\omega_2^2+2\Omega^2)\omega^2+\omega_1^2\omega_2^2+\Omega^2(\omega_1^2+\omega_2^2)=0$ (les termes $\Omega^4$ se compensent).
+      - titre: "Pulsations propres"
+        texte: |
+          L'équation est du quatrième degré en $\omega$ mais ne contient que $\omega^2$ : c'est une équation bicarrée. Son discriminant est $(\omega_1^2+\omega_2^2+2\Omega^2)^2-4\big[\omega_1^2\omega_2^2+\Omega^2(\omega_1^2+\omega_2^2)\big]=(\omega_1^2-\omega_2^2)^2+4\Omega^4>0$ : deux racines réelles distinctes en $\omega^2$,
+          $$\omega'^2=\tfrac12\Big[\omega_1^2+\omega_2^2+2\Omega^2-\sqrt{(\omega_1^2-\omega_2^2)^2+4\Omega^4}\Big],\qquad\omega''^2=\tfrac12\Big[\omega_1^2+\omega_2^2+2\Omega^2+\sqrt{(\omega_1^2-\omega_2^2)^2+4\Omega^4}\Big].$$
+          Elles sont strictement positives (produit $\omega_1^2\omega_2^2+\Omega^2(\omega_1^2+\omega_2^2)>0$ et somme $>0$) : on retient $\omega'>0$ et $\omega''>0$ ; les racines négatives en $\omega$ sont leurs opposées et décrivent les mêmes mouvements. Il y a donc deux modes, pas quatre.
+      - titre: "Formulation matricielle"
+        texte: |
+          $M=mI$, $K=m\begin{pmatrix}\omega_1^2+\Omega^2&-\Omega^2\\-\Omega^2&\omega_2^2+\Omega^2\end{pmatrix}$ et $\det(K-\omega^2M)=m^2\Delta(\omega)$. Ce sont les valeurs propres de la matrice symétrique $M^{-1}K$ : $\omega'^2,\omega''^2=\dfrac{\mathrm{tr}}2\mp\sqrt{\big(\tfrac{a-c}2\big)^2+b^2}$ avec $a-c=\omega_1^2-\omega_2^2$ et $b=-\Omega^2$, ce qui redonne le discriminant ci-dessus.
+      - titre: "Cas limites et anticroisement"
+        texte: |
+          \begin{itemize}[label = $\bullet$]
+            \item $\Omega\to0$ : $\omega'^2,\omega''^2\to\omega_1^2,\omega_2^2$ (oscillateurs indépendants).
+            \item $\omega_1=\omega_2$ : $\omega'^2=\omega_1^2$ et $\omega''^2=\omega_1^2+2\Omega^2$ : on retrouve les deux modes de l'exercice 1 (en phase et en opposition).
+            \item {\bf Répulsion de niveaux} : $\omega''^2-\omega'^2=\sqrt{(\omega_1^2-\omega_2^2)^2+4\Omega^4}\ge2\Omega^2$ : les pulsations propres ne se croisent jamais, même à l'accord $\omega_1=\omega_2$.
+          \end{itemize}
+
+  - id: q3
+    enonce: |
+      \textbf{(1\textsuperscript{ère} partie, question 3).} Calculer en fonction de $\Omega$, $\omega_1$ (ou $\omega_2$), $\omega'$ et $\omega''$, le rapport $\dfrac{a_2}{a_1}$ des amplitudes des oscillations de la masse $A$ et du centre de masse $G$ du chariot, pour chacun des deux modes propres du système.
+    coup_de_pouce:
+      - titre: "Utiliser une des deux équations"
+        texte: |
+          Reprenez la première équation sur les amplitudes : $(\omega_1^2+\Omega^2-\omega^2)A_1=\Omega^2A_2$. Que vaut $A_2/A_1$ ? Quel est le lien avec la seconde équation ?
+      - titre: "Signe et interprétation"
+        texte: |
+          Comparez $\omega'^2$ et $\omega''^2$ aux nombres $\omega_1^2+\Omega^2$ et $\omega_2^2+\Omega^2$ : en déduire le signe de $a_2/a_1$ pour chaque mode.
+    correction:
+      - titre: "Rapports d'amplitudes"
+        texte: |
+          $$\frac{a_2}{a_1}\Big|_{\omega'}=\frac{\omega_1^2+\Omega^2-\omega'^2}{\Omega^2}=\frac{\Omega^2}{\omega_2^2+\Omega^2-\omega'^2},\qquad\frac{a_2}{a_1}\Big|_{\omega''}=\frac{\omega_1^2+\Omega^2-\omega''^2}{\Omega^2}=\frac{\Omega^2}{\omega_2^2+\Omega^2-\omega''^2}.$$
+          Mode bas : en phase ($a_2/a_1>0$) ; mode haut : en opposition de phase ($a_2/a_1<0$).
+    solution:
+      - titre: "Calcul du rapport"
+        texte: |
+          Pour un mode de pulsation $\omega$, l'une ou l'autre des deux équations de la question 2 donne
+          $$\frac{A_2}{A_1}=\frac{\omega_1^2+\Omega^2-\omega^2}{\Omega^2}=\frac{\Omega^2}{\omega_2^2+\Omega^2-\omega^2}.$$
+          L'égalité des deux expressions équivaut à $\Delta(\omega)=0$ : c'est la condition de la question 2. Comme $A_2/A_1$ est \emph{réel}, les deux masses oscillent en phase ($a_2/a_1>0$) ou en opposition de phase ($a_2/a_1<0$), avec $a_2/a_1=|A_2/A_1|$ pour le rapport des amplitudes (modules).
+      - titre: "Signe : le mode bas est toujours en phase"
+        texte: |
+          La matrice $M^{-1}K=\begin{pmatrix}\omega_1^2+\Omega^2&-\Omega^2\\-\Omega^2&\omega_2^2+\Omega^2\end{pmatrix}$ a pour valeurs propres $\omega'^2<\omega''^2$. La plus petite valeur propre d'une matrice symétrique est inférieure à chacun de ses éléments diagonaux, et la plus grande leur est supérieure : $\omega'^2<\min(\omega_1^2,\omega_2^2)+\Omega^2$ et $\omega''^2>\max(\omega_1^2,\omega_2^2)+\Omega^2$. Donc $\omega_1^2+\Omega^2-\omega'^2>0$ : $A_2/A_1>0$ pour le mode bas (en phase, aucun nœud) ; $\omega_1^2+\Omega^2-\omega''^2<0$ : $A_2/A_1<0$ pour le mode haut (opposition, un nœud).
+      - titre: "Cas limites"
+        texte: |
+          \begin{itemize}[label = $\bullet$]
+            \item $\omega_1=\omega_2$ : $\omega'^2=\omega_1^2$ donne $A_2/A_1=\Omega^2/\Omega^2=+1$ ; $\omega''^2=\omega_1^2+2\Omega^2$ donne $-1$ : modes en phase et en opposition de l'exercice 1.
+            \item $\Omega\to0$ avec $\omega_1<\omega_2$ : $\omega'\to\omega_1$ et $A_2/A_1\to0$ (le mode bas est celui du chariot seul) ; $\omega''\to\omega_2$ et $|A_2/A_1|\to\infty$ (le mode haut est celui du pendule seul) : les modes se localisent sur un oscillateur.
+          \end{itemize}
+          {\bf Interprétation.} Un mode d'un système couplé est « collectif » ; il se rapproche d'un mode d'oscillateur isolé quand le couplage devient petit devant l'écart des pulsations (voir l'angle de mélange à l'exercice 7).
+
+  - id: q4
+    enonce: |
+      \textbf{(2\textsuperscript{ème} partie, question 1).} L'extrémité $O'$ du ressort de raideur $k$ est maintenant soumise à un déplacement sinusoïdal imposé $x_0'=a_0\cos(\omega t)$. Écrire les nouvelles équations différentielles en $x_1(t)$ et $x_2(t)$.
+    coup_de_pouce:
+      - titre: "Le ressort $k$ a changé"
+        texte: |
+          Quel est maintenant l'allongement algébrique du ressort $k$ ? L'extrémité $O'$ s'est déplacée de $x_0'$ et l'autre extrémité de $x_1$.
+    correction:
+      - titre: "Équations forcées"
+        texte: |
+          $$\ddot x_1+(\omega_1^2+\Omega^2)x_1-\Omega^2x_2=\omega_1^2a_0\cos\omega t,\qquad\ddot x_2+(\omega_2^2+\Omega^2)x_2-\Omega^2x_1=0.$$
+    solution:
+      - titre: "Nouvel allongement"
+        texte: |
+          La longueur du ressort $k$ est maintenant (position de $G$) $-$ (position de $O'$) ; l'allongement algébrique est $x_1-x_0'$. La force sur le chariot est donc $-k(x_1-x_0')=-kx_1+kx_0'$.
+      - titre: "Équations"
+        texte: |
+          $$m\ddot x_1=-k(x_1-a_0\cos\omega t)+k_c(x_2-x_1),\qquad m\ddot x_2=-k_c(x_2-x_1)-\frac{mg}\ell x_2.$$
+          Le pendule ne subit pas directement l'excitation. En divisant par $m$ :
+          $$\boxed{\ddot x_1+(\omega_1^2+\Omega^2)x_1-\Omega^2x_2=\omega_1^2a_0\cos\omega t},\qquad\boxed{\ddot x_2+(\omega_2^2+\Omega^2)x_2-\Omega^2x_1=0}.$$
+          L'excitation apparaît comme un second membre sur la première équation uniquement. Le système reste linéaire : solution = solution générale du système homogène (régime transitoire, qui s'amortit en présence de frottement) $+$ une solution particulière (régime permanent forcé).
+
+  - id: q5
+    enonce: |
+      \textbf{(2\textsuperscript{ème} partie, question 2).} Déterminer les amplitudes complexes des mouvements de $G$ et $A$ en fonction de la pulsation $\omega$ de l'excitation et des paramètres $\Omega$, $\omega_1$ (ou $\omega_2$), $\omega'$ et $\omega''$.
+    coup_de_pouce:
+      - titre: "Régime forcé permanent"
+        texte: |
+          En régime permanent, tous les éléments oscillent à la pulsation $\omega$ de l'excitation : $x_j=\mathrm{Re}\big[\underline A_je^{i\omega t}\big]$. Reportez dans les équations et obtenez un système linéaire non homogène sur $\underline A_1,\underline A_2$.
+      - titre: "Résolution"
+        texte: |
+          Résolvez par les formules de Cramer, puis factorisez le dénominateur en utilisant les pulsations propres.
+    correction:
+      - titre: "Amplitudes complexes"
+        texte: |
+          $$\underline A_1=a_0\frac{\omega_1^2(\omega_2^2+\Omega^2-\omega^2)}{(\omega'^2-\omega^2)(\omega''^2-\omega^2)},\qquad\underline A_2=a_0\frac{\omega_1^2\Omega^2}{(\omega'^2-\omega^2)(\omega''^2-\omega^2)}.$$
+    solution:
+      - titre: "Système sur les amplitudes complexes"
+        texte: |
+          Avec $\ddot x_j\to-\omega^2\underline A_j$ et le second membre $\omega_1^2a_0$ (amplitude complexe de $\omega_1^2a_0\cos\omega t$) :
+          $$\begin{pmatrix}\omega_1^2+\Omega^2-\omega^2&-\Omega^2\\-\Omega^2&\omega_2^2+\Omega^2-\omega^2\end{pmatrix}\begin{pmatrix}\underline A_1\\\underline A_2\end{pmatrix}=\begin{pmatrix}\omega_1^2a_0\\0\end{pmatrix}.$$
+          Le déterminant est $\Delta(\omega)$ de la question 2, non nul tant que $\omega\neq\omega',\omega''$ : le système a alors une solution unique (la matrice $K-\omega^2M$ est inversible).
+      - titre: "Formules de Cramer"
+        texte: |
+          $$\underline A_1=\frac{\omega_1^2a_0(\omega_2^2+\Omega^2-\omega^2)-(-\Omega^2)\cdot0}{\Delta(\omega)}=a_0\frac{\omega_1^2(\omega_2^2+\Omega^2-\omega^2)}{\Delta(\omega)},\qquad\underline A_2=\frac{(\omega_1^2+\Omega^2-\omega^2)\cdot0+\Omega^2\omega_1^2a_0}{\Delta(\omega)}=a_0\frac{\omega_1^2\Omega^2}{\Delta(\omega)}.$$
+          Comme $\Delta(\omega)=\omega^4-\dots$ a pour racines $\omega'^2$ et $\omega''^2$ : $\Delta(\omega)=(\omega'^2-\omega^2)(\omega''^2-\omega^2)=(\omega_1^2+\Omega^2-\omega^2)(\omega_2^2+\Omega^2-\omega^2)-\Omega^4$. Les amplitudes sont \emph{réelles} (sans frottement) : les masses sont en phase ou en opposition de phase avec l'excitation ($\varphi_1,\varphi_2\in\{0,\pi\}$), le signe changeant à chaque passage par une résonance.
+      - titre: "Interprétation"
+        texte: |
+          \begin{itemize}[label = $\bullet$]
+            \item {\bf Résonances} : le dénominateur s'annule en $\omega=\omega'$ et $\omega=\omega''$ ; les amplitudes divergent (modèle sans frottement). Un frottement, même faible, les limite.
+            \item {\bf Basse fréquence} ($\omega\to0$) : $\underline A_1\to a_0\dfrac{\omega_1^2(\omega_2^2+\Omega^2)}{\omega_1^2\omega_2^2+\Omega^2(\omega_1^2+\omega_2^2)}$ : le chariot suit l'excitation quasi statiquement (réduite par le ressort de couplage et le pendule).
+            \item {\bf Haute fréquence} ($\omega\to\infty$) : $\underline A\to0$ comme $1/\omega^2$ : l'inertie empêche de suivre.
+          \end{itemize}
+
+  - id: q6
+    enonce: |
+      \textbf{(2\textsuperscript{ème} partie, question 3).} On donne $g=9{,}81\ \mathrm{m\cdot s^{-2}}$, $\ell=0{,}66$ m, $m=0{,}1$ kg et $k_c=1$ N/m. Calculer la période $T$ de l'excitateur pour laquelle le chariot demeurera immobile.
+    coup_de_pouce:
+      - titre: "Quelle condition sur les amplitudes ?"
+        texte: |
+          Le chariot est immobile si $x_1(t)=0$ en régime permanent, c'est-à-dire si $\underline A_1=0$. Quel facteur du numérateur doit s'annuler ?
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $\omega^2=\omega_2^2+\Omega^2=\dfrac g\ell+\dfrac{k_c}m$ ; $\omega=4{,}99\ \mathrm{rad\cdot s^{-1}}$ ; $T=\dfrac{2\pi}\omega=1{,}26$ s (indépendant de $k$).
+    solution:
+      - titre: "Condition d'immobilité"
+        texte: |
+          $\underline A_1=a_0\omega_1^2(\omega_2^2+\Omega^2-\omega^2)/\Delta(\omega)=0$ pour $\omega^2=\omega_2^2+\Omega^2$ (à condition que $\Delta$ ne s'annule pas en même temps : $\Delta=-\Omega^4\neq0$ à cette pulsation). C'est une \emph{antirésonance} du chariot. La pulsation $\sqrt{\omega_2^2+\Omega^2}$ est celle d'un pendule dont le chariot serait immobile : le pendule seul, retenu par le ressort $k_c$ fixé à un point immobile, a pour pulsation $\sqrt{g/\ell+k_c/m}$.
+      - titre: "Application numérique"
+        texte: |
+          $\omega_2^2=\dfrac{9{,}81}{0{,}66}=14{,}86\ \mathrm{s^{-2}}$ ; $\Omega^2=\dfrac1{0{,}1}=10\ \mathrm{s^{-2}}$ ; $\omega^2=24{,}86\ \mathrm{s^{-2}}$ ; $\omega=4{,}986\ \mathrm{rad\cdot s^{-1}}$ ;
+          $$T=\frac{2\pi}{\omega}=1{,}26\ \mathrm s.$$
+          La raideur $k$ du ressort d'excitation n'est pas donnée : le résultat n'en dépend pas.
+      - titre: "Vérification physique par les forces"
+        texte: |
+          À cette pulsation, $\underline A_2=a_0\dfrac{\omega_1^2\Omega^2}{-\Omega^4}=-a_0\dfrac{\omega_1^2}{\Omega^2}=-\dfrac k{k_c}\,a_0$. Le bilan des forces sur le chariot immobile ($x_1=0$) s'écrit $0=k\,x_0'+k_c\,x_2$ : la force $kx_0'=ka_0\cos\omega t$ de l'excitation est exactement compensée par la force $k_cx_2$ du ressort de couplage, ce qui impose $x_2=-(k/k_c)\,a_0\cos\omega t$ : cohérent.
+      - titre: "Validité et application"
+        texte: |
+          Le pendule doit rester à petit angle : $|A_2|/\ell=(k/k_c)\,a_0/\ell\ll1$. C'est le principe de l'amortisseur à masse accordée : le pendule absorbe l'excitation à la fréquence choisie et le chariot (la structure) reste immobile. En dehors de cette fréquence, l'effet est moindre et les deux résonances $\omega',\omega''$ encadrent l'antirésonance.

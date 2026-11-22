@@ -1,0 +1,210 @@
+id: td6_ex7
+intitule: "(*) Modération des neutrons et chaîne de billes"
+td: td6
+facultatif: true
+seance: 1
+
+cours_rattache:
+  - collisions.choc_elastique
+  - collisions.referentiel_centre_de_masse
+  - collisions.transfert_energie
+  - physique_nucleaire.moderation
+
+metadonnees:
+  duree_estimee: "70 min"
+  difficulte: 5
+  type_exercice: "Exercice non guidé / Physique nucléaire et optimisation"
+  indispensable: false
+
+enonce_intro: |
+  Dans un réacteur nucléaire, les neutrons de fission sont émis avec une énergie de l'ordre de $E_0=2~\mathrm{MeV}$ ; pour entretenir la réaction en chaîne dans l'uranium $235$, il faut les ralentir jusqu'à l'énergie d'agitation thermique $E_f=0{,}025~\mathrm{eV}$ : c'est le rôle du {\bf modérateur}. Le ralentissement se fait par chocs {\bf élastiques} successifs sur des noyaux au repos de nombre de masse $A$ (masse $Am$, $m$ masse du neutron). On étudie d'abord un choc frontal, puis le cas général (diffusion isotrope dans le référentiel du centre de masse), puis un problème voisin, l'optimisation du transfert de vitesse dans une chaîne de billes.
+
+prerequis:
+  - titre: "Choc élastique frontal à cible immobile"
+    texte: |
+      $v_1'=\dfrac{m_1-m_2}{m_1+m_2}v_1$, $v_2'=\dfrac{2m_1}{m_1+m_2}v_1$.
+  - titre: "Référentiel du centre de masse"
+    texte: |
+      $\vec v_G=\dfrac{m_1\vec v_1+m_2\vec v_2}{m_1+m_2}$ ; $\vec v^*=\vec v-\vec v_G$ ; en $\mathcal R^*$, choc élastique : les normes sont conservées, la direction change d'un angle $\chi$.
+  - titre: "Valeur moyenne d'une grandeur sur une distribution uniforme"
+    texte: |
+      Si $u$ est uniformément distribuée sur $[a,b]$ : $\langle f(u)\rangle=\dfrac1{b-a}\displaystyle\int_a^bf(u)\,\mathrm du$.
+  - titre: "Logarithmes"
+    texte: |
+      $\ln(E_0/E_f)=\ln(2\times10^6/0{,}025)=\ln(8\times10^7)=18{,}2$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Quantifier un ralentissement par chocs successifs"
+    texte: |
+      Savoir exprimer la perte d'énergie d'un choc élastique avec cible immobile, passer à la moyenne sur les angles de diffusion (décrément logarithmique $\xi$), en déduire le nombre de chocs pour ralentir une particule, comparer plusieurs modérateurs et résoudre un problème d'optimisation de masses.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Un exercice de physique « vraie »"
+    texte: |
+      Le raisonnement : (i) choc frontal : le rapport d'énergie est $\alpha=\big(\tfrac{A-1}{A+1}\big)^2$ ; (ii) choc quelconque : dans $\mathcal R^*$ l'énergie finale s'écrit $E'/E=\tfrac12[(1+\alpha)+(1-\alpha)\cos\chi]$, uniformément répartie dans $[\alpha E,E]$ si la diffusion est isotrope ; (iii) $\xi=\langle\ln(E/E')\rangle=1+\dfrac{\alpha\ln\alpha}{1-\alpha}$ ; (iv) $n=\ln(E_0/E_f)/\xi$ chocs. Les valeurs ($18$ chocs pour l'hydrogène, $115$ pour le carbone, plus de $500$ pour le fer) expliquent pourquoi l'eau, le graphite et l'eau lourde sont les modérateurs usuels. L'optimisation de la chaîne de billes (m$_2=\sqrt{m_1m_3}$) est un second bel exemple d'utilisation du résultat de l'exercice 1 ; elle explique l'expérience de la balle de tennis sur le ballon de basket.
+
+point_cours:
+  - titre: "Choc élastique avec une cible immobile : énergie finale"
+    texte: |
+      Frontal : $\dfrac{E'}E=\alpha=\Big(\dfrac{A-1}{A+1}\Big)^2$ (perte maximale, $1-\alpha$). Quelconque, de déviation $\chi$ dans $\mathcal R^*$ : $\dfrac{E'}E=\dfrac{1+A^2+2A\cos\chi}{(A+1)^2}=\tfrac12\big[(1+\alpha)+(1-\alpha)\cos\chi\big]$.
+  - titre: "Décrément logarithmique moyen"
+    texte: |
+      $\xi=\Big\langle\ln\dfrac E{E'}\Big\rangle=1+\dfrac{\alpha\ln\alpha}{1-\alpha}$ (diffusion isotrope), indépendant de l'énergie ; après $n$ chocs, $\ln\dfrac{E_0}{E_n}=n\xi$ en moyenne.
+  - titre: "Transfert maximal d'énergie"
+    texte: |
+      Fraction transférée à la cible en choc frontal : $\dfrac{4m_1m_2}{(m_1+m_2)^2}$, maximale pour $m_1=m_2$ (le neutron ralenti à l'arrêt par un proton).
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Penser qu'un noyau lourd arrête mieux le neutron"
+    texte: |
+      Pour $A\gg1$, $\alpha\to1$ : le neutron rebondit presque sans perte, comme une balle de ping-pong sur un mur. Un bon modérateur est {\bf léger}.
+  - titre: "Utiliser le choc frontal pour tout"
+    texte: |
+      Le choc frontal est le cas le plus efficace, mais rare ; la moyenne sur tous les angles donne $\xi$.
+  - titre: "Moyenne arithmétique au lieu de moyenne logarithmique"
+    texte: |
+      On moyenne $\ln E$ (la perte relative), pas $E$ : sinon le nombre de chocs est sous-estimé. $\langle E'/E\rangle=\tfrac12(1+\alpha)$ donnerait pour le carbone $n\approx\dfrac{18{,}2}{\ln(1/0{,}858)}\approx119$, proche mais non rigoureux.
+  - titre: "Confondre vitesse et énergie"
+    texte: |
+      $E'/E=(v'/v)^2$ : le rapport des vitesses est la racine du rapport d'énergie.
+  - titre: "Le noyau d'hydrogène (A = 1) : formules singulières"
+    texte: |
+      Pour $A=1$, $\alpha=0$ et $\alpha\ln\alpha\to0$ : $\xi=1$ (formule par continuité).
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Expérience : balle de tennis sur ballon de basket"
+    texte: |
+      Poser une balle de tennis sur un ballon de basket et lâcher ensemble de $1$ m : la balle s'envole à environ $7$ m (question (h)). Demander la hauteur prévue avant.
+  - titre: "Prédire le meilleur modérateur"
+    texte: |
+      Poser : « eau, graphite, fer, plomb : classer ». Les étudiants proposent souvent le plomb, « parce qu'il est lourd et dense ». Calculer $\alpha$ pour chacun.
+
+bilan:
+  - titre: "Résultats"
+    texte: |
+      $\alpha=\Big(\dfrac{A-1}{A+1}\Big)^2$ ; $\xi=1+\dfrac{\alpha\ln\alpha}{1-\alpha}$ ; $n=\dfrac{\ln(E_0/E_f)}\xi$ avec $\ln(E_0/E_f)=18{,}2$ : $A=1$ : $\xi=1$, $n=18$ ; $A=2$ : $\xi=0{,}725$, $n=25$ ; $A=12$ : $\xi=0{,}158$, $n=115$ ; $A=56$ : $\xi=0{,}035$, $n=516$ ; $A=207$ : $\xi=0{,}0096$, $n=1\,890$. Chaîne de billes : $m_2=\sqrt{m_1m_3}$, $\dfrac{v_3}{v_1}=\dfrac{4}{(1+\sqrt{m_3/m_1})^2}$ ; empilement de $N$ billes (raison $q$) : $\Big(\dfrac2{1+q}\Big)^{N-1}$ ; balle de tennis sur ballon de basket : $\approx2{,}65\,v$, soit $h\approx7$ m.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Choc non frontal dans le référentiel du laboratoire"
+    texte: |
+      Pour un neutron qui heurte un noyau initialement au repos et est dévié d'un angle $\theta$ dans le laboratoire, montrer que $\tan\theta=\dfrac{A\sin\chi}{1+A\cos\chi}$ avec $\chi$ l'angle dans $\mathcal R^*$ ; pour $A=1$, $\theta=\chi/2$ ; pour $A>1$, $\theta_{\max}=\arcsin(1/A)$.
+  - niveau: licence
+    titre: "Nombre de chocs pour un mélange et pouvoir de ralentissement"
+    texte: |
+      Le {\bf pouvoir de ralentissement} d'un matériau est $\xi\,\Sigma_s$ ($\Sigma_s$ section efficace macroscopique de diffusion) ; le {\bf rapport de modération} fait intervenir aussi l'absorption $\Sigma_a$ : $\dfrac{\xi\Sigma_s}{\Sigma_a}$. Pourquoi l'eau lourde est-elle meilleure modérateur que l'eau ordinaire, alors que $\xi$ est plus faible ?
+  - niveau: master
+    titre: "Distribution des énergies après $n$ chocs"
+    texte: |
+      Montrer que la variable $u=\ln(E_0/E)$ suit après $n$ chocs une loi de moyenne $n\xi$ et de variance $n\,\sigma_\xi^2$ ; calculer $\sigma_\xi^2$ pour $A=12$ et estimer la dispersion du nombre de chocs.
+
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi l'eau et le graphite, pas le plomb ?"
+    duree_introduction: "4 min"
+    question_d_accroche: |
+      Pour ralentir un neutron rapide, on a le choix entre de l'eau, du graphite (carbone) ou du plomb. {\bf Lequel est le plus efficace ?} Intuitivement, un mur de plomb « arrête tout »... est-ce vrai pour des {\bf chocs élastiques} ?
+    texte: |
+      {\bf Idée clé : un choc élastique fait perdre d'autant plus d'énergie à la particule incidente que la cible a une masse voisine de la sienne.} $\alpha=\Big(\dfrac{A-1}{A+1}\Big)^2\to0$ pour $A=1$, $\to1$ pour $A\gg1$ : un noyau lourd renvoie le neutron sans le ralentir.
+
+outils_mathematiques:
+  - titre: "Intégrale du logarithme"
+    texte: |
+      $\displaystyle\int\ln u\,\mathrm du=u\ln u-u$ ; $\displaystyle\int_\alpha^1\ln\dfrac1u\,\mathrm du=1-\alpha+\alpha\ln\alpha$.
+  - titre: "Formule d'Al-Kashi dans le triangle des vitesses"
+    texte: |
+      $\|\vec v_G+\vec v^*\|^2=v_G^2+v^{*2}+2v_Gv^*\cos\chi$.
+  - titre: "Racines et symétrie $A\\leftrightarrow1/A$"
+    texte: |
+      $\alpha$ est invariant par $A\to1/A$ : un projectile lourd sur une cible légère perd la même fraction qu'un projectile léger sur une cible lourde.
+  - titre: "Optimisation d'une fonction d'une variable"
+    texte: |
+      Maximiser $\dfrac{m_2}{(m_1+m_2)(m_2+m_3)}$ : dériver par rapport à $m_2$ ; la dérivée s'annule en $m_2^2=m_1m_3$.
+
+liens_autres_disciplines:
+  - discipline: "Génie nucléaire"
+    texte: |
+      Réacteurs à eau pressurisée (modérateur : eau), réacteurs UNGG ou RBMK (graphite), CANDU (eau lourde).
+  - discipline: "Physique des matériaux"
+    texte: |
+      Diffusion de neutrons lents : sonde de la matière condensée.
+  - discipline: "Sport"
+    texte: |
+      Balle de tennis sur ballon de basket ; « billes de Newton » en cascade.
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{itemize}
+        \item[(a)] Un neutron de masse $m$ et de vitesse $v$ heurte {\bf de plein fouet} un noyau de masse $Am$ au repos (choc élastique). Exprimer le rapport $E'/E$ des énergies cinétiques du neutron après et avant le choc, en fonction de $A$. Calculer-le pour l'hydrogène ($A=1$), le deutérium ($A=2$), le carbone ($A=12$), le fer ($A=56$) et le plomb ($A=207$).
+        \item[(b)] Quel modérateur ralentit le mieux un neutron en un seul choc frontal ? Pourquoi un noyau lourd est-il un mauvais modérateur ?
+        \item[(c)] Pourquoi le choc frontal ne suffit-il pas à décrire le ralentissement réel ?
+      \end{itemize}
+    coup_de_pouce: |
+      Utiliser les formules de l'exercice 1 avec $m_1=m$, $m_2=Am$, $v_2=0$ : $v'=\dfrac{1-A}{1+A}v$.
+    correction: |
+      $E'/E=\Big(\dfrac{A-1}{A+1}\Big)^2=\alpha$ : H $0$ ; D $0{,}111$ ; C $0{,}716$ ; Fe $0{,}931$ ; Pb $0{,}981$ ; l'hydrogène est optimal ; en réalité les chocs ne sont pas tous frontaux.
+    solution:
+      - titre: "(a) Rapport d'énergie, choc frontal"
+        texte: |
+          Avec $m_1=m$, $m_2=Am$, $v_2=0$ : $v'=\dfrac{m-Am}{m+Am}v=\dfrac{1-A}{1+A}v$, donc
+          $$\boxed{\frac{E'}E=\Big(\frac{v'}v\Big)^2=\alpha=\Big(\frac{A-1}{A+1}\Big)^2}.$$
+          Valeurs : $A=1$ : $\alpha=0$ ; $A=2$ : $\big(\tfrac13\big)^2=0{,}111$ ; $A=12$ : $\big(\tfrac{11}{13}\big)^2=0{,}716$ ; $A=56$ : $\big(\tfrac{55}{57}\big)^2=0{,}931$ ; $A=207$ : $\big(\tfrac{206}{208}\big)^2=0{,}981$.
+      - titre: "(b) Meilleur modérateur et noyau lourd"
+        texte: |
+          L'hydrogène ($A=1$, proton de masse voisine de celle du neutron) arrête le neutron {\bf en un seul choc frontal} (échange total de vitesse, $\alpha=0$). Plus $A$ est grand, plus $\alpha\to1$ : le neutron {\bf rebondit} sur le noyau lourd presque sans perte d'énergie (comme une balle de ping-pong sur un mur, exercice 1, question (g)). Le plomb ne perd que $2~\%$ de l'énergie par choc frontal.
+      - titre: "(c) Limite du modèle frontal"
+        texte: |
+          Dans la réalité, les neutrons heurtent les noyaux avec un paramètre d'impact quelconque : le choc est {\bf rasant} dans la plupart des cas. La perte d'énergie moyenne est donc inférieure à la perte maximale ; il faut moyenner sur la distribution des angles de diffusion (question suivante).
+
+  - id: q2
+    enonce: |
+      \begin{itemize}
+        \item[(d)] Choc quelconque. Se placer dans $\mathcal R^*$ (centre de masse) : montrer que la vitesse du neutron après le choc, dans $\mathcal R$, vérifie $\dfrac{E'}E=\dfrac{1+A^2+2A\cos\chi}{(1+A)^2}$ où $\chi$ est l'angle de déviation dans $\mathcal R^*$. Retrouver le cas frontal ($\chi=\pi$).
+        \item[(e)] Si la diffusion est isotrope dans $\mathcal R^*$, montrer que $E'/E$ est uniformément distribué entre $\alpha$ et $1$, puis que la perte logarithmique moyenne $\xi=\langle\ln(E/E')\rangle$ vaut $1+\dfrac{\alpha\ln\alpha}{1-\alpha}$.
+        \item[(f)] En déduire le nombre moyen de chocs nécessaires pour ralentir un neutron de $2$ MeV à $0{,}025$ eV pour $A=1$, $2$, $12$, $56$ et $207$. Commenter.
+      \end{itemize}
+    coup_de_pouce: |
+      (d) $\vec v_G=\dfrac{\vec v}{1+A}$, vitesse du neutron dans $\mathcal R^*$ : $\vec v^*=\dfrac A{1+A}\vec v$ ; après le choc, $\vec v'=\vec v_G+\vec v^{*\prime}$ avec $\|\vec v^{*\prime}\|=\|\vec v^*\|$. (e) $\cos\chi$ uniforme dans $[-1,1]$ pour une diffusion isotrope (angle solide $2\pi\,\mathrm d\cos\chi$). (f) $\ln(E_0/E_n)=n\xi$.
+    correction: |
+      (d) $\dfrac{E'}E=\dfrac12[(1+\alpha)+(1-\alpha)\cos\chi]$ ; (e) $\xi=1+\dfrac{\alpha\ln\alpha}{1-\alpha}$ ; (f) $n=\dfrac{18{,}2}\xi$ : $18$ ; $25$ ; $115$ ; $516$ ; $1\,890$.
+    solution:
+      - titre: "(d) Énergie après le choc quelconque"
+        texte: |
+          Neutron : $\vec v_1=\vec v$ ; noyau : $\vec v_2=\vec0$. Vitesse du centre de masse : $\vec v_G=\dfrac{m\vec v}{(1+A)m}=\dfrac{\vec v}{1+A}$. Vitesse du neutron dans $\mathcal R^*$ : $\vec v^*=\vec v-\vec v_G=\dfrac A{1+A}\vec v$. Choc élastique : en $\mathcal R^*$, $\|\vec v^{*\prime}\|=\|\vec v^*\|=\dfrac{Av}{1+A}$, direction déviée de $\chi$. Retour à $\mathcal R$ :
+          $$v'^2=v_G^2+v^{*2}+2v_Gv^*\cos\chi=\frac{v^2}{(1+A)^2}\big(1+A^2+2A\cos\chi\big)\ \Rightarrow\ \boxed{\frac{E'}E=\frac{1+A^2+2A\cos\chi}{(1+A)^2}}.$$
+          {\bf Frontal} : $\chi=\pi$ (le neutron revient en arrière dans $\mathcal R^*$) : $\dfrac{(A-1)^2}{(A+1)^2}=\alpha$ $\surd$ ; {\bf pas de choc} : $\chi=0$, $E'/E=1$ $\surd$. En posant $\alpha=\Big(\dfrac{A-1}{A+1}\Big)^2$ : $1+\alpha=\dfrac{2(A^2+1)}{(A+1)^2}$ et $1-\alpha=\dfrac{4A}{(A+1)^2}$, donc $\dfrac{E'}E=\tfrac12\big[(1+\alpha)+(1-\alpha)\cos\chi\big]$.
+      - titre: "(e) Distribution isotrope et décrément logarithmique"
+        texte: |
+          Diffusion isotrope dans $\mathcal R^*$ : l'élément d'angle solide est $2\pi\sin\chi\,\mathrm d\chi=-2\pi\,\mathrm d(\cos\chi)$ : $\cos\chi$ est uniforme sur $[-1,1]$. Comme $E'/E=u$ est une fonction {\bf affine} de $\cos\chi$, de $\alpha$ (pour $\cos\chi=-1$) à $1$ (pour $\cos\chi=+1$), $u$ est uniforme sur $[\alpha,1]$ (densité $\dfrac1{1-\alpha}$). Donc
+          $$\xi=\Big\langle\ln\frac1u\Big\rangle=\frac1{1-\alpha}\int_\alpha^1(-\ln u)\,\mathrm du=\frac{\big[u-u\ln u\big]_\alpha^1}{1-\alpha}=\frac{1-\alpha+\alpha\ln\alpha}{1-\alpha}=\boxed{1+\frac{\alpha\ln\alpha}{1-\alpha}}.$$
+          Cas $A=1$ : $\alpha=0$, $\alpha\ln\alpha\to0$, $\xi=1$ $\surd$.
+      - titre: "(f) Nombre de chocs"
+        texte: |
+          À chaque choc, $\ln E$ diminue en moyenne de $\xi$ (indépendamment de $E$, car $u$ ne dépend pas de $E$) : $\ln\dfrac{E_0}{E_f}=n\xi\Rightarrow n=\dfrac{\ln(8\times10^7)}{\xi}=\dfrac{18{,}2}\xi$.
+          $$\begin{array}{c|ccccc}A&1&2&12&56&207\\\hline\alpha&0&0{,}111&0{,}716&0{,}931&0{,}981\\\xi&1&0{,}725&0{,}158&0{,}035&0{,}0096\\\hline n&18&25&115&516&1\,890\end{array}$$
+          {\bf Commentaire} : l'eau (hydrogène) ralentit en $\approx18$ chocs ; le graphite en $\approx115$ (d'où la taille des piles à graphite) ; le plomb ne modère pratiquement pas ($>1\,800$ chocs, pendant lesquels le neutron serait absorbé). Chaque choc sur le carbone ne divise l'énergie que par $\mathrm e^{0{,}158}\approx1{,}17$ en moyenne : il en faut $\approx115$ pour thermaliser le neutron.
+
+  - id: q3
+    enonce: |
+      {\bf Empiler pour accélérer.} Trois billes $1,2,3$ de masses $m_1>m_2>m_3$ sont alignées sur une table lisse. La bille $1$ arrive à la vitesse $v_1$ sur la bille $2$ au repos ; la bille $2$ frappe ensuite la bille $3$ au repos. Chocs frontaux {\bf élastiques}.
+      \begin{itemize}
+        \item[(g)] Exprimer $v_3'$ en fonction de $v_1$ et des masses. Pour $m_1$ et $m_3$ fixées, quelle masse $m_2$ maximise $v_3'$ ? Calculer $v_3'/v_1$ pour $m_1=1$ kg, $m_3=10$ g, et comparer au choc direct $1\to3$.
+        \item[(h)] {\bf Balle de tennis sur un ballon de basket.} Un ballon de basket ($M=600$ g) surmonté d'une balle de tennis ($m=57$ g) est lâché de $h_0=1{,}00$ m. Le ballon rebondit élastiquement sur le sol, puis heurte la balle encore en descente. Calculer la vitesse de la balle juste après son choc avec le ballon et la hauteur qu'elle atteint. Comparer au cas idéal $M\gg m$.
+      \end{itemize}
+    coup_de_pouce: |
+      (g) $v_2'=\dfrac{2m_1}{m_1+m_2}v_1$ puis $v_3'=\dfrac{2m_2}{m_2+m_3}v_2'$ ; maximiser le produit en $m_2$. (h) Après le rebond, le ballon monte à $+v$ ; la balle descend encore à $-v$, avec $v=\sqrt{2gh_0}$ : appliquer la formule de l'exercice 1 avec $v_1=+v$, $v_2=-v$.
+    correction: |
+      (g) $v_3'=\dfrac{4m_1m_2}{(m_1+m_2)(m_2+m_3)}v_1$, maximale pour $m_2=\sqrt{m_1m_3}=0{,}1$ kg ; $v_3'/v_1=\dfrac4{(1+\sqrt{m_3/m_1})^2}=3{,}31$ (contre $1{,}98$ en choc direct). (h) $v_{\rm balle}'=\dfrac{3M-m}{M+m}v=2{,}65\,v=11{,}7$ m/s, $h=7{,}0$ m (contre $9$ m pour $M\gg m$).
+    solution:
+      - titre: "(g) Chaîne de trois billes : masse intermédiaire optimale"
+        texte: |
+          Premier choc (cible 2 au repos) : $v_2'=\dfrac{2m_1}{m_1+m_2}v_1$. Second choc ($2\to3$, cible au repos) : $v_3'=\dfrac{2m_2}{m_2+m_3}v_2'$, donc
+          $$\boxed{v_3'=\frac{4m_1m_2}{(m_1+m_2)(m_2+m_3)}\,v_1}.$$
+          Maximiser $f(m_2)=\dfrac{m_2}{(m_1+m_2)(m_2+m_3)}$ : $f=\dfrac{m_2}{m_2^2+(m_1+m_3)m_2+m_1m_3}=\dfrac1{m_2+(m_1+m_3)+m_1m_3/m_2}$, maximale quand $m_2+\dfrac{m_1m_3}{m_2}$ est minimal, soit pour $m_2^2=m_1m_3$ (inégalité arithmético-géométrique) :
+          $$\boxed{m_2=\sqrt{m_1m_3}}\ \Rightarrow\ \frac{v_3'}{v_1}=\frac{4}{\big(1+\sqrt{m_3/m_1}\big)^2}.$$
+          AN : $m_2=\sqrt{1\times0{,}01}=0{,}10$ kg, $\sqrt{m_3/m_1}=0{,}1$ : $\dfrac{v_3'}{v_1}=\dfrac4{1{,}21}=\boxed{3{,}31}$. Choc direct $1\to3$ : $\dfrac{2m_1}{m_1+m_3}=1{,}98$ : l'intermédiaire permet de gagner un facteur $\approx1{,}7$ sur la vitesse, $\approx2{,}8$ sur l'énergie. Pour $N$ billes de masses en progression géométrique de raison $q$ : chaque étage multiplie la vitesse par $\dfrac2{1+q}$, soit $\Big(\dfrac2{1+q}\Big)^{N-1}$ (pour $N=4$ billes de $1$ kg à $10$ g : $q=0{,}215$, $4{,}46$ fois).
+      - titre: "(h) Balle de tennis sur ballon de basket"
+        texte: |
+          Vitesse d'arrivée au sol : $v=\sqrt{2gh_0}=4{,}43$ m/s. Le ballon rebondit (élastique, sol fixe) et repart à $+v$ (vers le haut) ; la balle, juste au-dessus, descend encore à $-v$. Choc élastique ballon ($M$, vitesse $+v$) – balle ($m$, vitesse $-v$) : d'après l'exercice 1, avec $v_1=+v$ (ballon), $v_2=-v$ (balle) :
+          $$v_{\rm balle}'=\frac{(m-M)v_2+2Mv_1}{M+m}=\frac{(m-M)(-v)+2Mv}{M+m}=\frac{3M-m}{M+m}\,v=\frac{1{,}8-0{,}057}{0{,}657}\,v=2{,}65\,v\approx\boxed{11{,}7~\mathrm{m/s}}.$$
+          Hauteur : $h=\dfrac{v_{\rm balle}'^2}{2g}=\Big(\dfrac{3M-m}{M+m}\Big)^2h_0\approx\boxed{7{,}0~\mathrm m}$. Dans l'idéal $M\gg m$ : $v_{\rm balle}'\to3v$, $h\to9h_0=9$ m (la balle repart à vitesse triple, car dans le référentiel du ballon qui monte à $v$ elle arrive à $2v$ et repart à $2v$). Les valeurs réelles sont plus basses car $e<1$ et la balle n'est pas rigoureusement alignée.

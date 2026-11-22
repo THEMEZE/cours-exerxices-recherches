@@ -6,3 +6,275 @@ niveau_public: [cpge, licence]
 exercices_ordre:
   - ex1_corde_non_homogene
   - ex2_impedance_acoustique
+  - ex3_perle_sur_corde
+  - ex4_incidence_oblique
+  - ex5_refraction_sismique
+  - ex6_echos_plaque_immergee
+
+prerequis:
+  - titre: "Équation de d'Alembert et ondes progressives (chapitres 1 et 2)"
+    texte: |
+      Savoir que les petites perturbations d'une corde tendue ($y$) et d'un fluide ($p$, $v$) obéissent à $\partial_t^2u=c^2\partial_x^2u$, avec $c=\sqrt{F/\mu}$ pour une corde et $c=\sqrt{1/(\rho_0\chi_S)}$ pour un fluide ; savoir qu'une onde progressive sinusoïdale s'écrit $\cos(\omega t\mp kx)$ ou $e^{i(\omega t\mp kx)}$ avec $k=\omega/c$ et que le signe devant $kx$ fixe le sens de propagation.
+  - titre: "Impédance caractéristique d'un milieu"
+    texte: |
+      Connaître la définition $Z=\rho c$ (fluide) et $Z=\mu c=\sqrt{F\mu}$ (corde), la relation $\tilde p=\pm Z\tilde v$ pour une onde plane progressive, et le fait que l'impédance mesure la « résistance » du milieu à être mis en mouvement : à $\omega$ fixé, $k$ est proportionnel à $Z$ pour deux cordes de même tension.
+  - titre: "Conditions de raccord"
+    texte: |
+      Savoir écrire les conditions physiques à une interface : continuité du déplacement et de la force transverse (pente) pour deux cordes ; continuité de la pression et de la vitesse normale pour deux fluides. Savoir en déduire un système linéaire $2\times2$ pour les amplitudes réfléchie et transmise.
+  - titre: "Énergie et intensité d'une onde (TD2)"
+    texte: |
+      Savoir que l'intensité acoustique moyenne est $p_{\mathrm{eff}}^2/Z$, que la puissance moyenne d'une onde de corde est $\tfrac12Z\omega^2A^2$, que les coefficients énergétiques s'obtiennent en rapportant ces flux, et que $R_E+T_E=1$ en l'absence de dissipation.
+  - titre: "Nombres complexes et notation $e^{i\\omega t}$"
+    texte: |
+      Module, argument, conjugué ; $\partial_t\to i\omega$ ; passage entre domaine fréquentiel et domaine temporel ($i\omega\leftrightarrow\partial_t$, $e^{-i\omega\tau}\leftrightarrow$ retard $\tau$) ; manipulation de fractions complexes.
+  - titre: "Trigonométrie, systèmes linéaires et ordres de grandeur"
+    texte: |
+      Formules de trigonométrie ($\sin^2+\cos^2=1$, $\arcsin$), résolution d'un système linéaire $2\times2$, calculs avec des puissances de $10$ et des décibels, développement limité d'une fraction.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Savoir établir et interpréter des coefficients de réflexion et de transmission"
+    texte: |
+      Savoir écrire les conditions de raccord à une jonction (corde ou fluide), résoudre le système obtenu, exprimer $r$ et $t$ en fonction des impédances, en déduire les coefficients énergétiques $R_E=|r|^2$ et $T_E=1-R_E$, et vérifier systématiquement la conservation de l'énergie.
+  - titre: "Reconnaître l'universalité de la notion d'impédance"
+    texte: |
+      Savoir transposer un résultat d'un domaine à un autre : corde, acoustique, ligne électrique, optique, mécanique quantique partagent la même structure $r=(Z_1-Z_2)/(Z_1+Z_2)$ ou $(Z_2-Z_1)/(Z_1+Z_2)$ selon la grandeur raccordée (type « force » ou type « vitesse »).
+  - titre: "Savoir ajouter un élément au raccord et en lire l'effet en fréquence"
+    texte: |
+      Savoir traiter une masse, un ressort ou un amortisseur à une jonction comme une impédance additionnelle en série, en déduire un filtre passe-bas, passe-bande ou une terminaison absorbante, et interpréter le résultat dans le domaine temporel (retard, dérivation).
+  - titre: "Savoir traiter l'incidence oblique"
+    texte: |
+      Savoir démontrer les lois de Snell-Descartes par conservation de $k_y$, calculer $R(\theta)$ avec les impédances apparentes $Z/\cos\theta$, déterminer l'angle critique, et interpréter la réflexion totale par une onde évanescente de flux moyen nul.
+  - titre: "Savoir résoudre un problème d'ingénieur à partir de mesures"
+    texte: |
+      Savoir exploiter un enregistrement (temps d'arrivée en sismique réfraction, train d'échos ultrasonore) pour en déduire une vitesse, une épaisseur, une impédance, une atténuation ou un défaut, en justifiant les hypothèses et en estimant les incertitudes.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Faire percevoir qu'une seule idée gouverne tout le chapitre"
+    texte: |
+      À une interface, les conditions de raccord imposent un système linéaire dont la solution ne dépend que du \emph{rapport des impédances}. Chaque exercice est une variation sur ce thème : deux cordes (ex. 1), fluide-solide (ex. 2), jonction chargée (ex. 3), interface oblique (ex. 4), couche enfouie (ex. 5), plaque à deux interfaces (ex. 6). L'enseignant doit répéter, à chaque exercice, « quelles sont les deux conditions de raccord ? ».
+  - titre: "Soigner les conventions de signe"
+    texte: |
+      Le signe de $r$ dépend de la grandeur raccordée (déplacement ou vitesse : $(Z_1-Z_2)/(Z_1+Z_2)$ ; pression, force ou tension : $(Z_2-Z_1)/(Z_1+Z_2)$) et du sens de propagation choisi (l'exercice 1 utilise une onde incidente vers les $x$ décroissants, les exercices 3 à 6 utilisent la convention usuelle vers $x$ croissants). Cette diversité est volontaire : elle apprend à lire les conditions d'un énoncé avant de calculer.
+  - titre: "Différencier selon le public"
+    texte: |
+      Les exercices 1 et 2 forment le socle du TD. Les exercices 3 à 6 sont des approfondissements facultatifs, indépendants les uns des autres : on peut en proposer un ou deux selon le niveau (CPGE : ex. 3 questions 1 à 5 ; licence : ex. 4 et 5 ; filières orientées ingénierie : ex. 6).
+  - titre: "Valoriser les cas limites et les vérifications énergétiques"
+    texte: |
+      Cas $\alpha=1$, $M=0$, $\theta=0$, $Z_2\to\infty$ ou $0$, conservation $R_E+T_E=1$ : ces contrôles doivent devenir un réflexe et être exigés dans toutes les corrections.
+  - titre: "Relier les exercices à des applications réelles"
+    texte: |
+      Échographie et contrôle non destructif (ex. 2 et 6), sismologie (ex. 5), sonar (ex. 4), instruments à cordes (ex. 1 et 3), optique et lignes électriques (tous). Une motivation applicative explicite améliore nettement l'engagement des étudiants.
+
+point_cours:
+  - titre: "Synthèse du chapitre : de la jonction de deux cordes aux interfaces acoustiques"
+    texte: |
+      \begin{enumerate}
+        \item {\bf Raccord à une interface plane en incidence normale}
+
+          Deux conditions de continuité relient les amplitudes incidente, réfléchie et transmise. Pour une corde : $y$ et $\partial_xy$ ; pour un fluide : $p$ et $v$. On obtient, en amplitude,
+          $$r=\frac{Z_1-Z_2}{Z_1+Z_2},\quad t=\frac{2Z_1}{Z_1+Z_2}\ \ (\text{déplacement}),\qquad R=\frac{Z_2-Z_1}{Z_1+Z_2},\quad T=\frac{2Z_2}{Z_1+Z_2}\ \ (\text{pression}).$$
+
+        \item {\bf Coefficients énergétiques}
+
+          $R_E=|r|^2$ et $T_E=\dfrac{Z_2}{Z_1}|t|^2=\dfrac{4Z_1Z_2}{(Z_1+Z_2)^2}$, avec $R_E+T_E=1$ : le coefficient de transmission en énergie est symétrique ($1\to2$ et $2\to1$ donnent la même valeur), seul le contraste d'impédance compte.
+
+        \item {\bf Impédance en série : éléments localisés}
+
+          Une masse $M$ à la jonction ajoute $iM\omega$, un ressort de raideur $K$ ajoute $K/(i\omega)$, un amortisseur $\eta$ ajoute $\eta$ : $r=\dfrac{Z_1-Z_2-Z_s}{Z_1+Z_2+Z_s}$. La jonction devient un filtre.
+
+        \item {\bf Incidence oblique}
+
+          La composante tangentielle $k_y$ est conservée : $\theta_1'=\theta_1$ et $\sin\theta_1/c_1=\sin\theta_2/c_2$. Les coefficients de Fresnel acoustiques s'obtiennent avec $Z\to Z/\cos\theta$. Si $c_2>c_1$, l'angle critique $\theta_c=\arcsin(c_1/c_2)$ sépare la transmission de la réflexion totale (onde évanescente).
+
+        \item {\bf Échos et couches}
+
+          En régime impulsionnel, chaque écho d'une plaque est un produit de coefficients, avec des retards multiples de $2e/c$ ; en régime sinusoïdal, les échos interfèrent (lame demi-onde, lame quart d'onde, TD2 exercice 8).
+      \end{enumerate}
+  - titre: "Dictionnaire des analogies"
+    texte: |
+      $$
+      \begin{array}{c|c|c|c|c}
+        \textbf{Système} & \text{variable de type « force »} & \text{variable de type « vitesse »} & Z & r\ \text{(variable « force »)}\\
+        \hline
+        \text{Corde} & -F\partial_xy & \partial_ty\ (\text{ou } y) & \sqrt{F\mu} & \dfrac{Z_2-Z_1}{Z_1+Z_2}\\
+        \text{Acoustique} & p & v & \rho c & \dfrac{Z_2-Z_1}{Z_1+Z_2}\\
+        \text{Ligne électrique} & U & I & \sqrt{L'/C'} & \dfrac{Z_2-Z_1}{Z_1+Z_2}\\
+        \text{Optique (E, H)} & E & H & Z_0/n & \dfrac{n_1-n_2}{n_1+n_2}
+      \end{array}
+      $$
+      Pour la variable de type « vitesse » (déplacement de la corde, courant, $H$), $r$ change de signe : $r_{\mathrm{vitesse}}=-r_{\mathrm{force}}=\dfrac{Z_1-Z_2}{Z_1+Z_2}$. C'est la raison de la différence de signe entre l'exercice 1 de ce TD (déplacement) et les exercices du TD2 (pression).
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Mélanger amplitude et énergie"
+    texte: |
+      $r$ et $t$ sont des rapports d'\emph{amplitudes} : $t$ peut dépasser $1$ sans violer la conservation de l'énergie. Seuls $R_E$ et $T_E$ sont bornés par $1$ et additifs. Le coefficient de transmission en énergie contient le facteur $Z_2/Z_1$ (ou $\cos\theta_2/\cos\theta_1$ en oblique).
+  - titre: "Oublier de vérifier la conservation de l'énergie"
+    texte: |
+      Un réflexe à acquérir : après chaque calcul de $r$ et $t$, vérifier $R_E+T_E=1$. Les erreurs de signe de $Z_2-Z_1$, de facteur $Z_2/Z_1$ ou de $\cos\theta$ sont ainsi détectées immédiatement.
+  - titre: "Confondre les conventions de signe"
+    texte: |
+      Onde incidente vers $x$ décroissants (ex. 1) ou croissants (ex. 3 à 6), raccord du déplacement ou de la pression : le signe de $r$ s'inverse mais le physique reste le même. Faire énoncer le sens de propagation et la grandeur raccordée avant tout calcul.
+  - titre: "Oublier que $k_1\\neq k_2$ et que la pulsation est commune"
+    texte: |
+      La pulsation est imposée par la source et conservée à toute interface (linéarité, invariance temporelle) ; le nombre d'onde, lui, change avec le milieu ($k=\omega/c$). Un angle de réfraction change pour la même raison.
+  - titre: "Penser qu'une interface réfléchit « l'onde » et non « l'énergie »"
+    texte: |
+      Une onde évanescente ($|R|=1$ au-delà de l'angle critique) ou une perle (ex. 3, $R_E+T_E=1$ sans dissipation) montrent que la réflexion sans transmission d'énergie est possible malgré des champs non nuls de l'autre côté ou sur la perle : seul le flux moyen compte.
+  - titre: "Utiliser $Z=\\rho c$ pour un solide sans précaution"
+    texte: |
+      L'approximation fluide en incidence normale est correcte pour les ondes de compression, mais le solide a aussi des ondes de cisaillement, des conversions de mode en incidence oblique et deux angles critiques (cf. ex. 4 et 5, aller plus loin).
+  - titre: "Négliger les unités et les ordres de grandeur"
+    texte: |
+      $Z$ en rayl (kg$\cdot$m$^{-2}\cdot$s$^{-1}$) pour un fluide, en kg$\cdot$s$^{-1}$ pour une corde ; des écarts de plusieurs ordres de grandeur ($3\times10^4$ air-aluminium) invitent à travailler en notation scientifique et à éviter les soustractions de nombres proches.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Organisation de la séance (environ 2 h)"
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+        \item $0$--$10$ min : accroche (voir ci-dessous) et rappel des deux conditions de raccord.
+        \item $10$--$55$ min : exercice 1 (corde non homogène), en insistant sur l'enchaînement q1-q9 : ondes, raccord, système, impédances.
+        \item $55$--$75$ min : exercice 2 (air/aluminium), rapide, avec pari avant le calcul.
+        \item $75$--$120$ min : un exercice d'approfondissement au choix (ex. 3 à 6) selon le public.
+      \end{itemize}
+  - titre: "Priorités des exercices"
+    texte: |
+      Les exercices 1 et 2 sont indispensables (priorité 2 dans leurs métadonnées). Les exercices 3 à 6 sont des approfondissements facultatifs, également de priorité 2 : le choix entre eux dépend du public et de l'objectif.
+
+      \begin{itemize}[label = $\bullet$]
+        \item \textbf{CPGE (socle)} : ex. 1, ex. 2, ex. 3 (questions 1 à 5).
+        \item \textbf{CPGE (concours exigeants)} : ex. 1, ex. 2, ex. 3 et ex. 4 (questions 1 à 5).
+        \item \textbf{Licence} : ex. 1 (rapide), ex. 2, ex. 4, ex. 5.
+        \item \textbf{Filières ingénieur ou application} : ex. 2, ex. 5, ex. 6.
+        \item \textbf{Séance de révision} : ex. 3, ex. 6, qui réutilisent les coefficients en des contextes très différents.
+      \end{itemize}
+  - titre: "Expériences et démonstrations"
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+        \item \textbf{Deux cordes} (ex. 1) : un tuyau en caoutchouc fin relié à un plus épais ; envoyer une impulsion dans chaque sens pour voir le signe de l'écho.
+        \item \textbf{Perle sur un fil} (ex. 3) : ressort long avec un lest ; impulsion large et impulsion étroite.
+        \item \textbf{Gel d'échographie} (ex. 2) : sonde sur la peau avec et sans gel, discussion de la lame d'air.
+        \item \textbf{Cuve à ondes} (ex. 4) : réfraction et réflexion totale sur une marche de profondeur.
+        \item \textbf{Capteur ultrasonore et plaque} (ex. 6) : train d'échos à l'oscilloscope.
+      \end{itemize}
+  - titre: "Faire verbaliser les deux conditions de raccord"
+    texte: |
+      Avant tout calcul, demander oralement : quelles sont les grandeurs continues ? pourquoi ? Qu'est-ce qui change d'un exercice à l'autre ? Cette routine est plus rentable que la correction écrite.
+  - titre: "Utiliser les coups de pouce de façon graduée"
+    texte: |
+      Les « coups de pouce » de chaque question sont conçus pour être donnés en deux temps : d'abord la phrase d'orientation, puis seulement le calcul. Pour les exercices d'approfondissement, ne les donner qu'après un temps de recherche autonome.
+  - titre: "Prévoir la différence de convention avec l'exercice 1"
+    texte: |
+      L'exercice 1 utilise une onde incidente vers les $x$ décroissants et un raccord en déplacement, les exercices 3 à 6 la convention usuelle. Le signaler explicitement évite des erreurs de signe inutiles et sert de leçon sur l'importance de lire l'énoncé.
+
+bilan:
+  - titre: "Résultats fondamentaux du TD"
+    texte: |
+      $$
+      \begin{array}{c|c}
+        \textbf{Situation} & \textbf{Résultat clé}\\
+        \hline
+        \text{Deux cordes (déplacement)} & r=\dfrac{Z_1-Z_2}{Z_1+Z_2}=\dfrac{1-\sqrt\alpha}{1+\sqrt\alpha},\quad t=1+r\\
+        \text{Deux fluides (pression)} & R=\dfrac{Z_2-Z_1}{Z_1+Z_2},\quad T_E=\dfrac{4Z_1Z_2}{(Z_1+Z_2)^2}\\
+        \text{Air/aluminium} & Z_2/Z_1\approx3\times10^4,\quad T_E\approx1{,}3\times10^{-4}\\
+        \text{Jonction avec perle} & r=\dfrac{Z_1-Z_2-iM\omega}{Z_1+Z_2+iM\omega},\quad f_c=\dfrac{Z}{\pi M}\\
+        \text{Incidence oblique} & \dfrac{\sin\theta_1}{c_1}=\dfrac{\sin\theta_2}{c_2},\quad R=\dfrac{Z_2\cos\theta_1-Z_1\cos\theta_2}{Z_2\cos\theta_1+Z_1\cos\theta_2}\\
+        \text{Angle critique} & \theta_c=\arcsin(c_1/c_2)\ (c_2>c_1),\quad\kappa=k_1\sqrt{\sin^2\theta_1-\sin^2\theta_c}\\
+        \text{Onde conique} & t_h=\dfrac x{c_2}+\dfrac{2h\cos\theta_c}{c_1},\quad x_c=2h\sqrt{\dfrac{c_2+c_1}{c_2-c_1}}\\
+        \text{Train d'échos d'une plaque} & E_n=t_{wA}t_{Aw}r_{Ab}(r_{Aw}r_{Ab})^{n-1},\quad\Delta t=2e/c
+      \end{array}
+      $$
+  - titre: "Trois messages à retenir"
+    texte: |
+      \begin{enumerate}
+        \item À toute interface, \emph{les conditions de raccord} fixent le système à résoudre ; le résultat ne dépend que du rapport des impédances (ou de $Z/\cos\theta$ en oblique).
+        \item Tout élément ajouté à la jonction (masse, ressort, amortisseur, lame) \emph{modifie l'impédance vue} et rend les coefficients complexes et dépendants de la fréquence : l'interface devient un filtre.
+        \item Le désaccord d'impédance interdit la transmission, mais la physique de la réflexion (angle critique, onde évanescente, échos) est aussi un \emph{outil de mesure} : sismique, échographie, contrôle non destructif, sonar.
+      \end{enumerate}
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Coefficients énergétiques, adaptation d'impédance et lames"
+    texte: |
+      Établir $R_E+T_E=1$ pour la corde et l'acoustique, puis étudier une couche d'épaisseur $\lambda/4$ et d'impédance $\sqrt{Z_1Z_3}$ qui annule la réflexion entre deux milieux (TD2, exercice 8 ; exercice 6 en régime impulsionnel). Faire le lien avec les antireflets optiques et les transformateurs quart d'onde en hyperfréquences.
+  - niveau: licence
+    titre: "Ondes de surface et ondes guidées"
+    texte: |
+      Au-delà de l'angle critique, l'onde évanescente se propage le long de l'interface : c'est l'origine des ondes de surface (Rayleigh, Scholte) et de la propagation guidée (fibre optique, canal sonore profond SOFAR, guides d'ondes acoustiques).
+  - niveau: master
+    titre: "Matrices de transfert et milieux stratifiés"
+    texte: |
+      Le raccord de $N$ couches se traite par produit de matrices $2\times2$ reliant $(p,v)$ ; on retrouve les résonances d'un empilement (miroir de Bragg, cristal phononique) et les bandes interdites.
+  - niveau: master
+    titre: "Solides : ondes P et S, conversions de mode, ondes de Rayleigh"
+    texte: |
+      Dans un solide, une interface en incidence oblique convertit les ondes P en ondes S et inversement ; le raccord impose la continuité des contraintes normale et tangentielle. On pourra établir les équations de Zoeppritz et les deux angles critiques d'une interface eau-acier.
+  - niveau: master
+    titre: "Interface en mouvement et effet Doppler"
+    texte: |
+      Si l'interface se déplace à la vitesse $V$, la fréquence réfléchie est décalée : c'est le principe de l'échographie Doppler (mesure de la vitesse du sang) et du radar routier. On pourra établir $f_r=f\,\dfrac{c+V}{c-V}$ pour une réflexion sur un obstacle approchant.
+  - niveau: doctorat
+    titre: "Métamatériaux et réflexion non réciproque"
+    texte: |
+      Des résonateurs locaux (perles sur ressort, cavités de Helmholtz) intégrés à l'interface permettent de dépasser la loi de masse, de créer des bandes interdites ou des interfaces non réciproques ; la jonction à perle de l'exercice 3 en est la brique de base.
+
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi un écho vient-il à l'endroit ou à l'envers, et pourquoi le gel est-il nécessaire ?"
+    duree_introduction: "10 min, en début de séance"
+    question_d_accroche: |
+      Quatre questions simples : (1) une impulsion sur une corde fine rencontre une corde épaisse : l'écho est-il à l'endroit ou renversé ? (2) Pourquoi doit-on étaler du gel sur la peau pour une échographie ? (3) Pourquoi un son qui entre dans l'eau doit-il arriver à peu près de la verticale ? (4) Comment un géophysicien mesure-t-il l'épaisseur d'une couche de sol sans creuser ? {\bf Que partagent ces quatre situations ?}
+    texte: |
+      {\bf Idée clé : à toute interface, deux conditions de raccord, un rapport d'impédances.} Quand une onde rencontre une interface, deux grandeurs restent continues (déplacement et pente pour une corde ; pression et vitesse pour un fluide). La solution du système ne dépend que du \emph{rapport des impédances} :
+      $$r=\frac{Z_1-Z_2}{Z_1+Z_2},\qquad R_E=r^2,\qquad T_E=\frac{4Z_1Z_2}{(Z_1+Z_2)^2}.$$
+      Une interface très désadaptée réfléchit tout (air/solide) ; une interface oblique ajoute la conservation de $k_y$ (Snell-Descartes) ; un élément localisé ajoute une impédance en série.
+
+outils_mathematiques:
+  - titre: "Système linéaire $2\\times2$ de raccord"
+    texte: |
+      Deux équations en $(r,t)$ ou $(R,T)$ : on substitue $t=1+r$ (continuité) puis on isole $r$. Le résultat ne dépend que du rapport $Z_2/Z_1$.
+  - titre: "Fractions complexes, module et phase"
+    texte: |
+      $\dfrac{a+ib}{a-ib}=e^{2i\arctan(b/a)}$ de module $1$ ; $|a+ib|^2=a^2+b^2$ ; multiplication par le conjugué pour séparer parties réelle et imaginaire.
+  - titre: "Domaine fréquentiel et domaine temporel"
+    texte: |
+      $i\omega\leftrightarrow\partial_t$ ; $e^{-i\omega\tau}\leftrightarrow$ retard de $\tau$ ; un filtre $1/(1+i\omega\tau)$ est un passe-bas du premier ordre de coupure $1/\tau$, équivalent à un retard $\tau$ à basse fréquence.
+  - titre: "Trigonométrie et angles"
+    texte: |
+      $\cos\theta_2=\sqrt{1-n^2\sin^2\theta_1}$ ; si $n\sin\theta_1>1$, $\cos\theta_2=-i\sqrt{n^2\sin^2\theta_1-1}$ ; construction géométrique d'un trajet brisé ($h/\cos\theta$, $h\tan\theta$).
+  - titre: "Séries géométriques"
+    texte: |
+      $\sum_{n\ge0}q^n=\dfrac1{1-q}$ pour $|q|<1$ : somme des échos d'une plaque ou d'une cavité.
+  - titre: "Ordres de grandeur, notation scientifique et décibels"
+    texte: |
+      Rapports d'impédances de $10^4$, $10\log_{10}$ pour l'énergie et $20\log_{10}$ pour l'amplitude ; éviter la soustraction de deux nombres proches en passant par la formule directe $T_E=4Z_1Z_2/(Z_1+Z_2)^2$.
+  - titre: "Lecture graphique et régression à la main"
+    texte: |
+      Pente d'une droite sur un graphe de temps d'arrivée, ordonnée à l'origine, intersection de deux droites : outils indispensables pour la sismique réfraction (exercice 5).
+
+liens_autres_disciplines:
+  - discipline: "Optique"
+    texte: |
+      Coefficients de Fresnel, antireflet quart d'onde ($n=\sqrt{n_1n_2}$), réflexion totale et onde évanescente, lame mince et interférences : tous les résultats de ce TD ont un analogue optique exact, avec l'indice $n$ à la place de l'impédance.
+  - discipline: "Électricité : lignes de transmission"
+    texte: |
+      Réflexion d'une impulsion sur un câble d'impédance $Z_0$ chargé par $Z_L$ ($r=(Z_L-Z_0)/(Z_L+Z_0)$), adaptation d'impédance, réflectométrie temporelle (TDR), filtre à inductance série ($\leftrightarrow$ perle de l'exercice 3).
+  - discipline: "Mécanique quantique"
+    texte: |
+      Marche et barrière de potentiel : $\psi$ et $\psi'$ continues, $r=(k_1-k_2)/(k_1+k_2)$ ; réflexion totale avec onde évanescente ($E<V$) et effet tunnel (lame fine) ; densité de courant de probabilité à la place de l'intensité.
+  - discipline: "Imagerie médicale"
+    texte: |
+      Échographie (gel, couches d'adaptation, interfaces entre organes, ombres des côtes), échographie Doppler, ultrasons thérapeutiques.
+  - discipline: "Contrôle non destructif et industrie"
+    texte: |
+      Mesure d'épaisseur et détection de défauts par échos ultrasonores, contrôle de collage, ondes rasantes, couplage par immersion.
+  - discipline: "Géophysique et sismologie"
+    texte: |
+      Sismique réfraction et réflexion, discontinuité de Mohorovičić, zones d'ombre, structure de la Terre (noyau, manteau), prospection pétrolière et hydrogéologique.
+  - discipline: "Acoustique sous-marine et sonar"
+    texte: |
+      Angle critique du fond marin, propagation guidée, canal SOFAR, réflectivité des sédiments, angle d'intromission.
+  - discipline: "Acoustique du bâtiment et lutherie"
+    texte: |
+      Loi de masse, double paroi, sourdine de violon et capodastre (jonction chargée), cordes filées, impédance du chevalet et rendement acoustique d'un instrument.
+  - discipline: "Biologie et physiologie de l'audition"
+    texte: |
+      L'oreille moyenne est un adaptateur d'impédance entre l'air et le liquide de l'oreille interne ; la perte à l'interface air-eau explique que l'on entend mal sous l'eau.

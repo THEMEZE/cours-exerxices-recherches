@@ -1,22 +1,12 @@
-id: mecanique-de-point-ipsa
-nom: "Mécanique du points"
-niveau: [cpge, licence]
+id: onip-iogs
+nom: "Outils Numériques pour l'Ingénieur·e en Physique (ONIP)"
+niveau: [licence]
 description: >
-  .
-quartz_namespace: physique/ipsa-ondes
-sujets: [n]
+  TD de méthodes numériques (ONIP, 5N-028-SCI).
+quartz_namespace: physique/IOGS/iogs-onip
+sujets: [onip]
 
-# Thème visuel de l'appli QCM (web/qcm_app_template.html) pour cette
-# matière -- voir web/README_QCM.md pour la liste des logos disponibles
-# et le détail de chaque couleur. Toutes les clés sont optionnelles : ce
-# qui n'est pas précisé prend la valeur par défaut du template.
 theme:
-  titre_app: "Réveil d'Ondes"
-  sous_titre_app: "Mécanique du points· IPSA"
+  titre_app: "Réveil d'ONIP"
+  sous_titre_app: "Outils numériques · IOGS"
   logo: onde
-  couleurs:
-    route: "#1B3A4B"
-    happy: "#3FA796"
-    neutral: "#F5B942"
-    sad: "#E8604C"
-    fond: "#EAF4F4"

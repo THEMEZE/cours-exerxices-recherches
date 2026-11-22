@@ -8,3 +8,315 @@ exercices_ordre:
   - ex2_kundt_ouvert
   - ex3_kundt_ferme
   - ex4_reflexion_transmition
+  - ex5_intensite_niveau_sonore
+  - ex6_tube_impedance
+  - ex7_resonateur_helmholtz
+  - ex8_lame_adaptation_impedance
+
+prerequis:
+  - titre: "Les équations de l'acoustique linéaire"
+    texte: |
+      Connaître la démarche du cours : un fluide parfait au repos ($\rho_0$, $P_0$) est traversé par une petite perturbation ($p$, $\rho'$, $\vec v$) ; on linéarise l'équation d'Euler, la conservation de la masse et l'équation d'état, ce qui donne
+      $$\rho_0\frac{\partial\vec v}{\partial t}=-\overrightarrow{\mathrm{grad}}\,p,\qquad\frac{\partial\rho'}{\partial t}+\rho_0\,\mathrm{div}\,\vec v=0,\qquad\rho'=\rho_0\chi\,p.$$
+      En éliminant, on obtient l'équation de d'Alembert $\Delta p-\dfrac1{c^2}\dfrac{\partial^2p}{\partial t^2}=0$ avec $c^2=\dfrac1{\rho_0\chi}$. Savoir que le déplacement $\vec\Psi$ (avec $\vec v=\partial_t\vec\Psi$) et la vitesse $\vec v$ vérifient la même équation, et que l'écoulement est irrotationnel.
+  - titre: "Ondes planes progressives et notation complexe"
+    texte: |
+      Savoir qu'une onde plane progressive vers $+x$ s'écrit $f(t-x/c)$ ou, en harmonique, $\tilde A\,e^{i(\omega t-kx)}$ avec $k=\omega/c$, que la relation de dispersion est linéaire (milieu non dispersif), et que la partie réelle de la grandeur complexe est la grandeur physique. Retenir la convention $e^{+i\omega t}$ utilisée dans tout le TD : $\partial_t\to i\omega$, $\partial_x\to\mp ik$ pour une onde se propageant vers $\pm x$.
+
+      Savoir que les grandeurs quadratiques (énergie, intensité) ne se calculent \textbf{pas} avec les produits de grandeurs complexes.
+  - titre: "Thermodynamique du gaz parfait"
+    texte: |
+      Connaître l'équation d'état $PV=nRT$, les capacités calorifiques et le coefficient $\gamma=C_P/C_V$, les lois de Laplace pour une transformation adiabatique réversible, et les compressibilités $\chi_T=1/P$ et $\chi_S=1/(\gamma P)$ (cf. exercice 1).
+  - titre: "Superposition, ondes stationnaires et cordes vibrantes (chapitre 1)"
+    texte: |
+      Savoir construire une onde stationnaire comme somme d'une onde incidente et d'une onde réfléchie, repérer nœuds et ventres, quantifier les fréquences propres par des conditions aux limites, et connaître l'analogie avec les cordes vibrantes (fixe-fixe, fixe-libre).
+  - titre: "Impédance et analogies électriques"
+    texte: |
+      Avoir déjà rencontré la notion d'impédance en électrocinétique ($Z=U/I$, association série/parallèle, circuit $LC$, résonance) : elle est réutilisée dans les exercices 4, 6, 7 et 8.
+  - titre: "Outils mathématiques de base"
+    texte: |
+      Nombres complexes (module, argument, conjugué), trigonométrie ($\cos$, $\sin$, formules d'Euler, formules d'addition), dérivées partielles, résolution de $\ddot\xi+\omega_0^2\xi=0$, logarithmes (décibels), systèmes linéaires $2\times2$ et développements limités.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Relier le modèle physique à une prédiction quantitative et la confronter à l'expérience"
+    texte: |
+      Savoir mener une démarche complète : choisir un modèle (isotherme ou isentropique, tube ouvert ou fermé, lame mince ou épaisse), en tirer une prédiction chiffrée, la comparer à une mesure (vitesse du son, fréquence d'une bouteille, absorption d'un matériau) et, s'il y a désaccord, remettre en cause l'hypothèse plutôt que le calcul.
+  - titre: "Maîtriser le triptyque célérité - impédance - conditions aux limites"
+    texte: |
+      Savoir calculer la célérité $c=\sqrt{\gamma RT/M}$ et l'impédance $Z=\rho_0c$ ; savoir traduire une extrémité ouverte, fermée ou une interface entre deux milieux en conditions mathématiques sur $p$ et $v$ ; en déduire fréquences propres, coefficients $R$ et $T$ et résonances.
+  - titre: "Manipuler la notation complexe sans erreur"
+    texte: |
+      Savoir sommer des exponentielles complexes pour obtenir une onde stationnaire, dériver pour passer de $\Psi$ à $p$ ou à $\theta$, extraire module et phase d'un coefficient complexe ($R$), et repasser aux grandeurs réelles pour un calcul d'énergie.
+  - titre: "Raisonner en énergie et en ordres de grandeur"
+    texte: |
+      Savoir exprimer une intensité, un niveau en décibels, évaluer des amplitudes ($\xi_0\sim10^{-11}$ m au seuil d'audition), juger de la validité de l'approximation acoustique, et additionner correctement des sources cohérentes ou non.
+  - titre: "Reconnaître un système connu sous un déguisement"
+    texte: |
+      Savoir identifier, sous des habillages différents (bouteille, sonde échographique, vitre), un oscillateur masse-ressort, une adaptation d'impédance ou un résonateur $\lambda/4$, et transposer ses résultats d'une discipline à une autre (optique, électricité, mécanique).
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Faire de l'acoustique un chapitre de synthèse, pas un chapitre isolé"
+    texte: |
+      Ce TD mobilise la thermodynamique (exercice 1, 7), les ondes sur une corde (exercices 2 et 3), l'électrocinétique et l'optique par l'analogie d'impédance (exercices 4, 6, 8), le calcul complexe et la physique statistique de l'énergie (exercice 5). Le fil rouge doit rester visible : une seule équation de propagation, des conditions aux limites différentes selon le dispositif.
+  - titre: "Faire vivre la démarche scientifique plutôt que la formule"
+    texte: |
+      L'exercice 1 pose la démarche (hypothèse, prédiction, test, révision) ; les exercices 5, 6 et 7 la reprennent avec des mesures « réelles » (seuil d'audition, rapport d'ondes stationnaires, note d'une bouteille). L'enseignant doit valoriser les phrases de conclusion physique dans les corrections, au même titre que les calculs.
+  - titre: "Différencier selon le public"
+    texte: |
+      Les exercices 1, 2 et 4 forment le socle (environ $2$ h). L'exercice 3 est un exercice « miroir » à faire à la maison. Les exercices 5 à 8 sont facultatifs et de difficulté croissante : ils permettent de proposer aux étudiants rapides, aux étudiants de licence ou à un public de préparation à un concours un travail à leur niveau sans ralentir le groupe.
+  - titre: "Entretenir l'esprit critique sur les modèles"
+    texte: |
+      Plusieurs exercices montrent les limites d'un modèle : le gaz parfait, l'onde plane (limite $f<f_c$ à l'exercice 6), les éléments localisés ($\lambda\gg D$ à l'exercice 7), la loi de masse (exercice 8). Faire expliciter systématiquement le domaine de validité, avec un nombre sans dimension ($k\ell$, $p/P_0$, $u=k_2e$, etc.).
+  - titre: "Préparer aux compétences transversales"
+    texte: |
+      Estimer un ordre de grandeur, vérifier l'homogénéité, tester un cas limite, comparer deux modèles, interpréter un signe : ces gestes doivent être demandés explicitement à chaque exercice.
+
+point_cours:
+  - titre: "Fil conducteur du TD : proposition de progression"
+    texte: |
+      \textbf{À introduire en début de séance}
+
+      \begin{enumerate}
+        \item {\bf Équation d'onde et célérité}
+
+          Les équations linéarisées donnent $\Delta p-\dfrac1{c^2}\partial_t^2p=0$ avec
+          $$c=\frac1{\sqrt{\rho_0\chi_S}}=\sqrt{\frac{\gamma P_0}{\rho_0}}=\sqrt{\frac{\gamma RT}{M}}.$$
+          La célérité d'un gaz parfait ne dépend que de $T$ (à composition donnée). Le caractère isentropique tient à la rapidité de l'oscillation devant la diffusion thermique.
+
+        \item {\bf Onde progressive et impédance}
+
+          Pour une onde plane vers $\pm x$, $\tilde p=\pm Z\tilde v$ avec $Z=\rho_0c$. L'impédance relie la pression à la vitesse du fluide, comme $U=ZI$. Elle contrôle ce qui se passe à toute interface.
+
+        \item {\bf Conditions aux limites et ondes stationnaires}
+
+          Extrémité ouverte : nœud de surpression, ventre de déplacement ($Z\to0$, $R=-1$). Extrémité fermée : nœud de déplacement, ventre de surpression ($Z\to\infty$, $R=+1$).
+          $$\text{ouvert-ouvert : }f_n=\frac{nc}{2L};\qquad\text{ouvert-fermé : }f_n=\frac{(2n-1)c}{4L}.$$
+
+        \item {\bf Interface entre deux fluides}
+
+          Continuité de $p$ et de $v$ ; $R=\dfrac{Z_2-Z_1}{Z_1+Z_2}$, $T=\dfrac{2Z_2}{Z_1+Z_2}$, $R_I+T_I=1$ ; seul le contraste d'impédance compte.
+      \end{enumerate}
+
+      \textbf{Pour approfondir (exercices 5 à 8)}
+
+      \begin{enumerate}
+        \setcounter{enumi}{4}
+        \item {\bf Énergie et intensité}
+
+          $e=\tfrac12\rho_0v^2+\tfrac12\chi p^2$, flux $\Pi=pv$, $\partial_te+\partial_x\Pi=0$ ; pour une onde progressive $I=p_{\mathrm{eff}}^2/Z=c\langle e\rangle$ ; $L=10\log_{10}(I/I_0)$ ; une onde stationnaire stocke l'énergie sans la transporter.
+
+        \item {\bf Impédance ramenée et lame}
+
+          $Z_{\mathrm{in}}=Z_2\dfrac{Z_3\cos u+iZ_2\sin u}{Z_2\cos u+iZ_3\sin u}$ ; lame $\lambda/2$ transparente, lame $\lambda/4$ adaptatrice si $Z_2=\sqrt{Z_1Z_3}$.
+
+        \item {\bf Éléments localisés}
+
+          Si $\lambda\gg D$, un conduit étroit est une masse $\rho_0S\ell'$ et une cavité un ressort $\gamma P_0S^2/V$ : $f_0=\dfrac c{2\pi}\sqrt{\dfrac S{V\ell'}}$.
+      \end{enumerate}
+  - titre: "Tableau de correspondance conditions aux limites / grandeurs physiques"
+    texte: |
+      $$
+      \begin{array}{c|c|c|c|c}
+        \textbf{Extrémité} & \textbf{Déplacement } \Psi & \textbf{Surpression } p & Z_s & R\\
+        \hline
+        \text{Ouverte (idéale)} & \text{ventre} & \text{nœud} & 0 & -1\\
+        \text{Fermée (paroi rigide)} & \text{nœud} & \text{ventre} & \infty & +1\\
+        \text{Matériau adapté} & \text{—} & \text{—} & Z_0 & 0\\
+        \text{Matériau absorbant} & \text{—} & \text{—} & Z_0\dfrac{1+R}{1-R} & |R|<1
+      \end{array}
+      $$
+
+      À mémoriser : la pression et la vitesse (ou le déplacement) sont toujours en quadrature spatiale dans une onde stationnaire, et en quadrature temporelle (aucun flux moyen d'énergie).
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Confondre vitesse du son et vitesse particulaire"
+    texte: |
+      La célérité $c\approx340$ m/s est la vitesse de propagation de la perturbation ; la vitesse particulaire $v$ est la vitesse d'oscillation du fluide ($\sim10^{-7}$ à $10^{-1}$ m/s selon le niveau). Elles n'ont rien à voir et leur rapport $v/c$ est le petit paramètre de l'approximation acoustique.
+  - titre: "Isotherme ou isentropique ?"
+    texte: |
+      Réflexe de $\chi_T=1/P$ sans justification. L'écart de $\sqrt\gamma\approx18\ \%$ (exercice 1) se retrouve dans la fréquence d'un résonateur (exercice 7). Rappeler le critère : période acoustique $\ll$ temps de diffusion thermique sur une longueur d'onde (ou sur la taille du système).
+  - titre: "Dépendance de $c$ à la pression et à la masse volumique"
+    texte: |
+      La célérité d'un gaz parfait ne dépend pas de $P$ ni de $\rho$ séparément (exercice 1, question 5). Rappeler l'unité SI de la masse molaire ($M$ en kg/mol).
+  - titre: "Nœud de pression et nœud de déplacement"
+    texte: |
+      Un tube ouvert est un nœud de pression mais un ventre de déplacement ; un tube fermé le contraire. Les profils de $p$ et $\Psi$ sont en quadrature spatiale. Faire tracer les deux profils côte à côte.
+  - titre: "Oublier le facteur de phase global et la partie réelle"
+    texte: |
+      Perdre le facteur $e^{-ikL}$ dans la factorisation d'une onde stationnaire, ou prendre une grandeur complexe pour une grandeur physique. Pour toute grandeur quadratique (énergie, intensité), revenir aux parties réelles.
+  - titre: "Le signe de $R$ et la valeur de $T$"
+    texte: |
+      $R<0$ si $Z_2<Z_1$ (déphasage de $\pi$) ; $T$ peut dépasser $1$ car c'est un rapport d'amplitudes de pression, pas d'énergie : seuls $R_I$ et $T_I$ sont bornés par $1$.
+  - titre: "Sommer des décibels"
+    texte: |
+      $L_1+L_2\neq L_{\mathrm{total}}$. Sommer des intensités (sources incohérentes) ou des amplitudes (sources cohérentes), puis reconvertir.
+  - titre: "Utiliser mécaniquement la formule d'un cas voisin"
+    texte: |
+      Réutiliser $f_n=nc/(2L)$ pour un tube ouvert-fermé ou pour un résonateur de Helmholtz ($c/(4\ell)\approx1$ kHz au lieu de $\approx100$ Hz). Refaire à chaque fois la condition aux limites, ou vérifier la cohérence par un cas limite.
+  - titre: "Négliger le domaine de validité"
+    texte: |
+      Onde plane au-delà de la fréquence de coupure du tube, éléments localisés quand $\lambda$ est comparable aux dimensions, loi de masse quand $u$ n'est plus petit : exiger systématiquement le calcul d'un paramètre sans dimension.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Organisation de la séance (environ 2 h de base, $+$ 1 h optionnelle)"
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+        \item $0$--$10$ min : accroche (voir ci-dessous) et rappel des trois idées clés (célérité, impédance, conditions aux limites).
+        \item $10$--$40$ min : exercice 1 (célérité) en autonomie guidée, avec mesure ou vidéo d'une vitesse du son.
+        \item $40$--$85$ min : exercice 2 (tube ouvert) en insistant sur les conditions en pression et en déplacement ; exercice 3 donné à la maison.
+        \item $85$--$115$ min : exercice 4 (interface) avec l'application air-eau ; reporter les questions 4 à 6 si le temps manque.
+        \item Exercices 5 à 8 : pour les étudiants en avance, ou comme DM, ou comme séance de remédiation ; chacun est autonome et indépendant des autres.
+      \end{itemize}
+  - titre: "Parcours conseillés"
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+        \item \textbf{CPGE (socle)} : 1, 2, 3, 4 ; puis ex. 5 (questions 1 à 5) et ex. 7 (questions 1 à 5) en approfondissement.
+        \item \textbf{CPGE (concours exigeants)} : 1, 2, 4, 5, 7, 8 (questions 1 à 4).
+        \item \textbf{Licence} : 1 (rapide), 2, 4, 6, 8 (questions 1 à 5), avec les questions « aller plus loin » de chaque fiche.
+        \item \textbf{Séance de révision} : 5, 6, 7, qui reprennent le chapitre autour de grandeurs mesurables.
+      \end{itemize}
+  - titre: "Expériences et démonstrations"
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+        \item \textbf{Vitesse du son} (exercice 1) : deux microphones espacés, un oscilloscope et un claquement de mains, ou un chronométrage d'écho.
+        \item \textbf{Tube de Kundt} (exercices 2, 3 et 6) : poudre de liège sur un tube transparent, avec et sans matériau absorbant à l'extrémité.
+        \item \textbf{Sonomètre de smartphone} (exercice 5) : décroissance de $6$ dB par doublement de distance.
+        \item \textbf{Bouteilles d'eau} (exercice 7) : fréquence en fonction du niveau d'eau.
+        \item \textbf{Vitre et haut-parleur} (exercice 8) : transmission en fonction de la fréquence.
+      \end{itemize}
+  - titre: "Gestion du tableau et des conventions"
+    texte: |
+      Afficher en permanence : la convention $e^{+i\omega t}$, le sens de l'axe $x$ pour chaque exercice, et le tableau de correspondance conditions aux limites / grandeurs. Beaucoup d'erreurs de signe viennent d'un changement de convention non explicité.
+  - titre: "Faire verbaliser avant de calculer"
+    texte: |
+      Avant chaque calcul, demander oralement : quelle est la condition physique ? quel cas limite connu doit-on retrouver ? quel ordre de grandeur attend-on ? Cette routine est plus rentable que n'importe quelle correction détaillée.
+  - titre: "Utiliser les coups de pouce de façon graduée"
+    texte: |
+      Les « coups de pouce » de chaque question sont conçus pour être donnés en deux temps : d'abord la phrase d'orientation, puis seulement le calcul complet. Pour les exercices 5 à 8, ne les donner qu'après un temps de recherche autonome.
+
+bilan:
+  - titre: "Résultats fondamentaux du TD"
+    texte: |
+      $$
+      \begin{array}{c|c}
+        \textbf{Situation} & \textbf{Résultat clé}\\
+        \hline
+        \text{Célérité (gaz parfait)} & c=\sqrt{\gamma RT/M},\quad\chi_S=1/(\gamma P),\quad c_S/c_T=\sqrt\gamma\\
+        \text{Tube ouvert-ouvert} & f_n=nc/(2L),\ n\in\mathbb N^*\\
+        \text{Tube ouvert-fermé} & f_n=(2n-1)c/(4L)\ \text{(harmoniques impairs)}\\
+        \text{Interface } Z_1\to Z_2 & R=\dfrac{Z_2-Z_1}{Z_1+Z_2},\quad T_I=\dfrac{4Z_1Z_2}{(Z_1+Z_2)^2}\\
+        \text{Intensité, niveau} & I=p_{\mathrm{eff}}^2/Z,\quad L=10\log_{10}(I/I_0)\\
+        \text{Onde stationnaire partielle} & s=\dfrac{1+|R|}{1-|R|},\quad\varphi=2kd_1-\pi\\
+        \text{Résonateur de Helmholtz} & f_0=\dfrac c{2\pi}\sqrt{S/(V\ell')}\\
+        \text{Lame quart d'onde adaptée} & Z_2=\sqrt{Z_1Z_3},\ e=\lambda_2/4,\ T_I=1\\
+        \text{Loi de masse} & TL\approx20\log_{10}\big(\omega m_s/2Z_0\big)
+      \end{array}
+      $$
+  - titre: "Trois messages à retenir"
+    texte: |
+      \begin{enumerate}
+        \item La physique d'une situation acoustique est déterminée par \emph{la célérité} (ce qui se propage), \emph{l'impédance} (ce qui est transmis ou réfléchi) et \emph{les conditions aux limites} (ce qui est permis).
+        \item Un modèle n'est pas « vrai » ou « faux » : il est valable dans un domaine, qu'on doit pouvoir énoncer avec un nombre sans dimension et tester par une mesure.
+        \item Le même formalisme (d'Alembert, impédance, conditions de raccord) décrit les cordes, les tubes, les lignes électriques, la lumière en couche mince et les ondes sismiques : c'est cette universalité qui fait la force de la physique des ondes.
+      \end{enumerate}
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Ondes sphériques et cylindriques"
+    texte: |
+      Pour une source ponctuelle, la solution à symétrie sphérique de l'équation de d'Alembert est $p=\dfrac{f(t-r/c)}{r}$ : l'amplitude décroît en $1/r$ et l'intensité en $1/r^2$ (exercice 5, question 5). On pourra établir que $r\,p$ vérifie l'équation de d'Alembert à une dimension.
+  - niveau: licence
+    titre: "Absorption classique : viscosité et conduction thermique"
+    texte: |
+      Dans un fluide réel, la viscosité et la conduction thermique atténuent l'onde en $e^{-\alpha x}$ avec $\alpha\propto\omega^2$ (formule de Stokes-Kirchhoff). On pourra estimer $\alpha$ dans l'air à $10$ kHz et $1$ MHz, et comprendre pourquoi les ultrasons sont absorbés sur de courtes distances dans l'air mais se propagent très loin dans l'eau.
+  - niveau: licence
+    titre: "Effet Doppler et onde de choc"
+    texte: |
+      Pour une source mobile à la vitesse $v_s$, $f'=f/(1-v_s/c)$ en approche. Lorsque $v_s>c$, les fronts d'onde s'accumulent sur un cône de demi-angle $\sin\theta=c/v_s$ (cône de Mach) : c'est le « bang » supersonique.
+  - niveau: master
+    titre: "Acoustique non linéaire"
+    texte: |
+      À forte amplitude, la célérité locale dépend de la perturbation, $c\approx c_0+\tfrac{\gamma+1}2v$ : les compressions rattrapent les détentes, le profil se raidit et forme une onde de choc (équation de Burgers). On pourra estimer la distance de formation du choc pour une onde à $140$ dB et $1$ kHz.
+  - niveau: master
+    titre: "Acoustique des salles : modes propres et réverbération"
+    texte: |
+      Dans une salle rectangulaire, les modes propres sont $f=\dfrac c2\sqrt{(n_x/L_x)^2+(n_y/L_y)^2+(n_z/L_z)^2}$ ; au-delà de la fréquence de Schroeder, leur densité est telle que le champ est diffus et la décroissance suit la loi de Sabine, $T_R=0{,}16\,V/A$.
+  - niveau: master
+    titre: "Ondes élastiques dans les solides"
+    texte: |
+      Dans un solide apparaissent des ondes longitudinales ($c_L$) et transversales ($c_T<c_L$). On pourra étendre le calcul d'impédance et de réflexion à l'interface fluide-solide, ce qui précise les hypothèses de la loi de masse (exercice 8).
+  - niveau: doctorat
+    titre: "Cristaux phononiques et métamatériaux acoustiques"
+    texte: |
+      Un milieu périodique (multicouche, réseau de résonateurs) possède des bandes de fréquences interdites (bandes gap), par interférences de type Bragg ou par résonances locales. On pourra les étudier avec les matrices de transfert de l'exercice 8.
+
+accroche_point_cours_essentiel:
+  - titre: "Du chant d'une bouteille à l'échographie : un seul formalisme"
+    duree_introduction: "10 min, en début de séance"
+    question_d_accroche: |
+      Voici cinq situations : (1) on souffle en travers d'une bouteille et elle « chante » ; (2) on entend très mal une voix quand on a la tête sous l'eau ; (3) un échographe exige un gel sur la peau ; (4) une flûte et une clarinette de même longueur n'ont pas la même note ; (5) un sonomètre indique $60$ dB à $1$ m d'une conversation. Qu'ont en commun ces cinq situations ? Quelles sont les {\bf trois grandeurs} qu'il faut connaître pour les comprendre ?
+    texte: |
+      {\bf Idée clé : trois ingrédients suffisent.} (i) La {\bf célérité} $c=\sqrt{\gamma RT/M}$ : ce qui se propage et à quelle vitesse. (ii) L'{\bf impédance} $Z=\rho_0c$ : ce que l'onde transmet ou réfléchit à une interface (eau, gel, vitre, goulot). (iii) Les {\bf conditions aux limites} : ouvert ou fermé, qui sélectionnent les fréquences propres.
+      $$c=\sqrt{\frac{\gamma RT}M},\qquad Z=\rho_0c,\qquad R=\frac{Z_2-Z_1}{Z_1+Z_2},\qquad f_n=\frac{nc}{2L}\ \text{ou}\ \frac{(2n-1)c}{4L}.$$
+      Toutes les situations de la séance se ramènent à ces trois ingrédients, avec des habillages différents.
+
+outils_mathematiques:
+  - titre: "Notation complexe et formules d'Euler"
+    texte: |
+      $e^{iu}\pm e^{-iu}=2\cos u$ ou $2i\sin u$. Pour sommer des ondes de même fréquence, factoriser $e^{i\omega t}$ et un facteur de phase global ; la partie réelle redonne l'expression physique. Pour un produit de grandeurs réelles, $\langle ab\rangle=\tfrac12\operatorname{Re}(\tilde a\tilde b^{*})$.
+  - titre: "Dérivées partielles et linéarisation"
+    texte: |
+      Développement au premier ordre d'une fonction d'une petite perturbation : $P(\rho)\approx P_0+(\partial P/\partial\rho)\rho'$. Savoir passer de $\partial_t\to i\omega$, $\partial_x\to\mp ik$ en notation complexe.
+  - titre: "Résolution de $\\ddot\\xi+\\omega_0^2\\xi=0$ et analogie $LC$"
+    texte: |
+      Solution $\xi=\xi_m\cos(\omega_0t+\phi)$ ; la pulsation propre est lue dans le coefficient de $\xi$. Même équation pour une masse-ressort, un circuit $LC$ et un résonateur de Helmholtz.
+  - titre: "Zéros des fonctions trigonométriques et quantification"
+    texte: |
+      $\sin u=0\Leftrightarrow u=n\pi$ ; $\cos u=0\Leftrightarrow u=(2n-1)\pi/2$. La nature de la condition ($\sin$ ou $\cos$) décide du spectre de fréquences : tous les entiers ou seulement les impairs.
+  - titre: "Systèmes linéaires $2\\times2$ et fractions complexes"
+    texte: |
+      Raccord à une interface : deux équations, deux inconnues ($R$, $T$). Pour une fraction complexe, multiplier haut et bas par le conjugué du dénominateur ; pour $|R|^2$, séparer parties réelle et imaginaire.
+  - titre: "Logarithmes décimaux et décibels"
+    texte: |
+      $L=10\log_{10}(I/I_0)=20\log_{10}(p/p_0)$ ; $10\log_{10}2\approx3$ dB ; $20\log_{10}2\approx6$ dB ; $\log_{10}(ab)=\log_{10}a+\log_{10}b$.
+  - titre: "Développements limités et ordres de grandeur"
+    texte: |
+      $\cos u\approx1-u^2/2$, $\sin u\approx u$, $(1+\varepsilon)^{1/2}\approx1+\varepsilon/2$ ; estimation de nombres sans dimension ($p_0/P_0$, $v_0/c$, $k\ell$, $u=ke$) pour valider une hypothèse.
+  - titre: "Moyennes temporelles"
+    texte: |
+      $\langle\cos^2\omega t\rangle=\tfrac12$, $\langle\sin\omega t\cos\omega t\rangle=0$ ; intégrale d'un $\cos^2$ sur un nombre entier de demi-périodes spatiales $=L/2$.
+  - titre: "Racines carrées de rapports et moyenne géométrique"
+    texte: |
+      $c\propto\sqrt T$ ; $f_0\propto V^{-1/2}$ ; $Z_2=\sqrt{Z_1Z_3}$ : savoir faire des estimations rapides ($\sqrt\gamma=1{,}18$, $\sqrt2=1{,}41$, $\sqrt{1{,}5}=1{,}22$).
+
+liens_autres_disciplines:
+  - discipline: "Thermodynamique"
+    texte: |
+      Le choix entre $\chi_T$ et $\chi_S$ (exercice 1) est un exemple direct de transformation réelle ; on y utilise les lois de Laplace, la relation de Mayer, le rapport $\gamma$ des capacités calorifiques. À $300$ K, $c$ dans l'hélium ($\gamma=5/3$, $M=4$ g/mol) est environ $3$ fois celle de l'air : la voix « de canard » après inhalation d'hélium est un effet de $c$, non de la hauteur du son émis.
+  - discipline: "Cordes vibrantes (chapitre 1) et mécanique des milieux continus"
+    texte: |
+      Les nœuds de pression d'un tube ouvert-ouvert jouent le rôle des nœuds de déplacement d'une corde fixe-fixe ; le tube ouvert-fermé joue celui de la corde fixe-libre ; l'impédance $Z=\rho_0c$ est l'analogue de $Z=\sqrt{T_0\mu}$ pour une corde.
+  - discipline: "Électrocinétique et lignes de transmission"
+    texte: |
+      Pression $\leftrightarrow$ tension, débit volumique $\leftrightarrow$ courant, masse acoustique $\leftrightarrow$ inductance, cavité $\leftrightarrow$ capacité. Les coefficients $R$ et $T$, l'adaptation d'impédance, la ligne quart d'onde et le ROS sont identiques.
+  - discipline: "Optique ondulatoire"
+    texte: |
+      Coefficients de Fresnel en incidence normale, traitements antireflets $\lambda/4$, franges d'interférences d'une lame, résonateur de Fabry-Pérot : tous ces objets ont un analogue exact dans les exercices 4, 6 et 8.
+  - discipline: "Mécanique quantique"
+    texte: |
+      Les fonctions d'onde du puits infini ($\sin(n\pi x/L)$) sont les modes d'un tube ouvert-ouvert ; la barrière de potentiel donne des coefficients de réflexion/transmission formellement identiques à ceux d'une interface ; la quantification vient des conditions aux limites.
+  - discipline: "Musique, lutherie et acoustique musicale"
+    texte: |
+      Flûte (ouvert-ouvert), clarinette (ouvert-fermé), tuyaux d'orgue, caisse de résonance de guitare (Helmholtz), harmoniques et timbre, longueur effective des tuyaux.
+  - discipline: "Médecine et physiologie"
+    texte: |
+      Échographie (contrastes d'impédance, gel, couche d'adaptation), audition (seuil à $10^{-12}$ W/m$^2$, résonance du conduit auditif vers $3$ kHz, échelle logarithmique), ultrasons thérapeutiques.
+  - discipline: "Génie civil, bâtiment et environnement sonore"
+    texte: |
+      Loi de masse, double vitrage et sa résonance masse-ressort-masse, absorbants et bass traps, mesure du bruit en dB(A), réglementation de l'exposition sonore.
+  - discipline: "Géophysique, océanographie et astrophysique"
+    texte: |
+      Sismologie (réflexions aux interfaces, ondes P), canal SOFAR et sonar sous-marin, héliosismologie (modes acoustiques du Soleil, quantifiés par des conditions aux limites comme dans un tube).
+  - discipline: "Ingénierie et environnement industriel"
+    texte: |
+      Silencieux (chambres de Helmholtz, couches d'impédance), contrôle actif du bruit, contrôle non destructif par ultrasons (couplant, adaptation d'impédance, lame demi-onde).

@@ -1,0 +1,62 @@
+
+
+% 3. Environnement unique et superposition directe
+\begin{tikzpicture}
+  % On dessine les deux éléments sur le MÊME repère absolu
+  \clip[](8, -7) rectangle (22,7) ;
+
+  \node[scale=1] at (15,0) {
+    \begin{tikzpicture}
+
+        \draw[dashed,draw=colorThree,line width=1.0ex] 
+            (0,0) circle (5)
+        ;
+
+        
+
+
+        \draw[]
+            (-7,0) edge[draw=colorThree,line width=1.2ex , ->]node[pos = 0.9, below , font=\fontsize{20pt}{1pt}\selectfont\bfseries, text=colorThree ]{$x$} (7,0)
+            (0,-7) edge[draw=colorThree,line width=1.2ex , ->]node[pos = 0.9, left , font=\fontsize{20pt}{1pt}\selectfont\bfseries, text=colorThree ]{$y$} (0,7)
+
+            (0,0) edge[draw=colorOne,line width=1.0ex , ->]node[pos = 0.5, below , font=\fontsize{20pt}{1pt}\selectfont\bfseries, text=colorOne ]{$\vec\imath$} (5,0)
+            (0,0) edge[draw=colorOne,line width=1.0ex , ->]node[pos = 0.7, left , font=\fontsize{20pt}{1pt}\selectfont\bfseries, text=colorOne ]{$\vec\jmath$} (0,5)
+
+            (0,-0.2) edge[draw=colorFour,line width=0.5ex ]({5*cos(30)},-0.2)
+            (0.2,0) edge[draw=colorFour,line width=0.5ex ](0.2,{5*cos(30)})
+            (-0.2,0) edge[draw=colorSix,line width=0.5ex] (-0.2,{5*sin(30)})
+            (0,-0.2) edge[draw=colorSix,line width=0.5ex] ({-5*sin(30)},-0.2)
+
+            ({5*cos(30)},-0.5) edge[dotted,draw=colorThree,line width=0.5ex ]node[pos = 0, left , font=\fontsize{15pt}{1pt}\selectfont\bfseries, text=colorThree , rotate = 90 ]{$\cos \theta$} ({5*cos(30)},{5*sin(30)})
+            (-3,{5*sin(30)}) edge[dotted,draw=colorThree,line width=0.5ex]node[pos = 0, left , font=\fontsize{15pt}{1pt}\selectfont\bfseries, text=colorThree , rotate = 0 ]{$\sin \theta$} ({5*cos(30)},{5*sin(30)})
+
+            ({-5*sin(30)},-0.5) edge[dotted,draw=colorThree,line width=0.5ex ]node[pos = 0, left , font=\fontsize{15pt}{24pt}\selectfont\bfseries, text=colorThree , rotate = 90 ]{$-\sin \theta$} ({-5*sin(30)},{5*cos(30)})
+            ({-5*sin(30)},{5*cos(30)}) edge[dotted,draw=colorThree,line width=0.5ex]node[pos = 1, right , font=\fontsize{15pt}{24pt}\selectfont\bfseries, text=colorThree , rotate = 0 ]{$\cos \theta$} (1.5,{5*cos(30)})
+            
+            (0,0) edge[draw=colorFive,line width=0.8ex , ->]node[pos = 1, right , font=\fontsize{20pt}{1pt}\selectfont\bfseries, text=colorFive , rotate = 30 ]{$\vec{u}$} ({5*cos(30)},{5*sin(30)})
+            (0,0) edge[draw=colorFive,line width=0.8ex , ->]node[pos = 1, right , font=\fontsize{20pt}{1pt}\selectfont\bfseries, text=colorFive , rotate = 120 ]{$\vec{v}$} ({-5*sin(30)},{5*cos(30)}) 
+        
+        ;
+
+        \draw[color=colorFive, line width=0.3ex, ->]
+            (0:2cm)arc[start angle=0, end angle=30, radius=2cm]node[pos=0.5, right,font=\fontsize{15pt}{24pt}\selectfont\bfseries,text=colorFive, rotate=15] {$\theta$}
+        ;
+
+        \draw[color=colorFive, line width=0.3ex, ->]
+            (90:2cm)arc[start angle=90, end angle=120, radius=2cm]node[pos=0.5, above,font=\fontsize{15pt}{24pt}\selectfont\bfseries,text=colorFive, rotate=15] {$\theta$}
+        ;
+
+       
+
+
+    \end{tikzpicture}   
+  };
+
+
+
+  
+
+  % Grille de repérage
+  %\draw[line width=2.5ex , color = red] (8, -7) rectangle (22,7) ;
+  %\drawgrid{8}{22}{-7}{7}{1}{1}
+\end{tikzpicture}

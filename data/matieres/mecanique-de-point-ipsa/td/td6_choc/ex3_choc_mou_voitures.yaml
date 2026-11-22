@@ -1,0 +1,139 @@
+id: td6_ex3
+intitule: "Choc parfaitement mou entre deux voitures"
+td: td6
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - collisions.choc_parfaitement_mou
+  - collisions.conservation_quantite_de_mouvement_vectorielle
+  - collisions.perte_energie
+
+metadonnees:
+  duree_estimee: "30 min"
+  difficulte: 2
+  type_exercice: "Application directe"
+  indispensable: true
+
+enonce_intro: |
+  Pendant un crash test, deux voitures sont lancées l'une contre l'autre dans un choc à $90^\circ$. La première a une masse $m_1=500$ kg et une vitesse $v_1=72$ km/h selon $Ox$ ; la seconde a une masse $m_2=900$ kg et une vitesse $v_2=36$ km/h selon $Oy$. Après le choc, les deux voitures forment un corps unique (choc {\bf parfaitement mou}). Déterminer le vecteur vitesse de ce corps unique juste après le choc, puis l'énergie dissipée.
+
+prerequis:
+  - titre: "Choc parfaitement mou"
+    texte: |
+      Les deux corps restent liés : $\vec v_1'=\vec v_2'=\vec V$ ; $\vec V=\vec v_G$ (vitesse du centre de masse).
+  - titre: "Projection de la conservation de $\\vec p$"
+    texte: |
+      $m_1\vec v_1+m_2\vec v_2=(m_1+m_2)\vec V$ : deux équations scalaires.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Résoudre un choc mou à deux dimensions et bilan d'énergie"
+    texte: |
+      Savoir projeter, calculer norme et direction de $\vec V$, calculer l'énergie perdue (par $E_c$ avant/après et par la formule $\tfrac12\mu_rv_{\rm rel}^2$) et comparer à une situation frontale.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Une formule, deux vérifications"
+    texte: |
+      La perte d'énergie se calcule deux fois : directement ($E_{c,i}-E_{c,f}=80{,}4$ kJ) et par $\tfrac12\mu_rv_{\rm rel}^2=\tfrac12\cdot321{,}4\cdot(20^2+10^2)=80{,}4$ kJ : concordance parfaite (excellent contrôle). La comparaison avec le choc {\bf frontal} (mêmes voitures face à face) est parlante : $v_{\rm rel}=30$ m/s, la perte atteint $144{,}6$ kJ soit $99{,}8~\%$ de l'énergie.
+
+point_cours:
+  - titre: "Méthode"
+    texte: |
+      $\vec V=\dfrac{m_1\vec v_1+m_2\vec v_2}{m_1+m_2}$ ; norme $V=\sqrt{V_x^2+V_y^2}$ ; angle $\theta=\arctan(V_y/V_x)$ ; énergie perdue $\Delta E_c=-\tfrac12\mu_r\|\vec v_1-\vec v_2\|^2$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Oublier de convertir km/h en m/s"
+    texte: |
+      $72$ km/h $=20$ m/s ; $36$ km/h $=10$ m/s.
+  - titre: "Additionner les normes"
+    texte: |
+      Les deux vitesses sont perpendiculaires : $V\ne\dfrac{m_1v_1+m_2v_2}{m_1+m_2}=11{,}6$ m/s mais $V=9{,}61$ m/s.
+  - titre: "Garder $E_c$ conservée"
+    texte: |
+      Choc mou : $E_c$ perdue $=80$ kJ (déformation des carrosseries, chaleur).
+  - titre: "Se tromper d'angle"
+    texte: |
+      $\theta=\arctan(V_y/V_x)=\arctan(6{,}43/7{,}14)=42{,}0^\circ$ avec $Ox$ (et non $\arctan(V_x/V_y)$).
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Demander une prédiction"
+    texte: |
+      La voiture la plus lourde impose sa direction : vers quel côté part l'ensemble ? (Plutôt vers $Oy$, direction de la plus lourde $m_2$, mais $v_1>v_2$ rééquilibre : $42^\circ$ de $Ox$.)
+  - titre: "Comparer à un choc frontal"
+    texte: |
+      Même exercice avec les deux voitures face à face : calculer $V=(500\times20-900\times10)/1400=0{,}71$ m/s et l'énergie dissipée ($99{,}8~\%$).
+
+bilan:
+  - titre: "Résultats"
+    texte: |
+      $V_x=\dfrac{m_1v_1}{m_1+m_2}=7{,}14$ m/s ; $V_y=\dfrac{m_2v_2}{m_1+m_2}=6{,}43$ m/s ; $V=9{,}61$ m/s ($34{,}6$ km/h) ; $\theta=42{,}0^\circ$ ; $E_{c,i}=145$ kJ, $E_{c,f}=64{,}6$ kJ, perte $80{,}4$ kJ $(55{,}4~\%)$ $=\tfrac12\mu_rv_{\rm rel}^2$.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Choc frontal et choc à $90^\\circ$"
+    texte: |
+      Reprendre l'exercice avec les voitures face à face (même axe, sens opposés) : calculer $V$, l'énergie dissipée et la comparer à celle du choc à $90^\circ$. Quelle configuration est la plus dangereuse pour les passagers ?
+  - niveau: licence
+    titre: "Impulsion et force moyenne"
+    texte: |
+      Si le choc dure $\Delta t=0{,}1$ s, calculer la force moyenne exercée sur chaque voiture : $\bar F_1=m_1\|\vec V-\vec v_1\|/\Delta t$, $\bar F_2=m_2\|\vec V-\vec v_2\|/\Delta t$ ; vérifier $\bar F_1=\bar F_2$ (troisième loi de Newton) et exprimer le résultat en nombre de $g$.
+  - niveau: master
+    titre: "Élasticité partielle et coefficient de restitution"
+    texte: |
+      Pour un choc avec restitution $e$ selon la normale de contact, calculer les vitesses finales et le rapport d'énergie perdue $(1-e^2)\dfrac{\mu_rv_{{\rm rel},n}^2}{2E_{c,i}}$ ; $e=0$ redonne l'exercice.
+
+accroche_point_cours_essentiel:
+  - titre: "Deux voitures qui restent collées : où partent-elles ?"
+    duree_introduction: "3 min"
+    question_d_accroche: |
+      Deux voitures se percutent à un carrefour, l'une venant de l'ouest et l'autre du sud, et restent collées ensemble. {\bf Dans quelle direction partent-elles ?} Quelle est la fraction d'énergie dissipée ?
+    texte: |
+      {\bf Idée clé : la quantité de mouvement totale (un vecteur) est conservée.} $\vec V=\dfrac{m_1\vec v_1+m_2\vec v_2}{m_1+m_2}$ : le résultat est la {\bf moyenne pondérée} par les masses.
+
+outils_mathematiques:
+  - titre: "Norme et angle d'un vecteur"
+    texte: |
+      $V=\sqrt{V_x^2+V_y^2}$ ; $\tan\theta=V_y/V_x$.
+  - titre: "Moyenne pondérée"
+    texte: |
+      $\vec V=\dfrac{\sum m_i\vec v_i}{\sum m_i}$ : barycentre des vitesses.
+
+liens_autres_disciplines:
+  - discipline: "Sécurité routière"
+    texte: |
+      Les crash tests évaluent l'énergie dissipée dans les déformations programmées ; en collision frontale, chaque véhicule dissipe $\tfrac12mv^2$ s'ils sont identiques.
+  - discipline: "Reconstitution d'accidents"
+    texte: |
+      La direction des véhicules après le choc permet de remonter à leurs vitesses avant le choc.
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{itemize}
+        \item[(a)] Faire un schéma. Écrire la conservation de la quantité de mouvement et la projeter sur $Ox$ et $Oy$.
+        \item[(b)] Déterminer le vecteur vitesse $\vec V$ du corps unique juste après le choc : composantes, norme (en m/s et en km/h) et angle avec $Ox$.
+        \item[(c)] Calculer l'énergie cinétique avant et après le choc ; en déduire l'énergie dissipée et sa fraction. Vérifier avec la formule $\Delta E_c=-\tfrac12\mu_rv_{\rm rel}^2$.
+        \item[(d)] Les mêmes voitures se percutent maintenant de {\bf plein fouet} aux mêmes vitesses (choc mou). Calculer $V$ et la fraction d'énergie dissipée.
+      \end{itemize}
+    coup_de_pouce: |
+      $\vec V=\dfrac{m_1\vec v_1+m_2\vec v_2}{m_1+m_2}$ avec $\vec v_1=v_1\vec u_x$ et $\vec v_2=v_2\vec u_y$. La masse réduite est $\mu_r=\dfrac{m_1m_2}{m_1+m_2}$ ; $v_{\rm rel}^2=v_1^2+v_2^2$ pour deux vitesses perpendiculaires.
+    correction: |
+      $V_x=7{,}14$ m/s, $V_y=6{,}43$ m/s, $V=9{,}61$ m/s $=34{,}6$ km/h, $\theta=42{,}0^\circ$ ; $E_c$ : $145$ kJ $\to64{,}6$ kJ, perte $80{,}4$ kJ $=55{,}4~\%$ ; frontal : $V=0{,}71$ m/s, perte $99{,}8~\%$.
+    solution:
+      - titre: "(a) Conservation de $\\vec p$"
+        texte: |
+          Système : les deux voitures. Pendant le choc, les forces extérieures (poids, réaction, frottement des pneus) sont négligeables devant les forces d'interaction : $\vec p$ conservée. Données SI : $v_1=72/3{,}6=20$ m/s (selon $Ox$), $v_2=36/3{,}6=10$ m/s (selon $Oy$).
+          $$m_1\vec v_1+m_2\vec v_2=(m_1+m_2)\vec V\ \Rightarrow\ \begin{cases}m_1v_1=(m_1+m_2)V_x\\ m_2v_2=(m_1+m_2)V_y\end{cases}$$
+      - titre: "(b) Vitesse après le choc"
+        texte: |
+          $$V_x=\frac{500\times20}{1400}=7{,}14~\mathrm{m/s},\qquad V_y=\frac{900\times10}{1400}=6{,}43~\mathrm{m/s}.$$
+          $$V=\sqrt{V_x^2+V_y^2}=\frac{\sqrt{m_1^2v_1^2+m_2^2v_2^2}}{m_1+m_2}=\boxed{9{,}61~\mathrm{m/s}}\approx34{,}6~\mathrm{km/h},\qquad\theta=\arctan\frac{V_y}{V_x}=\boxed{42{,}0^\circ}\ \text{(avec }Ox).$$
+          Contrôle de plausibilité : $V<v_1$ et $V\ne$ moyenne arithmétique (les directions sont perpendiculaires).
+      - titre: "(c) Bilan d'énergie"
+        texte: |
+          Avant : $E_{c,i}=\tfrac12\times500\times20^2+\tfrac12\times900\times10^2=100\,000+45\,000=145~\mathrm{kJ}$. Après : $E_{c,f}=\tfrac12\times1400\times9{,}61^2\approx64{,}6~\mathrm{kJ}$. Énergie dissipée :
+          $$\Delta E_c=-80{,}4~\mathrm{kJ},\qquad\frac{|\Delta E_c|}{E_{c,i}}=\boxed{55{,}4~\%}.$$
+          Vérification : $\mu_r=\dfrac{500\times900}{1400}=321{,}4$ kg, $v_{\rm rel}^2=20^2+10^2=500~\mathrm{m^2/s^2}$ : $\tfrac12\mu_rv_{\rm rel}^2=\tfrac12\times321{,}4\times500=80{,}4~\mathrm{kJ}$ $\surd$. {\bf La perte ne dépend que de la vitesse relative}, pas du référentiel : c'est l'énergie cinétique dans le référentiel du centre de masse.
+      - titre: "(d) Comparaison : choc frontal"
+        texte: |
+          Plein fouet (sens opposés) : $V=\dfrac{500\times20-900\times10}{1400}=\dfrac{1000}{1400}=0{,}71$ m/s (dans le sens de la première voiture) ; $v_{\rm rel}=30$ m/s, $\Delta E_c=-\tfrac12\times321{,}4\times30^2=-144{,}6$ kJ, soit $99{,}8~\%$ de l'énergie initiale : l'ensemble est quasi arrêté. Le choc frontal est {\bf beaucoup plus violent} ($v_{\rm rel}=30$ contre $22{,}4$ m/s) : l'énergie à dissiper dans les structures est $1{,}8$ fois plus grande.

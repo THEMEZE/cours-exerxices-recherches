@@ -1,0 +1,168 @@
+id: td4_ex6
+intitule: "Système de deux blocs"
+td: td4
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - dynamique.deuxieme_loi
+  - dynamique.plan_incline
+  - dynamique.liaison_fil_inextensible
+  - dynamique.tension_d_un_fil
+
+metadonnees:
+  duree_estimee: "50 min"
+  difficulte: 3
+  type_exercice: "Application / Synthèse"
+  indispensable: true
+
+enonce_intro: |
+  Deux blocs de masses $m_A=4$ kg et $m_B=5$ kg sont reliés par une corde passant par une poulie fixée au sommet d'un bloc triangulaire dont les faces sont inclinées de $\alpha=30^\circ$ (face portant $A$) et $\beta=60^\circ$ (face portant $B$). On néglige tous les frottements ainsi que les masses de la corde et de la poulie, la corde est inextensible, et on prendra $g=10~\mathrm{m\,s^{-2}}$. Le système est initialement au repos ; les blocs sont lâchés à $t=0$.
+
+prerequis:
+  - titre: "Projection du poids sur un plan incliné"
+    texte: |
+      Pour un plan incliné d'un angle $\varphi$ : composante du poids {\bf le long de la pente} $mg\sin\varphi$, {\bf perpendiculairement} $mg\cos\varphi$ ; la réaction normale équilibre cette dernière.
+  - titre: "Fil inextensible et poulie idéale"
+    texte: |
+      La corde a la même tension $T$ des deux côtés de la poulie, et un déplacement $s_A$ le long d'une face s'accompagne d'un déplacement $s_B$ de même longueur le long de l'autre face.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Système lié sur deux plans inclinés"
+    texte: |
+      Savoir choisir un repère adapté à chaque bloc (axe le long de la pente), écrire la 2\textsuperscript{e} loi pour chacun, relier les accélérations par la contrainte du fil, résoudre pour $a$ et $T$, puis utiliser la cinématique pour la vitesse.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "L'atwood sur plan incliné"
+    texte: |
+      C'est la généralisation de la machine d'Atwood : seuls changent les facteurs $\sin\alpha$ et $\sin\beta$. Chaque bloc a son propre repère, pas besoin de repère commun : on choisit l'axe positif dans le sens du mouvement présumé (A monte, B descend) et la contrainte devient $a_A=a_B$. Faire remarquer que le sens du mouvement se devine par comparaison de $m_B\sin\beta$ et $m_A\sin\alpha$, et que le calcul le confirme par le signe de $a$.
+
+point_cours:
+  - titre: "Système lié par un fil"
+    texte: |
+      Pour des solides reliés par un fil tendu, inextensible : mêmes accélérations (en norme) le long du fil, même tension en tout point si le fil et la poulie sont idéaux. On écrit la 2\textsuperscript{e} loi pour chaque solide en projetant sur l'axe du mouvement.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Se tromper de sens du mouvement"
+    texte: |
+      On compare $m_B g\sin\beta\approx43$ N et $m_A g\sin\alpha=20$ N : B descend. Si on suppose l'inverse, on obtient simplement $a<0$ : pas d'erreur, mais il faut l'interpréter.
+  - titre: "Utiliser $mg\\cos\\varphi$ le long de la pente"
+    texte: |
+      La composante le long de la pente est $mg\sin\varphi$ (pente de $30^\circ$ : la moitié du poids). $\cos$ intervient dans la réaction normale.
+  - titre: "Tension égale au poids d'un bloc"
+    texte: |
+      $T\ne m_Ag\sin\alpha$ et $T\ne m_Bg\sin\beta$ : la tension est intermédiaire, $20~\text{N}<T<43~\text{N}$.
+  - titre: "Oublier que la réaction normale n'intervient pas"
+    texte: |
+      Le mouvement se fait le long des pentes : la réaction normale n'entre pas dans les équations de mouvement (elle sert seulement à vérifier que les blocs restent en contact).
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Prédire avant de calculer"
+    texte: |
+      Faire voter : quel bloc descend ? Quelle masse faudrait-il pour que le système reste en équilibre ($m_A\sin\alpha=m_B\sin\beta\Rightarrow m_A=8{,}7$ kg) ? Cette valeur donne l'équilibre.
+  - titre: "Variante expérimentale"
+    texte: |
+      Plan incliné à rail avec chronomètre : mesurer $a$ pour différents angles et vérifier $a\propto\sin$.
+
+bilan:
+  - titre: "Résultats"
+    texte: |
+      $a=g\,\dfrac{m_B\sin\beta-m_A\sin\alpha}{m_A+m_B}\approx2{,}59~\mathrm{m\,s^{-2}}$ ; $T=m_A(g\sin\alpha+a)\approx30{,}4$ N ; $v=\sqrt{2ad}\approx1{,}44~\mathrm{m/s}$ pour $d=40$ cm. Si $\alpha=\beta=90^\circ$ on retrouve la machine d'Atwood.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Avec frottements de Coulomb"
+    texte: |
+      Avec un coefficient de frottement $\mu$ sur chaque face, le frottement est $\mu m_Ag\cos\alpha$ sur A et $\mu m_Bg\cos\beta$ sur B, opposé au mouvement. Calculer $a(\mu)$ et la valeur $\mu_c$ au-delà de laquelle le système reste immobile.
+  - niveau: licence
+    titre: "Force exercée sur le support"
+    texte: |
+      Déterminer la force totale exercée par les blocs, la corde et la poulie sur le bloc triangulaire, et la force horizontale de maintien nécessaire pour qu'il ne glisse pas sur le sol sans frottement.
+  - niveau: master
+    titre: "Bloc triangulaire libre de glisser"
+    texte: |
+      Si le bloc triangulaire peut glisser sans frottement sur le sol, son mouvement horizontal se couple à celui des blocs. Écrire les équations (conservation de la quantité de mouvement horizontale) et calculer $a_A$ et l'accélération du triangle.
+
+accroche_point_cours_essentiel:
+  - titre: "Deux pentes, une corde, qui l'emporte ?"
+    duree_introduction: "3 min"
+    question_d_accroche: |
+      Un bloc de $4$ kg sur une pente à $30^\circ$ est relié à un bloc de $5$ kg sur une pente à $60^\circ$. {\bf Lequel descend ?} Dans quelle direction la tension de la corde est-elle plus grande : elle est nulle ? égale au poids ? Quelle est l'accélération ?
+    texte: |
+      {\bf Idée clé : seule la composante du poids le long de la pente compte.} Pour A : $m_Ag\sin\alpha=20$ N ; pour B : $m_Bg\sin\beta\approx43$ N. Le plus « tirant » l'emporte et, la corde étant inextensible, les deux blocs ont la même accélération.
+
+outils_mathematiques:
+  - titre: "Valeurs remarquables"
+    texte: |
+      $\sin30^\circ=\tfrac12$, $\sin60^\circ=\dfrac{\sqrt3}2\approx0{,}866$, $\cos30^\circ=\dfrac{\sqrt3}2$, $\cos60^\circ=\tfrac12$.
+  - titre: "Système de deux équations à deux inconnues"
+    texte: |
+      $T-m_Ag\sin\alpha=m_Aa$ et $m_Bg\sin\beta-T=m_Ba$ : en additionnant, $T$ disparaît.
+  - titre: "Cinématique à accélération constante"
+    texte: |
+      Départ du repos : $v^2=2ad$ (élimination du temps entre $v=at$ et $d=\tfrac12at^2$).
+
+liens_autres_disciplines:
+  - discipline: "Ingénierie"
+    texte: |
+      Funiculaires, téléphériques à contrepoids, remontées mécaniques : le contrepoids sur une pente réduit la puissance motrice.
+  - discipline: "Mathématiques"
+    texte: |
+      Résolution de systèmes linéaires, trigonométrie des angles remarquables.
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{itemize}
+        \item[(a)] Citer et représenter sur la figure les forces qui s'exercent sur le bloc $A$ et sur le bloc $B$.
+        \item[(b)] Pour chaque bloc, tracer un repère et donner les composantes des forces.
+        \item[(c)] Relier le déplacement $s_A$ du bloc $A$ au déplacement $s_B$ du bloc $B$. En déduire la relation entre les accélérations.
+      \end{itemize}
+    coup_de_pouce: |
+      Pour chaque bloc, prenez un axe $Ox$ le long de la pente, orienté dans le sens du mouvement présumé (A monte, B descend), et un axe $Oy$ perpendiculaire.
+    correction: |
+      Forces : poids, réaction normale, tension. Composantes selon la pente : $A$ : $(T-m_Ag\sin\alpha,\ N_A-m_Ag\cos\alpha)$ ; $B$ : $(m_Bg\sin\beta-T,\ N_B-m_Bg\cos\beta)$. $s_A=s_B$ donc $a_A=a_B=a$.
+    solution:
+      - titre: "(a) Forces"
+        texte: |
+          Chaque bloc subit trois forces : son poids $m\vec g$ (vertical), la réaction normale $\vec N$ de la face (perpendiculaire à la face, pas de frottement), la tension $\vec T$ de la corde (le long de la face, vers la poulie). La tension a la même norme $T$ pour A et B.
+      - titre: "(b) Repères et composantes"
+        texte: |
+          Pour chaque bloc : axe $Ox_i$ le long de la pente dans le sens du mouvement présumé ($A$ vers le haut de sa pente, $B$ vers le bas de la sienne), $Oy_i$ perpendiculaire à la pente. Composantes :
+          $$A:\ \vec T\,(T,\,0),\quad m_A\vec g\,(-m_Ag\sin\alpha,\,-m_Ag\cos\alpha),\quad\vec N_A\,(0,\,N_A).$$
+          $$B:\ \vec T\,(-T,\,0),\quad m_B\vec g\,(m_Bg\sin\beta,\,-m_Bg\cos\beta),\quad\vec N_B\,(0,\,N_B).$$
+      - titre: "(c) Contrainte du fil"
+        texte: |
+          La corde est inextensible : si $A$ monte de $s_A$ le long de sa pente, $B$ descend de la même longueur $s_B$ le long de la sienne :
+          $$\boxed{s_A=s_B}\ \Rightarrow\ \boxed{a_A=a_B=a}.$$
+
+  - id: q2
+    enonce: |
+      \begin{itemize}
+        \item[(d)] Énoncer le principe fondamental de la dynamique et l'appliquer à chaque bloc.
+        \item[(e)] Déterminer l'accélération des deux blocs.
+        \item[(f)] En déduire la tension de la corde.
+        \item[(g)] Quelle est la vitesse des blocs lorsqu'ils se sont déplacés d'une distance $d=40$ cm ?
+      \end{itemize}
+    coup_de_pouce: |
+      Projetez la 2\textsuperscript{e} loi sur l'axe de la pente pour chaque bloc, avec la même accélération $a$. Additionnez les deux équations pour éliminer $T$.
+    correction: |
+      $a=g\dfrac{m_B\sin\beta-m_A\sin\alpha}{m_A+m_B}\approx2{,}59~\mathrm{m\,s^{-2}}$ ; $T=m_A(g\sin\alpha+a)\approx30{,}4$ N ; $v=\sqrt{2ad}\approx1{,}44~\mathrm{m/s}$.
+    solution:
+      - titre: "(d) Principe fondamental"
+        texte: |
+          Dans un référentiel galiléen, pour un point matériel de masse $m$ : $\sum\vec F=m\vec a$. Projeté sur $Ox_i$ :
+          $$A:\ T-m_Ag\sin\alpha=m_Aa,\qquad B:\ m_Bg\sin\beta-T=m_Ba .$$
+          Selon $Oy_i$ : $N_A=m_Ag\cos\alpha$ et $N_B=m_Bg\cos\beta$ (pas de mouvement perpendiculaire).
+      - titre: "(e) Accélération"
+        texte: |
+          On additionne les deux équations : $m_Bg\sin\beta-m_Ag\sin\alpha=(m_A+m_B)a$, donc
+          $$a=g\,\frac{m_B\sin\beta-m_A\sin\alpha}{m_A+m_B}=10\times\frac{5\times0{,}866-4\times0{,}5}{9}=\boxed{2{,}59~\mathrm{m\,s^{-2}}}.$$
+          $a>0$ confirme le sens supposé : $B$ descend, $A$ monte.
+      - titre: "(f) Tension"
+        texte: |
+          $T=m_A(g\sin\alpha+a)=4\times(5+2{,}59)\approx\boxed{30{,}4~\text{N}}$. Vérification avec $B$ : $m_B(g\sin\beta-a)=5\times(8{,}66-2{,}59)\approx30{,}4$ N. $\surd$ On a bien $20~\text{N}<T<43{,}3~\text{N}$.
+      - titre: "(g) Vitesse après $d=40$ cm"
+        texte: |
+          Départ du repos, accélération constante : $v^2=2ad$, donc
+          $$v=\sqrt{2\times2{,}59\times0{,}40}\approx\boxed{1{,}44~\mathrm{m/s}}.$$

@@ -1,0 +1,237 @@
+id: td3
+titre: "Base de Frenet, rayon de courbure et accélérations tangentielle et normale"
+chapitre_cours: "Chap. 1 — Cinématique du point matériel"
+seance: 3
+niveau_public: [cpge, licence]
+exercices_ordre:
+  - ex1_base_frenet
+  - ex2_mouvement_curviligne_uniforme
+  - ex3_circuit_monaco
+  - ex4_abscisse_curviligne
+  - ex5_cycloide
+  - ex6_raccordement_clothoide
+  - ex7_cercle_adherence
+  - ex8_tir_parabolique_frenet
+
+enonce_intro: |
+  {\bf Conventions valables pour tout le TD (sauf mention contraire).} Les mouvements sont ceux d'un {\bf point matériel} $M$ dans un référentiel galiléen, dans le plan $Oxy$ (sauf mention contraire). La {\bf base de Frenet} $(\vec\tau,\vec n)$ est la base orthonormée directe {\bf attachée à la trajectoire} : $\vec\tau$ est le vecteur unitaire tangent, orienté dans le sens du mouvement, et $\vec n$ est le vecteur unitaire normal, orienté vers le {\bf centre de courbure} (côté concave). Le vecteur tangent est noté $\vec t$ dans certains énoncés ; on le note ici $\vec\tau$ pour ne pas le confondre avec le temps $t$. L'angle $\alpha$ désigne l'angle orienté entre $Ox$ et la tangente ; il ne faut pas le confondre avec l'angle polaire $\theta$ du TD2. Les résultats littéraux sont établis avant toute application numérique et vérifiés par homogénéité et par des cas limites (cercle, droite). Les exercices marqués {\it (facultatif)} sont des approfondissements ; les questions notées (*) sont plus difficiles.
+
+prerequis:
+  - titre: "Cinématique cartésienne et polaire (TD1, TD2)"
+    texte: |
+      Savoir dériver une loi horaire pour obtenir $\vec v$ et $\vec a$ en cartésien, calculer une norme, éliminer le temps pour obtenir une trajectoire. En polaire : $\vec v=\dot r\,\vec u_r+r\dot\theta\,\vec u_\theta$ et $\vec a=(\ddot r-r\dot\theta^2)\,\vec u_r+(r\ddot\theta+2\dot r\dot\theta)\,\vec u_\theta$. Mouvement circulaire uniforme : $\vec a=-R\omega^2\,\vec u_r$.
+  - titre: "Dérivée d'un vecteur unitaire tournant"
+    texte: |
+      Si $\vec e(\alpha)=\cos\alpha\,\vec\imath+\sin\alpha\,\vec\jmath$ alors $\dfrac{\mathrm d\vec e}{\mathrm d\alpha}=-\sin\alpha\,\vec\imath+\cos\alpha\,\vec\jmath$ est le vecteur obtenu par rotation de $+\pi/2$, et $\dfrac{\mathrm d\vec e}{\mathrm dt}=\dot\alpha\,\dfrac{\mathrm d\vec e}{\mathrm d\alpha}$ (dérivée composée).
+  - titre: "Produits scalaire et vectoriel dans le plan"
+    texte: |
+      $\vec A\cdot\vec B=A_xB_x+A_yB_y$ ; $\vec A\wedge\vec B=(A_xB_y-A_yB_x)\,\vec k$, de norme $|A_xB_y-A_yB_x|=AB\,|\sin\varphi|$. Orthogonalité : $\vec A\cdot\vec B=0$. Colinéarité : $\vec A\wedge\vec B=\vec0$.
+  - titre: "Dérivation, développements limités, calcul intégral"
+    texte: |
+      Dérivée de $y(x)$ et de $y(x(t))$, $\dfrac{\mathrm d}{\mathrm dt}\sqrt{u}=\dfrac{\dot u}{2\sqrt u}$, DL de $\cos u$ et $\sin u$ à l'ordre 3, primitive de $\sqrt{1+u^2}$, et formules de duplication ($1-\cos\varphi=2\sin^2\frac\varphi2$, $\sin\varphi=2\sin\frac\varphi2\cos\frac\varphi2$).
+  - titre: "Ordres de grandeur"
+    texte: |
+      $g=9{,}81\ \mathrm{m\,s^{-2}}$ ; $36\ \mathrm{km/h}=10\ \mathrm{m/s}$ ; accélération normale d'une voiture dans un virage $\sim3$ à $8\ \mathrm{m\,s^{-2}}$ ; limite d'un pilote de chasse $\sim9g$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Décomposer le mouvement dans la base de Frenet"
+    texte: |
+      Écrire $\vec v=v\,\vec\tau$ et $\vec a=\dfrac{\mathrm dv}{\mathrm dt}\,\vec\tau+\dfrac{v^2}{R}\,\vec n$, savoir ce que représente chaque terme (changement de {\bf norme} de la vitesse, changement de {\bf direction}) et construire la base en un point quelconque d'une trajectoire dessinée.
+  - titre: "Calculer un rayon de courbure par la méthode adaptée"
+    texte: |
+      Choisir entre $R=\dfrac{v^3}{\|\vec v\wedge\vec a\|}$ (paramétrique), $R=\dfrac{(1+y'^2)^{3/2}}{|y''|}$ (courbe $y(x)$) et $R=\dfrac{(r^2+r'^2)^{3/2}}{|r^2+2r'^2-rr''|}$ (polaire), ou $R=v^2/a_N$ quand $a_N$ est déjà connue.
+  - titre: "Construire le cercle osculateur et lire la physique sur un tracé"
+    texte: |
+      Placer le centre de courbure du côté concave, tracer le cercle osculateur et en déduire sans calcul où l'accélération normale est grande (virage serré) ou petite (virage large), à vitesse donnée.
+  - titre: "Compétences transversales"
+    texte: |
+      Faire un schéma soigné (trajectoire, $\vec v$, $\vec a$, $\vec\tau$, $\vec n$, cercle osculateur), {\bf valider} chaque résultat (cas limites, homogénéité, $a^2=a_T^2+a_N^2$), relier la cinématique à des situations réelles (route, circuit, avion, satellite) et utiliser Python pour tracer trajectoires et cercles osculateurs.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Positionnement du TD et progression"
+    texte: |
+      Ce TD fait suite aux coordonnées polaires (TD2) et prépare la dynamique : la base de Frenet est la base naturelle pour projeter le principe fondamental ($m\,a_N=F_N$ donne la tension, la réaction, l'adhérence). Progression en trois temps : (1) {\bf outils} (exercice 1 : démonstrations de cours et formules de $R$ ; exercice 2 : mouvement uniforme, cercle et parabole), (2) {\bf lecture et calcul} (exercices 3 et 4 : circuit de Monaco, trajectoire parabolique avec $a_T$, $a_N$, $s(t)$), (3) {\bf synthèse et ouverture} (exercices 5 à 8 : cycloïde, raccordement en clothoïde, cercle d'adhérence, tir parabolique).
+  - titre: "Quatre parcours selon le temps disponible"
+    texte: |
+      {\bf Parcours essentiel} (environ 1 h 45) : exercice 1 (parties 1 et 2(a)--(d)), exercice 2 (parties 1 et 2), exercice 4.
+
+      {\bf Parcours renforcé} (environ 2 h 30) : ajouter l'exercice 3 (Monaco), les applications de l'exercice 1 (2(f)) et l'exercice 8 (tir parabolique, lecture de $a_T$, $a_N$ sur un mouvement connu).
+
+      {\bf Parcours approfondi} (CPGE/licence, travail personnel ou 2\textsuperscript{e} séance, environ 3 h) : exercice 1 complet y compris 2(e) et 3, exercice 5 (cycloïde), exercice 7 (cercle d'adhérence).
+
+      {\bf Parcours « excellence »} (colle ou projet, environ 1 h) : exercice 6 (clothoïde et jerk, avec simulation Python), à traiter après les exercices 1 et 4.
+  - titre: "Compétences évaluables"
+    texte: |
+      {\bf S'approprier} (reconnaître que la direction de $\vec a$ se lit sur la trajectoire, identifier le côté concave), {\bf Analyser} (choisir la formule de $R$ adaptée, traduire « vitesse constante » par $a_T=0$), {\bf Réaliser} (calculs de $\vec v$, $\vec a$, $a_T$, $a_N$, $R$, $s$), {\bf Valider} (cas limites : cercle $R=$ cte, droite $R\to\infty$, $a^2=a_T^2+a_N^2$, points de rebroussement), {\bf Communiquer} (schéma avec cercles osculateurs, bases locales).
+  - titre: "Points de vigilance sur la gestion de séance"
+    texte: |
+      (1) Imposer un schéma avec $\vec\tau$ et $\vec n$ {\bf avant} tout calcul. (2) Insister sur le fait que $\vec n$ pointe {\bf toujours} vers l'intérieur du virage, quel que soit le sens de parcours (alors que $\vec u_\theta$ de la base polaire change de sens avec $\dot\theta$). (3) Séparer la géométrie ($R$, ne dépend que de la {\bf courbe}) de la cinématique ($a_N=v^2/R$ dépend en plus de la {\bf vitesse}). (4) L'exercice 3 dépend de la figure du circuit : à fournir en impression grand format pour tracer les cercles osculateurs. (5) Chronométrer : 25 min avant correction pour un exercice de 35 min.
+
+mini_cours:
+  duree: "15 à 20 min en début de séance, avec schémas au tableau"
+  plan: "1. Abscisse curviligne et tangente ; 2. Courbure et normale ; 3. Accélération dans la base de Frenet ; 4. Calculer le rayon de courbure ; 5. Cas particuliers à connaître ; 6. Méthode"
+  sections:
+    - titre: "1. Pourquoi une base liée à la trajectoire ?"
+      texte: |
+        Les coordonnées cartésiennes et polaires sont attachées à un {\bf repère extérieur} à la trajectoire. Or la physique se lit dans le sens du mouvement : une voiture accélère ou freine {\bf le long} de la route (ce qui change la norme de la vitesse) et braque {\bf en travers} (ce qui change sa direction). La base de Frenet sépare exactement ces deux effets. Elle est définie {\bf par la courbe} et ne dépend d'aucun repère.
+    - titre: "2. Abscisse curviligne et vecteur tangent"
+      texte: |
+        L'{\bf abscisse curviligne} $s$ est la longueur de trajectoire parcourue à partir d'une origine : $\mathrm ds=\|\mathrm d\overrightarrow{OM}\|=\|\vec v\|\,\mathrm dt$, soit $s(t)=\displaystyle\int_{t_0}^t\|\vec v\|\,\mathrm dt'$. Le {\bf vecteur tangent} est
+        $$\vec\tau=\frac{\mathrm d\overrightarrow{OM}}{\mathrm ds}=\cos\alpha\,\vec u_x+\sin\alpha\,\vec u_y,\qquad\vec v=\dot s\,\vec\tau=v\,\vec\tau,$$
+        où $\alpha$ est l'angle entre $Ox$ et la tangente. Le déplacement élémentaire s'écrit $\mathrm d\overrightarrow{OM}=\mathrm ds\,\vec\tau$.
+    - titre: "3. Courbure, normale, cercle osculateur"
+      texte: |
+        Quand $M$ avance de $\mathrm ds$, la tangente tourne de $\mathrm d\alpha$. La {\bf courbure} est $\dfrac1R=\left|\dfrac{\mathrm d\alpha}{\mathrm ds}\right|$ et $R$ est le {\bf rayon de courbure}. Le vecteur $\dfrac{\mathrm d\vec\tau}{\mathrm ds}$ est de norme $\dfrac1R$ et perpendiculaire à $\vec\tau$ ; on pose
+        $$\frac{\mathrm d\vec\tau}{\mathrm ds}=\frac{\vec n}R,\qquad\frac{\mathrm d\vec n}{\mathrm ds}=-\frac{\vec\tau}R\ \ (\text{dans le plan}).$$
+        Le {\bf cercle osculateur} en $M$ est le cercle de rayon $R$, tangent à la courbe en $M$, de centre $C=M+R\,\vec n$ ({\bf centre de courbure}). C'est le cercle qui épouse le mieux la trajectoire au voisinage de $M$. Une droite a $R=\infty$ ; un cercle de rayon $R_0$ a $R=R_0$ partout.
+    - titre: "4. Accélération dans la base de Frenet"
+      texte: |
+        En dérivant $\vec v=v\,\vec\tau$ et en utilisant $\dfrac{\mathrm d\vec\tau}{\mathrm dt}=\dfrac{\mathrm d\vec\tau}{\mathrm ds}\,\dot s=\dfrac vR\,\vec n$ :
+        $$\boxed{\vec a=\frac{\mathrm dv}{\mathrm dt}\,\vec\tau+\frac{v^2}R\,\vec n=a_T\,\vec\tau+a_N\,\vec n}.$$
+        $a_T=\dot v=\ddot s$ mesure la variation de {\bf norme} de la vitesse (peut être $<0$) ; $a_N=v^2/R\ge0$ mesure la variation de {\bf direction}, toujours dirigée vers l'{\bf intérieur du virage}. On a $a^2=a_T^2+a_N^2$. Si le mouvement est {\bf uniforme} ($v=$ cte) : $\vec a=\dfrac{v^2}R\,\vec n\perp\vec v$. Si la trajectoire est rectiligne ($R=\infty$) : $\vec a=\dot v\,\vec\tau$.
+    - titre: "5. Calculer le rayon de courbure"
+      texte: |
+        Comme $\vec v\wedge\vec a=v\,\vec\tau\wedge\dfrac{v^2}R\,\vec n$, on obtient $\|\vec v\wedge\vec a\|=\dfrac{v^3}R$, d'où
+        $$\boxed{R=\frac{\|\vec v\|^3}{\|\vec v\wedge\vec a\|}},\qquad a_T=\frac{\vec a\cdot\vec v}v,\qquad a_N=\frac{\|\vec a\wedge\vec v\|}v.$$
+        Dans le plan (cartésien) : $R=\dfrac{(\dot x^2+\dot y^2)^{3/2}}{|\dot x\ddot y-\dot y\ddot x|}$. Pour une courbe $y(x)$ : $R=\dfrac{(1+y'^2)^{3/2}}{|y''|}$. En polaire $r(\theta)$ : $R=\dfrac{(r^2+r'^2)^{3/2}}{|r^2+2r'^2-rr''|}$ avec $r'=\dfrac{\mathrm dr}{\mathrm d\theta}$.
+    - titre: "6. Courbes de référence à connaître"
+      texte: |
+        {\bf Cercle} de rayon $R_0$ : $R=R_0$. {\bf Parabole} $y=kx^2$ en $x=0$ : $R=\dfrac1{2k}$. {\bf Ellipse} $x=a\cos\omega t$, $y=b\sin\omega t$ : $R=\dfrac{b^2}a$ en $(a,0)$ et $R=\dfrac{a^2}b$ en $(0,b)$. {\bf Cardioïde} $r=a(1+\cos\theta)$ : $R=\tfrac43a\left|\cos\tfrac\theta2\right|$. {\bf Spirale logarithmique} $r=r_0\mathrm e^{-k\theta}$ : $R=r\sqrt{1+k^2}$. {\bf Cycloïde} (rayon de la roue $R_0$) : $R=4R_0\left|\sin\tfrac\varphi2\right|$.
+    - titre: "7. Méthode d'étude"
+      texte: |
+        (1) Schéma : trajectoire, point $M$, $\vec v$ tangent, $\vec a$ côté concave. (2) Calculer $\vec v$, $v$, $\vec a$. (3) $a_T=\vec a\cdot\vec v/v$ et $a_N=\sqrt{a^2-a_T^2}$ (ou par le produit vectoriel). (4) $R=v^2/a_N$ ou formule directe. (5) Placer $C=M+R\,\vec n$ et tracer le cercle osculateur. (6) Valider : cas limites, $a^2=a_T^2+a_N^2$, signe de $a_T$ cohérent avec le dessin.
+  schemas_proposes:
+    - titre: "Figure de cours : arc de courbe avec $M$ et $M'$"
+      description: |
+        Dessiner une courbe plane, deux points voisins $M$ et $M'$ séparés par l'arc $\mathrm ds$, les tangentes en $M$ et $M'$ faisant un angle $\mathrm d\alpha$, les normales en $M$ et $M'$ qui se coupent au centre de courbure $C$ (à la distance $R$ de $M$), la base $(\vec\tau,\vec n)$ en $M$ et l'angle $\alpha$ avec l'horizontale. Légender $\mathrm ds=R\,|\mathrm d\alpha|$.
+    - titre: "Les trois situations de l'accélération"
+      description: |
+        Trois mini-figures côte à côte sur la même trajectoire courbe : (1) $v$ croissante : $\vec a$ penche vers l'avant ($a_T>0$), (2) $v$ constante : $\vec a\perp\vec v$ vers l'intérieur, (3) $v$ décroissante : $\vec a$ penche vers l'arrière ($a_T<0$). Toujours la composante $a_N\,\vec n$ vers le centre du virage. Faire apparaître le rectangle de composantes $a_T$ et $a_N$.
+    - titre: "Cercle osculateur de la parabole"
+      description: |
+        Parabole $y=x^2$, cercle osculateur en $x=0$ (rayon $\tfrac12$, centre $(0,\tfrac12)$) et en $x=1$ (rayon $\tfrac{5\sqrt5}2\approx5{,}6$, centre $(-4;3{,}5)$). Montre que le cercle {\bf traverse} la courbe en un point (cas particulier du contact d'ordre 2) et que $R$ croît quand on s'éloigne du sommet.
+      tikz: |
+        \begin{tikzpicture}[>=stealth,scale=0.55]
+          \draw[->] (-9,0)--(3,0) node[right]{$x$};
+          \draw[->] (0,-1)--(0,6) node[above]{$y$};
+          \draw[thick,domain=-2.4:2.1,samples=80] plot (\x,{\x*\x});
+          \draw[dashed,red] (0,0.5) circle (0.5);
+          \draw[dashed,blue] (-4,3.5) circle (5.59);
+          \fill (0,0) circle (2pt); \fill (1,1) circle (2pt) node[right]{$P$};
+          \fill[red] (0,0.5) circle (2pt); \fill[blue] (-4,3.5) circle (2pt) node[left]{$C$};
+          \draw[->,thick] (1,1)--++(0.45,0.9) node[right]{$\vec\tau$};
+          \draw[->,thick] (1,1)--++(-0.9,0.45) node[above]{$\vec n$};
+        \end{tikzpicture}
+
+point_cours:
+  - titre: "Résumé en trois formules"
+    texte: |
+      $$\vec v=v\,\vec\tau,\qquad\vec a=\frac{\mathrm dv}{\mathrm dt}\,\vec\tau+\frac{v^2}R\,\vec n,\qquad R=\frac{v^3}{\|\vec v\wedge\vec a\|}.$$
+  - titre: "Exemples de lecture rapide"
+    texte: |
+      Cercle uniforme : $a_T=0$, $a_N=v^2/R_0=R_0\omega^2$. Trajectoire rectiligne : $a_N=0$. Mouvement uniforme sur une courbe quelconque : $\vec a=\dfrac{v^2}{R(s)}\,\vec n$, grande là où la courbe est serrée.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Croire que $\\vec a=\\vec 0$ quand la vitesse est constante"
+    texte: |
+      $\|\vec v\|=$ cte implique seulement $\vec a\perp\vec v$ ($a_T=0$). Dès que la trajectoire est courbe, $a_N=v^2/R\ne0$.
+  - titre: "Confondre $\\dfrac{\\mathrm d\\|\\vec v\\|}{\\mathrm dt}$ et $\\left\\|\\dfrac{\\mathrm d\\vec v}{\\mathrm dt}\\right\\|$"
+    texte: |
+      $a_T=\dot v$ est la dérivée de la {\bf norme} (peut être négative), alors que $\|\vec a\|=\sqrt{a_T^2+a_N^2}$ est la norme de la dérivée du {\bf vecteur}. Ce sont deux grandeurs différentes dès que $a_N\ne0$.
+  - titre: "Orienter $\\vec n$ du mauvais côté"
+    texte: |
+      $\vec n$ pointe vers le centre de courbure (côté concave), jamais « vers l'extérieur du virage ». Sur une trajectoire en S, $\vec n$ change de côté au point d'inflexion (où $R=\infty$ et $a_N=0$).
+  - titre: "Utiliser la formule $R=v^2/a$ au lieu de $R=v^2/a_N$"
+    texte: |
+      $R=v^2/a_N$ avec la composante {\bf normale} seule. Prendre la norme totale $a$ donne un rayon trop petit dès que $a_T\ne0$ (par exemple sur la parabole de l'exercice 4).
+  - titre: "Oublier les valeurs absolues et le facteur $3/2$"
+    texte: |
+      $R=\dfrac{(1+y'^2)^{3/2}}{|y''|}$ : l'exposant est $3/2$ (et non $2$ ni $1/2$) et $y''$ est en valeur absolue (un rayon est positif). Pour $y''=0$, $R=\infty$ : point d'inflexion ou droite.
+  - titre: "Confondre les angles $\\alpha$, $\\theta$ et $\\beta$"
+    texte: |
+      $\alpha$ : angle de la {\bf tangente} avec $Ox$ ; $\theta$ : angle polaire du {\bf point} $M$ ; $\beta$ : angle entre $\vec v$ et $\vec u_r$. Un schéma avec les trois angles distincts évite la confusion.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Un vélo, une corde et un stylo"
+    texte: |
+      Faire dessiner un virage à main levée, puis un cercle qui épouse la courbe localement : les étudiants {\bf voient} le cercle osculateur avant de le calculer. Un jouet sur circuit ou une bille sur une gouttière courbe illustrent $a_N=v^2/R$ : plus la courbure est forte, plus la bille pousse la paroi.
+  - titre: "Prédire avant de calculer"
+    texte: |
+      Pour la parabole : « où l'accélération est-elle la plus grande à vitesse constante ? » (au sommet). Pour Monaco : « ordre de $a_9$, $a_{15}$, $a_{16}$ ? ». Pour la cycloïde : « que vaut $R$ au point de contact avec le sol ? » (zéro : point de rebroussement).
+  - titre: "Python en séance"
+    texte: |
+      Tracer en 15 lignes (\texttt{numpy}, \texttt{matplotlib}) : trajectoire, vecteurs $\vec\tau$, $\vec n$, $\vec a$ avec \texttt{quiver}, cercle osculateur (centre $M+R\,\vec n$) pour la parabole, la cycloïde et la clothoïde. Avec \texttt{np.gradient} on retrouve $R$ numériquement à partir d'une loi horaire.
+
+bilan:
+  - titre: "Ce qu'il faut savoir faire à la fin du TD"
+    texte: |
+      Construire $(\vec\tau,\vec n)$ en tout point ; démontrer $\vec a=\dot v\,\vec\tau+\dfrac{v^2}R\,\vec n$ ; calculer $R$ en cartésien, paramétrique, $y(x)$ et polaire ; décomposer $\vec a$ en $a_T$ et $a_N$ ; tracer le cercle osculateur ; relier $a_N$, $v$ et $R$ aux situations réelles (voiture, satellite, avion, circuit) ; valider par $a^2=a_T^2+a_N^2$ et les cas limites.
+  - titre: "Résultats marquants du TD"
+    texte: |
+      Uniforme : $\vec a=\dfrac{v^2}R\vec n$. Parabole $y=kx^2$ : $R(0)=\dfrac1{2k}$. Ellipse : $R=\dfrac{b^2}a$ en $(a,0)$. Cardioïde : $R=\tfrac43a|\cos\tfrac\theta2|$. Trajectoire $x=bt$, $y=ct(t-1)$ : $R(0{,}5)=0{,}5$ m. Cycloïde : $R=4R_0\sin\tfrac\varphi2$, $L=8R_0$, $\vec a=R_0\omega^2$ constante. Clothoïde : $R=A^2/s$, jerk $j=v^3/A^2$. Adhérence : $a_T^2+a_N^2\le(\mu g)^2$. Tir : $R=\dfrac{v_x^2}{g\cos^3\varphi}$.
+  - titre: "Ce qui sera réutilisé dans la suite"
+    texte: |
+      La projection du principe fondamental sur $\vec\tau$ et $\vec n$ (pendule : tension et $a_N=v^2/\ell$, mouvement sur un rail, véhicule en virage), la conservation de l'énergie le long d'une trajectoire guidée, le mouvement des particules chargées (rayon de Larmor $R=mv/qB$ : $a_N=v^2/R$ avec $a_N=qvB/m$), puis les référentiels non galiléens.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Cercle osculateur numérique"
+    texte: |
+      À partir d'une loi horaire $(x(t),y(t))$, calculer $R(t)$ par \texttt{np.gradient} puis tracer, pour quelques instants, le cercle de centre $M+R\,\vec n$ et de rayon $R$. Comparer au résultat analytique pour la parabole et l'ellipse.
+  - niveau: licence
+    titre: "Développée d'une courbe et trièdre de Frenet 3D"
+    texte: |
+      La {\bf développée} est le lieu des centres de courbure. Montrer que celle de la cycloïde est une cycloïde identique translatée (Huygens, exercice 5). En 3D on complète $(\vec\tau,\vec n)$ par la binormale $\vec b=\vec\tau\wedge\vec n$ : formules de Serret--Frenet $\dfrac{\mathrm d\vec\tau}{\mathrm ds}=\kappa\vec n$, $\dfrac{\mathrm d\vec n}{\mathrm ds}=-\kappa\vec\tau+\tau_g\vec b$, $\dfrac{\mathrm d\vec b}{\mathrm ds}=-\tau_g\vec n$ (torsion $\tau_g$). Pour l'hélice (TD2) : $\kappa=\dfrac a{a^2+h^2}$, $\tau_g=\dfrac h{a^2+h^2}$.
+  - niveau: master
+    titre: "Courbes de courbure donnée et théorème fondamental"
+    texte: |
+      Une courbe plane est entièrement déterminée, à un déplacement près, par sa courbure $\kappa(s)$ : $\alpha(s)=\int_0^s\kappa$, $x=\int\cos\alpha$, $y=\int\sin\alpha$. Pour $\kappa=$ cte on trouve le cercle, pour $\kappa=s/A^2$ la clothoïde (exercice 6), pour $\kappa=1/s$ la spirale logarithmique. Reformuler le « jerk » comme dérivée de l'accélération et relier au confort (ingénierie ferroviaire et routière).
+  - niveau: doctorat
+    titre: "Géométrie différentielle et mécanique des fils"
+    texte: |
+      L'équation de la courbure s'obtient comme les équations de la statique d'un fil élastique (élastica d'Euler : courbure proportionnelle au moment fléchissant). Établir que les courbes planes d'énergie de courbure $\int\kappa^2\,\mathrm ds$ minimale à longueur fixée sont les élastica, et relier à la spline cubique utilisée en conception de pistes et de profils.
+
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi la voiture vous pousse-t-elle vers l'extérieur ?"
+    duree_introduction: "5 min, avant le mini-cours"
+    question_d_accroche: |
+      Une voiture roule à $72$ km/h sur une route droite, puis entre dans un virage serré sans changer de vitesse. Son compteur n'a pas bougé : pourtant les passagers sont plaqués contre la portière. Qu'est-ce qui a changé, puisque la {\bf vitesse} (la norme) est la même ? Et dans quelle direction pointe l'accélération ?
+    texte: |
+      {\bf Idée clé : la direction de $\vec v$ change aussi.} L'accélération a deux sources : la variation de la norme de la vitesse ($a_T=\dot v$, le long de la trajectoire) et la rotation du vecteur vitesse ($a_N=v^2/R$, vers le centre du virage). Plus la route est courbée ($R$ petit), plus l'accélération normale est grande, {\bf même à vitesse constante}. Le rayon de courbure $R$ est une propriété de la {\bf route} ; la vitesse $v$ est celle du {\bf mobile}.
+
+outils_mathematiques:
+  - titre: "Dérivée d'un vecteur de norme constante"
+    texte: |
+      Si $\|\vec e\|=1$ alors $\vec e\cdot\dfrac{\mathrm d\vec e}{\mathrm dt}=0$ (dériver $\vec e\cdot\vec e=1$) : la dérivée d'un vecteur unitaire lui est perpendiculaire. C'est pourquoi $\dfrac{\mathrm d\vec\tau}{\mathrm ds}\parallel\vec n$.
+  - titre: "Produit vectoriel et aire du parallélogramme"
+    texte: |
+      $\|\vec v\wedge\vec a\|=v\,a\,|\sin\varphi|$ où $\varphi$ est l'angle entre $\vec v$ et $\vec a$ : c'est $v\,a_N$. Dans le plan : $\|\vec v\wedge\vec a\|=|v_xa_y-v_ya_x|$.
+  - titre: "Courbe $y(x)$ comme courbe paramétrée"
+    texte: |
+      Avec $x$ pour paramètre, $\dot x=1$, $\ddot x=0$, $\dot y=y'$, $\ddot y=y''$ : on retrouve $R=\dfrac{(1+y'^2)^{3/2}}{|y''|}$. Le rayon de courbure ne dépend {\bf pas} de la paramétrisation (c'est une propriété de la courbe).
+  - titre: "Primitive de $\\sqrt{1+u^2}$"
+    texte: |
+      $\displaystyle\int\sqrt{1+u^2}\,\mathrm du=\dfrac12\left(u\sqrt{1+u^2}+\operatorname{arsinh}u\right)$, avec $\operatorname{arsinh}u=\ln\left(u+\sqrt{1+u^2}\right)$. Elle sert pour la longueur d'un arc de parabole (exercice 4).
+  - titre: "Longueur d'un arc"
+    texte: |
+      $L=\displaystyle\int\|\vec v\|\,\mathrm dt=\int\sqrt{\dot x^2+\dot y^2}\,\mathrm dt=\int\sqrt{1+y'^2}\,\mathrm dx$.
+  - titre: "Décomposition d'un vecteur sur deux axes orthogonaux"
+    texte: |
+      $a_T=\vec a\cdot\vec\tau$ et $a_N=\vec a\cdot\vec n$ : projections orthogonales. $a^2=a_T^2+a_N^2$ (Pythagore) permet de calculer l'une des deux composantes quand on connaît l'autre.
+
+liens_autres_disciplines:
+  - discipline: "Mathématiques"
+    texte: |
+      Courbure d'une courbe plane, développée, cercle osculateur, équations différentielles de Frenet, longueur d'arc, géométrie différentielle des courbes et des surfaces.
+  - discipline: "Génie civil et transports"
+    texte: |
+      Tracé des routes, des voies ferrées et des autoroutes : raccordements en {\bf clothoïde} pour limiter le « jerk » (variation de l'accélération latérale), dévers des virages, rayon minimal en fonction de la vitesse de conception.
+  - discipline: "Sport automobile et aéronautique"
+    texte: |
+      Trajectoire idéale sur un circuit (rayon maximal dans un virage), cercle d'adhérence, voltige aérienne, facteur de charge d'un avion en virage ($n=a_N/g$), limite physiologique des pilotes.
+  - discipline: "Astronomie et physique des particules"
+    texte: |
+      Satellite en orbite circulaire ($a_N=v^2/R=g(R_T/R)^2$), particule chargée dans un champ magnétique (rayon de Larmor, accélérateurs et cyclotrons).
+  - discipline: "Robotique et animation"
+    texte: |
+      Planification de trajectoires lisses (splines, clothoïdes) pour robots mobiles et véhicules autonomes ; limitation de la vitesse selon la courbure ; caméras de jeu vidéo suivant une courbe.

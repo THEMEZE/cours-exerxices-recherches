@@ -1,0 +1,171 @@
+id: td5_ex6
+intitule: "(*) Chaîne qui glisse d'une table"
+td: td5
+facultatif: true
+seance: 1
+
+cours_rattache:
+  - energie.energie_potentielle_pesanteur
+  - energie.diagramme_energie_potentielle
+  - energie.equilibre_instable
+  - dynamique.frottement_solide_coulomb
+
+metadonnees:
+  duree_estimee: "55 min"
+  difficulte: 4
+  type_exercice: "Exercice non guidé / Système étendu"
+  indispensable: false
+
+enonce_intro: |
+  Une chaîne homogène, flexible et inextensible, de longueur $L=1{,}00$ m et de masse $M$, repose sur une table horizontale {\bf lisse} ; une longueur $x_0=0{,}10$ m pend initialement le long du bord de la table, l'arête étant arrondie et sans frottement. La chaîne est lâchée sans vitesse à $t=0$. On note $x(t)$ la longueur pendante, $\lambda_\ell=M/L$ la masse linéique et $g=9{,}81~\mathrm{m\,s^{-2}}$. Toute la chaîne se déplace avec la même vitesse (en norme) $\dot x$.
+
+prerequis:
+  - titre: "Énergie potentielle d'un système étendu"
+    texte: |
+      $E_p=\sum m_ig\,z_i$ : on repère la hauteur du centre de masse de chaque tronçon. Origine des altitudes au niveau de la table.
+  - titre: "Intégrale première de l'énergie"
+    texte: |
+      Pour un seul degré de liberté $x$, $E_m=\tfrac12M\dot x^2+E_p(x)=\text{cte}$ donne $\dot x(x)$ sans résoudre l'équation du mouvement.
+  - titre: "Fonctions hyperboliques"
+    texte: |
+      $\ddot x=\kappa^2x\Rightarrow x(t)=x_0\cosh\kappa t$ si $\dot x(0)=0$ ; $\cosh^{-1}$ ou $\operatorname{arcosh}$ pour inverser.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Appliquer l'énergie à un système étendu"
+    texte: |
+      Savoir calculer l'énergie potentielle d'une chaîne partiellement suspendue, établir $\dot x(x)$, retrouver l'équation du mouvement par dérivation, la résoudre (exponentielle croissante) et reconnaître un équilibre instable sur le diagramme d'énergie.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "L'inverse du ressort : une force qui augmente avec le déplacement"
+    texte: |
+      Ici $E_p=-\tfrac12\lambda_\ell g\,x^2$ : parabole {\bf inversée}, $x=0$ est un équilibre {\bf instable}. L'équation $\ddot x=+\kappa^2x$ a pour solution $\cosh\kappa t$ et non $\cos\omega t$. À comparer avec l'exercice 3. La question (e) (frottement) fait passer d'un exercice énergétique à un exercice de seuil d'adhérence. Piège à signaler : le {\bf tas} de chaîne, pour lequel les maillons démarrent du repos un à un (choc inélastique entre maillons), ne conserve pas $E_m$ (exercice classique ; voir « aller plus loin »).
+
+point_cours:
+  - titre: "Énergie potentielle d'une chaîne suspendue"
+    texte: |
+      La partie sur la table est à l'altitude $0$ : $E_p=0$. La partie pendante, de masse $\lambda_\ell x$ et de centre de masse à l'altitude $-x/2$, a pour énergie $E_p=-\lambda_\ell x\,g\,\dfrac x2=-\dfrac{Mg}{2L}x^2$.
+  - titre: "Équation du mouvement par la dérivée de l'énergie"
+    texte: |
+      $\dfrac{\mathrm dE_m}{\mathrm dt}=0\Rightarrow M\dot x\ddot x+\dfrac{\mathrm dE_p}{\mathrm dx}\dot x=0$, soit $M\ddot x=-\dfrac{\mathrm dE_p}{\mathrm dx}=\dfrac{Mg}Lx$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Utiliser la masse totale pour le poids moteur"
+    texte: |
+      La force motrice est le poids de la seule partie pendante, $\lambda_\ell xg=\dfrac xLMg$, mais l'inertie est celle de {\bf toute} la chaîne, $M$.
+  - titre: "Se tromper de centre de masse"
+    texte: |
+      Le centre de masse de la partie pendante est à $x/2$ sous la table, d'où le facteur $\tfrac12$ dans $E_p$.
+  - titre: "Penser que la chaîne oscille"
+    texte: |
+      Le signe de $\ddot x$ est {\bf positif} : accélération croissante avec $x$, pas d'oscillation, croissance exponentielle $\cosh$.
+  - titre: "Chaîne en tas"
+    texte: |
+      Si la chaîne est empilée sur la table (non tendue), les maillons partent un par un du repos : il y a des chocs inélastiques et $E_m$ n'est {\bf pas} conservée (la moitié de l'énergie est dissipée).
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Prédire le sens de la concavité"
+    texte: |
+      Demander : l'accélération augmente ou diminue au cours de la chute ? (Elle augmente : plus la chaîne pend, plus la force motrice est grande.)
+  - titre: "Expérience : chaîne de vélo sur le bord d'une table"
+    texte: |
+      Poser une chaîne et mesurer la longueur minimale pendante pour qu'elle démarre : $x_0=\mu L/(1+\mu)$ avec $\mu$ le coefficient d'adhérence.
+
+bilan:
+  - titre: "Résultats"
+    texte: |
+      $E_p=-\dfrac{Mg}{2L}x^2$ ; $\dot x^2=\dfrac gL\,(x^2-x_0^2)$ ; $\ddot x=\dfrac gL\,x$ ; $x(t)=x_0\cosh\sqrt{g/L}\,t$ ; $t_f=\sqrt{L/g}\operatorname{arcosh}(L/x_0)=0{,}956$ s ; $v_f=\sqrt{g(L^2-x_0^2)/L}=3{,}12$ m/s ; avec frottement : seuil $x_0\ge\mu L/(1+\mu)$ ; $x(t)=x_e+(x_0-x_e)\cosh\big(\sqrt{(1+\mu)g/L}\,t\big)$, $x_e=\mu L/(1+\mu)$.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Chaîne en tas"
+    texte: |
+      Une chaîne est empilée sur la table, un maillon pend. Écrire la quantité de mouvement de la partie en mouvement, $p=\lambda_\ell x\dot x$, et $\dfrac{\mathrm dp}{\mathrm dt}=\lambda_\ell xg$ ; montrer que $\ddot x=g/3$ (accélération constante) et que l'énergie mécanique n'est pas conservée : l'énergie potentielle libérée vaut $\tfrac12\lambda_\ell gx^2$ alors que $E_c=\tfrac13\lambda_\ell gx^2$, soit {\bf un tiers} de l'énergie libérée dissipée en chocs.
+  - niveau: licence
+    titre: "Formalisme de Lagrange"
+    texte: |
+      Avec $T=\tfrac12M\dot x^2$ et $V=-\dfrac{Mg}{2L}x^2$, écrire l'équation d'Euler--Lagrange et retrouver $\ddot x=gx/L$ ; calculer l'hamiltonien $H=T+V$ et tracer le portrait de phase $(x,\dot x)$ : hyperboles, séparatrice pour $x_0=0$.
+  - niveau: master
+    titre: "Chaîne avec bout de longueur finie sur le bord arrondi"
+    texte: |
+      Si l'arête est un cylindre de rayon $a$, l'énergie cinétique de courbure ne peut plus être négligée : comparer le terme $\tfrac12\lambda_\ell\pi a\,\dot x^2$ à $\tfrac12M\dot x^2$ ; condition de validité $a\ll L$.
+
+accroche_point_cours_essentiel:
+  - titre: "Une chaîne qui glisse : de plus en plus vite"
+    duree_introduction: "3 min"
+    question_d_accroche: |
+      Une chaîne posée sur une table lisse est tenue avec un petit bout qui pend. On la lâche. {\bf L'accélération est-elle constante ?} Combien de temps pour tomber de la table si $10~\%$ pend au départ ?
+    texte: |
+      {\bf Idée clé : la force motrice (poids de la partie pendante) croît avec $x$.} $\ddot x=\dfrac gLx$ : accélération proportionnelle à $x$, solution en $\cosh$. L'énergie donne la vitesse finale directement.
+
+outils_mathematiques:
+  - titre: "Équation $\\ddot x=\\kappa^2x$"
+    texte: |
+      Solution générale $A\,\mathrm e^{\kappa t}+B\,\mathrm e^{-\kappa t}$ ; avec $x(0)=x_0$, $\dot x(0)=0$ : $x=x_0\cosh\kappa t$, $\kappa=\sqrt{g/L}$.
+  - titre: "Inversion de $\\cosh$"
+    texte: |
+      $\cosh u=y\iff u=\ln\big(y+\sqrt{y^2-1}\big)=\operatorname{arcosh}y$ ; $\operatorname{arcosh}10=\ln(10+\sqrt{99})=2{,}993$.
+  - titre: "Racine carrée"
+    texte: |
+      $\sqrt{9{,}81\times0{,}99}=\sqrt{9{,}712}=3{,}116$.
+
+liens_autres_disciplines:
+  - discipline: "Génie civil"
+    texte: |
+      Câbles et chaînes de manutention : le poids d'une longueur de câble pendante est la force motrice d'un treuil à contrepoids.
+  - discipline: "Instabilités en physique"
+    texte: |
+      Tout équilibre au sommet d'une barrière d'énergie potentielle : croissance exponentielle des perturbations ($\mathrm e^{\kappa t}$), même structure que l'instabilité de Rayleigh--Taylor ou le basculement d'un crayon.
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{itemize}
+        \item[(a)] Faire le bilan des forces sur l'ensemble de la chaîne. Lesquelles travaillent ? Que vaut le travail de la réaction de la table ?
+        \item[(b)] Calculer l'énergie potentielle de pesanteur de la chaîne en fonction de $x$ (altitude $0$ sur la table). Tracer $E_p(x)$ et discuter l'équilibre en $x=0$.
+        \item[(c)] Par conservation de $E_m$, exprimer $\dot x^2$ en fonction de $x$, $x_0$, $g$ et $L$. Retrouver l'équation du mouvement.
+      \end{itemize}
+    coup_de_pouce: |
+      Seule la partie pendante a une énergie potentielle non nulle ; son centre de masse est à $x/2$ sous la table. Dériver $E_m=\text{cte}$ par rapport au temps pour obtenir $\ddot x$.
+    correction: |
+      $E_p=-\dfrac{Mg}{2L}x^2$ ; maximum en $x=0$ (équilibre instable) ; $\dot x^2=\dfrac gL(x^2-x_0^2)$ ; $\ddot x=\dfrac gLx$.
+    solution:
+      - titre: "(a) Forces et travail"
+        texte: |
+          Système : la chaîne entière (inextensible : tous les points ont la même vitesse en norme). Forces extérieures : poids de chaque maillon, réaction de la table sur la partie posée, réaction de l'arête. La réaction de la table lisse est normale, donc perpendiculaire au déplacement : $W=0$ ; de même pour l'arête arrondie sans frottement. Les tensions internes de la chaîne ne travaillent pas globalement (inextensibilité : les points de la chaîne ont des déplacements égaux le long de la chaîne). Seul le poids des maillons qui descendent travaille : le poids est conservatif, $E_m$ est conservée.
+      - titre: "(b) Énergie potentielle"
+        texte: |
+          Partie sur la table ($z=0$) : $E_p=0$. Partie pendante : masse $\lambda_\ell x=\dfrac{M}Lx$, centre de masse à $z=-x/2$ :
+          $$\boxed{E_p(x)=-\frac MLx\,g\,\frac x2=-\frac{Mg}{2L}x^2}.$$
+          {\bf Graphe} : parabole inversée, maximum en $x=0$. $E_p'(0)=0$ : équilibre ; $E_p''(0)=-\dfrac{Mg}L<0$ : {\bf équilibre instable}, toute petite perturbation est amplifiée (sans frottement, une chaîne parfaitement tendue au bord mais sans partie pendante resterait immobile).
+      - titre: "(c) Vitesse et équation du mouvement"
+        texte: |
+          $E_m=\tfrac12M\dot x^2-\dfrac{Mg}{2L}x^2=-\dfrac{Mg}{2L}x_0^2$ (à $t=0$ : $\dot x=0$, $x=x_0$), d'où
+          $$\boxed{\dot x^2=\frac gL\,(x^2-x_0^2)}.$$
+          On dérive par rapport au temps : $2\dot x\ddot x=\dfrac gL\,2x\dot x$, soit $\boxed{\ddot x=\dfrac gL\,x}$ (accélération proportionnelle à $x$). Même résultat par Newton : force motrice $=$ poids de la partie pendante $=\dfrac MLxg$, inertie $M$.
+
+  - id: q2
+    enonce: |
+      \begin{itemize}
+        \item[(d)] Résoudre l'équation du mouvement avec les conditions initiales. Calculer l'instant $t_f$ où la chaîne quitte entièrement la table ($x=L$) et sa vitesse $v_f$ à cet instant. Application numérique ($L=1$ m, $x_0=0{,}10$ m). Que devient $t_f$ quand $x_0\to0$ ?
+        \item[(e)] Avec un frottement cinétique $\mu$ sur la table (le frottement ne s'exerce que sur la partie posée), établir l'équation du mouvement, la longueur minimale $x_0$ pour que la chaîne démarre (adhérence $\mu_s=\mu$) et la solution pour $x_0=0{,}30$ m, $\mu=0{,}2$. Calculer la vitesse de sortie.
+      \end{itemize}
+    coup_de_pouce: |
+      (d) $\kappa=\sqrt{g/L}$ ; $x=A\cosh\kappa t+B\sinh\kappa t$ ; $\dot x(0)=0\Rightarrow B=0$. (e) Frottement $\mu\lambda_\ell(L-x)g$ opposé au mouvement. Chercher une solution constante $x_e$ puis poser $y=x-x_e$.
+    correction: |
+      (d) $x(t)=x_0\cosh\kappa t$ ; $t_f=\kappa^{-1}\operatorname{arcosh}(L/x_0)=0{,}956$ s ; $v_f=\sqrt{g(L^2-x_0^2)/L}=3{,}12$ m/s ; $t_f\to\infty$ logarithmiquement quand $x_0\to0$. (e) $\ddot x=\kappa^2\big[(1+\mu)x-\mu L\big]$ ; démarrage si $x_0>\mu L/(1+\mu)$ ; $x=x_e+(x_0-x_e)\cosh\omega't$, $\omega'=\kappa\sqrt{1+\mu}$ ; $v_f=2{,}82$ m/s.
+    solution:
+      - titre: "(d) Résolution sans frottement"
+        texte: |
+          $\ddot x=\kappa^2x$, $\kappa=\sqrt{g/L}=3{,}132~\mathrm{s^{-1}}$. Solution : $x(t)=A\cosh\kappa t+B\sinh\kappa t$ avec $x(0)=x_0\Rightarrow A=x_0$ et $\dot x(0)=0\Rightarrow B=0$ :
+          $$\boxed{x(t)=x_0\cosh(\kappa t)}.$$
+          Sortie : $x(t_f)=L\Rightarrow\boxed{t_f=\sqrt{\frac Lg}\,\operatorname{arcosh}\frac L{x_0}}=0{,}3194\times\operatorname{arcosh}10=0{,}3194\times2{,}993\approx\boxed{0{,}956~\mathrm s}$. Vitesse par l'énergie en $x=L$ :
+          $$\boxed{v_f=\sqrt{\frac{g\,(L^2-x_0^2)}L}}=\sqrt{9{,}81\times0{,}99}\approx\boxed{3{,}12~\mathrm{m/s}}.$$
+          Vérification avec la solution : $v_f=x_0\kappa\sinh\kappa t_f=x_0\kappa\sqrt{(L/x_0)^2-1}=\kappa\sqrt{L^2-x_0^2}$ $\sird$ (même expression).
+          {\bf Cas limite} : $x_0\to0$, $\operatorname{arcosh}(L/x_0)\sim\ln(2L/x_0)\to\infty$ : $t_f$ diverge {\bf logarithmiquement} ; comportement typique d'un équilibre instable (la durée dépend de la perturbation initiale, pas la vitesse finale $v_f\to\sqrt{gL}$). Pour $x_0=0$ la chaîne ne bouge pas.
+      - titre: "(e) Avec frottement"
+        texte: |
+          Frottement cinétique sur la partie posée, de masse $\lambda_\ell(L-x)$ : $f=\mu\lambda_\ell(L-x)g$. Newton selon $x$ pour le système entier :
+          $$M\ddot x=\lambda_\ell g\,x-\mu\lambda_\ell g\,(L-x)\ \Rightarrow\ \ddot x=\frac gL\big[(1+\mu)x-\mu L\big].$$
+          {\bf Démarrage} : il faut $\ddot x>0$ à $t=0$, soit $x_0>x_e\equiv\dfrac{\mu L}{1+\mu}$ (équilibre limite : poids de la partie pendante $=$ frottement maximal sur la partie posée). Pour $\mu=0{,}2$ : $x_e=0{,}167$ m ; avec $x_0=0{,}30$ m la chaîne démarre. On pose $y=x-x_e$ : $\ddot y=\omega'^2y$, $\omega'=\kappa\sqrt{1+\mu}=3{,}43~\mathrm{s^{-1}}$, d'où
+          $$x(t)=x_e+(x_0-x_e)\cosh(\omega't).$$
+          Sortie ($x=L$) : $\dot x^2=\omega'^2\big[(L-x_e)^2-(x_0-x_e)^2\big]=11{,}77\times(0{,}6944-0{,}0178)$, soit $\boxed{v_f\approx2{,}82~\mathrm{m/s}}$ ($<3{,}12$ m/s sans frottement, avec $x_0=0{,}10$ m ; le calcul à $x_0=0{,}30$ m sans frottement donnerait $2{,}99$ m/s). {\bf Vérification énergétique} : $\Delta E_m=W_f=-\int_{x_0}^{L}\mu\lambda_\ell g(L-x)\,\mathrm dx=-\dfrac{\mu Mg}{2L}(L-x_0)^2$ ; avec $\tfrac12Mv_f^2=\dfrac{Mg}{2L}(L^2-x_0^2)-\dfrac{\mu Mg}{2L}(L-x_0)^2$ on retrouve $v_f^2=\dfrac gL\big[L^2-x_0^2-\mu(L-x_0)^2\big]=9{,}81\times(0{,}91-0{,}098)=7{,}965$ et $v_f=2{,}82$ m/s $\sird$.

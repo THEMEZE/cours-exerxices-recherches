@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Réveil de Mécanique — QCM en direct</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Ccircle cx='64' cy='64' r='60' fill='%231B3A4B'/%3E%3Cpath d='M64 48c-8-7-22-7-32-3v40c10-4 24-4 32 3c8-7 22-7 32-3V45c-10-4-24-4-32 3z' fill='none' stroke='white' stroke-width='4'/%3E%3Cpath d='M24 64c6-14 12 14 18 0s12-14 18 0 12-14 18 0 12-14 18 0' fill='none' stroke='%233FA796' stroke-width='4.5'/%3E%3C/svg%3E">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:wght@400;600;800&display=swap');
+
+  :root{
+    --bg:#EAF4F4;
+    --ink:#16323F;
+    --card:#FFFFFF;
+    --road:#1B3A4B;
+    --happy:#3FA796;
+    --neutral:#F5B942;
+    --sad:#E8604C;
+    --shadow: 0 6px 0 rgba(22,50,63,0.15);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 12% 8%, color-mix(in srgb, var(--happy) 12%, transparent), transparent 40%),
+      radial-gradient(circle at 90% 85%, color-mix(in srgb, var(--neutral) 14%, transparent), transparent 45%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Nunito Sans', system-ui, sans-serif;
+    min-height:100vh;
+    padding:20px 16px 60px;
+  }
+  h1,h2,h3,.display{ font-family:'Fredoka', system-ui, sans-serif; }
+  .wrap{max-width:760px;margin:0 auto;}
+
+  .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px;}
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand .logo{width:38px;height:38px;flex:none;}
+  .brand h1{font-size:1.25rem;margin:0;letter-spacing:.2px;}
+  .brand small{display:block;font-size:.7rem;font-weight:600;color:#4d6b78;letter-spacing:.5px;text-transform:uppercase;}
+  .modebtn{
+    border:2px solid var(--road); background:var(--card); color:var(--road);
+    font-family:'Fredoka',sans-serif; font-weight:600; font-size:.85rem;
+    padding:8px 14px; border-radius:999px; cursor:pointer; box-shadow: 0 3px 0 var(--road);
+  }
+  .modebtn:active{ transform: translateY(2px); box-shadow:none; }
+
+  .road-wrap{ position:relative; margin: 6px 0 22px; }
+  .road-svg{ width:100%; height:64px; display:block; }
+  .mascot{ transition: left .6s cubic-bezier(.34,1.56,.64,1); position:absolute; top:2px; width:46px; height:46px; }
+  #mascotFace{ width:100%; height:100%; }
+  #mascotFace svg{ width:100%; height:100%; display:block; }
+  #mascotFace.bounce-once{ animation: bounce .5s ease; }
+
+  .card{ background:var(--card); border-radius:22px; padding:22px 20px; box-shadow: var(--shadow); margin-bottom:18px; border: 2px solid rgba(27,58,75,0.06); }
+  .card h3{margin:0 0 10px;}
+  .tag{ display:inline-block; font-family:'Fredoka',sans-serif; font-size:.72rem; font-weight:600; text-transform:uppercase; letter-spacing:.6px; padding:4px 10px; border-radius:999px; background:var(--road); color:#fff; margin:0 6px 10px 0; }
+  .tag.debut{background:var(--happy);} .tag.milieu{background:var(--neutral); color:#4a3400;} .tag.fin{background:var(--sad);}
+  .tag.soft{background:#E6EEEE;color:#35505c;}
+  .qtext{font-size:1.15rem; font-weight:800; margin: 6px 0 16px; line-height:1.4;}
+  .qmedia{display:block;max-width:100%;height:auto;border-radius:12px;margin:0 auto 14px;background:#fff;padding:8px;border:1px solid #E3ECEC;}
+
+  .choices{display:flex; flex-direction:column; gap:10px;}
+  .choice{ display:flex; align-items:center; gap:10px; text-align:left; border:2px solid #D7E6E6; background:#fff; border-radius:16px; padding:14px 16px;
+    font-family:'Nunito Sans',sans-serif; font-weight:600; font-size:1rem; color:var(--ink); cursor:pointer; box-shadow: 0 3px 0 #D7E6E6; width:100%; }
+  .choice:active{ transform: translateY(2px); box-shadow:none; }
+  .choice .bullet{ flex:none; width:26px; height:26px; border-radius:50%; border:2px solid #C7D8D8; display:flex; align-items:center; justify-content:center; font-size:.8rem; font-weight:800; color:#6f8b8b; }
+  .choice.picked-correct{ border-color:var(--happy); background:color-mix(in srgb, var(--happy) 14%, white); }
+  .choice.picked-incorrect{ border-color:var(--sad); background:color-mix(in srgb, var(--sad) 12%, white); }
+  .choice.picked-neutral{ border-color:var(--neutral); background:color-mix(in srgb, var(--neutral) 16%, white); }
+  .choice.is-right{ border-color:var(--happy); box-shadow:0 3px 0 var(--happy); }
+  .choice.disabled{ pointer-events:none; opacity:.85; }
+
+  .feedback{ display:flex; gap:14px; align-items:center; margin-top:18px; padding:16px; border-radius:16px; }
+  .feedback.correct{ background:color-mix(in srgb, var(--happy) 14%, white); }
+  .feedback.incorrect{ background:color-mix(in srgb, var(--sad) 12%, white); }
+  .feedback.neutral{ background:color-mix(in srgb, var(--neutral) 16%, white); }
+  .feedback svg{ width:56px; height:56px; flex:none; animation: bounce .55s ease; }
+  .feedback p{ margin:0; font-weight:700; }
+  @keyframes bounce{ 0%{transform:scale(.4) rotate(-8deg);} 60%{transform:scale(1.12) rotate(4deg);} 100%{transform:scale(1) rotate(0);} }
+
+  .waiting{ text-align:center; padding:36px 10px; color:#4d6b78; font-weight:700; }
+  .waiting .pulse{ width:16px;height:16px;border-radius:50%; background:var(--neutral); margin:0 auto 14px; animation:pulse 1.4s infinite; }
+  @keyframes pulse{ 0%,100%{opacity:.3; transform:scale(.8);} 50%{opacity:1; transform:scale(1.15);} }
+
+  .stat-row{display:flex; align-items:center; gap:10px; margin:8px 0; font-weight:700; font-size:.92rem;}
+  .stat-row .lbl{width:38%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .stat-bar-bg{flex:1; height:14px; background:#EDEFEF; border-radius:999px; overflow:hidden;}
+  .stat-bar{height:100%; border-radius:999px;}
+  .stat-count{width:34px; text-align:right; font-variant-numeric: tabular-nums;}
+
+  .qr-box{ display:flex; flex-direction:column; align-items:center; gap:8px; padding:20px; text-align:center; }
+  #qrcode img, #qrcode canvas{ border-radius:12px; }
+  .code{font-family:'Fredoka',sans-serif;font-size:2rem;letter-spacing:.35em;font-weight:700;color:var(--road);}
+
+  select, input[type=text], input[type=password], input[type=number]{
+    font-family:'Nunito Sans',sans-serif; font-weight:600; font-size:.95rem; border-radius:12px; border:2px solid #CFE0E0; padding:9px 12px; background:#fff; color:var(--ink); max-width:100%;
+  }
+  button.primary, button.sec{ font-family:'Fredoka',sans-serif; font-weight:600; font-size:.95rem; border-radius:14px; border:2px solid var(--road); padding:10px 14px; cursor:pointer; }
+  button.primary{ background:var(--road); color:#fff; box-shadow: 0 4px 0 #0e232e; }
+  button.primary:active{ transform:translateY(3px); box-shadow:none; }
+  button.primary.block{ width:100%; margin-top:12px; }
+  button.sec{ background:#fff; color:var(--road); }
+  button.small{ padding:5px 10px; font-size:.8rem; border-radius:10px; }
+  button.danger{ border-color:var(--sad); color:var(--sad); }
+  button:disabled{opacity:.45;cursor:not-allowed;}
+  button.ghost{ font-family:'Nunito Sans',sans-serif; font-weight:700; font-size:.8rem; color:#4d6b78; background:none; border:none; text-decoration:underline; cursor:pointer; padding:6px; }
+
+  .muted{color:#4d6b78; font-size:.85rem;}
+  .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
+  .row.grow>*{flex:1;min-width:140px;}
+  .field{display:flex;flex-direction:column;gap:4px;font-size:.8rem;font-weight:800;color:#35505c;}
+  .footer-note{font-size:.75rem; color:#5c7885; text-align:center; margin-top:26px; line-height:1.5;}
+  .err{color:var(--sad);font-weight:700;font-size:.9rem;}
+  .hidden{display:none!important;}
+
+  .pbar{height:12px;background:#E3ECEC;border-radius:999px;overflow:hidden;}
+  .pbar>i{display:block;height:100%;background:var(--happy);border-radius:999px;transition:width .4s;}
+  .qhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;font-weight:800;font-size:.85rem;color:#35505c;}
+  .qlist{max-height:420px;overflow:auto;border:2px solid #E3ECEC;border-radius:14px;}
+  .qitem{display:flex;gap:10px;align-items:center;padding:8px 10px;border-bottom:1px solid #EEF3F3;font-size:.88rem;}
+  .qitem:last-child{border-bottom:none;}
+  .qitem.live{background:color-mix(in srgb, var(--neutral) 22%, white);}
+  .qitem .t{flex:1;min-width:0;}
+  table.res{width:100%;border-collapse:collapse;font-size:.85rem;}
+  table.res th{text-align:left;color:#35505c;font-size:.75rem;text-transform:uppercase;letter-spacing:.4px;padding:4px 6px;}
+  table.res td{padding:6px;border-top:1px solid #EEF3F3;vertical-align:top;}
+  .rate{font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .rate.lo{color:var(--sad);} .rate.hi{color:var(--happy);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="var(--happy)"/><path d="M8 26c4-8 8 8 12 0s8-8 12 0 8-8 8-8" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+      <div>
+        <h1>Réveil de Mécanique</h1>
+        <small>Mécanique du point · IPSA</small>
+      </div>
+    </div>
+    <button class="modebtn" id="modeToggle">Vue enseignant</button>
+  </div>
+
+  <div class="road-wrap">
+    <svg class="road-svg" viewBox="0 0 700 64" preserveAspectRatio="none">
+      <path d="M0 40 C 90 0, 180 64, 270 32 S 450 0, 540 32 S 650 56, 700 24" fill="none" stroke="#CFE3E3" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 14"/>
+    </svg>
+    <div class="mascot" id="mascot" style="left:0%;"><div id="mascotFace"></div></div>
+  </div>
+
+  <div id="app"></div>
+
+  <div class="footer-note">
+    Réponse anonyme : aucun compte, aucune donnée nominative. Un identifiant
+    aléatoire est créé sur cet appareil pour éviter de répondre deux fois et
+    suivre ta progression au fil des séances — il n'est lié ni à ton nom ni à
+    ton adresse e-mail. L'enseignant ne voit que des résultats agrégés.
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   QCM en direct — client. Les questions NE SONT PLUS dans cette page :
+   elles viennent du serveur (data/matieres/<matiere>/qcm/*.yaml), et la
+   bonne réponse n'est révélée qu'APRÈS la réponse de l'élève.
+   ===================================================================== */
+const MATIERE = 'mecanique-de-point-ipsa';
+const MOMENT_LABEL = {debut:"Réveil de début de cours", milieu:"Pause réveil", fin:"Synthèse de fin de cours",
+                      entrainement:"Entraînement", revision:"Révision", bilan:"Bilan"};
+const modeLabel = m => m==='serie' ? 'série' : m==='libre' ? 'libre' : 'direct';
+const momentLabel = m => MOMENT_LABEL[m] || (m ? m.charAt(0).toUpperCase()+m.slice(1) : '');
+
+/* ---------- utilitaires ---------- */
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const MATH_RE = /(\$\$[\s\S]+?\$\$|\$[^$\n]+?\$|\\\([\s\S]+?\\\)|\\\[[\s\S]+?\\\])/;
+function rich(text){            // échappe le HTML, garde les $maths$, gère **gras** *italique* `code`
+  return String(text ?? '').split(MATH_RE).map((seg,i) => {
+    if(i % 2) return esc(seg);
+    return esc(seg).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/(^|[^\w*])\*([^\s*][^*]*?)\*(?![\w*])/g,'$1<i>$2</i>')
+                   .replace(/`(.+?)`/g,'<code>$1</code>');
+  }).join('');
+}
+function typeset(el){
+  try{ if(window.renderMathInElement) renderMathInElement(el, {throwOnError:false, delimiters:[
+    {left:'$$',right:'$$',display:true},{left:'\\[',right:'\\]',display:true},
+    {left:'$',right:'$',display:false},{left:'\\(',right:'\\)',display:false}]}); }catch(e){}
+}
+window.addEventListener('load', () => setTimeout(() => typeset($('app')), 300));   // KaTeX chargé en différé
+
+function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return MEM[k] ?? null; } }
+function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){ MEM[k]=v; } }
+function ssGet(k){ try{ return sessionStorage.getItem(k); }catch(e){ return MEM['s:'+k] ?? null; } }
+function ssSet(k,v){ try{ v===null ? sessionStorage.removeItem(k) : sessionStorage.setItem(k,v); }catch(e){ MEM['s:'+k]=v; } }
+const MEM = {};
+function uuid(){
+  if(window.crypto && crypto.randomUUID) return crypto.randomUUID();
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c=>{ const r=Math.random()*16|0, v=c==='x'?r:(r&0x3|0x8); return v.toString(16); });
+}
+function studentId(){
+  const k = 'qcm:student_id';           // partagé entre matières du même site : une seule identité par navigateur
+  let id = lsGet(k);
+  if(!id){ id = uuid(); lsSet(k, id); }
+  return id;
+}
+let teacherToken = ssGet('qcm:teacher_token') || '';
+
+async function api(path, {method='GET', body=null, teacher=false} = {}){
+  const headers = {'X-Student-ID': studentId()};
+  if(teacher) headers['Authorization'] = 'Bearer ' + teacherToken;
+  if(body) headers['Content-Type'] = 'application/json';
+  const res = await fetch(path, {method, headers, body: body ? JSON.stringify(body) : null});
+  let data = null; try{ data = await res.json(); }catch(e){}
+  return {ok: res.ok, status: res.status, data};
+}
+
+/* ---------- mascotte ---------- */
+const MASCOT_SVG = {
+  neutral: `<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#F5B942"/><circle cx="16" cy="20" r="3" fill="#16323F"/><circle cx="32" cy="20" r="3" fill="#16323F"/><line x1="15" y1="31" x2="33" y2="31" stroke="#16323F" stroke-width="3" stroke-linecap="round"/></svg>`,
+  correct: `<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#3FA796"/><circle cx="16" cy="19" r="3" fill="#16323F"/><circle cx="32" cy="19" r="3" fill="#16323F"/><path d="M14 28 Q24 40 34 28" stroke="#16323F" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`,
+  incorrect: `<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#E8604C"/><circle cx="16" cy="20" r="3" fill="#16323F"/><circle cx="32" cy="20" r="3" fill="#16323F"/><path d="M14 33 Q24 23 34 33" stroke="#16323F" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`,
+};
+const mascotIcon = (m) => MASCOT_SVG[m] || MASCOT_SVG.neutral;
+let currentMood = null;
+function setMascotFace(mood){
+  if(mood === currentMood) return;
+  currentMood = mood;
+  const el = $('mascotFace'); el.innerHTML = mascotIcon(mood);
+  el.classList.remove('bounce-once'); void el.offsetWidth; el.classList.add('bounce-once');
+}
+function setMascotPos(frac){ $('mascot').style.left = Math.max(0, Math.min(96, Math.round(frac*96))) + '%'; }
+const moodFromRate = (rate) => rate == null ? 'neutral' : rate >= 60 ? 'correct' : rate < 35 ? 'incorrect' : 'neutral';
+const statusMood = (s) => s === 'correct' ? 'correct' : s === 'neutre' ? 'neutral' : 'incorrect';
+
+/* ---------- timers : un seul jeu de timers actifs à la fois ---------- */
+let timers = [];
+function every(ms, fn){ const t = setInterval(fn, ms); timers.push(t); return t; }
+function clearTimers(){ timers.forEach(clearInterval); timers = []; }
+
+/* =====================================================================
+   BLOCS COMMUNS
+   ===================================================================== */
+function choiceClass(c, res){
+  // res = résultat renvoyé par le serveur après réponse (ou null)
+  if(!res) return '';
+  let cls = 'disabled';
+  if(c.id === res.choice_id) cls += ' ' + (res.status==='correct' ? 'picked-correct' : res.status==='neutre' ? 'picked-neutral' : 'picked-incorrect');
+  if(c.id === res.correct_choice_id) cls += ' is-right';
+  return cls;
+}
+function mediaHtml(q){
+  // figures : /figures/<ref>.svg ou image libre ; animation : /animations/<ref>/animation.gif (chemins calculés par le serveur)
+  const figs = (q.figures || []).map(f => `<img class="qmedia" src="${esc(f.src)}" alt="${esc(f.legende || '')}" loading="lazy" onerror="this.remove()">`).join('');
+  const anim = q.animation && q.animation.src ? `<img class="qmedia" src="${esc(q.animation.src)}" alt="animation" onerror="this.remove()">` : '';
+  return figs + anim;
+}
+function questionCardHtml(q, res, extraTop=''){
+  const choices = q.choix.map(c => `
+    <button class="choice ${choiceClass(c, res)}" data-choice="${esc(c.id)}">
+      <span class="bullet">${esc(c.id.toUpperCase())}</span><span>${rich(c.texte)}</span>
+    </button>`).join('');
+  return `${extraTop}
+    <span class="tag ${esc(q.moment)}">${esc(momentLabel(q.moment))}</span>
+    ${q.difficulte ? `<span class="tag soft">${esc(q.difficulte)}</span>` : ''}
+    <div class="qtext">${rich(q.question)}</div>
+    ${mediaHtml(q)}
+    <div class="choices">${choices}</div>
+    <div id="feedbackSlot">${res ? feedbackHtml(res) : ''}</div>`;
+}
+function feedbackHtml(res){
+  const cls = res.status === 'correct' ? 'correct' : res.status === 'neutre' ? 'neutral' : 'incorrect';
+  return `<div class="feedback ${cls}">${mascotIcon(statusMood(res.status))}<p>${rich(res.feedback)}</p></div>`;
+}
+function statsBarsHtml(st){
+  if(!st) return '<p class="muted">Résultats de la classe disponibles dès que tu as répondu.</p>';
+  const tot = st.total || 0;
+  const rows = st.choices.map(c => {
+    const n = st.by_choice[c.id] || 0, pct = tot ? Math.round(100*n/tot) : 0;
+    const color = c.correct ? 'var(--happy)' : c.neutre ? 'var(--neutral)' : 'var(--sad)';
+    return `<div class="stat-row"><span class="lbl" title="${esc(c.texte)}">${esc(c.id.toUpperCase())}. ${esc(c.texte)}</span>
+      <div class="stat-bar-bg"><div class="stat-bar" style="width:${pct}%;background:${color};"></div></div>
+      <span class="stat-count">${n}</span></div>`;
+  }).join('');
+  return `<p class="muted"><b>${tot}</b> réponse(s)${st.success_rate_evaluated!=null ? ` · réussite ${st.success_rate_evaluated} %` : ''}</p>${rows}`;
+}
+async function submitAnswer(sessionId, q, choiceId){
+  const r = await api('/api/responses', {method:'POST', body:{session_id:sessionId, qcm_id:q.id, choice_id:choiceId}});
+  if(!r.ok && r.status !== 200) return {error: (r.data && r.data.error) || 'Erreur réseau'};
+  return r.data;
+}
+
+/* =====================================================================
+   VUE ÉLÈVE
+   ===================================================================== */
+let SESSION_ID = (new URLSearchParams(location.search).get('s') || '').toUpperCase() || null;
+let S = null;   // état courant de la séance côté élève
+
+function renderEleve(){
+  clearTimers();
+  $('app').innerHTML = '';
+  S = null;
+  if(!SESSION_ID) return renderJoin();
+  loadSession(true);
+}
+
+let FREE_TRIED = false;
+async function renderJoin(){
+  const app = $('app');
+  setMascotFace('neutral'); setMascotPos(0);
+  // Lien direct depuis Quartz : ?c=<chapitre>  (ou ?c=all pour toute la matière)
+  const qc = new URLSearchParams(location.search).get('c');
+  if(qc !== null && !FREE_TRIED){ FREE_TRIED = true; return startFree(qc === 'all' ? '' : qc); }
+  app.innerHTML = `<div id="openSessions"></div>
+    <div class="card"><h3>Entraînement libre</h3>
+      <p class="muted">Pas besoin de séance : choisis un chapitre et entraîne-toi quand tu veux, autant de fois que tu veux.</p>
+      <div id="freeList" class="muted">Chargement…</div></div>`;
+  const [ch, pr] = await Promise.all([api(`/api/qcm/${MATIERE}/chapitres`), api('/api/students/me/progress?matiere=' + encodeURIComponent(MATIERE))]);
+  const prog = {};
+  ((pr.ok && pr.data.chapitres) || []).forEach(c => prog[c.chapitre] = c);
+  const chaps = ((ch.ok && ch.data.chapitres) || []).filter(c => c.libre);   // seuls les chapitres en accès libre (config.yaml)
+  const totalLibre = chaps.reduce((a, c) => a + c.n, 0);
+  const row = (id, titre, n) => {
+    const c = id ? prog[id] : null;
+    const done = id ? (c ? c.correct : 0) : Object.values(prog).reduce((a, x) => a + x.correct, 0);
+    const pct = n ? Math.min(100, Math.round(100 * done / n)) : 0;
+    return `<div class="qitem"><span class="t"><b>${esc(titre)}</b><br><span class="muted">${n} question${n>1?'s':''} · ${done} réussie${done>1?'s':''}</span>
+      <div class="pbar" style="margin-top:6px"><i style="width:${pct}%"></i></div></span>
+      <button class="primary small" data-free="${esc(id)}">S'entraîner</button></div>`;
+  };
+  $('freeList').className = '';
+  $('freeList').innerHTML = chaps.length
+    ? `<div class="qlist" style="max-height:none">${chaps.length > 1 ? row('', 'Toute la matière', totalLibre) : ''}${chaps.map(c => row(c.id, c.titre, c.n)).join('')}</div>`
+    : '<p class="muted">Aucun QCM pour cette matière.</p>';
+  app.querySelectorAll('[data-free]').forEach(b => b.onclick = () => startFree(b.dataset.free));
+  const poll = async () => {
+    const r = await api('/api/sessions?matiere=' + encodeURIComponent(MATIERE));
+    const list = (r.ok && r.data) || [], box = $('openSessions');
+    if(!box) return;
+    box.innerHTML = list.length ? `<div class="card" style="border-color:var(--neutral)"><h3>🔴 Séance en cours</h3>` + list.map(x =>
+      `<p><button class="primary block" data-join="${esc(x.id)}">${esc(x.title)} <span style="opacity:.8">· ${x.mode==='serie' ? x.n_questions+' questions' : 'en direct'}</span></button></p>`).join('') + `</div>` : '';
+    box.querySelectorAll('[data-join]').forEach(b => b.onclick = () => joinSession(b.dataset.join));
+  };
+  await poll();
+  every(4000, poll);
+}
+async function startFree(chapitre){
+  const r = await api('/api/libre', {method:'POST', body:{matiere: MATIERE, chapitre: chapitre || null}});
+  if(r.ok) joinSession(r.data.session_id);
+  else $('app').innerHTML = `<div class="card"><p class="err">${esc((r.data && r.data.error) || 'Erreur')}</p><button class="sec" id="backJoin">Retour</button></div>`,
+       $('backJoin').onclick = backToChapters;
+}
+function backToChapters(){ SESSION_ID = null; FREE_TRIED = true; history.replaceState(null, '', location.pathname); renderEleve(); }
+function joinSession(id){
+  SESSION_ID = id;
+  history.replaceState(null, '', '?s=' + id);
+  renderEleve();
+}
+
+async function loadSession(first){
+  const r = await api('/api/sessions/' + SESSION_ID);
+  const app = $('app');
+  if(!r.ok){
+    if(first){
+      app.innerHTML = `<div class="card"><p class="err">Séance introuvable (${esc(SESSION_ID)}).</p><button class="sec" id="backJoin">Retour</button></div>`;
+      $('backJoin').onclick = () => { SESSION_ID = null; history.replaceState(null,'',location.pathname); renderEleve(); };
+    }
+    return;
+  }
+  const d = r.data;
+  if(!S || S.id !== d.id){
+    S = {id: d.id, mode: d.mode, idx: parseInt(ssGet('qcm:idx:' + d.id) || '0', 10) || 0, stats: null, key: null, run: null};
+    app.innerHTML = `<div id="main"></div><div class="card" id="statsCard" style="display:none"></div>
+                     <div class="card"><div class="row"><h3 style="margin:0;flex:1">Ma progression</h3><button class="sec small" id="progBtn">Afficher</button></div><div id="progBox" class="muted hidden"></div></div>`;
+    $('progBtn').onclick = toggleProgress;
+    if(d.mode === 'direct') every(2500, () => loadSession(false));
+  }
+  S.data = d;
+  d.mode === 'direct' ? renderDirect(d) : d.mode === 'libre' ? renderLibre(d) : renderSerie(d);
+}
+
+/* ---------- mode direct ---------- */
+function renderDirect(d){
+  const main = $('main');
+  if(d.status === 'closed'){
+    const mine = Object.values(d.mine || {});
+    const ok = mine.filter(m => m.status==='correct').length;
+    setMascotFace(mine.length && ok/mine.length >= .6 ? 'correct' : 'neutral'); setMascotPos(1);
+    const key = 'closed';
+    if(S.key !== key){ S.key = key;
+      main.innerHTML = `<div class="card"><h3>Séance terminée</h3><p>Tu as répondu à <b>${mine.length}</b> question(s)${mine.length ? ` — <b>${ok}</b> correcte(s)` : ''}.</p></div>`;
+      $('statsCard').style.display = 'none';
+    }
+    return;
+  }
+  const q = d.active;
+  const answered = q ? d.mine[q.id] : null;
+  setMascotPos(d.n_launched ? d.n_answered / d.n_launched : 0);
+  const key = q ? q.id + (answered ? ':a' : ':q') : 'wait';
+  if(key !== S.key){
+    S.key = key;
+    if(!q){
+      main.innerHTML = `<div class="waiting"><div class="pulse"></div>En attente d'une question lancée par l'enseignant…<div class="muted">${esc(d.title)}</div></div>`;
+      $('statsCard').style.display = 'none';
+      setMascotFace('neutral');
+    }else{
+      main.innerHTML = `<div class="card" id="qcard">${questionCardHtml(q, answered)}</div>`;
+      typeset(main);
+      if(answered) setMascotFace(statusMood(answered.status));
+      else attachChoices(q, (res) => { d.mine[q.id] = res; d.n_answered++; S.key = null; loadSession(false); });
+    }
+  }
+  if(q && answered) showClassStats(q.id);
+}
+async function showClassStats(qcmId){
+  const r = await api(`/api/statistics/sessions/${SESSION_ID}?qcm_id=${encodeURIComponent(qcmId)}`);
+  const card = $('statsCard');
+  if(!r.ok || !card) return;
+  const st = (r.data.questions || [])[0];
+  if(!st) return;
+  card.style.display = '';
+  card.innerHTML = `<h3>La classe</h3>${statsBarsHtml(st)}`;
+  setMascotFace(statusMood(S.data.mine[qcmId] ? S.data.mine[qcmId].status : 'neutre'));
+}
+function attachChoices(q, onDone){
+  document.querySelectorAll('#qcard .choice, #main .choice').forEach(btn => {
+    btn.onclick = async () => {
+      document.querySelectorAll('.choice').forEach(b => b.classList.add('disabled'));
+      const res = await submitAnswer(SESSION_ID, q, btn.dataset.choice);
+      if(res.error){
+        document.querySelectorAll('.choice').forEach(b => b.classList.remove('disabled'));
+        $('feedbackSlot').innerHTML = `<p class="err">${esc(res.error)}</p>`;
+        return;
+      }
+      onDone(res);
+    };
+  });
+}
+
+/* ---------- mode série (un chapitre, à son rythme) ---------- */
+function renderSerie(d){
+  const main = $('main');
+  const qs = d.questions || [];
+  if(!qs.length){ main.innerHTML = `<div class="card"><p>Cette séance ne contient aucune question.</p></div>`; return; }
+  if(S.idx >= qs.length) S.idx = qs.length;
+  const answeredN = Object.keys(d.mine).length;
+  setMascotPos(answeredN / qs.length);
+  if(d.status === 'closed' && S.idx < qs.length && !d.mine[qs[S.idx].id]){ S.idx = qs.length; }
+
+  if(S.idx >= qs.length) return renderSerieEnd(d, qs);
+
+  const q = qs[S.idx], res = d.mine[q.id];
+  const head = `<div class="qhead"><span>Question ${S.idx+1} / ${qs.length}</span><span>${esc(d.title)}</span></div>
+                <div class="pbar" style="margin-bottom:14px"><i style="width:${Math.round(100*answeredN/qs.length)}%"></i></div>`;
+  main.innerHTML = `<div class="card" id="qcard">${questionCardHtml(q, res, head)}
+      <div class="row" style="margin-top:14px;justify-content:space-between">
+        <button class="sec small" id="prevBtn" ${S.idx===0?'disabled':''}>← Précédente</button>
+        <button class="primary" id="nextBtn" ${res?'':'disabled'}>${S.idx === qs.length-1 ? 'Terminer' : 'Suivante →'}</button>
+      </div></div>`;
+  typeset(main);
+  $('statsCard').style.display = 'none';
+  $('prevBtn').onclick = () => gotoIdx(S.idx-1);
+  $('nextBtn').onclick = () => gotoIdx(S.idx+1);
+  if(res){ setMascotFace(statusMood(res.status)); showClassStats(q.id); }
+  else{
+    setMascotFace('neutral');
+    attachChoices(q, (r) => { d.mine[q.id] = r; renderSerie(d); });
+  }
+}
+function gotoIdx(i){ S.idx = Math.max(0, i); ssSet('qcm:idx:' + S.id, String(S.idx)); renderSerie(S.data); window.scrollTo({top:0, behavior:'smooth'}); }
+
+function renderSerieEnd(d, qs){
+  const mine = Object.entries(d.mine);
+  const ok = mine.filter(([,m]) => m.status==='correct').length;
+  const ev = mine.filter(([,m]) => m.status!=='neutre').length;
+  const rate = ev ? Math.round(100*ok/ev) : null;
+  setMascotFace(moodFromRate(rate)); setMascotPos(1);
+  const wrong = qs.filter(q => d.mine[q.id] && d.mine[q.id].status !== 'correct');
+  const skipped = qs.filter(q => !d.mine[q.id]);
+  $('main').innerHTML = `<div class="card"><h3>Bravo, série terminée !</h3>
+    <p>${ok} bonne(s) réponse(s) sur ${mine.length} répondue(s)${rate!=null ? ` — <b>${rate} %</b> de réussite` : ''}.</p>
+    ${skipped.length ? `<p class="muted">${skipped.length} question(s) sans réponse.</p>` : ''}
+    ${wrong.length ? `<p><b>À revoir :</b></p><div class="qlist">${wrong.map(q => `<div class="qitem"><span class="t">${rich(q.question)}</span><button class="sec small" data-go="${qs.indexOf(q)}">Revoir</button></div>`).join('')}</div>` : ''}
+    <div class="row" style="margin-top:14px"><button class="sec" id="againBtn">Revenir au début</button>
+    ${skipped.length ? `<button class="primary" id="skipBtn">Aller à la première sans réponse</button>` : ''}</div></div>`;
+  typeset($('main'));
+  document.querySelectorAll('[data-go]').forEach(b => b.onclick = () => gotoIdx(parseInt(b.dataset.go,10)));
+  $('againBtn').onclick = () => gotoIdx(0);
+  if($('skipBtn')) $('skipBtn').onclick = () => gotoIdx(qs.indexOf(skipped[0]));
+  $('statsCard').style.display = 'none';
+}
+
+/* ---------- entraînement libre (hors cours) ---------- */
+const shuffle = (a) => { a = a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
+const BACK_BTN = `<button class="ghost" id="backChap">← Chapitres</button>`;
+
+function renderLibre(d){
+  const main = $('main'), qs = d.questions || [];
+  $('statsCard').style.display = 'none';
+  if(!qs.length){ main.innerHTML = `<div class="card"><p>Aucune question dans ce chapitre pour le moment.</p>${BACK_BTN}</div>`; $('backChap').onclick = backToChapters; return; }
+  if(!S.run) return libreStart(d, qs);
+  const run = S.run;
+  if(run.pos >= run.ids.length) return libreEnd(d, qs);
+  const q = qs.find(x => x.id === run.ids[run.pos]), res = run.results[q.id];
+  setMascotPos(run.pos / run.ids.length);
+  const head = `<div class="qhead"><span>Question ${run.pos+1} / ${run.ids.length}</span>${BACK_BTN}</div>
+                <div class="pbar" style="margin-bottom:14px"><i style="width:${Math.round(100*run.pos/run.ids.length)}%"></i></div>`;
+  main.innerHTML = `<div class="card" id="qcard">${questionCardHtml(q, res, head)}
+      <div class="row" style="margin-top:14px;justify-content:flex-end">
+        <button class="primary" id="nextBtn" ${res?'':'disabled'}>${run.pos === run.ids.length-1 ? 'Terminer' : 'Suivante →'}</button></div></div>`;
+  typeset(main);
+  $('backChap').onclick = backToChapters;
+  $('nextBtn').onclick = () => { run.pos++; renderLibre(d); window.scrollTo({top:0, behavior:'smooth'}); };
+  if(res){ setMascotFace(statusMood(res.status)); showClassStats(q.id); }
+  else{ setMascotFace('neutral'); attachChoices(q, (r) => { run.results[q.id] = r; d.mine[q.id] = r; renderLibre(d); }); }
+}
+function startRun(d, ids){ S.run = {ids, pos: 0, results: {}}; renderLibre(d); }
+function libreStart(d, qs){
+  const mine = d.mine || {};
+  const redo = qs.filter(q => !(mine[q.id] && mine[q.id].status === 'correct'));
+  const done = qs.length - redo.length;
+  setMascotFace('neutral'); setMascotPos(done / qs.length);
+  $('main').innerHTML = `<div class="card"><div class="row"><h3 style="margin:0;flex:1">${esc(d.title.replace('Entraînement libre — ',''))}</h3>${BACK_BTN}</div>
+    <p>${qs.length} question${qs.length>1?'s':''} · <b>${done}</b> déjà réussie${done>1?'s':''}.</p>
+    <div class="pbar" style="margin-bottom:14px"><i style="width:${Math.round(100*done/qs.length)}%"></i></div>
+    <div class="choices">
+      <button class="choice" id="runOrder"><span class="bullet">1</span><span>Dans l'ordre</span></button>
+      <button class="choice" id="runRand"><span class="bullet">⚄</span><span>Dans le désordre</span></button>
+      <button class="choice" id="runRedo" ${redo.length?'':'disabled'}><span class="bullet">↻</span><span>Seulement celles que je n'ai pas encore réussies (${redo.length})</span></button>
+    </div></div>`;
+  $('backChap').onclick = backToChapters;
+  $('runOrder').onclick = () => startRun(d, qs.map(q => q.id));
+  $('runRand').onclick = () => startRun(d, shuffle(qs.map(q => q.id)));
+  $('runRedo').onclick = () => startRun(d, shuffle(redo.map(q => q.id)));
+}
+function libreEnd(d, qs){
+  const run = S.run, res = Object.entries(run.results);
+  const ok = res.filter(([, r]) => r.status === 'correct').length;
+  const ev = res.filter(([, r]) => r.status !== 'neutre').length;
+  const rate = ev ? Math.round(100 * ok / ev) : null;
+  setMascotFace(moodFromRate(rate)); setMascotPos(1);
+  const wrong = qs.filter(q => run.results[q.id] && run.results[q.id].status !== 'correct');
+  $('main').innerHTML = `<div class="card"><h3>Série terminée !</h3>
+    <p>${ok} bonne(s) réponse(s) sur ${run.ids.length}${rate!=null ? ` — <b>${rate} %</b>` : ''}.</p>
+    ${wrong.length ? `<p><b>À revoir :</b></p><div class="qlist">${wrong.map(q => `<div class="qitem"><span class="t">${rich(q.question)}</span></div>`).join('')}</div>` : '<p>Sans faute, bravo !</p>'}
+    <div class="row" style="margin-top:14px">
+      ${wrong.length ? '<button class="primary" id="redoWrong">Refaire les ratées</button>' : ''}
+      <button class="sec" id="again">Recommencer</button><button class="sec" id="toChap">Autres chapitres</button></div></div>`;
+  typeset($('main'));
+  if($('redoWrong')) $('redoWrong').onclick = () => startRun(d, shuffle(wrong.map(q => q.id)));
+  $('again').onclick = () => { S.run = null; renderLibre(d); };
+  $('toChap').onclick = backToChapters;
+}
+
+/* ---------- progression personnelle ---------- */
+async function toggleProgress(){
+  const box = $('progBox'), btn = $('progBtn');
+  if(!box.classList.contains('hidden')){ box.classList.add('hidden'); btn.textContent = 'Afficher'; return; }
+  box.classList.remove('hidden'); btn.textContent = 'Masquer'; box.textContent = 'Chargement…';
+  const r = await api('/api/students/me/progress?matiere=' + encodeURIComponent(MATIERE));
+  if(!r.ok){ box.innerHTML = '<span class="err">Indisponible.</span>'; return; }
+  const p = r.data;
+  if(!p.total){ box.textContent = "Pas encore de réponse enregistrée sur cet appareil."; return; }
+  box.innerHTML = `<p><b>${p.total}</b> question(s) traitée(s) en ${p.n_seances} séance(s)${p.taux_reussite!=null ? ` — réussite <b>${p.taux_reussite} %</b>` : ''}.</p>` +
+    p.chapitres.map(c => `<div class="stat-row"><span class="lbl" title="${esc(c.chapitre)}">${esc(c.chapitre)}</span>
+      <div class="stat-bar-bg"><div class="stat-bar" style="width:${c.taux_reussite||0}%;background:${(c.taux_reussite||0)>=60?'var(--happy)':'var(--sad)'}"></div></div>
+      <span class="stat-count" style="width:84px">${c.taux_reussite!=null?c.taux_reussite+' %':'—'} <span class="muted">(${c.repondues}/${c.total_banque})</span></span></div>`).join('') +
+    (p.a_revoir.length ? `<p style="margin-top:12px"><b>À retravailler :</b></p><ul>${p.a_revoir.slice(0,8).map(q => `<li>${rich(q.question)} <span class="muted">(${esc(q.chapitre)})</span></li>`).join('')}</ul>` : '');
+  typeset(box);
+}
+
+/* =====================================================================
+   VUE ENSEIGNANT
+   ===================================================================== */
+let T = {chapitres: [], questions: null, session: null, filterChap: '', search: '', report: null};
+
+async function renderProf(){
+  clearTimers();
+  const app = $('app');
+  if(!teacherToken || !(await api('/api/teacher/check', {teacher:true})).ok){
+    teacherToken = ''; ssSet('qcm:teacher_token', null);
+    app.innerHTML = `<div class="card"><h3>Espace enseignant</h3>
+      <p class="muted">Le pilotage est protégé : il faut le jeton enseignant (variable <code>QCM_TEACHER_TOKEN</code> du serveur). Il reste uniquement dans cet onglet.</p>
+      <div class="row"><input type="password" id="tok" placeholder="Jeton enseignant" style="flex:1"><button class="primary" id="tokBtn">Entrer</button></div>
+      <p class="err" id="tokErr"></p></div>`;
+    const go = async () => {
+      teacherToken = $('tok').value.trim();
+      const r = await api('/api/teacher/check', {teacher:true});
+      if(r.ok){ ssSet('qcm:teacher_token', teacherToken); renderProf(); }
+      else { $('tokErr').textContent = r.status === 503 ? "Le serveur n'a pas de jeton configuré." : 'Jeton refusé.'; teacherToken = ''; }
+    };
+    $('tokBtn').onclick = go; $('tok').onkeydown = e => { if(e.key==='Enter') go(); };
+    return;
+  }
+  const ch = await api(`/api/qcm/${MATIERE}/chapitres`);
+  T.chapitres = (ch.ok && ch.data.chapitres) || [];
+  T.total = ch.ok ? ch.data.total : 0;
+  const cur = SESSION_ID && !T.session ? await api('/api/teacher/sessions?matiere=' + MATIERE) : null;
+  if(cur && cur.ok) T.session = (cur.data.find(s => s.id === SESSION_ID)) || null;
+  T.session ? renderProfSession() : renderProfHome();
+}
+
+async function renderProfHome(){
+  clearTimers();
+  T.session = null;
+  const r = await api('/api/teacher/sessions?matiere=' + MATIERE, {teacher:true});
+  const sessions = (r.ok && r.data) || [];
+  const chOpts = `<option value="">Toute la matière (${T.total} questions)</option>` +
+    T.chapitres.map(c => `<option value="${esc(c.id)}">${esc(c.titre)} — ${c.n} question${c.n>1?'s':''}</option>`).join('');
+  $('app').innerHTML = `
+    <div class="card"><h3>Nouvelle séance</h3>
+      <div class="row grow">
+        <label class="field">Chapitre<select id="nsChap">${chOpts}</select></label>
+        <label class="field">Mode<select id="nsMode">
+          <option value="direct">Direct — je lance une question à la fois</option>
+          <option value="serie">Série — chacun avance à son rythme</option></select></label>
+      </div>
+      <div class="row grow" style="margin-top:10px">
+        <label class="field">Titre (facultatif)<input type="text" id="nsTitle" placeholder="Ex. TD 2 — 12 novembre"></label>
+        <label class="field serieOnly hidden">Ordre<select id="nsOrdre"><option value="ordre">Ordre du fichier</option><option value="aleatoire">Aléatoire</option></select></label>
+        <label class="field serieOnly hidden">Nombre max<input type="number" id="nsNb" min="1" placeholder="toutes"></label>
+      </div>
+      <button class="primary block" id="nsCreate">Créer la séance et afficher le QR code</button>
+      <p class="err" id="nsErr"></p>
+    </div>
+    <div class="card"><h3>Séances existantes</h3>
+      ${sessions.length ? `<div class="qlist">${sessions.map(s => `<div class="qitem">
+        <span class="t"><b>${esc(s.title)}</b><br><span class="muted">${esc(s.id)} · ${modeLabel(s.mode)} · ${s.participants} participant(s) · ${s.n_questions} question(s) · ${s.status==='open'?'ouverte':'close'}</span></span>
+        <button class="sec small" data-open="${esc(s.id)}">Ouvrir</button></div>`).join('')}</div>` : '<p class="muted">Aucune séance pour cette matière.</p>'}
+    </div>`;
+  $('nsMode').onchange = () => document.querySelectorAll('.serieOnly').forEach(e => e.classList.toggle('hidden', $('nsMode').value !== 'serie'));
+  $('nsCreate').onclick = async () => {
+    const body = {matiere: MATIERE, mode: $('nsMode').value, chapitre: $('nsChap').value || null, title: $('nsTitle').value};
+    if(body.mode === 'serie'){ body.ordre = $('nsOrdre').value; if($('nsNb').value) body.nb_questions = parseInt($('nsNb').value,10); }
+    const r = await api('/api/teacher/sessions', {method:'POST', body, teacher:true});
+    if(!r.ok){ $('nsErr').textContent = (r.data && r.data.error) || 'Erreur'; return; }
+    openTeacherSession(r.data.session_id);
+  };
+  document.querySelectorAll('[data-open]').forEach(b => b.onclick = () => openTeacherSession(b.dataset.open));
+}
+
+async function openTeacherSession(id){
+  SESSION_ID = id;
+  history.replaceState(null, '', '?s=' + id);
+  const r = await api('/api/teacher/sessions?matiere=' + MATIERE, {teacher:true});
+  T.session = (r.data || []).find(s => s.id === id) || null;
+  T.questions = null; T.report = null; T.filterChap = T.session && T.session.chapitre || ''; T.search = '';
+  T.session ? renderProfSession() : renderProfHome();
+}
+
+function studentUrl(id){ return location.origin + location.pathname + '?s=' + id; }
+
+async function renderProfSession(){
+  clearTimers();
+  const s = T.session;
+  if(!T.questions){
+    const q = await api(`/api/teacher/${MATIERE}/questions`, {teacher:true});
+    T.questions = (q.ok && q.data) || [];
+  }
+  $('app').innerHTML = `
+    <div class="card qr-box">
+      <div id="qrcode"></div>
+      <div class="code">${esc(s.id)}</div>
+      <div><b>${esc(s.title)}</b> <span class="tag soft">${modeLabel(s.mode)}</span> <span class="tag soft" id="stTag">${s.status==='open'?'ouverte':'close'}</span></div>
+      <div class="muted" id="partInfo"></div>
+      <div class="muted">${esc(studentUrl(s.id))}</div>
+      <div class="row" style="justify-content:center">
+        ${s.mode==='direct' ? '<button class="sec small" id="stopQ">⏹ Arrêter la question</button>' : ''}
+        <button class="sec small" id="toggleClose">${s.status==='open' ? '🔒 Clôturer (résultats publics)' : '🔓 Rouvrir'}</button>
+        <button class="sec small danger" id="resetAll">Effacer les réponses</button>
+        <button class="sec small" id="csvBtn">⬇ CSV</button>
+        <button class="sec small" id="backHome">← Séances</button>
+      </div>
+    </div>
+    <div class="card" id="liveCard"><h3>📊 Résultats</h3><div id="liveBox" class="muted">En attente de réponses…</div></div>
+    ${s.mode==='direct' ? `<div class="card"><h3>🎛️ Lancer une question</h3>
+      <div class="row grow"><select id="fChap"><option value="">Tous les chapitres</option>${T.chapitres.map(c=>`<option value="${esc(c.id)}">${esc(c.titre)}</option>`).join('')}</select>
+      <input type="text" id="fSearch" placeholder="Rechercher dans les énoncés…"></div>
+      <div class="qlist" id="qList" style="margin-top:10px"></div></div>` : ''}
+    <div class="card"><h3>Questions les plus difficiles</h3><div id="hardBox" class="muted">—</div></div>`;
+  try{ new QRCode($('qrcode'), {text: studentUrl(s.id), width: 176, height: 176, colorDark: "#16323F", colorLight: "#ffffff"}); }
+  catch(e){ $('qrcode').innerHTML = '<p class="muted">(QR code indisponible hors ligne — donne le code ci-dessous)</p>'; }
+  $('backHome').onclick = () => { SESSION_ID = null; history.replaceState(null,'',location.pathname); renderProfHome(); };
+  $('toggleClose').onclick = async () => {
+    await api(`/api/teacher/sessions/${s.id}/${s.status==='open'?'close':'reopen'}`, {method:'POST', teacher:true});
+    s.status = s.status === 'open' ? 'closed' : 'open'; renderProfSession();
+  };
+  $('resetAll').onclick = async () => { if(confirm('Effacer toutes les réponses de cette séance ?')){ await api(`/api/teacher/sessions/${s.id}/reset`, {method:'POST', body:{}, teacher:true}); refreshReport(); } };
+  $('csvBtn').onclick = exportCsv;
+  if(s.mode === 'direct'){
+    $('stopQ').onclick = async () => { await api(`/api/teacher/sessions/${s.id}/stop`, {method:'POST', teacher:true}); s.active_qcm_id = null; drawQList(); };
+    $('fChap').value = T.filterChap;
+    $('fChap').onchange = () => { T.filterChap = $('fChap').value; drawQList(); };
+    $('fSearch').oninput = () => { T.search = $('fSearch').value.toLowerCase(); drawQList(); };
+    drawQList();
+  }
+  await refreshReport();
+  every(3000, refreshReport);
+}
+
+function drawQList(){
+  const s = T.session, box = $('qList');
+  if(!box) return;
+  const list = T.questions.filter(q => (!T.filterChap || q.chapitre === T.filterChap) && (!T.search || q.question.toLowerCase().includes(T.search)));
+  box.innerHTML = list.length ? list.map(q => `<div class="qitem ${s.active_qcm_id===q.id?'live':''}">
+      <span class="t">${rich(q.question.length>150 ? q.question.slice(0,150)+'…' : q.question)}<br>
+        <span class="muted">${esc(q.chapitre)} · ${esc(momentLabel(q.moment))}${q.difficulte?' · '+esc(q.difficulte):''}</span></span>
+      <button class="${s.active_qcm_id===q.id?'primary':'sec'} small" data-launch="${esc(q.id)}">${s.active_qcm_id===q.id?'En direct':'Lancer'}</button></div>`).join('')
+    : '<div class="qitem muted">Aucune question.</div>';
+  typeset(box);
+  box.querySelectorAll('[data-launch]').forEach(b => b.onclick = async () => {
+    const r = await api(`/api/teacher/sessions/${s.id}/launch`, {method:'POST', body:{qcm_id:b.dataset.launch}, teacher:true});
+    if(r.ok){ s.active_qcm_id = b.dataset.launch; drawQList(); refreshReport(); } else alert((r.data && r.data.error) || 'Erreur');
+  });
+}
+
+async function refreshReport(){
+  const s = T.session; if(!s) return;
+  const r = await api(`/api/teacher/sessions/${s.id}/report`, {teacher:true});
+  if(!r.ok || !$('liveBox')) return;
+  T.report = r.data;
+  $('partInfo').textContent = `${r.data.participants} participant(s)` + (r.data.success_rate!=null ? ` · réussite globale ${r.data.success_rate} %` : '');
+  const qs = r.data.questions;
+  let live = null;
+  if(s.mode === 'direct'){
+    // la question en cours (lue sur le serveur pour rester synchro entre onglets)
+    const sess = await api('/api/teacher/sessions?matiere=' + MATIERE, {teacher:true});
+    const me = (sess.data || []).find(x => x.id === s.id);
+    if(me){ s.active_qcm_id = me.active_qcm_id; s.status = me.status; }
+    live = qs.find(x => x.qcm_id === s.active_qcm_id) || qs[qs.length-1] || null;
+  }
+  const liveBox = $('liveBox');
+  if(s.mode === 'direct'){
+    liveBox.innerHTML = live ? `<p><b>${s.active_qcm_id===live.qcm_id?'🔴 En direct':'Dernière question'} :</b> ${rich(live.question)}</p>${statsBarsHtml(live)}` : 'Lance une question pour voir les réponses arriver.';
+    setMascotFace(moodFromRate(live ? live.success_rate_evaluated : null));
+  }else{
+    liveBox.innerHTML = qs.length ? `<table class="res"><tr><th>#</th><th>Question</th><th>Rép.</th><th>Réussite</th></tr>` +
+      qs.map((x,i) => `<tr><td>${i+1}</td><td>${rich(x.question.length>110?x.question.slice(0,110)+'…':x.question)}</td><td>${x.total}</td>
+        <td class="rate ${x.success_rate_evaluated!=null&&x.success_rate_evaluated<40?'lo':x.success_rate_evaluated>=70?'hi':''}">${x.success_rate_evaluated!=null?x.success_rate_evaluated+' %':'—'}</td></tr>`).join('') + '</table>' : '—';
+    setMascotFace(moodFromRate(r.data.success_rate));
+  }
+  typeset(liveBox);
+  const hard = r.data.plus_difficiles.map(id => qs.find(x => x.qcm_id === id)).filter(Boolean);
+  $('hardBox').innerHTML = hard.length ? `<table class="res">` + hard.map(x => `<tr><td>${rich(x.question.length>110?x.question.slice(0,110)+'…':x.question)}</td><td class="rate lo">${x.success_rate_evaluated} %</td><td class="muted">${x.total} rép.</td></tr>`).join('') + '</table>' : 'Pas encore assez de réponses.';
+  typeset($('hardBox'));
+  if($('stTag')) $('stTag').textContent = s.status === 'open' ? 'ouverte' : 'close';
+}
+
+function exportCsv(){
+  if(!T.report) return;
+  const rows = [['session','qcm_id','chapitre','reponses','correct','incorrect','neutre','reussite_evaluee_pct']];
+  T.report.questions.forEach(q => rows.push([T.report.session.id, q.qcm_id, q.chapitre, q.total, q.counts.correct, q.counts.incorrect, q.counts.neutre, q.success_rate_evaluated ?? '']));
+  const csv = rows.map(r => r.map(v => '"' + String(v).replace(/"/g,'""') + '"').join(';')).join('\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob(['﻿' + csv], {type:'text/csv;charset=utf-8'}));
+  a.download = `qcm_${T.report.session.id}.csv`; a.click();
+}
+
+/* =====================================================================
+   Bascule Élève / Enseignant
+   ===================================================================== */
+function setMode(prof){
+  const btn = $('modeToggle');
+  btn.dataset.mode = prof ? 'prof' : 'eleve';
+  btn.textContent = prof ? 'Vue étudiant' : 'Vue enseignant';
+  clearTimers();
+  if(prof) renderProf(); else renderEleve();
+}
+$('modeToggle').addEventListener('click', () => setMode($('modeToggle').dataset.mode !== 'prof'));
+
+setMascotFace('neutral');
+setMode(false);   // par défaut : vue élève (celle que le QR code ouvre)
+</script>
+</body>
+</html>

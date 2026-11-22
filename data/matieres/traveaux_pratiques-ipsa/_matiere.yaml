@@ -1,0 +1,7 @@
+id: traveaux_pratiques-ipsa
+nom: "Travaux pratiques — IPSA"
+niveau: [licence]
+description: >
+  Fiches de TP (général, astrophysique).
+quartz_namespace: physique/IPSA/ipsa-tp
+sujets: [tp-ipsa]

@@ -1,0 +1,198 @@
+id: tp1
+titre: "TP Ondes stationnaires : modes propres d'un ressort hélicoïdal et d'une corde vibrante {\\color{blue}(Standing Waves: normal modes of a helical spring and a vibrating string)}"
+chapitre_cours: "Chap. 1 — Équation d'onde de d'Alembert : corde vibrante (voir TD1, ex. 4, 5 et 6)"
+module: "Wave Physics 1 (Phv212) — IPSA, 2e année"
+seance: 1
+duree: "4 h"
+niveau_public: [cpge, licence]
+type_document: "Fiche encadrant (corrigé, déroulé, points de vigilance)"
+exercices_ordre:
+  - tp1_partA_ressort
+  - tp1_partB_corde_tension
+  - tp1_partC_masse_lineique
+  - tp1_partD_longueurs_onde
+  - tp1_partE_synthese
+
+enonce_intro: |
+  {\bf Rôle de cette fiche.} Elle accompagne l'encadrant pendant la séance de 4 h : matériel, sécurité, déroulé, réponses attendues avec des {\bf valeurs provisoires} (à remplacer par les mesures réelles du banc), erreurs fréquentes et questions de relance. L'étudiant ne remplit que le {\it cahier de laboratoire} (notebook), seul document rendu en fin de séance ; le guide du TP n'est qu'un support.
+
+  {\color{blue}{\bf Purpose of this sheet.} It supports the supervisor during the 4-hour session: equipment, safety, schedule, expected answers with {\bf provisional values} (to be replaced by the actual bench measurements), common mistakes and follow-up questions. Students only fill in the {\it lab notebook}, the only document handed in at the end of the session; the lab guide is only a support.}
+
+prerequis:
+  - titre: "Ondes stationnaires et modes propres {\\color{blue}(Standing waves and normal modes)}"
+    texte: |
+      Corde fixée aux deux bouts : $f_n=nc/(2L)$, $\lambda_n=2L/n$, $c=\lambda f$, $c=\sqrt{F/\mu}$ (TD1 ex. 4). Nœuds et ventres séparés de $\lambda/2$.
+
+      {\color{blue}String fixed at both ends: $f_n=nc/(2L)$, $\lambda_n=2L/n$, $c=\lambda f$, $c=\sqrt{F/\mu}$ (TD1 ex. 4). Nodes and antinodes are separated by $\lambda/2$.}
+  - titre: "Régime forcé et résonance (Melde) {\\color{blue}(Forced regime and resonance, Melde)}"
+    texte: |
+      Un vibreur impose $y(0,t)=a\,e^{j\omega t}$ ; résonance quand $\sin(k\ell)=0$, soit $f=Nc/(2\ell)$ (TD1 ex. 5). Le vibreur est un nœud approché, pas un nœud parfait.
+
+      {\color{blue}A vibrator imposes $y(0,t)=a\,e^{j\omega t}$; resonance when $\sin(k\ell)=0$, i.e. $f=Nc/(2\ell)$ (TD1 ex. 5). The vibrator is an approximate node, not a perfect one.}
+  - titre: "Régression linéaire et incertitudes {\\color{blue}(Linear regression and uncertainties)}"
+    texte: |
+      Ajustement affine dans Excel (pente, équation affichée), différentielle logarithmique : si $Q=A^aB^bC^c$, $\dfrac{\Delta Q}{Q}=|a|\dfrac{\Delta A}{A}+|b|\dfrac{\Delta B}{B}+|c|\dfrac{\Delta C}{C}$.
+
+      {\color{blue}Linear fit in Excel (slope, displayed equation), logarithmic differential: if $Q=A^aB^bC^c$, $\dfrac{\Delta Q}{Q}=|a|\dfrac{\Delta A}{A}+|b|\dfrac{\Delta B}{B}+|c|\dfrac{\Delta C}{C}$.}
+
+materiel:
+  - titre: "Matériel par binôme {\\color{blue}(Equipment per pair)}"
+    texte: |
+      \begin{itemize}[label=$\bullet$]
+      \item Générateur de fonctions FG100 et vibreur (3B Scientific) ;
+      \item ressort hélicoïdal et tige support (ondes longitudinales) ;
+      \item corde, potence, poulie, dynamomètre, tige support avec broche de connexion (ondes transversales) ;
+      \item règle ou mètre ruban, balance (sinon utiliser $m=(3{,}0\pm0{,}1)$ g) ;
+      \item ordinateur avec Excel pour les graphiques.
+      \end{itemize}
+
+      {\color{blue}FG100 function generator and vibration generator (3B Scientific); helical spring and support rod (longitudinal waves); string, stand, pulley, dynamometer, support rod with connector pin (transverse waves); ruler or tape measure, balance (otherwise use $m=(3.0\pm0.1)$ g); computer with Excel for the graphs.}
+
+attention:
+
+  - titre:
+      TP de physique des ondes – Informations pratiques
+      {\color{blue} Wave Physics Lab – Practical Information}
+
+    texte: |
+
+      Bonjour à toutes et à tous,
+
+      {\color{blue} Hello everyone,} 
+
+      
+
+      Voici quelques informations importantes pour le bon déroulement des TP de physique des ondes.
+
+      {\color{blue} Here is some important information to help ensure that your wave physics lab sessions run smoothly.}
+
+      {\bf 1. Documents}{\color{blue} Documents}
+
+      Les polys de TP sont disponibles dans la salle. Le {\bf carnet expérimental à compléter pendant la séance} est disponible sur Moodle. Vous devrez le déposer sur Moodle à la fin de la séance.
+      {\color{blue} The lab handouts are available in the lab. The {\bf experimental lab notebook, which you must complete during the session}, is available on Moodle. You must upload it to Moodle at the end of the session.}
+
+      {\bf 2. Supports expérimentaux}{\bf Experimental equipment stands}
+
+      Les supports sont rangés sur la table à l’arrière de la salle. Ils sont lourds et les barres ne se fixent pas toujours facilement dessus. {\bf Manipulez-les avec précaution} lors de vos déplacements et de leur installation.{\color{blue} The stands are stored on the table at the back of the room. They are heavy, and the rods do not always screw into them easily. {\bf Handle them carefully} when moving and setting them up.}
+
+      {\bf 3. Matériel}{\color{blue} Equipment}
+
+      Le matériel est rangé dans les armoires du fond :
+      \begin{itemize}
+        \item une boîte pour les générateurs ;
+        \item boîte pour les alimentations ;
+        \item une boîte pour les accessoires (câbles, cordes, ressorts, supports de maintien du vibreur, etc.).
+      \end{itemize}
+
+      {\color{blue}
+      The equipment is stored in the cabinets at the back of the room :
+      \begin{itemize}
+        \item one box for the signal generators;
+        \item one box for the power supplies;
+        \item one box for accessories (cables, strings, springs, supports designed to relieve lateral tension on the vibrator, etc.).
+      \end{itemize}
+      }
+
+      Veillez à utiliser le matériel avec soin et à ne pas égarer les accessoires.
+
+      {\color{blue}
+      Handle all equipment carefully and make sure no accessories are misplaced.
+      }
+
+      {\bf 4. Utilisation du vibreur}{\color{blue} Using the vibrator}
+      
+      Le vibreur est conçu pour effectuer un mouvement uniquement vertical. Une traction latérale risque de l’endommager rapidement.
+      {\color{blue}The vibrator is designed to move vertically only. Any lateral pull may damage it quickly.}
+
+      {\bf Utilisez systématiquement les supports prévus pour soulager le vibreur de la tension latérale}, et assurez-vous qu’ils sont correctement installés avant de commencer l’expérience.{\color{blue} {\bf Always use the supports provided to relieve lateral tension on the vibrator}, and make sure they are correctly installed before starting the experiment.}
+
+      {\bf 5. Rangement en fin de séance}{\bf Tidying up at the end of the session}
+      
+      À la fin du TP, vous devrez remettre tout le matériel à sa place. Veillez notamment à {\bf ne pas mélanger les câbles accrochés aux murs avec ceux utilisés pour l’expérience}.
+      {\color{blue}At the end of the lab session, you must return all equipment to its proper place. In particular, {\bf do not mix up the cables hanging on the walls with those used for the experiment}.}
+
+      Merci à toutes et à tous pour votre attention et votre soin dans la manipulation du matériel.{\color{blue} Thank you for your attention and for taking good care of the equipment.}
+
+
+  - titre: "Règles impératives {\\color{blue}(Mandatory rules)}"
+    texte: |
+      \begin{itemize}[label=$\bullet$]
+      \item {\bf Amplitude du générateur $\le 5$ V} : bouton Amplitude jamais au-delà de la position « midi » ; démarrer avec une valeur basse.
+      \item {\bf Ne jamais tendre la corde contre le vibreur} : la tension statique est reprise par la tige arrière à broche ; le vibreur ne transmet que la petite oscillation.
+      \item N'exercer aucune force latérale sur la tige mobile du vibreur.
+      \item Ne pas sur-étirer le ressort (déformation permanente, mesures faussées).
+      \item Si la tige du vibreur est visiblement déviée ou inclinée corde au repos : {\bf montage incorrect}, ne pas allumer, desserrer la fixation au vibreur et recommencer.
+      \end{itemize}
+
+      {\color{blue}{\bf Generator amplitude $\le 5$ V}: Amplitude knob never beyond the 12 o'clock position; start low. {\bf Never tension the string against the vibrator}: the static tension is carried by the rear rod with connector pin; the vibrator only transmits the small oscillation. Apply no lateral force on the moving rod. Do not over-stretch the spring. If the rod is visibly pulled sideways or tilted with the string at rest: {\bf incorrect setup}, do not switch on, loosen the attachment at the vibrator and start again.}
+
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Ce que l'étudiant doit savoir faire {\\color{blue}(What students must be able to do)}"
+    texte: |
+      Repérer un mode propre (motif stable, nœuds bien localisés, amplitude nettement accrue), mesurer $f_n$ pour $n=1,\dots,6$, tracer $f_n=f(n)$ et en tirer $c=2L\times\text{pente}$, montrer que $c$ dépend de la tension, obtenir $\mu$ par deux méthodes, comparer deux déterminations de $\lambda_n$, discuter l'écart au modèle.
+
+      {\color{blue}Identify a normal mode (stable pattern, well-localized nodes, clearly larger amplitude), measure $f_n$ for $n=1,\dots,6$, plot $f_n$ versus $n$ and get $c=2L\times\text{slope}$, show that $c$ depends on tension, obtain $\mu$ by two methods, compare two determinations of $\lambda_n$, discuss the deviation from the model.}
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Déroulé conseillé sur 4 h {\\color{blue}(Suggested 4-hour schedule)}"
+    texte: |
+      \begin{itemize}[label=$\bullet$]
+      \item 0 h 00 – 0 h 20 : accueil, sécurité, vérification du montage ressort (rappel : $f_n=nc/2L$) ;
+      \item 0 h 20 – 1 h 00 : partie A (ressort), mesures puis graphique ;
+      \item 1 h 00 – 1 h 15 : montage de la corde, {\bf contrôle du montage par l'encadrant avant mise sous tension} ;
+      \item 1 h 15 – 2 h 15 : partie B (trois tensions), mesures puis graphique ;
+      \item 2 h 15 – 3 h 15 : partie C ($\mu$ par deux méthodes, incertitudes) ;
+      \item 3 h 15 – 3 h 40 : partie D (longueurs d'onde, $F=0{,}8$ N) ;
+      \item 3 h 40 – 4 h 00 : synthèse, relecture, dépôt du cahier.
+      \end{itemize}
+
+      {\color{blue}0:00–0:20 welcome, safety, spring setup check; 0:20–1:00 Part A; 1:00–1:15 string setup, {\bf supervisor checks the setup before tensioning}; 1:15–2:15 Part B (three tensions); 2:15–3:15 Part C ($\mu$ by two methods, uncertainties); 3:15–3:40 Part D ($F=0.8$ N); 3:40–4:00 summary, proofreading, upload of the notebook.}
+  - titre: "Remarque sur le vibreur {\\color{blue}(Remark on the vibrator)}"
+    texte: |
+      Le vibreur impose un déplacement de faible amplitude : c'est un nœud {\bf quasi fixe}, pas un nœud exact. La longueur effective réelle est donc un peu plus grande que $L=55$ cm, ce qui abaisse légèrement les fréquences. C'est la source principale de l'écart au modèle et le point à faire discuter.
+
+      {\color{blue}The vibrator imposes a small-amplitude displacement: it is a {\bf quasi-fixed} node, not an exact one. The real effective length is therefore slightly larger than $L=55$ cm, which slightly lowers the frequencies. This is the main source of deviation from the model and the point to have students discuss.}
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Prendre un pic d'amplitude pour un mode {\\color{blue}(Mistaking an amplitude peak for a mode)}"
+    texte: |
+      Une grande amplitude ne suffit pas : le motif doit être stable avec des nœuds nets. Attendre quelques secondes après chaque changement de fréquence (régime permanent) et affiner au dixième de hertz.
+
+      {\color{blue}A large amplitude is not enough: the pattern must be stable with clear nodes. Wait a few seconds after each frequency change (steady state) and fine-tune to a tenth of a hertz.}
+  - titre: "Oublier le facteur 2L dans la pente {\\color{blue}(Forgetting the factor 2L in the slope)}"
+    texte: |
+      La pente de $f_n=f(n)$ vaut $\alpha=c/(2L)$, donc $c=2L\alpha$ (et non $c=\alpha$). Même erreur : oublier de convertir cm en m.
+
+      {\color{blue}The slope of $f_n$ versus $n$ is $\alpha=c/(2L)$, so $c=2L\alpha$ (not $c=\alpha$). Same kind of error: forgetting to convert cm to m.}
+  - titre: "Confondre $c$ et $c^2$ en partie C {\\color{blue}(Confusing $c$ and $c^2$ in Part C)}"
+    texte: |
+      Le graphique est $c^2=f(F)$, de pente $1/\mu$ : $\mu=1/\text{pente}$ (et non la pente elle-même).
+
+      {\color{blue}The graph is $c^2$ versus $F$, with slope $1/\mu$: $\mu=1/\text{slope}$ (not the slope itself).}
+  - titre: "Incertitude sur $F$ oubliée {\\color{blue}(Ignoring the uncertainty on $F$)}"
+    texte: |
+      La tension lue varie quand le vibreur tourne : l'incertitude $\Delta F$ doit tenir compte de la graduation du dynamomètre et de cette fluctuation, pas seulement de la lecture.
+
+      {\color{blue}The tension reading fluctuates while the vibrator runs: $\Delta F$ must include the dynamometer graduation and this fluctuation, not just the reading.}
+
+bilan:
+  - titre: "Résultats attendus (valeurs provisoires) {\\color{blue}(Expected results, provisional values)}"
+    texte: |
+      Ressort : $c\approx5{,}1$ m/s. Corde ($L=0{,}55$ m) : $c\approx17{,}3\ ;\ 19{,}9\ ;\ 22{,}3$ m/s pour $F=0{,}6\ ;\ 0{,}8\ ;\ 1{,}0$ N. $\mu_{\text{ondes}}\approx2{,}0\times10^{-3}$ kg/m et $\mu_{\text{direct}}=(2{,}00\pm0{,}07)\times10^{-3}$ kg/m : cohérents.
+
+      {\color{blue}Spring: $c\approx5.1$ m/s. String ($L=0.55$ m): $c\approx17.3,\ 19.9,\ 22.3$ m/s for $F=0.6,\ 0.8,\ 1.0$ N. $\mu_{\text{waves}}\approx2.0\times10^{-3}$ kg/m and $\mu_{\text{direct}}=(2.00\pm0.07)\times10^{-3}$ kg/m: consistent.}
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Lien avec le régime forcé amorti {\\color{blue}(Link with the damped forced regime)}"
+    texte: |
+      La largeur d'un pic de résonance est $\Delta f=\gamma/(2\pi)$ et $A_v/a\simeq2Q_N/(N\pi)$ (TD1 ex. 14) : mesurer la largeur de résonance du mode 1 permet d'estimer $\gamma$ et $Q$.
+
+      {\color{blue}The width of a resonance peak is $\Delta f=\gamma/(2\pi)$ and $A_v/a\simeq2Q_N/(N\pi)$ (TD1 ex. 14): measuring the width of the mode-1 resonance gives $\gamma$ and $Q$.}
+  - niveau: prepa
+    titre: "Inharmonicité {\\color{blue}(Inharmonicity)}"
+    texte: |
+      Si $f_n/n$ augmente avec $n$, discuter la raideur de la corde (TD1 ex. 13) ; si elle diminue, discuter la longueur effective et la masse du point d'attache (TD1 ex. 15).
+
+      {\color{blue}If $f_n/n$ increases with $n$, discuss string stiffness (TD1 ex. 13); if it decreases, discuss effective length and the mass at the attachment point (TD1 ex. 15).}

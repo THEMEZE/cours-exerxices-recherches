@@ -1,0 +1,161 @@
+id: td3_ex3
+intitule: "Circuit de Monaco : courbure et accélération à vitesse constante"
+td: td3
+facultatif: true
+seance: 3
+
+cours_rattache:
+  - cinematique.base_frenet
+  - cinematique.rayon_courbure
+  - cinematique.cercle_osculateur
+
+metadonnees:
+  duree_estimee: "25 min"
+  difficulte: 2
+  priorite: 3
+  type_exercice: "Lecture de document / Raisonnement qualitatif"
+  indispensable: false
+
+enonce_intro: |
+  On s'intéresse aux voitures qui roulent sur le circuit de Monaco, représenté sur le plan fourni (figure du TD).
+  Lors d'une phase de test, une automobile parcourt le circuit avec une vitesse de norme $\|\vec v\|$
+  {\bf constante}. On considère la norme de l'accélération $a=\|\vec a\|$ de l'automobile aux virages 9 (Tunnel), 15 et
+  16 (Rascasse), notée respectivement $a_9$, $a_{15}$ et $a_{16}$.
+
+prerequis:
+  - titre: "Accélération à vitesse constante"
+    texte: |
+      Si $v=$ cte : $a=a_N=\dfrac{v^2}R$ où $R$ est le rayon de courbure de la trajectoire au point considéré.
+  - titre: "Cercle osculateur"
+    texte: |
+      Cercle tangent à la trajectoire en $M$, de centre $C=M+R\,\vec n$ (côté concave) et de rayon $R$ : celui qui s'ajuste le mieux à la courbe localement.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Lire un rayon de courbure sur un plan et en déduire l'accélération"
+    texte: |
+      Savoir qu'à vitesse constante l'accélération est inversement proportionnelle au rayon de courbure, tracer qualitativement un cercle osculateur sur un plan et classer des accélérations sans calcul.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Un exercice de raisonnement, sans calcul"
+    texte: |
+      L'exercice est un QCM suivi d'une justification : le point de contrôle est que les étudiants {\bf n'invoquent pas la vitesse} (constante) mais le rayon de courbure, puis qu'ils justifient par le tracé. Il est utile de leur demander ensuite d'estimer un rayon à partir de l'échelle du plan, pour obtenir des ordres de grandeur. Prévoir la figure du circuit en grand format ; la réponse exacte au QCM dépend du dessin fourni et doit être vérifiée sur le plan utilisé en séance (voir la note dans la correction).
+
+point_cours:
+  - titre: "Accélération et courbure"
+    texte: |
+      À vitesse constante, $a=\dfrac{v^2}R$ : le virage le plus {\bf serré} (plus petit $R$) est celui où l'accélération est la plus {\bf grande}. Une portion droite donne $a=0$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Répondre « $a=0$ » parce que la vitesse est constante"
+    texte: |
+      L'option (a) du QCM est tentante mais fausse : la trajectoire est courbe, donc $a\ne0$.
+  - titre: "Répondre « $a$ est la même partout »"
+    texte: |
+      L'option (b) serait vraie si le rayon de courbure était le même aux trois virages, ce qui n'est pas le cas. L'accélération dépend du {\bf virage}, pas seulement de la vitesse.
+  - titre: "Classer par angle de virage au lieu de rayon de courbure"
+    texte: |
+      Un virage peut tourner de $90^\circ$ avec un grand rayon (large, rapide) ou un petit rayon (épingle). Ce qui compte pour $a_N$ est le rayon de courbure local, pas l'angle total tourné.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Faire estimer des rayons avec l'échelle"
+    texte: |
+      À l'aide de l'échelle du plan, demander une estimation numérique de $R$ en chaque virage, puis de $a=v^2/R$ pour $v=100\ \mathrm{km/h}$. Comparer à $g$ (Monaco n'est pas un circuit rapide : $a\sim2$ à $5\,g$ en F1).
+
+bilan:
+  - titre: "À retenir"
+    texte: |
+      À vitesse constante : $a=v^2/R$. Le plus petit $R$ donne la plus grande accélération. Pour classer $a_9$, $a_{15}$, $a_{16}$ il suffit de comparer les rayons de courbure lus sur le plan : $a_i\propto1/R_i$.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Vitesse maximale par virage"
+    texte: |
+      Dans le modèle d'adhérence $a\le\mu g$ (exercice 7), la vitesse maximale en un virage est $v_{\max}=\sqrt{\mu gR}$ : elle est plus grande dans les virages larges. En déduire pourquoi la voiture ralentit pour le virage de la Rascasse (serré) et reste rapide dans le Tunnel (large). Estimer le rapport $v_{\max,9}/v_{\max,16}=\sqrt{R_9/R_{16}}$.
+  - niveau: licence
+    titre: "Trajectoire idéale"
+    texte: |
+      Un pilote cherche à maximiser le rayon de courbure de sa trajectoire dans un virage en utilisant toute la largeur de la piste (extérieur, sommet de corde, extérieur). Dans un virage à $90^\circ$ de largeur $w$ avec un angle intérieur vif, le rayon de la trajectoire circulaire tangente aux deux bords extérieurs et passant par le coin intérieur est $R=(2+\sqrt2)\,w\approx3{,}4\,w$. Établir ce résultat.
+
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi ralentir à la Rascasse ?"
+    duree_introduction: "3 à 5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Sur un circuit, les pilotes freinent avant les virages serrés et accélèrent à la sortie. Mais l'exercice demande : {\bf si la vitesse ne change pas}, laquelle des trois courbes est la plus « dure » pour la voiture ? Et pour les passagers ?
+    texte: |
+      {\bf Idée clé : $a=v^2/R$ à $v$ fixé.} Seul $R$ varie d'un virage à l'autre. Un virage serré est une portion de trajectoire proche d'un petit cercle ; un virage large, proche d'un grand cercle. L'accélération « se lit » donc sur le dessin.
+
+outils_mathematiques:
+  - titre: "Proportionnalité inverse"
+    texte: |
+      $a\propto1/R$ à $v$ constant : si $R$ double, $a$ est divisée par $2$ ; si $R$ est divisé par $4$, $a$ est multipliée par $4$.
+  - titre: "Ordres de grandeur d'un rayon sur plan"
+    texte: |
+      Si l'échelle est $1\ \mathrm{cm}\leftrightarrow50\ \mathrm m$ et que le cercle osculateur mesure $2\ \mathrm{cm}$ de rayon, $R=100\ \mathrm m$.
+
+liens_autres_disciplines:
+  - discipline: "Sport automobile"
+    texte: |
+      Le Tunnel de Monaco est un virage large pris à très haute vitesse ; la Rascasse est une épingle lente. Les pilotes de F1 subissent des accélérations latérales de $3$ à $5\,g$ dans des virages rapides.
+  - discipline: "Physiologie"
+    texte: |
+      Le corps humain tolère mal plus de $5\,g$ : voltigeurs et pilotes de chasse portent des combinaisons anti-g.
+
+schemas_proposes:
+  - titre: "Cercles osculateurs sur le plan de Monaco"
+    description: |
+      Sur le plan du circuit (à imprimer en A3), repérer les virages 9, 15 et 16. Pour chacun : tracer la trajectoire, la tangente à la position de la voiture, la normale du côté concave, puis le cercle qui épouse la courbe localement (au compas). Mesurer les rayons sur le plan et les convertir avec l'échelle.
+  - titre: "Tableau des accélérations"
+    description: |
+      Tableau à trois colonnes (virages 9, 15, 16) avec $R$ mesuré, $a=v^2/R$ pour $v=100\ \mathrm{km/h}$, et $a/g$.
+
+questions:
+  - id: q1
+    enonce: |
+      Laquelle des affirmations suivantes est vraie ?
+      \begin{enumerate}[label=(\alph*)]
+          \item $a_9=a_{15}=a_{16}=0$
+          \item $a_9=a_{15}=a_{16}=k$, $k$ constante non nulle
+          \item $a_9<a_{15}<a_{16}$
+          \item $a_9<a_{16}<a_{15}$
+          \item $a_{15}<a_9<a_{16}$
+          \item $a_{15}<a_{16}<a_9$
+          \item $a_{16}<a_9<a_{15}$
+          \item $a_{16}<a_{15}<a_9$
+      \end{enumerate}
+    coup_de_pouce: |
+      La vitesse est constante en norme. Que devient alors $\dot v$ ? Quelle composante de l'accélération reste ? De quelle grandeur géométrique dépend-elle ?
+    correction: |
+      $a=a_N=v^2/R$ : classer les accélérations revient à classer les $1/R$. Le Tunnel (virage 9) est large donc $a_9$ est la plus petite des trois ; l'ordre entre $a_{15}$ et $a_{16}$ se lit sur les rayons des cercles osculateurs tracés sur le plan : (c) si $R_{15}>R_{16}$, (d) si $R_{16}>R_{15}$. {\bf À vérifier sur le plan fourni.}
+    solution:
+      - titre: "Raisonnement"
+        texte: |
+          Comme $\|\vec v\|=$ cte, $a_T=\dot v=0$, donc $\vec a=\dfrac{v^2}R\,\vec n$ avec $a=\dfrac{v^2}R$. Les options (a) et (b) sont à écarter : (a) car $R$ est fini en un virage, (b) car $R$ diffère d'un virage à l'autre. L'accélération est {\bf inversement proportionnelle au rayon de courbure}, donc {\bf d'autant plus grande que le virage est serré}.
+
+          On compare donc les rayons de courbure aux trois virages. Le virage 9 (Tunnel) est un virage large (grand rayon) : $a_9$ est la plus petite. Il reste à départager les virages 15 et 16 (Rascasse), plus serrés, en comparant les rayons des cercles osculateurs tracés (question 3). Le plus serré des deux a la plus grande accélération.
+
+          {\bf Remarque pour l'enseignant :} le rang exact dépend de la figure ; avec la numérotation et le tracé du plan d'origine, la réponse attendue est une des options (c) ou (d) ; elle doit être confirmée en traçant les cercles osculateurs sur le plan utilisé en séance.
+  - id: q2
+    enonce: |
+      Justifier votre réponse.
+    coup_de_pouce: |
+      Écrivez $\vec a$ dans la base de Frenet en annulant le terme tangentiel. Reliez ensuite le rayon de courbure à la forme de la trajectoire : une courbe serrée est-elle proche d'un petit ou d'un grand cercle ?
+    correction: |
+      $\vec a=\dfrac{v^2}R\,\vec n$ ; $a$ est proportionnelle à $1/R$ ; classement par comparaison des rayons des cercles osculateurs.
+    solution:
+      - titre: "Justification"
+        texte: |
+          Dans la base de Frenet, $\vec a=\dot v\,\vec\tau+\dfrac{v^2}R\,\vec n$. Pour $\|\vec v\|=$ cte, seule la composante normale subsiste :
+          $$a_9=\frac{v^2}{R_9},\quad a_{15}=\frac{v^2}{R_{15}},\quad a_{16}=\frac{v^2}{R_{16}}.$$
+          $v$ étant la même, $a_i<a_j\iff R_i>R_j$. L'ordre des accélérations est l'{\bf ordre inverse} des rayons de courbure. Un rayon grand correspond à un virage « ouvert » (le Tunnel, pris à grande vitesse) ; un rayon petit correspond à un virage serré (la Rascasse, qui est une épingle). {\bf Ordres de grandeur} : $R_9\sim100$ à $200\ \mathrm m$ et $R_{16}\sim15$ à $25\ \mathrm m$ donnent, à $v=100\ \mathrm{km/h}\approx28\ \mathrm{m/s}$, $a_9\approx4$ à $8\ \mathrm{m\,s^{-2}}$ et $a_{16}\approx30$ à $50\ \mathrm{m\,s^{-2}}$ ($3$ à $5\,g$), valeurs que seule une voiture de course peut tenir (grâce à l'appui aérodynamique) : en pratique, la voiture {\bf ralentit} dans l'épingle, ce qui est le sujet de l'exercice 7.
+  - id: q3
+    enonce: |
+      Tracer approximativement, sur le circuit de Monaco, les cercles osculateurs aux points 9 (Tunnel), 15 et 16 (Rascasse) de la trajectoire.
+    coup_de_pouce: |
+      En chaque point : tracez la tangente, puis la normale côté concave ; cherchez le cercle tangent à la trajectoire qui la suit le mieux sur un petit arc.
+    correction: |
+      Grand cercle (rayon $R_9$) au virage 9 ; cercles plus petits aux virages 15 et 16, de centre du côté intérieur de chaque virage.
+    solution:
+      - titre: "Construction"
+        texte: |
+          Pour chaque point : (1) tracer la tangente à la trajectoire ; (2) tracer la normale, perpendiculaire, vers l'{\bf intérieur du virage} ; (3) choisir sur cette normale le point $C$ tel que le cercle de centre $C$ passant par le point d'étude {\bf épouse} la trajectoire de part et d'autre (en testant avec le compas) ; (4) tracer le cercle. On obtient un {\bf grand cercle} au Tunnel (courbure faible) et des {\bf petits cercles} aux virages 15 et 16 (courbure forte). Le rayon se lit avec l'échelle. Aux virages en épingle, le cercle osculateur est à peu près inscrit dans la largeur de la piste.
+

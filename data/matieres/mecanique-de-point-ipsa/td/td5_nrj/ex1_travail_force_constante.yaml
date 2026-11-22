@@ -1,0 +1,154 @@
+id: td5_ex1
+intitule: "Travail d'une force constante"
+td: td5
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - energie.travail_force
+  - energie.produit_scalaire
+  - energie.puissance
+
+metadonnees:
+  duree_estimee: "30 min"
+  difficulte: 1
+  type_exercice: "Cours actif / Application directe"
+  indispensable: true
+
+enonce_intro: |
+  Cinq petites questions indépendantes qui installent la définition du travail : $\delta W=\vec F\cdot\mathrm d\overrightarrow{OM}$, le {\bf signe} du travail, le produit scalaire en composantes et la puissance. On prendra $g=9{,}81~\mathrm{m\,s^{-2}}$.
+
+prerequis:
+  - titre: "Travail d'une force constante"
+    texte: |
+      $W_{A\to B}=\vec F\cdot\overrightarrow{AB}=F\,AB\cos\varphi$ où $\varphi$ est l'angle entre la force et le déplacement ; en composantes, $W=F_x\Delta x+F_y\Delta y+F_z\Delta z$.
+  - titre: "Puissance moyenne"
+    texte: |
+      $\bar P=\dfrac{W}{\Delta t}$ ; à vitesse constante, la force exercée par l'opérateur équilibre exactement la force résistante.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Définir et calculer un travail"
+    texte: |
+      Savoir écrire $\delta W$ puis $W$ ; savoir commenter le signe ; savoir projeter une force oblique ; savoir calculer un travail avec des vecteurs en composantes ; savoir passer du travail à la puissance.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Les trois pièges du travail"
+    texte: |
+      (i) Le {\bf signe} : $F_x<0$ et $\Delta x<0$ donnent $W>0$ ; (ii) la {\bf projection} : seule la composante parallèle au déplacement travaille (question 2) ; (iii) le travail {\bf minimal} pour soulever est celui qui équilibre le poids, vitesse constante (questions 4 et 5). Les questions 4 et 5 appellent la discussion « le travail du poids vaut $-mgh$, celui de l'opérateur $+mgh$ : somme nulle, $\Delta E_c=0$ ».
+
+point_cours:
+  - titre: "Travail élémentaire et fini"
+    texte: |
+      $\delta W=\vec F\cdot\mathrm d\overrightarrow{OM}$ ; $W_{A\to B}=\displaystyle\int_A^B\delta W$. Pour une force constante, $W_{A\to B}=\vec F\cdot\overrightarrow{AB}$, indépendant du chemin. Unité : joule.
+  - titre: "Signe du travail"
+    texte: |
+      $W>0$ : la force aide le mouvement (moteur) ; $W<0$ : elle s'y oppose (résistant) ; $W=0$ : force perpendiculaire au déplacement.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Oublier le cosinus de l'angle"
+    texte: |
+      Pour une force oblique, $W=F\,d\cos\varphi$ et non $F\,d$. La masse du bloc (52 kg dans la question 2) est une donnée inutile : elle ne sert pas pour le travail d'une force imposée.
+  - titre: "Sens du déplacement et signe"
+    texte: |
+      Déplacement de $x=8$ à $x=3$ : $\Delta x=-5$ m (négatif). Avec $F_x=-12$ N, on trouve $W=(-12)(-5)=+60$ J.
+  - titre: "Masse de $105$ g et non $100$ g"
+    texte: |
+      $m=0{,}105$ kg, donc $F=mg=1{,}03$ N et $W=1{,}03$ J. Arrondir à $1$ N/$1$ J est un ordre de grandeur, pas la valeur de la correction.
+  - titre: "Confondre travail de l'opérateur et travail du poids"
+    texte: |
+      Pour soulever à vitesse constante, $W_{\rm op}=+mgh$ et $W_{\rm poids}=-mgh$.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Demander le signe avant le calcul"
+    texte: |
+      Pour chaque question, faire annoncer « moteur, résistant ou nul ? ». C'est le contrôle le plus efficace.
+
+bilan:
+  - titre: "Résultats"
+    texte: |
+      (1) $W=+60$ J ; (2) $W=12\times5\times\cos35^\circ\approx49{,}1$ J ; (3) $W=\vec F\cdot\Delta\vec r=6$ J ; (4) $F_{\min}=mg\approx1{,}03$ N, $W=mgh\approx1{,}03$ J ; (5) $\bar P=\dfrac{mgh}{\Delta t}\approx1{,}72$ kW.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Travail d'une force non constante"
+    texte: |
+      Calculer le travail de $\vec F=-k\,y\,\vec u_x+k\,x\,\vec u_y$ entre $O$ et $A(1,1)$ le long de la droite $y=x$ puis le long de $O\to(1,0)\to(1,1)$. Conclure sur la conservativité (calculer le rotationnel).
+  - niveau: licence
+    titre: "Puissance instantanée"
+    texte: |
+      L'haltérophile soulève la barre avec une accélération non nulle au début puis au milieu. Montrer que la puissance instantanée $P(t)=\big(F_{\rm op}\big)v$ n'est pas constante et que sa moyenne vaut quand même $mgh/\Delta t$ si la vitesse initiale et la vitesse finale sont nulles.
+
+accroche_point_cours_essentiel:
+  - titre: "Porter une valise : travaille-t-on ?"
+    duree_introduction: "3 min"
+    question_d_accroche: |
+      Vous portez une valise de $20$ kg en marchant sur un trottoir horizontal à vitesse constante. {\bf Quel est le travail de la force que votre bras exerce sur elle ?} Et si vous montez un escalier ?
+    texte: |
+      {\bf Idée clé : le travail mesure la partie de la force parallèle au déplacement.} Sur le plat, la force du bras est verticale et le déplacement horizontal : $W=0$ (au sens de la mécanique du point). Dans l'escalier, $W=mg\,h$.
+
+outils_mathematiques:
+  - titre: "Produit scalaire en composantes"
+    texte: |
+      $\vec F\cdot\Delta\vec r=F_x\Delta x+F_y\Delta y+F_z\Delta z$ : plus rapide que le cosinus quand les vecteurs sont donnés en composantes.
+  - titre: "Projection d'une force oblique"
+    texte: |
+      Force faisant l'angle $\varphi$ avec l'horizontale : composante horizontale $F\cos\varphi$, verticale $F\sin\varphi$.
+
+liens_autres_disciplines:
+  - discipline: "Sport"
+    texte: |
+      Puissance d'un haltérophile ($\approx1{,}7$ kW en pointe, mais $\approx0{,}2$ kW soutenue pour un athlète entraîné) ; coût énergétique d'un saut.
+  - discipline: "Physiologie"
+    texte: |
+      Rendement musculaire $\approx25~\%$ : un travail mécanique de $1$ J coûte $\approx4$ J au corps.
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{itemize}
+        \item[1/] Quel est le travail effectué par une force de composante $F_x=-12$ N appliquée en $M$ pour un déplacement de $x=8$ m à $x=3$ m ? Commenter son signe.
+        \item[2/] Un bloc de $52$ kg est tiré sur $5$ m le long d'un plan horizontal sans frottement par une force de $12$ N faisant un angle de $35^\circ$ avec l'horizontale. Quel est le travail de cette force sur ce déplacement ?
+        \item[3/] Sous l'action de la force $\vec F=2\,\vec\imath-3\,\vec\jmath+\vec k$ (en N), une particule se déplace de $\vec r_i=2\,\vec\imath-\vec\jmath+3\,\vec k$ à $\vec r_f=4\,\vec\imath-3\,\vec\jmath-\vec k$ (en m). Quel est le travail de cette force ?
+      \end{itemize}
+    coup_de_pouce: |
+      Pour 1/ et 2/, écrire $\delta W=\vec F\cdot\mathrm d\overrightarrow{OM}$ puis intégrer. Pour 2/, la masse ne sert à rien. Pour 3/, calculer $\Delta\vec r$ puis le produit scalaire en composantes.
+    correction: |
+      1/ $W=F_x\Delta x=(-12)(3-8)=+60$ J (force et déplacement de même sens, force motrice). 2/ $W=Fd\cos35^\circ\approx49{,}1$ J. 3/ $\Delta\vec r=(2,-2,-4)$ m, $W=2\times2+(-3)(-2)+1\times(-4)=6$ J.
+    solution:
+      - titre: "1/ Force selon $Ox$"
+        texte: |
+          $\delta W=\vec F\cdot\mathrm d\overrightarrow{OM}=F_x\,\mathrm dx$, d'où, la force étant constante,
+          $$W=\int_{x_i}^{x_f}F_x\,\mathrm dx=F_x(x_f-x_i)=(-12)\times(3-8)=\boxed{+60~\mathrm J}.$$
+          {\bf Signe} : $F_x<0$ et le déplacement est dans le sens des $x$ décroissants : force et déplacement ont le même sens, le travail est {\bf moteur} ($W>0$).
+      - titre: "2/ Force oblique"
+        texte: |
+          Avec $Ox$ horizontal, $\vec F=F\cos\varphi\,\vec u_x+F\sin\varphi\,\vec u_y$ et $\mathrm d\overrightarrow{OM}=\mathrm dx\,\vec u_x$ (le bloc reste sur le plan) :
+          $$W=\int_0^5F\cos\varphi\,\mathrm dx=F\,d\cos\varphi=12\times5\times\cos35^\circ\approx\boxed{49{,}1~\mathrm J}.$$
+          La composante verticale $F\sin\varphi$ ne travaille pas (perpendiculaire au déplacement), la masse de $52$ kg n'intervient pas : c'est elle qui fixerait l'accélération, pas le travail.
+      - titre: "3/ Force en composantes"
+        texte: |
+          $\Delta\vec r=\vec r_f-\vec r_i=(4-2,\,-3+1,\,-1-3)=(2,-2,-4)$ m. La force est constante :
+          $$W=\vec F\cdot\Delta\vec r=F_x\Delta x+F_y\Delta y+F_z\Delta z=2\times2+(-3)\times(-2)+1\times(-4)=\boxed{6~\mathrm J}.$$
+          Détail : $\delta W=F_x\mathrm dx+F_y\mathrm dy+F_z\mathrm dz$, chaque terme s'intègre séparément ($F$ constante).
+
+  - id: q2
+    enonce: |
+      \begin{itemize}
+        \item[4/] Quelle force et quel travail doit-on fournir (au minimum) pour soulever une tablette de chocolat de $105$ g d'une hauteur de $1$ m ?
+        \item[5/] Quelle est la puissance moyenne fournie par un haltérophile qui soulève, à vitesse constante, $250$ kg sur une distance de $2{,}1$ m en $3$ s ?
+      \end{itemize}
+    coup_de_pouce: |
+      « Au minimum » : la force qui équilibre le poids (vitesse constante, $\vec a=\vec0$). Pour 5/, $\bar P=W/\Delta t$.
+    correction: |
+      4/ $F_{\min}=mg=0{,}105\times9{,}81\approx1{,}03$ N ; $W=mgh\approx1{,}03$ J. 5/ $W=mgh=250\times9{,}81\times2{,}1\approx5{,}15$ kJ ; $\bar P=W/\Delta t\approx1{,}72$ kW.
+    solution:
+      - titre: "4/ Soulever une tablette"
+        texte: |
+          Système : la tablette. À vitesse constante, $\vec P+\vec F_{\rm op}=\vec0$, donc $F_{\rm op}=mg$ (c'est le {\bf minimum} : une force plus grande donnerait une accélération et un surplus d'énergie cinétique). Avec $m=0{,}105$ kg :
+          $$F_{\min}=mg=0{,}105\times9{,}81\approx\boxed{1{,}03~\mathrm N},\qquad W_{\rm op}=F_{\min}\,h=mgh\approx\boxed{1{,}03~\mathrm J}.$$
+          Le poids travaille $-mgh$ : la somme des travaux est nulle, en accord avec $\Delta E_c=0$.
+      - titre: "5/ Puissance de l'haltérophile"
+        texte: |
+          À vitesse constante, $F_{\rm op}=mg=250\times9{,}81\approx2{,}45\times10^3$ N. Travail : $W=mgh=2452{,}5\times2{,}1\approx5{,}15\times10^3$ J. Puissance moyenne :
+          $$\bar P=\frac Wt=\frac{5{,}15\times10^3}{3}\approx\boxed{1{,}72\times10^3~\mathrm W}\approx1{,}7~\mathrm{kW}.$$
+          Ordre de grandeur : un athlète soutient $\approx200$ W en continu ; $1{,}7$ kW n'est tenable que quelques secondes, ce qui est bien le cas.

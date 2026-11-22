@@ -1,0 +1,366 @@
+id: td4
+titre: "Oscillateurs couplés"
+chapitre_cours: "Chap. 4 — Oscillateurs couplés : petites oscillations, modes propres et battements"
+seance: 5
+niveau_public: [cpge, licence]
+exercices_ordre:
+  - ex1_pendules_couples_battements
+  - ex2_oscillateurs_dissymetriques
+  - ex3_pendule_chariot
+  - ex4_molecule_diatomique
+  # ---- Compléments hors énoncé de l'établissement (tous facultatifs) ----
+  - ex5_ressort_a_mi_hauteur          # niveau 1 : approfondissement CPGE
+  - ex6_trois_masses_quatre_ressorts  # niveau 2 : trois degrés de liberté, matrices M et K
+  - ex7_desaccord_anticroisement      # niveau 2 : système légèrement asymétrique
+  - ex8_modes_non_lineaires_pendules  # niveau 3 : esprit ENS, non-linéarités et stabilité
+  - ex9_anneau_de_N_oscillateurs      # niveau 3 : N oscillateurs, limite continue
+
+enonce_intro: |
+  {\bf Conventions valables pour tout le TD (sauf mention contraire).} Les déplacements $x_i(t)$ sont des grandeurs \emph{algébriques} comptées à partir de la position d'équilibre de la masse $i$, sur un axe $Ox$ orienté de la gauche vers la droite. Un ressort de raideur $k$ et de longueur à vide $\ell_0$ exerce sur chacune de ses extrémités une force de module $k\,|\ell-\ell_0|$ dirigée vers son centre s'il est étiré ($\ell>\ell_0$) et vers l'extérieur s'il est comprimé : l'\emph{allongement algébrique} $e=\ell-\ell_0$ suffit à fixer le signe de toutes les forces. On appelle « petites oscillations » les mouvements pour lesquels tous les écarts à l'équilibre restent assez petits pour que les équations puissent être linéarisées ; la correction commence toutefois, chaque fois que c'est possible, par les équations \emph{exactes}, pour que l'approximation soit comprise avant d'être utilisée.
+
+  {\bf Structure de la correction.} Pour chaque système : (i) schéma, système, référentiel, bases et projections ; (ii) équations exactes ; (iii) linéarisation et justification physique ; (iv) découplage par la méthode du \emph{physicien} (somme, différence, symétries) ; (v) résolution par la méthode du \emph{mathématicien} (matrices $M$ et $K$, valeurs propres, vecteurs propres) ; (vi) interprétation des modes et vérifications (dimensions, limites, énergie). Les exercices 5 à 9 sont des compléments, indépendants de l'énoncé officiel.
+
+prerequis:
+  - titre: "Mouvement du point matériel dans une base locale"
+    texte: |
+      Savoir exprimer position, vitesse et accélération d'un point en coordonnées cartésiennes puis en base polaire ; savoir que $\dfrac{\mathrm d\vec e_r}{\mathrm dt}=\dot\theta\,\vec e_\theta$ et $\dfrac{\mathrm d\vec e_\theta}{\mathrm dt}=-\dot\theta\,\vec e_r$ ; savoir projeter un vecteur sur un axe à l'aide d'un produit scalaire.
+  - titre: "Oscillateur harmonique à un degré de liberté"
+    texte: |
+      Savoir que $\ddot x+\omega_0^2x=0$ a pour solution générale $x=A\cos(\omega_0t+\varphi)$ avec deux constantes fixées par $x(0)$ et $\dot x(0)$ ; connaître $\omega_0=\sqrt{k/m}$ pour un ressort et $\omega_0=\sqrt{g/\ell}$ pour un pendule simple de faible amplitude.
+  - titre: "Principe fondamental de la dynamique et théorème du centre de masse"
+    texte: |
+      $m\vec a=\sum\vec F$ pour un point ; pour un système, $M_{\mathrm{tot}}\vec a_G=\sum\vec F_{\mathrm{ext}}$ : les forces intérieures (action-réaction) n'interviennent pas dans le mouvement du centre de masse.
+  - titre: "Développements limités usuels"
+    texte: |
+      Connaître $\sin\theta=\theta-\dfrac{\theta^3}{6}+\dots$, $\cos\theta=1-\dfrac{\theta^2}{2}+\dots$, $\sqrt{1+\varepsilon}\simeq1+\dfrac\varepsilon2$ et savoir quel ordre conserver selon la grandeur étudiée (voir le point de cours « développements limités »).
+  - titre: "Algèbre linéaire élémentaire"
+    texte: |
+      Systèmes $2\times2$, déterminant, valeurs et vecteurs propres d'une matrice $2\times2$, produit scalaire de deux vecteurs, matrice symétrique ; pour les compléments, matrices $3\times3$ et notion de base orthogonale.
+  - titre: "Notation complexe"
+    texte: |
+      $\partial_t\to i\omega$ pour $e^{i\omega t}$ ; passage de $\mathrm{Re}\big[\underline Ae^{i\omega t}\big]$ à l'amplitude et à la phase ; formules de trigonométrie de somme et de produit.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Comprendre ce que l'on projette"
+    texte: |
+      Savoir distinguer un vecteur de ses coordonnées, choisir une base adaptée (cartésienne ou locale), justifier chaque signe d'une projection à l'aide du schéma et d'un produit scalaire, et expliquer pourquoi une base locale varie avec le temps.
+  - titre: "Passer des équations exactes aux équations linéarisées en connaissance de cause"
+    texte: |
+      Savoir écrire les équations exactes d'un système couplé simple, identifier les termes linéaires, non linéaires et de couplage, justifier physiquement et mathématiquement la linéarisation autour d'un équilibre, et estimer l'erreur commise.
+  - titre: "Maîtriser les deux méthodes de découplage"
+    texte: |
+      Savoir découpler à la manière du physicien (somme, différence, centre de masse et mouvement relatif, symétrie) et à la manière du mathématicien (matrices $M$ et $K$, problème aux valeurs propres, diagonalisation), savoir dire quand la première fonctionne et pourquoi la seconde fonctionne toujours.
+  - titre: "Interpréter les modes propres"
+    texte: |
+      Savoir décrire le mouvement de chaque élément dans chaque mode (phases, amplitudes relatives), relier les pulsations aux paramètres, décomposer un mouvement initial sur les modes, et reconnaître battements et échanges d'énergie.
+  - titre: "Situer les équations différentielles linéaires dans un cadre général"
+    texte: |
+      Savoir ramener une équation d'ordre $N$ à un système du premier ordre $Y'=AY$, relier les solutions exponentielles aux valeurs propres de $A$, et ne pas confondre valeurs propres de $A$ et pulsations propres $\omega$ du problème mécanique.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Ne jamais écrire une projection sans l'avoir construite"
+    texte: |
+      La difficulté réelle de l'exercice 1 n'est pas le découplage, qui est immédiat une fois les équations écrites, mais la mise en équation : base, angle, signe, élimination de la tension. Faire dessiner le schéma avec $\vec e_r$ et $\vec e_\alpha$, faire calculer \emph{au tableau} $\vec e_r\cdot\vec e_x$ et $\vec e_r\cdot\vec e_y$, puis seulement projeter.
+  - titre: "Faire percevoir l'unité de la démarche"
+    texte: |
+      Les exercices 1 à 4 sont la même histoire racontée quatre fois : un équilibre, une énergie potentielle dont la forme quadratique est $\tfrac12X^{\mathsf T}KX$, une énergie cinétique $\tfrac12\dot X^{\mathsf T}M\dot X$, puis un problème aux valeurs propres. L'exercice 1 est symétrique (la méthode du physicien suffit), l'exercice 2 la met en échec (il faut la méthode du mathématicien), l'exercice 3 montre le cas général avec un forçage, l'exercice 4 un cas où la matrice $K$ est singulière (mode de translation).
+  - titre: "Différencier selon le public"
+    texte: |
+      Socle commun : exercices 1 à 4, questions du texte officiel. CPGE : la linéarisation (partie « petits angles ») et les modes propres ; licence : la formulation matricielle, les compléments des rubriques « Aller plus loin » et l'exercice 5 ou 6 ; ambition ENS : exercices 7 à 9. Les corrections des exercices 1 à 3 sont volontairement plus longues que ce que l'on exposera en séance : la progression pédagogique est dans les « coups de pouce » (trois niveaux d'aide), la correction détaillée est destinée à l'étudiant en travail autonome.
+  - titre: "Relier physique et mathématiques sans les confondre"
+    texte: |
+      La somme et la différence $x_1\pm x_2$ ne sont pas une « astuce » : c'est la diagonalisation d'une matrice qui commute avec l'échange des deux oscillateurs. À chaque fois que l'on découple « à la physicienne », demander pourquoi cela marche ; à chaque fois que l'on diagonalise, demander quelle est l'interprétation physique des vecteurs propres.
+
+point_cours:
+  - titre: "Projeter correctement : bases cartésienne et locale, vecteurs et coordonnées"
+    texte: |
+      {\bf Un vecteur n'est pas ses coordonnées.} Le vecteur $\vec F$ est un objet géométrique (une flèche) qui existe indépendamment de tout repère ; ses \emph{coordonnées} ne sont que sa « lecture » dans une base : $\vec F=F_x\vec e_x+F_y\vec e_y=F_r\vec e_r+F_\alpha\vec e_\alpha$. Changer de base change les coordonnées, pas le vecteur.
+
+      \begin{enumerate}
+        \item {\bf Base cartésienne} $(\vec e_x,\vec e_y,\vec e_z)$, fixe dans le référentiel du laboratoire : ses vecteurs sont constants, $\mathrm d\vec e_x/\mathrm dt=\vec 0$. Orientation directe : $\vec e_z=\vec e_x\wedge\vec e_y$.
+        \item {\bf Base locale d'un pendule.} L'angle $\alpha$ est mesuré à partir de la verticale descendante, positif lorsque la masse part vers $+x$ (sens trigonométrique si $\vec e_y$ est dirigé vers le haut) :
+          $$\vec e_r=\sin\alpha\,\vec e_x-\cos\alpha\,\vec e_y\ \ (\text{du point d'attache vers la masse}),\qquad \vec e_\alpha=\cos\alpha\,\vec e_x+\sin\alpha\,\vec e_y\ \ (\text{sens des }\alpha\text{ croissants}).$$
+          Ces coordonnées se lisent sur le schéma à l'aide de produits scalaires : $\vec e_r\cdot\vec e_x=\cos\big(\tfrac\pi2-\alpha\big)=\sin\alpha$ et $\vec e_r\cdot\vec e_y=\cos(\pi-\alpha)=-\cos\alpha$. La base est orthonormée directe : $\vec e_r\cdot\vec e_\alpha=0$, $\|\vec e_r\|=\|\vec e_\alpha\|=1$, $\vec e_r\wedge\vec e_\alpha=\vec e_z$.
+        \item {\bf Règle de projection.} La coordonnée d'un vecteur sur un vecteur \emph{unitaire} est le produit scalaire avec ce vecteur : $F_\alpha=\vec F\cdot\vec e_\alpha$. Projeter, c'est mesurer « combien de $\vec F$ » pointe dans la direction choisie.
+        \item {\bf Une base locale tourne avec le système.} $\vec e_r$ et $\vec e_\alpha$ dépendent de $\alpha(t)$ : $\dfrac{\mathrm d\vec e_r}{\mathrm dt}=\dot\alpha\,\vec e_\alpha$ et $\dfrac{\mathrm d\vec e_\alpha}{\mathrm dt}=-\dot\alpha\,\vec e_r$. Pour une masse à la distance fixe $\ell$ du point d'attache : $\vec v=\ell\dot\alpha\,\vec e_\alpha$ et $\vec a=\ell\ddot\alpha\,\vec e_\alpha-\ell\dot\alpha^2\,\vec e_r$ (accélération tangentielle et centripète).
+        \item {\bf Pourquoi choisir la base locale ?} La tension du fil est le long de $\vec e_r$ : en projetant sur $\vec e_\alpha$, elle disparaît de l'équation, et l'on obtient directement une équation différentielle en la seule variable $\alpha$ (on élimine une force de liaison inconnue).
+      \end{enumerate}
+
+      {\bf Protocole pour justifier un signe} : (a) dessiner le vecteur pour une valeur \emph{positive} de la variable ; (b) comparer son sens avec le sens positif de l'axe de projection ; (c) le confirmer par un produit scalaire ; (d) tester sur un cas limite ($\alpha=0$, $\alpha=\pi/2$) où la réponse est évidente.
+  - titre: "Pourquoi étudier de petites oscillations autour d'un équilibre ?"
+    texte: |
+      Une position d'équilibre $q_0$ est un point où l'énergie potentielle $V(q)$ est stationnaire, $V'(q_0)=0$ (force nulle) ; elle est \emph{stable} si $V''(q_0)>0$ (minimum). Une petite perturbation reste alors petite : le système oscille au voisinage de $q_0$ et c'est dans ce voisinage seulement que l'approximation a un sens. Au voisinage d'un minimum, la formule de Taylor donne
+      $$V(q)=V(q_0)+\frac12V''(q_0)\,(q-q_0)^2+O\big((q-q_0)^3\big).$$
+      Le terme linéaire a disparu (équilibre) : \emph{toute} énergie potentielle régulière est, près de son minimum, une parabole. La force $-V'(q)\simeq-V''(q_0)(q-q_0)$ est donc une force de rappel linéaire de raideur $k_{\mathrm{eff}}=V''(q_0)$, quelle que soit l'origine physique du potentiel. C'est pourquoi l'oscillateur harmonique est universel : pendule ($V=mg\ell(1-\cos\alpha)$ donne $k_{\mathrm{eff}}=mg\ell$), liaison chimique ($k=V''(r_0)$, exercice 4), cristal, pont, circuit.
+
+      Avec plusieurs variables $q_i$, le même raisonnement donne $V\simeq V_0+\tfrac12\sum_{i,j}K_{ij}(q_i-q_{i0})(q_j-q_{j0})$ avec la \emph{matrice hessienne} $K_{ij}=\partial^2V/\partial q_i\partial q_j$ évaluée à l'équilibre. Elle est symétrique (théorème de Schwarz) et l'équilibre est stable si elle est définie positive. On linéarise \emph{simultanément} toutes les équations parce que tous les écarts $q_j-q_{j0}$ sont petits en même temps : un produit comme $\alpha_1\alpha_2$ est d'ordre $2$, de même nature que $\alpha_1^2$, et se néglige pour la même raison.
+  - titre: "Petits angles, développements limités, linéarisation : trois notions à ne pas confondre"
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+        \item Un {\bf développement limité} (DL) est un énoncé \emph{mathématique} sur une fonction : $f(\theta)=f(0)+f'(0)\theta+\dots+\dfrac{f^{(n)}(0)}{n!}\theta^n+o(\theta^n)$. Il est toujours vrai ; il ne dit rien de la physique et ne suppose pas que $\theta$ soit « petit » avant que l'on demande une valeur numérique.
+        \item L'{\bf approximation des petits angles} est une \emph{application} de ce DL : pour $|\theta|\ll1$ rad, on remplace $\sin\theta$ et $\tan\theta$ par $\theta$ et $\cos\theta$ par $1$ (ou $1-\theta^2/2$ si l'ordre $1$ ne suffit pas).
+        \item La {\bf linéarisation} est une \emph{démarche physique} : on développe les équations du mouvement (ou l'énergie) autour de l'équilibre et on ne garde que les termes du premier ordre dans les équations (du second ordre dans l'énergie). Elle contient les petits angles mais aussi d'autres développements : $\sqrt{u^2+v^2}-d\simeq u-d$ pour la longueur d'un ressort presque horizontal, par exemple.
+      \end{itemize}
+
+      {\bf Ordre en fonction de l'objet développé.} Si $\varepsilon$ désigne la taille typique des angles, l'équation du mouvement est d'ordre $1$ ($\ddot\alpha\sim\varepsilon$) et l'énergie d'ordre $2$ ($E\sim\varepsilon^2$). On a donc $\cos\theta\simeq1$ dans une force qui est déjà multipliée par un petit paramètre, mais $1-\cos\theta\simeq\theta^2/2$ dans l'énergie potentielle du pendule : prendre $\cos\theta\simeq1$ dans $V=mg\ell(1-\cos\alpha)$ donnerait $V=0$ et aucune force de rappel. Ces deux écritures ne se contredisent pas : $F=-\mathrm dV/\mathrm d\alpha=-mg\ell\sin\alpha\simeq-mg\ell\alpha$ est la dérivée de $V\simeq\tfrac12mg\ell\alpha^2$.
+
+      {\bf Physique de l'approximation pour un pendule.}
+      \begin{enumerate}
+        \item La masse se déplace sur un arc de cercle ; pour $\alpha$ petit, l'arc $\ell\alpha$ et la corde $2\ell\sin(\alpha/2)$ sont presque confondus : le mouvement est quasiment rectiligne et horizontal. Son abscisse $x=\ell\sin\alpha\simeq\ell\alpha$ est proportionnelle à l'angle.
+        \item Son élévation $\ell(1-\cos\alpha)\simeq\ell\alpha^2/2$ est du second ordre : elle est négligeable devant $x$ (rapport $\alpha/2$) ; la tension du fil vaut $mg$ à l'ordre $0$.
+        \item La force de rappel tangentielle $-mg\sin\alpha\simeq-mg\,x/\ell$ est proportionnelle au déplacement : le poids joue le rôle d'un ressort de raideur $mg/\ell$.
+        \item Une équation différentielle \emph{linéaire à coefficients constants} possède le principe de superposition : toute combinaison de solutions est solution, les solutions s'obtiennent par des exponentielles $e^{rt}$, et un système couplé devient un problème d'algèbre linéaire (valeurs propres).
+      \end{enumerate}
+
+      {\bf Ce que l'on perd.} L'isochronisme : la période $T(\theta_0)=T_0\Big(1+\dfrac{\theta_0^2}{16}+\dfrac{11\theta_0^4}{3072}+\dots\Big)$ dépend de l'amplitude (par exemple $+0{,}19\ \%$ à $10^\circ$, $+1{,}7\ \%$ à $30^\circ$, $+18\ \%$ à $90^\circ$). On perd aussi les harmoniques de rang supérieur (le mouvement n'est plus purement sinusoïdal), les couplages \emph{non linéaires} entre modes (échange d'énergie entre modes supposés indépendants, instabilités paramétriques, chaos pour deux pendules à grande amplitude) et les écarts d'équilibre. On gagne une théorie analytique complète. Ordre de grandeur de validité : pour que l'écart sur la période reste inférieur à $1\ \%$, il faut $\theta_0\lesssim0{,}4$ rad ($\simeq23^\circ$).
+  - titre: "Développements limités de $\\sin$ et $\\cos$ : lecture, ordre, erreur"
+    texte: |
+      {\bf Énoncé (Taylor--Young).} Pour tout réel $\theta$,
+      $$\sin\theta=\theta-\frac{\theta^3}{3!}+\frac{\theta^5}{5!}-\dots+(-1)^n\frac{\theta^{2n+1}}{(2n+1)!}+\dots,\qquad \cos\theta=1-\frac{\theta^2}{2!}+\frac{\theta^4}{4!}-\dots+(-1)^n\frac{\theta^{2n}}{(2n)!}+\dots$$
+      Les signes alternent, et seuls apparaissent des puissances \emph{impaires} pour le sinus (fonction impaire) et \emph{paires} pour le cosinus (fonction paire) : c'est la raison pour laquelle les deux fonctions n'ont pas le même terme dominant. Le terme d'ordre $\theta^2$ du sinus est nul, donc $\sin\theta\simeq\theta$ à l'ordre $1$ \emph{et} à l'ordre $2$ ; au contraire $\cos\theta\simeq1$ à l'ordre $1$ mais $\cos\theta\simeq1-\theta^2/2$ à l'ordre $2$.
+
+      {\bf Comment lire un développement.} Chaque terme est plus petit que le précédent d'un facteur $\theta^2/\big(2n(2n+1)\big)$ pour le sinus (resp. $\theta^2/\big((2n-1)2n\big)$ pour le cosinus) : pour $|\theta|<1$ la série décroît très vite. On garde les termes dont la contribution est supérieure à la précision cherchée \emph{et} on veille à ce que le terme dominant ne s'annule pas (par exemple $1-\cos\theta\simeq\theta^2/2$, jamais $0$).
+
+      {\bf Estimer l'erreur.} (i) Reste de Taylor--Lagrange : les dérivées de $\sin$ et $\cos$ sont bornées par $1$, donc $\big|R_n(\theta)\big|\le\dfrac{|\theta|^{n+1}}{(n+1)!}$ pour tout $\theta$ : $|\sin\theta-\theta|\le\dfrac{|\theta|^3}{6}$, $|\cos\theta-1|\le\dfrac{\theta^2}{2}$ et $\big|\cos\theta-(1-\tfrac{\theta^2}{2})\big|\le\dfrac{\theta^4}{24}$. (ii) Série alternée à termes décroissants : l'erreur est majorée par le premier terme négligé. L'erreur relative sur $\sin\theta\simeq\theta$ vaut environ $\theta^2/6$ ; sur $\cos\theta\simeq1$, environ $\theta^2/2$, trois fois plus : l'ordre $0$ du cosinus est une approximation moins bonne que l'ordre $1$ du sinus.
+      $$
+      \begin{array}{c|ccccc}
+        \theta\ (\mathrm{rad}) & 0{,}05 & 0{,}1 & 0{,}2 & 0{,}5 & 1\\
+        \hline
+        \text{erreur relative de }\sin\theta\simeq\theta & 4\times10^{-4} & 1{,}7\times10^{-3} & 6{,}7\times10^{-3} & 4{,}3\times10^{-2} & 0{,}19\\
+        \text{erreur relative de }\cos\theta\simeq1 & 1{,}3\times10^{-3} & 5{,}0\times10^{-3} & 2{,}0\times10^{-2} & 0{,}14 & 0{,}85\\
+        \text{erreur relative de }\cos\theta\simeq1-\theta^2/2 & 3\times10^{-7} & 4\times10^{-6} & 7\times10^{-5} & 3\times10^{-3} & 7\times10^{-2}
+      \end{array}
+      $$
+      {\bf Intuition géométrique.} $\sin\theta<\theta$ exprime que la corde est plus courte que l'arc ; $1-\cos\theta\simeq\theta^2/2$ est la « flèche » de l'arc, c'est-à-dire la hauteur dont la masse s'élève : elle est du second ordre alors que le déplacement horizontal est du premier ordre.
+  - titre: "Découpler à la manière du physicien : somme, différence, symétrie"
+    texte: |
+      {\bf Méthode.} Pour des équations couplées, on commence par \emph{regarder} : (i) écrire toutes les équations ; (ii) comparer les coefficients ; (iii) chercher une symétrie (échange de deux oscillateurs identiques, symétrie miroir) ; (iv) additionner et soustraire ; (v) chercher des combinaisons dont l'équation \emph{se referme} sur elle-même. Pour deux oscillateurs identiques de coordonnées $x_1$ et $x_2$ on prend $S=x_1+x_2$ et $D=x_1-x_2$.
+
+      {\bf Pourquoi cela correspond à des mouvements physiques.} La somme est (au facteur $2$ près) la position du centre de masse : les forces de couplage sont des forces intérieures égales et opposées, elles s'annulent dans la somme. La différence est le mouvement relatif : l'élongation du ressort de couplage y est directement lisible. $S$ décrit le \emph{mode symétrique} (les deux éléments bougent en phase) et $D$ le \emph{mode antisymétrique} (en opposition de phase) au sens de l'échange $x_1\leftrightarrow x_2$ des coordonnées.
+
+      {\bf Quand cela marche.} Écrivons $\ddot X=-AX$ avec $A=\begin{pmatrix}a&b\\c&d\end{pmatrix}$. Les vecteurs $(1,1)$ et $(1,-1)$ sont vecteurs propres de $A$ si et seulement si $a+b=c+d$ et $a-b=d-c$, c'est-à-dire si et seulement si $a=d$ et $b=c$ : mêmes coefficients diagonaux (oscillateurs identiques vis-à-vis de l'extérieur) et couplage réciproque symétrique. Autrement dit, $A$ commute avec la matrice d'échange $P=\begin{pmatrix}0&1\\1&0\end{pmatrix}$ dont $(1,\pm1)$ sont les vecteurs propres. La symétrie du système \emph{est} la raison du découplage.
+
+      {\bf Quand cela échoue.} Pour des oscillateurs dissymétriques ($a\neq d$), $S$ et $D$ restent couplés (exercice 2). On généralise alors : on cherche $c=x_1+\beta x_2$ tel que $\ddot c=-\omega^2c$. L'identification des coefficients conduit à une équation du second degré en $\beta$ dont les deux racines fournissent les deux modes : c'est exactement le calcul de valeurs propres, mené sans le dire. Dans le cas de masses \emph{inégales} (exercice 4) les bonnes combinaisons sont $m_1x_1+m_2x_2$ (centre de masse) et $x_2-x_1$ (mouvement relatif), et non $x_1\pm x_2$.
+  - titre: "Découpler à la manière du mathématicien : $M\\ddot X+KX=0$ et diagonalisation"
+    texte: |
+      {\bf Mise en forme.} Pour $n$ coordonnées $X=(q_1,\dots,q_n)^{\mathsf T}$ d'un système conservatif, l'énergie cinétique et l'énergie potentielle sont, à l'ordre quadratique, $E_c=\tfrac12\dot X^{\mathsf T}M\dot X$ et $E_p=\tfrac12X^{\mathsf T}KX$, et les équations du mouvement sont
+      $$M\ddot X+KX=0.$$
+      $M$ est la \emph{matrice de masse} (inertie ; symétrique définie positive ; diagonale si l'énergie cinétique ne contient pas de termes croisés) et $K$ la \emph{matrice de raideur} (rappel ; symétrique ; sur la diagonale, la raideur « vue » par chaque coordonnée, hors diagonale l'opposé de la raideur de couplage). Un terme hors diagonale non nul dans $K$ \emph{est} le couplage.
+
+      {\bf Résolution.}
+      \begin{enumerate}
+        \item On cherche une solution harmonique : $X(t)=\mathrm{Re}\big[A\,e^{i\omega t}\big]$ avec $A$ un vecteur constant (même pulsation et phases liées pour toutes les coordonnées : un \emph{mode}).
+        \item On reporte, $\ddot X=-\omega^2X$ : $(K-\omega^2M)A=0$, \emph{problème aux valeurs propres généralisé}.
+        \item Solution non triviale si et seulement si $\det(K-\omega^2M)=0$ : équation de degré $n$ en $\omega^2$.
+        \item Les $n$ racines $\omega_p^2$ sont les carrés des pulsations propres. Comme $M$ est inversible, on se ramène à un problème classique $\big(M^{-1}K-\omega^2I\big)A=0$.
+        \item Pour chaque $\omega_p^2$ on résout $(K-\omega_p^2M)A_p=0$ : vecteur propre $A_p$ défini à un facteur près.
+        \item Théorème spectral : $K$ et $M$ symétriques, $M>0$, $\Rightarrow$ les $\omega_p^2$ sont réels, positifs si l'équilibre est stable ($K>0$), et les vecteurs propres sont \emph{$M$-orthogonaux} : $A_p^{\mathsf T}MA_q=0$ pour $p\neq q$ (orthogonaux au sens usuel si $M\propto I$).
+        \item Les solutions de la forme $A_p\cos(\omega_pt+\varphi_p)$ sont les \emph{modes normaux}. Les coordonnées normales $\xi_p=A_p^{\mathsf T}MX/(A_p^{\mathsf T}MA_p)$ vérifient $\ddot\xi_p+\omega_p^2\xi_p=0$ : $n$ oscillateurs indépendants.
+        \item Superposition : $X(t)=\sum_p\big(c_p\cos\omega_pt+d_p\sin\omega_pt\big)A_p$.
+        \item Conditions initiales : si les $A_p$ sont $M$-normalisés ($A_p^{\mathsf T}MA_p=1$), $c_p=A_p^{\mathsf T}MX(0)$ et $d_p\omega_p=A_p^{\mathsf T}M\dot X(0)$.
+      \end{enumerate}
+
+      {\bf Diagonalisation explicite à deux degrés de liberté.} Pour $M=mI$ et $K=m\begin{pmatrix}a&b\\b&c\end{pmatrix}$ : $\omega_\pm^2=\dfrac{a+c}2\pm\sqrt{\Big(\dfrac{a-c}2\Big)^2+b^2}$. Les vecteurs propres sont $u_\theta=(\cos\theta,\sin\theta)$ et $u_\theta^\perp=(-\sin\theta,\cos\theta)$ avec $\tan2\theta=\dfrac{2b}{a-c}$, $\theta$ étant l'angle dont tournent les axes. Pour identifier à quelle valeur propre correspond chaque vecteur, calculer $u^{\mathsf T}Ku/u^{\mathsf T}u$. Si $a=c$ (oscillateurs identiques), $\tan2\theta=\infty$, soit $\theta=45^\circ$ \emph{quelle que soit la force du couplage} : on retrouve $S$ et $D$. Si $|a-c|\gg|b|$, $\theta\simeq b/(a-c)$ est petit : les modes sont presque localisés sur un seul oscillateur (couplage faible devant l'écart de fréquence).
+
+      {\bf Vérifications.} La somme des valeurs propres est la trace de $M^{-1}K$ et leur produit est son déterminant ; $K$ définie positive $\iff$ $\omega_p^2>0$ ; $k\to0$ redonne les oscillateurs libres.
+  - titre: "Petit cours : équations différentielles linéaires d'ordre $N$, systèmes du premier ordre, exponentielle de matrice"
+    texte: |
+      {\bf Trois objets à ne pas confondre.}
+      $$
+      \begin{array}{l|l|c}
+        \textbf{Objet} & \textbf{Écriture} & \textbf{Dimension de l'espace des solutions}\\
+        \hline
+        \text{équation scalaire d'ordre }N & y^{(N)}+a_{N-1}y^{(N-1)}+\dots+a_0y=0 & N\\
+        \text{système du 1\textsuperscript{er} ordre} & Y'=AY,\ Y\in\mathbb R^N & N\\
+        \text{système de }n\text{ équations du 2\textsuperscript{e} ordre} & M\ddot X+KX=0,\ X\in\mathbb R^n & 2n
+      \end{array}
+      $$
+      Le nombre de constantes d'intégration est la dimension de l'espace des solutions : il faut autant de conditions initiales (positions \emph{et} vitesses pour un système mécanique).
+
+      {\bf Équation scalaire d'ordre $N$ à coefficients constants.} On cherche $y=e^{rt}$ : $P(r)=r^N+a_{N-1}r^{N-1}+\dots+a_0=0$ ({\it polynôme caractéristique}). Racine simple $r_j$ : solution $e^{r_jt}$ ; racine de multiplicité $\nu$ : $e^{rt},te^{rt},\dots,t^{\nu-1}e^{rt}$ ; paire complexe $\sigma\pm i\omega$ : $e^{\sigma t}\cos\omega t$ et $e^{\sigma t}\sin\omega t$. Exemple : $y''+\omega^2y=0$, $r=\pm i\omega$.
+
+      {\bf Réduction au premier ordre.} Avec $Y=\big(y,y',\dots,y^{(N-1)}\big)^{\mathsf T}$ on a $Y'=AY$ où $A$ est la matrice \emph{compagne}
+      $$A=\begin{pmatrix}0&1&0&\cdots&0\\0&0&1&\cdots&0\\\vdots&&&\ddots&\vdots\\-a_0&-a_1&-a_2&\cdots&-a_{N-1}\end{pmatrix},\qquad \det(\lambda I-A)=P(\lambda).$$
+      Les valeurs propres de $A$ sont exactement les racines caractéristiques. Exemple $N=2$ : $A=\begin{pmatrix}0&1\\-\omega^2&0\end{pmatrix}$, $\lambda=\pm i\omega$.
+
+      {\bf Solutions et exponentielle de matrice.} Si $Av=\lambda v$, alors $Y(t)=e^{\lambda t}v$ est solution. Si $A$ est diagonalisable, $A=P\,\mathrm{diag}(\lambda_j)\,P^{-1}$ et la solution générale est $Y(t)=\sum_jc_je^{\lambda_jt}v_j$, soit $Y(t)=e^{At}Y(0)$ avec $e^{At}=\sum_{k\ge0}\dfrac{A^kt^k}{k!}=P\,\mathrm{diag}(e^{\lambda_jt})\,P^{-1}$ ; on vérifie $\dfrac{\mathrm d}{\mathrm dt}e^{At}=Ae^{At}$. Si $A$ n'est pas diagonalisable (blocs de Jordan), des termes $t^je^{\lambda t}$ apparaissent : $\ddot x=0$ conduit à $x=a+bt$, valeur propre double $\lambda=0$ (c'est le mode de translation d'un système libre, exercices 4 et 9).
+
+      {\bf Lien avec les oscillateurs couplés.} Pour $M\ddot X+KX=0$ on pose $Z=(X,\dot X)^{\mathsf T}\in\mathbb R^{2n}$ :
+      $$Z'=\mathcal A\,Z,\qquad \mathcal A=\begin{pmatrix}0&I\\-M^{-1}K&0\end{pmatrix}.$$
+      Si $M^{-1}K\,u_p=\omega_p^2u_p$, alors $\mathcal A\begin{pmatrix}u_p\\\pm i\omega_pu_p\end{pmatrix}=\pm i\omega_p\begin{pmatrix}u_p\\\pm i\omega_pu_p\end{pmatrix}$. Il y a donc \emph{trois} objets différents :
+      $$
+      \begin{array}{l|l|l}
+        \omega_p^2 & \text{valeur propre de }M^{-1}K\ (n\times n) & \mathrm{s^{-2}},\ \text{réelle positive}\\
+        \omega_p & \text{pulsation propre} & \mathrm{rad\cdot s^{-1}}\\
+        \lambda=\pm i\omega_p & \text{valeur propre de }\mathcal A\ (2n\times2n) & \mathrm s^{-1},\ \text{imaginaire pure},\ \lambda^2=-\omega_p^2
+      \end{array}
+      $$
+      {\bf Forme close.} On peut écrire $X(t)=\cos(\Omega t)X_0+\Omega^{-1}\sin(\Omega t)\dot X_0$ avec $\Omega=(M^{-1}K)^{1/2}$, racine carrée de matrice définie par diagonalisation : c'est la décomposition sur les modes de la rubrique précédente écrite sous forme compacte.
+  - titre: "Modes propres, superposition, battements, échanges d'énergie"
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+        \item Un {\bf mode propre} est un mouvement où toutes les coordonnées oscillent à la \emph{même} pulsation avec des amplitudes relatives fixées (phases égales ou opposées). Un système à $n$ degrés de liberté possède $n$ modes ; un couplage \emph{lève la dégénérescence} des fréquences des oscillateurs identiques, car la raideur de couplage est « vue » différemment selon la forme du mode (nulle si le ressort n'est pas déformé, maximale si les éléments sont en opposition).
+        \item Le mode de plus basse fréquence est en phase (pas de nœud) ; le plus haut est le plus « alterné ». Plus un mode comporte de nœuds, plus sa pulsation est élevée. Le quotient de Rayleigh $\omega^2=\dfrac{A^{\mathsf T}KA}{A^{\mathsf T}MA}$ exprime que la pulsation est le rapport de l'énergie potentielle à l'énergie cinétique « réduite » du mode.
+        \item Toute solution est une {\bf superposition} de modes ; le poids de chaque mode est fixé par les conditions initiales. {\bf Excitation sélective :} un mouvement initial proportionnel à un vecteur propre (positions \emph{et} vitesses) n'excite que ce mode ; sinon, tous les modes dont le poids est non nul sont présents.
+        \item {\bf Battements.} La somme de deux mouvements sinusoïdaux de même amplitude et de pulsations proches s'écrit $\cos\omega_1t+\cos\omega_2t=2\cos\dfrac{\omega_2-\omega_1}2t\cos\dfrac{\omega_1+\omega_2}2t$ : porteuse à la pulsation moyenne, enveloppe lente de période $T_b=\dfrac{2\pi}{|\omega_2-\omega_1|}$. L'interprétation en « enveloppe lente » exige $|\omega_2-\omega_1|\ll\omega_1+\omega_2$ ; la factorisation reste mathématiquement exacte dans tous les cas.
+        \item {\bf Échanges d'énergie.} Pour deux oscillateurs identiques faiblement couplés, l'énergie passe périodiquement de l'un à l'autre. Le transfert est \emph{complet} si les fréquences sont égales avant couplage et si les deux modes ont le même poids ; il est partiel si les oscillateurs sont désaccordés (exercice 7).
+        \item {\bf Réponse forcée.} En régime sinusoïdal forcé à la pulsation $\omega$, $(K-\omega^2M)\underline X=\underline F$ : l'amplitude diverge (idéalement) à chaque pulsation propre (résonances) et peut s'annuler en un point donné pour une pulsation particulière (antirésonance, exercice 3).
+      \end{itemize}
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Projeter sans avoir construit la base"
+    texte: |
+      Écrire « $-mg\sin\alpha$ » parce que « c'est ce que l'on trouve dans les livres ». Faire systématiquement écrire $\vec e_\alpha=\cos\alpha\,\vec e_x+\sin\alpha\,\vec e_y$ et calculer $-mg\,\vec e_y\cdot\vec e_\alpha$.
+  - titre: "Confondre vecteur et coordonnées, ou composante et module"
+    texte: |
+      $F_\alpha<0$ ne signifie pas que la force est « petite » mais qu'elle pointe dans le sens des $\alpha$ décroissants. Les composantes sont algébriques ; les modules sont positifs.
+  - titre: "Prendre $T=mg$ pour la tension du fil"
+    texte: |
+      $T=mg\cos\alpha+m\ell\dot\alpha^2+\dots$ : l'égalité $T=mg$ n'est vraie qu'à l'ordre $0$. Elle est suffisante pour calculer la composante horizontale $T\sin\alpha$ à l'ordre $1$, mais il est plus propre de projeter sur la tangente et d'éliminer $T$.
+  - titre: "Linéariser une équation mais pas l'autre, ou une variable mais pas l'autre"
+    texte: |
+      Toutes les variables sont petites en même temps ; une linéarisation partielle donne des équations incohérentes (ordres mélangés) et un système qui n'est plus symétrique.
+  - titre: "Croire que $\\cos\\theta\\simeq1$ est « aussi bonne » que $\\sin\\theta\\simeq\\theta$"
+    texte: |
+      L'erreur relative est $\theta^2/2$ contre $\theta^2/6$. Et $\cos\theta\simeq1$ est inutilisable dans une énergie ($1-\cos\theta$ s'annulerait).
+  - titre: "Appliquer $S=x_1+x_2$, $D=x_1-x_2$ sans condition"
+    texte: |
+      Ce changement ne découple que si les coefficients diagonaux sont égaux et le couplage réciproque (exercice 2 : il ne sert à rien). Faire vérifier la condition avant le calcul.
+  - titre: "Oublier la normalisation et confondre « symétrique » avec « géométriquement symétrique »"
+    texte: |
+      Le mode « en phase » ($x_1=x_2$) est symétrique pour l'échange des coordonnées ; mais il est \emph{impair} par la symétrie miroir qui échange les deux pendules (il change de signe), alors que le mode en opposition est pair. Dire « en phase » et « en opposition de phase » évite l'ambiguïté.
+  - titre: "Confondre pulsation propre et valeur propre"
+    texte: |
+      $\omega$, $\omega^2$ et $\lambda=\pm i\omega$ ne sont pas interchangeables ; les unités ($\mathrm{rad\cdot s^{-1}}$, $\mathrm{s^{-2}}$, $\mathrm s^{-1}$) servent de garde-fou.
+  - titre: "Période des battements : confondre demi-période et période"
+    texte: |
+      Avec $x_1=a\sin\Omega_mt\sin\Omega_0t$ et $x_2=a\cos\Omega_mt\cos\Omega_0t$ ($\Omega_m=(\omega_2-\omega_1)/2$), l'énergie revient au même oscillateur après $T_b=2\pi/(\omega_2-\omega_1)$ ; le transfert d'un pendule à l'autre dure $T_b/2$.
+  - titre: "Raisonner sur les solutions $\\omega<0$ ou croire qu'il y a quatre modes"
+    texte: |
+      Une équation du quatrième degré en $\omega$ (exercice 3) ne contient que $\omega^2$ : les racines négatives ne sont que les opposées des racines positives. Il y a deux modes, c'est-à-dire deux valeurs de $\omega^2$.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Organisation de la séance (environ 2 h)"
+    texte: |
+      \begin{itemize}[label = $\bullet$]
+        \item $0$--$10$ min : accroche, démonstration de deux pendules couplés.
+        \item $10$--$60$ min : exercice 1, en insistant sur la mise en équation exacte puis la linéarisation, puis le découplage par $S$ et $D$.
+        \item $60$--$85$ min : exercice 2, découplage qui échoue, puis matrice et valeurs propres.
+        \item $85$--$110$ min : exercice 3 (questions de la première partie) ou exercice 4.
+        \item Travail à la maison : exercices 3 (seconde partie) et 4 de l'énoncé ; compléments au choix.
+      \end{itemize}
+  - titre: "Démonstration de cours"
+    texte: |
+      Deux pendules identiques (lourdes masses) reliés par un ressort souple ou, plus simplement, suspendus à une même ficelle tendue horizontalement : écarter une masse, lâcher, observer le transfert d'énergie ; puis exciter les deux en phase puis en opposition pour montrer les deux fréquences propres. Faire prédire le sens du transfert et l'ordre des deux fréquences avant l'expérience.
+  - titre: "Utiliser les trois niveaux d'aide"
+    texte: |
+      Les « coups de pouce » sont gradués : le premier oriente (que faut-il choisir ?), le deuxième donne la méthode, le troisième donne le calcul. Ne passer au suivant qu'après un temps de recherche autonome.
+  - titre: "Faire verbaliser les symétries"
+    texte: |
+      Avant de calculer : « que se passe-t-il si l'on échange les deux pendules ? », « que vaut la force du ressort si les deux masses se déplacent ensemble ? », « quel mode a la fréquence la plus haute, pourquoi ? ». Ces trois questions rendent les résultats prévisibles.
+
+bilan:
+  - titre: "Résultats fondamentaux du TD"
+    texte: |
+      $$
+      \begin{array}{l|l}
+        \textbf{Situation} & \textbf{Résultat clé}\\
+        \hline
+        \text{Pendules couplés par ressort (ex. 1)} & \omega_1=\sqrt{\dfrac g\ell},\ \ \omega_2=\sqrt{\dfrac g\ell+\dfrac{2k}m},\ \ T_{\mathrm{bat}}=\dfrac{2\pi}{\omega_2-\omega_1}\\
+        \text{Oscillateurs dissymétriques } (k,2k,4k) \text{ (ex. 2)} & \omega'^2=2\dfrac km\ \ (2,1),\quad \omega''^2=7\dfrac km\ \ (1,-2)\\
+        \text{Pendule--chariot (ex. 3)} & \omega^4-(\omega_1^2+\omega_2^2+2\Omega^2)\omega^2+\omega_1^2\omega_2^2+\Omega^2(\omega_1^2+\omega_2^2)=0\\
+        \text{Antirésonance du chariot (ex. 3)} & \omega^2=\omega_2^2+\Omega^2=\dfrac g\ell+\dfrac{k_c}m\ \Rightarrow\ T=1{,}26\ \mathrm s\\
+        \text{Molécule diatomique (ex. 4)} & \omega=\sqrt{\dfrac{k}{\mu}},\ \ \mu=\dfrac{m_1m_2}{m_1+m_2};\ \ k_{\mathrm{CO}}\simeq1{,}9\times10^3\ \mathrm{N\cdot m^{-1}}
+      \end{array}
+      $$
+  - titre: "Quatre messages à retenir"
+    texte: |
+      \begin{enumerate}
+        \item {\bf Projeter, c'est faire un produit scalaire} avec un vecteur unitaire dont on connaît les coordonnées ; les signes se justifient, ils ne se devinent pas.
+        \item {\bf Linéariser, c'est développer autour d'un équilibre} : $\sin\theta\simeq\theta$ dans les forces, $1-\cos\theta\simeq\theta^2/2$ dans l'énergie ; l'erreur est d'ordre $\theta^2$ en relatif.
+        \item {\bf Un système couplé est un ensemble d'oscillateurs indépendants dans de bonnes coordonnées} : le physicien les devine par symétrie, le mathématicien les calcule par diagonalisation ; la symétrie explique pourquoi la première méthode marche.
+        \item {\bf Un mouvement quelconque est une superposition de modes} : battements et échanges d'énergie sont la conséquence directe de la présence de deux fréquences propres voisines.
+      \end{enumerate}
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Formalisme lagrangien : où naissent $M$ et $K$"
+    texte: |
+      Avec $L=\tfrac12\dot X^{\mathsf T}M\dot X-V(X)$, les équations d'Euler--Lagrange donnent $M\ddot X=-\nabla V$ ; au voisinage d'un équilibre, $\nabla V\simeq KX$ avec $K$ la hessienne de $V$. Retrouver ainsi les équations de l'exercice 1 en deux lignes (potentiel $V=-mg\ell(\cos\alpha_1+\cos\alpha_2)+\tfrac12k(\ell_{\mathrm{ressort}}-d)^2$), et comprendre que la linéarisation est un développement de $V$ à l'ordre $2$.
+  - niveau: licence
+    titre: "Anticroisement des niveaux et théorie des perturbations"
+    texte: |
+      Pour deux oscillateurs de pulsations propres voisines $\omega_a,\omega_b$ et de couplage $\Omega^2$, les pulsations propres de l'ensemble ne se croisent jamais quand on fait varier $\omega_b-\omega_a$ : leur écart minimal vaut $2\Omega^2$ (exercices 3 et 7). Le même phénomène existe en mécanique quantique (système à deux niveaux) et en optique (guides couplés).
+  - niveau: master
+    titre: "Instabilité paramétrique et modes non linéaires"
+    texte: |
+      Pour deux pendules identiques couplés, le mode en phase est solution \emph{exacte} des équations non linéaires pour toute amplitude (le ressort reste à sa longueur naturelle) ; sa stabilité face au mode en opposition se discute par une équation de Hill--Mathieu et présente un seuil d'amplitude (exercice 8).
+  - niveau: master
+    titre: "De $N$ oscillateurs à la corde : limite continue"
+    texte: |
+      Une chaîne de $N$ masses reliées par des ressorts possède $N$ modes ; pour $N\to\infty$ avec $a\to0$ ($L=Na$ fixé), les modes deviennent ceux de la corde vibrante du TD 1 et la relation $\omega_p=2\omega_0\sin(k_pa/2)$ devient $\omega=ck$ (exercice 9 et TD 1, exercice 9).
+  - niveau: master
+    titre: "Spectroscopie de vibration"
+    texte: |
+      Les nombres d'onde de vibration d'une molécule (infrarouge, Raman) donnent directement les constantes de raideur des liaisons ; les modes normaux d'une molécule polyatomique (par exemple $\mathrm{CO_2}$, $\mathrm{H_2O}$) se calculent par la diagonalisation de $M^{-1}K$ présentée ici.
+
+accroche_point_cours_essentiel:
+  - titre: "Deux balançoires reliées par une corde : pourquoi l'une s'arrête-t-elle quand l'autre repart ?"
+    duree_introduction: "5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Deux enfants sont sur deux balançoires identiques voisines, reliées par une corde souple. L'un d'eux se balance, l'autre est au repos. Au bout d'un moment le premier ralentit puis s'immobilise tandis que le second s'est mis à se balancer, puis la situation se renverse. {\bf Pourquoi, et au bout de combien de temps ?} Que se passe-t-il si les deux enfants se balancent exactement en même temps, dans le même sens ? Et s'ils se balancent en sens opposé ?
+    texte: |
+      {\bf Idée clé : un système couplé a plusieurs fréquences propres, et le mouvement général est leur superposition.} Pour deux oscillateurs identiques de pulsation $\omega_0$ couplés, il existe deux mouvements « purs » : en phase (le couplage ne travaille pas, $\omega_1=\omega_0$) et en opposition de phase (le couplage ajoute de la raideur, $\omega_2>\omega_0$). Un mouvement quelconque est la somme des deux ; comme les fréquences diffèrent légèrement, les deux composantes se déphasent lentement et l'énergie oscille d'un oscillateur à l'autre :
+      $$x_1=a\sin\frac{\omega_2-\omega_1}2t\ \sin\frac{\omega_1+\omega_2}2t,\qquad x_2=a\cos\frac{\omega_2-\omega_1}2t\ \cos\frac{\omega_1+\omega_2}2t.$$
+
+outils_mathematiques:
+  - titre: "Produit scalaire et projection"
+    texte: |
+      $\vec u\cdot\vec v=\|\vec u\|\|\vec v\|\cos(\vec u,\vec v)=u_xv_x+u_yv_y$ ; coordonnée de $\vec F$ sur le vecteur unitaire $\vec e$ : $F_e=\vec F\cdot\vec e$.
+  - titre: "Dérivation d'une base locale"
+    texte: |
+      $\dfrac{\mathrm d}{\mathrm dt}(\cos\alpha,\sin\alpha)=\dot\alpha(-\sin\alpha,\cos\alpha)$ : tourner un vecteur unitaire de $\pi/2$ donne le vecteur dérivé.
+  - titre: "Développements limités de $\\sin$, $\\cos$, $\\sqrt{1+\\varepsilon}$"
+    texte: |
+      $\sin\theta=\theta-\dfrac{\theta^3}6+\dots$ ; $\cos\theta=1-\dfrac{\theta^2}2+\dots$ ; $\sqrt{1+\varepsilon}=1+\dfrac\varepsilon2-\dfrac{\varepsilon^2}8+\dots$ Erreur : premier terme négligé (séries alternées) ou reste de Taylor--Lagrange.
+  - titre: "Formules de somme et de produit"
+    texte: |
+      $\cos p+\cos q=2\cos\dfrac{p+q}2\cos\dfrac{p-q}2$ ; $\cos p-\cos q=-2\sin\dfrac{p+q}2\sin\dfrac{p-q}2$ ; $\cos(a\pm b)=\cos a\cos b\mp\sin a\sin b$.
+  - titre: "Équation $y''+\\omega^2y=0$ et formes équivalentes"
+    texte: |
+      $y=C\cos\omega t+D\sin\omega t=A\cos(\omega t+\varphi)$ avec $A=\sqrt{C^2+D^2}$ et $\tan\varphi=-D/C$ ; deux constantes fixées par $y(0)$ et $y'(0)$.
+  - titre: "Matrices symétriques $2\\times2$"
+    texte: |
+      Valeurs propres $\lambda_\pm=\dfrac{a+c}2\pm\sqrt{\big(\tfrac{a-c}2\big)^2+b^2}$ ; vecteurs propres orthogonaux ; trace $=\lambda_++\lambda_-$ ; déterminant $=\lambda_+\lambda_-$.
+  - titre: "Problème aux valeurs propres généralisé"
+    texte: |
+      $(K-\omega^2M)A=0$ ; $\det(K-\omega^2M)=0$ ; orthogonalité $A_p^{\mathsf T}MA_q=0$ pour $p\neq q$ ; décomposition $X_0=\sum_pc_pA_p$ avec $c_p=A_p^{\mathsf T}MX_0/(A_p^{\mathsf T}MA_p)$.
+  - titre: "Équation du second degré et discriminant"
+    texte: |
+      Pour une équation \emph{bicarrée} $\omega^4-s\,\omega^2+p=0$, on résout en $\omega^2$ : $\omega^2=\tfrac12\big(s\pm\sqrt{s^2-4p}\big)$, discriminant positif si les valeurs propres sont réelles.
+  - titre: "Exponentielle de matrice"
+    texte: |
+      $e^{At}=\sum_kA^kt^k/k!$ ; $\dfrac{\mathrm d}{\mathrm dt}e^{At}=Ae^{At}$ ; $e^{P\,D\,P^{-1}t}=P\,e^{Dt}P^{-1}$ pour $D$ diagonale.
+
+liens_autres_disciplines:
+  - discipline: "Chimie et spectroscopie"
+    texte: |
+      Les vibrations d'une molécule sont des modes normaux ; la fréquence d'absorption infrarouge d'une liaison $\mathrm{C{=}O}$ ou $\mathrm{O{-}H}$ identifie les groupes fonctionnels. La constante de raideur d'une liaison covalente est de l'ordre de $10^2$ à $10^3\ \mathrm{N\cdot m^{-1}}$.
+  - discipline: "Électrocinétique"
+    texte: |
+      Deux circuits $LC$ couplés par une inductance mutuelle ou une capacité de couplage sont exactement les deux oscillateurs de l'exercice 1 ; les deux fréquences propres sont celles du transformateur à résonance (mode en phase et mode en opposition).
+  - discipline: "Mécanique quantique"
+    texte: |
+      Le système à deux niveaux (molécule d'ammoniac, double puits) obéit à la même algèbre que deux oscillateurs couplés : écart d'énergie minimal $2\hbar\Omega$ à la résonance (anticroisement) et oscillations de Rabi entre les deux états.
+  - discipline: "Optique"
+    texte: |
+      Deux guides d'onde voisins échangent périodiquement leur puissance le long de leur propagation (coupleur directionnel) : l'axe de propagation joue le rôle du temps et l'échange d'énergie est le battement des deux « supermodes » symétrique et antisymétrique.
+  - discipline: "Génie civil et sismique"
+    texte: |
+      Un bâtiment multi-étages se modélise par un empilement de masses reliées par des ressorts de cisaillement (matrices $M$ et $K$ tridiagonales) ; les pulsations propres commandent la réponse à un séisme, et les absorbeurs à masse accordée (pendule suspendu sous un gratte-ciel) exploitent l'antirésonance de l'exercice 3.
+  - discipline: "Musique"
+    texte: |
+      Deux cordes de piano accordées à l'unisson couplées par le chevalet donnent deux modes voisins : leur battement lent produit la « chorus » ; en les désaccordant, on obtient un fondu ou un battement rapide. L'accordeur règle les cordes en écoutant les battements.
+  - discipline: "Physique du solide"
+    texte: |
+      Un cristal est un très grand système d'oscillateurs couplés : ses modes normaux (phonons) obéissent à $\omega(k)=2\sqrt{K/m}\,|\sin(ka/2)|$ pour une chaîne monoatomique (exercice 9 et TD 1, exercice 9).

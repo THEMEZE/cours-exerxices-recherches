@@ -1,0 +1,154 @@
+id: mp_s1_conservation
+intitule: "Séance 1 -- Conservation de la quantité de mouvement et bilan d'énergie cinétique"
+td: mp_phv111
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - dynamique.quantite_de_mouvement
+  - dynamique.systeme_isole
+  - energie.energie_cinetique
+  - dynamique.chocs
+
+metadonnees:
+  duree_estimee: "30 min"
+  difficulte: 3
+  type_exercice: "Travail expérimental / Synthèse"
+  indispensable: true
+
+enonce_intro: |
+  On reprend la chronophotographie de l'annexe ($m_A=1{,}50$ kg, $m_B=1{,}00$ kg, $\tau=0{,}1$ s) et les vitesses obtenues dans la partie précédente : $\vec v_A\approx(0{,}17;0{,}49)$, $\vec v_B\approx(-0{,}20;0{,}54)$ avant le choc ; $\vec v_A'\approx(-0{,}07;0{,}42)$, $\vec v_B'\approx(0{,}11;0{,}63)$ après, en m/s dans le repère $(Ox,Oy)$ de la feuille. On cherche à vérifier expérimentalement la conservation de la quantité de mouvement du système $\{A+B\}$ et à classifier le choc.
+
+prerequis:
+  - titre: "Démonstration de la conservation de $\\vec p_{\\rm tot}$"
+    texte: |
+      Pour un système isolé, $\vec p_{\rm tot}$ est conservée (voir la partie théorique). Les vecteurs $\vec p$ ont été tracés dans la partie précédente.
+  - titre: "Énergie cinétique"
+    texte: |
+      $E_c=\tfrac12mv^2$ est une grandeur {\bf scalaire} : l'énergie cinétique d'un système est la somme arithmétique des énergies cinétiques de ses parties.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Vérifier une loi de conservation avec une barre d'erreur"
+    texte: |
+      Construire $\vec p_{\rm tot}$ avant et après, comparer les deux à l'incertitude de mesure, calculer $E_c$ avant et après, déterminer le type de choc et conclure avec un esprit critique.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Distinguer ce qui se conserve de ce qui ne se conserve pas"
+    texte: |
+      Le résultat à obtenir : $\vec p_{\rm tot}$ conservée (écart $\lesssim5\%$ dans les composantes), $E_c$ presque conservée (perte $\approx7\%$, du même ordre que l'incertitude, $2\times$ l'incertitude sur $v$). Le choc est donc {\bf quasi élastique} ; on évitera de conclure « élastique » ou « inélastique » sans comparer la perte à l'incertitude. Montrer que l'incertitude sur $E_c$ est le double de celle sur $v$ (car $E_c\propto v^2$) : c'est un résultat attendu dans le compte rendu.
+
+point_cours:
+  - titre: "Critère de classification"
+    texte: |
+      On compare $E_c'/E_c$ à $1$ en tenant compte de l'incertitude $\delta E_c/E_c\approx2\,\delta v/v$ : choc élastique si $|E_c'-E_c|\lesssim\delta E_c$ ; partiellement élastique si la perte est significative ; mou si les corps repartent ensemble.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Additionner les normes des vecteurs $\\vec p$"
+    texte: |
+      $\|\vec p_A\|+\|\vec p_B\|\approx1{,}36$ avant et $1{,}28$ après n'ont aucun sens physique ici : seule la somme {\bf vectorielle} se conserve. $\|\vec p_{\rm tot}\|\approx1{,}28$ avant et $1{,}26$ après.
+  - titre: "Conclure « non élastique » à partir d'un écart de quelques pour cent"
+    texte: |
+      Une perte de $7\%$ avec une incertitude de $\pm10\%$ ne permet pas de conclure à une perte d'énergie réelle. Il faut {\bf comparer l'écart à l'incertitude}.
+  - titre: "Chercher la perte d'énergie dans le mauvais système"
+    texte: |
+      Si l'énergie diminue, elle n'a pas disparu : elle est devenue énergie interne (chaleur, déformation) et énergie acoustique ; la conservation de l'énergie totale reste vraie.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Faire prédire avant de calculer"
+    texte: |
+      Demander : « Le choc vous semble-t-il élastique ? » avant le calcul (les ressorts des bagues font du choc un choc proche d'un élastique). Cela ancre l'attente que le calcul confirme ou infirme.
+  - titre: "Préparer la transition vers la séance 2"
+    texte: |
+      Terminer en posant : « Et si, au lieu de $A$ et $B$ qui se séparent, c'était un seul corps qui {\bf éjecte} une partie de sa masse ? » C'est la propulsion par réaction.
+
+bilan:
+  - titre: "Résultats attendus"
+    texte: |
+      $\vec p_{\rm tot}\approx(0{,}06;\,1{,}28)$ avant, $\approx(0{,}01;\,1{,}26)$ après kg\,m\,s$^{-1}$ : conservation à $\approx5\%$ près. $E_c\approx0{,}37$ J avant, $\approx0{,}34$ J après (perte $\approx7\%$) : choc {\bf quasi élastique}.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Quelle énergie peut être perdue au maximum ?"
+    texte: |
+      Montrer que la perte maximale d'énergie cinétique dans un choc entre $A$ et $B$ (mou) est $\Delta E_c=\dfrac12\dfrac{m_Am_B}{m_A+m_B}\|\vec v_A-\vec v_B\|^2$ et la calculer avec les données de l'annexe.
+  - niveau: licence
+    titre: "Référentiel du centre de masse"
+    texte: |
+      Calculer la vitesse $\vec v_G$ du centre de masse avant et après le choc et vérifier qu'elle est constante. Exprimer $E_c$ dans $\mathcal R$ en fonction de $E_c^*$ (dans $\mathcal R^*$) : théorème de Kœnig.
+  - niveau: master
+    titre: "Estimation de $e$"
+    texte: |
+      Définir le coefficient de restitution $e=\dfrac{v_{\rm rel,n}'}{v_{\rm rel,n}}$ suivant la ligne des centres et l'estimer à partir de l'annexe. Le relier à la perte d'énergie.
+
+accroche_point_cours_essentiel:
+  - titre: "Où est passée l'énergie ?"
+    duree_introduction: "3 min"
+    question_d_accroche: |
+      La quantité de mouvement avant et après est la même. Et l'énergie cinétique ? Si elle diminue, où va-t-elle ? Et peut-elle {\bf augmenter} dans un choc ?
+    texte: |
+      {\bf Idée clé : la quantité de mouvement est conservée dans tout choc isolé, l'énergie cinétique seulement dans un choc élastique.} Dans un choc réel, l'énergie cinétique macroscopique diminue ; elle peut augmenter s'il y a libération d'énergie interne (explosion, ressort relâché) : c'est ce qui se passe dans une fusée.
+
+outils_mathematiques:
+  - titre: "Somme vectorielle par composantes"
+    texte: |
+      $\vec p_{\rm tot}=(p_{A,x}+p_{B,x},\,p_{A,y}+p_{B,y})$, norme $\sqrt{p_x^2+p_y^2}$.
+  - titre: "Écart relatif"
+    texte: |
+      $\varepsilon=\dfrac{|X'-X|}{X}$ ; on le compare à l'incertitude relative de la grandeur. Pour $E_c=\tfrac12mv^2$, l'incertitude relative est doublée.
+
+liens_autres_disciplines:
+  - discipline: "Thermodynamique"
+    texte: |
+      L'énergie cinétique « perdue » devient énergie interne : le premier principe $\Delta E_c+\Delta U=0$ pour un système isolé.
+  - discipline: "Physique nucléaire"
+    texte: |
+      Dans les collisions neutron--noyau, les chocs élastiques servent à ralentir les neutrons (modérateur d'un réacteur) : le transfert d'énergie est maximal pour une masse du modérateur proche de celle du neutron.
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{itemize}
+        \item[10.] Construire le vecteur $\vec p_{\rm tot}=\vec p_A+\vec p_B$ avant le choc, puis $\vec p_{\rm tot}'=\vec p_A'+\vec p_B'$ après le choc. Comparer ces deux vecteurs.
+        \item[11.] Calculer les variations $\Delta\vec p_A$ et $\Delta\vec p_B$ en composantes et en déduire $\Delta\vec p_A+\Delta\vec p_B$. Que vaut cette somme dans un système isolé ?
+        \item[12.] Quelles sont les causes d'écart avec la conservation parfaite de la quantité de mouvement ?
+      \end{itemize}
+    coup_de_pouce: |
+      Faites la somme composante par composante. Pour les causes d'écart, pensez à la mesure (pointage, échelle) et à la physique (coussin d'air imparfait, table non horizontale).
+    correction: |
+      $\vec p_{\rm tot}\approx(0{,}06;1{,}28)$ et $\vec p_{\rm tot}'\approx(0{,}01;1{,}26)$ ; écart $\approx0{,}05$ soit $4\%$. Somme des variations $\approx0{,}0$ à $0{,}05$ près.
+    solution:
+      - titre: "10. Quantité de mouvement totale"
+        texte: |
+          Composantes (kg\,m\,s$^{-1}$) : $\vec p_A=1{,}50\,(0{,}17;0{,}49)=(0{,}26;0{,}74)$, $\vec p_B=(-0{,}20;0{,}54)$ donc
+          $$\vec p_{\rm tot}\approx(0{,}06;\,1{,}28),\quad\|\vec p_{\rm tot}\|\approx1{,}28.$$
+          Après : $\vec p_A'=(-0{,}11;0{,}63)$, $\vec p_B'=(0{,}11;0{,}63)$ donc
+          $$\vec p_{\rm tot}'\approx(0{,}00;\,1{,}26),\quad\|\vec p_{\rm tot}'\|\approx1{,}26.$$
+          Les deux vecteurs sont presque identiques ($\approx1{,}5\%$ en norme, $\approx3^\circ$ en direction) : $\boxed{\vec p_{\rm tot}\simeq\vec p_{\rm tot}'}$.
+      - titre: "11. Variations"
+        texte: |
+          $\Delta\vec p_A\approx(-0{,}37;-0{,}11)$ et $\Delta\vec p_B\approx(0{,}31;0{,}09)$ donc $\Delta\vec p_A+\Delta\vec p_B\approx(-0{,}06;-0{,}02)$, de norme $\approx0{,}06$ (soit $\approx5\%$ de $\|\vec p_{\rm tot}\|$). Pour un système isolé, elle est nulle : $\Delta\vec p_A+\Delta\vec p_B=\vec0$.
+      - titre: "12. Causes d'écart"
+        texte: |
+          (i) Incertitude de pointage ($\pm1$ mm sur $\approx5$ cm : $2\%$ par vitesse) et d'échelle ; (ii) choix des points « avant/après » ; (iii) frottements résiduels sur le coussin d'air et table pas parfaitement horizontale (le système n'est que pseudo-isolé) ; (iv) masses connues à $\pm1\%$. L'écart de $5\%$ est de l'ordre de ces incertitudes : la conservation est {\bf vérifiée dans l'incertitude}.
+
+  - id: q2
+    enonce: |
+      \begin{itemize}
+        \item[13.] Calculer l'énergie cinétique totale du système $\{A+B\}$ avant puis après le choc.
+        \item[14.] Le choc est-il élastique, partiellement élastique ou mou ? Estimer l'incertitude sur $E_c$ pour justifier la réponse.
+        \item[15.] Que ferait-on pour qu'un choc soit mou ? Que vaudrait alors $\vec v_f$ et $E_c$ pour les données de l'annexe ?
+      \end{itemize}
+    coup_de_pouce: |
+      $E_c=\tfrac12m_Av_A^2+\tfrac12m_Bv_B^2$. L'incertitude relative sur $E_c$ est le double de celle sur $v$. Pour le choc mou : $\vec v_f=\dfrac{\vec p_{\rm tot}}{m_A+m_B}$.
+    correction: |
+      $E_c\approx0{,}37$ J, $E_c'\approx0{,}34$ J, perte $\approx7\%$ pour une incertitude $\approx\pm10\%$ : choc quasi élastique. Choc mou : $\vec v_f\approx(0{,}02;0{,}51)$, $E_c^{\rm mou}\approx0{,}33$ J.
+    solution:
+      - titre: "13. Énergies cinétiques"
+        texte: |
+          Avant : $E_c=\tfrac12(1{,}50)(0{,}52)^2+\tfrac12(1{,}00)(0{,}58)^2\approx0{,}203+0{,}168=\boxed{0{,}37~\mathrm{J}}$. Après : $E_c'=\tfrac12(1{,}50)(0{,}43)^2+\tfrac12(1{,}00)(0{,}64)^2\approx0{,}139+0{,}205=\boxed{0{,}34~\mathrm{J}}$.
+      - titre: "14. Nature du choc"
+        texte: |
+          $E_c'/E_c\approx0{,}93$ : perte de $\approx7\%$. Avec $\delta v/v\approx5\%$, $\delta E_c/E_c\approx10\%$ : la perte est {\bf inférieure à l'incertitude}. On conclut que le choc est {\bf élastique à l'incertitude près} (ou faiblement inélastique), ce qui est cohérent avec des bagues à ressorts. Les mobiles ne restent pas collés : ce n'est pas un choc mou.
+      - titre: "15. Et pour un choc mou ?"
+        texte: |
+          On remplace les ressorts par de la pâte à modeler ou du velcro : les mobiles repartent ensemble avec $\vec v_f=\dfrac{\vec p_{\rm tot}}{m_A+m_B}\approx\dfrac{(0{,}06;1{,}28)}{2{,}50}=(0{,}02;0{,}51)$ m/s, $\|\vec v_f\|\approx0{,}51$ m/s. Alors $E_c^{\rm mou}=\tfrac12(m_A+m_B)v_f^2\approx0{,}33$ J et la perte maximale est $\approx0{,}04$ J ($\approx10\%$) ; elle est faible parce que les deux mobiles avaient des vitesses presque identiques : $\Delta E_c=\tfrac12\dfrac{m_Am_B}{m_A+m_B}\|\vec v_A-\vec v_B\|^2=\tfrac12(0{,}6)(0{,}373)^2\approx0{,}04$ J avec $\|\vec v_A-\vec v_B\|\approx0{,}37$ m/s.

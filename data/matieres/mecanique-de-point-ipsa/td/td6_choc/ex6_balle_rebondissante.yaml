@@ -1,0 +1,194 @@
+id: td6_ex6
+intitule: "(*) Balle rebondissante et coefficient de restitution"
+td: td6
+facultatif: true
+seance: 1
+
+cours_rattache:
+  - collisions.coefficient_de_restitution
+  - collisions.choc_sur_paroi
+  - cinematique.chute_libre
+  - mathematiques.suites_geometriques
+
+metadonnees:
+  duree_estimee: "60 min"
+  difficulte: 4
+  type_exercice: "Exercice non guidé / Modélisation"
+  indispensable: false
+
+enonce_intro: |
+  Une balle est lâchée sans vitesse initiale d'une hauteur $h_0=1{,}00$ m au-dessus d'un sol dur et horizontal. À chaque rebond, la composante normale de la vitesse est multipliée par $-e$ ($0<e<1$ : coefficient de restitution), la composante tangentielle étant conservée (pas de frottement). On prendra $e=0{,}80$ et $g=9{,}81~\mathrm{m\,s^{-2}}$ ; les frottements de l'air sont négligés et les chocs sont supposés instantanés.
+
+prerequis:
+  - titre: "Coefficient de restitution sur un sol fixe"
+    texte: |
+      Pour un choc contre un sol immobile infiniment massif : $e=-\dfrac{v_{\rm après}}{v_{\rm avant}}$, soit $v'=-ev$ (composante normale). Énergie : $E_c'=e^2E_c$.
+  - titre: "Chute libre"
+    texte: |
+      Lâchée de $h$ sans vitesse : $t=\sqrt{2h/g}$, $v=\sqrt{2gh}$. Lancée vers le haut à $v$ : $h=\dfrac{v^2}{2g}$, durée de vol $\dfrac{2v}g$.
+  - titre: "Série géométrique"
+    texte: |
+      $\displaystyle\sum_{n=0}^\infty q^n=\dfrac1{1-q}$, $\displaystyle\sum_{n=1}^\infty q^n=\dfrac q{1-q}$ pour $|q|<1$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Décrire une suite de rebonds par un modèle"
+    texte: |
+      Savoir exprimer hauteurs, vitesses et durées des rebonds successifs, sommer une série géométrique pour obtenir une durée et une distance totales, traiter un rebond oblique et un rebond sur une paroi en mouvement (raquette).
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Un problème de suites qui a un sens physique"
+    texte: |
+      Résultats surprenants : les rebonds s'accumulent en un {\bf temps fini} ($t_{\rm tot}=t_0\dfrac{1+e}{1-e}=4{,}06$ s) alors qu'il y a une infinité de rebonds (paradoxe de Zénon mécanique). Le rebond oblique ($\tan\theta'=\tan\theta/e$ : la balle repart {\bf plus rasante}) et la raquette ($v'=ev+(1+e)V$) sont des applications directes du coefficient de restitution. Bon exercice de rédaction mathématique : montrer la récurrence sur $h_n$.
+
+point_cours:
+  - titre: "Rebond sur un sol fixe"
+    texte: |
+      Vitesse avant le rebond $n$ : $v_n=\sqrt{2gh_{n-1}}$. Après : $v_n'=ev_n$. Hauteur de remontée : $h_n=\dfrac{(ev_n)^2}{2g}=e^2h_{n-1}$, donc $h_n=e^{2n}h_0$.
+  - titre: "Durées"
+    texte: |
+      Première chute : $t_0=\sqrt{2h_0/g}$. Entre le rebond $n$ et $n+1$ : $\tau_n=\dfrac{2v_n'}g=2t_0e^n$ ($n\ge1$). Durée totale : $t_0+2t_0\dfrac e{1-e}=t_0\dfrac{1+e}{1-e}$.
+  - titre: "Rebond oblique et paroi mobile"
+    texte: |
+      Sans frottement : $v_t'=v_t$, $v_n'=-ev_n$. Rebond sur une paroi qui avance à la vitesse $V$ vers la balle : dans le référentiel de la paroi, la vitesse normale est inversée et multipliée par $e$ ; retour au référentiel du laboratoire en ajoutant $V$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Hauteur multipliée par $e$ au lieu de $e^2$"
+    texte: |
+      La vitesse est multipliée par $e$, la hauteur par $e^2$ (car $h\propto v^2$) : $e=0{,}8\Rightarrow h_1=0{,}64$ m.
+  - titre: "Oublier la durée de la première chute"
+    texte: |
+      $t_0$ ne se répète pas : la première chute ne fait qu'un aller (pas de montée), les suivantes sont des allers-retours : $2t_0e^n$.
+  - titre: "Conclure à une durée infinie"
+    texte: |
+      Série infinie ne veut pas dire durée infinie : la série géométrique converge ($q=e<1$).
+  - titre: "Rebond oblique : conserver l'angle"
+    texte: |
+      Avec $e<1$, la balle repart avec un angle plus grand par rapport à la normale : $\tan\theta'=\tan\theta/e>\tan\theta$.
+  - titre: "Paroi mobile : oublier $V$"
+    texte: |
+      Ne pas se contenter de $v'=ev$ : pour une raquette qui avance, il faut ajouter $(1+e)V$.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Mesure de $e$ à la maison"
+    texte: |
+      Lâcher une balle de $1$ m et mesurer la hauteur du premier rebond : $e=\sqrt{h_1/h_0}$. Avec une balle de tennis $e\approx0{,}75$ ; de basket $\approx0{,}85$ ; de pâte à modeler $0$.
+  - titre: "Mesure par le son"
+    texte: |
+      Enregistrer le bruit des rebonds avec un smartphone : le rapport entre deux intervalles successifs vaut $e$ ($\tau_{n+1}/\tau_n=e$).
+
+bilan:
+  - titre: "Résultats"
+    texte: |
+      $h_n=e^{2n}h_0$ ; $\tau_n=2t_0e^n$ ; $t_{\rm tot}=t_0\dfrac{1+e}{1-e}=4{,}06$ s ($t_0=0{,}452$ s) ; distance totale $h_0\dfrac{1+e^2}{1-e^2}=4{,}56$ m ; énergie dissipée par rebond $1-e^2=36~\%$ ; $h_{11}<1$ cm ; rebond oblique : $\tan\theta'=\tan\theta/e$ ; raquette : $v'=ev+(1+e)V=67{,}5$ m/s pour $v=20$, $V=30$ m/s, $e=0{,}75$.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Mesure de $e$ par la durée des rebonds"
+    texte: |
+      Montrer que le rapport de deux intervalles de temps successifs entre rebonds vaut $e$ et que $\tau_1=2et_0$. En déduire une méthode pour mesurer $e$ avec un chronomètre.
+  - niveau: licence
+    titre: "Dissipation continue et énergie totale"
+    texte: |
+      Montrer que la perte d'énergie cumulée tend vers $mgh_0$ (toute l'énergie initiale est dissipée) ; calculer la {\bf puissance moyenne} dissipée jusqu'à l'arrêt, $\dfrac{mgh_0}{t_{\rm tot}}$.
+  - niveau: master
+    titre: "Rebonds sur un sol vibrant (billes de Fermi)"
+    texte: |
+      Si le sol oscille verticalement à la fréquence $f$, la vitesse de rebond dépend de la phase du choc ; montrer que l'énergie moyenne de la balle peut {\bf augmenter} (accélérateur de Fermi) et discuter la stabilité du régime périodique.
+
+accroche_point_cours_essentiel:
+  - titre: "Une balle qui rebondit s'arrête-t-elle en un temps fini ?"
+    duree_introduction: "4 min"
+    question_d_accroche: |
+      Une balle rebondit une {\bf infinité} de fois, de moins en moins haut. {\bf S'arrête-t-elle en un temps fini ou infini ?} Quelle distance totale parcourt-elle ? Quelle fraction de son énergie est perdue à chaque rebond ?
+    texte: |
+      {\bf Idée clé : la vitesse est multipliée par $e$ à chaque rebond, la hauteur par $e^2$, la durée du vol par $e$.} La somme des durées est une série géométrique convergente : la balle s'arrête en un temps {\bf fini}.
+
+outils_mathematiques:
+  - titre: "Série géométrique"
+    texte: |
+      $\sum_{n=0}^\infty e^n=\dfrac1{1-e}$ ; $\sum_{n=1}^\infty e^{2n}=\dfrac{e^2}{1-e^2}$.
+  - titre: "Suite géométrique : terme général"
+    texte: |
+      $h_{n+1}=e^2h_n\Rightarrow h_n=h_0e^{2n}$ ; $h_n<\varepsilon\iff n>\dfrac{\ln(\varepsilon/h_0)}{2\ln e}$.
+  - titre: "Logarithmes"
+    texte: |
+      $\ln0{,}8=-0{,}223$ ; $\dfrac{\ln0{,}01}{2\ln0{,}8}=\dfrac{-4{,}605}{-0{,}446}=10{,}3$.
+
+liens_autres_disciplines:
+  - discipline: "Sport"
+    texte: |
+      Règlements sportifs : la FIFA impose un rebond du ballon de football compris entre $1{,}35$ et $1{,}55$ m depuis $2$ m ($e\approx0{,}82$--$0{,}88$) ; les balles de tennis rebondissent entre $1{,}35$ et $1{,}47$ m depuis $2{,}54$ m ($e\approx0{,}73$--$0{,}76$).
+  - discipline: "Mathématiques"
+    texte: |
+      Convergence de séries géométriques ; paradoxe d'Achille et de la tortue.
+  - discipline: "Matériaux"
+    texte: |
+      Le coefficient de restitution dépend du matériau et de la vitesse d'impact (viscoélasticité).
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{itemize}
+        \item[(a)] Calculer la durée $t_0$ de la première chute et la vitesse $v_1$ juste avant le premier rebond.
+        \item[(b)] Établir la hauteur $h_n$ atteinte après le $n$-ième rebond. Application numérique pour $n=1$, $2$, $5$. Combien de rebonds jusqu'à une hauteur $<1$ cm ?
+        \item[(c)] Quelle fraction de l'énergie mécanique est dissipée à chaque rebond ?
+      \end{itemize}
+    coup_de_pouce: |
+      Après le rebond $n$, la vitesse vaut $v_n'=ev_n$ ; la hauteur atteinte est $h_n=v_n'^2/(2g)$ et la vitesse de retour au sol est $\sqrt{2gh_n}$.
+    correction: |
+      $t_0=\sqrt{2h_0/g}=0{,}452$ s, $v_1=\sqrt{2gh_0}=4{,}43$ m/s ; $h_n=e^{2n}h_0$ : $h_1=0{,}64$ m, $h_2=0{,}41$ m, $h_5=0{,}107$ m ; $h_n<1$ cm pour $n\ge11$ ; fraction dissipée $1-e^2=0{,}36$.
+    solution:
+      - titre: "(a) Première chute"
+        texte: |
+          $$t_0=\sqrt{\frac{2h_0}g}=\sqrt{\frac{2}{9{,}81}}=\boxed{0{,}452~\mathrm s},\qquad v_1=gt_0=\sqrt{2gh_0}=\boxed{4{,}43~\mathrm{m/s}}.$$
+      - titre: "(b) Hauteurs successives"
+        texte: |
+          Après le $n$-ième rebond la vitesse est $v_n'=ev_n$ où $v_n=\sqrt{2gh_{n-1}}$ est la vitesse d'arrivée. Hauteur atteinte :
+          $$h_n=\frac{v_n'^2}{2g}=e^2\frac{v_n^2}{2g}=e^2h_{n-1}\ \Rightarrow\ \boxed{h_n=e^{2n}h_0}\quad(\text{suite géométrique de raison }e^2=0{,}64).$$
+          $h_1=0{,}64$ m ; $h_2=0{,}410$ m ; $h_5=0{,}8^{10}=0{,}107$ m. Condition $h_n<0{,}01$ m : $n>\dfrac{\ln(0{,}01)}{2\ln0{,}8}=10{,}3$, soit {\bf au bout de $11$ rebonds}.
+      - titre: "(c) Dissipation par rebond"
+        texte: |
+          Énergie juste avant le rebond $\tfrac12mv_n^2$, juste après $\tfrac12m(ev_n)^2=e^2\times$ avant : fraction dissipée $\boxed{1-e^2=0{,}36}$ à chaque rebond, quelle que soit la hauteur (l'énergie est perdue en déformation et chaleur).
+
+  - id: q2
+    enonce: |
+      \begin{itemize}
+        \item[(d)] Montrer que l'intervalle de temps entre le $n$-ième et le $(n+1)$-ième rebond vaut $\tau_n=2t_0e^n$. En déduire la durée totale $t_{\rm tot}$ jusqu'à l'arrêt ; AN. La balle s'arrête-t-elle en un temps fini ?
+        \item[(e)] Calculer la distance verticale totale parcourue. AN.
+        \item[(f)] {\bf Rebond oblique} : la balle arrive sur le sol avec un angle $\theta=30^\circ$ par rapport à la normale (vitesse $v$). Quelle est la direction après le rebond ? Quel est le rapport $v'/v$ ? Application numérique.
+      \end{itemize}
+    coup_de_pouce: |
+      (d) Durée d'un aller-retour : $2v_n'/g$ avec $v_n'=ev_n=e^nv_1$. (e) $h_0+2\sum_{n\ge1}h_n$. (f) Composante tangentielle conservée, composante normale multipliée par $-e$.
+    correction: |
+      (d) $\tau_n=2t_0e^n$ ; $t_{\rm tot}=t_0\dfrac{1+e}{1-e}=4{,}06$ s (fini). (e) $h_0\dfrac{1+e^2}{1-e^2}=4{,}56$ m. (f) $\tan\theta'=\dfrac{\tan\theta}e$, $\theta'=35{,}8^\circ$ ; $\dfrac{v'}v=\sqrt{\sin^2\theta+e^2\cos^2\theta}=0{,}85$.
+    solution:
+      - titre: "(d) Durée totale"
+        texte: |
+          Après le $n$-ième rebond, vitesse $v_n'=e^nv_1$ (récurrence $v_{n}'=ev_n=e\,v_{n-1}'$). Durée du vol (montée + descente) : $\tau_n=\dfrac{2v_n'}g=2e^n\dfrac{v_1}g=2t_0e^n$. Durée totale :
+          $$t_{\rm tot}=t_0+\sum_{n=1}^\infty2t_0e^n=t_0\Big(1+\frac{2e}{1-e}\Big)=\boxed{t_0\,\frac{1+e}{1-e}}=0{,}452\times9=\boxed{4{,}06~\mathrm s}.$$
+          La série converge ($e<1$) : {\bf la balle s'arrête en un temps fini}, après une infinité de rebonds de durées décroissantes ($\tau_n\to0$). Au bout de $n=11$ rebonds on a déjà $t=t_0\big(1+2\sum_{k=1}^{11}e^k\big)=3{,}75$ s, soit $92~\%$ du temps total.
+      - titre: "(e) Distance totale"
+        texte: |
+          $$D=h_0+2\sum_{n=1}^\infty h_n=h_0\Big(1+\frac{2e^2}{1-e^2}\Big)=\boxed{h_0\,\frac{1+e^2}{1-e^2}}=\frac{1{,}64}{0{,}36}=\boxed{4{,}56~\mathrm m}.$$
+          (chute de $1$ m, puis allers-retours de $2h_n$.) Cas limites : $e\to0$, $D\to h_0$ ; $e\to1$, $D\to\infty$ $\surd$.
+      - titre: "(f) Rebond oblique"
+        texte: |
+          Avant : $v_n=v\cos\theta$ (normale), $v_t=v\sin\theta$ (tangentielle). Après : $v_n'=ev\cos\theta$ (vers le haut), $v_t'=v\sin\theta$ (inchangée). L'angle $\theta'$ avec la normale vérifie
+          $$\boxed{\tan\theta'=\frac{v_t'}{v_n'}=\frac{\tan\theta}e},\qquad v'=v\sqrt{\sin^2\theta+e^2\cos^2\theta}.$$
+          Pour $\theta=30^\circ$ et $e=0{,}8$ : $\tan\theta'=\dfrac{0{,}577}{0{,}8}=0{,}722$, $\theta'=\boxed{35{,}8^\circ}$ (la balle repart plus rasante) ; $v'/v=\sqrt{0{,}25+0{,}64\times0{,}75}=\sqrt{0{,}73}=\boxed{0{,}85}$.
+
+  - id: q3
+    enonce: |
+      \begin{itemize}
+        \item[(g)] {\bf Rebond sur une raquette.} Une balle de tennis de vitesse $v=20~\mathrm{m/s}$ (vers la droite) est frappée par une raquette de masse très grande devant celle de la balle, animée d'une vitesse $V=30~\mathrm{m/s}$ (vers la gauche). Le coefficient de restitution est $e=0{,}75$. Calculer la vitesse de la balle après le choc, par un raisonnement dans le référentiel de la raquette. Quelle fraction de l'énergie fournie par la raquette est transmise ? Pourquoi une balle ne repart-elle pas à $2V$ ?
+      \end{itemize}
+    coup_de_pouce: |
+      Se placer dans le référentiel de la raquette (immobile) : la balle arrive à $v+V$ et repart à $e(v+V)$. Revenir au référentiel du laboratoire.
+    correction: |
+      Dans $\mathcal R_{\rm raq}$ : arrivée $v+V=50$ m/s, départ $e(v+V)=37{,}5$ m/s ; dans $\mathcal R$ : $v'=-[e(v+V)+V]$ en norme $67{,}5$ m/s vers la gauche ; $v'=ev+(1+e)V$.
+    solution:
+      - titre: "(g) Raquette : référentiel de la raquette"
+        texte: |
+          Raquette de masse infinie : son mouvement n'est pas modifié ; $\mathcal R_{\rm raq}$ est galiléen (translation uniforme). Dans ce référentiel, la balle arrive à la vitesse $v+V=20+30=50$ m/s (la raquette vient à la rencontre de la balle), le choc inverse la vitesse et la multiplie par $e$ : elle repart à $e(v+V)=37{,}5$ m/s. Retour au laboratoire : on ajoute la vitesse de la raquette ($30$ m/s dans le sens du mouvement de la raquette) :
+          $$\boxed{v'=e\,v+(1+e)\,V}=0{,}75\times20+1{,}75\times30=15+52{,}5=\boxed{67{,}5~\mathrm{m/s}}\ (243~\mathrm{km/h}),$$
+          dirigée vers la gauche (sens de la raquette). Pour $e=1$ : $v'=v+2V=80$ m/s (balle d'une raquette parfaitement élastique). {\bf Pourquoi pas $2V$ ?} Parce que $2V=60$ m/s ne vaudrait que pour une balle arrivant au repos ($v=0$) et $e=1$ ; ici une partie de l'énergie est dissipée ($e<1$) mais la balle apporte sa propre vitesse initiale. Énergie transmise à la balle : $\Delta E_c=\tfrac12m(67{,}5^2-20^2)$, pour $m=57$ g, $=\tfrac12\times0{,}057\times4156=118$ J, fournie par la raquette (qui perd très peu de vitesse puisque sa masse est grande).

@@ -1,0 +1,189 @@
+id: td5_ex7
+intitule: "(*) Puits de potentiel de Lennard-Jones"
+td: td5
+facultatif: true
+seance: 1
+
+cours_rattache:
+  - energie.diagramme_energie_potentielle
+  - energie.etats_lies_et_etats_de_diffusion
+  - energie.petites_oscillations
+  - energie.force_conservative_gradient
+
+metadonnees:
+  duree_estimee: "60 min"
+  difficulte: 4
+  type_exercice: "Exercice non guidé / Modélisation"
+  indispensable: false
+
+enonce_intro: |
+  Deux atomes de gaz rare (argon) interagissent par le potentiel de Lennard-Jones
+  $$E_p(r)=4\varepsilon\left[\Big(\frac\sigma r\Big)^{12}-\Big(\frac\sigma r\Big)^{6}\right],$$
+  où $r$ est la distance entre les centres, $\varepsilon>0$ la profondeur du puits et $\sigma$ une longueur. Pour l'argon : $\varepsilon/k_B=120$ K (soit $\varepsilon=1{,}66\times10^{-21}$ J $=10{,}3$ meV), $\sigma=0{,}34$ nm, masse atomique $m=39{,}95$ u $=6{,}63\times10^{-26}$ kg. On étudie le mouvement {\bf relatif} (une dimension, selon la droite des centres) ; la particule fictive a pour masse la {\bf masse réduite} $\mu_r=m/2$. On néglige tout rayonnement.
+
+prerequis:
+  - titre: "Force et énergie potentielle"
+    texte: |
+      $F(r)=-\dfrac{\mathrm dE_p}{\mathrm dr}$ ; équilibre : $E_p'(r_{\rm eq})=0$ ; stabilité : $E_p''(r_{\rm eq})>0$.
+  - titre: "Petites oscillations"
+    texte: |
+      Autour d'un minimum, $E_p\approx E_p(r_{\rm eq})+\tfrac12k_{\rm eff}(r-r_{\rm eq})^2$ avec $k_{\rm eff}=E_p''(r_{\rm eq})$ ; $T_0=2\pi\sqrt{\mu_r/k_{\rm eff}}$.
+  - titre: "Masse réduite"
+    texte: |
+      Deux masses $m_1,m_2$ en interaction mutuelle : le mouvement relatif est celui d'une particule de masse $\mu_r=\dfrac{m_1m_2}{m_1+m_2}$ ; ici $\mu_r=m/2$.
+  - titre: "Résolution d'une équation du second degré"
+    texte: |
+      $x^2-x-c=0\Rightarrow x=\dfrac{1\pm\sqrt{1+4c}}2$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Exploiter un potentiel réel"
+    texte: |
+      Savoir tracer et analyser un potentiel, trouver l'équilibre, la profondeur, la force maximale, la raideur effective et la période des petites oscillations, déterminer les points de rebroussement pour une énergie donnée et distinguer états liés et états de diffusion.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Un modèle réel, des questions rigoureuses"
+    texte: |
+      L'exercice est calculatoire mais propre : tout se simplifie avec la variable $x=(\sigma/r)^6$ (les deux termes deviennent $4\varepsilon(x^2-x)$). Les points de rebroussement s'obtiennent par une équation du second degré en $x$, d'où $r_\pm=\sigma\Big[\tfrac12\big(1\pm\sqrt{1+E/\varepsilon}\big)\Big]^{-1/6}$ ({\bf très élégant}). Points d'attention : (i) $E_p''$ est {\bf positive} en $r_{\rm eq}$, (ii) la force n'est pas maximale en $r_{\rm eq}$ (où elle est nulle) mais au point d'inflexion $r_i=(26/7)^{1/6}\sigma$ ; (iii) la dissociation exige l'énergie $\varepsilon$ (classique), ordre de grandeur $T\approx120$ K : l'argon est liquide à $87$ K.
+
+point_cours:
+  - titre: "Force et équilibre"
+    texte: |
+      $F(r)=-E_p'(r)=\dfrac{24\varepsilon}r\Big[2\Big(\dfrac\sigma r\Big)^{12}-\Big(\dfrac\sigma r\Big)^6\Big]$ : répulsive à courte distance ($F>0$), attractive à longue distance ($F<0$).
+  - titre: "États liés et états de diffusion"
+    texte: |
+      $E_m<0$ : mouvement borné entre deux rebroussements $r_-<r<r_+$ : état lié (molécule). $E_m>0$ : un seul rebroussement, la particule vient de l'infini et repart : diffusion.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Confondre $E_p=0$ et équilibre"
+    texte: |
+      $E_p(\sigma)=0$ (à $r=\sigma$ le potentiel s'annule) mais l'équilibre est en $r_{\rm eq}=2^{1/6}\sigma\approx1{,}122\,\sigma$, où $E_p=-\varepsilon$.
+  - titre: "Force maximale en $r_{\\rm eq}$"
+    texte: |
+      Au minimum du potentiel la force est {\bf nulle}. La force attractive maximale est en $r_i=(26/7)^{1/6}\sigma$, point d'inflexion ($E_p''=0$).
+  - titre: "Oublier la masse réduite"
+    texte: |
+      Pour deux atomes identiques la masse effective est $m/2$ : la période est plus courte ($1{,}26$ ps) que celle d'un atome oscillant dans un puits fixe ($1{,}79$ ps).
+  - titre: "Valeur de $k_{\\rm eff}$ : oublier le facteur $2^{1/3}$"
+    texte: |
+      $k_{\rm eff}=\dfrac{72\varepsilon}{r_{\rm eq}^2}=\dfrac{72\,\varepsilon}{2^{1/3}\sigma^2}\approx57{,}1\,\dfrac\varepsilon{\sigma^2}$.
+  - titre: "Mouvement symétrique ?"
+    texte: |
+      Le puits est asymétrique (mur raide à gauche, flanc doux à droite) : les rebroussements ne sont pas symétriques par rapport à $r_{\rm eq}$ ; la valeur moyenne de $r$ augmente avec l'énergie (dilatation thermique).
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Tracer le potentiel avec Python"
+    texte: |
+      Tracer $E_p/\varepsilon$ en fonction de $r/\sigma$ pour $r\in[0{,}9;\,3]\sigma$ avec les droites $E_m=-0{,}5\varepsilon$ et $E_m=+\varepsilon$ ; lire les rebroussements, comparer aux formules.
+  - titre: "Comparer à la thermodynamique"
+    texte: |
+      L'énergie $\varepsilon\approx10$ meV est de l'ordre de $k_BT$ à $120$ K : à $300$ K les atomes d'argon ne sont plus liés (gaz).
+
+bilan:
+  - titre: "Résultats"
+    texte: |
+      $r_{\rm eq}=2^{1/6}\sigma$, $E_p(r_{\rm eq})=-\varepsilon$ ; $F_{\max}^{\rm attr}=2{,}40\,\varepsilon/\sigma$ en $r_i=(26/7)^{1/6}\sigma=1{,}244\sigma$ ; $k_{\rm eff}=57{,}1\,\varepsilon/\sigma^2$ ; argon : $T_0\approx1{,}26$ ps ($f\approx0{,}79$ THz) ; rebroussements $r_\pm=\sigma\big[\tfrac12(1\pm\sqrt{1+E/\varepsilon})\big]^{-1/6}$ ; $E=-\varepsilon/2$ : $r_-=1{,}027\sigma$, $r_+=1{,}377\sigma$.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Anharmonicité et dilatation"
+    texte: |
+      Développer $E_p$ à l'ordre 3 autour de $r_{\rm eq}$ : $E_p\approx-\varepsilon+\tfrac12k_{\rm eff}u^2-\tfrac12\gamma\,u^3$ avec $u=r-r_{\rm eq}$ ; montrer que la valeur moyenne $\langle u\rangle>0$ augmente avec l'énergie (dilatation des solides).
+  - niveau: licence
+    titre: "Hamiltonien et portrait de phase"
+    texte: |
+      Écrire $H(r,p)=\dfrac{p^2}{2\mu_r}+E_p(r)$, tracer les courbes $H=\text{cte}$ dans le plan $(r,p)$ : courbes fermées (états liés), courbes ouvertes (diffusion), séparatrice $H=0$.
+  - niveau: master
+    titre: "Potentiel de Morse"
+    texte: |
+      Le potentiel de Morse $E_p=D\big(1-\mathrm e^{-a(r-r_e)}\big)^2-D$ est un meilleur modèle des liaisons covalentes ; calculer $k_{\rm eff}=2Da^2$, la période $T_0=2\pi\sqrt{\mu_r/(2Da^2)}$ et comparer à Lennard-Jones pour la molécule de dihydrogène.
+
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi deux atomes forment-ils une molécule ?"
+    duree_introduction: "4 min"
+    question_d_accroche: |
+      Deux atomes d'argon s'attirent à longue distance et se repoussent à courte distance. {\bf Existe-t-il une distance d'équilibre ?} À quelle température cette « molécule » se dissocie-t-elle ? À quelle fréquence vibre-t-elle ?
+    texte: |
+      {\bf Idée clé : lire la physique dans la forme de $E_p(r)$.} Minimum $\Rightarrow$ équilibre stable ; profondeur $\Rightarrow$ énergie de liaison ; courbure $\Rightarrow$ fréquence des petites oscillations ; intersection avec $E_m$ $\Rightarrow$ rebroussements.
+
+outils_mathematiques:
+  - titre: "Changement de variable $x=(\\sigma/r)^6$"
+    texte: |
+      $E_p=4\varepsilon(x^2-x)$ ; $\dfrac{\mathrm dx}{\mathrm dr}=-\dfrac6rx$ ; extrema de $x^2-x$ en $x=\tfrac12$.
+  - titre: "Dérivées successives de $r^{-n}$"
+    texte: |
+      $(r^{-n})'=-n\,r^{-n-1}$, $(r^{-n})''=n(n+1)\,r^{-n-2}$ ; d'où $E_p'=4\varepsilon\big[-12\sigma^{12}r^{-13}+6\sigma^6r^{-7}\big]$ et $E_p''=4\varepsilon\big[156\sigma^{12}r^{-14}-42\sigma^6r^{-8}\big]$.
+  - titre: "Résolution de $x^2-x-c=0$"
+    texte: |
+      Avec $c=E/(4\varepsilon)$ : $x_\pm=\dfrac12\big(1\pm\sqrt{1+E/\varepsilon}\big)$.
+  - titre: "Conversion énergie-température"
+    texte: |
+      $\varepsilon/k_B=120$ K ; à $300$ K, $k_BT=25{,}9$ meV $=2{,}5\,\varepsilon$.
+
+liens_autres_disciplines:
+  - discipline: "Chimie physique"
+    texte: |
+      Énergie de liaison, longueur de liaison, spectroscopie vibrationnelle ; le modèle de Lennard-Jones sert à simuler le comportement des gaz et des liquides (dynamique moléculaire).
+  - discipline: "Thermodynamique"
+    texte: |
+      Équation d'état de van der Waals : le terme attractif en $r^{-6}$ vient directement du potentiel de Lennard-Jones.
+  - discipline: "Science des matériaux"
+    texte: |
+      Raideur d'un solide : le module d'Young s'exprime avec $k_{\rm eff}/a$ ($a$ distance interatomique).
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{itemize}
+        \item[(a)] Montrer que $E_p(\sigma)=0$ et étudier le comportement de $E_p$ pour $r\to0$ et $r\to\infty$. Quel terme est répulsif ? attractif ?
+        \item[(b)] Établir l'expression de la force $F(r)$. Déterminer la distance d'équilibre $r_{\rm eq}$ et la valeur $E_p(r_{\rm eq})$. L'équilibre est-il stable ?
+        \item[(c)] Montrer que la force attractive est maximale en $r_i=\big(\tfrac{26}7\big)^{1/6}\sigma$ et calculer sa valeur. Application numérique pour l'argon : quelle force faut-il exercer pour séparer les deux atomes ?
+      \end{itemize}
+    coup_de_pouce: |
+      Poser $x=(\sigma/r)^6$ : $E_p=4\varepsilon(x^2-x)$. Équilibre : $E_p'=0$. La force est extrêmale quand $F'(r)=0$, c'est-à-dire $E_p''(r)=0$ (point d'inflexion).
+    correction: |
+      $E_p(\sigma)=0$ ; $F=\dfrac{24\varepsilon}r\big[2(\sigma/r)^{12}-(\sigma/r)^6\big]$ ; $r_{\rm eq}=2^{1/6}\sigma$, $E_p=-\varepsilon$, minimum (stable) ; $r_i=(26/7)^{1/6}\sigma=1{,}244\sigma$, $F_{\max}\approx-2{,}40\,\varepsilon/\sigma$ ; argon : $\approx12$ pN.
+    solution:
+      - titre: "(a) Comportement de $E_p$"
+        texte: |
+          $E_p(\sigma)=4\varepsilon[1-1]=0$. Pour $r\to0$ : le terme en $r^{-12}$ domine, $E_p\to+\infty$ (répulsion de coeur, terme {\bf répulsif}). Pour $r\to\infty$ : $E_p\simeq-4\varepsilon(\sigma/r)^6\to0^-$ (terme en $r^{-6}$ {\bf attractif}, interaction de van der Waals). Le potentiel est négatif pour $r>\sigma$ et positif pour $r<\sigma$.
+      - titre: "(b) Force, équilibre et stabilité"
+        texte: |
+          $$F=-\frac{\mathrm dE_p}{\mathrm dr}=4\varepsilon\Big[12\frac{\sigma^{12}}{r^{13}}-6\frac{\sigma^6}{r^7}\Big]=\boxed{\frac{24\varepsilon}r\Big[2\Big(\frac\sigma r\Big)^{12}-\Big(\frac\sigma r\Big)^6\Big]}.$$
+          $F=0\iff2(\sigma/r)^{12}=(\sigma/r)^6\iff(\sigma/r)^6=\tfrac12\iff\boxed{r_{\rm eq}=2^{1/6}\sigma\approx1{,}122\,\sigma}$. Avec $x=(\sigma/r)^6=\tfrac12$ : $E_p(r_{\rm eq})=4\varepsilon\big(\tfrac14-\tfrac12\big)=\boxed{-\varepsilon}$. Stabilité : $E_p''=4\varepsilon\big[156\sigma^{12}r^{-14}-42\sigma^6r^{-8}\big]$ ; en $r_{\rm eq}$, $\sigma^6=r_{\rm eq}^6/2$ et $\sigma^{12}=r_{\rm eq}^{12}/4$ :
+          $$E_p''(r_{\rm eq})=\frac{4\varepsilon}{r_{\rm eq}^2}\Big[\frac{156}4-\frac{42}2\Big]=\frac{72\varepsilon}{r_{\rm eq}^2}>0:$$
+          {\bf minimum, équilibre stable}.
+      - titre: "(c) Force attractive maximale"
+        texte: |
+          $F'(r)=-E_p''(r)=0\iff156\sigma^{12}r^{-14}=42\sigma^6r^{-8}\iff(\sigma/r)^6=\dfrac{42}{156}=\dfrac7{26}$, soit $\boxed{r_i=\big(\tfrac{26}7\big)^{1/6}\sigma\approx1{,}244\,\sigma}$. Force en ce point ($x=7/26$) :
+          $$F(r_i)=\frac{24\varepsilon}{r_i}\Big[2x^2-x\Big]=\frac{24\varepsilon}{1{,}244\,\sigma}\Big[\frac{98}{676}-\frac7{26}\Big]=\frac{24\varepsilon}{1{,}244\,\sigma}\times(-0{,}1243)\approx\boxed{-2{,}40\,\frac\varepsilon\sigma}.$$
+          Argon : $F_{\max}=2{,}40\times\dfrac{1{,}66\times10^{-21}}{0{,}34\times10^{-9}}\approx\boxed{1{,}2\times10^{-11}~\mathrm N}\approx12$ pN : force d'arrachement d'un dimère.
+
+  - id: q2
+    enonce: |
+      \begin{itemize}
+        \item[(d)] Établir la raideur effective $k_{\rm eff}$ des petites oscillations autour de $r_{\rm eq}$ puis la période et la fréquence de vibration du dimère d'argon (masse réduite $m/2$). Comparer au cas d'un atome oscillant dans un puits fixe.
+        \item[(e)] On donne l'énergie mécanique $E$ du mouvement relatif. Montrer que les rebroussements vérifient $r_\pm=\sigma\Big[\tfrac12\big(1\pm\sqrt{1+E/\varepsilon}\big)\Big]^{-1/6}$. Pour quelles valeurs de $E$ le mouvement est-il lié ? Calculer $r_\pm$ pour $E=-\varepsilon/2$.
+        \item[(f)] Pour $E=+\varepsilon$ (état de diffusion) : calculer la distance minimale d'approche. Quelle vitesse relative minimale faut-il communiquer à un dimère lié au repos en $r_{\rm eq}$ pour le dissocier ?
+      \end{itemize}
+    coup_de_pouce: |
+      (d) $\omega_0=\sqrt{k_{\rm eff}/\mu_r}$. (e) À un rebroussement, $E_c=0$ donc $E_p(r)=E$, soit $4\varepsilon(x^2-x)=E$ : équation du second degré en $x$. (f) Dissociation : $E_m\ge0$ ; énergie cinétique relative $\tfrac12\mu_rv^2$.
+    correction: |
+      (d) $k_{\rm eff}=72\varepsilon/r_{\rm eq}^2=57{,}1\,\varepsilon/\sigma^2\approx0{,}82$ N/m ; $T_0=2\pi\sqrt{\mu_r/k_{\rm eff}}\approx1{,}26$ ps, $f\approx0{,}79$ THz (atome seul : $1{,}79$ ps). (e) $r_\pm$ comme indiqué ; lié $\iff-\varepsilon\le E<0$ ; $E=-\varepsilon/2$ : $r_-=1{,}027\sigma$, $r_+=1{,}377\sigma$. (f) $r_{\min}=0{,}969\,\sigma$ pour $E=\varepsilon$ ; $v_{\rm diss}=\sqrt{2\varepsilon/\mu_r}=\sqrt{4\varepsilon/m}\approx316$ m/s.
+    solution:
+      - titre: "(d) Petites oscillations"
+        texte: |
+          Autour de $r_{\rm eq}$, avec $u=r-r_{\rm eq}$ : $E_p\simeq-\varepsilon+\tfrac12k_{\rm eff}u^2$ et
+          $$\boxed{k_{\rm eff}=E_p''(r_{\rm eq})=\frac{72\varepsilon}{2^{1/3}\sigma^2}\approx57{,}1\,\frac\varepsilon{\sigma^2}}.$$
+          Argon : $k_{\rm eff}=57{,}1\times\dfrac{1{,}66\times10^{-21}}{(0{,}34\times10^{-9})^2}\approx0{,}82~\mathrm{N/m}$. Équation du mouvement relatif : $\mu_r\ddot u=-k_{\rm eff}u$, d'où
+          $$T_0=2\pi\sqrt{\frac{\mu_r}{k_{\rm eff}}}=2\pi\sqrt{\frac{3{,}32\times10^{-26}}{0{,}82}}\approx\boxed{1{,}26\times10^{-12}~\mathrm s}\quad(f\approx0{,}79~\mathrm{THz}).$$
+          Pour un atome de masse $m$ dans un puits fixe, $T_0=2\pi\sqrt{m/k_{\rm eff}}=1{,}79$ ps ($\sqrt2$ plus long). Il s'agit d'une estimation harmonique (le puits est asymétrique : la période réelle augmente avec l'amplitude).
+      - titre: "(e) Rebroussements"
+        texte: |
+          Rebroussement : $E_c=0\Rightarrow E_p(r)=E$. Avec $x=(\sigma/r)^6$ : $4\varepsilon(x^2-x)=E\iff x^2-x-\dfrac E{4\varepsilon}=0$, soit
+          $$x_\pm=\tfrac12\Big(1\pm\sqrt{1+\tfrac E\varepsilon}\Big),\qquad r=\sigma\,x^{-1/6}\ \Rightarrow\ \boxed{r_\pm=\sigma\Big[\tfrac12\big(1\pm\sqrt{1+E/\varepsilon}\big)\Big]^{-1/6}}.$$
+          La racine existe si $E\ge-\varepsilon$ (minimum du potentiel). Pour $-\varepsilon<E<0$ les deux racines $x_\pm$ sont positives : {\bf deux rebroussements}, mouvement lié ($r_-<r<r_+$). Pour $E\ge0$, $x_-\le0$ : un seul rebroussement, {\bf état de diffusion}. $E=-\varepsilon/2$ : $\sqrt{1/2}=0{,}7071$, $x_+=0{,}8536\Rightarrow r_-=1{,}027\sigma$ ; $x_-=0{,}1464\Rightarrow r_+=1{,}377\sigma$. Asymétrie : $r_{\rm eq}-r_-=0{,}095\sigma$, $r_+-r_{\rm eq}=0{,}255\sigma$.
+      - titre: "(f) Approche minimale et dissociation"
+        texte: |
+          $E=+\varepsilon$ : $x_+=\tfrac12(1+\sqrt2)=1{,}207\Rightarrow r_{\min}=\sigma\,x_+^{-1/6}\approx\boxed{0{,}969\,\sigma}$ (le mur répulsif est très raide : $r_{\min}$ varie lentement avec $E$, d'où le modèle de « sphères dures »). Dissociation d'un dimère au repos en $r_{\rm eq}$ ($E=-\varepsilon$) : il faut $E\ge0$, soit un apport $\Delta E=\varepsilon$ en énergie cinétique relative : $\tfrac12\mu_rv^2=\varepsilon$,
+          $$v_{\rm diss}=\sqrt{\frac{2\varepsilon}{\mu_r}}=\sqrt{\frac{4\varepsilon}m}=\sqrt{\frac{4\times1{,}66\times10^{-21}}{6{,}63\times10^{-26}}}\approx\boxed{316~\mathrm{m/s}},$$
+          de l'ordre de la vitesse du son dans un gaz ($\approx320$ m/s à $0$ $^\circ$C) : une collision thermique suffit à dissocier un dimère à température ambiante ($k_BT=2{,}5\,\varepsilon$ à $300$ K), ce qui explique que l'argon soit un gaz.

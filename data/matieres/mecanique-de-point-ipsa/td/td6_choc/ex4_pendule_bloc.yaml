@@ -1,0 +1,193 @@
+id: td6_ex4
+intitule: "(*) Système pendule-bloc"
+td: td6
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - energie.conservation_energie_mecanique
+  - collisions.choc_elastique
+  - energie.frottement_solide_et_energie
+  - dynamique.deuxieme_loi
+
+metadonnees:
+  duree_estimee: "50 min"
+  difficulte: 3
+  type_exercice: "Synthèse / Révisions (trois phases)"
+  indispensable: true
+
+enonce_intro: |
+  Une boule de masse $m=500$ g est retenue par une corde de longueur $R=1{,}80$ m. La boule est écartée de sa position d'équilibre d'un angle $\theta=\pi/2$ (corde tendue horizontalement), puis lâchée sans vitesse initiale. En bas de sa trajectoire elle percute {\bf de plein fouet} un bloc de masse $M=1{,}5$ kg posé sur un plan horizontal. Le choc est parfaitement élastique, toutes les vitesses sont colinéaires. Après le choc, le bloc parcourt une distance $d$ sur le plan rugueux (coefficient de frottement cinétique $\mu_c=0{,}1$) et la boule remonte jusqu'à une hauteur $h<R$. On prendra $g=9{,}81~\mathrm{m\,s^{-2}}$.
+
+prerequis:
+  - titre: "Énergie mécanique d'un pendule"
+    texte: |
+      La tension du fil est perpendiculaire à la vitesse : elle ne travaille pas ; seul le poids travaille ; $E_m=\text{cte}$.
+  - titre: "Choc élastique frontal"
+    texte: |
+      Cible au repos : $v'=\dfrac{m-M}{m+M}v$, $w'=\dfrac{2m}{m+M}v$.
+  - titre: "Théorème de l'énergie cinétique avec frottement"
+    texte: |
+      $\Delta E_c=W_{\rm frottement}=-\mu_cMg\,d$ pour un glissement horizontal jusqu'à l'arrêt.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Enchaîner trois phases avec les bons théorèmes"
+    texte: |
+      Savoir utiliser {\bf l'énergie} avant le choc (chute du pendule), la {\bf quantité de mouvement et l'énergie} pendant le choc (élastique), puis de nouveau {\bf l'énergie ou Newton} après (remontée, frottement sur le bloc).
+
+objectifs_pedagogiques_enseignants:
+  - titre: "L'exercice qui sépare les trois outils"
+    texte: |
+      Phase 1 : $E_m$ conservée (pas $p$ : la tension et le poids sont extérieurs). Phase 2 : $p$ et $E_c$ conservées (choc bref). Phase 3 : $E_m$ conservée pour la boule, TEC avec frottement pour le bloc ($p$ n'est {\bf pas} conservée pendant le glissement). Joli résultat : avec $M=3m$, la boule repart à $\tfrac12v$ en sens inverse et monte à $h=R/4$ ; le bloc part à $\tfrac12v$ et parcourt $d=R/(4\mu_c)$ (indépendant de $m$ et $g$).
+
+point_cours:
+  - titre: "Les trois phases"
+    texte: |
+      (1) Avant : TEC ou $E_m$. (2) Choc : $p$ (+ $E_c$ si élastique), projection sur la direction du choc. (3) Après : $E_m$ (sans frottement) ou TEC (avec frottement) ou Newton.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Appliquer $E_m$ à travers le choc"
+    texte: |
+      Pour un choc élastique, $E_c$ totale est conservée, mais l'énergie mécanique de la {\bf boule seule} ne l'est pas : $E_m$ est transférée au bloc.
+  - titre: "Appliquer $p$ à travers la phase de glissement"
+    texte: |
+      Le frottement du plan est extérieur et non négligeable pendant la durée du glissement : $p$ du bloc n'est pas conservée. TEC.
+  - titre: "Oublier que la boule rebondit"
+    texte: |
+      Comme $m<M$, $v'<0$ : la boule repart en arrière (rebond). Elle remonte jusqu'à $h=\dfrac{v'^2}{2g}$ de l'autre côté du plan vertical.
+  - titre: "Tension du fil pendant le choc"
+    texte: |
+      La tension est verticale, le choc horizontal : elle n'a pas de composante horizontale ; pas d'impulsion horizontale.
+  - titre: "Confondre $h$ et l'angle"
+    texte: |
+      $h=R(1-\cos\theta_1)$ : $\cos\theta_1=1-h/R=0{,}75$, soit $\theta_1=41{,}4^\circ$.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Prédire avant de calculer"
+    texte: |
+      Demander : « la boule rebondit-elle ? jusqu'à quelle hauteur ? Le bloc va-t-il plus loin si $M$ est plus grande ? » (Non : il va moins loin quand $M$ augmente car $w'=2mv/(m+M)$ diminue.)
+  - titre: "Mesurer sur le terrain"
+    texte: |
+      Faire l'expérience avec une boule de pétanque et un bloc ; mesurer $h$ et $d$ ; la différence avec la théorie donne un coefficient de restitution $e<1$.
+
+bilan:
+  - titre: "Résultats"
+    texte: |
+      $v=\sqrt{2gR}=5{,}94$ m/s ; $v'=\dfrac{m-M}{m+M}v=-2{,}97$ m/s, $w'=\dfrac{2m}{m+M}v=+2{,}97$ m/s ; $h=\dfrac{v'^2}{2g}=\dfrac R4=0{,}45$ m ; $a=-\mu_cg=-0{,}981~\mathrm{m\,s^{-2}}$ ; $d=\dfrac{w'^2}{2\mu_cg}=\dfrac R{4\mu_c}=4{,}5$ m.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Deuxième choc"
+    texte: |
+      La boule repasse au point bas, de vitesse $2{,}97$ m/s vers le bloc, après une demi-période d'oscillation, soit $t_b\approx\pi\sqrt{R/g}\approx1{,}35$ s (estimation petits angles). Montrer que, à cet instant, le bloc a déjà parcouru $w't_b-\tfrac12\mu_cgt_b^2\approx3{,}1$ m : la boule, qui ne peut qu'osciller autour du point bas, ne rencontre donc plus le bloc.
+  - niveau: licence
+    titre: "Choc avec coefficient de restitution"
+    texte: |
+      Reprendre l'exercice avec $e=0{,}8$ : $v'=\dfrac{m-eM}{m+M}v$, $w'=\dfrac{(1+e)m}{m+M}v$. Calculer $h$ et $d$ et la fraction d'énergie dissipée dans le choc $\dfrac{(1-e^2)\,\mu_r}{2E_c}\,v^2$.
+  - niveau: master
+    titre: "Transfert d'énergie optimal"
+    texte: |
+      Pour une boule de masse $m$ et un bloc de masse $M$ variable, montrer que la distance $d\propto\dfrac{m^2}{(m+M)^2}$ est maximale pour $M\to0$, alors que l'énergie transférée $\dfrac{4mM}{(m+M)^2}$ est maximale pour $M=m$. Pourquoi sont-ce deux critères différents ?
+
+accroche_point_cours_essentiel:
+  - titre: "Une bille lourde ou légère : qui pousse le plus loin ?"
+    duree_introduction: "3 min"
+    question_d_accroche: |
+      Une boule suspendue est lâchée et percute un bloc. {\bf Le bloc va-t-il plus loin si la boule est plus lourde ?} Que se passe-t-il si le bloc est beaucoup plus lourd que la boule ?
+    texte: |
+      {\bf Idée clé : trois phases, trois outils.} Chute : énergie. Choc : quantité de mouvement. Glissement : énergie avec frottement.
+
+outils_mathematiques:
+  - titre: "Racines et rapports de masses"
+    texte: |
+      $\dfrac{m-M}{m+M}=\dfrac{0{,}5-1{,}5}{2}=-\tfrac12$ ; $\dfrac{2m}{m+M}=\dfrac12$.
+  - titre: "Hauteur et angle"
+    texte: |
+      $h=R(1-\cos\theta_1)$ pour un fil de longueur $R$ ; $\theta_1=\arccos(1-h/R)$.
+
+liens_autres_disciplines:
+  - discipline: "Expérience du pendule de choc"
+    texte: |
+      Mesure du coefficient de restitution $e$ à partir des hauteurs de rebond.
+  - discipline: "Sécurité des structures"
+    texte: |
+      Essais de choc de type Charpy : un pendule frappe un échantillon ; l'énergie absorbée se déduit de la différence de hauteur avant/après.
+
+questions:
+  - id: q1
+    enonce: |
+      {\bf 1/ Avant la collision.}
+      \begin{itemize}
+        \item[(a)] Définir les forces qui s'exercent sur la boule (frottements négligés).
+        \item[(b)] Calculer le travail de ces forces entre l'état initial et le passage à la verticale.
+        \item[(c)] Énoncer et appliquer le théorème de l'énergie cinétique.
+        \item[(d)] L'énergie mécanique est-elle conservée ? Justifier.
+        \item[(e)] En déduire la vitesse $v$ de la boule juste avant le choc.
+      \end{itemize}
+    coup_de_pouce: |
+      Deux forces : poids et tension. La tension est radiale, la vitesse tangentielle. Descente de hauteur $R$.
+    correction: |
+      Poids et tension ; $W_{\rm tension}=0$, $W_{\rm poids}=mgR$ ; TEC : $\tfrac12mv^2=mgR$ ; $E_m$ conservée ; $v=\sqrt{2gR}=5{,}94$ m/s.
+    solution:
+      - titre: "(a)(b) Forces et travaux"
+        texte: |
+          Système : la boule ; référentiel terrestre. Forces : le poids $m\vec g$ et la tension $\vec T$ du fil. La tension est dirigée selon le fil (radiale) et la vitesse est tangente au cercle : $\vec T\cdot\vec v=0$, donc $W_{\vec T}=0$. Le poids travaille : $W_{\vec P}=mg\,(z_i-z_f)=mgR$ (descente de la hauteur $R$).
+      - titre: "(c)(d) TEC et énergie mécanique"
+        texte: |
+          {\bf TEC} : $\Delta E_c=\sum W$. Ici $\tfrac12mv^2-0=mgR+0$. {\bf Énergie mécanique} : $\Delta E_m=W_{\rm nc}=W_{\vec T}=0$ : l'énergie mécanique est conservée (la tension est non conservative mais ne travaille pas).
+      - titre: "(e) Vitesse avant le choc"
+        texte: |
+          $$v=\sqrt{2gR}=\sqrt{2\times9{,}81\times1{,}80}=\boxed{5{,}94~\mathrm{m/s}}\ (\approx21~\mathrm{km/h}).$$
+          Indépendante de $m$ (comme une chute libre de hauteur $R$).
+
+  - id: q2
+    enonce: |
+      {\bf 2/ Choc frontal élastique} (le bloc est initialement au repos ; la boule arrive à $\vec v$).
+      \begin{itemize}
+        \item[(a)] Schématiser avant/après et nommer les vitesses : $\vec v'$ (boule) et $\vec w'$ (bloc).
+        \item[(b)] Quelles grandeurs sont conservées pendant le choc ? Justifier.
+        \item[(c)] Écrire les quantités de mouvement avant et après.
+        \item[(d)] Déterminer $v'$ et $w'$. Application numérique. Dans quel sens repart la boule ?
+      \end{itemize}
+    coup_de_pouce: |
+      Pendant le choc, la tension et le poids sont verticaux, perpendiculaires à la direction du choc (horizontale). Utiliser les formules du choc élastique à cible immobile.
+    correction: |
+      $p$ et $E_c$ conservées ; $mv=mv'+Mw'$ ; $v'=\dfrac{m-M}{m+M}v=-2{,}97$ m/s ; $w'=\dfrac{2m}{m+M}v=+2{,}97$ m/s ; la boule rebondit.
+    solution:
+      - titre: "(a)(b)(c) Conservations"
+        texte: |
+          Pendant le choc (bref), la composante horizontale des forces extérieures est nulle (poids et tension verticaux, réaction verticale s'il n'y a pas de frottement impulsif) : $p_x$ du système $\{$boule, bloc$\}$ est conservée. Le choc est élastique : $E_c$ aussi.
+          $$mv+0=mv'+Mw',\qquad\tfrac12mv^2=\tfrac12mv'^2+\tfrac12Mw'^2.$$
+      - titre: "(d) Vitesses après le choc"
+        texte: |
+          D'après l'exercice 1 : $v'=\dfrac{m-M}{m+M}v$, $w'=\dfrac{2m}{m+M}v$. Avec $m=0{,}5$ kg et $M=1{,}5$ kg :
+          $$v'=\frac{0{,}5-1{,}5}{2}\times5{,}94=\boxed{-2{,}97~\mathrm{m/s}},\qquad w'=\frac{2\times0{,}5}{2}\times5{,}94=\boxed{+2{,}97~\mathrm{m/s}}.$$
+          $v'<0$ : la boule {\bf rebondit} (la boule est plus légère que le bloc). Vérification : $p$ : $0{,}5\times5{,}94=2{,}97$ et $0{,}5\times(-2{,}97)+1{,}5\times2{,}97=2{,}97$ $\surd$ ; $E_c$ : $8{,}83$ J avant, $\tfrac12\cdot0{,}5\cdot8{,}83+\tfrac12\cdot1{,}5\cdot8{,}83=2{,}21+6{,}62=8{,}83$ J ✓.
+
+  - id: q3
+    enonce: |
+      {\bf 3/ Après la collision.}
+      \begin{itemize}
+        \item[(a)] À quelle hauteur $h$ remonte la boule (frottements de l'air négligés) ? Quel angle fait alors le fil avec la verticale ?
+        \item[(b)] Appliquer le PFD au bloc (force de frottement de norme $f=\mu_cMg$ opposée au mouvement) et projeter.
+        \item[(c)] Déterminer l'accélération du bloc.
+        \item[(d)] Calculer la distance $d$ parcourue par le bloc. Exprimer $d$ en fonction de $R$ et $\mu_c$ et commenter.
+      \end{itemize}
+    coup_de_pouce: |
+      (a) $E_m$ conservée pour la boule après le choc. (b) $-\mu_cMg=Ma$ (axe $Ox$ dans le sens du mouvement). (d) $0-w'^2=2a\,d$ ou TEC.
+    correction: |
+      (a) $h=\dfrac{v'^2}{2g}=\dfrac R4=0{,}45$ m, $\theta_1=41{,}4^\circ$ ; (b) $-\mu_cMg=Ma$ ; (c) $a=-\mu_cg=-0{,}981~\mathrm{m\,s^{-2}}$ ; (d) $d=\dfrac{w'^2}{2\mu_cg}=\dfrac R{4\mu_c}=4{,}5$ m.
+    solution:
+      - titre: "(a) Hauteur de remontée de la boule"
+        texte: |
+          Après le choc, $E_m$ de la boule est conservée : $\tfrac12mv'^2=mgh$, donc
+          $$h=\frac{v'^2}{2g}=\frac{2{,}97^2}{2\times9{,}81}=\boxed{0{,}45~\mathrm m}=\frac R4.$$
+          Le fil fait l'angle $\theta_1$ tel que $h=R(1-\cos\theta_1)$ : $\cos\theta_1=1-\tfrac14=0{,}75$, $\theta_1=\boxed{41{,}4^\circ}$ (du côté opposé au bloc). Pour $M=3m$, la boule perd la moitié de sa vitesse, donc les trois quarts de son énergie.
+      - titre: "(b)(c) PFD pour le bloc"
+        texte: |
+          Forces sur le bloc : poids, réaction normale $N=Mg$, frottement $\vec f$ opposé à la vitesse, de norme $\mu_cMg$. Projection sur $Ox$ (sens du mouvement) : $-\mu_cMg=Ma$, d'où
+          $$\boxed{a=-\mu_cg}=-0{,}1\times9{,}81=-0{,}981~\mathrm{m\,s^{-2}}$$
+          (décélération constante indépendante de la masse).
+      - titre: "(d) Distance parcourue"
+        texte: |
+          Cinématique ($v=0$ à l'arrêt) : $0-w'^2=2a\,d\Rightarrow d=\dfrac{w'^2}{2\mu_cg}=\dfrac{2{,}97^2}{2\times0{,}981}=\boxed{4{,}5~\mathrm m}$. {\bf Autre méthode} (TEC) : $0-\tfrac12Mw'^2=-\mu_cMg\,d$, même résultat. Expression littérale : comme $w'^2=\dfrac{gR}2$ ici, $d=\dfrac R{4\mu_c}=\dfrac{1{,}80}{0{,}4}=4{,}5$ m, {\bf indépendante de $g$ et de la masse du bloc dans ce cas particulier} ($M=3m$). Plausible : $4{,}5$ m de glissement pour un bloc lancé à $3$ m/s sur un sol avec $\mu_c=0{,}1$ (glace/plancher ciré).

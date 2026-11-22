@@ -1,0 +1,45 @@
+# ======================================================================
+# MODÈLE DE FICHIER QCM  —  un fichier = un chapitre, autant de questions que tu veux.
+# Copie-le dans data/matieres/<matiere>/qcm/<chapitre>.yaml
+# (ou : python3 tools/qcm.py new <matiere> <chapitre> "Titre")
+# Vérification : python3 tools/qcm.py check
+# ======================================================================
+chapitre: mon_chapitre            # facultatif : par défaut, le nom du fichier
+titre: "Chap. X — Titre du chapitre"
+# td: td1_corde                   # facultatif : rattache les questions à un TD (affichage dans Quartz)
+defauts:                          # appliqué à toutes les questions du fichier (écrasable question par question)
+  moment: entrainement            # debut | milieu | fin | entrainement | revision | bilan (libre)
+  difficulte: moyen               # facile | moyen | difficile
+  # ajouter_neutre: true          # « Je ne sais pas encore » ajouté tout seul (défaut : build/config.yaml → qcm:)
+
+questions:
+  # --- forme courte : énoncé, propositions, bonne réponse (numéro 1-based OU lettre) ---
+  - q: "Quelle grandeur change la hauteur du son quand on serre la clé d'une guitare ?"
+    choix: ["La tension F de la corde", "La couleur de la corde", "Le nom de la note"]
+    bonne: 1
+    explication: "$c=\\sqrt{F/\\mu}$ : plus F est grande, plus c (donc la fréquence) augmente."
+
+  # --- maths : $…$ ; gras : **…** ; italique : *…* ; Unicode (λ, √, ≈) accepté, converti pour les PDF ---
+  - q: "Un son de 440 Hz à c = 340 m/s a une longueur d'onde proche de…"
+    choix: ["0,77 m", "1,3 m", "7,7 m"]
+    bonne: a
+    difficulte: facile
+    explication: "λ = c/f ≈ 0,77 m."
+
+  # --- forme complète (retours personnalisés, id stable, figure, liens) ---
+  - id: mon_chapitre_exemple_complet     # sans id : <chapitre>_q001, _q002… (ordre du fichier)
+    q: "Les ondes sonores dans l'air sont…"
+    choix: ["transversales", "longitudinales"]
+    bonne: 2
+    moment: fin
+    lie_a: td1_ex2                       # exercice lié (lien Quartz)
+    sujets: [ondes-sonores]
+    # Figures / animations (même convention que les TD) :
+    figure: {ref: fig_corde_noeud, legende: "Corde en mode N=2"}   # -> web/public/figures/fig_corde_noeud.svg
+    #   image libre : figure: {src: /figures/mon_image.png}  (fichier déposé dans web/public/figures/)
+    #   plusieurs   : figure: [{ref: a}, {ref: b}]
+    animation: {ref: anim_corde_onde, formats: [gif]}              # -> animations/outputs/anim_corde_onde/animation.gif
+    feedback:
+      correct: "Oui : compressions/dilatations dans la direction de propagation."
+      incorrect: "Non : dans un fluide, il n'y a pas de cisaillement."
+      neutre: "Pas de souci, on le revoit."

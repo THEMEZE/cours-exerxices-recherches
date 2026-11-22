@@ -1,0 +1,263 @@
+id: td4_ex7
+intitule: "Complément (niveau 2, ambitieux) : oscillateurs désaccordés, anticroisement et transfert d'énergie"
+td: td4
+facultatif: true
+seance: 5
+
+cours_rattache:
+  - chap4.oscillateurs_couples
+  - chap4.matrices_masse_raideur
+  - chap4.modes_propres
+  - chap4.battements
+  - chap4.energie_des_modes
+
+metadonnees:
+  duree_estimee: "75 min"
+  difficulte: 4 # Sur une échelle de 1 à 5
+  priorite: 3
+  type_exercice: "Complément original, problème guidé de type concours/ENS"
+  indispensable: false
+
+enonce_intro: |
+  \textbf{Exercice complémentaire original (niveau 2).} Deux pendules simples de même masse $m$, de longueurs $\ell_a$ et $\ell_b$ légèrement différentes, sont suspendus côte à côte et couplés par un ressort horizontal de raideur $k_c$, accroché aux masses (ressort relâché quand les deux fils sont verticaux). On note $x_a$, $x_b$ les abscisses des masses (petits angles), $\omega_a^2=g/\ell_a$, $\omega_b^2=g/\ell_b$, $\Omega^2=k_c/m$ et $\omega_0^2=\dfrac{\omega_a^2+\omega_b^2}2$, $\Delta=\omega_b^2-\omega_a^2$ (désaccord). On suppose $\Omega^2\ll\omega_0^2$. Dans les applications numériques : $\omega_0^2=100\ \mathrm{s^{-2}}$, $\Omega^2=0{,}5\ \mathrm{s^{-2}}$.
+
+  Le but est de comprendre ce qui se passe quand on \emph{désaccorde} deux oscillateurs couplés : comment les modes évoluent, pourquoi les fréquences ne se croisent jamais, et quelle fraction de l'énergie peut passer d'un oscillateur à l'autre.
+
+# figure:
+#   - ref: td4_ex7_pendules_desaccordes
+#     legende: "Deux pendules de longueurs différentes, couplés par un ressort."
+#     width: 0.7
+#     label: "fig:pendules_desaccordes"
+#   - ref: td4_ex7_anticroisement
+#     legende: |
+#       Suggestion : $\omega'^2$ et $\omega''^2$ en fonction de $\Delta$ : hyperbole d'anticroisement, avec les asymptotes (droites $\omega_a^2+\Omega^2$ et $\omega_b^2+\Omega^2$) et l'écart minimal $2\Omega^2$ en $\Delta=0$.
+#     width: 0.8
+#     label:
+
+prerequis:
+  - titre: "Exercices 2 et 3 du TD4"
+    texte: |
+      Oscillateurs dissymétriques, matrice $K$, équation caractéristique bicarrée, rapport d'amplitudes.
+  - titre: "Trigonométrie"
+    texte: |
+      $\tan2\theta=\dfrac{2\tan\theta}{1-\tan^2\theta}$, $\sin^22\theta=\dfrac{\tan^22\theta}{1+\tan^22\theta}$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Comprendre l'anticroisement des niveaux"
+    texte: |
+      Montrer que $\omega''^2-\omega'^2=2\sqrt{(\Delta/2)^2+\Omega^4}\ge2\Omega^2$ : le couplage empêche les fréquences de se croiser.
+  - titre: "Introduire l'angle de mélange"
+    texte: |
+      Décrire les modes par $(\cos\theta,\sin\theta)$ et $(-\sin\theta,\cos\theta)$ avec $\tan2\theta=2\Omega^2/\Delta$.
+  - titre: "Prévoir le transfert d'énergie"
+    texte: |
+      Montrer que la fraction maximale d'énergie transférée est $\sin^22\theta=\dfrac{4\Omega^4}{\Delta^2+4\Omega^4}$ et que la période de battement est $T_b=\dfrac{2\pi}{\omega''-\omega'}$.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Faire percevoir l'analogie avec le système à deux niveaux"
+    texte: |
+      Le problème est mathématiquement celui d'un atome à deux niveaux couplé à un champ (oscillation de Rabi généralisée) : le transfert est complet seulement à résonance et sa fraction maximale tombe en $\sin^22\theta$ quand le désaccord augmente.
+  - titre: "Lire un diagramme d'anticroisement"
+    texte: |
+      Loin du croisement, les modes ressemblent aux oscillateurs isolés ; près du croisement, ils sont mélangés à $50/50$ : « les modes échangent leur caractère ».
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Croire que les fréquences propres se croisent à l'accord"
+    texte: |
+      À $\Delta=0$ les deux pulsations propres sont $\omega_0^2$ et $\omega_0^2+2\Omega^2$ : elles sont séparées de $2\Omega^2$, jamais égales.
+  - titre: "Confondre pulsations propres et pulsations des oscillateurs isolés"
+    texte: |
+      $\omega_a,\omega_b$ sont les pulsations \emph{sans couplage} ; les pulsations propres $\omega',\omega''$ sont celles du système couplé.
+  - titre: "Utiliser la formule des battements hors de son domaine"
+    texte: |
+      $T_b=2\pi/(\omega''-\omega')$ vaut toujours, mais la forme « produit de sinusoïdes » à deux amplitudes égales n'est valable qu'à l'accord ; hors accord, l'oscillateur 2 n'est jamais complètement excité.
+  - titre: "Sommer des énergies des modes sans tenir compte des termes croisés"
+    texte: |
+      L'énergie de chaque oscillateur isolé n'est pas conservée seule : seul le total l'est (le terme d'interaction est petit mais non nul).
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Faire tracer le diagramme"
+    texte: |
+      Demandez le tracé de $\omega'^2$ et $\omega''^2$ en fonction de $\Delta$ avant tout calcul : deux droites qui se croisent. Puis « que fait le couplage ? ». La réponse : il écarte les droites en une hyperbole.
+
+bilan:
+  - titre: "Résultats à retenir"
+    texte: |
+      $$\omega'^2,\omega''^2=\omega_0^2+\Omega^2\mp\sqrt{\tfrac{\Delta^2}4+\Omega^4},\qquad\tan2\theta=\frac{2\Omega^2}{\Delta},\qquad\text{fraction transférée }\sin^22\theta=\frac{4\Omega^4}{\Delta^2+4\Omega^4},$$
+      $$T_b=\frac{2\pi}{\omega''-\omega'}\simeq\frac{2\pi}{\sqrt{\delta^2+\Omega^4/\omega_0^2}},\quad\delta=\frac{\Delta}{2\omega_0}.$$
+      Avec $\omega_0^2=100$ et $\Omega^2=0{,}5$ : à l'accord $\Delta=0$, $T_b=126$ s et le transfert est total ; pour $\Delta=2$, la fraction transférée est $20\,\%$.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Modes comme rotation d'un angle $\\theta$"
+    texte: |
+      Montrer que $P(\theta)=\begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}$ diagonalise $K$ et que $\theta$ varie de $\pi/4$ (accord) à $0$ (grand désaccord).
+  - niveau: master
+    titre: "Analogie quantique"
+    texte: |
+      Montrer que les équations des amplitudes lentes sont celles d'un système à deux niveaux ($i\dot c=Hc$ avec $H=\begin{pmatrix}-\delta&\kappa\\\kappa&\delta\end{pmatrix}$) et identifier $\sqrt{\delta^2+\kappa^2}$ à la fréquence de Rabi généralisée.
+  - niveau: master
+    titre: "Passage adiabatique"
+    texte: |
+      Si $\Delta$ varie lentement de $-\infty$ à $+\infty$, montrer que l'énergie reste sur le mode : le pendule excité au début est excité à la fin sur l'autre oscillateur (« échange de caractère » ; formule de Landau--Zener pour une variation rapide).
+
+accroche_point_cours_essentiel:
+  - titre: "Deux diapasons presque identiques"
+    duree_introduction: "3 min"
+    question_d_accroche: |
+      Deux diapasons presque identiques sont posés sur la même caisse. On en frappe un seul. L'autre se met-il à vibrer ? Complètement ? Que se passe-t-il s'ils sont de plus en plus différents ?
+    texte: |
+      {\bf Idée clé : le transfert d'énergie est total seulement si les deux oscillateurs sont accordés.} Plus le désaccord $\Delta$ est grand devant le couplage $\Omega^2$, moins l'énergie passe : la fraction transférée vaut $\sin^22\theta$ avec $\tan2\theta=2\Omega^2/\Delta$.
+
+outils_mathematiques:
+  - titre: "Valeurs propres d'une matrice symétrique $2\\times2$"
+    texte: |
+      $\begin{pmatrix}p&q\\q&r\end{pmatrix}$ : $\lambda=\dfrac{p+r}2\pm\sqrt{\Big(\dfrac{p-r}2\Big)^2+q^2}$ ; angle $\tan2\theta=\dfrac{2q}{p-r}$.
+  - titre: "Développement de la racine"
+    texte: |
+      $\sqrt{\Delta^2/4+\Omega^4}\simeq\dfrac{|\Delta|}2+\dfrac{\Omega^4}{|\Delta|}$ pour $|\Delta|\gg2\Omega^2$ (décalage perturbatif) ; $\simeq\Omega^2$ pour $\Delta\to0$.
+  - titre: "Différence de racines"
+    texte: |
+      $\omega''-\omega'=\dfrac{\omega''^2-\omega'^2}{\omega''+\omega'}\simeq\dfrac{\omega''^2-\omega'^2}{2\omega_0}$.
+
+liens_autres_disciplines:
+  - discipline: "Physique quantique"
+    texte: |
+      Système à deux niveaux : les niveaux d'énergie ne se croisent pas (anticroisement) ; l'oscillation de Rabi est l'analogue du battement.
+  - discipline: "Optique"
+    texte: |
+      Deux guides d'onde couplés : le transfert de puissance d'un guide à l'autre est complet seulement si leurs indices sont égaux (coupleur directionnel).
+
+questions:
+  - id: q1
+    enonce: |
+      \textbf{Question 1.} Écrire les équations du mouvement de $x_a$ et $x_b$ (petits angles) et la matrice $\mathcal K$ telle que $\ddot X+\mathcal KX=0$. Exprimer $\mathcal K$ avec $\omega_0^2$, $\Delta$ et $\Omega^2$.
+    coup_de_pouce:
+      - titre: "Reprendre l'exercice 2"
+        texte: |
+          Chaque pendule a sa propre pulsation $\omega_a$ ou $\omega_b$ ; le ressort ajoute $\Omega^2$ sur la diagonale et $-\Omega^2$ hors diagonale.
+    correction:
+      - titre: "Matrice"
+        texte: |
+          $\ddot x_a+(\omega_a^2+\Omega^2)x_a-\Omega^2x_b=0$, $\ddot x_b+(\omega_b^2+\Omega^2)x_b-\Omega^2x_a=0$ ; $\mathcal K=\begin{pmatrix}\omega_0^2-\Delta/2+\Omega^2&-\Omega^2\\-\Omega^2&\omega_0^2+\Delta/2+\Omega^2\end{pmatrix}$.
+    solution:
+      - titre: "Équations"
+        texte: |
+          Pour chaque pendule, la projection sur la tangente donne le rappel de gravité $-\omega_{a,b}^2x_{a,b}$ ; le ressort (allongement $x_b-x_a$) ajoute $+\Omega^2(x_b-x_a)$ sur $a$ et $-\Omega^2(x_b-x_a)$ sur $b$ (même méthode que les exercices 1 et 3) : $\ddot x_a=-\omega_a^2x_a+\Omega^2(x_b-x_a)$, $\ddot x_b=-\omega_b^2x_b-\Omega^2(x_b-x_a)$.
+      - titre: "Matrice et paramètres"
+        texte: |
+          $\omega_a^2=\omega_0^2-\Delta/2$ et $\omega_b^2=\omega_0^2+\Delta/2$ (définition de $\omega_0^2$ et $\Delta$), d'où $\mathcal K$ ci-dessus. Elle est symétrique : réciprocité. Les deux diagonales sont égales si et seulement si $\Delta=0$ ; alors seulement le découplage par somme et différence fonctionne (exercice 1).
+      - titre: "Contrôles"
+        texte: |
+          $\Omega=0$ : $\mathcal K$ diagonale, pulsations $\omega_a,\omega_b$. $\Delta=0$ : exercice 1.
+
+  - id: q2
+    enonce: |
+      \textbf{Question 2.} Calculer les pulsations propres $\omega'$ et $\omega''$. Montrer que $\omega''^2-\omega'^2=2\sqrt{\Delta^2/4+\Omega^4}\ge2\Omega^2$ : les niveaux ne se croisent jamais. Tracer l'allure de $\omega'^2$, $\omega''^2$ en fonction de $\Delta$ et préciser les asymptotes.
+    coup_de_pouce:
+      - titre: "Formule des valeurs propres"
+        texte: |
+          Appliquez $\lambda=\dfrac{p+r}2\pm\sqrt{\big(\tfrac{p-r}2\big)^2+q^2}$ à $\mathcal K$ : $p-r=-\Delta$, $q=-\Omega^2$.
+      - titre: "Asymptotes"
+        texte: |
+          Pour $|\Delta|\to\infty$, développez la racine : $\sqrt{\Delta^2/4+\Omega^4}\simeq|\Delta|/2$.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $\omega'^2,\omega''^2=\omega_0^2+\Omega^2\mp\sqrt{\dfrac{\Delta^2}4+\Omega^4}$. Asymptotes : $\omega_a^2+\Omega^2$ et $\omega_b^2+\Omega^2$ (droites de pente $\mp\tfrac12$ en $\Delta$). Écart minimal $2\Omega^2$ à $\Delta=0$ : hyperbole d'anticroisement.
+    solution:
+      - titre: "Valeurs propres"
+        texte: |
+          $\mathrm{tr}\,\mathcal K=2(\omega_0^2+\Omega^2)$ et $\det\mathcal K=(\omega_0^2+\Omega^2)^2-\dfrac{\Delta^2}4-\Omega^4$ donnent $\omega^2=\omega_0^2+\Omega^2\pm\sqrt{\dfrac{\Delta^2}4+\Omega^4}$. Le discriminant est strictement positif dès que $\Omega\ne0$ : jamais de dégénérescence.
+      - titre: "Anticroisement"
+        texte: |
+          $\omega''^2-\omega'^2=2\sqrt{\Delta^2/4+\Omega^4}$ est minimal en $\Delta=0$ et vaut $2\Omega^2$. Sans couplage ($\Omega=0$) les deux pulsations propres $\omega_a^2=\omega_0^2-\Delta/2$ et $\omega_b^2=\omega_0^2+\Delta/2$ sont deux droites qui se croisent en $\Delta=0$ ; avec couplage elles forment les deux branches d'une hyperbole. Le croisement est \emph{évité}.
+      - titre: "Application numérique"
+        texte: |
+          $\omega_0^2=100$, $\Omega^2=0{,}5$, $\Delta=0$ : $\omega'^2=100{,}5$ ($\omega'=10{,}025$) et $\omega''^2=101{,}5$ ($\omega''=10{,}075$) ; $\omega''-\omega'=0{,}0499\ \mathrm{rad\cdot s^{-1}}$.
+      - titre: "Perturbation à grand désaccord"
+        texte: |
+          Pour $|\Delta|\gg2\Omega^2$ : $\omega'^2\simeq\omega_a^2+\Omega^2-\dfrac{\Omega^4}{\Delta}$, $\omega''^2\simeq\omega_b^2+\Omega^2+\dfrac{\Omega^4}\Delta$ (pour $\Delta>0$) : chaque niveau est décalé de $\Omega^2$ (le ressort s'ajoute à la raideur) et repoussé de $\Omega^4/\Delta$ par l'autre : c'est la perturbation du second ordre, qui disparaît lentement avec le désaccord.
+
+  - id: q3
+    enonce: |
+      \textbf{Question 3.} Déterminer les modes propres sous la forme $\vec u'=(\cos\theta,\sin\theta)$ et $\vec u''=(-\sin\theta,\cos\theta)$. Montrer que $\tan2\theta=\dfrac{2\Omega^2}{\Delta}$ et discuter les cas $\Delta=0$, $\Delta\gg\Omega^2$, $\Delta\ll-\Omega^2$.
+    coup_de_pouce:
+      - titre: "Rotation"
+        texte: |
+          Écrivez $P^{\mathsf T}\mathcal KP$ avec $P=\begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}$ et imposez que le terme hors diagonale soit nul.
+    correction:
+      - titre: "Angle de mélange"
+        texte: |
+          $\tan\theta=\dfrac{\sqrt{\Delta^2/4+\Omega^4}-\Delta/2}{\Omega^2}$, d'où $\tan2\theta=\dfrac{2\Omega^2}{\Delta}$ ; $\theta=\pi/4$ à l'accord.
+    solution:
+      - titre: "Calcul du terme hors diagonale"
+        texte: |
+          Avec $p=\omega_0^2-\Delta/2+\Omega^2$, $r=\omega_0^2+\Delta/2+\Omega^2$, $q=-\Omega^2$, la première ligne de $\mathcal K\vec u'=\omega'^2\vec u'$ donne $(p-\omega'^2)\cos\theta-\Omega^2\sin\theta=0$, soit $t=\tan\theta=\dfrac{p-\omega'^2}{\Omega^2}=\dfrac{s-\Delta/2}{\Omega^2}$ avec $s=\sqrt{\Delta^2/4+\Omega^4}$. Ce nombre est strictement positif : $\theta\in\,]0,\pi/2[$. C'est la racine positive de $\Omega^2t^2+\Delta t-\Omega^2=0$, d'où $1-t^2=\Delta t/\Omega^2$ et
+          $$\tan2\theta=\frac{2t}{1-t^2}=\frac{2\Omega^2}{\Delta}.$$
+      - titre: "Cas limites"
+        texte: |
+          \begin{itemize}[label = $\bullet$]
+            \item $\Delta=0$ : $\tan2\theta=\infty$, $\theta=\pi/4$ : modes $(1,1)/\sqrt2$ (en phase, $\omega'$) et $(-1,1)/\sqrt2$ (en opposition, $\omega''$) : mélange à $50/50$, exercice 1.
+            \item $\Delta\gg\Omega^2$ ($\omega_b\gg\omega_a$) : $\theta\simeq\Omega^2/\Delta\to0$ : $\vec u'\to(1,0)$ : le mode bas est le pendule $a$ seul, le mode haut le pendule $b$ seul.
+            \item $\Delta\ll-\Omega^2$ : $\theta\to\pi/2$ : $\vec u'\to(0,1)$ : le mode bas est maintenant le pendule $b$ (le plus lent), le mode haut le pendule $a$. Les modes ont « échangé leur caractère » en traversant la zone d'anticroisement.
+          \end{itemize}
+      - titre: "Signification physique"
+        texte: |
+          L'angle $\theta$ mesure le mélange : $\cos^2\theta$ est la part de l'oscillateur $a$ dans le mode bas. À l'accord le mélange est maximal ; loin de l'accord il disparaît. L'orthogonalité de $\vec u'$ et $\vec u''$ est celle des modes d'une matrice symétrique : les amplitudes des deux modes se « partagent » sans fuite.
+
+  - id: q4
+    enonce: |
+      \textbf{Question 4.} À $t=0$, on lâche le pendule $a$ avec l'amplitude $A$ sans vitesse, le pendule $b$ étant à l'équilibre. Calculer $x_a(t)$ et $x_b(t)$, puis la fraction maximale de l'énergie du pendule $a$ transférée au pendule $b$. Calculer la période de battement. Applications numériques pour $\Delta=0$ et $\Delta=2\ \mathrm{s^{-2}}$.
+    coup_de_pouce:
+      - titre: "Projection sur les modes"
+        texte: |
+          $X(0)=(A,0)=A\cos\theta\,\vec u'-A\sin\theta\,\vec u''$ : écrivez les deux coefficients modaux.
+      - titre: "Amplitude de $x_b$"
+        texte: |
+          $x_b=A\sin\theta\cos\theta\,(\cos\omega't-\cos\omega''t)$ : quelle est la valeur maximale de $|\cos\omega't-\cos\omega''t|$ ?
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $x_a=A(\cos^2\theta\cos\omega't+\sin^2\theta\cos\omega''t)$, $x_b=\dfrac A2\sin2\theta(\cos\omega't-\cos\omega''t)$ ; amplitude maximale de $x_b$ : $A\sin2\theta$ ; fraction d'énergie transférée $\sin^22\theta=\dfrac{4\Omega^4}{\Delta^2+4\Omega^4}$ ; $T_b=\dfrac{2\pi}{\omega''-\omega'}$.
+    solution:
+      - titre: "Décomposition"
+        texte: |
+          $x_a(0)=A$, $x_b(0)=0$ : $c'=\vec u'\cdot X(0)=A\cos\theta$, $c''=\vec u''\cdot X(0)=-A\sin\theta$. Vitesses nulles : $X(t)=A\cos\theta\,\vec u'\cos\omega't-A\sin\theta\,\vec u''\cos\omega''t$, d'où
+          $$x_a=A\big(\cos^2\theta\cos\omega't+\sin^2\theta\cos\omega''t\big),\qquad x_b=A\sin\theta\cos\theta\,\big(\cos\omega't-\cos\omega''t\big).$$
+      - titre: "Fraction transférée"
+        texte: |
+          $|x_b|_{\max}=A\sin\theta\cos\theta\cdot2=A\sin2\theta$ (quand les deux cosinus valent $\pm1$ en opposition). L'énergie de $b$ vaut $\tfrac12m\omega_b^2A_b^2$ ; avec $\omega_b\simeq\omega_a$ le rapport à l'énergie initiale $\tfrac12m\omega_a^2A^2$ est $\sin^22\theta$ à des corrections relatives $O(\Delta/\omega_0^2)$ près :
+          $$\sin^22\theta=\frac{\tan^22\theta}{1+\tan^22\theta}=\frac{4\Omega^4}{\Delta^2+4\Omega^4}.$$
+          À l'accord ($\theta=\pi/4$), $100\,\%$ : transfert complet. Pour $\Delta=2\ \mathrm{s^{-2}}$ : $\dfrac{4\times0{,}25}{4+1}=20\,\%$. Vérifié numériquement (intégration des équations).
+      - titre: "Période de battement"
+        texte: |
+          Le motif se reproduit avec la période $T_b=\dfrac{2\pi}{\omega''-\omega'}$ (période du terme $\cos\omega't-\cos\omega''t$ pour l'enveloppe). Application numérique : à $\Delta=0$, $\omega''-\omega'=0{,}0499$ donc $T_b=126$ s ; pour $\Delta=2$ : $\omega''^2-\omega'^2=2\sqrt{1+0{,}25}=2{,}236$, $\omega''-\omega'=2{,}236/(2\times10{,}0)\simeq0{,}112$, $T_b\simeq56$ s. Formule approchée : $T_b\simeq\dfrac{2\pi}{\sqrt{\delta^2+\Omega^4/\omega_0^2}}$ avec $\delta=\Delta/(2\omega_0)$.
+      - titre: "Lien avec l'exercice 1"
+        texte: |
+          À l'accord, $x_a=A\cos\Omega_mt\cos\Omega_0t$ et $x_b=A\sin\Omega_mt\sin\Omega_0t$ : le battement complet. Hors accord, l'amplitude de $x_b$ ne dépasse jamais $A\sin2\theta<A$ : le battement est « incomplet ».
+
+  - id: q5
+    enonce: |
+      \textbf{Question 5.} \emph{Discussion.} À partir de quel désaccord le transfert d'énergie tombe-t-il à $50\,\%$ ? Interpréter en comparant $\Delta$ et $2\Omega^2$. Que se passe-t-il si l'on fait varier lentement la longueur $\ell_b$ de part et d'autre de $\ell_a$ ?
+    coup_de_pouce:
+      - titre: "Condition"
+        texte: |
+          $\sin^22\theta=\tfrac12$ équivaut à $\tan2\theta=\pm1$, soit $|\Delta|=2\Omega^2$.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $|\Delta|=2\Omega^2=1\ \mathrm{s^{-2}}$. Le transfert est important ($>50\,\%$) tant que le désaccord reste inférieur à l'écart minimal $2\Omega^2$ entre les modes : « couplage fort » si $|\Delta|\lesssim2\Omega^2$, « couplage faible » si $|\Delta|\gg2\Omega^2$.
+    solution:
+      - titre: "Seuil à 50 %"
+        texte: |
+          $\sin^22\theta=\dfrac{4\Omega^4}{\Delta^2+4\Omega^4}=\dfrac12$ donne $\Delta^2=4\Omega^4$, soit $|\Delta|=2\Omega^2=1\ \mathrm{s^{-2}}$ (ici : $\ell_b/\ell_a-1\simeq\Delta/\omega_0^2=1\,\%$, très sensible !).
+      - titre: "Interprétation"
+        texte: |
+          Deux échelles : le désaccord $\Delta$ (différence des raideurs effectives) et le couplage $2\Omega^2$ (l'écart minimal entre les modes). Le transfert est complet si $\Delta\ll2\Omega^2$ et négligeable si $\Delta\gg2\Omega^2$ (fraction $\simeq4\Omega^4/\Delta^2$). Avec un couplage de $0{,}5\ \mathrm{s^{-2}}$ sur $100\ \mathrm{s^{-2}}$, une différence de $1\,\%$ des longueurs suffit à réduire le transfert à $50\,\%$ : il faut donc des pendules très bien accordés pour voir de beaux battements.
+      - titre: "Variation lente du désaccord"
+        texte: |
+          Si $\ell_b$ varie lentement (devant $T_b$) de $\Delta<0$ à $\Delta>0$ en traversant l'accord, l'énergie initialement dans le pendule $a$ \emph{suit le mode} : elle reste dans le mode haut puis bas, donc passe finalement dans le pendule $b$ (transfert adiabatique) ; si la variation est rapide, l'énergie reste dans $a$ (mouvement diabatique). Le critère intermédiaire est celui de Landau--Zener.
+      - titre: "Analogie quantique"
+        texte: |
+          En posant $x_{a,b}=\mathrm{Re}[c_{a,b}(t)e^{i\omega_0t}]$ avec des amplitudes lentes, les équations deviennent $i\dot c=\begin{pmatrix}-\delta+\kappa&-\kappa\\-\kappa&\delta+\kappa\end{pmatrix}c$ avec $\delta=\Delta/(4\omega_0)$ et $\kappa=\Omega^2/(2\omega_0)$ : un système à deux niveaux. Le désaccord est celui du laser par rapport à la résonance, la fréquence de Rabi généralisée est $\sqrt{4\delta^2+4\kappa^2}\simeq\omega''-\omega'$. La fraction transférée $\sin^22\theta$ est la formule de Rabi.

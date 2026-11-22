@@ -1,0 +1,192 @@
+id: tp1_partA
+intitule: "Partie A — Modes propres d'un ressort hélicoïdal (ondes longitudinales) {\\color{blue}(Part A — Normal modes of a helical spring, longitudinal waves)}"
+td: tp1
+facultatif: false
+seance: 1
+cours_rattache:
+  - chap1.ondes_stationnaires
+  - chap1.modes_propres
+  - chap1.oscillations_forcees
+
+metadonnees:
+  duree_estimee: "40 min"
+  difficulte: 2 # Sur une échelle de 1 à 5
+  priorite: 1
+  type_exercice: "Manipulation guidée"
+  indispensable: true
+
+enonce_intro: |
+  Un ressort hélicoïdal est accroché entre une tige support et la tige mobile du vibreur. On cherche ses six premiers modes propres et on teste $f_n=nc/(2L)$. {\bf Question scientifique :} le ressort confirme-t-il le modèle des modes propres ?
+
+  {\color{blue}A helical spring is hooked between a support rod and the moving rod of the vibrator. We look for its first six normal modes and test $f_n=nc/(2L)$. {\bf Scientific question:} does the spring confirm the normal-mode model?}
+
+# figure:
+#   ref: tp_ressort_montage
+#   legende: "Longueur effective $L$ du ressort (Fig. 2 du guide). {\\color{blue}Effective length $L$ of the spring (Fig. 2 of the guide).}"
+#   scale: 0.5
+#   label: "fig:ressort_L"
+
+accroche_point_cours_essentiel:
+  - titre: "Une onde longitudinale peut-elle être stationnaire ? {\\color{blue}(Can a longitudinal wave be standing?)}"
+    duree_introduction: "3 min, avant de toucher au matériel"
+    question_d_accroche: |
+      Dans un ressort, les spires oscillent {\bf dans la direction de propagation}. Peut-on malgré cela voir des nœuds et des ventres ? Pourquoi la fréquence augmente-t-elle quand on passe d'un mode au suivant ?
+
+      {\color{blue}In a spring the coils oscillate {\bf along the direction of propagation}. Can we still see nodes and antinodes? Why does the frequency increase from one mode to the next?}
+    texte: |
+      {\bf Idée clé : les conditions aux limites sélectionnent des fréquences.} Avec deux extrémités quasi fixes, $L=n\lambda_n/2$ et $f_n=nc/(2L)$ : la fréquence est {\bf proportionnelle} à $n$, la pente de $f_n=f(n)$ vaut $c/(2L)$.
+
+      {\color{blue}{\bf Key idea: boundary conditions select frequencies.} With two quasi-fixed ends, $L=n\lambda_n/2$ and $f_n=nc/(2L)$: the frequency is {\bf proportional} to $n$, and the slope of $f_n$ versus $n$ is $c/(2L)$.}
+
+outils_mathematiques:
+  - titre: "Régression linéaire {\\color{blue}(Linear regression)}"
+    texte: |
+      Pour $f_n=\alpha n$ avec $\alpha=c/(2L)$ : $c=2L\alpha$. Vérifier que l'ordonnée à l'origine est proche de $0$.
+
+      {\color{blue}For $f_n=\alpha n$ with $\alpha=c/(2L)$: $c=2L\alpha$. Check that the intercept is close to $0$.}
+  - titre: "Incertitude sur la pente {\\color{blue}(Uncertainty on the slope)}"
+    texte: |
+      Excel (DROITEREG) donne l'incertitude-type de la pente ; sinon encadrer par deux droites extrêmes. $\Delta c/c=\Delta L/L+\Delta\alpha/\alpha$.
+
+      {\color{blue}Excel (LINEST) gives the standard error of the slope; otherwise bracket with two extreme lines. $\Delta c/c=\Delta L/L+\Delta\alpha/\alpha$.}
+
+liens_autres_disciplines:
+  - discipline: "Acoustique {\\color{blue}(Acoustics)}"
+    texte: |
+      Les ondes sonores sont longitudinales (compression-détente) : un tuyau a des modes propres de même nature que le ressort.
+
+      {\color{blue}Sound waves are longitudinal (compression-rarefaction): a pipe has normal modes of the same nature as the spring.}
+  - discipline: "Physique du solide {\\color{blue}(Solid-state physics)}"
+    texte: |
+      Une chaîne d'atomes reliés par des ressorts est le modèle des phonons (TD1 ex. 9).
+
+      {\color{blue}A chain of atoms linked by springs is the model of phonons (TD1 ex. 9).}
+
+questions:
+  - id: q1
+    enonce: |
+      A1 — Mesurer la longueur effective $L$ du ressort entre ses deux points d'attache et estimer l'incertitude.
+
+      {\color{blue}A1 — Measure the effective length $L$ of the spring between its two attachment points and estimate the uncertainty.}
+    coup_de_pouce:
+      - titre: "Mesure {\\color{blue}(Measurement)}"
+        texte: |
+          Mesurer entre les deux points d'accroche (Fig. 2), ressort légèrement tendu, non tordu. Incertitude de lecture et de repérage des points d'attache.
+
+          {\color{blue}Measure between the two hooks (Fig. 2), spring slightly stretched and not twisted. Reading and positioning uncertainty.}
+    correction:
+      - titre: "Valeur provisoire {\\color{blue}(Provisional value)}"
+        texte: |
+          $L=0{,}300\ \text{m}$, $\Delta L=0{,}002\ \text{m}$.
+
+          {\color{blue}$L=0.300$ m, $\Delta L=0.002$ m.}
+    solution:
+      - titre: "Remarque {\\color{blue}(Remark)}"
+        texte: |
+          L'incertitude de $2$ mm vient surtout du repérage des points d'attache. Faire noter l'unité SI (m).
+
+          {\color{blue}The 2 mm uncertainty mostly comes from locating the attachment points. Make sure students write the SI unit (m).}
+
+  - id: q2
+    enonce: |
+      A2 — En faisant varier lentement la fréquence, repérer les six premiers modes propres et noter $f_n$.
+
+      {\color{blue}A2 — By slowly varying the frequency, find the first six normal modes and record $f_n$.}
+    coup_de_pouce:
+      - titre: "Procédure {\\color{blue}(Procedure)}"
+        texte: |
+          Amplitude basse ($\le5$ V), balayage croissant, attendre la stabilisation, noter le nombre de nœuds. Un mode se reconnaît à un motif stable avec des nœuds bien localisés.
+
+          {\color{blue}Low amplitude ($\le5$ V), increasing sweep, wait for stabilization, note the number of nodes. A mode is recognized by a stable pattern with well-localized nodes.}
+    correction:
+      - titre: "Valeurs provisoires {\\color{blue}(Provisional values)}"
+        texte: |
+          $f_n\ (\text{Hz})$ pour $n=1,\dots,6$ : $8{,}4\ ;\ 16{,}9\ ;\ 25{,}2\ ;\ 33{,}7\ ;\ 42{,}0\ ;\ 50{,}5$ (incertitude $\pm0{,}1$ Hz).
+
+          {\color{blue}$f_n$ (Hz) for $n=1,\dots,6$: 8.4; 16.9; 25.2; 33.7; 42.0; 50.5 (uncertainty $\pm0.1$ Hz).}
+    solution:
+      - titre: "Points de vigilance {\\color{blue}(Watch points)}"
+        texte: |
+          Ne pas confondre un pic d'amplitude transitoire avec un mode. Si le motif dérive, ajuster la fréquence de $0{,}1$ Hz. Les modes sont à peu près équidistants : $f_{n+1}-f_n\approx8{,}4$ Hz.
+
+          {\color{blue}Do not confuse a transient amplitude peak with a mode. If the pattern drifts, adjust the frequency by 0.1 Hz. The modes are roughly equally spaced: $f_{n+1}-f_n\approx8.4$ Hz.}
+
+  - id: q3
+    enonce: |
+      A3 — Décrire comment reconnaître un mode excité, comment évolue $f_n$ avec $n$, et quelle représentation graphique teste le modèle.
+
+      {\color{blue}A3 — Describe how to recognize an excited mode, how $f_n$ changes with $n$, and which graph tests the model.}
+    coup_de_pouce:
+      - titre: "Linéariser {\\color{blue}(Linearize)}"
+        texte: |
+          Quelle représentation donne une droite si $f_n=nc/(2L)$ ?
+
+          {\color{blue}Which plot gives a straight line if $f_n=nc/(2L)$?}
+    correction:
+      - titre: "Réponse attendue {\\color{blue}(Expected answer)}"
+        texte: |
+          Mode excité : motif stable, nœuds immobiles, amplitude nettement plus grande. $f_n$ croît linéairement avec $n$. On trace $f_n=f(n)$ : droite passant par l'origine de pente $c/(2L)$.
+
+          {\color{blue}Excited mode: stable pattern, motionless nodes, clearly larger amplitude. $f_n$ increases linearly with $n$. Plot $f_n$ versus $n$: a straight line through the origin with slope $c/(2L)$.}
+    solution:
+      - titre: "Justification {\\color{blue}(Justification)}"
+        texte: |
+          La relation est linéaire en $n$ : le graphique $f_n=f(n)$ est le plus direct, la pente donne $c$ sans linéarisation supplémentaire.
+
+          {\color{blue}The relation is linear in $n$: the plot $f_n$ versus $n$ is the most direct, the slope gives $c$ with no extra linearization.}
+
+  - id: q4
+    enonce: |
+      A4 — Tracer le graphique A.1, relever l'équation de la droite et en déduire la célérité $c$ dans le ressort.
+
+      {\color{blue}A4 — Plot graph A.1, read the fit equation and deduce the wave speed $c$ in the spring.}
+    coup_de_pouce:
+      - titre: "Pente et célérité {\\color{blue}(Slope and speed)}"
+        texte: |
+          Pente $\alpha=c/(2L)$, donc $c=2L\alpha$.
+
+          {\color{blue}Slope $\alpha=c/(2L)$, so $c=2L\alpha$.}
+    correction:
+      - titre: "Valeur provisoire {\\color{blue}(Provisional value)}"
+        texte: |
+          Ajustement : $f_n=8{,}42\,n+0{,}0$ (Hz). $c=2L\alpha=2\times0{,}300\times8{,}42\approx5{,}05\ \text{m/s}$, soit $\Delta c\approx0{,}05$ m/s.
+
+          {\color{blue}Fit: $f_n=8.42\,n+0.0$ (Hz). $c=2L\alpha=2\times0.300\times8.42\approx5.05$ m/s, i.e. $\Delta c\approx0.05$ m/s.}
+    solution:
+      - titre: "Rédaction pas à pas {\\color{blue}(Step-by-step write-up)}"
+        texte: |
+          Le modèle donne $f_n=\dfrac{c}{2L}\,n$, droite de pente $\alpha=\dfrac{c}{2L}$. Donc $c=2L\alpha=2\times0{,}300\times8{,}42=5{,}05$ m/s. Incertitude : $\dfrac{\Delta c}{c}=\dfrac{\Delta L}{L}+\dfrac{\Delta\alpha}{\alpha}\approx0{,}007+0{,}003$, soit $\Delta c\approx0{,}05$ m/s.
+
+          {\color{blue}The model gives $f_n=\dfrac{c}{2L}\,n$, a line of slope $\alpha=\dfrac{c}{2L}$. Hence $c=2L\alpha=2\times0.300\times8.42=5.05$ m/s. Uncertainty: $\dfrac{\Delta c}{c}=\dfrac{\Delta L}{L}+\dfrac{\Delta\alpha}{\alpha}\approx0.007+0.003$, i.e. $\Delta c\approx0.05$ m/s.}
+
+  - id: q5
+    enonce: |
+      A5 — Le modèle décrit-il correctement les mesures ? Quelles sont les principales sources d'incertitude ?
+
+      {\color{blue}A5 — Does the model describe the measurements correctly? What are the main sources of uncertainty?}
+    coup_de_pouce:
+      - titre: "Critères {\\color{blue}(Criteria)}"
+        texte: |
+          Linéarité, ordonnée à l'origine proche de $0$, résidus petits devant l'incertitude de $f_n$.
+
+          {\color{blue}Linearity, intercept close to $0$, residuals small compared with the uncertainty on $f_n$.}
+    correction:
+      - titre: "Réponse attendue {\\color{blue}(Expected answer)}"
+        texte: |
+          Oui : points alignés ($R^2>0{,}999$), ordonnée à l'origine compatible avec $0$. Sources d'écart : repérage de la résonance (pic large), longueur effective incertaine, vibreur quasi fixe, masse propre du ressort, spires qui se touchent ou tension résiduelle non uniforme.
+
+          {\color{blue}Yes: aligned points ($R^2>0.999$), intercept compatible with $0$. Sources of deviation: locating the resonance (broad peak), uncertain effective length, quasi-fixed vibrator, spring's own mass, touching coils or non-uniform residual tension.}
+    solution:
+      - titre: "Discussion {\\color{blue}(Discussion)}"
+        texte: |
+          Un petit décalage systématique vers le bas de $f_n$ est attendu si la longueur effective dépasse $L$. Pousser l'étudiant à relier l'écart à une hypothèse du modèle (extrémités parfaitement fixes, milieu homogène non dispersif).
+
+          {\color{blue}A small systematic downward shift of $f_n$ is expected if the effective length exceeds $L$. Push students to link the deviation to a model hypothesis (perfectly fixed ends, homogeneous non-dispersive medium).}
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Vitesse longitudinale dans un ressort {\\color{blue}(Longitudinal speed in a spring)}"
+    texte: |
+      Montrer que $c=L\sqrt{K/m_r}$ avec $K$ la raideur et $m_r$ la masse du ressort. Estimer $K$ à partir de $c=5{,}05$ m/s si $m_r=40$ g.
+
+      {\color{blue}Show that $c=L\sqrt{K/m_r}$ with $K$ the stiffness and $m_r$ the spring mass. Estimate $K$ from $c=5.05$ m/s if $m_r=40$ g.}

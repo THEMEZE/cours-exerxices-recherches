@@ -7,6 +7,8 @@ After=network.target
 User=pi
 Group=www-data
 WorkingDirectory=/mnt/mariage_data/CoursOndes/web/server
+# Jeton enseignant du QCM (fichier hors dépôt, droits 640 root:pi : voir DEPLOY_QCM_PI.md)
+EnvironmentFile=/etc/gunicorn-cours.env
 
 ExecStart=/mnt/mariage_data/CoursOndes/venv/bin/python -m gunicorn \
           --access-logfile /mnt/mariage_data/CoursOndes/logs/gunicorn-access.log \

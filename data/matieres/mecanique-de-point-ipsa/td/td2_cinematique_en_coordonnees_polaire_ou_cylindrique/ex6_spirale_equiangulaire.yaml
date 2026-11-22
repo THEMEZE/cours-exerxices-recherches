@@ -1,0 +1,182 @@
+id: td2_ex6
+intitule: "Spirale équiangulaire (trajectoire d'approche d'un faucon)"
+td: td2
+facultatif: true
+seance: 2
+
+cours_rattache:
+  - cinematique.coordonnees_polaires
+  - cinematique.base_polaire
+  - cinematique.vecteur_vitesse
+  - cinematique.vecteur_acceleration
+
+metadonnees:
+  duree_estimee: "40 min"
+  difficulte: 4
+  priorite: 2
+  type_exercice: "Entraînement / Approfondissement"
+  indispensable: false
+
+enonce_intro: |
+  Un faucon vole dans un plan horizontal vers sa proie, immobile en $O$. Il garde la proie dans une direction
+  qui fait un {\bf angle constant} avec sa vitesse. En coordonnées polaires centrées en $O$, sa trajectoire a pour
+  équation
+  $$r(\theta)=r_0\,\mathrm e^{-k\theta},\qquad k>0\ \text{constante},$$
+  (spirale {\bf logarithmique} ou {\bf équiangulaire}) et il la parcourt avec une vitesse angulaire constante
+  $\dot\theta=\omega>0$, $\theta(0)=0$.
+
+prerequis:
+  - titre: "Accélération en base polaire"
+    texte: |
+      $a_r=\ddot r-r\dot\theta^2$ et $a_\theta=r\ddot\theta+2\dot r\dot\theta$.
+  - titre: "Composantes tangentielle et normale"
+    texte: |
+      $a_t=\dfrac{\mathrm dv}{\mathrm dt}$ (variation de la norme de la vitesse) et $a_n=\sqrt{a^2-a_t^2}=\dfrac{v^2}{\rho}$ (changement de direction), $\rho$ étant le rayon de courbure.
+  - titre: "Intégrale d'une exponentielle"
+    texte: |
+      $\displaystyle\int_0^\infty\mathrm e^{-\lambda t}\,\mathrm dt=\frac1\lambda$ pour $\lambda>0$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Exploiter une trajectoire donnée en $r(\\theta)$ et une loi horaire $\\theta(t)$"
+    texte: |
+      Obtenir $r(t)$ à partir de $r(\theta)$, calculer $\vec v$ et $\vec a$, mesurer l'angle entre la vitesse et le rayon vecteur, décomposer l'accélération en parties tangentielle et normale, et calculer une longueur parcourue {\bf finie} en un temps infini.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Une courbe, deux lois horaires : préparer l'exercice 7"
+    texte: |
+      Même trajectoire (spirale logarithmique) que l'exercice 7, mais parcourue à $\dot\theta=$ cte ici, à $\|\vec v\|=$ cte là-bas : on retrouve l'idée du TD1 « mêmes trajectoires, lois horaires différentes ». Ici, le point atteint $O$ après une {\bf infinité de tours}, une {\bf durée infinie} et une {\bf longueur finie}. Un résultat qui déroute et qu'il faut faire discuter.
+
+point_cours:
+  - titre: "Spirale logarithmique"
+    texte: |
+      Pour $r=r_0\mathrm e^{-k\theta}$ : $\dfrac{\mathrm dr}{\mathrm d\theta}=-kr$, donc la pente $\dfrac{\mathrm dr}{r\,\mathrm d\theta}=-k$ est {\bf constante} : la tangente fait un angle constant avec le rayon vecteur en tout point (d'où « équiangulaire »). La courbe est invariante par similitude (rotation + homothétie).
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Confondre $\\theta$ et $\\theta(t)$"
+    texte: |
+      L'équation $r(\theta)$ décrit la {\bf trajectoire} ; elle ne dit rien sur la vitesse de parcours. Ici $\theta=\omega t$ donne $r(t)=r_0\mathrm e^{-k\omega t}$, un autre mouvement donnerait la même courbe.
+  - titre: "Penser que $\\|\\vec v\\|$ est constante parce que $\\dot\\theta$ l'est"
+    texte: |
+      $\|\vec v\|=\omega r\sqrt{1+k^2}$ décroît exponentiellement : le faucon ralentit en s'approchant de $O$. L'accélération tangentielle est non nulle.
+  - titre: "Croire que le trajet est infini car il y a une infinité de tours"
+    texte: |
+      Les spires se resserrent exponentiellement : la somme des longueurs de spires est une série géométrique, convergente. $L$ est finie alors que le nombre de tours est infini.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Faire tracer la spirale avec Python"
+    texte: |
+      Tracer $x=r\cos\theta$, $y=r\sin\theta$ pour $k=0{,}2$ et superposer les vecteurs $\vec v$ et $\vec a$ avec \texttt{quiver} : on voit que l'angle entre $\vec v$ et le rayon est le même partout, et que $\vec a$ est elle aussi tournée d'un angle constant par rapport à $\vec v$.
+
+bilan:
+  - titre: "Spirale logarithmique parcourue à $\\dot\\theta=\\omega$"
+    texte: |
+      $r=r_0\mathrm e^{-k\omega t}$, $\vec v=\omega r\,(-k\,\vec u_r+\vec u_\theta)$, $\|\vec v\|=\omega r\sqrt{1+k^2}$ ; $\vec a=\omega^2r\,[(k^2-1)\,\vec u_r-2k\,\vec u_\theta]$, $\|\vec a\|=\omega^2r(1+k^2)$ ; $\rho=r\sqrt{1+k^2}$ ; longueur totale jusqu'à $O$ : $L=r_0\sqrt{1+k^2}/k=r_0/\cos\gamma$, finie. Le faucon met un temps infini pour atteindre $O$ mais parcourt une longueur finie.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Choisir la loi horaire pour atteindre la proie en temps fini"
+    texte: |
+      Avec la même trajectoire, quelle loi $\theta(t)$ faut-il imposer pour que la vitesse $\|\vec v\|$ soit {\bf constante} ? Montrer qu'alors $r=r_0-v\sin\gamma\,t$ et que la proie est atteinte en un temps fini $T=r_0/(v\sin\gamma)$ (où $\gamma$ est l'angle de l'énoncé). C'est exactement le mouvement de l'exercice 7.
+  - niveau: master
+    titre: "Similitudes et invariance d'échelle"
+    texte: |
+      Montrer que la spirale logarithmique est invariante par la similitude $(r,\theta)\mapsto(\lambda r,\theta+\ln\lambda/k')$ avec $k'=-k$ choisi convenablement, et expliquer pourquoi cette propriété la rend « auto-similaire » (coquille de nautile, bras de galaxies spirales, cyclones).
+
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi un faucon ne fonce-t-il pas en ligne droite ?"
+    duree_introduction: "3 à 5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Un faucon pèlerin s'approche de sa proie en spirale plutôt qu'en ligne droite : on explique cela par le fait qu'il garde la tête droite (pour une meilleure vision) et regarde la proie sous un angle constant. Quelle courbe obtient-on ? Combien de tours fait-il ? Le trajet est-il beaucoup plus long qu'une ligne droite ?
+    texte: |
+      {\bf Idée clé : trajectoire équiangulaire.} Une courbe polaire $r=r_0\mathrm e^{-k\theta}$ coupe tous les rayons issus de $O$ sous le même angle, et le rapport $\dot r/(r\dot\theta)=-k$ est constant. Si $\theta(t)$ est connu, $\dot r=-kr\dot\theta$ et
+      $$\vec v=r\dot\theta\,(-k\,\vec u_r+\vec u_\theta).$$
+
+outils_mathematiques:
+  - titre: "Dérivation d'une exponentielle composée"
+    texte: |
+      $\dfrac{\mathrm d}{\mathrm dt}\mathrm e^{-k\omega t}=-k\omega\,\mathrm e^{-k\omega t}$, donc $\dot r=-k\omega r$ et $\ddot r=k^2\omega^2r$.
+  - titre: "Angle entre deux vecteurs"
+    texte: |
+      $\cos\varphi=\dfrac{\vec A\cdot\vec B}{\|\vec A\|\,\|\vec B\|}$. Pour $\vec v=\omega r(-k,1)$ et $-\vec u_r=(-1,0)$ dans la base polaire : $\cos\gamma=\dfrac{k}{\sqrt{1+k^2}}$.
+  - titre: "Accélération tangentielle"
+    texte: |
+      $a_t=\dfrac{\mathrm dv}{\mathrm dt}$ avec $v=\omega\sqrt{1+k^2}\,r$ : $a_t=\omega\sqrt{1+k^2}\,\dot r=-k\omega^2\sqrt{1+k^2}\,r$.
+  - titre: "Longueur parcourue"
+    texte: |
+      $L=\displaystyle\int_0^\infty\|\vec v\|\,\mathrm dt$ : intégrale d'une exponentielle décroissante, qui converge.
+
+liens_autres_disciplines:
+  - discipline: "Biologie et éthologie"
+    texte: |
+      Approche en spirale des faucons pèlerins et des insectes vers une source lumineuse (mouvement à angle constant avec la direction de la source) ; coquilles de mollusques (nautile), tournesol.
+  - discipline: "Astronomie"
+    texte: |
+      Bras de galaxies spirales (spirales logarithmiques approchées) ; trajectoire d'un satellite qui perd lentement de l'altitude par frottements (spirale de décroissance quasi circulaire).
+  - discipline: "Mathématiques"
+    texte: |
+      Courbe de Bernoulli (« spira mirabilis »), invariance par similitude, nombres complexes : $z=r_0\mathrm e^{(-k+i)\theta}$.
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{enumerate}[label=(\alph*)]
+          \item Déterminer $\theta(t)$ puis $r(t)$.
+          \item Calculer le vecteur vitesse $\vec v$ dans la base polaire et sa norme. Montrer que l'angle $\gamma$ entre $\vec v$ et la direction de la proie $-\vec u_r$ est constant et exprimer $\tan\gamma$ en fonction de $k$.
+      \end{enumerate}
+    coup_de_pouce: |
+      Intégrez $\dot\theta=\omega$. Pour la vitesse, dérivez $r(t)$. L'angle entre $\vec v$ et $-\vec u_r$ se lit sur les composantes de $\vec v$ : $\tan\gamma=|v_\theta|/|v_r|$.
+    correction: |
+      $\theta=\omega t$, $r=r_0\mathrm e^{-k\omega t}$. $\vec v=\omega r(-k\,\vec u_r+\vec u_\theta)$, $\|\vec v\|=\omega r\sqrt{1+k^2}$, $\tan\gamma=1/k$ : constant.
+    solution:
+      - titre: "(a) Équations horaires"
+        texte: |
+          $\theta(t)=\omega t$ et $\boxed{r(t)=r_0\,\mathrm e^{-k\omega t}}$. Le rayon décroît exponentiellement, avec la constante de temps $1/(k\omega)$, et $r\to0$ seulement quand $t\to\infty$.
+      - titre: "(b) Vitesse et angle constant"
+        texte: |
+          $\dot r=-k\omega r$ et $r\dot\theta=\omega r$ :
+          $$\boxed{\vec v=\omega r\left(-k\,\vec u_r+\vec u_\theta\right)},\qquad\|\vec v\|=\boxed{\omega r\sqrt{1+k^2}}.$$
+          La composante vers la proie est $|v_r|=k\omega r$ et la composante orthoradiale est $\omega r$ : $\tan\gamma=\dfrac{v_\theta}{|v_r|}=\boxed{\dfrac1k}$, soit $\cos\gamma=\dfrac k{\sqrt{1+k^2}}$. L'angle ne dépend ni de $t$ ni de $r$ : le faucon voit la proie sous un {\bf angle constant}.
+
+  - id: q2
+    enonce: |
+      \begin{enumerate}[label=(\alph*),start=3]
+          \item Calculer l'accélération $\vec a$ et sa norme. Pour quelle valeur de $k$ l'accélération est-elle purement orthoradiale ? Que devient-elle pour $k\to0$ ?
+          \item Calculer l'accélération tangentielle $a_t=\dfrac{\mathrm dv}{\mathrm dt}$, l'accélération normale $a_n$ et le rayon de courbure $\rho$. Vérifier le cas $k\to0$.
+      \end{enumerate}
+    coup_de_pouce: |
+      $\ddot r=k^2\omega^2r$. Pour $a_n$, utilisez $a_n^2=a^2-a_t^2$.
+    correction: |
+      $\vec a=\omega^2r\left[(k^2-1)\,\vec u_r-2k\,\vec u_\theta\right]$, $\|\vec a\|=\omega^2r(1+k^2)$ ; $k=1$ : orthoradiale ; $a_t=-k\omega^2r\sqrt{1+k^2}$, $a_n=\omega^2r\sqrt{1+k^2}$, $\rho=r\sqrt{1+k^2}$.
+    solution:
+      - titre: "(c) Accélération"
+        texte: |
+          $a_r=\ddot r-r\dot\theta^2=(k^2-1)\,\omega^2r$ et $a_\theta=2\dot r\dot\theta=-2k\omega^2r$ :
+          $$\boxed{\vec a=\omega^2r\left[(k^2-1)\,\vec u_r-2k\,\vec u_\theta\right]},\qquad\|\vec a\|=\omega^2r\sqrt{(k^2-1)^2+4k^2}=\boxed{\omega^2r\,(1+k^2)}.$$
+          Pour $k=1$ : $a_r=0$, l'accélération est {\bf orthoradiale}. Pour $k\to0$ : $\vec a\to-\omega^2r\,\vec u_r$, l'accélération centripète du cercle.
+      - titre: "(d) Composantes tangentielle et normale"
+        texte: |
+          $v=\omega\sqrt{1+k^2}\,r$ et $\dot r=-k\omega r$ donnent
+          $$a_t=\frac{\mathrm dv}{\mathrm dt}=\boxed{-k\omega^2r\sqrt{1+k^2}}\quad(\text{le faucon ralentit}).$$
+          $a_n^2=a^2-a_t^2=\omega^4r^2(1+k^2)\left[(1+k^2)-k^2\right]=\omega^4r^2(1+k^2)$, soit $a_n=\omega^2r\sqrt{1+k^2}$ et
+          $$\rho=\frac{v^2}{a_n}=\boxed{r\sqrt{1+k^2}}.$$
+          Pour $k\to0$ : $\rho\to r$ (cercle de rayon $r$), $a_t\to0$ (vitesse constante) : on retrouve le mouvement circulaire uniforme.
+
+  - id: q3
+    enonce: |
+      \begin{enumerate}[label=(\alph*),start=5]
+          \item Combien de temps le faucon met-il pour atteindre $O$ ? Combien de tours fait-il ? Calculer la longueur totale $L$ de la trajectoire de $\theta=0$ à $+\infty$ et l'exprimer en fonction de $r_0$ et de l'angle $\gamma$.
+          \item Application numérique : $r_0=100$ m, $\gamma=40^\circ$, $\omega=0{,}5$ rad/s. Calculer $k$, $L$, la vitesse initiale, et le rapport $L/r_0$. Commenter.
+      \end{enumerate}
+    coup_de_pouce: |
+      $r\to0$ seulement si $t\to\infty$. Pour $L$, intégrez $\|\vec v\|=\omega r_0\sqrt{1+k^2}\,\mathrm e^{-k\omega t}$ de $0$ à $\infty$. Utilisez $\cos\gamma=k/\sqrt{1+k^2}$.
+    correction: |
+      Durée infinie, nombre de tours infini ; $L=\dfrac{r_0\sqrt{1+k^2}}k=\dfrac{r_0}{\cos\gamma}$. AN : $k\approx1{,}19$, $L\approx131$ m, $v_0\approx78$ m/s, $L/r_0\approx1{,}31$.
+    solution:
+      - titre: "(e) Durée, nombre de tours et longueur"
+        texte: |
+          $r(t)=r_0\mathrm e^{-k\omega t}$ ne s'annule jamais : le faucon n'atteint $O$ qu'au bout d'un temps {\bf infini}, après un nombre {\bf infini} de tours ($\theta=\omega t\to\infty$). Pourtant
+          $$L=\int_0^\infty\omega r_0\sqrt{1+k^2}\,\mathrm e^{-k\omega t}\,\mathrm dt=\frac{r_0\sqrt{1+k^2}}{k}=\boxed{\frac{r_0}{\cos\gamma}}.$$
+          $L$ est {\bf finie}. En dessous, $L\geq r_0$ (distance en ligne droite), avec égalité pour $\gamma=0$ (approche droite, $k\to\infty$). Résultat remarquable : plus l'angle d'approche $\gamma$ est grand, plus le trajet est long, mais rien ne diverge tant que $\gamma<90^\circ$ ($k>0$).
+      - titre: "(f) Application numérique"
+        texte: |
+          $k=\dfrac1{\tan\gamma}=\dfrac1{\tan40^\circ}\approx1{,}19$. $L=\dfrac{100}{\cos40^\circ}\approx131$ m, soit $L/r_0\approx1{,}31$ : le trajet en spirale n'est que $31\,\%$ plus long que la ligne droite, alors que le faucon fait une infinité de tours. La vitesse initiale vaut $v_0=\omega r_0\sqrt{1+k^2}\approx0{,}5\times100\times1{,}55\approx78$ m/s : ordre de grandeur réaliste pour un piqué de faucon pèlerin ($\sim80$ m/s). Le faucon ralentit ensuite exponentiellement ($v\propto r$) : le modèle n'est valable que jusqu'à une distance minimale de la proie, où commence la capture.

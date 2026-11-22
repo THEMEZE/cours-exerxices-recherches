@@ -106,9 +106,17 @@ fi
 # Régénération du contenu (PDF, animations, figures, site)
 # ─────────────────────────────────────────────
 
-info "Régénération des PDF (build/build.py)..."
-python3 build/build.py
-ok "PDF régénérés"
+# Seuls les PDF « à faire » ou dont les sources ont changé sont recompilés
+# (état : python3 build/pdf_status.py). Un échec LaTeX ne doit plus empêcher
+# la régénération du site (avant : set -e + code retour 1 => tout s'arrêtait).
+info "État des PDF (fait / défait)..."
+python3 build/pdf_status.py | tail -8
+info "Compilation des PDF manquants ou périmés (build/build.py --stale)..."
+if python3 build/build.py --stale; then
+    ok "PDF à jour"
+else
+    warn "Certains PDF n'ont pas compilé -- le site est régénéré quand même (voir build/pdf_status.py)"
+fi
 
 PROFILE="avant_seance"
 if [ -f web/.current_profile ]; then

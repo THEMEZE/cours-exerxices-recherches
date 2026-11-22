@@ -1,0 +1,194 @@
+id: td5_ex4
+intitule: "Looping vertical"
+td: td5
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - energie.conservation_energie_mecanique
+  - energie.reaction_normale
+  - cinematique.base_de_frenet
+  - dynamique.condition_de_decollage
+
+metadonnees:
+  duree_estimee: "45 min"
+  difficulte: 3
+  type_exercice: "Application / Synthèse énergie et Newton"
+  indispensable: true
+
+enonce_intro: |
+  Le wagon d'un manège, de masse $m$ assimilé à un point matériel $M$, est lâché {\bf sans vitesse initiale} d'une hauteur $H$ au point $A$, glisse le long d'une grande descente, puis effectue un looping circulaire de rayon $R=19$ m. Le point $B$ est le sommet du looping, le point $C$ le point le plus bas. On néglige les frottements, on prendra $g=9{,}81~\mathrm{m\,s^{-2}}$ et on repère l'altitude $z$ à partir du sol (point $C$).
+
+prerequis:
+  - titre: "Conservation de l'énergie mécanique"
+    texte: |
+      La réaction normale du rail lisse est perpendiculaire à $\vec v$, elle ne travaille pas ; seul le poids travaille : $E_m=\tfrac12mv^2+mgz=\text{cte}$.
+  - titre: "Base de Frenet"
+    texte: |
+      $\vec a=\dfrac{\mathrm dv}{\mathrm dt}\vec t+\dfrac{v^2}{\rho}\vec n$, $\vec n$ dirigé vers le centre de courbure ; sur un cercle, $\rho=R$.
+  - titre: "Condition de contact"
+    texte: |
+      $N\ge0$ ; le contact est rompu quand $N=0$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Combiner énergie et loi de Newton"
+    texte: |
+      Savoir obtenir la vitesse par l'énergie, la réaction par la projection normale, puis écrire la condition $N\ge0$ et en déduire une hauteur minimale. Chercher le {\bf point le plus critique} du trajet.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Le schéma type « énergie pour $v$, Newton pour $N$ »"
+    texte: |
+      L'énergie est l'outil rapide pour la vitesse ; la réaction ne se trouve que par Newton. Le résultat $H_{\min}=\tfrac52R$ est un classique à retenir ; l'étude de $N(\theta)$ (questions (i)--(k)) est un complément qui montre que le sommet est le pire point. Il est utile de faire remarquer que $N_{\rm bas}=6mg$ : les occupants subissent $6\,g$ en bas pour $H=H_{\min}$, ce qui est dangereux pour un manège (limite d'environ $4\,g$) : un vrai looping n'est pas circulaire mais en clothoïde pour cette raison.
+
+point_cours:
+  - titre: "Méthode"
+    texte: |
+      (1) Conservation de $E_m$ entre $A$ et le point étudié ; (2) PFD projeté sur la normale ; (3) $N\ge0$ en chaque point ; (4) étude du minimum de $N$ sur le trajet.
+  - titre: "Rail lisse : un paramètre angulaire"
+    texte: |
+      Repérer la position par l'angle $\theta$ (mesuré depuis le bas du looping) : $z=R(1-\cos\theta)$. La projection de $m\vec a=m\vec g+\vec N$ sur la normale centripète donne $N-mg\cos\theta=\dfrac{mv^2}R$ ($\theta=0$ en bas, $\theta=\pi$ en haut).
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Vitesse au sommet nulle"
+    texte: |
+      $v_B=\sqrt{gR}$ est une vitesse minimale, non nulle : le wagon a besoin d'être rapide pour que le poids seul ne suffise pas à le faire quitter la trajectoire circulaire.
+  - titre: "Se tromper d'altitude du point $B$"
+    texte: |
+      Avec l'origine des altitudes au sol, $z_A=H$ et $z_B=2R$ (la correction papier écrit par erreur « $z_B=H-2R$ » mais utilise ensuite correctement $2R$). La différence d'altitude $z_A-z_B=H-2R$ est ce qui compte pour $v_B$.
+  - titre: "Le poids n'est pas toujours opposé à $N$"
+    texte: |
+      En $B$ (sommet), poids et réaction pointent {\bf tous deux vers le centre} : $N+mg=mv^2/R$. En un point quelconque, seule la composante radiale du poids intervient.
+  - titre: "Condition large ou stricte"
+    texte: |
+      On écrit $N\ge0$ : $N=0$ est la limite (contact juste maintenu). L'inégalité large donne $H\ge\tfrac52R$.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Mesure expérimentale"
+    texte: |
+      Avec une bille, mesurer $H_{\min}$ : on trouve $\approx2{,}7R$ au lieu de $2{,}5R$ parce que la bille roule (une partie de l'énergie passe en rotation : $\tfrac12J\omega^2$). Voir l'exercice 5, variante « roulement ».
+  - titre: "Question de sécurité"
+    texte: |
+      Calculer la force ressentie en bas ($6\,g$) : pourquoi les vrais loopings ne sont pas circulaires ?
+
+bilan:
+  - titre: "Résultats"
+    texte: |
+      $v_B=\sqrt{2g(H-2R)}$ ; $N_B=m\Big(\dfrac{v_B^2}R-g\Big)$ ; contact en $B\iff v_B\ge\sqrt{gR}\approx13{,}7$ m/s ; $H_{\min}=\tfrac52R=47{,}5$ m ; $N(\theta)=mg\Big(\dfrac{2H}R-2+3\cos\theta\Big)$, minimale au sommet ; $N_{\rm bas}=6mg$ pour $H=\tfrac52R$.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Bille qui roule dans le looping"
+    texte: |
+      Pour une bille pleine ($J=\tfrac25mr^2$) qui roule sans glisser, montrer que l'énergie mécanique comporte $\tfrac12mv^2\big(1+\tfrac25\big)$, puis $H_{\min}=\tfrac{27}{10}R$ (en négligeant le rayon de la bille).
+  - niveau: licence
+    titre: "Looping non circulaire"
+    texte: |
+      Si le rayon de courbure en bas vaut $\rho_b$ et au sommet $\rho_h$, la condition en haut devient $v_B^2\ge g\rho_h$. Montrer qu'un looping à courbure variable (grand rayon en bas, petit rayon en haut) permet de limiter l'accélération en bas à quelques $g$ pour la même hauteur.
+
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi ne tombe-t-on pas la tête en bas ?"
+    duree_introduction: "3 min"
+    question_d_accroche: |
+      Au sommet d'un looping, les passagers sont {\bf la tête en bas} et ne tombent pas, sans être attachés par le haut. {\bf À quelle vitesse minimale} faut-il arriver au sommet ? De quelle hauteur faut-il lâcher le wagon ?
+    texte: |
+      {\bf Idée clé : au sommet, le poids seul peut fournir la force centripète.} $N+mg=mv^2/R$ : si $v^2=gR$, $N=0$ et le poids suffit ; au-dessus, le rail pousse. La vitesse vient de l'énergie : $v^2=2g(H-2R)$.
+
+outils_mathematiques:
+  - titre: "Résolution d'inégalités"
+    texte: |
+      $2g(H-2R)\ge gR\iff H\ge\tfrac52R$ (diviser par $g>0$).
+  - titre: "Position angulaire sur un cercle"
+    texte: |
+      Avec $\theta$ depuis le bas : $z=R(1-\cos\theta)$, composante radiale du poids $-mg\cos\theta$ (vers le centre pour $\cos\theta<0$).
+
+liens_autres_disciplines:
+  - discipline: "Parcs d'attractions"
+    texte: |
+      Clothoïde (rayon de courbure variable) pour limiter l'accélération verticale et obtenir un looping plus « doux ».
+  - discipline: "Aéronautique"
+    texte: |
+      Looping en avion : le facteur de charge vaut $1+v^2/(gR)$ en bas du looping.
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{itemize}
+        \item[(a)] Appliquer la conservation de l'énergie mécanique du wagon entre $A$ et $B$.
+        \item[(b)] En déduire l'expression de sa vitesse $v_B$ au point $B$ en fonction de $H$, $R$ et $g$.
+        \item[(c)] Faire le bilan des forces qui s'exercent sur le wagon en $B$.
+      \end{itemize}
+    coup_de_pouce: |
+      $A$ est à l'altitude $H$ avec $v_A=0$ ; $B$ est à l'altitude $2R$. La réaction du rail ne travaille pas.
+    correction: |
+      $E_m(A)=mgH=E_m(B)=\tfrac12mv_B^2+2mgR$, donc $v_B=\sqrt{2g(H-2R)}$ ; forces en $B$ : poids $m\vec g$ et réaction $\vec N$, toutes deux dirigées vers le bas (vers le centre du looping).
+    solution:
+      - titre: "(a) Conservation de $E_m$"
+        texte: |
+          Système : le wagon. Forces : poids (conservatif) et réaction $\vec N$ du rail lisse (perpendiculaire à la vitesse, $W=0$). Donc $\Delta E_m=0$ entre $A$ ($z_A=H$, $v_A=0$) et $B$ ($z_B=2R$) :
+          $$mgH=\tfrac12mv_B^2+mg\,(2R).$$
+      - titre: "(b) Vitesse en $B$"
+        texte: |
+          $$\boxed{v_B=\sqrt{2g\,(H-2R)}}.$$
+          Elle ne dépend pas de la masse ni de la forme de la descente, seulement de la différence d'altitude $H-2R$ ; réel si $H\ge2R$ (il faut au moins atteindre le sommet).
+      - titre: "(c) Bilan des forces en $B$"
+        texte: |
+          En $B$ (sommet, le wagon roule à l'intérieur du cercle, tête en bas) : le poids $m\vec g$ vers le bas, la réaction $\vec N$ vers le centre $O$ du cercle, donc {\bf aussi vers le bas}. Les deux forces sont colinéaires, dans la direction normale $\vec n$ dirigée vers le centre.
+
+  - id: q2
+    enonce: |
+      \begin{itemize}
+        \item[(d)] Rappeler l'expression de l'accélération dans la base de Frenet.
+        \item[(e)] Appliquer le PFD en $B$ et le projeter dans la base de Frenet.
+        \item[(f)] Sous quelle condition physique le wagon se détache-t-il du rail ?
+        \item[(g)] En déduire la vitesse minimale $v_{\min}$ en $B$ pour que le wagon reste en contact ; valeur numérique.
+        \item[(h)] En déduire la hauteur minimale $H_{\min}$ permettant au wagon de franchir le looping jusqu'en $C$.
+      \end{itemize}
+    coup_de_pouce: |
+      Au sommet, $\vec n$ est dirigé vers le bas. $\vec a=\dfrac{\mathrm dv}{\mathrm dt}\vec t+\dfrac{v^2}R\vec n$. Le contact est rompu quand la réaction s'annule.
+    correction: |
+      $N+mg=mv_B^2/R$ ; décollage $\iff N\le0$ ; $v_{\min}=\sqrt{gR}\approx13{,}7$ m/s ; $v_B^2\ge gR\Rightarrow H\ge H_{\min}=\tfrac52R=47{,}5$ m.
+    solution:
+      - titre: "(d)(e) Accélération et PFD en $B$"
+        texte: |
+          Frenet : $\vec a=\dfrac{\mathrm dv}{\mathrm dt}\,\vec t+\dfrac{v^2}{R}\,\vec n$. Au sommet, $\vec n$ est dirigé vers le centre (vers le bas) et $\vec N$, $m\vec g$ sont selon $+\vec n$. Projection de $m\vec a=m\vec g+\vec N$ :
+          $$\text{(selon }\vec n):\ \ mg+N=m\frac{v_B^2}R,\qquad\text{(selon }\vec t):\ \ m\frac{\mathrm dv}{\mathrm dt}=0\ \text{(en B)}.$$
+          (La tangente est horizontale en $B$, le poids n'y a pas de composante : la vitesse est extremale en $B$.)
+      - titre: "(f) Condition de détachement"
+        texte: |
+          Le rail ne peut que {\bf pousser} : $N\ge0$. Le wagon quitte le rail dès que la réaction s'annule : $N\le0$ est la condition de décollage ($N<0$ est impossible physiquement ; la trajectoire circulaire n'est plus tenue).
+      - titre: "(g) Vitesse minimale"
+        texte: |
+          $N=m\Big(\dfrac{v_B^2}R-g\Big)\ge0\iff v_B^2\ge gR$, soit
+          $$\boxed{v_{\min}=\sqrt{gR}}=\sqrt{9{,}81\times19}\approx\boxed{13{,}7~\mathrm{m/s}}\approx49~\mathrm{km/h}.$$
+          Interprétation : à cette vitesse, le poids seul fournit exactement la force centripète $mv^2/R=mg$ ; le wagon est en chute libre « le long du cercle » ($N=0$, apesanteur ressentie).
+      - titre: "(h) Hauteur minimale"
+        texte: |
+          $v_B^2=2g(H-2R)\ge gR\iff H\ge2R+\tfrac R2$, soit
+          $$\boxed{H_{\min}=\tfrac52R}=2{,}5\times19=\boxed{47{,}5~\mathrm m}.$$
+          {\bf Vérification} : si $H=2R$ le wagon arrive en $B$ à vitesse nulle (il n'y arrive pas vraiment, la réaction serait négative). $H=\tfrac52R$ est bien entre $2R$ et $3R$.
+
+  - id: q3
+    enonce: |
+      {\bf Compléments (le sommet est-il le pire point ?)} On repère le wagon par l'angle $\theta$ entre le rayon $\overrightarrow{OM}$ et la verticale descendante ($\theta=0$ en bas du looping, $\theta=\pi$ au sommet).
+      \begin{itemize}
+        \item[(i)] Exprimer l'altitude $z(\theta)$, puis $v^2(\theta)$ par l'énergie.
+        \item[(j)] Établir $N(\theta)$ par le PFD projeté sur la normale centripète. Montrer que $N$ est minimale au sommet.
+        \item[(k)] Pour $H=H_{\min}=\tfrac52R$, calculer $N_{\rm bas}/(mg)$ et commenter.
+      \end{itemize}
+    coup_de_pouce: |
+      $z=R(1-\cos\theta)$. Projeter sur la direction vers le centre : $N-mg\cos\theta=mv^2/R$ (le poids a une composante vers le centre égale à $-mg\cos\theta$).
+    correction: |
+      $v^2=2g\big[H-R(1-\cos\theta)\big]$ ; $N(\theta)=mg\Big[\dfrac{2H}R-2+3\cos\theta\Big]$ ; minimale en $\theta=\pi$ ; pour $H=\tfrac52R$, $N_{\rm bas}=6mg$.
+    solution:
+      - titre: "(i) Altitude et vitesse"
+        texte: |
+          $z(\theta)=R(1-\cos\theta)$ ($z=0$ en bas, $2R$ en haut). Conservation de $E_m$ : $mgH=\tfrac12mv^2+mgR(1-\cos\theta)$, d'où
+          $$v^2(\theta)=2g\big[H-R(1-\cos\theta)\big].$$
+      - titre: "(j) Réaction $N(\\theta)$ et pire point"
+        texte: |
+          Vecteur unitaire centripète $\vec n=-\vec e_r$ (vers $O$). Composante du poids selon $\vec n$ : $-mg\cos\theta$ (en bas, le poids s'oppose à la direction centripète ; en haut il l'accompagne). PFD selon $\vec n$ :
+          $$N-mg\cos\theta=\frac{mv^2}R\ \Rightarrow\ N=m\frac{v^2}R+mg\cos\theta=mg\Big[\frac{2H}R-2+3\cos\theta\Big].$$
+          $N$ est une fonction croissante de $\cos\theta$ : minimale pour $\cos\theta=-1$, {\bf donc au sommet} ($\theta=\pi$), où $N_B=mg\big(\dfrac{2H}R-5\big)$. Contrôle : $N_B\ge0\iff H\ge\tfrac52R$ $\sird$.
+      - titre: "(k) Réaction en bas pour $H_{\\min}$"
+        texte: |
+          $\theta=0$ : $N_{\rm bas}=mg\Big(\dfrac{2H}R-2+3\Big)=mg\Big(\dfrac{2H}R+1\Big)$. Pour $H=\tfrac52R$ : $N_{\rm bas}=6mg$. {\bf Interprétation} : les passagers subissent $6\,g$ (facteur de charge $6$), ce qui est trop pour un manège. Raison d'être des loopings non circulaires : grand rayon en bas (petit $v^2/\rho$), petit rayon en haut (le poids suffit à assurer la courbure).

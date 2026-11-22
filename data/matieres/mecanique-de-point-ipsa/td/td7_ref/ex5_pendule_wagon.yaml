@@ -1,0 +1,175 @@
+id: td7_ex5
+intitule: "Pendule dans un wagon accéléré"
+td: td7
+facultatif: true
+seance: 5
+
+cours_rattache:
+  - dynamique.referentiel_non_galileen
+  - dynamique.force_inertie_entrainement
+  - dynamique.petites_oscillations
+
+metadonnees:
+  duree_estimee: "45 min"
+  difficulte: 3
+  type_exercice: "Complément original / Dynamique en référentiel non galiléen"
+  indispensable: false
+
+enonce_intro: |
+  Un pendule simple (masse $m$ ponctuelle, fil inextensible de longueur $\ell=1{,}00$ m, de masse négligeable) est suspendu au plafond d'un wagon. Le wagon, référentiel $\mathcal R'$, est en mouvement rectiligne par rapport au sol $\mathcal R$ (galiléen) avec l'accélération constante $\vec a=a\,\vec e_x$, $a=2{,}00\ {\rm m\cdot s^{-2}}$ ; $g=9{,}81\ {\rm m\cdot s^{-2}}$. On repère le pendule par l'angle $\theta$ que fait le fil avec la verticale descendante, compté positivement dans le sens de $\vec e_x$. À $t=0$, le wagon démarre : le pendule est au repos {\bf dans le wagon}, le fil vertical ($\theta=0$).
+
+prerequis:
+  - titre: "Forces d'inertie"
+    texte: |
+      Dans un référentiel $\mathcal R'$ en translation accélérée ($\vec a_e=\vec a$, $\vec\Omega=\vec0$) : $\vec F_{ie}=-m\vec a$ et $\vec F_{ic}=\vec0$.
+  - titre: "Pendule simple"
+    texte: |
+      $\ell\ddot\theta=-g\sin\theta$ ; petites oscillations $\omega_0=\sqrt{g/\ell}$.
+  - titre: "Énergie potentielle"
+    texte: |
+      Une force constante $\vec F$ dérive de $E_p=-\vec F\cdot\vec r$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Écrire le PFD dans $\\mathcal R'$ avec la force d'inertie d'entraînement"
+    texte: |
+      Savoir que tout se passe comme dans un champ de pesanteur effectif $\vec g_{\rm eff}=\vec g-\vec a$.
+  - titre: "Équilibre relatif, stabilité, oscillations"
+    texte: |
+      Déterminer l'angle d'équilibre, la tension, la période de petites oscillations, l'amplitude des oscillations après le démarrage.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Idée centrale : la gravité effective"
+    texte: |
+      L'exercice est un {\bf pendule simple dans un champ de pesanteur modifié} $\vec g_{\rm eff}$. Toutes les formules du pendule restent valables en remplaçant $g$ par $g_{\rm eff}=\sqrt{g^2+a^2}$ et la verticale par la direction de $\vec g_{\rm eff}$. Le point subtil est la condition initiale (fil vertical = pas à l'équilibre).
+  - titre: "Deux méthodes pour comparer"
+    texte: |
+      On résout dans $\mathcal R'$ (force d'inertie) puis on vérifie dans $\mathcal R$ (tension seule + poids, accélération $a$ de la masse à l'équilibre).
+
+point_cours:
+  - titre: "Principe fondamental dans $\\mathcal R'$"
+    texte: |
+      $m\vec a_r=m\vec g+\vec T-m\vec a=m\vec g_{\rm eff}+\vec T$ avec $\vec g_{\rm eff}=\vec g-\vec a$, $g_{\rm eff}=\sqrt{g^2+a^2}$.
+  - titre: "Énergie potentielle effective"
+    texte: |
+      $E_{p,\rm eff}(\theta)=-m\ell\,\vec g_{\rm eff}\cdot\vec u_\ell=-mg\ell\cos\theta+ma\ell\sin\theta$ (pour $\theta$ compté vers $+\vec e_x$) ; on peut écrire $E_{p,\rm eff}=-mg_{\rm eff}\ell\cos(\theta+\alpha)$ avec $\tan\alpha=a/g$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Mauvais sens de la force d'inertie"
+    texte: |
+      La force d'inertie est dirigée {\bf à l'opposé} de l'accélération du wagon : $-ma\vec e_x$. Le pendule se déplace vers l'arrière lorsque le wagon accélère.
+  - titre: "Pendule à l'équilibre en $\\theta=0$"
+    texte: |
+      À $t=0$ le pendule est au repos dans le wagon mais {\bf pas à l'équilibre} : l'équilibre est en $\theta=-\alpha$. Le pendule oscille autour de $-\alpha$ avec l'amplitude $\alpha$.
+  - titre: "Tension égale à $mg$"
+    texte: |
+      Même à l'équilibre, $T=mg_{\rm eff}=m\sqrt{g^2+a^2}>mg$.
+  - titre: "Oublier le référentiel"
+    texte: |
+      Dans $\mathcal R$ (galiléen) il n'y a pas de force d'inertie ; la masse est accélérée par la composante horizontale de la tension.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Le fil à plomb dans le train"
+    texte: |
+      Montrer que l'accéléromètre le plus simple est un pendule ($\tan\alpha=a/g$) ; l'angle de $11{,}5^\circ$ correspond à $a=2$ m/s² ($\approx0{,}2\,g$), accélération d'un TGV au démarrage ou d'une voiture assez sportive.
+  - titre: "Prédire l'amplitude"
+    texte: |
+      Avant le calcul, demander : « jusqu'à quel angle le pendule remonte-t-il, à l'arrière ? » (symétrie de l'oscillation autour de la position d'équilibre : $2\alpha$).
+
+bilan:
+  - titre: "Résultats"
+    texte: |
+      $\tan\alpha=a/g$, $\alpha=11{,}5^\circ$ ; $T_{\rm eq}=mg_{\rm eff}=10{,}01\,m$ (N) ; $\omega_0=\sqrt{g_{\rm eff}/\ell}=3{,}16\ {\rm rad\cdot s^{-1}}$, $T_0=1{,}99$ s ; amplitude $\alpha$ autour de $-\alpha$ (angle maximal $-2\alpha=-23{,}0^\circ$) ; $T_{\max}=m(3g_{\rm eff}-2g)=10{,}4\,m$ (N).
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Freinage"
+    texte: |
+      Le wagon freine ($a<0$) : que devient l'angle d'équilibre ? À partir de quelle décélération le pendule atteint-il l'horizontale à l'équilibre ? ($a\to\infty$)
+  - niveau: licence
+    titre: "Oscillations de grande amplitude"
+    texte: |
+      Écrire l'intégrale première $\tfrac12\ell\dot\theta^2-g_{\rm eff}\cos(\theta+\alpha)={\rm cte}$ et la période exacte $T=4\sqrt{\ell/g_{\rm eff}}\,K(\sin(\theta_m/2))$ ; comparer à la période harmonique pour une amplitude $23^\circ$ (écart $\approx1\ \%$).
+  - niveau: master
+    titre: "Accélération variable (démarrage progressif)"
+    texte: |
+      Pour $a(t)=a_0(1-\mathrm e^{-t/\tau})$ avec $\tau\gg\omega_0^{-1}$ : montrer par l'approximation adiabatique que le pendule suit $\tan\alpha(t)=a(t)/g$ (invariant adiabatique) ; discuter le cas $\tau\lesssim\omega_0^{-1}$ (oscillations excitées).
+
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi un pendule penche-t-il vers l'arrière quand le train démarre ?"
+    duree_introduction: "3 min"
+    question_d_accroche: |
+      Dans un train qui démarre, un fil à plomb se penche vers l'arrière : quelle force le tire ? Existe-t-elle pour un observateur sur le quai ?
+    texte: |
+      {\bf Idée clé : dans $\mathcal R'$, tout se passe comme si la pesanteur valait $\vec g-\vec a$.} Pour l'observateur du quai, aucune force supplémentaire : c'est le fil qui accélère la masse.
+
+outils_mathematiques:
+  - titre: "Composition de sinus et cosinus"
+    texte: |
+      $A\cos\theta+B\sin\theta=\sqrt{A^2+B^2}\cos(\theta-\varphi)$, $\tan\varphi=B/A$.
+  - titre: "Petites oscillations"
+    texte: |
+      $\ddot\varphi+\omega_0^2\varphi=0$ pour $\varphi=\theta+\alpha$.
+  - titre: "Conservation de l'énergie"
+    texte: |
+      $\tfrac12m\ell^2\dot\varphi^2-mg_{\rm eff}\ell\cos\varphi={\rm cte}$.
+
+liens_autres_disciplines:
+  - discipline: "Capteurs"
+    texte: |
+      Accéléromètres (MEMS), inclinomètres : mesure de $\vec g-\vec a$.
+  - discipline: "Transports"
+    texte: |
+      Confort des passagers (accélération latérale en virage, démarrages), trains pendulaires.
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{itemize}
+        \item[(a)] Faire le bilan des forces sur la masse dans $\mathcal R'$ et écrire le principe fondamental.
+        \item[(b)] Déterminer l'angle d'équilibre $\theta_{\rm eq}$ et la tension à l'équilibre. Applications numériques.
+        \item[(c)] Retrouver ces résultats dans $\mathcal R$ (galiléen), sans force d'inertie.
+      \end{itemize}
+    coup_de_pouce: |
+      (a) Poids, tension et $\vec F_{ie}=-m\vec a$. (b) À l'équilibre, $\vec a_r=\vec0$ : $m\vec g_{\rm eff}+\vec T=\vec0$. (c) La masse a l'accélération $\vec a$ : appliquer $m\vec a=m\vec g+\vec T$.
+    correction: |
+      (a) $m\vec a_r=m\vec g+\vec T-m\vec a$ ; (b) $\tan\theta_{\rm eq}=-a/g$, $\theta_{\rm eq}=-11{,}5^\circ$ (vers l'arrière), $T=m\sqrt{g^2+a^2}=10{,}01\,m$ N ; (c) $T_x=ma$, $T_y=mg$ : mêmes résultats.
+    solution:
+      - titre: "(a) Bilan et PFD dans $\\mathcal R'$"
+        texte: |
+          Forces : poids $m\vec g=-mg\,\vec e_y$ (avec $\vec e_y$ vertical ascendant), tension $\vec T$ (dirigée le long du fil, vers le point d'attache), force d'inertie d'entraînement $\vec F_{ie}=-m\vec a_e=-ma\,\vec e_x$ ($\vec F_{ic}=\vec0$ car $\mathcal R'$ ne tourne pas). Dans $\mathcal R'$ :
+          $$m\vec a_r=m\vec g+\vec T-ma\,\vec e_x=m\,\vec g_{\rm eff}+\vec T,\qquad\vec g_{\rm eff}=-a\vec e_x-g\vec e_y.$$
+      - titre: "(b) Équilibre relatif"
+        texte: |
+          À l'équilibre $\vec a_r=\vec0$ : $\vec T=-m\vec g_{\rm eff}$, donc le fil est aligné avec $\vec g_{\rm eff}$. L'angle de $\vec g_{\rm eff}$ avec la verticale descendante vérifie $\tan\alpha=\dfrac{a}{g}$, et le pendule se place {\bf en arrière} (opposé à $\vec a$) :
+          $$\boxed{\theta_{\rm eq}=-\alpha=-\arctan\frac ag=-11{,}5^\circ},\qquad\boxed{T_{\rm eq}=mg_{\rm eff}=m\sqrt{g^2+a^2}=10{,}01\,m\ {\rm (N)}}.$$
+          Vérification : $\tan(11{,}52^\circ)=0{,}2039=2/9{,}81$ $\surd$.
+      - titre: "(c) Vérification dans le référentiel du sol"
+        texte: |
+          Dans $\mathcal R$ la masse, immobile dans le wagon, a l'accélération $a\,\vec e_x$ : $ma\vec e_x=m\vec g+\vec T$. Projections : $T_x=ma$, $T_y=mg$, soit $\tan\alpha=T_x/T_y=a/g$ et $T=m\sqrt{g^2+a^2}$ $\surd$. La composante horizontale de la tension est ce qui {\bf accélère la masse} (pas de force d'inertie dans $\mathcal R$).
+
+  - id: q2
+    enonce: |
+      \begin{itemize}
+        \item[(d)] Établir l'équation du mouvement de $\theta(t)$ dans $\mathcal R'$ et montrer qu'elle se met sous la forme $\ddot\varphi=-\dfrac{g_{\rm eff}}{\ell}\sin\varphi$ avec $\varphi=\theta+\alpha$.
+        \item[(e)] Calculer la période des petites oscillations. Applications numériques.
+        \item[(f)] À $t=0$ le fil est vertical et le pendule immobile dans le wagon. Quelle est l'amplitude du mouvement ultérieur, l'angle maximal atteint vers l'arrière et la tension maximale ?
+      \end{itemize}
+    coup_de_pouce: |
+      (d) Projeter sur $\vec e_\theta$ : $m\ell\ddot\theta=-mg\sin\theta-ma\cos\theta$. Écrire $g\sin\theta+a\cos\theta=g_{\rm eff}\sin(\theta+\alpha)$. (f) Conservation de $\tfrac12\ell\dot\varphi^2-g_{\rm eff}\cos\varphi$ avec $\varphi(0)=\alpha$, $\dot\varphi(0)=0$. Pour $T$ : projeter sur le fil.
+    correction: |
+      (d) $\ddot\varphi=-\dfrac{g_{\rm eff}}{\ell}\sin\varphi$ ; (e) $T_0=2\pi\sqrt{\ell/g_{\rm eff}}=1{,}99$ s ; (f) amplitude $\alpha=11{,}5^\circ$ autour de $-\alpha$, angle maximal $-2\alpha=-23{,}0^\circ$ ; $T_{\max}=m(3g_{\rm eff}-2g)=10{,}4\,m$ (N).
+    solution:
+      - titre: "(d) Équation du mouvement"
+        texte: |
+          Avec $\vec e_\theta$ le vecteur unitaire orthoradial ($\theta$ croissant vers $+\vec e_x$) : le poids donne $-mg\sin\theta$, la force d'inertie $-ma\cos\theta$, la tension est radiale. Donc
+          $$m\ell\ddot\theta=-m(g\sin\theta+a\cos\theta)=-mg_{\rm eff}\sin(\theta+\alpha),$$
+          avec $g\sin\theta+a\cos\theta=g_{\rm eff}(\cos\alpha\sin\theta+\sin\alpha\cos\theta)$, $\cos\alpha=g/g_{\rm eff}$, $\sin\alpha=a/g_{\rm eff}$. Avec $\varphi=\theta+\alpha$ : $\boxed{\ddot\varphi=-\dfrac{g_{\rm eff}}{\ell}\sin\varphi}$ : pendule simple d'axe incliné de $-\alpha$ et de gravité $g_{\rm eff}$.
+      - titre: "(e) Petites oscillations"
+        texte: |
+          $\ddot\varphi+\omega_0^2\varphi=0$ avec $\omega_0=\sqrt{g_{\rm eff}/\ell}=\sqrt{10{,}01/1{,}00}=3{,}16\ {\rm rad\cdot s^{-1}}$ ; $\boxed{T_0=2\pi/\omega_0=1{,}99\ {\rm s}}$ (contre $2{,}01$ s sans accélération : l'accélération {\bf raccourcit} la période).
+      - titre: "(f) Condition initiale : oscillation d'amplitude $\\alpha$"
+        texte: |
+          À $t=0$, $\theta=0$ donc $\varphi(0)=\alpha$ et $\dot\varphi(0)=0$ (immobile dans $\mathcal R'$). Le pendule oscille entre $\varphi=\pm\alpha$, c'est-à-dire entre $\theta=0$ et $\theta=-2\alpha=-23{,}0^\circ$ ; {\bf amplitude $\alpha=11{,}5^\circ$ autour de la position d'équilibre $-\alpha$}. Intégrale première : $\tfrac12\ell\dot\varphi^2=g_{\rm eff}(\cos\varphi-\cos\alpha)$. Passage à l'équilibre ($\varphi=0$) : $\ell\dot\varphi^2=2g_{\rm eff}(1-\cos\alpha)$.
+          Tension (projection sur le fil, radiale, dans $\mathcal R'$) : $T-mg_{\rm eff}\cos\varphi=m\ell\dot\varphi^2$, donc $T=m\,g_{\rm eff}(3\cos\varphi-2\cos\alpha)$ ; maximale en $\varphi=0$ :
+          $$T_{\max}=mg_{\rm eff}(3-2\cos\alpha)=m(3g_{\rm eff}-2g)=m(30{,}04-19{,}62)=\boxed{10{,}4\,m\ {\rm (N)}}\quad(\text{car }g_{\rm eff}\cos\alpha=g).$$
+          À $t=0$ ($\varphi=\alpha$, vitesse nulle) : $T=mg_{\rm eff}\cos\alpha=mg=9{,}81\,m$ N.

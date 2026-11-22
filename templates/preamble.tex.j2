@@ -3,6 +3,10 @@
 \documentclass[11pt]{article}
 \input{templates/styles/packages}
 
+% --- Couleur de l'anglais : réglée dans build/config.yaml (couleurs.anglais) ---
+% Dans les YAML, l'anglais s'écrit {\color{blue} ...} ; common_data le redirige vers colorEN.
+\VAR{couleur_en_definition}
+
 % --- Extraction des données de la matière ---
 \BLOCK{set matiere_nom = matiere_meta.nom if matiere_meta and matiere_meta.nom else opts.matiere}
 
@@ -44,7 +48,7 @@
   \renewcommand{\footrulewidth}{0.8pt}
   \renewcommand{\footrule}{{\color{FooterRuleColor}\hrule width\headwidth height\footrulewidth}}
   \fancyhead[L]{\small\bfseries\color{woodNoyer} \VAR{entete_gauche}}
-  \fancyhead[R]{\small\itshape\color{grayPierre} \VAR{td.chapitre_cours}}
+  \fancyhead[R]{\small\itshape\color{grayPierre} \VAR{td.chapitre_cours if td is defined else ''}}
   
   %\fancyfoot[L]{\small\color{grayBrume} \VAR{auteur_nom} \href{mailto:\VAR{auteur_email}}{\scriptsize\ttfamily <\VAR{auteur_email}>}}
   \fancyfoot[C]{\small\bfseries\color{grayPierre} \thepage}

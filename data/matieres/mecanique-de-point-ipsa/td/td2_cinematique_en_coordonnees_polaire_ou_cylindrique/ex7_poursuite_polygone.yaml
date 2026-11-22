@@ -1,0 +1,195 @@
+id: td2_ex7
+intitule: "Courbe de poursuite : les trois drones"
+td: td2
+facultatif: true
+seance: 2
+
+cours_rattache:
+  - cinematique.coordonnees_polaires
+  - cinematique.base_polaire
+  - cinematique.vecteur_vitesse
+  - cinematique.vecteur_acceleration
+
+metadonnees:
+  duree_estimee: "45 min"
+  difficulte: 5
+  priorite: 2
+  type_exercice: "Approfondissement / Problème de synthèse"
+  indispensable: false
+
+enonce_intro: |
+  Trois drones $A_1$, $A_2$, $A_3$ sont initialement placés aux sommets d'un triangle équilatéral dont le centre
+  $O$ est à la distance $R$ de chaque sommet. À $t=0$, chaque drone $A_i$ vole à la {\bf vitesse constante en norme} $v$
+  en visant en permanence le drone suivant ($A_1\to A_2\to A_3\to A_1$) : son vecteur vitesse est toujours dirigé
+  vers la position actuelle de sa cible. On généralise ensuite à $n$ mobiles aux sommets d'un polygone régulier à
+  $n$ côtés.
+
+prerequis:
+  - titre: "Polygone régulier"
+    texte: |
+      Les $n$ sommets d'un polygone régulier de centre $O$ sont à la même distance $r$ de $O$, les angles au centre valent $2\pi/n$ et l'angle intérieur en un sommet vaut $\pi-2\pi/n$ ; le rayon $OA_i$ est la bissectrice de cet angle.
+  - titre: "Vitesse en base polaire"
+    texte: |
+      $\vec v=\dot r\,\vec u_r+r\dot\theta\,\vec u_\theta$, $\|\vec v\|^2=\dot r^2+r^2\dot\theta^2$ ; $\vec a=(\ddot r-r\dot\theta^2)\,\vec u_r+(r\ddot\theta+2\dot r\dot\theta)\,\vec u_\theta$.
+  - titre: "Séparation des variables"
+    texte: |
+      $\dfrac{\mathrm dr}{\mathrm d\theta}=-r\tan\alpha$ s'intègre en $\ln r=-\theta\tan\alpha+$ cte.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Utiliser la symétrie pour réduire un problème à $N$ corps à un problème à un corps"
+    texte: |
+      Exploiter une symétrie (rotation d'angle $2\pi/n$) pour ramener un mouvement collectif à un mouvement polaire de {\bf un seul} mobile ; traduire « $\vec v$ dirigé vers la cible » en deux équations scalaires $\dot r$ et $r\dot\theta$ ; en déduire la trajectoire, la durée de rencontre, la longueur parcourue et l'accélération.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Exercice de synthèse : modélisation géométrique puis cinématique polaire"
+    texte: |
+      Le piège est géométrique : trouver l'angle entre $\vec v$ et le rayon $OA_i$. Une fois fait, tout est calcul. Le résultat est spectaculaire (spirale logarithmique, une infinité de tours, durée {\bf finie}) et se compare à l'exercice 6 (même courbe, loi horaire différente). Les cas limites $n=2$ (droite) et $n\to\infty$ (cercle) servent de vérification.
+
+point_cours:
+  - titre: "Mouvement d'un point visant une cible mobile"
+    texte: |
+      Si $\vec v=v\,\vec e$ avec $\vec e$ le vecteur unitaire dirigé vers la cible, la vitesse est de norme constante $v$ mais change de direction : $\vec a\perp\vec v$ et $\|\vec a\|=v^2/\rho$. La trajectoire est appelée {\bf courbe de poursuite}.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Se tromper d'angle dans le triangle"
+    texte: |
+      L'angle entre le côté $A_iA_{i+1}$ et le rayon $A_iO$ est $\dfrac\pi2-\dfrac\pi n$ (pour $n=3$ : $30^\circ$) et non $\dfrac\pi n$. Vérification avec $n=2$ : $0$ (vitesse dirigée vers $O$).
+  - titre: "Croire qu'un nombre infini de tours impose une durée infinie"
+    texte: |
+      Ici $\dot\theta=v\cos(\pi/n)/r\to\infty$ quand $r\to0$ : les derniers tours sont parcourus de plus en plus vite et la durée totale est finie : $T=R/(v\sin(\pi/n))$.
+  - titre: "Penser que l'accélération est dirigée vers la cible ou vers le centre"
+    texte: |
+      Comme $\|\vec v\|$ est constante, $\vec a\perp\vec v$ : l'accélération n'est ni vers la cible, ni vers $O$.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Simuler avant de calculer"
+    texte: |
+      Programmer en 10 lignes (Python, pas de temps $\Delta t$) les trois drones qui visent chacun le suivant : les étudiants voient le triangle tourner et se contracter, ce qui rend plausible l'hypothèse « triangle toujours équilatéral » avant de la justifier par la symétrie.
+
+bilan:
+  - titre: "Les $n$ poursuivants : spirale logarithmique et durée finie"
+    texte: |
+      Pour $n$ mobiles : $\dot r=-v\sin\dfrac\pi n$, $r\dot\theta=v\cos\dfrac\pi n$ ; $r(t)=R-v\sin\dfrac\pi n\,t$ ; trajectoire $r=R\,\mathrm e^{-\theta\tan(\pi/n)}$ ; durée de la rencontre $T=\dfrac R{v\sin(\pi/n)}$ ; longueur parcourue par chaque mobile $L=vT=\dfrac R{\sin(\pi/n)}$ ; $\|\vec a\|=\dfrac{v^2\cos(\pi/n)}r$ ; $\rho=\dfrac r{\cos(\pi/n)}$. Pour $n=3$ : $T=\dfrac{2R}{\sqrt3\,v}$.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Deux mobiles de vitesses différentes"
+    texte: |
+      Un mobile $B$ (vitesse $v_B$) poursuit un mobile $A$ qui se déplace en ligne droite à la vitesse $v_A<v_B$ perpendiculairement à la direction initiale $BA$. Établir l'équation différentielle de la courbe de poursuite $y(x)$ et montrer que $B$ rattrape $A$ en un temps fini si et seulement si $v_B>v_A$.
+  - niveau: master
+    titre: "Stabilité de la formation et formes limites"
+    texte: |
+      Montrer par un calcul de perturbation qu'une petite déformation du triangle équilatéral (un sommet légèrement déplacé) est, à l'ordre un, ramenée à la forme équilatérale quand les mobiles se rapprochent. Quelle est la loi d'évolution de la taille du triangle ? Généraliser à des mobiles de vitesses légèrement différentes.
+
+accroche_point_cours_essentiel:
+  - titre: "Trois drones, une seule règle : viser son voisin"
+    duree_introduction: "3 à 5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Trois drones, aux sommets d'un triangle équilatéral, volent à la même vitesse constante en visant chacun celui qui est à sa gauche. Le triangle va-t-il rester équilatéral ? Va-t-il se contracter ? Les drones vont-ils se rencontrer ? Combien de tours feront-ils avant ?
+    texte: |
+      {\bf Idée clé : la symétrie réduit le problème.} Par symétrie de rotation d'angle $2\pi/n$, le polygone reste régulier et ses $n$ sommets décrivent la même courbe, aux mêmes distances $r(t)$ de $O$. Il suffit d'étudier {\bf un} mobile en polaire : l'angle entre $\vec v$ et le rayon est constant, donc $\dot r$ et $r\dot\theta$ sont proportionnels à $v$.
+
+outils_mathematiques:
+  - titre: "Géométrie du polygone régulier"
+    texte: |
+      Angle entre le côté $A_iA_{i+1}$ et le rayon $A_iO$ : $\dfrac12\left(\pi-\dfrac{2\pi}n\right)=\dfrac\pi2-\dfrac\pi n$. Pour $n=3$ : $30^\circ$ ; pour $n=4$ : $45^\circ$ ; pour $n=6$ : $60^\circ$.
+  - titre: "Complément à $\\pi/2$"
+    texte: |
+      $\cos\left(\dfrac\pi2-x\right)=\sin x$ et $\sin\left(\dfrac\pi2-x\right)=\cos x$.
+  - titre: "Équation différentielle $\\dot y=-\\lambda$ et $\\dot\\theta=\\mu/r$"
+    texte: |
+      Si $\dot r=-\lambda$ (constante), alors $r=R-\lambda t$ ; si de plus $\dot\theta=\mu/r$, alors $\theta=-\dfrac\mu\lambda\ln\left(1-\dfrac t T\right)$ avec $T=R/\lambda$.
+  - titre: "Rayon de courbure à vitesse constante"
+    texte: |
+      $\rho=\dfrac{v^2}{\|\vec a\|}$ car $\vec a\perp\vec v$ (toute l'accélération est normale).
+
+liens_autres_disciplines:
+  - discipline: "Robotique et drones"
+    texte: |
+      Algorithmes de {\bf rendez-vous} et de consensus pour une flotte de robots qui convergent vers un point commun en ne se regardant qu'entre voisins.
+  - discipline: "Défense et guidage"
+    texte: |
+      Guidage d'un missile par « poursuite pure » : la vitesse est dirigée en permanence vers la cible, d'où une courbe de poursuite (le missile arrive derrière la cible).
+  - discipline: "Mathématiques"
+    texte: |
+      Problème classique des « quatre insectes » (ou trois chiens), courbes de poursuite de Bouguer, spirales logarithmiques.
+  - discipline: "Biologie et éthologie"
+    texte: |
+      Poursuite d'une proie par un prédateur (guépard, libellule) : modèles de navigation proportionnelle.
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{enumerate}[label=(\alph*)]
+          \item Pourquoi, par symétrie, le triangle reste-t-il équilatéral et son centre $O$ reste-t-il fixe ? En déduire qu'il suffit d'étudier le mouvement de $A_1$ en coordonnées polaires $(r,\theta)$ de centre $O$.
+          \item Déterminer l'angle entre le vecteur vitesse de $A_1$ et le rayon $A_1O$ (faire un schéma). En déduire $\dot r$ et $r\dot\theta$ en fonction de $v$.
+      \end{enumerate}
+    coup_de_pouce: |
+      Dans un triangle équilatéral, le rayon $A_1O$ est la bissectrice de l'angle en $A_1$. La vitesse de $A_1$ est dirigée selon $\overrightarrow{A_1A_2}$.
+    correction: |
+      (a) La rotation de $2\pi/3$ autour de $O$ échange les mobiles et conserve la règle de mouvement : la configuration reste invariante, donc équilatérale de centre $O$. (b) L'angle vaut $30^\circ$ : $\dot r=-v\cos30^\circ=-\dfrac{\sqrt3}2v$ et $r\dot\theta=v\sin30^\circ=\dfrac v2$.
+    solution:
+      - titre: "(a) Argument de symétrie"
+        texte: |
+          La règle « chaque mobile vise le suivant à la vitesse $v$ » est invariante par la rotation de centre $O$ et d'angle $2\pi/3$ qui envoie $A_1\to A_2\to A_3\to A_1$. Comme le mouvement est entièrement déterminé par la configuration initiale et par cette règle, l'état à tout instant est invariant par cette rotation : les trois mobiles restent aux sommets d'un triangle {\bf équilatéral}, de centre $O$ fixe, à la distance $r(t)$ de $O$ et tournant autour de $O$. Il suffit d'étudier $A_1$, en polaire de centre $O$.
+      - titre: "(b) Composantes de la vitesse"
+        texte: |
+          Dans le triangle équilatéral, l'angle en $A_1$ vaut $60^\circ$ et $A_1O$ est la bissectrice : l'angle entre $\overrightarrow{A_1A_2}$ et $\overrightarrow{A_1O}$ vaut $30^\circ$. La vitesse $\vec v$ de $A_1$, de norme $v$, est dirigée selon $\overrightarrow{A_1A_2}$. Sa projection sur $-\vec u_r$ (vers $O$) vaut $v\cos30^\circ$ et sa projection sur $\vec u_\theta$ vaut $v\sin30^\circ$ :
+          $$\boxed{\dot r=-\frac{\sqrt3}2\,v},\qquad\boxed{r\dot\theta=\frac v2}.$$
+
+  - id: q2
+    enonce: |
+      \begin{enumerate}[label=(\alph*),start=3]
+          \item Déterminer $r(t)$ et la durée $T$ au bout de laquelle les drones se rencontrent en $O$. Exprimer $T$ en fonction du côté $d$ du triangle initial.
+          \item Déterminer $\theta(t)$. Combien de tours effectue chaque drone avant la rencontre ?
+          \item Établir l'équation polaire $r(\theta)$ de la trajectoire et la nommer. Calculer la longueur $L$ parcourue par chaque drone.
+      \end{enumerate}
+    coup_de_pouce: |
+      $\dot r$ est constant : intégrez directement. Pour $\theta(t)$, reportez $r(t)$ dans $\dot\theta=\dfrac{v}{2r}$ et intégrez ; attention au comportement de $r\to0$. Pour $r(\theta)$, éliminez $t$ ou calculez $\dfrac{\mathrm dr}{\mathrm d\theta}=\dfrac{\dot r}{\dot\theta}$.
+    correction: |
+      $r=R-\frac{\sqrt3}2vt$ ; $T=\dfrac{2R}{\sqrt3v}=\dfrac{2d}{3v}$ (car $d=R\sqrt3$). $\theta(t)=-\dfrac1{\sqrt3}\ln\left(1-\dfrac tT\right)\to\infty$ : une infinité de tours. $r=R\,\mathrm e^{-\sqrt3\,\theta}$, spirale logarithmique ; $L=vT=\dfrac{2R}{\sqrt3}=\dfrac{2d}3$.
+    solution:
+      - titre: "(c) Rayon et durée"
+        texte: |
+          $\dot r=-\frac{\sqrt3}2v$ constant et $r(0)=R$ donnent $\boxed{r(t)=R-\frac{\sqrt3}2\,vt}$. La rencontre a lieu quand $r=0$ :
+          $$\boxed{T=\frac{2R}{\sqrt3\,v}}.$$
+          Le côté du triangle est $d=R\sqrt3$ : $T=\dfrac{2d}{3v}$. Interprétation : si la cible était fixe, il faudrait $d/v$. Ici la cible avance elle aussi, avec une composante $v\cos60^\circ=v/2$ dirigée vers son poursuivant : le côté $d$ du triangle diminue au rythme $v+v/2=\frac32v$, d'où $T=d/(\frac32v)=\frac{2d}{3v}<\frac dv$.
+      - titre: "(d) Angle $\\theta(t)$ et nombre de tours"
+        texte: |
+          $\dot\theta=\dfrac v{2r}=\dfrac v{2R\,(1-t/T)}$. Avec $R=\dfrac{\sqrt3}2vT$ : $\dot\theta=\dfrac1{\sqrt3\,T\,(1-t/T)}=\dfrac1{\sqrt3\,(T-t)}$. D'où
+          $$\boxed{\theta(t)=-\frac1{\sqrt3}\ln\left(1-\frac tT\right)}.$$
+          $\theta\to+\infty$ quand $t\to T^-$ : chaque drone fait une {\bf infinité de tours} avant la rencontre, qui a pourtant lieu en un temps {\bf fini}. Les derniers tours sont parcourus de plus en plus vite ($\dot\theta=v/(2r)\to\infty$).
+      - titre: "(e) Trajectoire et longueur"
+        texte: |
+          $\dfrac{\mathrm dr}{\mathrm d\theta}=\dfrac{\dot r}{\dot\theta}=\dfrac{-\frac{\sqrt3}2v}{v/(2r)}=-\sqrt3\,r$, d'où
+          $$\boxed{r(\theta)=R\,\mathrm e^{-\sqrt3\,\theta}}$$
+          (vérification : $\theta=-\frac1{\sqrt3}\ln(1-t/T)$ donne $\mathrm e^{-\sqrt3\theta}=1-t/T=r/R$ $\surd$). C'est une {\bf spirale logarithmique} ($k=\sqrt3=\tan60^\circ$). La longueur parcourue est simplement $L=vT=\dfrac{2R}{\sqrt3}=\dfrac{2d}3$, car la vitesse est constante. Comparaison avec l'exercice 6 : même courbe, mais ici $\|\vec v\|=$ cte (et $\dot\theta$ variable), ce qui donne une durée {\bf finie}.
+
+  - id: q3
+    enonce: |
+      \begin{enumerate}[label=(\alph*),start=6]
+          \item Calculer l'accélération $\vec a$ d'un drone dans la base polaire, sa norme et vérifier $\vec a\perp\vec v$. En déduire le rayon de courbure $\rho(r)$.
+          \item {\bf Généralisation à $n$ mobiles} (polygone régulier à $n$ côtés). Établir $\dot r$, $r\dot\theta$, $T$, $L$ et $\rho$ en fonction de $n$, $R$ et $v$. Vérifier les cas limites $n=2$ et $n\to\infty$.
+          \item Application numérique : trois drones aux sommets d'un triangle équilatéral de côté $d=60$ m, $v=10$ m/s. Calculer $R$, $T$, $L$, le rayon de courbure initial et l'accélération initiale.
+      \end{enumerate}
+    coup_de_pouce: |
+      Dérivez $\dot r=-v\sin(\pi/n)$ et $r\dot\theta=v\cos(\pi/n)$ : $\ddot r=0$, $\dot\theta=\dfrac{v\cos(\pi/n)}r$ puis $\ddot\theta=-\dfrac{v\cos(\pi/n)\,\dot r}{r^2}$. Pour $n$ quelconque, l'angle entre $\vec v$ et $\vec u_r$ vaut $\pi-\left(\dfrac\pi2-\dfrac\pi n\right)$ (vitesse vers $O$).
+    correction: |
+      $\vec a=-\dfrac{v^2\cos(\pi/n)}{r}\left[\cos\dfrac\pi n\,\vec u_r+\sin\dfrac\pi n\,\vec u_\theta\right]$, $\|\vec a\|=\dfrac{v^2\cos(\pi/n)}r$, $\rho=\dfrac r{\cos(\pi/n)}$ ($=2r$ pour $n=3$). $T=\dfrac R{v\sin(\pi/n)}$, $L=\dfrac R{\sin(\pi/n)}$. AN : $R\approx34{,}6$ m, $T=4{,}0$ s, $L=40$ m, $\rho_0\approx69$ m, $a_0\approx1{,}4\ \mathrm{m\,s^{-2}}$.
+    solution:
+      - titre: "(f) Accélération pour $n=3$"
+        texte: |
+          Avec $\dot r=-\frac{\sqrt3}2v$ ($\ddot r=0$) et $r\dot\theta=\frac v2$ : $\dot\theta=\dfrac v{2r}$ et $\ddot\theta=-\dfrac v{2r^2}\dot r=\dfrac{\sqrt3v^2}{4r^2}$.
+          $$a_r=-r\dot\theta^2=-\frac{v^2}{4r},\qquad a_\theta=r\ddot\theta+2\dot r\dot\theta=\frac{\sqrt3v^2}{4r}-\frac{\sqrt3v^2}{2r}=-\frac{\sqrt3v^2}{4r}.$$
+          $$\boxed{\vec a=-\frac{v^2}{4r}\left(\vec u_r+\sqrt3\,\vec u_\theta\right)},\qquad\|\vec a\|=\boxed{\frac{v^2}{2r}}.$$
+          Avec $\vec v=v\left(-\frac{\sqrt3}2\vec u_r+\frac12\vec u_\theta\right)$ : $\vec a\cdot\vec v=-\frac{v^3}{4r}\left(-\frac{\sqrt3}2+\frac{\sqrt3}2\right)=0$ $\surd$ ($\|\vec v\|=$ cte). Comme $\vec a\perp\vec v$, $\rho=\dfrac{v^2}{\|\vec a\|}=\boxed{2r}$.
+      - titre: "(g) Généralisation à $n$ mobiles"
+        texte: |
+          L'angle entre le côté et le rayon vaut $\dfrac\pi2-\dfrac\pi n$. Donc
+          $$\boxed{\dot r=-v\sin\frac\pi n},\qquad\boxed{r\dot\theta=v\cos\frac\pi n}\qquad(n=3:\ \sin60^\circ=\tfrac{\sqrt3}2,\ \cos60^\circ=\tfrac12\ ~\surd).$$
+          Alors $r=R-v\sin\frac\pi n\,t$, $\boxed{T=\dfrac R{v\sin(\pi/n)}}$, $\dfrac{\mathrm dr}{\mathrm d\theta}=-r\tan\dfrac\pi n$ soit $\boxed{r=R\,\mathrm e^{-\theta\tan(\pi/n)}}$ et $\boxed{L=vT=\dfrac R{\sin(\pi/n)}}$. En reprenant le calcul de (f) : $a_r=-\dfrac{v^2\cos^2(\pi/n)}r$, $a_\theta=-\dfrac{v^2\sin(\pi/n)\cos(\pi/n)}r$, donc
+          $$\|\vec a\|=\frac{v^2\cos(\pi/n)}r,\qquad\rho=\frac r{\cos(\pi/n)}.$$
+          {\bf Cas limites.} $n=2$ : $\cos\frac\pi2=0$, $\vec a=\vec0$, $\rho=\infty$, $r=R-vt$, $T=R/v$ : deux mobiles qui se visent vont en ligne droite l'un vers l'autre $\surd$. $n\to\infty$ : $\sin\frac\pi n\to0$, $T\to\infty$, $r\to R$, $\rho\to r$ : on retrouve le mouvement circulaire uniforme de rayon $R$ (chaque mobile vise quasiment son voisin tangent) $\surd$.
+      - titre: "(h) Application numérique"
+        texte: |
+          $R=\dfrac d{\sqrt3}\approx34{,}6$ m. $T=\dfrac{2R}{\sqrt3v}=\dfrac{2d}{3v}=4{,}0$ s. $L=vT=40$ m (à comparer avec la distance $R=34{,}6$ m : seulement $16\,\%$ de plus). $\rho_0=2R\approx69$ m et $a_0=\dfrac{v^2}{2R}=\dfrac{100}{69}\approx1{,}4\ \mathrm{m\,s^{-2}}$ (environ $0{,}15\,g$) en début de mouvement. En fin de mouvement, $a\propto1/r\to\infty$ : le modèle perd son sens quand les drones sont à quelques mètres l'un de l'autre (limite physique d'accélération des drones, collision). {\bf Validation} : les unités sont cohérentes ($\mathrm{m^2\,s^{-2}/m}=\mathrm{m\,s^{-2}}$).

@@ -1,0 +1,475 @@
+\BLOCK{include "preamble.tex.j2"}
+
+\begin{document}
+\vspace{-1.5cm}
+\maketitle
+\vspace{-0.5cm}
+%\begin{center}\small (Chapitre de cours : \VAR{td.chapitre_cours})\end{center}
+\bigskip
+
+\bigskip
+
+%{# ============================================================================== #}
+%{# 1) OUVERTURE DU TD : conventions, prérequis, objectifs, point de cours, outils  #}
+%{#    (toutes les sections du _meta.yaml qui doivent précéder les exercices)       #}
+%{# ============================================================================== #}
+\BLOCK{set ex = td}
+\BLOCK{set titre_exercice = false}
+\BLOCK{set td_phase = 'debut'}
+\BLOCK{include "exercice.tex.j2"}
+
+\bigskip
+
+%{# ============================================================================== #}
+%{# 2) PLAN DE SÉANCE : tableau généré à partir des métadonnées des exercices       #}
+%{#    Désactivable avec opts.show_plan_seance = false                             #}
+%{#    Les durées sont lues au format "35 min", "35", "1 h 30" ou "1h30".          #}
+%{# ============================================================================== #}
+\BLOCK{if (opts.show_plan_seance is not defined or opts.show_plan_seance) and exercices}
+\BLOCK{set ns = namespace(tot=0, ess=0, nfac=0)}%
+\par\medskip\noindent{\large\bfseries\sffamily Plan de la séance}\par\nopagebreak\smallskip
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.25}
+
+\BLOCK{if false}
+
+\begin{tabular}{|c|p{0.34\linewidth}|p{0.2\linewidth}|c|c|c|}
+\hline
+\textbf{n\textsuperscript{o}} & \textbf{Exercice} & \textbf{Type} & \textbf{Diff.} & \textbf{Durée} & \textbf{Statut}\\
+\hline
+\BLOCK{for e in exercices}%
+\BLOCK{set d_raw = ((e.metadonnees.duree_estimee|default('0')) if e.metadonnees else '0')}%
+\BLOCK{set s = d_raw|string|lower|replace(' ','')|replace('min','')|replace('mn','')}%
+\BLOCK{if 'h' in s}%
+\BLOCK{set p = s.split('h')}%
+\BLOCK{set m = (p[0]|int) * 60 + (p[1]|int)}%
+\BLOCK{else}%
+\BLOCK{set m = s|int}%
+\BLOCK{endif}%
+\BLOCK{set ns.tot = ns.tot + m}%
+\BLOCK{if not e.facultatif}\BLOCK{set ns.ess = ns.ess + m}\BLOCK{else}\BLOCK{set ns.nfac = ns.nfac + 1}\BLOCK{endif}%
+\VAR{e.numero|default(loop.index)} & \VAR{e.intitule}\BLOCK{if e.facultatif} \textit{(facultatif)}\BLOCK{endif} & \VAR{(e.metadonnees.type_exercice|default('')) if e.metadonnees else ''} & \BLOCK{if e.metadonnees and e.metadonnees.difficulte}\BLOCK{for k in range(e.metadonnees.difficulte|int)}$\star$\BLOCK{endfor}\BLOCK{endif} & \VAR{m} min & \BLOCK{if e.facultatif}facultatif\BLOCK{else}\textbf{essentiel}\BLOCK{endif}\\
+\hline
+\BLOCK{endfor}%
+\end{tabular}
+
+\begin{tabular}{|c|p{0.34\linewidth}|p{0.2\linewidth}|c|c|c|}
+
+\hline
+
+\textbf{n\textsuperscript{o}} &
+\textbf{Exercice} &
+\textbf{Type} &
+\textbf{Diff.} &
+\textbf{Durée} &
+\textbf{Statut}\\
+
+\hline
+
+\BLOCK{for e in exercices}%
+
+\BLOCK{set d_raw = ((e.metadonnees.duree_estimee|default('0')) if e.metadonnees else '0')}%
+
+\BLOCK{set s = d_raw|string|lower|replace(' ','')|replace('min','')|replace('mn','')}%
+
+\BLOCK{if 'h' in s}%
+\BLOCK{set p = s.split('h')}%
+\BLOCK{set m = (p[0]|int) * 60 + (p[1]|int)}%
+\BLOCK{else}%
+\BLOCK{set m = s|int}%
+\BLOCK{endif}%
+
+\BLOCK{set ns.tot = ns.tot + m}%
+
+\BLOCK{if not e.facultatif}%
+\BLOCK{set ns.ess = ns.ess + m}%
+\BLOCK{else}%
+\BLOCK{set ns.nfac = ns.nfac + 1}%
+\BLOCK{endif}%
+
+\VAR{e.numero|default(loop.index)}
+&
+\VAR{e.intitule}
+\BLOCK{if e.facultatif} \textit{(facultatif)}\BLOCK{endif}
+&
+\VAR{(e.metadonnees.type_exercice|default('')) if e.metadonnees else ''}
+&
+\BLOCK{if e.metadonnees and e.metadonnees.difficulte}%
+\BLOCK{for k in range(e.metadonnees.difficulte|int)}%
+$\star$%
+\BLOCK{endfor}%
+\BLOCK{endif}
+&
+\BLOCK{set nh = ((m + 14) // 15)}%
+\BLOCK{for i in range(nh)}%
+\petitehorloge
+\BLOCK{endfor}%
+&
+\BLOCK{if e.facultatif}%
+facultatif%
+\BLOCK{else}%
+\textbf{essentiel}%
+\BLOCK{endif}\\
+
+\hline
+
+\BLOCK{endfor}%
+
+\end{tabular}
+
+\BLOCK{endif}
+
+
+% ==============================================================================
+% CONFIGURATION DU PLAN DE SÉANCE
+% ==============================================================================
+
+% Une horloge représente cette durée en minutes
+\BLOCK{set intervalle_horloge = 15}%
+\BLOCK{set taille_horloge = 0.8}%
+
+% Horloge représentant une unité de durée
+\newcommand{\logoHorloge}{%
+  %\showclock{0}{10}%
+  \scalebox{\VAR{taille_horloge}}{%
+    \ClockFrametrue
+    \ClockStyle=3
+    \clock{0}{\VAR{intervalle_horloge}}%
+  }%
+}
+
+% Nombre maximal de niveaux de difficulté / priorité
+\BLOCK{set max_difficulte = 5}%
+\BLOCK{set max_priorite = 5}%
+
+% ==============================================================================
+
+
+% ==============================================================================
+% LÉGENDE DU PLAN DE SÉANCE
+% ==============================================================================
+
+%{#
+
+\BLOCK{if false}
+
+\par\smallskip
+\noindent
+\textbf{Légende durée :}\quad
+\logoHorloge\ = \VAR{intervalle_horloge} min
+\quad\text{—}\quad
+\logoHorloge\,\logoHorloge\ = \VAR{intervalle_horloge * 2} min
+\quad\text{—}\quad
+\logoHorloge\,\logoHorloge\,\logoHorloge\ = \VAR{intervalle_horloge * 3} min
+\quad\text{—}\quad
+\logoHorloge\,\logoHorloge\,\logoHorloge\,\logoHorloge\ = \VAR{intervalle_horloge * 4} min
+
+\par\smallskip
+
+\noindent
+\textbf{Difficulté :}\quad
+$\star$ = facile
+\quad\text{→}\quad
+$\star\star\star\star\star$ = très difficile
+
+\qquad
+
+\textbf{Priorité :}\quad
+\logoPriorite\ = 1
+\quad\text{→}\quad
+\BLOCK{for i in range(max_priorite)}
+\logoPriorite
+\BLOCK{endfor}
+\ = \VAR{max_priorite}
+
+\par\smallskip
+
+\noindent
+\textbf{Statut :}\quad
+\logoEssentiel\ essentiel
+\qquad
+\logoFacultatif\ facultatif
+
+\par\medskip
+
+% ---------
+
+\par\smallskip
+\noindent
+\begin{tabular}{@{}ll@{}}
+\textbf{Légende durée :}\quad
+\logoHorloge\ = \VAR{intervalle_horloge} min
+\quad\text{—}\quad
+\logoHorloge\,\logoHorloge\ = \VAR{intervalle_horloge * 2} min
+\quad\text{—}\quad
+\logoHorloge\,\logoHorloge\,\logoHorloge\ = \VAR{intervalle_horloge * 3} min
+\quad\text{—}\quad
+\logoHorloge\,\logoHorloge\,\logoHorloge\,\logoHorloge\ = \VAR{intervalle_horloge * 4} min
+&
+\textbf{Difficulté :}\quad
+$\star$ = facile
+\quad\text{→}\quad
+$\star\star\star\star\star$ = très difficile
+\\[0.8em]
+\textbf{Priorité :}\quad
+\logoPriorite\ = 1
+\quad\text{→}\quad
+\BLOCK{for i in range(max_priorite)}
+\logoPriorite
+\BLOCK{endfor}
+\ = \VAR{max_priorite}
+&
+\textbf{Statut :}\quad
+\logoEssentiel\ essentiel
+\qquad
+\logoFacultatif\ facultatif
+\end{tabular}
+\par\smallskip
+
+% --------
+
+\par\smallskip
+\noindent
+\begin{tabular}{@{}l@{}}
+\textbf{Durée :}\quad
+\logoHorloge\ = \VAR{intervalle_horloge} min
+\quad\text{—}\quad
+\logoHorloge\,\logoHorloge\ = \VAR{intervalle_horloge * 2} min
+\quad\text{—}\quad
+\logoHorloge\,\logoHorloge\,\logoHorloge\ = \VAR{intervalle_horloge * 3} min
+\quad\text{—}\quad
+\logoHorloge\,\logoHorloge\,\logoHorloge\,\logoHorloge\ = \VAR{intervalle_horloge * 4} min
+\\[0.4em]
+\textbf{Difficulté :}\quad
+$\star$ = facile
+\quad\text{→}\quad
+$\star\star\star\star\star$ = très difficile
+\\[0.4em]
+\textbf{Priorité :}\quad
+\logoPriorite\ = 1
+\quad\text{→}\quad
+\BLOCK{for i in range(max_priorite)}
+\logoPriorite
+\BLOCK{endfor}
+\ = \VAR{max_priorite}
+\\[0.4em]
+\textbf{Statut :}\quad
+\logoEssentiel\ essentiel
+\quad\text{—}\quad
+\logoFacultatif\ facultatif
+\end{tabular}
+\par\smallskip
+
+%#}
+
+\BLOCK{endif}
+
+
+% ---------
+
+
+\par\smallskip
+\noindent
+\hspace{-1cm}
+\begin{tabular}{@{}r@{}r@{}c@{}l@{}c@{}r@{}c@{}l@{}c@{}r@{}c@{}l@{}c@{}r@{}c@{}l@{}c@{}r@{}c@{}l@{}}
+\textbf{Durée :}\quad&\logoHorloge\  & =  & \VAR{intervalle_horloge} min  & \quad\text{—}\quad & \logoHorloge\,\logoHorloge\ & =  & \VAR{intervalle_horloge * 2} min & \quad\text{—}\quad & \logoHorloge\,\logoHorloge\,\logoHorloge\ & = & \VAR{intervalle_horloge * 3} min & \quad\text{—}\quad & \logoHorloge\,\logoHorloge\,\logoHorloge\,\logoHorloge\ & = & \VAR{intervalle_horloge * 4} min &  \quad\text{—}\quad & \logoHorloge\,\logoHorloge\,\logoHorloge\,\logoHorloge\,\logoHorloge\ & = & \VAR{intervalle_horloge * 5} min \\[0.4em]
+\textbf{Difficulté :}\quad & $\star$ &  = & très facile & \quad\text{—}\quad & $\star\star$ &  = & facile &  \quad\text{—}\quad & $\star\star\star$ &  = & moyen & \quad\text{—}\quad & $\star\star\star\star$ &  = & difficile & \quad\text{→}\quad & $\star\star\star\star\star$  & = & très difficile \\[0.4em]
+\textbf{Priorité :}\quad & \logoPriorite\  & = & 1 & \quad\text{—}\quad & \logoPriorite\logoPriorite\  & = & 2 & \quad\text{—}\quad & \logoPriorite\logoPriorite\logoPriorite\  & = & 3 & \quad\text{—}\quad & \logoPriorite\logoPriorite\logoPriorite\logoPriorite\  & = & 4 & \quad\text{→}\quad & 
+\BLOCK{for i in range(max_priorite)}
+\logoPriorite
+\BLOCK{endfor}
+\ & = &\VAR{max_priorite}
+\\[0.4em]
+\textbf{Statut :}\quad & \logoFacultatif\ & &  facultatif &   \quad\text{—}\quad   &  & & & \quad\text{—}\quad &  & & & \quad\text{—}\quad &  & & & \quad\text{—}\quad   & \logoEssentiel\ & & essentiel  
+\end{tabular}
+\par\smallskip
+
+
+
+% ---------
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{Plan de la séance}
+\label{plandelaseance}
+
+
+%\begin{tabular}{|c|p{0.30\linewidth}|p{0.17\linewidth}|c|c|c|c|}
+\begin{tabular}{c p{0.30\linewidth} p{0.17\linewidth} c c c c }
+
+%\hline
+
+\textbf{n\textsuperscript{o}} &
+\textbf{Exercice} &
+\textbf{Type} &
+\textbf{Diff.} &
+\textbf{Priorité} &
+\textbf{Durée} &
+\textbf{Statut}\\
+
+\hline
+\hline
+
+\BLOCK{for e in exercices}%
+
+% ------------------------------------------------------------------------------
+% Durée
+% ------------------------------------------------------------------------------
+
+\BLOCK{set d_raw = ((e.metadonnees.duree_estimee|default('0')) if e.metadonnees else '0')}%
+
+\BLOCK{set s = d_raw|string|lower|replace(' ','')|replace('min','')|replace('mn','')}%
+
+\BLOCK{if 'h' in s}%
+
+\BLOCK{set p = s.split('h')}%
+
+\BLOCK{set m = (p[0]|int) * 60 + (p[1]|int)}%
+
+\BLOCK{else}%
+
+\BLOCK{set m = s|int}%
+
+\BLOCK{endif}%
+
+% ------------------------------------------------------------------------------
+% Statistiques globales
+% ------------------------------------------------------------------------------
+
+\BLOCK{set ns.tot = ns.tot + m}%
+
+\BLOCK{if not e.facultatif}%
+
+\BLOCK{set ns.ess = ns.ess + m}%
+
+\BLOCK{else}%
+
+\BLOCK{set ns.nfac = ns.nfac + 1}%
+
+\BLOCK{endif}%
+
+% ------------------------------------------------------------------------------
+% Priorité
+% ------------------------------------------------------------------------------
+
+\BLOCK{set priorite = ((e.metadonnees.priorite|default(1))|int) if e.metadonnees else 1}%
+
+% Sécurité : priorité entre 1 et max_priorite
+\BLOCK{if priorite < 1}%
+\BLOCK{set priorite = 1}%
+\BLOCK{endif}%
+
+\BLOCK{if priorite > max_priorite}%
+\BLOCK{set priorite = max_priorite}%
+\BLOCK{endif}%
+
+% ------------------------------------------------------------------------------
+% Difficulté
+% ------------------------------------------------------------------------------
+
+\BLOCK{set difficulte = ((e.metadonnees.difficulte|default(1))|int) if e.metadonnees else 1}%
+
+% Sécurité : difficulté entre 1 et max_difficulte
+\BLOCK{if difficulte < 1}%
+\BLOCK{set difficulte = 1}%
+\BLOCK{endif}%
+
+\BLOCK{if difficulte > max_difficulte}%
+\BLOCK{set difficulte = max_difficulte}%
+\BLOCK{endif}%
+
+% ------------------------------------------------------------------------------
+% Nombre d'horloges
+% ------------------------------------------------------------------------------
+
+\BLOCK{set nh = ((m + intervalle_horloge - 1) // intervalle_horloge)}%
+
+% ------------------------------------------------------------------------------
+% Ligne du tableau
+% ------------------------------------------------------------------------------
+
+\VAR{e.numero|default(loop.index)}
+&
+\hyperref[\VAR{e.id}]{\VAR{e.intitule}}
+&
+\VAR{(e.metadonnees.type_exercice|default('')) if e.metadonnees else ''}
+&
+%
+% Difficulté
+%
+\BLOCK{for k in range(difficulte)}%
+$\star$%
+\BLOCK{endfor}%
+&
+%
+% Priorité
+%
+\BLOCK{for k in range(priorite)}%
+\logoPriorite
+\BLOCK{endfor}%
+&
+%
+% Durée
+%
+\BLOCK{for i in range(nh)}%
+\logoHorloge
+\BLOCK{endfor}%
+&
+%
+% Statut
+%
+\BLOCK{if e.metadonnees and e.metadonnees.statut is defined}%
+
+    \BLOCK{if e.metadonnees.statut == 'facultatif'}%
+        \logoFacultatif\ facultatif%
+    \BLOCK{else}%
+        \logoEssentiel\ \textbf{essentiel}%
+    \BLOCK{endif}%
+
+\BLOCK{else}%
+
+    % Compatibilité avec les anciens YAML
+    \BLOCK{if e.facultatif}%
+        \logoFacultatif\ facultatif%
+    \BLOCK{else}%
+        \logoEssentiel\ \textbf{essentiel}%
+    \BLOCK{endif}%
+
+\BLOCK{endif}\\
+
+%\hline
+
+\BLOCK{endfor}%
+
+\end{tabular}
+
+\smallskip
+{\footnotesize Durée totale estimée : \VAR{ns.tot} min (dont \VAR{ns.ess} min pour les exercices essentiels ; \VAR{ns.nfac} exercice\BLOCK{if ns.nfac > 1}s\BLOCK{endif} facultatif\BLOCK{if ns.nfac > 1}s\BLOCK{endif}).}
+\end{center}
+
+\bigskip
+\BLOCK{endif}
+
+%{# ============================================================================== #}
+%{# 3) EXERCICES                                                                    #}
+%{# ============================================================================== #}
+\BLOCK{set td_phase = 'all'}
+\BLOCK{set titre_exercice = true}
+\BLOCK{for ex in exercices}
+    \BLOCK{include "exercice.tex.j2"}
+    \bigskip
+\BLOCK{endfor}
+
+%{# ============================================================================== #}
+%{# 4) CLÔTURE DU TD : écueils, conseils d'animation, bilan, liens, aller plus loin  #}
+%{#    Désactivable avec opts.show_cloture_td = false                               #}
+%{# ============================================================================== #}
+\BLOCK{if opts.show_cloture_td is not defined or opts.show_cloture_td}
+\BLOCK{set ex = td}
+\BLOCK{set titre_exercice = false}
+\BLOCK{set td_phase = 'fin'}
+\BLOCK{include "exercice.tex.j2"}
+\BLOCK{endif}
+
+\end{document}

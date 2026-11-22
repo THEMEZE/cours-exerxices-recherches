@@ -1,0 +1,148 @@
+id: mp_ext2_etagement
+intitule: "Extension -- Pourquoi des étages ? Optimisation, pertes par gravité et poussée minimale"
+td: mp_phv111
+facultatif: true
+seance: 2
+
+cours_rattache:
+  - dynamique.propulsion_par_reaction
+  - dynamique.etagement
+
+metadonnees:
+  duree_estimee: "50 min"
+  difficulte: 5
+  type_exercice: "Approfondissement / Modélisation"
+  indispensable: false
+
+enonce_intro: |
+  On veut placer une charge utile $m_u=1$ t sur une trajectoire exigeant $\Delta V=9$ km/s (pesanteur et traînée comprises dans cette valeur), avec des moteurs de vitesse d'éjection $v_e=3{,}0$ km/s. Chaque étage de masse $m_s$ contient une structure de masse $\varepsilon\,m_s$ ($\varepsilon=0{,}10$) et $(1-\varepsilon)m_s$ d'ergols ; l'étage vide est largué après usage. On néglige la pesanteur dans les questions (a) à (c) ($\Delta V=9$ km/s est le besoin total) puis on la réintroduit en (d) et (e).
+
+prerequis:
+  - titre: "Équation de Tsiolkovski"
+    texte: |
+      $\Delta V=v_e\ln\dfrac{m_{\rm init}}{m_{\rm fin}}$ ; pour plusieurs étages, les $\Delta V$ s'ajoutent.
+  - titre: "Vol vertical avec pesanteur"
+    texte: |
+      $v(t)=v_e\ln\dfrac{m_0}{m(t)}-g\,t$ ; décollage si $D\,v_e>m_0g$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Comprendre l'intérêt de l'étagement par un calcul"
+    texte: |
+      Montrer qu'un étage unique ne peut pas atteindre un $\Delta V$ donné quelle que soit la quantité d'ergols, dimensionner un lanceur à deux étages, calculer la masse au décollage, et quantifier les pertes par gravité et la poussée minimale nécessaire.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "La limite $\\Delta V_{\\max}=v_e\\ln(1/\\varepsilon)$"
+    texte: |
+      Résultat central : même avec une charge utile nulle, un étage unique de coefficient de structure $\varepsilon$ ne dépasse pas $v_e\ln(1/\varepsilon)=6{,}9$ km/s. Cette « asymptote » est la raison physique de l'étagement. La charge utile représente moins de $2\%$ de la masse au décollage pour deux étages : on retrouve les ordres de grandeur réels. Le dernier point (poussée minimale) fait le lien avec le TP : la poussée doit dépasser le poids, sinon aucune gravité ne peut être vaincue.
+
+point_cours:
+  - titre: "Masse d'un étage pour un $\\Delta V$ donné"
+    texte: |
+      Avec $R=e^{\Delta V/v_e}$ et $R=\dfrac{m_s+m_u}{\varepsilon m_s+m_u}$ : $m_s=m_u\,\dfrac{R-1}{1-\varepsilon R}$, valable si $R<1/\varepsilon$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Croire qu'on peut toujours ajouter du carburant"
+    texte: |
+      Plus de carburant exige un réservoir plus gros, donc plus de structure : le rapport $m_{\rm init}/m_{\rm fin}$ tend vers $1/\varepsilon$ au plus. Il y a une limite {\bf indépendante} de la quantité d'ergols.
+  - titre: "Oublier la charge utile des étages supérieurs"
+    texte: |
+      La charge utile de l'étage 1 est l'étage 2 {\bf plus} la charge utile finale. Il faut dimensionner le lanceur {\bf depuis le haut}.
+  - titre: "Calculer $\\varepsilon$ par rapport à la masse totale"
+    texte: |
+      Ici $\varepsilon$ est le rapport structure/(structure $+$ ergols), indépendant de la charge utile.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Tableur"
+    texte: |
+      Faire tracer $\Delta V$ en fonction de $m_s/m_u$ pour 1, 2, 3 étages avec le tableur du projet : on voit l'asymptote $v_e\ln(1/\varepsilon)$ pour un étage.
+  - titre: "Rendement décroissant"
+    texte: |
+      Un troisième étage rapporte peu par rapport à la complexité (coût) ajoutée : discuter de l'optimum technico-économique ($2$ étages pour la plupart des lanceurs).
+
+bilan:
+  - titre: "Résultats"
+    texte: |
+      Étage unique : $\Delta V_{\max}=3000\ln10=6{,}9$ km/s $<9$ km/s : impossible. Deux étages ($\Delta V_i=4{,}5$ km/s, $R=4{,}48$) : $m_{s2}=6{,}31$ t, $m_{s1}=46{,}1$ t, $m_0=53{,}4$ t ; charge utile $1{,}9\%$ de $m_0$. Avec la pesanteur : poussée minimale $F>m_0g=524$ kN ; perte $gt_b$ d'autant plus grande que la poussée est proche du poids.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Trois étages"
+    texte: |
+      Refaire le calcul avec trois étages ($\Delta V_i=3$ km/s) : calculer $m_0$ et comparer ; conclure sur le gain marginal.
+  - niveau: licence
+    titre: "Optimum de répartition"
+    texte: |
+      Pour deux étages de même $v_e$ et $\varepsilon$, montrer par la méthode des multiplicateurs de Lagrange que $m_0$ est minimal pour $\Delta V_1=\Delta V_2$.
+  - niveau: master
+    titre: "Optimisation de la poussée"
+    texte: |
+      En vol vertical à débit constant, trouver $D$ qui maximise $v(t_b)=v_e\ln R-g\,t_b$ avec $t_b=(m_0-m_f)/D$ ; discuter la limite $D\to\infty$ (accélération excessive, $a_{\max}=D\,v_e/m_f-g$) et la contrainte structurelle ($a_{\max}\le5$--$6\,g$).
+
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi ne peut-on pas faire une fusée à un seul étage ?"
+    duree_introduction: "3 min"
+    question_d_accroche: |
+      Si $\Delta V=v_e\ln(m_0/m_f)$, il suffirait d'ajouter assez de carburant pour atteindre n'importe quelle vitesse. Pourquoi les lanceurs ont-ils alors presque tous plusieurs étages ?
+    texte: |
+      {\bf Idée clé : les réservoirs pèsent.} Pour transporter plus d'ergols, il faut plus de structure, ce qui donne un rapport $m_{\rm init}/m_{\rm fin}$ borné par $1/\varepsilon$. Larguer l'étage vide permet de repartir avec un $\varepsilon$ « neuf » : le $\Delta V$ total n'est plus borné.
+
+outils_mathematiques:
+  - titre: "Exponentielle et logarithme"
+    texte: |
+      $R=e^{\Delta V/v_e}$ ; $e^{1{,}5}=4{,}4817$ ; $\ln10=2{,}3026$.
+  - titre: "Résolution d'une équation linéaire en $m_s$"
+    texte: |
+      $m_s+m_u=R(\varepsilon m_s+m_u)\Rightarrow m_s(1-R\varepsilon)=m_u(R-1)$.
+  - titre: "Limites"
+    texte: |
+      Quand $R\to1/\varepsilon$, $m_s\to\infty$ : la charge utile tend vers $0$ pour une masse donnée.
+
+liens_autres_disciplines:
+  - discipline: "Ingénierie spatiale"
+    texte: |
+      Le coefficient structurel d'un étage réel est de $0{,}04$ à $0{,}10$ ; l'étage 1 réutilisable (Falcon 9) a un $\varepsilon$ plus élevé du fait des pieds, de la protection thermique et du carburant de retour.
+  - discipline: "Économie"
+    texte: |
+      Les coûts par kg en orbite basse sont de l'ordre de milliers à dizaines de milliers d'euros ; le $\Delta V$ exponentiel dans la masse est le coeur du coût.
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{itemize}
+        \item[(a)] Montrer que pour un étage unique, $\Delta V$ est borné par $v_e\ln(1/\varepsilon)$ quelle que soit la quantité d'ergols. Conclure pour $\Delta V=9$ km/s.
+        \item[(b)] Deux étages identiques en $v_e$ et $\varepsilon$ sont utilisés, chacun fournissant $\Delta V=4{,}5$ km/s. Calculer le rapport de masses $R$ de chaque étage.
+        \item[(c)] Dimensionner le lanceur depuis le haut : calculer $m_{s2}$ (étage 2) puis $m_{s1}$ (étage 1) et la masse au décollage $m_0$ pour $m_u=1$ t. Quelle fraction de $m_0$ est la charge utile ?
+      \end{itemize}
+    coup_de_pouce: |
+      (a) $R=\dfrac{m_s+m_u}{\varepsilon m_s+m_u}$ : que devient $R$ quand $m_s\to\infty$ ? (c) La charge utile de l'étage 1 est $m_{s2}+m_u$.
+    correction: |
+      (a) $R<1/\varepsilon=10$, $\Delta V<6{,}9$ km/s. (b) $R=e^{1{,}5}=4{,}48$. (c) $m_{s2}=6{,}31$ t, $m_{s1}=46{,}1$ t, $m_0=53{,}4$ t, fraction $1{,}9\%$.
+    solution:
+      - titre: "(a) Limite d'un étage unique"
+        texte: |
+          $R=\dfrac{m_s+m_u}{\varepsilon m_s+m_u}\xrightarrow[m_s\to\infty]{}\dfrac1\varepsilon$ et $R<\dfrac1\varepsilon$ pour tout $m_s$ fini. Donc $\Delta V<v_e\ln\dfrac1\varepsilon=3000\ln10=\boxed{6{,}9~\mathrm{km/s}}$ : impossible d'atteindre $9$ km/s avec un seul étage, {\bf même sans charge utile}.
+      - titre: "(b) Rapport de masses par étage"
+        texte: |
+          $R=\exp\Big(\dfrac{\Delta V_i}{v_e}\Big)=e^{4{,}5/3{,}0}=e^{1{,}5}=\boxed{4{,}482}$. On a bien $R<1/\varepsilon=10$.
+      - titre: "(c) Dimensionnement"
+        texte: |
+          $m_s=m_u\dfrac{R-1}{1-\varepsilon R}$. Étage 2 : $m_{s2}=1\times\dfrac{3{,}482}{1-0{,}4482}=\boxed{6{,}31~\mathrm t}$ ; masse au-dessus de l'étage 1 : $m_{s2}+m_u=7{,}31$ t. Étage 1 : $m_{s1}=7{,}31\times6{,}31=\boxed{46{,}1~\mathrm t}$ ; $m_0=m_{s1}+7{,}31=\boxed{53{,}4~\mathrm t}$. Vérification : $\dfrac{53{,}4}{4{,}61+7{,}31}=\dfrac{53{,}4}{11{,}92}=4{,}48$ (vérifié). La charge utile est $\dfrac{1}{53{,}4}=\boxed{1{,}9\%}$ de $m_0$.
+
+  - id: q2
+    enonce: |
+      On réintroduit maintenant la pesanteur pour l'étage 1 de la question précédente (vol vertical, $g=9{,}81~\mathrm{m\,s^{-2}}$ constante).
+      \begin{itemize}
+        \item[(d)] Quelle poussée minimale $F_{\min}$ l'étage 1 doit-il fournir pour décoller ? Pour une poussée $F=1{,}3\,m_0g$, calculer le débit $D$, la durée de combustion $t_b$ et la perte par gravité $g\,t_b$.
+        \item[(e)] Même question pour $F=2{,}0\,m_0g$. Comparer. Quelle est l'accélération maximale subie en fin de combustion dans les deux cas ? Conclure sur le choix de la poussée.
+      \end{itemize}
+    coup_de_pouce: |
+      $F=Dv_e$ donc $D=F/v_e$. La masse d'ergols de l'étage 1 est $(1-\varepsilon)m_{s1}$. En fin de combustion : $m_{\rm fin}=\varepsilon m_{s1}+7{,}31$ t $=11{,}92$ t. Accélération : $a=\dfrac{F}{m_{\rm fin}}-g$.
+    correction: |
+      $F_{\min}=m_0g=524$ kN. Pour $1{,}3\,m_0g$ : $D=227$ kg/s, $t_b=183$ s, perte $1{,}79$ km/s ; pour $2{,}0\,m_0g$ : $D=349$ kg/s, $t_b=119$ s, perte $1{,}17$ km/s ; accélérations finales $\approx4{,}8\,g$ et $\approx8{,}0\,g$ : plus de poussée réduit les pertes mais augmente l'accélération subie.
+    solution:
+      - titre: "(d) Poussée minimale et poussée de $1{,}3\\,m_0g$"
+        texte: |
+          Décollage : $F>m_0g=53{,}4\times10^3\times9{,}81=\boxed{524~\mathrm{kN}}$. Pour $F=1{,}3\,m_0g=681$ kN : $D=\dfrac{F}{v_e}=\dfrac{681\times10^3}{3000}=227$ kg/s. Ergols de l'étage 1 : $0{,}9\times46{,}1=41{,}5$ t, donc $t_b=\dfrac{41{,}5\times10^3}{227}=183$ s. Perte par gravité : $gt_b=9{,}81\times183=\boxed{1{,}79~\mathrm{km/s}}$ ($40\%$ de $\Delta V_1=4{,}5$ km/s).
+      - titre: "(e) Poussée de $2{,}0\\,m_0g$ et accélération"
+        texte: |
+          $F=1048$ kN, $D=349$ kg/s, $t_b=\dfrac{41{,}5\times10^3}{349}=119$ s, perte $=\boxed{1{,}17~\mathrm{km/s}}$ : on gagne $0{,}6$ km/s. Accélération de fin de combustion (masse $11{,}9$ t) : pour $1{,}3\,m_0g$ : $a=\dfrac{681}{11{,}92}-9{,}81=57{,}1-9{,}8=47{,}3~\mathrm{m\,s^{-2}}\approx4{,}8\,g$ ; pour $2{,}0\,m_0g$ : $a=\dfrac{1048}{11{,}92}-9{,}81=87{,}9-9{,}8=78{,}1~\mathrm{m\,s^{-2}}\approx8{,}0\,g$. {\bf Conclusion} : plus de poussée réduit les pertes par gravité mais augmente fortement l'accélération finale (contrainte pour la charge utile et la structure ; on limite à environ $4$--$6\,g$ en étranglant les moteurs). Le bon choix est un compromis : poussée initiale de $1{,}2$ à $1{,}5$ fois le poids.

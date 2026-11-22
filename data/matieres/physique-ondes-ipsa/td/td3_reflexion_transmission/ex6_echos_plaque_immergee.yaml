@@ -1,0 +1,260 @@
+id: td3_ex6
+intitule: "Contrôle ultrasonore d'une plaque immergée : train d'échos, épaisseur, atténuation et défaut de collage"
+td: td3
+facultatif: true
+seance: 4
+
+cours_rattache:
+  - chap3.impedance_acoustique
+  - chap3.coefficients_energie
+  - chap3.reflexion_transmission
+
+metadonnees:
+  duree_estimee: "50 min"
+  difficulte: 4
+  priorite: 2
+  type_exercice: "Application / Problème d'ingénieur"
+  indispensable: false
+
+enonce_intro: |
+  Pour contrôler une plaque d'aluminium d'épaisseur $e$ inconnue, on l'immerge dans l'eau et on envoie, sous
+  incidence normale, une impulsion ultrasonore brève (fréquence centrale $5$ MHz, durée $\simeq0{,}4~\mu$s) à l'aide d'une
+  sonde émettrice-réceptrice placée dans l'eau. La face arrière de la plaque est en contact avec l'air.
+  On enregistre sur la sonde un train d'échos notés $E_0$, $E_1$, $E_2,\dots$ : $E_0$ est l'écho de la face avant, $E_n$
+  ($n\ge1$) celui qui a effectué $n$ allers-retours dans la plaque. On note $r_{ij}$ et $t_{ij}$ les coefficients de réflexion
+  et de transmission en \emph{amplitude de pression} pour une onde allant du milieu $i$ au milieu $j$ :
+  $r_{ij}=\dfrac{Z_j-Z_i}{Z_i+Z_j}$, $t_{ij}=1+r_{ij}$.
+
+  Données : eau ($\rho_w=1000~\text{kg}\cdot\text{m}^{-3}$, $c_w=1500~\text{m}\cdot\text{s}^{-1}$), aluminium
+  ($\rho_A=2700~\text{kg}\cdot\text{m}^{-3}$, $c_A=5110~\text{m}\cdot\text{s}^{-1}$), air ($Z_{\mathrm{air}}=442$ rayl).
+  On néglige l'atténuation sauf à la question 5, et on admet que le faisceau reste plan (pas de diffraction).
+
+# figure:
+#   - ref: td3_ex6_echos
+#     legende: |
+#       Suggestion : schéma de la plaque d'aluminium (épaisseur $e$) immergée, avec la sonde dans l'eau et l'air derrière ; tracer (légèrement décalés) les trajets de l'écho $E_0$ (réflexion face avant) et des échos $E_1$, $E_2$ (un et deux allers-retours dans la plaque). Au-dessous, le signal reçu en fonction du temps : une première impulsion positive $E_0$, puis des impulsions négatives d'amplitudes décroissantes.
+#     width: 0.7
+#     label:
+#   - ref: td3_ex6_defaut
+#     legende: |
+#       Suggestion : comparaison de deux trains d'échos : plaque avec face arrière en contact avec l'air (échos $E_1$, $E_2,\dots$ de forte amplitude) et plaque collée sur un polymère (échos plus faibles, décroissance plus rapide) ; faire apparaître le rapport $E_1'/E_1$ en dB.
+#     width: 0.7
+#     label:
+
+prerequis:
+  - titre: "Réflexion et transmission en pression à une interface fluide-solide, incidence normale"
+    texte: |
+      $R=\dfrac{Z_2-Z_1}{Z_1+Z_2}$, $T=1+R$ pour l'amplitude de pression ; pour l'énergie, $R_E=R^2$ et $T_E=1-R_E=\dfrac{4Z_1Z_2}{(Z_1+Z_2)^2}$ (TD2, exercice 4, et exercice 2 du TD3).
+  - titre: "Raisonnement en régime impulsionnel"
+    texte: |
+      Une impulsion brève dont la durée est inférieure au temps d'aller-retour dans la plaque est suivie d'une succession d'échos \emph{distincts} dans le temps : on raisonne sur chaque trajet séparément, en multipliant les coefficients rencontrés. (En régime sinusoïdal établi, tous ces échos interfèrent : TD2, exercice 8.)
+  - titre: "Série géométrique"
+    texte: |
+      $\sum_{n\ge0}q^n=\dfrac1{1-q}$ pour $|q|<1$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Raisonner en échos plutôt qu'en régime établi"
+    texte: |
+      Savoir écrire l'amplitude d'un écho comme produit de coefficients de réflexion et de transmission rencontrés le long du trajet, vérifier la conservation de l'énergie en sommant sur tous les échos, extraire d'un train d'échos l'épaisseur, l'impédance et l'atténuation d'une plaque, et interpréter un changement de conditions à la face arrière (défaut de collage).
+      
+objectifs_pedagogiques_enseignants:
+  - titre: "Un cas d'école du contrôle non destructif qui réutilise tout le chapitre"
+    texte: |
+      L'exercice reprend, dans un contexte industriel réel, le coefficient de pression, le coefficient d'énergie, le désaccord d'impédance de l'exercice 2 et l'intérêt de l'immersion dans l'eau. Il fait voir l'importance des \emph{signes} (réflexion sur milieu plus ou moins impédant) : l'écho du fond de la plaque est de signe opposé à celui de la face avant, ce qui permet de distinguer ces deux échos à l'oscilloscope.
+
+      Les étudiants apprécient de retrouver, par une somme de série géométrique sur les échos, la conservation de l'énergie : ce bilan est rarement fait à ce niveau.
+
+point_cours:
+  - titre: "Train d'échos d'une plaque"
+    texte: |
+      Pour une plaque (milieu $A$) entre un milieu avant $w$ et un milieu arrière $b$, l'écho $E_0$ est la réflexion directe $r_{wA}$. L'écho $E_n$ ($n\ge1$) a traversé la face avant (aller), parcouru $n$ allers-retours dans la plaque en étant $n$ fois réfléchi par la face arrière ($r_{Ab}$) et $n-1$ fois par la face avant vue de l'intérieur ($r_{Aw}$), puis a retraversé la face avant (retour) :
+      $$E_n=t_{wA}\,t_{Aw}\,r_{Ab}\,\big(r_{Aw}\,r_{Ab}\big)^{n-1}\qquad(n\ge1).$$
+      Les instants d'arrivée sont séparés de $\Delta t=2e/c_A$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Confondre amplitude et énergie"
+    texte: |
+      $t_{wA}=1{,}80>1$ ne signifie pas que l'énergie est amplifiée : c'est un coefficient de \emph{pression}. Seule l'énergie, avec le facteur $Z$ du milieu, est conservée. Le produit $t_{wA}t_{Aw}=1-r^2<1$ est, lui, interprétable comme un facteur de transmission en énergie.
+  - titre: "Oublier les signes"
+    texte: |
+      $r_{wA}>0$ (le métal est plus impédant que l'eau) mais $r_{Aw}<0$ et $r_{A,\mathrm{air}}\approx-1$ (l'air est beaucoup moins impédant). La face arrière renverse donc le signe de l'impulsion. Une erreur de signe dans $r_{Aw}$ ferait trouver une alternance de signes des échos.
+  - titre: "Appliquer la formule d'énergie à chaque écho en oubliant que le milieu est le même"
+    texte: |
+      Tous les échos sont reçus dans l'eau, avec la même impédance $Z_w$ : leurs énergies relatives sont donc simplement les carrés de leurs amplitudes de pression. Ce n'est pas le cas des ondes dans la plaque.
+  - titre: "Négliger la résolution temporelle"
+    texte: |
+      Deux échos successifs ne peuvent être séparés que si la durée de l'impulsion est inférieure à $\Delta t=2e/c_A$ ; sinon ils se recouvrent et interfèrent. Cela impose le choix de la fréquence et du nombre de périodes de l'impulsion.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Dessiner la chronologie avant de calculer"
+    texte: |
+      Demander de dessiner l'axe du temps et de placer $E_0$, $E_1$, $E_2$, avec leur signe, avant tout calcul. Les étudiants devinent alors que $|E_2/E_1|=|r_{Aw}r_{Ab}|$.
+  - titre: "Lien avec l'oscilloscope"
+    texte: |
+      Si un capteur ultrasonore et une plaque sont disponibles, observer le train d'échos à l'oscilloscope : le contraste de signe entre $E_0$ et $E_1$, la décroissance géométrique des échos suivants et le changement d'amplitude quand on remplace l'air par un liquide à l'arrière sont immédiatement visibles.
+
+bilan:
+  - titre: "Ce que dit un train d'échos"
+    texte: |
+      $$E_0=r_{wA},\qquad E_n=t_{wA}t_{Aw}\,r_{Ab}\,(r_{Aw}r_{Ab})^{n-1},\qquad\Delta t=\frac{2e}{c_A},\qquad\sum_{n\ge0}E_n^2=1\ (\text{sans pertes, face arrière totalement réfléchissante}).$$
+      Le \emph{retard} entre échos donne l'épaisseur, le \emph{rapport} de deux échos successifs donne l'impédance (et, si elle est connue, l'atténuation), l'\emph{amplitude} de $E_1$ renseigne sur l'état de la face arrière (collage, corrosion).
+
+aller_plus_loin:
+  - niveau: master
+    titre: "Retour au régime sinusoïdal : formule d'Airy"
+    texte: |
+      Si l'impulsion est remplacée par une onde sinusoïdale entretenue, tous les échos interfèrent. En sommant la série géométrique $r_{wA}+t_{wA}t_{Aw}r_{Ab}e^{-2i\varphi}\sum_{m\ge0}(r_{Aw}r_{Ab}e^{-2i\varphi})^m$ avec $\varphi=\omega e/c_A$, on retrouve la formule de transmission d'une lame (TD2, exercice 8) et les résonances $e=n\lambda_A/2$ : c'est le même problème vu dans deux régimes différents.
+  - niveau: ingénieur
+    titre: "Diffraction, directivité et sonde réelle"
+    texte: |
+      Une sonde réelle a une taille finie ($\sim$ centimètres) : en champ proche, l'amplitude oscille avec la distance ; en champ lointain, le faisceau diverge avec un demi-angle $\sin\theta\simeq1{,}22\lambda/D$. Pour l'inspection, on choisit la fréquence, le diamètre de la sonde et la distance de focalisation en tenant compte de ces effets.
+  - niveau: ingénieur
+    titre: "Mesure d'épaisseur de tuyauterie corrodée"
+    texte: |
+      Les mesures d'épaisseur résiduelle sur les canalisations utilisent exactement ce principe (mesure du temps entre deux échos de fond). Un facteur correctif est nécessaire car $c_A$ dépend de la température et de l'état de la pièce : on étalonne sur une épaisseur connue.
+
+accroche_point_cours_essentiel:
+  - titre: "Comment voir la face arrière d'une plaque sans la toucher ?"
+    duree_introduction: "5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Une plaque de métal est plongée dans un bain d'eau. On envoie une impulsion ultrasonore : on reçoit d'abord un écho (face avant), puis une série d'autres échos de plus en plus faibles. {\bf D'où viennent ces échos ? Que nous apprend leur espacement ? Que nous apprend la décroissance de leur amplitude ?}
+    texte: |
+      {\bf Idée clé : chaque aller-retour dans la plaque produit un écho, dont l'amplitude est le produit des coefficients de réflexion et de transmission rencontrés.} Les temps d'arrivée donnent $e=c_A\Delta t/2$ ; la décroissance géométrique donne $r_{Aw}r_{Ab}$, donc l'impédance de la plaque ; l'énergie totale restituée est exactement celle envoyée (si la face arrière réfléchit tout) :
+      $$r_{wA}^2+\frac{(1-r_{wA}^2)^2}{1-r_{wA}^2}=1.$$
+
+outils_mathematiques:
+  - titre: "Série géométrique"
+    texte: |
+      $\sum_{n=1}^{\infty}q^{\,n-1}=\dfrac1{1-q}$. Avec $q=r^2$ : $\sum_{n\ge1}E_n^2=\dfrac{(1-r^2)^2}{1-r^2}=1-r^2$.
+  - titre: "Identité $(1+r)(1-r)=1-r^2$"
+    texte: |
+      $t_{wA}t_{Aw}=(1+r_{wA})(1+r_{Aw})=(1+r)(1-r)$ car $r_{Aw}=-r_{wA}$ : le produit est indépendant du signe de $r$.
+  - titre: "Signe des coefficients"
+    texte: |
+      $r_{ij}>0$ si $Z_j>Z_i$ (réflexion sur un milieu plus impédant, sans inversion de pression), $r_{ij}<0$ sinon. Une chaîne de coefficients se multiplie : un nombre impair de coefficients négatifs donne un écho négatif.
+  - titre: "Décibels et rapport d'amplitudes"
+    texte: |
+      Rapport d'amplitudes de pression $\rho$ : $20\log_{10}\rho$ dB ; par exemple $\rho=0{,}643$ correspond à $-3{,}8$ dB.
+  - titre: "Atténuation exponentielle"
+    texte: |
+      Une onde d'amplitude atténuée en $e^{-\alpha x}$ perd, sur un aller-retour de longueur $2e$, un facteur $e^{-2\alpha e}$ ; en dB, $\alpha_{\mathrm{dB}}=8{,}686\,\alpha$ ($\alpha$ en Np/m).
+  - titre: "Précision relative d'une mesure"
+    texte: |
+      $\dfrac{\Delta e}{e}=\dfrac{\Delta(\Delta t)}{\Delta t}$ si $c_A$ est connu : une résolution de $10$ ns sur $\Delta t=4{,}7~\mu$s donne $0{,}2\ \%$.
+
+liens_autres_disciplines:
+  - discipline: "Contrôle non destructif et maintenance industrielle"
+    texte: |
+      Mesure d'épaisseur résiduelle de réservoirs et de canalisations, détection de corrosion, de délaminage, de soudures défectueuses, de décollement de revêtements : applications quotidiennes des échos ultrasonores.
+  - discipline: "Imagerie médicale"
+    texte: |
+      L'échographie fonctionne en mode impulsionnel : chaque interface entre tissus renvoie un écho dont l'amplitude dépend du contraste d'impédance, et le retard donne la profondeur $z=ct/2$.
+  - discipline: "Télédétection : radar et sonar"
+    texte: |
+      Radar, sonar et lidar fonctionnent par échos : retard $\to$ distance, amplitude $\to$ réflectivité. Les échos multiples d'un sonar sur un fond sédimentaire donnent l'épaisseur des couches.
+  - discipline: "Électricité : réflectométrie temporelle (TDR)"
+    texte: |
+      Un échantillon de câble est testé en envoyant une impulsion et en observant les échos aux discontinuités d'impédance : le temps donne la position d'un défaut, le signe et l'amplitude de l'écho donnent la nature (circuit ouvert, court-circuit).
+  - discipline: "Optique"
+    texte: |
+      Les doubles reflets d'une lame de verre mince (réflexion sur la face avant et sur la face arrière) sont l'équivalent optique des échos $E_0$ et $E_1$ ; la mesure d'épaisseur de couches minces par interférométrie en est la version en régime sinusoïdal.
+
+questions:
+  - id: q1
+    enonce: |
+      Calculer les impédances $Z_w$ et $Z_A$, puis $r_{wA}$, $t_{wA}$, $r_{Aw}$, $t_{Aw}$ et $r_{A,\mathrm{air}}$.
+      Vérifier que $t_{wA}\,t_{Aw}=1-r_{wA}^2$. Comparer à l'interface air-aluminium de l'exercice 2.
+    coup_de_pouce: |
+      $r_{ij}=(Z_j-Z_i)/(Z_i+Z_j)$ et $t_{ij}=1+r_{ij}$ ; $r_{ji}=-r_{ij}$.
+    correction: "$Z_w=1{,}5\\times10^6$ rayl, $Z_A=1{,}38\\times10^7$ rayl ; $r_{wA}=+0{,}804$, $t_{wA}=1{,}804$, $r_{Aw}=-0{,}804$, $t_{Aw}=0{,}196$, $r_{A,\\mathrm{air}}\\approx-1$ ; produit $=0{,}354$."
+    solution:
+      - titre: "Impédances"
+        texte: |
+          $Z_w=1000\times1500=1{,}5\times10^6$ rayl et $Z_A=2700\times5110=1{,}38\times10^7$ rayl (cf. exercice 2).
+      - titre: "Coefficients"
+        texte: |
+          $$r_{wA}=\frac{Z_A-Z_w}{Z_A+Z_w}=\frac{12{,}3}{15{,}3}=+0{,}804,\qquad t_{wA}=1+r_{wA}=1{,}804,$$
+          $$r_{Aw}=-0{,}804,\qquad t_{Aw}=1+r_{Aw}=0{,}196,\qquad r_{A,\mathrm{air}}=\frac{442-1{,}38\times10^7}{442+1{,}38\times10^7}\approx-0{,}99994\approx-1.$$
+          On vérifie $t_{wA}t_{Aw}=1{,}804\times0{,}196=0{,}354=1-0{,}804^2$. Ici, l'eau est un bien meilleur milieu de couplage que l'air : la fraction d'énergie qui entre dans la plaque est $1-r_{wA}^2=0{,}354$, soit $35\ \%$, contre $1{,}3\times10^{-4}$ pour l'interface air-aluminium de l'exercice 2 ($\sim2\,700$ fois plus).
+
+  - id: q2
+    enonce: |
+      Établir l'expression de l'amplitude de l'écho $E_n$ et calculer numériquement $E_0$, $E_1$, $E_2$ et $E_3$ (l'amplitude de l'onde incidente
+      dans l'eau est prise égale à $1$). Quels sont les signes des échos ? Quel est le rapport $E_{n+1}/E_n$ ?
+    coup_de_pouce: |
+      Suivez l'impulsion : aller dans la plaque ($t_{wA}$), réflexion sur la face arrière ($r_{Ab}$), retour dans l'eau ($t_{Aw}$) pour $E_1$ ; un aller-retour supplémentaire ajoute une réflexion sur la face avant vue de l'intérieur ($r_{Aw}$) puis sur la face arrière.
+    correction: "$E_0=+0{,}804$ ; $E_1=-0{,}354$ ; $E_2=-0{,}284$ ; $E_3=-0{,}229$ ; rapport constant $r_{Aw}r_{Ab}=+0{,}804$."
+    solution:
+      - titre: "Expression générale"
+        texte: |
+          $E_0=r_{wA}$ (réflexion directe). Pour $E_1$ : transmission dans la plaque, réflexion sur la face arrière, transmission dans l'eau : $E_1=t_{wA}\,r_{Ab}\,t_{Aw}$. Chaque aller-retour supplémentaire ajoute deux réflexions (face avant vue de l'intérieur, puis face arrière), soit le facteur $r_{Aw}r_{Ab}$ :
+          $$E_n=t_{wA}\,t_{Aw}\,r_{Ab}\,\big(r_{Aw}\,r_{Ab}\big)^{n-1},\quad n\ge1.$$
+      - titre: "Valeurs numériques"
+        texte: |
+          Avec $r_{Ab}\approx-1$ et $r_{Aw}r_{Ab}=(-0{,}804)(-1)=+0{,}804$ :
+          $$E_0=+0{,}804,\quad E_1=0{,}354\times(-1)=-0{,}354,\quad E_2=-0{,}354\times0{,}804=-0{,}284,\quad E_3=-0{,}229.$$
+          Les échos $E_n$ ($n\ge1$) sont tous de même signe, opposé à celui de $E_0$, et décroissent en progression géométrique de raison $0{,}804$ (soit $-1{,}9$ dB entre deux échos successifs).
+
+  - id: q3
+    enonce: |
+      Vérifier que l'énergie se conserve : $\sum_{n\ge0}E_n^2=1$. Que représente chaque terme ? Quelle fraction de l'énergie
+      incidente est renvoyée par $E_0$ ? Par $E_1$, $E_2$, $E_3$ ?
+    coup_de_pouce: |
+      $\sum_{n\ge1}E_n^2=(t_{wA}t_{Aw})^2\sum_{n\ge1}(r_{Aw}r_{Ab})^{2(n-1)}$ avec $r_{Ab}^2=1$ : série géométrique de raison $r_{wA}^2$.
+    correction: "$E_0^2=0{,}646$ ; $E_1^2=0{,}125$ ; $E_2^2=0{,}081$ ; $E_3^2=0{,}052$ ; $\\sum_{n\\ge1}E_n^2=1-r_{wA}^2=0{,}354$ ; total $=1$."
+    solution:
+      - titre: "Somme de la série"
+        texte: |
+          $E_n^2=(1-r^2)^2r^{2(n-1)}$ avec $r=r_{wA}$ (et $r_{Ab}^2=1$). Donc
+          $$\sum_{n\ge1}E_n^2=(1-r^2)^2\sum_{n\ge1}r^{2(n-1)}=\frac{(1-r^2)^2}{1-r^2}=1-r^2,\qquad\sum_{n\ge0}E_n^2=r^2+(1-r^2)=1.$$
+      - titre: "Interprétation numérique"
+        texte: |
+          Les échos reçus dans l'eau emportent chacun une fraction $E_n^2$ de l'énergie incidente : $64{,}6\ \%$ pour $E_0$ (face avant), puis $12{,}5\ \%$, $8{,}1\ \%$, $5{,}2\ \%$ pour $E_1$, $E_2$, $E_3$, et les suivants se partagent les $9{,}6\ \%$ restants. Toute l'énergie incidente revient finalement vers la sonde : la plaque ne dissipe rien, et la face arrière réfléchit la totalité de l'énergie transmise ; c'est la preuve que les coefficients utilisés (en pression) sont cohérents avec le bilan énergétique.
+
+  - id: q4
+    enonce: |
+      On mesure $\Delta t=4{,}70~\mu$s entre deux échos successifs. Calculer $e$. L'impulsion de durée
+      $0{,}4~\mu$s permet-elle de séparer les échos ? Quelle est l'incertitude relative sur $e$ pour une résolution de $10$ ns ?
+      Quelle fréquence minimale pour séparer les échos d'une plaque de $2$ mm avec une impulsion de $2$ périodes ?
+    correction: "$e=c_A\\Delta t/2=12{,}0$ mm ; échos séparés ($0{,}4<4{,}7~\\mu$s) ; $\\Delta e/e\\approx0{,}2\\ \\%$ ; $\\Delta t=0{,}78~\\mu$s pour $2$ mm, d'où $f>2{,}6$ MHz."
+    solution:
+      - titre: "Épaisseur"
+        texte: |
+          Entre deux échos successifs, l'impulsion a fait un aller-retour de plus dans la plaque : $\Delta t=2e/c_A$, donc
+          $$e=\frac{c_A\Delta t}{2}=\frac{5110\times4{,}70\times10^{-6}}{2}\approx1{,}20\times10^{-2}~\text{m}=12{,}0~\text{mm}.$$
+      - titre: "Résolution temporelle et précision"
+        texte: |
+          La durée de l'impulsion ($0{,}4~\mu$s) est très inférieure à $\Delta t=4{,}7~\mu$s : les échos sont bien séparés. La précision relative est $\Delta e/e=\Delta(\Delta t)/\Delta t=10~\text{ns}/4{,}7~\mu\text{s}\approx0{,}2\ \%$ (soit $0{,}026$ mm). Pour une plaque de $2$ mm, $\Delta t=2\times2\times10^{-3}/5110=0{,}78~\mu$s : une impulsion de $2$ périodes dure $2/f$ et reste séparable si $2/f<0{,}78~\mu$s, soit $f>2{,}6$ MHz. Plus la plaque est mince, plus la fréquence doit être élevée, au prix d'une atténuation croissante.
+
+  - id: q5
+    enonce: |
+      En réalité, on mesure $E_2/E_1=0{,}78$ au lieu de la valeur théorique. En déduire le facteur d'atténuation
+      sur un aller-retour, puis le coefficient d'atténuation $\alpha$ de l'aluminium à $5$ MHz (en Np/m et en dB/m).
+      Que peut-on déduire de $E_2/E_1$ si on ignore l'impédance de la plaque et si l'atténuation est négligeable ?
+    coup_de_pouce: |
+      Si $\mathcal A$ est le facteur d'atténuation sur un aller-retour, $E_2/E_1=\mathcal A\,r_{Aw}r_{Ab}$. Pour la dernière question, inversez $|r|=(Z_A-Z_w)/(Z_A+Z_w)$.
+    correction: "$\\mathcal A=0{,}78/0{,}804=0{,}970$ ; $\\alpha=-\\ln\\mathcal A/(2e)\\approx1{,}3$ Np/m $\\approx11$ dB/m ; sans atténuation, $Z_A/Z_w=(1+|r|)/(1-|r|)$."
+    solution:
+      - titre: "Facteur d'atténuation"
+        texte: |
+          $\dfrac{E_2}{E_1}=\mathcal A\,r_{Aw}r_{Ab}=0{,}804\,\mathcal A=0{,}78\Rightarrow\mathcal A=0{,}970$. Sur un aller-retour de longueur $2e=24$ mm, $\mathcal A=e^{-2\alpha e}$ :
+          $$\alpha=\frac{-\ln0{,}970}{2e}=\frac{0{,}0301}{0{,}024}\approx1{,}3~\text{Np}\cdot\text{m}^{-1}\approx11~\text{dB}\cdot\text{m}^{-1}.$$
+      - titre: "Utilisation du rapport comme mesure d'impédance"
+        texte: |
+          Si l'atténuation est négligeable, $|E_2/E_1|=|r_{Aw}|=\dfrac{Z_A-Z_w}{Z_A+Z_w}$, soit $\dfrac{Z_A}{Z_w}=\dfrac{1+|E_2/E_1|}{1-|E_2/E_1|}$ : pour $0{,}804$, on retrouve $9{,}2$. La mesure du rapport de deux échos successifs fournit donc l'impédance de la plaque, ou son atténuation si l'impédance est connue. Les deux effets ne se séparent qu'en connaissant l'un des deux ; on peut aussi les séparer en comparant la décroissance de plusieurs échos ($E_3/E_2$, etc.), ou en mesurant à plusieurs épaisseurs.
+
+  - id: q6
+    enonce: |
+      La plaque est maintenant collée sur un polymère d'impédance $Z_3=3{,}0\times10^6$ rayl. Calculer le nouveau coefficient
+      $r_{A3}$, l'amplitude de $E_1'$ et le rapport $E_2'/E_1'$. De combien de décibels l'écho $E_1$ varie-t-il
+      lorsque le collage disparaît (lame d'air) ? Comment détecte-t-on le défaut ?
+    correction: "$r_{A3}=-0{,}643$ ; $E_1'=-0{,}227$ ; $E_2'/E_1'=0{,}517$ ; décollement : $E_1$ passe de $-0{,}227$ à $-0{,}354$ : $+3{,}8$ dB."
+    solution:
+      - titre: "Face arrière collée"
+        texte: |
+          $r_{A3}=\dfrac{Z_3-Z_A}{Z_3+Z_A}=\dfrac{3{,}0-13{,}8}{3{,}0+13{,}8}=-0{,}643$, d'où
+          $$E_1'=t_{wA}t_{Aw}\,r_{A3}=0{,}354\times(-0{,}643)=-0{,}227,\qquad\frac{E_2'}{E_1'}=r_{Aw}r_{A3}=(-0{,}804)(-0{,}643)=0{,}517.$$
+          Une partie de l'énergie passe dans le polymère à chaque aller-retour : les échos décroissent plus vite ($0{,}517$ au lieu de $0{,}804$).
+      - titre: "Détection d'un décollement"
+        texte: |
+          Si le polymère se décolle, une lame d'air s'interpose et la face arrière redevient quasi parfaitement réfléchissante : $E_1$ revient à $-0{,}354$, soit une augmentation de $20\log_{10}(0{,}354/0{,}227)=20\log_{10}(1{,}56)\approx+3{,}8$ dB et des échos suivants beaucoup plus durables. En balayant la sonde sur la plaque, une zone où $E_1$ (et $E_2$) sont plus forts signale un décollement ; une zone où ils sont plus faibles signale un collage plus absorbant (ou une corrosion de la face arrière). C'est le principe de la cartographie de collage par ultrasons (C-scan).

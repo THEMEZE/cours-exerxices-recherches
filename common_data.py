@@ -23,6 +23,7 @@ niveau) et de nettoyage pour le web vit ici pour ne jamais diverger entre
 les différentes sorties.
 """
 import re
+import unicodedata
 from pathlib import Path
 
 import yaml
@@ -30,6 +31,8 @@ import yaml
 ROOT = Path(__file__).resolve().parent
 DATA_DIR = ROOT / "data" / "matieres"
 GRAPH_FILE = ROOT / "data" / "graph" / "sujets.yaml"
+BUILD_CONFIG_FILE = ROOT / "build" / "config.yaml"
+PROFILES_FILE = ROOT / "web" / "visibility_profiles.yaml"
 
 NIVEAU_LABELS = {
     "lycee": "Lycée",
@@ -42,6 +45,167 @@ NIVEAU_LABELS = {
 }
 
 
+# ----------------------------------------------------------------------
+# build/config.yaml : couleur de l'anglais + profil de publication par document
+# ----------------------------------------------------------------------
+
+_BUILD_CONFIG = None
+
+
+def load_build_config() -> dict:
+    global _BUILD_CONFIG
+    if _BUILD_CONFIG is None:
+        try:
+            _BUILD_CONFIG = yaml.safe_load(BUILD_CONFIG_FILE.read_text(encoding="utf-8")) or {}
+        except OSError:
+            _BUILD_CONFIG = {}
+    return _BUILD_CONFIG
+
+
+_HEX_RE = re.compile(r"#?([0-9A-Fa-f]{6})")
+
+
+def _en_color_raw(web: bool) -> str:
+    cfg = load_build_config().get("couleurs") or {}
+    raw = (cfg.get("anglais_web") if web else None) or cfg.get("anglais") or "#1565C0"
+    return str(raw).strip()
+
+
+def en_color_css() -> str:
+    """Couleur de l'anglais pour le SITE (couleurs.anglais_web, sinon couleurs.anglais)."""
+    raw = _en_color_raw(web=True)
+    m = _HEX_RE.fullmatch(raw)
+    return f"#{m.group(1).upper()}" if m else raw
+
+
+def en_color_latex_definition() -> str:
+    """Ligne LaTeX qui définit la couleur `colorEN` pour les PDF (couleurs.anglais)."""
+    raw = _en_color_raw(web=False)
+    m = _HEX_RE.fullmatch(raw)
+    return rf"\definecolor{{colorEN}}{{HTML}}{{{m.group(1).upper()}}}" if m else rf"\colorlet{{colorEN}}{{{raw}}}"
+
+
+_EN_BLUE_RE = re.compile(r"(\\(?:text)?color)\{blue\}")
+
+
+def read_yaml(path: Path):
+    """yaml.safe_load avec un message d'erreur qui NOMME le fichier et la ligne
+    (avant : « mapping values are not allowed here » sans dire où)."""
+    try:
+        return yaml.safe_load(path.read_text(encoding="utf-8"))
+    except yaml.YAMLError as e:
+        mark = getattr(e, "problem_mark", None)
+        try:
+            shown = path.resolve().relative_to(ROOT)
+        except ValueError:
+            shown = path
+        where = f"{shown}" + (f", ligne {mark.line + 1}, colonne {mark.column + 1}" if mark else "")
+        problem = getattr(e, "problem", None) or str(e).splitlines()[0]
+        hint = ""
+        if "mapping values are not allowed" in str(problem):
+            hint = (" -- astuce : un texte contenant « : » (ou finissant par « :», fréquent en français) "
+                    "doit être entre guillemets \"...\" ou écrit en bloc  > / |")
+        raise ValueError(f"YAML invalide : {where} : {problem}{hint}") from None
+
+
+def normalize_en_color(obj):
+    """Dans les YAML, l'anglais est écrit {\\color{blue} ...}. On le redirige vers
+    la couleur NOMMÉE `colorEN`, réglée dans config.yaml (couleurs.anglais) :
+    même teinte pour les PDF (\\definecolor) et pour le site. Convention : « blue »
+    = anglais ; pour un vrai bleu ailleurs, utilise \\colorFour ou un hex."""
+    if isinstance(obj, str):
+        return _EN_BLUE_RE.sub(r"\1{colorEN}", obj)
+    if isinstance(obj, dict):
+        return {k: normalize_en_color(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [normalize_en_color(v) for v in obj]
+    return obj
+
+
+def load_visibility_profiles() -> dict:
+    return yaml.safe_load(PROFILES_FILE.read_text(encoding="utf-8"))["profiles"]
+
+
+def publication_config() -> dict:
+    return load_build_config().get("publication") or {}
+
+
+def resolve_profile(matiere: str, type_doc: str, doc_slug: str, ex_slug: str = None, forced: str = None) -> str:
+    """Profil de visibilité d'un document (ou d'un exercice) :
+
+      1. `forced` (argument en ligne de commande, ex. `all`) l'emporte, sauf « auto » ;
+      2. sinon publication: dans build/config.yaml :
+             publication.matieres.<matiere>.<td|tp|cours>.<doc>        -> profil du document
+             ... .<doc>.exercices.<ex>                                  -> surcharge d'un exercice
+      3. sinon le `defaut` de la matière, puis le `defaut` global, puis avant_seance.
+    """
+    if forced and forced != "auto":
+        return forced
+    pub = publication_config()
+    default = pub.get("defaut", "avant_seance")
+    m = (pub.get("matieres") or {}).get(matiere) or {}
+    default = m.get("defaut", default)
+    entry = (m.get(type_doc) or {}).get(doc_slug)
+    prof, exs = default, {}
+    if isinstance(entry, str):
+        prof = entry
+    elif isinstance(entry, dict):
+        prof = entry.get("profil", prof)
+        exs = entry.get("exercices") or {}
+    if ex_slug and ex_slug in exs:
+        prof = exs[ex_slug]
+    return prof
+
+
+def split_en_text(raw: str):
+    """« Titre FR {\\color{colorEN}English title} » -> (FR, EN) en texte propre.
+    Sert aux URL (slug = français seul), au titre de page (français) et à la
+    ligne d'anglais en couleur sous le titre."""
+    if not isinstance(raw, str):
+        return "", ""
+    text = normalize_en_color(raw)
+    rest, groups, pos = [], [], 0
+    for m in _COLOR_START.finditer(text):
+        if m.start() < pos:
+            continue
+        color = m.group(1) or m.group(2)
+        if color != "colorEN":
+            continue
+        depth, i = 1, m.end()
+        while i < len(text) and depth:
+            ch = text[i]
+            if ch == "\\":
+                i += 2
+                continue
+            depth += (ch == "{") - (ch == "}")
+            i += 1
+        if depth:
+            continue
+        rest.append(text[pos:m.start()])
+        groups.append(text[m.end():i - 1])
+        pos = i
+    rest.append(text[pos:])
+
+    def tidy(s):
+        s = re.sub(r"\\\\|\\newline", " ", s)
+        s = clean_text_for_web(s)
+        s = re.sub(r"\s+", " ", s).strip()
+        return re.sub(r"^[\s—–/:;,|-]+|[\s—–/:;,|-]+$", "", s)
+
+    return tidy("".join(rest)), tidy(" ".join(groups))
+
+
+def title_parts(raw: str):
+    """Alias lisible : (titre_fr, titre_en)."""
+    return split_en_text(raw)
+
+
+def en_span(en: str) -> str:
+    """Texte anglais dans la couleur du site (HTML inline, accepté par Quartz)."""
+    return f'<span style="color:{en_color_css()}">{en}</span>' if en else ""
+
+
+
 def niveau_label(niveau: str) -> str:
     return NIVEAU_LABELS.get(niveau, niveau)
 
@@ -50,14 +214,67 @@ def niveau_label(niveau: str) -> str:
 # Matières
 # ----------------------------------------------------------------------
 
+def _nfc(s: str) -> str:
+    return unicodedata.normalize("NFC", s)
+
+
+def resolve_child(parent: Path, name: str) -> Path:
+    """parent/name, tolérant à la normalisation Unicode : un zip fait sur macOS
+    stocke « é » en NFD (e + accent combinant), alors que le YAML est en NFC --
+    ça marche sur le Mac (APFS normalise) mais PAS sur le Raspberry (ext4).
+    Si le chemin exact n'existe pas, on cherche l'entrée équivalente."""
+    direct = parent / name
+    if direct.exists() or not parent.is_dir():
+        return direct
+    target = _nfc(name)
+    for child in parent.iterdir():
+        if _nfc(child.name) == target:
+            return child
+    return direct
+
+
+def is_ignored_name(name: str) -> bool:
+    """Dossiers/fichiers jamais traités comme documents : brouillons « xxx copie »
+    (copies Finder), préfixes _ ou ., fichiers cachés."""
+    n = name.lower()
+    return n.startswith(("_", ".")) or " copie" in n or n.endswith(("_copie", "-copie"))
+
+
+def _is_published(meta_path: Path) -> bool:
+    """`publier: false` dans _meta.yaml (ou dans un cours) exclut le document."""
+    try:
+        meta = yaml.safe_load(meta_path.read_text(encoding="utf-8")) or {}
+    except Exception:
+        return True
+    return meta.get("publier", True) is not False
+
+
 def list_matieres():
+    """Toute matière = dossier de data/matieres/ avec un _matiere.yaml OU au
+    moins un sous-dossier td/tp/cours/qcm (meta par défaut sinon)."""
     if not DATA_DIR.exists():
         return []
-    return sorted(p.name for p in DATA_DIR.iterdir() if p.is_dir() and (p / "_matiere.yaml").exists())
+    out = []
+    for p in DATA_DIR.iterdir():
+        if not p.is_dir() or is_ignored_name(p.name):
+            continue
+        if (p / "_matiere.yaml").exists() or any((p / s).is_dir() for s in ("td", "tp", "cours", "qcm")):
+            out.append(p.name)
+    return sorted(out)
 
 
 def load_matiere_meta(matiere_slug: str) -> dict:
-    return yaml.safe_load((DATA_DIR / matiere_slug / "_matiere.yaml").read_text(encoding="utf-8"))
+    path = DATA_DIR / matiere_slug / "_matiere.yaml"
+    meta = {}
+    if path.exists():
+        meta = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    # Valeurs par défaut : une matière sans _matiere.yaml reste exportable.
+    meta.setdefault("id", matiere_slug)
+    meta.setdefault("nom", matiere_slug.replace("-", " ").replace("_", " ").capitalize())
+    meta.setdefault("quartz_namespace", matiere_slug)
+    meta.setdefault("sujets", [])
+    meta["sujets"] = [s for s in (meta["sujets"] or []) if isinstance(s, str) and len(s) > 1]
+    return meta
 
 
 def _type_dir(matiere_slug: str, type_doc: str) -> Path:
@@ -73,14 +290,18 @@ def list_docs_td_like(matiere_slug: str, type_doc: str = "td"):
     d = _type_dir(matiere_slug, type_doc)
     if not d.exists():
         return []
-    return sorted(p.name for p in d.iterdir() if p.is_dir() and (p / "_meta.yaml").exists())
+    return sorted(
+        p.name for p in d.iterdir()
+        if p.is_dir() and not is_ignored_name(p.name)
+        and (p / "_meta.yaml").exists() and _is_published(p / "_meta.yaml")
+    )
 
 
 def load_td(matiere_slug: str, doc_slug: str, type_doc: str = "td", only_exercices=None):
     """Retourne (meta, [exercices]) pour un document td-like, exercices dans
     l'ordre déclaré dans _meta.yaml (exercices_ordre)."""
-    doc_dir = _type_dir(matiere_slug, type_doc) / doc_slug
-    meta = yaml.safe_load((doc_dir / "_meta.yaml").read_text(encoding="utf-8"))
+    doc_dir = resolve_child(_type_dir(matiere_slug, type_doc), doc_slug)
+    meta = normalize_en_color(read_yaml(doc_dir / "_meta.yaml"))
     meta["matiere"] = matiere_slug
     meta["type_doc"] = type_doc
     meta["doc_slug"] = doc_slug
@@ -88,8 +309,8 @@ def load_td(matiere_slug: str, doc_slug: str, type_doc: str = "td", only_exercic
     order = only_exercices or meta["exercices_ordre"]
     exercices = []
     for numero, ex_slug in enumerate(order, start=1):
-        ex_path = doc_dir / f"{ex_slug}.yaml"
-        ex = yaml.safe_load(ex_path.read_text(encoding="utf-8"))
+        ex_path = resolve_child(doc_dir, f"{ex_slug}.yaml")
+        ex = normalize_en_color(read_yaml(ex_path))
         ex["numero"] = numero
         ex["slug"] = ex_slug
         ex["contenu"] = group_questions(ex.get("questions", []))
@@ -109,12 +330,13 @@ def list_docs_cours(matiere_slug: str, type_doc: str = "cours"):
     d = _type_dir(matiere_slug, type_doc)
     if not d.exists():
         return []
-    return sorted(p.stem for p in d.glob("*.yaml"))
+    return sorted(p.stem for p in d.glob("*.yaml")
+                  if not is_ignored_name(p.name) and _is_published(p))
 
 
 def load_cours(matiere_slug: str, doc_slug: str, type_doc: str = "cours") -> dict:
-    path = _type_dir(matiere_slug, type_doc) / f"{doc_slug}.yaml"
-    doc = yaml.safe_load(path.read_text(encoding="utf-8"))
+    path = resolve_child(_type_dir(matiere_slug, type_doc), f"{doc_slug}.yaml")
+    doc = normalize_en_color(read_yaml(path))
     doc["matiere"] = matiere_slug
     doc["type_doc"] = type_doc
     doc["doc_slug"] = doc_slug
@@ -128,20 +350,11 @@ def load_cours(matiere_slug: str, doc_slug: str, type_doc: str = "cours") -> dic
 # ----------------------------------------------------------------------
 
 def load_all_qcm(matiere_slug: str = None, td_filter: str = None):
-    items = []
-    matieres = [matiere_slug] if matiere_slug else list_matieres()
-    for m in matieres:
-        qcm_dir = DATA_DIR / m / "qcm"
-        if not qcm_dir.exists():
-            continue
-        for path in sorted(qcm_dir.glob("*.yaml")):
-            docs = yaml.safe_load(path.read_text(encoding="utf-8")) or []
-            for d in docs:
-                if td_filter and d.get("td") != td_filter:
-                    continue
-                d["matiere"] = m
-                items.append(d)
-    return items
+    """QCM normalisés. Délègue à qcm_data.py (format compact ou liste, autant de questions
+    que voulu par chapitre) ; mêmes clés qu'avant + `chapitre`."""
+    import qcm_data
+    return [{k: v for k, v in q.items() if not k.startswith("_")}
+            for q in qcm_data.load_all_qcm(matiere_slug, td_filter)]
 
 
 # ----------------------------------------------------------------------
@@ -299,6 +512,96 @@ _LATEX_UNWRAP_PATTERNS = [
 ]
 
 
+_MATH_RE = re.compile(r"(\$\$.*?\$\$|\$[^$\n]*?\$|\\\[.*?\\\]|\\\(.*?\\\))", re.DOTALL)
+_ENV_RE = re.compile(r"\\begin\{(enumerate|itemize)\}(\[[^\]]*\])?((?:(?!\\begin\{(?:enumerate|itemize)\}).)*?)\\end\{\1\}", re.DOTALL)
+
+
+def _list_env_to_md(m):
+    kind, opt, body = m.group(1), m.group(2) or "", m.group(3)
+    items = [i.strip() for i in re.split(r"\\item\b\s*", body) if i.strip()]
+    out = []
+    for n, it in enumerate(items):
+        if kind == "itemize":
+            mark = "-"
+        elif "alph" in opt:
+            mark = f"({chr(ord('a') + n)})"
+        else:
+            mark = f"{n + 1}."
+        out.append(f"{mark} {it}" if kind == "enumerate" else f"- {it}")
+    sep = "\n\n" if (kind == "enumerate" and "alph" in opt) else "\n"   # (a) (b) : pas une vraie liste Markdown
+    return "\n\n" + sep.join(out) + "\n\n"
+
+
+def _latex_text_to_md(seg: str) -> str:
+    """Macros de TEXTE courantes -> Markdown (les maths sont protégées par l'appelant)."""
+    seg = re.sub(r"\{\\(?:bf|bfseries)\s+((?:[^{}]|\{[^{}]*\})*)\}", r"**\1**", seg)
+    seg = re.sub(r"\\textbf\{((?:[^{}]|\{[^{}]*\})*)\}", r"**\1**", seg)
+    seg = re.sub(r"\{\\(?:it|em|itshape)\s+((?:[^{}]|\{[^{}]*\})*)\}", r"*\1*", seg)
+    seg = re.sub(r"\\(?:textit|emph)\{((?:[^{}]|\{[^{}]*\})*)\}", r"*\1*", seg)
+    seg = seg.replace("\\newline", "\n").replace("\\medskip", "\n").replace("\\smallskip", "").replace("\\bigskip", "\n")
+    return seg
+
+
+_COLOR_START = re.compile(r"\{\s*\\color\{(#?[A-Za-z0-9]+)\}\s*|\\textcolor\{(#?[A-Za-z0-9]+)\}\{")
+
+
+def _convert_color_groups(text: str) -> str:
+    """`{\\color{blue} ...}` et `\\textcolor{blue}{...}` -> <span style="color:blue">...</span>.
+    Accolades équilibrées (les formules $\\frac{a}{b}$ à l'intérieur sont OK) ;
+    un groupe sur plusieurs paragraphes est découpé (un <span> ne traverse pas
+    une ligne vide en Markdown)."""
+    out, pos = [], 0
+    while True:
+        m = _COLOR_START.search(text, pos)
+        if not m:
+            out.append(text[pos:])
+            break
+        out.append(text[pos:m.start()])
+        depth, i = 1, m.end()
+        while i < len(text) and depth:
+            ch = text[i]
+            if ch == "\\":
+                i += 2
+                continue
+            depth += (ch == "{") - (ch == "}")
+            i += 1
+        if depth:                       # accolade jamais fermée : on laisse tel quel
+            out.append(text[m.start():m.end()])
+            pos = m.end()
+            continue
+        color = m.group(1) or m.group(2)
+        inner = _convert_color_groups(text[m.end():i - 1])
+        paras = re.split(r"(\n\s*\n)", inner)
+        out.append("".join(f'<span style="color:{color}">{p}</span>' if p.strip() and not re.fullmatch(r"\n\s*\n", p) else p
+                           for p in paras))
+        pos = i
+    return "".join(out)
+
+
+_THEME_COLORS = None
+
+
+def _theme_colors() -> dict:
+    """\\colorOne.. -> #RRGGBB, lus dans templates/styles/theme_academique.tex
+    (les mêmes couleurs que dans les PDF)."""
+    global _THEME_COLORS
+    if _THEME_COLORS is None:
+        _THEME_COLORS = {}
+        f = Path(__file__).resolve().parent / "templates" / "styles" / "theme_academique.tex"
+        if f.exists():
+            for name, hexv in re.findall(r"\\definecolor\{(color\w+)\}\{HTML\}\{([0-9A-Fa-f]{6})\}", f.read_text(encoding="utf-8")):
+                _THEME_COLORS[name] = "#" + hexv.upper()
+    return _THEME_COLORS
+
+
+def _replace_theme_colors(text: str) -> str:
+    colors = {**_theme_colors(), "colorEN": en_color_css()}
+    text = re.sub(r"\\(color[A-Z][A-Za-z]*)\b", lambda m: colors.get(m.group(1), m.group(0)), text)
+    # forme « nom TeX » : \color{colorSix}, \textcolor{colorOne}{...}
+    return re.sub(r"(\\(?:text)?color)\{(color[A-Z][A-Za-z]*)\}",
+                  lambda m: f"{m.group(1)}{{{colors.get(m.group(2), m.group(2))}}}", text)
+
+
 def clean_text_for_web(text):
     if not isinstance(text, str):
         return text
@@ -306,7 +609,21 @@ def clean_text_for_web(text):
         text = pat.sub("", text)
     for pat, repl in _LATEX_UNWRAP_PATTERNS:
         text = pat.sub(repl, text)
-    return text
+    text = _replace_theme_colors(text)          # \colorOne -> #8C0000 (utile aussi dans les formules KaTeX)
+    # Les formules sont mises de côté : aucune conversion de TEXTE ne doit les toucher
+    # (ex. {\color{red} x} dans un $...$ reste du LaTeX).
+    maths = []
+
+    def _stash(m):
+        maths.append(m.group(0))
+        return f"\ue000{len(maths) - 1}\ue001"
+
+    text = _MATH_RE.sub(_stash, text)
+    text = _convert_color_groups(text)
+    for _ in range(3):                           # listes : les plus internes d'abord
+        text = _ENV_RE.sub(_list_env_to_md, text)
+    text = _latex_text_to_md(text)
+    return re.sub("\ue000(\\d+)\ue001", lambda m: maths[int(m.group(1))], text)
 
 
 def _clean_field_or_list(val):
@@ -318,8 +635,9 @@ def _clean_field_or_list(val):
         for item in val:
             if isinstance(item, dict):
                 it = dict(item)
-                if "texte" in it:
-                    it["texte"] = clean_text_for_web(it["texte"])
+                for k in ("texte", "titre"):
+                    if k in it:
+                        it[k] = clean_text_for_web(it[k])
                 res.append(it)
             else:
                 res.append(clean_text_for_web(item))
@@ -341,8 +659,9 @@ def _clean_question_for_web(q: dict) -> dict:
             res = []
             for item in apl:
                 it = dict(item)
-                if "texte" in it:
-                    it["texte"] = clean_text_for_web(it["texte"])
+                for k in ("texte", "titre"):
+                    if k in it:
+                        it[k] = clean_text_for_web(it[k])
                 res.append(it)
             q["aller_plus_loin"] = res
     if "encadre" in q:
@@ -426,6 +745,64 @@ def pdf_web_path(td_id, suffix):
     return f"/pdfs/{td_id}_{suffix}.pdf"
 
 
+def blocks_to_markdown(val) -> str:
+    """Champ texte (coup_de_pouce, correction, solution, aller_plus_loin...) :
+    chaîne OU liste de blocs {titre, texte, [figure]} -> Markdown."""
+    if val is None:
+        return ""
+    if isinstance(val, str):
+        return val
+    parts = []
+    for b in val:
+        if isinstance(b, str):
+            parts.append(b)
+            continue
+        seg = []
+        if b.get("titre"):
+            seg.append(f"**{b['titre']}**")
+        if b.get("texte"):
+            seg.append(str(b["texte"]).strip())
+        figs = b.get("figure")
+        for f in (figs if isinstance(figs, list) else [figs] if figs else []):
+            if f.get("src"):
+                seg.append(f"![{(f.get('legende') or '').strip()}]({f['src']})")
+        parts.append("\n\n".join(seg))
+    return "\n\n".join(p for p in parts if p.strip())
+
+
+def _enrich_figure(fig):
+    """`figure:` est un dict {ref, legende...} OU une liste de tels dicts. Les
+    refs vides ou « ??? » (gabarits non remplis, ~40 dans tes YAML) sont
+    ignorées : pas d'image cassée sur le site."""
+    if not fig:
+        return None
+    if isinstance(fig, list):
+        out = [f for f in (_enrich_figure(x) for x in fig) if f]
+        return out or None
+    ref = fig.get("ref")
+    if not ref or "?" in str(ref):
+        return None
+    return {**fig, "src": figure_web_path(ref)}
+
+
+def _fix_figure(d: dict) -> None:
+    if "figure" in d:
+        f = _enrich_figure(d["figure"])
+        if f:
+            d["figure"] = f
+        else:
+            d.pop("figure")
+
+
+def _fix_animation(d: dict) -> None:
+    anim = d.get("animation")
+    if anim:
+        if isinstance(anim, dict) and anim.get("ref") and "?" not in str(anim["ref"]):
+            d["animation"] = {**anim, "src": animation_web_path(anim["ref"])}
+        else:
+            d.pop("animation")
+
+
 def _enrich_sub_block_media(block_list):
     """Enrichit les figures/animations contenues dans une liste de sous-blocs (coup_de_pouce, etc.)."""
     if not isinstance(block_list, list):
@@ -434,10 +811,8 @@ def _enrich_sub_block_media(block_list):
     for item in block_list:
         if isinstance(item, dict):
             it = dict(item)
-            if it.get("figure"):
-                it["figure"] = {**it["figure"], "src": figure_web_path(it["figure"]["ref"])}
-            if it.get("animation"):
-                it["animation"] = {**it["animation"], "src": animation_web_path(it["animation"]["ref"])}
+            _fix_figure(it)
+            _fix_animation(it)
             enriched.append(it)
         else:
             enriched.append(item)
@@ -448,17 +823,13 @@ def enrich_media_paths(exercice: dict) -> dict:
     """Ajoute un champ `src` (chemin web) à chaque `figure`/`animation`
     référencée dans un exercice td-like, en plus du `ref` d'origine."""
     ex = dict(exercice)
-    if ex.get("figure"):
-        ex["figure"] = {**ex["figure"], "src": figure_web_path(ex["figure"]["ref"])}
-    if ex.get("animation"):
-        ex["animation"] = {**ex["animation"], "src": animation_web_path(ex["animation"]["ref"])}
+    _fix_figure(ex)
+    _fix_animation(ex)
 
     def enrich_q(q):
         q = dict(q)
-        if q.get("figure"):
-            q["figure"] = {**q["figure"], "src": figure_web_path(q["figure"]["ref"])}
-        if q.get("animation"):
-            q["animation"] = {**q["animation"], "src": animation_web_path(q["animation"]["ref"])}
+        _fix_figure(q)
+        _fix_animation(q)
         
         # Enrichissement des figures/animations dans les sous-blocs
         for key in ("coup_de_pouce", "correction", "solution", "aller_plus_loin"):
@@ -486,13 +857,13 @@ def enrich_cours_media(doc: dict) -> dict:
 
     def enrich_section(sec):
         s = dict(sec)
-        if s.get("figure"):
-            s["figure"] = {**s["figure"], "src": figure_web_path(s["figure"]["ref"])}
-        if s.get("animation"):
-            s["animation"] = {**s["animation"], "src": animation_web_path(s["animation"]["ref"])}
+        _fix_figure(s)
+        _fix_animation(s)
         if "aller_plus_loin" in s:
             s["aller_plus_loin"] = _enrich_sub_block_media(s["aller_plus_loin"])
         return s
 
     doc2["sections"] = [enrich_section(s) for s in doc.get("sections", [])]
     return doc2
+
+  

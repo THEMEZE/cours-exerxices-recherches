@@ -1,0 +1,218 @@
+id: td4_ex5
+intitule: "Voiture sur une bosse"
+td: td4
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - cinematique.base_polaire
+  - cinematique.vecteurs_unitaires_tournants
+  - dynamique.deuxieme_loi
+  - dynamique.reaction_du_support
+  - dynamique.mouvement_circulaire
+
+metadonnees:
+  duree_estimee: "55 min"
+  difficulte: 4
+  type_exercice: "Synthèse cinématique / dynamique"
+  indispensable: true
+
+enonce_intro: |
+  Une automobile s'engage sur une portion de route en forme de bosse. Le véhicule est assimilé à un point matériel $M$ de masse $m$, et la norme $v>0$ de sa vitesse est constante tout au long du mouvement. La bosse est modélisée par deux portions rectilignes raccordées par un arc de cercle de centre $O$, de rayon $R$ et d'ouverture angulaire $2\alpha$ (le centre $O$ est sous la route). On repère $M$ sur l'arc par l'angle $\theta$ entre la verticale ascendante passant par $O$ et le rayon $\overrightarrow{OM}$ ; $\theta$ est compté positivement dans le sens trigonométrique, de sorte que la voiture, qui avance vers la droite, parcourt l'arc de $\theta=+\alpha$ à $\theta=-\alpha$. On prendra $g=9{,}81~\mathrm{m\,s^{-2}}$.
+
+  On cherche à quelle condition sur $v$ l'automobile garde le contact avec le sol tout au long de son chemin.
+
+prerequis:
+  - titre: "Base polaire et dérivées des vecteurs unitaires"
+    texte: |
+      $\vec e_r$ est le vecteur unitaire radial (de $O$ vers $M$), $\vec e_\theta$ le vecteur unitaire orthoradial (rotation de $+90^\circ$). $\dfrac{\mathrm d\vec e_r}{\mathrm d\theta}=\vec e_\theta$ et $\dfrac{\mathrm d\vec e_\theta}{\mathrm d\theta}=-\vec e_r$ (exercice « dérivée d'un vecteur unitaire tournant » du TD1).
+  - titre: "Vitesse et accélération en polaires"
+    texte: |
+      $\overrightarrow{OM}=r\,\vec e_r$, $\vec v=\dot r\,\vec e_r+r\dot\theta\,\vec e_\theta$, $\vec a=(\ddot r-r\dot\theta^2)\,\vec e_r+(r\ddot\theta+2\dot r\dot\theta)\,\vec e_\theta$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Relier cinématique polaire et dynamique"
+    texte: |
+      Savoir établir $\vec v$ et $\vec a$ en polaires pour un mouvement circulaire uniforme, faire le bilan des forces avec réaction normale et tangentielle, projeter sur $\vec e_r$, traduire « garder le contact » par $N\ge0$, et discuter une condition valable pour tous les angles de l'arc.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Le premier exercice qui relie cinématique polaire et dynamique"
+    texte: |
+      L'exercice guide pas à pas : cinématique (1), dynamique (2). La condition $N\ge0$ pour tout $\theta\in[-\alpha,\alpha]$ amène à chercher le {\bf pire cas} (cosinus minimal, donc $\theta=\pm\alpha$). C'est le moment d'insister sur la différence entre « pour un angle donné » et « pour tous les angles ». Le résultat $v\le\sqrt{gR\cos\alpha}$ est contre-intuitif : plus la bosse est « pointue » (petit $R$) et plus la vitesse maximale est faible. Les composantes tangentielles (frottement, moteur) n'influent pas sur la projection radiale.
+
+point_cours:
+  - titre: "Condition de contact"
+    texte: |
+      Le sol ne peut que pousser : $\vec N\cdot\vec n\ge0$, où $\vec n$ est la normale sortante. Quand $N$ s'annule, le véhicule décolle. En mouvement circulaire uniforme, $\vec a=-\dfrac{v^2}R\,\vec e_r$ (centripète), de norme $v^2/R$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Signe de $\\dot\\theta$"
+    texte: |
+      Avec $\theta$ trigonométrique et la voiture qui va vers la droite sur le dessus de la bosse, $\theta$ {\bf diminue} : $\dot\theta=-v/R<0$ et $\vec v=R\dot\theta\,\vec e_\theta=-v\,\vec e_\theta$. Écrire $\dot\theta=+v/R$ conduirait à une vitesse dirigée vers la gauche. Heureusement, le signe disparaît dans $\dot\theta^2$ pour l'accélération.
+  - titre: "Projeter le poids avec le mauvais angle"
+    texte: |
+      Sur la bosse, $\vec g=-g\,\vec u_y$ avec $\vec u_y=\cos\theta\,\vec e_r-\sin\theta\,\vec e_\theta$. La composante radiale du poids est $-mg\cos\theta$ (et non $-mg\sin\theta$) : vérifier au sommet $\theta=0$ où le poids est purement radial.
+  - titre: "Tester la condition en un seul angle"
+    texte: |
+      $v^2\le gR\cos\theta$ doit être vérifiée pour {\bf tous} les $\theta\in[-\alpha,\alpha]$ ; le cosinus est minimal en $\theta=\pm\alpha$, donc la condition la plus contraignante est $v^2\le gR\cos\alpha$, non $gR$ (qui est celle du sommet).
+  - titre: "Croire que le frottement intervient"
+    texte: |
+      La force tangentielle $\vec T$ n'a pas de composante radiale : elle disparaît de l'équation selon $\vec e_r$.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Demander un ressenti"
+    texte: |
+      Qui a déjà ressenti un « creux dans l'estomac » en passant un dos-d'âne trop vite ? C'est la réaction du siège qui diminue. À $N=0$ on est en apesanteur apparente.
+  - titre: "Comparer avec un creux"
+    texte: |
+      Faire refaire l'exercice pour un creux (centre au-dessus de la route) : $N=mg\cos\theta+mv^2/R>0$, il n'y a jamais décollage, mais la réaction est plus grande que le poids.
+
+bilan:
+  - titre: "Bosse circulaire"
+    texte: |
+      $\|\vec N\|=m\Big(g\cos\theta-\dfrac{v^2}R\Big)$ ; contact maintenu $\iff v^2\le gR\cos\theta$ ; pour tout l'arc $v\le\sqrt{gR\cos\alpha}$ ; application $v_{\max}\approx7{,}6~\mathrm{m/s}\approx27$ km/h pour $\alpha=10^\circ$, $R=6{,}0$ m.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Vitesse variable : bosse avec décélération"
+    texte: |
+      Si la vitesse varie ($\dot v\ne0$), l'accélération tangentielle $\dot v\,\vec e_\theta$ apparaît, mais la composante radiale reste $-v^2/R$ : montrer que la condition $N\ge0$ est inchangée à chaque instant, et que le frottement $\vec T$ fixe $\dot v$.
+  - niveau: licence
+    titre: "Décollage et trajectoire ensuite"
+    texte: |
+      Pour $v>\sqrt{gR\cos\alpha}$, la voiture décolle en $\theta=\alpha$ (point où $N$ s'annule en premier si $v$ est juste au-dessus). Déterminer la trajectoire parabolique ensuite et la distance de saut, en prenant pour vitesse initiale celle du point de décollage ($v$, tangente à l'arc).
+  - niveau: master
+    titre: "Bosse à profil quelconque"
+    texte: |
+      Pour une route $y=h(x)$, la condition de contact s'écrit $v^2\kappa\le g\cos\gamma$ où $\kappa=-h''/(1+h'^2)^{3/2}$ est la courbure et $\gamma$ la pente. Retrouver le cas du cercle ($\kappa=1/R$).
+
+accroche_point_cours_essentiel:
+  - titre: "Le dos-d'âne : à quelle vitesse décolle-t-on ?"
+    duree_introduction: "3 min"
+    question_d_accroche: |
+      Vous passez un dos-d'âne. À $20$ km/h, ça va. À $50$ km/h, vous sentez le {\bf creux dans l'estomac}. Existe-t-il une vitesse à laquelle {\bf la voiture décolle} ? De quoi dépend-elle : de la masse ? du rayon de la bosse ?
+    texte: |
+      {\bf Idée clé : projeter la 2\textsuperscript{e} loi sur la direction radiale.} En mouvement circulaire uniforme, $\vec a=-\dfrac{v^2}R\vec e_r$. La projection radiale donne $-mg\cos\theta+N=-\dfrac{mv^2}R$, donc $N=m\Big(g\cos\theta-\dfrac{v^2}R\Big)$. Le contact est maintenu tant que $N\ge0$, et la masse $m$ disparaît de la condition.
+
+outils_mathematiques:
+  - titre: "Base polaire"
+    texte: |
+      $\dfrac{\mathrm d\vec e_r}{\mathrm dt}=\dot\theta\,\vec e_\theta$, $\dfrac{\mathrm d\vec e_\theta}{\mathrm dt}=-\dot\theta\,\vec e_r$.
+  - titre: "Projection de la verticale dans la base polaire"
+    texte: |
+      $\vec u_y=\cos\theta\,\vec e_r-\sin\theta\,\vec e_\theta$ (au sommet, $\theta=0$ : $\vec u_y=\vec e_r$).
+  - titre: "Minimum de $\\cos\\theta$ sur un intervalle"
+    texte: |
+      Sur $[-\alpha,\alpha]$ avec $\alpha<\pi/2$, $\cos\theta$ est maximal en $0$ et minimal en $\pm\alpha$, de valeur $\cos\alpha$.
+  - titre: "Conversion m/s $\\to$ km/h"
+    texte: |
+      $7{,}6~\mathrm{m/s}\times3{,}6\approx27$ km/h.
+
+liens_autres_disciplines:
+  - discipline: "Génie civil et sécurité routière"
+    texte: |
+      Les ralentisseurs et les profils en long des routes sont dimensionnés pour garder $N>0$ à la vitesse réglementaire ; les ponts « en dos d'âne » imposent des limites de vitesse.
+  - discipline: "Parcs d'attractions"
+    texte: |
+      Les montagnes russes à « airtime » recherchent justement $N\approx0$ en haut des bosses : sensation d'apesanteur.
+  - discipline: "Astronomie"
+    texte: |
+      Un satellite en orbite basse est un « objet qui décolle » : $v^2=gR$ est la vitesse orbitale ($7{,}9$ km/s pour la Terre).
+
+questions:
+  - id: q1
+    enonce: |
+      {\bf 1/ Cinématique}
+      \begin{itemize}
+        \item[(a)] Représenter sur la figure les vecteurs $(\vec e_r,\vec e_\theta)$ de la base polaire associée au point $M$.
+        \item[(b)] Rappeler l'expression des dérivées de ces deux vecteurs par rapport à $\theta(t)$. (Si vous avez oublié, refaire le calcul.)
+        \item[(c)] Donner, dans le cas général, l'expression du vecteur vitesse $\vec v$ en coordonnées polaires. Que devient-elle pour la voiture sur la partie courbe ?
+      \end{itemize}
+    coup_de_pouce: |
+      $\vec e_r$ pointe de $O$ vers $M$ et $\vec e_\theta$ s'en déduit par une rotation de $+90^\circ$. Sur l'arc, $r=R$ est constant.
+    correction: |
+      $\dfrac{\mathrm d\vec e_r}{\mathrm d\theta}=\vec e_\theta$, $\dfrac{\mathrm d\vec e_\theta}{\mathrm d\theta}=-\vec e_r$ ; $\vec v=\dot r\,\vec e_r+r\dot\theta\,\vec e_\theta$ ; sur l'arc $\vec v=R\dot\theta\,\vec e_\theta$.
+    solution:
+      - titre: "(a) Base polaire"
+        texte: |
+          $\vec e_r$ est unitaire, porté par $\overrightarrow{OM}$ (vers le haut et vers l'extérieur de l'arc) ; $\vec e_\theta$ est tangent à l'arc, obtenu en tournant $\vec e_r$ de $+90^\circ$ (sens trigonométrique, donc vers la gauche au sommet).
+      - titre: "(b) Dérivées"
+        texte: |
+          Avec $\theta$ compté depuis la verticale, $\vec e_r=-\sin\theta\,\vec u_x+\cos\theta\,\vec u_y$ et $\vec e_\theta=-\cos\theta\,\vec u_x-\sin\theta\,\vec u_y$, d'où $\boxed{\dfrac{\mathrm d\vec e_r}{\mathrm d\theta}=\vec e_\theta}$ et $\boxed{\dfrac{\mathrm d\vec e_\theta}{\mathrm d\theta}=-\vec e_r}$ (on retrouve les formules du TD1 : l'origine de l'angle n'a pas d'importance, seule la rotation de $+90^\circ$ compte). Par dérivée composée : $\dot{\vec e}_r=\dot\theta\,\vec e_\theta$ et $\dot{\vec e}_\theta=-\dot\theta\,\vec e_r$.
+      - titre: "(c) Vitesse"
+        texte: |
+          $\overrightarrow{OM}=r\,\vec e_r\Rightarrow\boxed{\vec v=\dot r\,\vec e_r+r\dot\theta\,\vec e_\theta}$. Sur l'arc, $r=R$ donc $\dot r=0$ et $\boxed{\vec v=R\dot\theta\,\vec e_\theta}$ : vitesse tangente à l'arc.
+
+  - id: q2
+    enonce: |
+      \begin{itemize}
+        \item[(d)] Déterminer l'expression reliant $v$, $R$ et $\mathrm d\theta/\mathrm dt$ en analysant soigneusement le signe de $\mathrm d\theta/\mathrm dt$.
+        \item[(e)] Donner, dans le cas général, l'expression du vecteur accélération $\vec a$ en polaires. Que devient-elle pour la voiture sur la partie courbe ?
+      \end{itemize}
+    coup_de_pouce: |
+      La voiture va vers la droite au sommet ; que fait $\theta$ ? $v$ est la norme de $\vec v$, donc positive. Dérivez $\vec v$ en utilisant les dérivées de $\vec e_r$ et $\vec e_\theta$.
+    correction: |
+      $\dot\theta=-\dfrac vR$ ; $\vec a=(\ddot r-r\dot\theta^2)\vec e_r+(r\ddot\theta+2\dot r\dot\theta)\vec e_\theta$ ; sur l'arc $\vec a=-\dfrac{v^2}R\,\vec e_r$.
+    solution:
+      - titre: "(d) Lien entre $v$, $R$ et $\\dot\\theta$"
+        texte: |
+          Sur l'arc, $\|\vec v\|=R|\dot\theta|=v$. La voiture va de $\theta=+\alpha$ à $\theta=-\alpha$ : $\theta$ décroît, donc $\dot\theta<0$ :
+          $$\boxed{\dot\theta=-\frac vR},\qquad\vec v=R\dot\theta\,\vec e_\theta=-v\,\vec e_\theta .$$
+          Au sommet ($\theta=0$), $\vec e_\theta=-\vec u_x$ : $\vec v=+v\,\vec u_x$, vers la droite. $\surd$
+      - titre: "(e) Accélération"
+        texte: |
+          On dérive $\vec v=\dot r\,\vec e_r+r\dot\theta\,\vec e_\theta$ avec $\dot{\vec e}_r=\dot\theta\vec e_\theta$ et $\dot{\vec e}_\theta=-\dot\theta\vec e_r$ :
+          $$\boxed{\vec a=(\ddot r-r\dot\theta^2)\,\vec e_r+(r\ddot\theta+2\dot r\dot\theta)\,\vec e_\theta}.$$
+          Sur l'arc ($r=R$, $\dot\theta=-v/R$ constante donc $\ddot\theta=0$) :
+          $$\boxed{\vec a=-R\dot\theta^2\,\vec e_r=-\frac{v^2}{R}\,\vec e_r}.$$
+          Accélération centripète, dirigée vers $O$ (vers le bas au sommet), indépendante du signe de $\dot\theta$.
+
+  - id: q3
+    enonce: |
+      {\bf 2/ Dynamique}
+      \begin{itemize}
+        \item[(a)] Faire le bilan des forces sur l'automobile : la route exerce une réaction $\vec R=\vec N+\vec T$, avec $\vec N$ la composante normale et $\vec T$ la composante tangentielle (frottements solides). Les représenter sur le schéma.
+        \item[(b)] Comment exprimer au moyen d'une inégalité sur $\vec N$ que la voiture est ou non en contact avec la route ?
+        \item[(c)] En appliquant la relation fondamentale de la dynamique projetée sur $\vec e_r$, donner l'expression reliant $\|\vec N\|$, $m$, $v$, $R$, $g$ et $\theta$.
+      \end{itemize}
+    coup_de_pouce: |
+      Le poids est vertical vers le bas ; $\vec N$ est perpendiculaire à la route, donc selon $\vec e_r$ ; $\vec T$ est tangent, donc selon $\vec e_\theta$. Le contact exige que la route « pousse ».
+    correction: |
+      Forces : $m\vec g$, $\vec N=N\vec e_r$, $\vec T=T\vec e_\theta$. Contact $\iff N\ge0$. $N=m\Big(g\cos\theta-\dfrac{v^2}R\Big)$.
+    solution:
+      - titre: "(a) Bilan des forces"
+        texte: |
+          Système : la voiture (point $M$). Référentiel : terrestre, galiléen. Forces : le poids $m\vec g=-mg\,\vec u_y=-mg\cos\theta\,\vec e_r+mg\sin\theta\,\vec e_\theta$ ; la réaction normale $\vec N=N\,\vec e_r$ ; la réaction tangentielle $\vec T=T\,\vec e_\theta$ (frottement et force motrice des roues).
+      - titre: "(b) Condition de contact"
+        texte: |
+          La route ne peut que pousser : $\boxed{N\ge0}$ signifie contact maintenu ; $N=0$ est la limite du décollage ; $N<0$ est impossible (le véhicule a quitté la route).
+      - titre: "(c) Projection radiale"
+        texte: |
+          $m\vec a=m\vec g+\vec N+\vec T$ se projette sur $\vec e_r$ : $-\dfrac{mv^2}R=-mg\cos\theta+N$, donc
+          $$\boxed{N=m\left(g\cos\theta-\frac{v^2}{R}\right)}.$$
+          La projection sur $\vec e_\theta$ donne $0=mg\sin\theta+T$, soit $T=-mg\sin\theta$ : le frottement (ou la force motrice) maintient la vitesse constante.
+
+  - id: q4
+    enonce: |
+      \begin{itemize}
+        \item[(d)] Quelle inégalité relie $v$, $R$, $g$ et $\theta$ pour que la voiture reste sur la route quel que soit l'angle $\theta$ ?
+        \item[(e)] En déduire la relation liant $v$, $R$, $g$ et $\alpha$ pour que la voiture reste sur la route tout le long du trajet.
+        \item[(f)] Application numérique : calculer $v_{\max}$ pour $\alpha=10^\circ$ et $R=6{,}0$ m.
+      \end{itemize}
+    coup_de_pouce: |
+      $N\ge0$ s'écrit $v^2\le gR\cos\theta$. Cette inégalité doit être vraie pour tous les $\theta\in[-\alpha,\alpha]$ : cherchez la valeur de $\theta$ qui rend le second membre minimal.
+    correction: |
+      $v\le\sqrt{gR\cos\theta}$ ; pour tout l'arc $v\le\sqrt{gR\cos\alpha}$ ; $v_{\max}\approx7{,}6~\mathrm{m/s}\approx27$ km/h.
+    solution:
+      - titre: "(d) Condition pour un angle donné"
+        texte: |
+          $N\ge0\iff g\cos\theta\ge\dfrac{v^2}R\iff\boxed{v\le\sqrt{gR\cos\theta}}$.
+      - titre: "(e) Condition sur tout l'arc"
+        texte: |
+          Il faut que l'inégalité soit vraie pour tout $\theta\in[-\alpha,\alpha]$. Le second membre est minimal quand $\cos\theta$ l'est, c'est-à-dire en $\theta=\pm\alpha$ (les extrémités de l'arc) :
+          $$\boxed{v\le v_{\max}=\sqrt{g\,R\cos\alpha}}.$$
+          La contrainte la plus sévère n'est pas au sommet (où $v\le\sqrt{gR}$) mais aux extrémités de l'arc, où le poids a la plus petite composante radiale.
+      - titre: "(f) Application numérique"
+        texte: |
+          $$v_{\max}=\sqrt{9{,}81\times6{,}0\times\cos10^\circ}=\sqrt{57{,}97}\approx\boxed{7{,}6~\mathrm{m/s}}\approx27~\text{km/h}.$$
+          Au-delà, la voiture décolle dès l'entrée de l'arc. Ordre de grandeur cohérent avec la vitesse de franchissement prudente d'un dos-d'âne ($\approx30$ km/h).

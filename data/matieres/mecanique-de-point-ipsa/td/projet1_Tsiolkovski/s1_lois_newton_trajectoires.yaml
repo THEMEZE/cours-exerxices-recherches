@@ -1,0 +1,196 @@
+id: mp_s1_newton
+intitule: "Séance 1 -- Exploitation de la chronophotographie : vitesses, forces, lois de Newton"
+td: mp_phv111
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - cinematique.vecteur_vitesse
+  - dynamique.quantite_de_mouvement
+  - dynamique.lois_de_newton
+  - dynamique.impulsion
+
+metadonnees:
+  duree_estimee: "60 min"
+  difficulte: 3
+  type_exercice: "Travail expérimental / Exploitation de données"
+  indispensable: true
+
+enonce_intro: |
+  Dans le référentiel du laboratoire $\mathcal R$ lié à la table à coussin d'air (frottements négligeables), deux mobiles autoporteurs $A$ et $B$ de forme cylindrique, munis de bagues à ressorts, sont lancés puis se heurtent. La position du centre d'inertie de chaque mobile est enregistrée à intervalles réguliers $\tau=0{,}1$ s : les points $A_0,\dots,A_8$ et $B_0,\dots,B_8$ sont tracés sur l'{\bf annexe} (feuille à détacher), avec une échelle des distances ($5$ cm). Les masses sont $m_A=1{,}50$ kg et $m_B=1{,}00$ kg. Le choc a lieu entre les instants $4\tau$ et $5\tau$ pour $A$, et vers $3\tau$--$4\tau$ pour $B$.
+
+prerequis:
+  - titre: "Vitesse moyenne et mouvement rectiligne uniforme"
+    texte: |
+      Pour un mouvement rectiligne uniforme, la vitesse est $\vec v=\dfrac{\overrightarrow{M_iM_j}}{(j-i)\,\tau}$ entre deux points $M_i$ et $M_j$ de la chronophotographie. On prend les points {\bf éloignés} pour réduire l'erreur relative de pointage.
+  - titre: "Représenter un vecteur à une échelle"
+    texte: |
+      On choisit une échelle (par exemple $1~\mathrm{kg\,m\,s^{-1}}\leftrightarrow10$ cm) pour que $\vec p$ mesure $4$ à $8$ cm. La somme $\vec u+\vec v$ se construit par la règle du parallélogramme (compas et règle).
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Passer d'un enregistrement à des grandeurs dynamiques"
+    texte: |
+      Savoir justifier la nature du mouvement (rectiligne uniforme avant et après), déterminer des vitesses à partir de positions et de l'échelle, calculer et tracer les vecteurs $\vec p$ et $\Delta\vec p$, en déduire les forces du choc par $\vec F=\Delta\vec p/\Delta t$ et vérifier action--réaction ainsi que la 2\textsuperscript{e} loi, en estimant l'incertitude.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Une expérience qui valide trois lois en même temps"
+    texte: |
+      Le même document permet de vérifier la 1\textsuperscript{re} loi (alignement et équidistance avant/après le choc), la 2\textsuperscript{e} (force moyenne $=\Delta\vec p/\Delta t$, accélération $a=F/m$) et la 3\textsuperscript{e} ($\Delta\vec p_A\simeq-\Delta\vec p_B$, soit $\vec F_{B\to A}\simeq-\vec F_{A\to B}$). Le {\bf piège} est la durée du choc : $\Delta t\approx60$ ms est une estimation (le choc est plus court que $\tau=100$ ms), donc les forces ne sont qu'un ordre de grandeur. On attend des écarts de $5$ à $15\%$ : le compte rendu doit {\bf les commenter} (pointage, choix des points avant/après, échelle) et non les cacher. Le tracé des vecteurs est évalué dans la synthèse après la séance 1.
+
+point_cours:
+  - titre: "Force moyenne d'un choc"
+    texte: |
+      $\Delta\vec p_A=\displaystyle\int\vec F_{B\to A}\,\mathrm dt=\bar{\vec F}_{B\to A}\,\Delta t$ donc $\bar{\vec F}_{B\to A}=\dfrac{\Delta\vec p_A}{\Delta t}$, puis $\bar a_A=\dfrac{\bar F_{B\to A}}{m_A}$. Les forces moyennes sont opposées : $\bar{\vec F}_{A\to B}=-\bar{\vec F}_{B\to A}$, et les accélérations sont dans le rapport inverse des masses : $a_A/a_B=m_B/m_A$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Oublier la mise à l'échelle"
+    texte: |
+      Les distances de la feuille sont à convertir : mesurer la barre « 5 cm » sur la feuille imprimée et en déduire le facteur d'échelle (le fichier peut avoir été agrandi ou réduit à l'impression). Les vitesses obtenues sans échelle sont fausses d'un facteur constant.
+  - titre: "Calculer la vitesse sur un seul intervalle"
+    texte: |
+      $v=\dfrac{A_3A_4}{\tau}$ est entaché d'une erreur relative de $5\%$ environ. Utiliser $\dfrac{A_0A_4}{4\tau}$ (ou une droite ajustée) réduit l'erreur : c'est la bonne pratique pour un mouvement uniforme.
+  - titre: "Mélanger les points « avant » et « après »"
+    texte: |
+      Les points $A_0$ à $A_4$ sont {\bf avant} le choc, $A_5$ à $A_8$ {\bf après} ; pour $B$, $B_0$ à $B_3$ avant et $B_4$ à $B_8$ après. Utiliser un point de l'autre côté du choc donne une vitesse fausse (moyenne sur un point de rebroussement).
+  - titre: "Soustraire les normes au lieu des vecteurs"
+    texte: |
+      $\Delta\vec p=\vec p'-\vec p$ est une soustraction {\bf vectorielle} : $\|\Delta\vec p\|\ne\|\vec p'\|-\|\vec p\|$. Ici, la norme de $\vec p_A$ diminue de $0{,}78$ à $0{,}64$, mais $\|\Delta\vec p_A\|=0{,}38$ et non $0{,}14$.
+  - titre: "Prendre $\\Delta t=\\tau$"
+    texte: |
+      L'intervalle $\tau=0{,}1$ s est la période d'échantillonnage, pas la durée du choc. Le choc dure moins que $\tau$ (ici estimée à $60$ ms), d'où une force plus grande que $\Delta p/\tau$.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Repartir de la figure : où s'est produit le choc ?"
+    texte: |
+      Avant de calculer, faire repérer l'instant et la position du choc (changement de direction), puis la direction de $\Delta\vec p_A$ : elle doit être {\bf la direction de la force} de contact, perpendiculaire aux surfaces au point de contact (ici presque horizontale).
+  - titre: "Répartir le travail"
+    texte: |
+      En binôme : l'un traite $A$, l'autre $B$, puis confrontation de $\Delta\vec p_A$ et $\Delta\vec p_B$ : leur quasi-opposition est le résultat clé de la séance.
+  - titre: "Incertitudes"
+    texte: |
+      Demander une estimation de l'incertitude (pointage $\pm1$ mm, échelle $\pm2\%$), et faire comparer l'écart $\|\Delta\vec p_A+\Delta\vec p_B\|$ à cette incertitude.
+
+bilan:
+  - titre: "Résultats attendus (pointage numérique de l'annexe)"
+    texte: |
+      Mouvements rectilignes uniformes avant et après ($\approx5{,}2$ cm par intervalle pour $A$ avant). Vitesses : $v_A\approx0{,}52$ m/s, $v_B\approx0{,}58$ m/s avant ; $v_A'\approx0{,}43$ m/s, $v_B'\approx0{,}64$ m/s après. Quantités de mouvement : $p_A\approx0{,}78$, $p_B\approx0{,}58$, $p_A'\approx0{,}64$, $p_B'\approx0{,}64$ kg\,m\,s$^{-1}$. $\|\Delta\vec p_A\|\approx0{,}38$ et $\|\Delta\vec p_B\|\approx0{,}32$ kg\,m\,s$^{-1}$, de sens quasi opposés. Forces moyennes ($\Delta t=60$ ms) : $F_A\approx6{,}4$ N et $F_B\approx5{,}4$ N ; $a_A\approx4{,}3$ et $a_B\approx5{,}4$ m\,s$^{-2}$. {\bf Valeurs indicatives} : les mesures à la règle donnent $\pm5$ à $10\%$.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Ajustement linéaire et incertitude de vitesse"
+    texte: |
+      Pointer toutes les positions $x_i,y_i$ et ajuster par une droite : la pente donne $v_x,v_y$. Comparer l'incertitude obtenue à celle d'un calcul sur deux points seulement. Propager l'incertitude jusqu'à $\|\Delta\vec p\|$ et à $F$.
+  - niveau: licence
+    titre: "Durée réelle du choc"
+    texte: |
+      Le choc dure moins que $\tau$. Si l'on suppose une force en demi-sinus de durée $\delta$ et de pic $F_{\max}$, montrer que $\bar F=\dfrac{2}{\pi}F_{\max}$ sur $\delta$ et $\Delta p=\dfrac{2}{\pi}F_{\max}\,\delta$. Estimer $F_{\max}$ pour $\delta=20$ ms et $\delta=60$ ms.
+  - niveau: master
+    titre: "Retrouver la direction de la force à partir de la géométrie"
+    texte: |
+      Pour deux disques lisses (sans frottement), la force de contact est portée par la ligne des centres. Montrer que $\Delta\vec p_A$ est alors colinéaire à la ligne des centres au moment du choc, et utiliser cette propriété pour retrouver la position des centres à l'instant du choc à partir de la chronophotographie.
+
+accroche_point_cours_essentiel:
+  - titre: "Peut-on mesurer la force d'un choc avec un crayon et une règle ?"
+    duree_introduction: "3 min"
+    question_d_accroche: |
+      Un choc dure quelques dizaines de millisecondes : impossible de le « voir » directement. Pourtant, avec {\bf une feuille de points} prise tous les $0{,}1$ s, on peut en déduire {\bf la force exercée} par un mobile sur l'autre. Comment ? Et que doit valoir cette force vue de l'autre mobile ?
+    texte: |
+      {\bf Idée clé : la 2\textsuperscript{e} loi sous forme de variation de $\vec p$.} Vitesses avant et après $\Rightarrow$ $\vec p$ avant et après $\Rightarrow$ $\Delta\vec p$, et la force moyenne $\bar{\vec F}=\dfrac{\Delta\vec p}{\Delta t}$. Les trois lois sont testées sur le même document : mouvements rectilignes uniformes (1\textsuperscript{re} loi), $\bar F=\Delta p/\Delta t$ (2\textsuperscript{e}), $\Delta\vec p_A=-\Delta\vec p_B$ (3\textsuperscript{e}).
+
+outils_mathematiques:
+  - titre: "Règle de trois pour l'échelle"
+    texte: |
+      Si $L_{\rm barre}$ (en cm sur la feuille) représente $5$ cm réels, le facteur d'échelle est $\lambda=\dfrac{5}{L_{\rm barre}}$ et toute distance réelle est $d=\lambda\,d_{\rm feuille}$.
+  - titre: "Composantes d'un vecteur déplacement"
+    texte: |
+      Avec un repère $(Ox,Oy)$ sur la feuille : $\overrightarrow{A_iA_j}=(x_j-x_i,\,y_j-y_i)$, $\|\overrightarrow{A_iA_j}\|=\sqrt{(\Delta x)^2+(\Delta y)^2}$ ; on construit $\Delta\vec p$ composante par composante ou au compas.
+  - titre: "Construction du parallélogramme"
+    texte: |
+      $\vec u+\vec v$ s'obtient en reportant $\vec v$ à l'extrémité de $\vec u$ ; $\vec u-\vec v=\vec u+(-\vec v)$.
+  - titre: "Incertitude relative"
+    texte: |
+      Pour $v=d/\Delta t$ : $\dfrac{\delta v}{v}\approx\dfrac{\delta d}{d}$ ; pour $p=mv$ : $\dfrac{\delta p}{p}\approx\dfrac{\delta v}{v}$ ; pour $E_c=\tfrac12mv^2$ : $\dfrac{\delta E_c}{E_c}\approx2\dfrac{\delta v}{v}$.
+
+liens_autres_disciplines:
+  - discipline: "Métrologie et physique expérimentale"
+    texte: |
+      Chronophotographie, vidéo analysée avec un logiciel de pointage (Tracker), incertitudes de type B (pointage, échelle), propagation d'incertitudes.
+  - discipline: "Sécurité automobile"
+    texte: |
+      Les enregistreurs de crash mesurent $\Delta v$ et la durée du choc pour estimer la force moyenne et la décélération subies par les passagers (en multiples de $g$).
+  - discipline: "Sport"
+    texte: |
+      La force moyenne d'un coup de raquette ou de pied se déduit de $\Delta p/\Delta t$ : d'où l'intérêt du « suivi du geste » qui allonge $\Delta t$.
+
+questions:
+  - id: q1
+    enonce: |
+      On travaille sur l'annexe (échelle : $5$ cm).
+      \begin{itemize}
+        \item[1.] Quelle est la nature du mouvement des mobiles $A$ et $B$ avant et après le choc ? Justifier.
+        \item[2.] Déterminer les vitesses $v_A,v_B$ avant le choc et $v_A',v_B'$ après le choc (distances à remettre à l'échelle).
+        \item[3.] Calculer les normes des vecteurs quantité de mouvement $\vec p_A,\vec p_B$ avant le choc et $\vec p_A',\vec p_B'$ après le choc, en unités S.I.
+      \end{itemize}
+    coup_de_pouce: |
+      Regardez si les points sont alignés et équidistants. Pour la vitesse, utilisez des points éloignés : $v=\dfrac{A_0A_4}{4\tau}$. N'oubliez pas de convertir les mesures avec l'échelle.
+    correction: |
+      Mouvements rectilignes uniformes. $v_A\approx0{,}52$, $v_B\approx0{,}58$, $v_A'\approx0{,}43$, $v_B'\approx0{,}64$ m/s ; $p_A\approx0{,}78$, $p_B\approx0{,}58$, $p_A'\approx0{,}64$, $p_B'\approx0{,}64$ kg\,m\,s$^{-1}$.
+    solution:
+      - titre: "1. Nature du mouvement"
+        texte: |
+          Avant le choc, les points $A_0$ à $A_4$ (resp. $B_0$ à $B_3$) sont {\bf alignés} et {\bf équidistants} (même distance parcourue pendant chaque intervalle $\tau$) : mouvement {\bf rectiligne uniforme}. Même constat après le choc ($A_5$ à $A_8$, $B_4$ à $B_8$), avec une autre direction et une autre vitesse. C'est cohérent avec la 1\textsuperscript{re} loi : en dehors du choc, aucune force ne s'exerce (poids compensé par le coussin d'air, frottements négligeables).
+      - titre: "2. Vitesses"
+        texte: |
+          {\bf Échelle} : la barre « $5$ cm » mesure $L$ sur la feuille imprimée ; facteur $\lambda=5/L$ (sur le document numérique, $\approx26$--$27$ pixels par cm réel). On calcule, sur les points extrêmes de chaque phase :
+          $$v_A=\frac{A_0A_4}{4\tau}\approx\frac{20{,}6\times10^{-2}}{0{,}4}\approx0{,}52~\mathrm{m/s},\qquad v_B=\frac{B_0B_3}{3\tau}\approx\frac{17{,}3\times10^{-2}}{0{,}3}\approx0{,}58~\mathrm{m/s},$$
+          $$v_A'=\frac{A_5A_8}{3\tau}\approx0{,}43~\mathrm{m/s},\qquad v_B'=\frac{B_4B_8}{4\tau}\approx0{,}64~\mathrm{m/s}.$$
+          Les vecteurs vitesse ont, en repère $(Ox,Oy)$ de la feuille ($Oy$ vers le haut) : $\vec v_A\approx(0{,}17;\,0{,}49)$, $\vec v_B\approx(-0{,}20;\,0{,}54)$, $\vec v_A'\approx(-0{,}07;\,0{,}42)$, $\vec v_B'\approx(0{,}11;\,0{,}63)$ m/s. {\bf Valeurs indicatives} à $\pm5\%$.
+      - titre: "3. Normes des quantités de mouvement"
+        texte: |
+          $p=m\,v$ avec $m_A=1{,}50$ kg et $m_B=1{,}00$ kg :
+          $$p_A\approx0{,}78,\quad p_B\approx0{,}58,\quad p_A'\approx0{,}64,\quad p_B'\approx0{,}64~\mathrm{kg\,m\,s^{-1}}.$$
+
+  - id: q2
+    enonce: |
+      \begin{itemize}
+        \item[4.] Construire les vecteurs $\vec p_A$ et $\vec p_B$ avant le choc aux points $A_0$ et $B_0$ (échelle donnant des vecteurs de $4$ à $8$ cm).
+        \item[5.] De même, construire $\vec p_A'$ et $\vec p_B'$ après le choc en $A_5$ et $B_5$.
+        \item[6.] Construire la variation $\Delta\vec p_A=\vec p_A'-\vec p_A$ en $A_5$ et $\Delta\vec p_B=\vec p_B'-\vec p_B$ en $B_5$ (construction de la somme au compas et à la règle).
+        \item[7.] Mesurer les normes de $\Delta\vec p_A$ et $\Delta\vec p_B$.
+      \end{itemize}
+    coup_de_pouce: |
+      Les vecteurs $\vec p$ ont même direction et même sens que $\vec v$ ; choisissez par exemple $1~\mathrm{kg\,m\,s^{-1}}\leftrightarrow8$ cm. $\Delta\vec p=\vec p'+(-\vec p)$ : reportez $-\vec p$ puis $\vec p'$ bout à bout.
+    correction: |
+      $\Delta\vec p_A\approx(-0{,}37;\,-0{,}11)$, $\|\Delta\vec p_A\|\approx0{,}38$ kg\,m\,s$^{-1}$ ; $\Delta\vec p_B\approx(0{,}31;\,0{,}09)$, $\|\Delta\vec p_B\|\approx0{,}32$ kg\,m\,s$^{-1}$ : vecteurs quasi opposés et presque horizontaux.
+    solution:
+      - titre: "4--5. Tracé des $\\vec p$"
+        texte: |
+          Avec l'échelle $1~\mathrm{kg\,m\,s^{-1}}\leftrightarrow8$ cm : $\vec p_A$ mesure $\approx6{,}2$ cm, $\vec p_B\approx4{,}6$ cm, $\vec p_A'\approx5{,}1$ cm, $\vec p_B'\approx5{,}1$ cm. Chaque vecteur est tracé à partir du point d'origine indiqué, dans la direction de la vitesse.
+      - titre: "6. Construction de $\\Delta\\vec p$"
+        texte: |
+          On reporte $-\vec p_A$ (opposé à $\vec p_A$) puis $\vec p_A'$ à son extrémité (parallélogramme au compas) ; $\Delta\vec p_A$ relie l'origine à l'extrémité finale. Même construction pour $B$. On constate que $\Delta\vec p_A$ et $\Delta\vec p_B$ sont {\bf presque colinéaires et de sens opposés}, et presque horizontaux : la force du choc agit suivant la ligne qui joint les deux centres au moment du contact.
+      - titre: "7. Normes"
+        texte: |
+          $\|\Delta\vec p_A\|\approx0{,}38$ et $\|\Delta\vec p_B\|\approx0{,}32$ kg\,m\,s$^{-1}$ (soit $\approx3{,}0$ et $2{,}6$ cm à l'échelle précédente). On vérifie que $\|\Delta\vec p_A+\Delta\vec p_B\|\approx0{,}06$ est petite devant $0{,}35$ : $\Delta\vec p_A\simeq-\Delta\vec p_B$ à $\approx15\%$ près, écart à commenter (pointage, choix des points avant/après).
+
+  - id: q3
+    enonce: |
+      \begin{itemize}
+        \item[8.] Exprimer la force $\vec F_{\to A}$ s'exerçant sur $A$ en fonction de $\Delta\vec p_A$ et de la durée $\Delta t$ de l'interaction ; de même pour $B$. Calculer leurs intensités (on prendra $\Delta t\approx60$ ms) et représenter ces forces en $A_5$ et $B_5$.
+        \item[9.] Connaissant les forces, calculer les accélérations $a_A$ et $a_B$ de chaque mobile. Conclure.
+      \end{itemize}
+    coup_de_pouce: |
+      2\textsuperscript{e} loi sous la forme $\bar{\vec F}=\Delta\vec p/\Delta t$ puis $a=F/m$. Comparez le rapport $a_A/a_B$ à $m_B/m_A$ ; comparez les forces $\vec F_{\to A}$ et $\vec F_{\to B}$ (3\textsuperscript{e} loi).
+    correction: |
+      $\bar{\vec F}_{\to A}=\Delta\vec p_A/\Delta t$, $F_A\approx6{,}4$ N ; $F_B\approx5{,}4$ N ; $a_A\approx4{,}3$, $a_B\approx5{,}4~\mathrm{m\,s^{-2}}$. Forces opposées à l'incertitude près (3\textsuperscript{e} loi), accélérations dans le rapport inverse des masses (rapport attendu $2/3$, mesuré $\approx0{,}79$).
+    solution:
+      - titre: "8. Forces moyennes du choc"
+        texte: |
+          D'après la 2\textsuperscript{e} loi sous forme intégrée, $\Delta\vec p_A=\bar{\vec F}_{\to A}\,\Delta t$, donc
+          $$\boxed{\bar{\vec F}_{\to A}=\frac{\Delta\vec p_A}{\Delta t}},\qquad\bar{\vec F}_{\to B}=\frac{\Delta\vec p_B}{\Delta t}.$$
+          Avec $\Delta t=0{,}060$ s : $F_A=\dfrac{0{,}38}{0{,}060}\approx\boxed{6{,}4~\text{N}}$ et $F_B=\dfrac{0{,}32}{0{,}060}\approx\boxed{5{,}4~\text{N}}$. Les deux forces sont dirigées suivant $\Delta\vec p$ (presque horizontales), de sens opposés : $\vec F_{\to A}$ vers la gauche en $A_5$, $\vec F_{\to B}$ vers la droite en $B_5$.
+      - titre: "9. Accélérations et conclusion"
+        texte: |
+          $a_A=\dfrac{F_A}{m_A}\approx\dfrac{6{,}4}{1{,}50}\approx\boxed{4{,}3~\mathrm{m\,s^{-2}}}$ et $a_B=\dfrac{F_B}{m_B}\approx\boxed{5{,}4~\mathrm{m\,s^{-2}}}$.
+
+          {\bf Conclusion} : (i) les forces sont {\bf opposées} à $\approx15\%$ près (3\textsuperscript{e} loi vérifiée dans l'incertitude) ; (ii) le mobile le plus léger subit la plus grande accélération : $\dfrac{a_A}{a_B}\approx0{,}79$ pour un rapport attendu $\dfrac{m_B}{m_A}=0{,}67$ ; (iii) la force estimée dépend de la valeur de $\Delta t$ (inconnue à $\pm30\%$), mais le {\bf rapport} $F_A/F_B$ n'en dépend pas : il vaut $\approx1{,}2$ au lieu de $1$.

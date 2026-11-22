@@ -7,6 +7,10 @@ Usage :
     python3 build/build.py                 # génère toutes les cibles de config.yaml
     python3 build/build.py td1_enonce       # ne génère que cette cible
     python3 build/build.py --no-pdf         # génère les .tex seulement (pas de pdflatex)
+    python3 build/build.py --stale          # seulement les PDF « à faire » ou « périmés »
+    python3 build/build.py --missing        # seulement les PDF « à faire »
+    python3 build/build.py --qcm            # seulement les cibles QCM (type_doc: qcm)
+    python3 build/pdf_status.py             # voir ce qui est fait / défait sans rien compiler
 
     python3 build/build.py                       # sans log
     python3 build/build.py td1_enonce --log      # erreurs + avertissements seulement
@@ -34,7 +38,12 @@ import time
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from common_data import load_td, load_cours, niveau_label  # noqa: E402  (source de vérité partagée)
+from common_data import (  # noqa: E402
+    load_td, load_cours, niveau_label, normalize_en_color, en_color_latex_definition,
+)  # noqa: E402  (source de vérité partagée)
+import qcm_data  # noqa: E402  (QCM : chargement, validation, to_latex)
+sys.path.insert(0, str(ROOT / "build"))
+import pdf_status  # noqa: E402  (état fait / défait des PDF)
 
 TEMPLATES_DIR = ROOT / "templates"
 GEN_DIR = ROOT / "build" / "generated"
@@ -82,6 +91,7 @@ def make_env():
     # Injecter la date et l'heure courantes
     env.globals["now"] = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
     env.filters["texid"] = lambda s: str(s).replace("_", r"\_")
+    env.filters["qcm_tex"] = qcm_data.to_latex   # texte QCM (plain + $maths$ + **gras**) -> LaTeX sûr
     env.filters["texdim_w"] = lambda v: to_texdim(v, base="\\linewidth")
     env.filters["texdim_h"] = lambda v: to_texdim(v, base="\\textheight")
     return env
@@ -125,12 +135,28 @@ def render_target(env, target: dict, config: dict):
     # Fusion : profil de base + surcharges explicites de la cible
     auteur_final = {**profil_base, **auteur_target}
 
-    # 3. Chargement du document (cours ou TD) et rendu Jinja2
+    # 3. Chargement du document (QCM, cours ou TD) et rendu Jinja2
+    if type_doc == "qcm":
+        # doc = un chapitre (data/matieres/<matiere>/qcm/<doc>.yaml) ou « all » (toute la matière)
+        qcm_doc = qcm_data.load_qcm_doc(matiere, doc_slug, target)
+        errs = [e for g in qcm_doc["chapitres"] for q in g["questions"] for e in qcm_data.question_errors(q)]
+        if errs:
+            raise ValueError(f"QCM invalide(s) : {errs[0]} (python3 tools/qcm.py check)")
+        tmpl = env.get_template("qcm.tex.j2")
+        return tmpl.render(
+            titre_document=target["titre"],
+            qcm=qcm_doc,
+            opts=target,
+            matiere_meta=matiere_meta,
+            auteur=auteur_final,
+        )
+
     if type_doc == "cours":
         cours = load_cours(matiere, doc_slug)
         tmpl = env.get_template("cours.tex.j2")
         return tmpl.render(
-            titre_document=target["titre"],
+            titre_document=normalize_en_color(target["titre"]),
+            couleur_en_definition=en_color_latex_definition(),
             cours=cours,
             opts=target,
             matiere_meta=matiere_meta,
@@ -142,7 +168,8 @@ def render_target(env, target: dict, config: dict):
     )
     tmpl = env.get_template("td.tex.j2")
     return tmpl.render(
-        titre_document=target["titre"],
+        titre_document=normalize_en_color(target["titre"]),
+        couleur_en_definition=en_color_latex_definition(),
         td=meta,
         exercices=exercices,
         opts=target,
@@ -151,32 +178,6 @@ def render_target(env, target: dict, config: dict):
     )
 
 
-
-# ----------------------------------------------------------------------
-# Compilation
-# ----------------------------------------------------------------------
-
-def compile_pdf(tex_path: Path):
-    for _ in range(2):
-        subprocess.run(
-            [
-                "pdflatex",
-                "-interaction=nonstopmode",
-                "-output-directory", str(tex_path.parent),
-                str(tex_path),
-            ],
-            cwd=ROOT,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            check=False,
-        )
-    pdf_path = tex_path.with_suffix(".pdf")
-    if pdf_path.exists():
-        OUT_DIR.mkdir(parents=True, exist_ok=True)
-        dest = OUT_DIR / pdf_path.name
-        shutil.copy(pdf_path, dest)
-        return dest
-    return None
 
 # ----------------------------------------------------------------------
 # Compilation
@@ -290,17 +291,30 @@ def main():
                         help="afficher les erreurs et avertissements extraits du log pdflatex")
     parser.add_argument("--full-log", action="store_true",
                         help="afficher le log pdflatex complet")
+    parser.add_argument("--stale", action="store_true",
+                        help="ne (re)construire que les cibles sans PDF ou dont les sources ont changé")
+    parser.add_argument("--missing", action="store_true",
+                        help="ne construire que les cibles sans PDF")
+    parser.add_argument("--qcm", action="store_true",
+                        help="ne construire que les cibles de type QCM (type_doc: qcm)")
     args = parser.parse_args()
 
     config = yaml.safe_load((ROOT / "build" / "config.yaml").read_text(encoding="utf-8"))
     targets = config["targets"]
     if args.names:
+        unknown = [n for n in args.names if n not in {t["name"] for t in targets}]
+        if unknown:
+            print(f"{RED}Cibles inconnues dans config.yaml : {', '.join(unknown)}{RESET}")
         targets = [t for t in targets if t["name"] in args.names]
+    if args.qcm:
+        targets = [t for t in targets if t.get("type_doc") == "qcm"]
+    if args.stale or args.missing:
+        todo = set(pdf_status.todo_names(config, include_perime=args.stale and not args.missing))
+        targets = [t for t in targets if t["name"] in todo]
+        print(f"{BLUE}🔎 {len(targets)} cible(s) à construire (le reste est à jour){RESET}")
 
     GEN_DIR.mkdir(parents=True, exist_ok=True)
     env = make_env()
-    manifest = load_manifest()
-
     counts = {"success": 0, "warning": 0, "fail": 0}
     global_start = time.time()
 
@@ -308,7 +322,12 @@ def main():
 
     for target in targets:
         print(f"{CYAN}🔄 Génération de{RESET} {target['name']}")
-        tex = render_target(env, target, config)
+        try:
+            tex = render_target(env, target, config)
+        except Exception as exc:  # source cassée : on continue avec les autres cibles
+            print(f"   ❌ {RED}Impossible de générer le .tex : {type(exc).__name__}: {exc}{RESET}\n")
+            counts["fail"] += 1
+            continue
         tex_path = GEN_DIR / f"{target['name']}.tex"
         tex_path.write_text(tex, encoding="utf-8")
         print(f"   📝 .tex écrit : {tex_path}")
@@ -347,18 +366,17 @@ def main():
         counts[status] += 1
 
         if result["pdf"] is not None and status != "fail":
-            manifest[target["name"]] = {
-                "matiere": target["matiere"],
-                "type_doc": target.get("type_doc", "td"),
-                "doc": target.get("doc", target.get("td")),
-                "pdf": result["pdf"].name,
-            }
+            pdf_status.record_build(target["name"], target, config)
 
     global_duration = time.time() - global_start
 
     if not args.no_pdf:
-        save_manifest(manifest)
-        print(f"-> Manifeste PDF écrit : {MANIFEST_PATH}\n")
+        # Manifeste = réalité du disque (plus d'entrée fantôme) + status.json
+        _, status = pdf_status.reconcile(config)
+        c = status["counts"]
+        print(f"-> Manifeste PDF réécrit : {MANIFEST_PATH}")
+        print(f"   état : {c['ok']} à jour · {c['present_sans_empreinte']} sans empreinte · "
+              f"{c['perime']} périmés · {c['manquant']} à faire · {c['cible_cassee']} cassés\n")
 
         print(f"{MAGENTA}──────────── Résumé ────────────{RESET}")
         print(f"✅ {GREEN}Réussies : {counts['success']}{RESET}")

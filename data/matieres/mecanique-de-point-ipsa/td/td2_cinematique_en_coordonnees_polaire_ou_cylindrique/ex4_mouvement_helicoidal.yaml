@@ -13,6 +13,7 @@ cours_rattache:
 metadonnees:
   duree_estimee: "30 min"
   difficulte: 3
+  priorite: 4
   type_exercice: "Entraînement / Extension 3D"
   indispensable: false
 

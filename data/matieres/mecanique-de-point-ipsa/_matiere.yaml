@@ -1,18 +1,15 @@
 id: mecanique-de-point-ipsa
-nom: "Mécanique du points"
+nom: "Mécanique du point — IPSA"
 niveau: [cpge, licence]
 description: >
-  .
-quartz_namespace: physique/ipsa-ondes
-sujets: [n]
+  TD de mécanique du point (cinématique : coordonnées cartésiennes,
+  polaires/cylindriques, base de Frenet).
+quartz_namespace: physique/IPSA/ipsa-mecanique-point   # (avant : physique/ipsa-ondes -> collision)
+sujets: [mecanique-du-point]
 
-# Thème visuel de l'appli QCM (web/qcm_app_template.html) pour cette
-# matière -- voir web/README_QCM.md pour la liste des logos disponibles
-# et le détail de chaque couleur. Toutes les clés sont optionnelles : ce
-# qui n'est pas précisé prend la valeur par défaut du template.
 theme:
-  titre_app: "Réveil d'Ondes"
-  sous_titre_app: "Mécanique du points· IPSA"
+  titre_app: "Réveil de Mécanique"
+  sous_titre_app: "Mécanique du point · IPSA"
   logo: onde
   couleurs:
     route: "#1B3A4B"

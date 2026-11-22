@@ -139,6 +139,9 @@ def resolve_page_path(quartz_content: Path, quartz_path: str) -> Path:
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--quartz-content", required=True, help="dossier content/ de Quartz")
+    p.add_argument("--create-missing", action="store_true",
+                    help="crée une page minimale pour tout sujet dont la page Quartz n'existe pas "
+                         "(sans ça le sujet n'est pas un nœud du graphe)")
     p.add_argument("--seuil", type=float, default=0.0,
                     help="poids minimal (valeur absolue) pour afficher un lien associé (défaut: 0, tout afficher)")
     args = p.parse_args()
@@ -152,6 +155,16 @@ def main():
 
     print(f"-- Injection des liens de sujets dans {quartz_content}")
 
+    # Validation de la base : un lien vers un id inconnu était ignoré en silence.
+    bad = [(l["de"], l["a"]) for l in liens if l["de"] not in sujets or l["a"] not in sujets]
+    for de, a in bad:
+        print(f"   ⚠️  lien ignoré, sujet inconnu dans sujets.yaml : {de} -> {a}")
+    for l in liens:
+        if l.get("type") not in ("parent", "associe"):
+            print(f"   ⚠️  type de lien invalide « {l.get('type')} » ({l['de']} -> {l['a']}) : attendu parent | associe")
+        if not -1 <= l.get("poids", 0) <= 1:
+            print(f"   ⚠️  poids hors [-1, 1] ({l['de']} -> {l['a']}) : {l.get('poids')}")
+
     pages = {}  # quartz_path -> [sujet_id, ...]
     for sujet_id, sujet in sujets.items():
         pages.setdefault(sujet["quartz_path"], []).append(sujet_id)
@@ -162,6 +175,11 @@ def main():
         if not section:
             continue
         page = resolve_page_path(quartz_content, quartz_path)
+        if not page.exists() and args.create_missing:
+            page.parent.mkdir(parents=True, exist_ok=True)
+            titre = " / ".join(sujets[s]["nom"] for s in sujet_ids)
+            page.write_text(f'---\ntitle: "{titre}"\ntags:\n  - sujet\n---\n\n*Page à compléter.*\n', encoding="utf-8")
+            print(f"   🆕 page créée : {page.relative_to(quartz_content)}")
         changed = inject_into_file(page, section)
         marker = "✏️  mis à jour" if changed else "-- déjà à jour"
         print(f"   {marker} : {page.relative_to(quartz_content) if page.exists() else page} "

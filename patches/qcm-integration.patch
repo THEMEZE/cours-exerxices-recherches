@@ -1,0 +1,96 @@
+diff -ruN a/common_data.py b/common_data.py
+--- a/common_data.py
++++ b/common_data.py
+@@ -187,20 +187,11 @@
+ # ----------------------------------------------------------------------
+ 
+ def load_all_qcm(matiere_slug: str = None, td_filter: str = None):
+-    items = []
+-    matieres = [matiere_slug] if matiere_slug else list_matieres()
+-    for m in matieres:
+-        qcm_dir = DATA_DIR / m / "qcm"
+-        if not qcm_dir.exists():
+-            continue
+-        for path in sorted(qcm_dir.glob("*.yaml")):
+-            docs = yaml.safe_load(path.read_text(encoding="utf-8")) or []
+-            for d in docs:
+-                if td_filter and d.get("td") != td_filter:
+-                    continue
+-                d["matiere"] = m
+-                items.append(d)
+-    return items
++    """QCM normalisés. Délègue à qcm_data.py (format compact ou liste, autant de questions
++    que voulu par chapitre) ; mêmes clés qu'avant + `chapitre`."""
++    import qcm_data
++    return [{k: v for k, v in q.items() if not k.startswith("_")}
++            for q in qcm_data.load_all_qcm(matiere_slug, td_filter)]
+ 
+ 
+ # ----------------------------------------------------------------------
+diff -ruN a/web/export_markdown.py b/web/export_markdown.py
+--- a/web/export_markdown.py
++++ b/web/export_markdown.py
+@@ -46,6 +46,8 @@
+     title_parts, en_span, resolve_profile, load_visibility_profiles, publication_config,
+ )
+ 
++import qcm_data  # noqa: E402  (liens + QR code des QCM)
++
+ DEFAULT_OUT = ROOT / "web" / "public" / "quartz_content"
+ PDF_OUT_DIR = ROOT / "build" / "output"
+ MANIFEST_PATH = PDF_OUT_DIR / "manifest.json"
+@@ -284,14 +286,17 @@
+ 
+ 
+ def render_qcm_md(qcm_list: list, exercice_paths: dict, matiere: str) -> str:
++    """Questions « réveil » (debut/milieu/fin) détaillées ; toutes les autres (entraînement…)
++    résumées : un chapitre peut en avoir des dizaines. Lien + QR code d'accès libre à la fin."""
+     if not qcm_list:
+         return ""
+     blocks = ["## QCM de réveil liés à ce document\n"]
+     moment_titles = {"debut": "🌅 Début de cours", "milieu": "🔄 Milieu de cours", "fin": "🌇 Fin de cours"}
+-    for q in qcm_list:
++    reveil = [q for q in qcm_list if q.get("moment") in moment_titles]
++    for q in reveil:
+         choices = "\n".join(f"- {c['texte']}" for c in q["choix"])
+         body = (f"**{q['question']}**\n\n{choices}\n\n"
+-                f"*Réponds en direct sur {a_blank("l'appli QCM", f"/qcm/{matiere}/")} (QR code affiché en cours).*")
++                f"*Réponds en direct sur {a_blank("l'appli QCM", qcm_data.qcm_url(matiere))} (QR code affiché en cours).*")
+         # clé (matiere, id) : « td1 » existe dans plusieurs matières, le lien ne
+         # doit jamais partir vers l'exercice d'une autre matière
+         target = exercice_paths.get((matiere, q.get("lie_a")))
+@@ -299,7 +304,12 @@
+             body += f"\n\nEn lien avec [[{target}|cet exercice]]."
+         elif q.get("lie_a"):
+             print(f"   ⚠️  QCM {q.get('id')} : lie_a « {q['lie_a']} » introuvable dans la matière {matiere}")
+-        blocks.append(callout("question", f"QCM — {moment_titles.get(q['moment'], q['moment'])}", body, "qcm"))
++        blocks.append(callout("question", f"QCM — {moment_titles[q['moment']]}", body, "qcm"))
++    # accès libre : chapitres représentés dans ce document (dans l'ordre d'apparition)
++    chapitres = list(dict.fromkeys(q.get("chapitre") for q in qcm_list if q.get("chapitre")))
++    libre = [f"**S'entraîner librement** ({len(qcm_list)} question(s) liée(s) à ce document) :"]
++    libre += [qcm_data.qcm_link_html(matiere, c, f"Chapitre {c}") for c in chapitres]
++    blocks.append("\n\n".join(libre))
+     return "\n\n".join(blocks)
+ 
+ 
+@@ -532,8 +542,18 @@
+             sections_index.append(f"- [[{ns}/Cours/{doc_slug}|{l_fr}]]" + (f" {en_span(l_en)}" if l_en else ""))
+         sections_index.append("")
+ 
+-    if load_all_qcm(matiere):
+-        sections_index += ["## QCM en direct\n", "- " + a_blank("Ouvrir l'appli QCM", f"/qcm/{matiere}/"), ""]
++    chaps = qcm_data.chapitres(matiere)
++    if chaps:
++        # Entraînement libre : un lien (+ QR code scannable si qcm.base_url est renseigné) par chapitre
++        sections_index += ["## QCM d'entraînement\n",
++                           f"{sum(c['n'] for c in chaps)} questions, en accès libre (sans compte), "
++                           "ou en direct pendant le cours.\n"]
++        if len(chaps) > 1:
++            sections_index += [qcm_data.qcm_link_html(matiere, "all", "Toute la matière"), ""]
++        for c in chaps:
++            sections_index += [qcm_data.qcm_link_html(matiere, c["id"], f"{c['titre']} — {c['n']} question{'s' if c['n'] > 1 else ''}"), ""]
++        if not (qcm_data.load_qcm_config().get("base_url")):
++            print("   ⚠️  qcm.base_url vide dans build/config.yaml : liens QCM relatifs, pas de QR code dans Quartz.")
+     sl = sujets_line(meta.get("sujets"), ctx["sujets"], ns)
+     if sl:
+         sections_index += [sl, ""]

@@ -14,7 +14,7 @@ source venv/bin/activate
 
 echo -e "\n⏳ Première génération du site (profil 'avant_seance' par défaut)..."
 echo "avant_seance" > web/.current_profile
-python3 build/build.py
+python3 build/build.py --stale || warn "Certains PDF n'ont pas compilé (voir : python3 build/pdf_status.py)"
 ./web/publish_profile.sh avant_seance
 ok "Site généré"
 

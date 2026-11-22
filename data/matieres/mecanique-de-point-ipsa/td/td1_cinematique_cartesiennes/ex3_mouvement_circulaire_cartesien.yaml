@@ -1,4 +1,4 @@
-id: td1_ex3
+id: td1_ex3_p
 intitule: "Mouvement circulaire en base cartésienne"
 td: td1
 facultatif: false
@@ -13,6 +13,7 @@ cours_rattache:
 metadonnees:
   duree_estimee: "35 min"
   difficulte: 3
+  priorite: 2
   type_exercice: "Application"
   indispensable: true
 

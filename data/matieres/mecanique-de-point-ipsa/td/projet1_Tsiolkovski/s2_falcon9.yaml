@@ -1,0 +1,177 @@
+id: mp_s2_falcon9
+intitule: "Séance 2 -- Application : un lanceur à deux étages inspiré du Falcon 9"
+td: mp_phv111
+facultatif: false
+seance: 2
+
+cours_rattache:
+  - dynamique.propulsion_par_reaction
+  - dynamique.etagement
+  - dynamique.quantite_de_mouvement
+
+metadonnees:
+  duree_estimee: "60 min"
+  difficulte: 4
+  type_exercice: "Application numérique / Modélisation"
+  indispensable: true
+
+enonce_intro: |
+  On applique l'équation de Tsiolkovski à un lanceur à deux étages. {\bf Les données réelles du Falcon 9 sont fournies dans le fichier tableur du projet} (non reproduit ici) : on les saisit à la place des valeurs ci-dessous. Pour que cette fiche soit autonome, on utilise un {\bf lanceur fictif, de caractéristiques voisines} (données illustratives, {\bf pas} les valeurs officielles) : masse au décollage $m_0=560$ t ; étage 1 : vitesse d'éjection effective $v_{e1}=2900$ m/s, débit $D_1=2531$ kg/s, masse en fin de combustion (étages 1 et 2 réunis, avant largage) $m_{1f}=150$ t ; étage 2 : après largage de l'étage 1 vide, masse $m_{2i}=125$ t, $v_{e2}=3400$ m/s, $D_2=272$ kg/s, masse finale (étage 2 vide $+$ charge utile) $m_{2f}=17$ t. On prend $g=9{,}81~\mathrm{m\,s^{-2}}$ constant.
+
+prerequis:
+  - titre: "Équation de Tsiolkovski et son extension avec pesanteur"
+    texte: |
+      $\Delta V=v_e\ln\dfrac{m_0}{m_f}$ sans pesanteur ; $v(t)=v_e\ln\dfrac{m_0}{m(t)}-g\,t$ en vol vertical, avec $m(t)=m_0-Dt$ ; poussée $F=Dv_e$.
+  - titre: "Notion d'étagement"
+    texte: |
+      L'étage 1 vide (réservoirs, moteurs) est largué : il ne faut plus l'accélérer. La masse initiale du deuxième étage $m_{2i}$ est inférieure à $m_{1f}$ de la masse sèche de l'étage 1 ; les $\Delta V$ des étages s'ajoutent.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Mener un calcul de lanceur de bout en bout"
+    texte: |
+      Calculer, pour chaque étage, le rapport de masses, le $\Delta V$, la durée de combustion et la poussée ; sommer les étages ; estimer l'effet de la pesanteur (perte, altitude atteinte) ; critiquer le modèle (traînée, $g(h)$, trajectoire non verticale).
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Comparer le calcul idéal à la réalité du vol"
+    texte: |
+      Le $\Delta V$ idéal ($10{,}6$ km/s) est supérieur à la vitesse orbitale (7,8 km/s) : la différence ($\approx3$ km/s) représente les pertes (gravité $\approx1{,}6$ km/s sur l'étage 1, traînée, trajectoire courbée) et la marge. Faire discuter : le lanceur est-il {\bf viable} ? Un bon compte rendu mentionne les approximations : $g$ constant, vol vertical, $v_e$ constante (en réalité $v_e$ augmente avec l'altitude), traînée négligée. {\bf Avertissement} : si l'on utilise les vraies données du fichier tableur, les résultats ci-dessous ne s'appliquent pas ; seule la {\bf méthode} est à reproduire.
+
+point_cours:
+  - titre: "Formules du lanceur"
+    texte: |
+      Étage $i$ : $\Delta V_i=v_{ei}\ln R_i$ avec $R_i=\dfrac{m_{i,{\rm init}}}{m_{i,{\rm fin}}}$ ; durée $t_{bi}=\dfrac{m_{i,{\rm init}}-m_{i,{\rm fin}}}{D_i}$ ; poussée $F_i=D_iv_{ei}$ ; rapport poussée/poids au décollage $\dfrac{F_1}{m_0g}$ ; altitude en fin de combustion verticale : $h=v_e\tau\Big[1-\dfrac{1+\ln R}{R}\Big]-\tfrac12gt_b^2$, avec $\tau=m_0/D$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Utiliser $m_0$ comme masse initiale de l'étage 2"
+    texte: |
+      Le rapport de masses de l'étage 2 est $m_{2i}/m_{2f}$ ($125/17\approx7{,}35$) et non $m_0/m_{2f}$ ($\approx33$) : l'étage 1 a été largué. Cette erreur conduit à un $\Delta V$ de $11{,}9$ km/s au lieu de $6{,}8$ km/s pour l'étage 2.
+  - titre: "Additionner les rapports de masses au lieu des $\\Delta V$"
+    texte: |
+      Ce sont les {\bf $\Delta V$ qui s'ajoutent} (ou, de façon équivalente, les logarithmes) ; les rapports de masses se {\bf multiplient}.
+  - titre: "Confondre $\\Delta V$ et vitesse atteinte avec pesanteur"
+    texte: |
+      Le $\Delta V=v_e\ln R$ est la vitesse en l'absence de gravité. La vitesse réelle en fin de combustion est $v_e\ln R-g\,t_b$ : pour l'étage 1, $3820-1589=2231$ m/s.
+  - titre: "Unités : tonnes et kg"
+    texte: |
+      $D$ en kg/s, masses en kg (ou toutes en t avec $D$ en t/s) ; la poussée est en N : $2531\times2900=7{,}34$ MN.
+  - titre: "Négliger la variation de $g$ avec l'altitude"
+    texte: |
+      À $115$ km, $g$ ne diminue que de $3\%$ ($g(h)=g_0\,[R_T/(R_T+h)]^2$) : l'approximation est correcte pour l'étage 1, moins pour l'étage 2 qui accélère à plus de $200$ km d'altitude.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Utiliser le tableur du projet"
+    texte: |
+      Faire saisir les données réelles du Falcon 9, calculer les colonnes $R$, $\Delta V$, $t_b$, $F$, et comparer à l'exemple fictif. Faire tracer $v(t)$ avec et sans gravité.
+  - titre: "Question de critique"
+    texte: |
+      Demander à chaque groupe d'identifier l'hypothèse la plus pénalisante pour le résultat (la gravité, ici) et de la quantifier.
+
+bilan:
+  - titre: "Résultats pour le lanceur fictif ($m_0=560$ t)"
+    texte: |
+      Étage 1 : $R_1=3{,}73$, $\Delta V_1=3820$ m/s, $t_{b1}=162$ s, $F_1=7{,}34$ MN, $F_1/(m_0g)=1{,}34$. Étage 2 : $R_2=7{,}35$, $\Delta V_2=6783$ m/s, $t_{b2}=397$ s, $F_2=0{,}92$ MN. Total : $\Delta V=10{,}6$ km/s sans pesanteur. Avec pesanteur : $v_{\rm MECO}=2231$ m/s à $h\approx115$ km ; $v(80~\mathrm{s})\approx516$ m/s.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Nombre d'étages et rapport de masses"
+    texte: |
+      Pour $\Delta V$ total donné, montrer que le rapport $m_0/m_{\rm charge\ utile}$ est minimal quand les $\Delta V_i$ sont égaux (étages identiques). Appliquer à $\Delta V=9{,}4$ km/s avec $v_e=3$ km/s.
+  - niveau: licence
+    titre: "Trajectoire non verticale"
+    texte: |
+      Le lanceur s'incline progressivement pour acquérir une vitesse horizontale. Écrire $m\dot v=Dv_e-mg\sin\gamma$ ($\gamma$ : angle de la trajectoire avec l'horizontale) et montrer que la perte par gravité est réduite si $\gamma$ diminue rapidement.
+  - niveau: master
+    titre: "Traînée atmosphérique"
+    texte: |
+      Ajouter une traînée $F_d=\tfrac12\rho(h)C_xSv^2$ avec $\rho=\rho_0e^{-h/H}$, $H=7$ km. Estimer numériquement la perte de $\Delta V$ pour $C_x=0{,}3$, $S=10~\mathrm{m^2}$ et conclure sur le moment de la « pression dynamique maximale » (Max Q).
+
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi 560 tonnes pour mettre 10 tonnes en orbite ?"
+    duree_introduction: "3 min"
+    question_d_accroche: |
+      Un lanceur de $560$ t décolle pour placer à peine quelques tonnes en orbite. Que devient le reste ? Pourquoi larguer des morceaux de fusée en vol ?
+    texte: |
+      {\bf Idée clé : la dépendance de $\Delta V$ à la masse est logarithmique, donc chaque tonne de structure inutile est coûteuse.} Larguer l'étage vide fait repartir le second étage avec un rapport de masses plus favorable. Les étages donnent des $\Delta V$ qui s'ajoutent.
+
+outils_mathematiques:
+  - titre: "Logarithme népérien"
+    texte: |
+      $\ln3{,}73\approx1{,}317$, $\ln7{,}35\approx1{,}995$ ; $\ln(ab)=\ln a+\ln b$.
+  - titre: "Intégration de $\\ln$"
+    texte: |
+      $\displaystyle\int-\ln(1-x)\,\mathrm dx=(1-x)\ln(1-x)+x+C$ pour obtenir l'altitude.
+  - titre: "Valeurs numériques et chiffres significatifs"
+    texte: |
+      Les données sont à $2$--$3$ chiffres significatifs ; on arrondit les $\Delta V$ à $10$ m/s près.
+
+liens_autres_disciplines:
+  - discipline: "Économie et industrie spatiale"
+    texte: |
+      Réutilisation du premier étage (atterrissage propulsé) : on réserve une partie du carburant ($\Delta V$ de freinage) ; le prix par kg en orbite baisse mais la charge utile aussi.
+  - discipline: "Chimie"
+    texte: |
+      $v_e$ dépend du couple d'ergols (kérosène--oxygène liquide : $I_{sp}\approx300$--$350$ s ; hydrogène--oxygène : $\approx450$ s) et de la pression d'éjection.
+
+questions:
+  - id: q1
+    enonce: |
+      Pour chaque étage du lanceur fictif :
+      \begin{itemize}
+        \item[1.] Calculer le rapport de masses $R_i$ et le $\Delta V_i$ idéal. Que vaut le $\Delta V$ total ?
+        \item[2.] Calculer la durée de combustion $t_{bi}$ et la poussée $F_i=D_iv_{ei}$.
+        \item[3.] Calculer le rapport poussée/poids au décollage. Le lanceur décolle-t-il ?
+      \end{itemize}
+    coup_de_pouce: |
+      Étage 1 : $m_{\rm init}=m_0=560$ t, $m_{\rm fin}=m_{1f}=150$ t. Étage 2 : $m_{\rm init}=m_{2i}=125$ t, $m_{\rm fin}=m_{2f}=17$ t.
+    correction: |
+      $R_1=3{,}73$, $\Delta V_1=3820$ m/s ; $R_2=7{,}35$, $\Delta V_2=6783$ m/s ; total $10{,}6$ km/s ; $t_{b1}=162$ s, $t_{b2}=397$ s ; $F_1=7{,}34$ MN, $F_2=0{,}92$ MN ; $F_1/(m_0g)=1{,}34$.
+    solution:
+      - titre: "1. Rapports de masses et $\\Delta V$"
+        texte: |
+          $R_1=\dfrac{560}{150}=3{,}733$, $\Delta V_1=2900\ln3{,}733=2900\times1{,}317=\boxed{3820~\mathrm{m/s}}$. $R_2=\dfrac{125}{17}=7{,}353$, $\Delta V_2=3400\ln7{,}353=3400\times1{,}995=\boxed{6783~\mathrm{m/s}}$. Total $\Delta V=\Delta V_1+\Delta V_2\approx\boxed{10{,}6~\mathrm{km/s}}$ (les $\Delta V$ s'additionnent).
+      - titre: "2. Durées et poussées"
+        texte: |
+          $t_{b1}=\dfrac{(560-150)\times10^3}{2531}=\boxed{162~\mathrm s}$ ; $t_{b2}=\dfrac{(125-17)\times10^3}{272}=\boxed{397~\mathrm s}$. $F_1=2531\times2900=\boxed{7{,}34~\mathrm{MN}}$, $F_2=272\times3400=\boxed{0{,}92~\mathrm{MN}}$.
+      - titre: "3. Décollage"
+        texte: |
+          Poids initial : $m_0g=560\times10^3\times9{,}81=5{,}49$ MN. $\dfrac{F_1}{m_0g}=\dfrac{7{,}34}{5{,}49}=\boxed{1{,}34}>1$ : le lanceur décolle ; l'accélération initiale vaut $\dot v(0)=(1{,}34-1)\,g=3{,}3~\mathrm{m\,s^{-2}}$ (soit $0{,}34\,g$ de « surplus »). Au dernier instant de l'étage 1 ($m=150$ t), l'accélération est $F_1/m-g=48{,}9-9{,}8\approx39~\mathrm{m\,s^{-2}}$ ($\approx4{,}0\,g$ de plus) : on limite souvent la poussée en fin de combustion.
+
+  - id: q2
+    enonce: |
+      \begin{itemize}
+        \item[4.] Écrire $v(t)$ pendant l'étage 1 (vol vertical, $g$ constant). Calculer $v$ à $t=80$ s et à la fin de la combustion ($t_{b1}$).
+        \item[5.] Calculer la perte par gravité sur l'étage 1 et la comparer à $\Delta V_1$. Que conclure ?
+        \item[6.] Montrer que l'altitude à la fin de la combustion de l'étage 1 est $h=v_{e}\tau\Big[1-\dfrac{1+\ln R_1}{R_1}\Big]-\tfrac12gt_{b1}^2$ avec $\tau=m_0/D_1$ et la calculer.
+      \end{itemize}
+    coup_de_pouce: |
+      $v(t)=v_e\ln\dfrac{m_0}{m_0-D_1t}-gt$. Pour l'altitude, intégrez $v(t)$ entre $0$ et $t_{b1}$ avec le changement $x=t/\tau$ ; $\int-\ln(1-x)\,\mathrm dx=(1-x)\ln(1-x)+x$.
+    correction: |
+      $v(80~\mathrm s)\approx516$ m/s ; $v(t_{b1})=3820-1589=2231$ m/s ; perte $\approx1{,}6$ km/s ($42\%$ de $\Delta V_1$) ; $h\approx115$ km.
+    solution:
+      - titre: "4. Vitesse pendant l'étage 1"
+        texte: |
+          $v(t)=2900\ln\dfrac{560\times10^3}{560\times10^3-2531\,t}-9{,}81\,t$. À $t=80$ s : $m=560-202{,}5=357{,}5$ t, $\ln\dfrac{560}{357{,}5}=0{,}449$, donc $v=1301-785=\boxed{516~\mathrm{m/s}}$. À $t_{b1}=162$ s : $v=3820-9{,}81\times162=3820-1589=\boxed{2231~\mathrm{m/s}}$.
+      - titre: "5. Perte par gravité"
+        texte: |
+          $g\,t_{b1}=1589$ m/s, soit $\approx42\%$ de $\Delta V_1$ : une part {\bf considérable} du $\Delta V$ est perdue à lutter contre la pesanteur. Pour la réduire, il faut diminuer $t_{b1}$ (poussée plus forte) ou incliner la trajectoire ($g\sin\gamma$). Ceci explique que le $\Delta V$ idéal ($10{,}6$ km/s) dépasse la vitesse orbitale ($7{,}8$ km/s).
+      - titre: "6. Altitude"
+        texte: |
+          $h=\displaystyle\int_0^{t_b}v\,\mathrm dt=v_e\tau\int_0^{x_b}[-\ln(1-x)]\,\mathrm dx-\tfrac12gt_b^2$ avec $x_b=\dfrac{t_b}{\tau}=1-\dfrac1{R_1}$. L'intégrale vaut $(1-x_b)\ln(1-x_b)+x_b=1-\dfrac{1+\ln R_1}{R_1}$ d'où le résultat. Numériquement $\tau=\dfrac{560\times10^3}{2531}=221{,}3$ s, $v_e\tau=641{,}6$ km, et $1-\dfrac{1+1{,}317}{3{,}733}=0{,}379$ : $h\approx243{,}3-128{,}7=\boxed{114{,}6~\mathrm{km}}$.
+
+  - id: q3
+    enonce: |
+      \begin{itemize}
+        \item[7.] Les données du tableur du projet donnent d'autres valeurs : indiquer, pour le Falcon 9 réel, quelles grandeurs il faut lire dans le fichier et comment calculer $\Delta V_1$, $\Delta V_2$, $F_1/(m_0g)$ et $t_{b1}$.
+        \item[8.] Le $\Delta V$ idéal est-il suffisant pour une orbite basse (vitesse $7{,}8$ km/s, pertes de $\approx1{,}5$ à $2$ km/s) ? Faire un bilan critique.
+      \end{itemize}
+    coup_de_pouce: |
+      Il faut 4 grandeurs par étage : masse initiale, masse finale, débit (ou durée) et $v_e$ (ou $I_{sp}$). Pensez au $I_{sp}$ : $v_e=g_0I_{sp}$.
+    correction: |
+      Méthode : lire $m_i,m_f,D,v_e$ ; $\Delta V=v_e\ln(m_i/m_f)$, $t_b=(m_i-m_f)/D$. Bilan fictif : $10{,}6-1{,}6\ (\text{gravité})-\text{traînée}\approx$ marge $\gtrsim1$ km/s au-delà des $7{,}8$ km/s : viable.
+    solution:
+      - titre: "7. Méthode sur les données réelles"
+        texte: |
+          Lire dans le tableur, pour chaque étage : masse au début ($m_i$, après largage éventuel) ; masse à la fin ($m_f$) ; débit massique $D$ (ou durée $t_b$, avec $D=(m_i-m_f)/t_b$) ; vitesse d'éjection $v_e$ (ou impulsion spécifique, $v_e=g_0I_{sp}$). Puis : $\Delta V=v_e\ln(m_i/m_f)$ ; $F=Dv_e$ ; $F_1/(m_0g)$ ; $t_b$. Les $\Delta V$ s'ajoutent. {\bf Les résultats numériques de la fiche ne s'appliquent pas aux données réelles} : ils servent de modèle de calcul.
+      - titre: "8. Bilan critique"
+        texte: |
+          Pour le lanceur fictif : $\Delta V$ idéal $=10{,}6$ km/s ; pertes par gravité $\approx1{,}6$ km/s (étage 1) $+$ quelques centaines de m/s pour l'étage 2 ; traînée $\approx0{,}1$--$0{,}3$ km/s ; il reste $\approx8$ km/s $>7{,}8$ km/s : c'est {\bf viable} mais avec une marge faible, cohérent avec une charge utile modeste. Limites du modèle : $g$ non constant, $v_e$ augmentant avec l'altitude (moteur en vide), trajectoire inclinée (qui réduit les pertes de gravité mais ajoute la composante horizontale), traînée négligée, rotation terrestre ($+0{,}4$ km/s à l'équateur) ignorée.

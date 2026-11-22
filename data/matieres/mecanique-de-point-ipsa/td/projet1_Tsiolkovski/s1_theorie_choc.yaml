@@ -1,0 +1,166 @@
+id: mp_s1_theorie
+intitule: "Séance 1 -- Théorie du choc et quantité de mouvement"
+td: mp_phv111
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - dynamique.quantite_de_mouvement
+  - dynamique.lois_de_newton
+  - dynamique.systeme_isole
+  - dynamique.chocs
+
+metadonnees:
+  duree_estimee: "30 min"
+  difficulte: 2
+  type_exercice: "Cours actif / Théorie"
+  indispensable: true
+
+enonce_intro: |
+  On considère un choc (ou collision) entre deux corps de masses $m_1$ et $m_2$ comme une interaction {\bf très brève} et de {\bf courte portée}, localisée dans le temps et l'espace : on distingue un {\bf avant} et un {\bf après} la collision. Lors du choc, les corps 1 et 2 exercent l'un sur l'autre les forces $\vec F_{1\to2}$ et $\vec F_{2\to1}$ ; l'ensemble des deux corps constitue un système {\bf isolé}. On se place dans un référentiel galiléen.
+
+prerequis:
+  - titre: "Lois de Newton et notion de force"
+    texte: |
+      Principe d'inertie, principe fondamental $\sum\vec F=\dfrac{\mathrm d\vec p}{\mathrm dt}$, action--réaction (voir TD sur les lois de Newton). Une force extérieure est une action exercée par un objet n'appartenant pas au système.
+  - titre: "Intégrale d'une fonction du temps"
+    texte: |
+      Si $\dfrac{\mathrm d\vec p}{\mathrm dt}=\vec F(t)$, alors $\Delta\vec p=\displaystyle\int_{t_1}^{t_2}\vec F(t)\,\mathrm dt=\bar{\vec F}\,\Delta t$ où $\bar{\vec F}$ est la force moyenne.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Démontrer la conservation de la quantité de mouvement"
+    texte: |
+      Savoir définir $\vec p$, relier sa variation aux forces (2\textsuperscript{e} loi), et démontrer à partir de l'action--réaction que la quantité de mouvement totale d'un système isolé est conservée ; savoir classer les chocs (élastique, partiellement élastique, mou) par le bilan d'énergie cinétique.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Fixer le vocabulaire et la démonstration avant la manipulation"
+    texte: |
+      Ces 30 minutes sont un rappel théorique à traiter {\bf avant} d'ouvrir l'annexe. La démonstration de $\vec p_{\rm tot}=\text{cte}$ est courte mais doit être {\bf rédigée} (c'est une partie du rapport de synthèse). Insister sur deux nuances : la conservation de $\vec p_{\rm tot}$ vaut pour {\bf tout} choc d'un système isolé, alors que celle de $E_c$ n'est valable que pour le choc élastique ; la force du choc est {\bf intense et brève}, ce qui justifie de négliger les forces extérieures finies (poids compensé par le coussin d'air).
+
+point_cours:
+  - titre: "Quantité de mouvement et deuxième loi sous forme générale"
+    texte: |
+      $\vec p=m\vec v$ (kg\,m\,s$^{-1}$). Forme générale de la 2\textsuperscript{e} loi : $\dfrac{\mathrm d\vec p}{\mathrm dt}=\sum\vec F_{\rm ext}$. Pour un système isolé ou pseudo-isolé ($\sum\vec F_{\rm ext}=\vec0$), $\vec p_{\rm tot}$ est constante.
+  - titre: "Classification des chocs"
+    texte: |
+      {\bf Élastique} : $E_c$ conservée ($E_c'=E_c$). {\bf Partiellement élastique} (ou inélastique) : $E_c'<E_c$, les corps repartent séparément. {\bf Mou} (parfaitement inélastique) : les corps restent collés, vitesse commune $\vec v_f=\dfrac{m_1\vec v_1+m_2\vec v_2}{m_1+m_2}$, perte maximale d'énergie cinétique. Dans tous les cas, $\vec p_{\rm tot}$ est conservée.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Confondre conservation de $\\vec p$ et de $E_c$"
+    texte: |
+      $\vec p_{\rm tot}$ est conservée dans {\bf tous} les chocs d'un système isolé ; $E_c$ seulement dans les chocs élastiques. Un choc mou conserve $\vec p$ mais perd de l'énergie (déformation, chaleur, son).
+  - titre: "Oublier le caractère vectoriel"
+    texte: |
+      $\vec p_{\rm tot}=\vec p_1+\vec p_2$ est une somme {\bf vectorielle} ; en général $\|\vec p_1+\vec p_2\|\ne\|\vec p_1\|+\|\vec p_2\|$ (inégalité triangulaire). On conserve les {\bf composantes}, pas la somme des normes.
+  - titre: "Dire que les forces sont nulles pendant le choc"
+    texte: |
+      Les forces $\vec F_{1\to2}$ et $\vec F_{2\to1}$ sont {\bf grandes} pendant le choc, mais opposées : leur somme est nulle, pas chacune. Avant et après, chacun des corps est libre (aucune force).
+  - titre: "Appliquer l'action--réaction à deux forces d'un même corps"
+    texte: |
+      Les forces $\vec F_{1\to2}$ et $\vec F_{2\to1}$ s'exercent sur {\bf deux corps différents} : elles ne s'annulent pas pour l'étude d'un seul corps, seulement dans la somme pour le système $\{1+2\}$.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Démonstration au tableau puis réécriture individuelle"
+    texte: |
+      Faire dérouler la démonstration oralement par les étudiants (question 5), puis la leur faire réécrire seuls : c'est le paragraphe « rappel théorique » du rapport.
+  - titre: "Chocs de la vie courante"
+    texte: |
+      Faire classer : boules de billard, voitures qui s'emboutissent, balle de tennis sur une raquette, voiture contre un mur. Quels sont les chocs mous ? Quelle énergie est dissipée ?
+
+bilan:
+  - titre: "L'essentiel à retenir"
+    texte: |
+      $\dfrac{\mathrm d\vec p_1}{\mathrm dt}=\vec F_{2\to1}$ et $\dfrac{\mathrm d\vec p_2}{\mathrm dt}=\vec F_{1\to2}=-\vec F_{2\to1}$ donnent $\dfrac{\mathrm d\vec p_{\rm tot}}{\mathrm dt}=\vec0$, donc $\vec p_{\rm tot}=\vec p_1'+\vec p_2'=\vec p_1+\vec p_2$ et $\Delta\vec p_1=-\Delta\vec p_2$. La nature du choc se lit sur l'énergie cinétique.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Impulsion d'une force"
+    texte: |
+      Montrer que $\Delta\vec p_1=\displaystyle\int\vec F_{2\to1}\,\mathrm dt$ (impulsion). En déduire que la force moyenne pendant le choc vaut $\bar F=\Delta p/\Delta t$ et l'estimer pour une balle de tennis ($m=58$ g, $v=30$ m/s, retournée en $5$ ms).
+  - niveau: licence
+    titre: "Coefficient de restitution"
+    texte: |
+      En 1D, on définit $e=-\dfrac{v_2'-v_1'}{v_2-v_1}$ ($0\le e\le1$ ; $e=1$ élastique, $e=0$ mou). Établir les vitesses après choc en fonction de $e$, $m_1$, $m_2$ et la perte d'énergie cinétique $\Delta E_c=-\dfrac12\dfrac{m_1m_2}{m_1+m_2}(1-e^2)(v_1-v_2)^2$.
+  - niveau: master
+    titre: "Référentiel du centre de masse"
+    texte: |
+      Dans le référentiel du centre de masse, $\vec p^*_{\rm tot}=\vec0$. Montrer que, pour un choc élastique, chaque corps conserve la norme de sa vitesse et que seule sa direction change.
+
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi la quantité de mouvement se conserve-t-elle ?"
+    duree_introduction: "3 à 5 min"
+    question_d_accroche: |
+      Deux palets sur un coussin d'air se heurtent : chacun repart dans une autre direction avec une autre vitesse. {\bf Qu'est-ce qui reste exactement le même} avant et après ? L'énergie ? La vitesse totale ? Autre chose ? Et pourquoi les forces très violentes du choc n'y changent-elles rien ?
+    texte: |
+      {\bf Idée clé : les forces du choc sont des paires action--réaction.} $\dfrac{\mathrm d\vec p_1}{\mathrm dt}=\vec F_{2\to1}$, $\dfrac{\mathrm d\vec p_2}{\mathrm dt}=-\vec F_{2\to1}$, donc $\dfrac{\mathrm d(\vec p_1+\vec p_2)}{\mathrm dt}=\vec0$ : {\bf ce que l'un gagne, l'autre le perd}. La nature du choc (élastique ou non) se lit, elle, sur l'énergie cinétique.
+
+outils_mathematiques:
+  - titre: "Somme vectorielle et inégalité triangulaire"
+    texte: |
+      $\|\vec u+\vec v\|\le\|\vec u\|+\|\vec v\|$, avec égalité si les vecteurs sont de même sens. La somme se calcule par composantes ou par la règle du parallélogramme.
+  - titre: "Intégrale d'une force sur la durée du choc"
+    texte: |
+      $\displaystyle\int_{t_1}^{t_2}\vec F\,\mathrm dt=\Delta\vec p$ : l'aire sous la courbe $F(t)$ (pic bref et intense) est la variation de quantité de mouvement.
+  - titre: "Dérivée d'une somme"
+    texte: |
+      $\dfrac{\mathrm d}{\mathrm dt}(\vec p_1+\vec p_2)=\dfrac{\mathrm d\vec p_1}{\mathrm dt}+\dfrac{\mathrm d\vec p_2}{\mathrm dt}$ : la linéarité de la dérivée permet de sommer les deux équations.
+
+liens_autres_disciplines:
+  - discipline: "Physique des particules"
+    texte: |
+      Les collisions en accélérateur (LHC) sont analysées par conservation de l'énergie et de l'impulsion totales ; elle est utilisée pour reconstruire des particules non détectées (neutrinos).
+  - discipline: "Sécurité routière"
+    texte: |
+      Les crash-tests analysent la quantité de mouvement avant et après la collision ; les zones de déformation augmentent la durée du choc et diminuent la force moyenne $\bar F=\Delta p/\Delta t$.
+  - discipline: "Sport"
+    texte: |
+      Billard, golf, tennis : l'interaction balle--objet est un choc quasi élastique ; la vitesse de sortie dépend de la masse et de la vitesse de la raquette.
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{itemize}
+        \item[1.] Rappeler la notion de quantité de mouvement $\vec p$.
+        \item[2.] Rappeler les 3 lois de Newton. Quelle grandeur physique est modifiée sous l'action d'une force extérieure ? Écrire le principe d'action--réaction qui relie $\vec F_{1\to2}$ et $\vec F_{2\to1}$ lors d'un choc.
+        \item[3.] Avant et après le choc, les corps ne sont soumis à aucune force. Que peut-on dire de leurs quantités de mouvement $\vec p_1,\vec p_2$ avant le choc ? Et de $\vec p_1',\vec p_2'$ après le choc ?
+      \end{itemize}
+    coup_de_pouce: |
+      Pensez au principe d'inertie : sans force, la vitesse est constante, donc $\vec p=m\vec v$ aussi (la masse est constante).
+    correction: |
+      $\vec p=m\vec v$ ; $\sum\vec F=\mathrm d\vec p/\mathrm dt$ : c'est $\vec p$ (donc $\vec v$) qui est modifiée ; $\vec F_{1\to2}=-\vec F_{2\to1}$ ; avant et après le choc, $\vec p_1,\vec p_2$ puis $\vec p_1',\vec p_2'$ sont constantes (mouvement rectiligne uniforme).
+    solution:
+      - titre: "1. Quantité de mouvement"
+        texte: |
+          Pour un point matériel de masse $m$ et de vitesse $\vec v$ : $\boxed{\vec p=m\vec v}$ (grandeur vectorielle, de même direction et sens que $\vec v$, en kg\,m\,s$^{-1}$).
+      - titre: "2. Lois de Newton"
+        texte: |
+          {\bf 1\textsuperscript{re} loi} (inertie) : dans un référentiel galiléen, un point matériel soumis à $\sum\vec F=\vec0$ a un mouvement rectiligne uniforme (ou est au repos), et réciproquement. {\bf 2\textsuperscript{e} loi} : $\sum\vec F_{\rm ext}=\dfrac{\mathrm d\vec p}{\mathrm dt}$ ($=m\vec a$ pour $m$ constante). {\bf 3\textsuperscript{e} loi} : $\boxed{\vec F_{1\to2}=-\vec F_{2\to1}}$ (même norme, même droite d'action, sens opposés).
+
+          Une force extérieure modifie la {\bf quantité de mouvement} (donc la vitesse du corps).
+      - titre: "3. Avant et après le choc"
+        texte: |
+          Aucune force : $\dfrac{\mathrm d\vec p_i}{\mathrm dt}=\vec0$, donc $\vec p_1$ et $\vec p_2$ sont {\bf constantes} avant le choc ; de même $\vec p_1'$ et $\vec p_2'$ sont constantes après. Les mobiles ont des mouvements rectilignes uniformes, ce qui permet de déterminer leurs vitesses sur la chronophotographie.
+
+  - id: q2
+    enonce: |
+      \begin{itemize}
+        \item[4.] Lors du choc, le corps 1 est soumis à $\vec F_{2\to1}$ et le corps 2 à $\vec F_{1\to2}$. Écrire ce qu'implique la 2\textsuperscript{e} loi de Newton pour $\vec p_1$, puis pour $\vec p_2$.
+        \item[5.] On définit $\vec p_{\rm tot}=\vec p_1+\vec p_2$. Montrer, en partant du principe d'action--réaction, que $\vec p_{\rm tot}$ est conservé.
+        \item[6.] Définir les notions de choc élastique, choc partiellement élastique et choc mou.
+      \end{itemize}
+    coup_de_pouce: |
+      Écrivez les deux équations $\mathrm d\vec p_i/\mathrm dt=\dots$, additionnez-les, puis utilisez la 3\textsuperscript{e} loi. Pour les chocs, comparez l'énergie cinétique avant et après.
+    correction: |
+      $\dfrac{\mathrm d\vec p_1}{\mathrm dt}=\vec F_{2\to1}$, $\dfrac{\mathrm d\vec p_2}{\mathrm dt}=\vec F_{1\to2}$ ; somme $=\vec0$ donc $\vec p_{\rm tot}=\text{cte}$ ; élastique : $E_c$ conservée ; partiellement élastique : $E_c'<E_c$ avec séparation ; mou : corps collés, perte maximale.
+    solution:
+      - titre: "4. Deuxième loi pour chaque corps"
+        texte: |
+          $$\frac{\mathrm d\vec p_1}{\mathrm dt}=\vec F_{2\to1},\qquad\frac{\mathrm d\vec p_2}{\mathrm dt}=\vec F_{1\to2}.$$
+      - titre: "5. Conservation de $\\vec p_{\\rm tot}$"
+        texte: |
+          On additionne : $\dfrac{\mathrm d\vec p_{\rm tot}}{\mathrm dt}=\vec F_{2\to1}+\vec F_{1\to2}=\vec0$ par la 3\textsuperscript{e} loi. Donc $\vec p_{\rm tot}$ est constante pendant le choc, et comme elle l'est aussi avant et après :
+          $$\boxed{\vec p_1+\vec p_2=\vec p_1'+\vec p_2'}.$$
+          En intégrant sur la durée du choc : $\Delta\vec p_1=\displaystyle\int\vec F_{2\to1}\,\mathrm dt=-\Delta\vec p_2$ : {\bf ce que l'un gagne, l'autre le perd}.
+      - titre: "6. Classification des chocs"
+        texte: |
+          {\bf Choc élastique} : l'énergie cinétique totale est conservée ($E_c'=E_c$), pas de déformation permanente ni de dissipation. {\bf Choc partiellement élastique} : $E_c'<E_c$, une partie est dissipée (déformation, chaleur, son) mais les corps repartent séparément. {\bf Choc mou} (parfaitement inélastique) : les corps restent liés après le choc, la perte d'énergie cinétique est la plus grande possible compatible avec la conservation de $\vec p_{\rm tot}$ ; $\vec p_{\rm tot}$ est conservée dans les trois cas.

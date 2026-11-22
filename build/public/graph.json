@@ -1,0 +1,216 @@
+{
+  "nodes": [
+    {
+      "id": "ondes-mecaniques",
+      "nom": "Ondes mécaniques",
+      "page": "physique/IPSA/ipsa-physique-ondes",
+      "matieres": [
+        "physique-ondes-ipsa"
+      ]
+    },
+    {
+      "id": "ondes-acoustiques",
+      "nom": "Ondes acoustiques",
+      "page": "physique/IPSA/ipsa-physique-ondes",
+      "matieres": [
+        "physique-ondes-ipsa"
+      ]
+    },
+    {
+      "id": "reflexion-transmission",
+      "nom": "Réflexion / transmission, impédance",
+      "page": "physique/IPSA/ipsa-physique-ondes",
+      "matieres": [
+        "physique-ondes-ipsa"
+      ]
+    },
+    {
+      "id": "agregation-physique",
+      "nom": "Agrégation de physique",
+      "page": "physique/agregation-physique",
+      "matieres": [
+        "agregation-physique"
+      ]
+    },
+    {
+      "id": "agregation-mathematiques",
+      "nom": "Agrégation de mathématiques",
+      "page": "mathematiques/agregation-mathematiques",
+      "matieres": [
+        "agregation-mathematiques"
+      ]
+    },
+    {
+      "id": "gravitation-quantique",
+      "nom": "Gravitation quantique",
+      "page": "physique/gravitation-quantique",
+      "matieres": []
+    },
+    {
+      "id": "supergravite",
+      "nom": "Supergravité",
+      "page": "physique/supergravite",
+      "matieres": []
+    },
+    {
+      "id": "theorie-m",
+      "nom": "Théorie M",
+      "page": "physique/theorie-m",
+      "matieres": []
+    },
+    {
+      "id": "theorie-du-tout",
+      "nom": "Théorie du tout",
+      "page": "physique/theorie-du-tout",
+      "matieres": []
+    },
+    {
+      "id": "integrabilite-quantique",
+      "nom": "Intégrabilité quantique",
+      "page": "mathematiques/integrabilite-quantique",
+      "matieres": [
+        "recherche-integrabilite-quantique"
+      ]
+    },
+    {
+      "id": "bethe-ansatz",
+      "nom": "Bethe ansatz",
+      "page": "mathematiques/bethe-ansatz",
+      "matieres": [
+        "recherche-integrabilite-quantique"
+      ]
+    },
+    {
+      "id": "mecanique-du-point",
+      "nom": "Mécanique du point",
+      "page": "physique/IPSA/ipsa-mecanique-point",
+      "matieres": [
+        "mecanique-de-point-ipsa"
+      ]
+    },
+    {
+      "id": "onip",
+      "nom": "Outils numériques (ONIP)",
+      "page": "physique/IOGS/iogs-onip",
+      "matieres": [
+        "onip-iogs"
+      ]
+    },
+    {
+      "id": "grandeurs-physiques",
+      "nom": "Grandeurs physiques et analyse dimensionnelle",
+      "page": "physique/IPSA/ipsa-piscines-sciences-methodologie",
+      "matieres": [
+        "piscines-de-sciences-et-methodologie"
+      ]
+    },
+    {
+      "id": "tp-ipsa",
+      "nom": "Travaux pratiques IPSA",
+      "page": "physique/IPSA/ipsa-tp",
+      "matieres": [
+        "traveaux_pratiques-ipsa"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "theorie-m",
+      "target": "supergravite",
+      "poids": 0.9,
+      "type": "parent",
+      "note": "La supergravité D=11 est la limite basse énergie de la théorie M."
+    },
+    {
+      "source": "theorie-du-tout",
+      "target": "theorie-m",
+      "poids": 0.7,
+      "type": "parent",
+      "note": ""
+    },
+    {
+      "source": "theorie-du-tout",
+      "target": "gravitation-quantique",
+      "poids": 0.7,
+      "type": "parent",
+      "note": ""
+    },
+    {
+      "source": "integrabilite-quantique",
+      "target": "bethe-ansatz",
+      "poids": 0.85,
+      "type": "parent",
+      "note": "L'ansatz de Bethe est historiquement le premier exemple de méthode d'intégrabilité quantique."
+    },
+    {
+      "source": "ondes-mecaniques",
+      "target": "ondes-acoustiques",
+      "poids": 0.6,
+      "type": "associe",
+      "note": "Même formalisme d'onde de d'Alembert, milieu différent (corde vs fluide)."
+    },
+    {
+      "source": "ondes-acoustiques",
+      "target": "reflexion-transmission",
+      "poids": 0.5,
+      "type": "associe",
+      "note": ""
+    },
+    {
+      "source": "ondes-mecaniques",
+      "target": "reflexion-transmission",
+      "poids": 0.5,
+      "type": "associe",
+      "note": ""
+    },
+    {
+      "source": "gravitation-quantique",
+      "target": "supergravite",
+      "poids": 0.5,
+      "type": "associe",
+      "note": "Deux approches distinctes à la quantification de la gravité, à ne pas confondre."
+    },
+    {
+      "source": "agregation-physique",
+      "target": "ondes-mecaniques",
+      "poids": 0.4,
+      "type": "associe",
+      "note": "Les ondes sont un grand classique de leçon d'agrégation."
+    },
+    {
+      "source": "bethe-ansatz",
+      "target": "agregation-mathematiques",
+      "poids": 0.1,
+      "type": "associe",
+      "note": "Lien faible -- à ce stade juste une note, pas encore de contenu commun réel."
+    },
+    {
+      "source": "mecanique-du-point",
+      "target": "ondes-mecaniques",
+      "poids": 0.5,
+      "type": "associe",
+      "note": "La cinématique/dynamique du point précède l'étude des ondes."
+    },
+    {
+      "source": "grandeurs-physiques",
+      "target": "mecanique-du-point",
+      "poids": 0.4,
+      "type": "associe",
+      "note": "Dimensions et unités servent à vérifier chaque résultat de mécanique."
+    },
+    {
+      "source": "onip",
+      "target": "mecanique-du-point",
+      "poids": 0.3,
+      "type": "associe",
+      "note": ""
+    },
+    {
+      "source": "tp-ipsa",
+      "target": "ondes-mecaniques",
+      "poids": 0.6,
+      "type": "associe",
+      "note": ""
+    }
+  ]
+}

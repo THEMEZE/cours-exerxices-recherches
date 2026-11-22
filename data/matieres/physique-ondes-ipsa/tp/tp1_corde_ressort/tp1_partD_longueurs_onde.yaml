@@ -1,0 +1,114 @@
+id: tp1_partD
+intitule: "Partie D — Compatibilité des longueurs d'onde avec le modèle des modes propres {\\color{blue}(Part D — Compatibility of wavelengths with the normal-mode model)}"
+td: tp1
+facultatif: false
+seance: 1
+cours_rattache:
+  - chap1.modes_propres
+  - chap1.ondes_stationnaires
+
+metadonnees:
+  duree_estimee: "25 min"
+  difficulte: 3 # Sur une échelle de 1 à 5
+  priorite: 1
+  type_exercice: "Analyse critique"
+  indispensable: true
+
+enonce_intro: |
+  Pour $F=0{,}8$ N uniquement, on compare pour $n=1,\dots,6$ deux déterminations de la longueur d'onde : $\lambda_n=2L/n$ (géométrie) et $\lambda_n=c/f_n$ (célérité mesurée et fréquence mesurée). {\bf Question scientifique :} les longueurs d'onde expérimentales sont-elles cohérentes avec le modèle ?
+
+  {\color{blue}For $F=0.8$ N only, we compare for $n=1,\dots,6$ two determinations of the wavelength: $\lambda_n=2L/n$ (geometry) and $\lambda_n=c/f_n$ (measured speed and measured frequency). {\bf Scientific question:} are the experimental wavelengths consistent with the model?}
+
+accroche_point_cours_essentiel:
+  - titre: "Deux façons de mesurer une longueur d'onde {\\color{blue}(Two ways to measure a wavelength)}"
+    duree_introduction: "2 min, avant le calcul"
+    question_d_accroche: |
+      Si le modèle est parfait, $2L/n$ et $c/f_n$ coïncident. Si le vibreur n'est pas un nœud exact, lequel des deux va s'écarter, et dans quel sens ?
+
+      {\color{blue}If the model is perfect, $2L/n$ and $c/f_n$ coincide. If the vibrator is not an exact node, which of the two will deviate, and in which direction?}
+    texte: |
+      {\bf Idée clé : tester un modèle, c'est comparer deux quantités qui devraient être égales.} $2L/n$ suppose des nœuds exactement aux extrémités ; $c/f_n$ dépend des mesures de $c$ et de $f_n$.
+
+      {\color{blue}{\bf Key idea: testing a model means comparing two quantities that should be equal.} $2L/n$ assumes nodes exactly at the ends; $c/f_n$ depends on the measurements of $c$ and $f_n$.}
+
+outils_mathematiques:
+  - titre: "Comparaison avec incertitudes {\\color{blue}(Comparison with uncertainties)}"
+    texte: |
+      $\dfrac{\Delta\lambda}{\lambda}=\dfrac{\Delta L}{L}$ pour $2L/n$ et $\dfrac{\Delta c}{c}+\dfrac{\Delta f}{f}$ pour $c/f_n$ ; compatibilité si $|\lambda_1-\lambda_2|\le\Delta\lambda_1+\Delta\lambda_2$.
+
+      {\color{blue}$\dfrac{\Delta\lambda}{\lambda}=\dfrac{\Delta L}{L}$ for $2L/n$ and $\dfrac{\Delta c}{c}+\dfrac{\Delta f}{f}$ for $c/f_n$; compatible if $|\lambda_1-\lambda_2|\le\Delta\lambda_1+\Delta\lambda_2$.}
+
+liens_autres_disciplines:
+  - discipline: "Optique {\\color{blue}(Optics)}"
+    texte: |
+      Dans une cavité Fabry-Pérot, $L=n\lambda/2$ : même condition de résonance.
+
+      {\color{blue}In a Fabry-Perot cavity, $L=n\lambda/2$: same resonance condition.}
+
+questions:
+  - id: q1
+    enonce: |
+      D2 — Compléter le tableau des $\lambda_n$ pour $n=1,\dots,6$ avec $L=0{,}55$ m et $c=19{,}92$ m/s ($F=0{,}8$ N).
+
+      {\color{blue}D2 — Fill in the table of $\lambda_n$ for $n=1,\dots,6$ with $L=0.55$ m and $c=19.92$ m/s ($F=0.8$ N).}
+    coup_de_pouce:
+      - titre: "Formules {\\color{blue}(Formulas)}"
+        texte: |
+          $\lambda_n=2L/n$ et $\lambda_n=c/f_n$ avec les $f_n$ mesurés pour $F=0{,}8$ N.
+
+          {\color{blue}$\lambda_n=2L/n$ and $\lambda_n=c/f_n$ with the $f_n$ measured at $F=0.8$ N.}
+    correction:
+      - titre: "Valeurs provisoires {\\color{blue}(Provisional values)}"
+        texte: |
+          \begin{center}
+          \begin{tabular}{|c|c|c|c|}
+          \hline
+          $n$ & $f_n$ (Hz) & $2L/n$ (m) & $c/f_n$ (m) \\ \hline
+          1 & 18,0 & 1,100 & 1,107 \\ \hline
+          2 & 36,2 & 0,550 & 0,550 \\ \hline
+          3 & 54,3 & 0,367 & 0,367 \\ \hline
+          4 & 72,4 & 0,275 & 0,275 \\ \hline
+          5 & 90,6 & 0,220 & 0,220 \\ \hline
+          6 & 108,7 & 0,183 & 0,183 \\ \hline
+          \end{tabular}
+          \end{center}
+
+          {\color{blue}Table above with provisional values.}
+    solution:
+      - titre: "Exemple {\\color{blue}(Example)}"
+        texte: |
+          $n=1$ : $2L/1=1{,}100$ m ; $c/f_1=19{,}92/18{,}0=1{,}107$ m. Écart $0{,}6\ \%$. Les autres modes sont dans le même ordre (écart $<0{,}2\ \%$).
+
+          {\color{blue}$n=1$: $2L/1=1.100$ m; $c/f_1=19.92/18.0=1.107$ m. Deviation $0.6\,\%$. The other modes are in the same range (deviation $<0.2\,\%$).}
+
+  - id: q2
+    enonce: |
+      D3 — Les deux méthodes sont-elles compatibles ? Quelle hypothèse du modèle pourrait expliquer les écarts ?
+
+      {\color{blue}D3 — Are the two methods compatible? Which model assumption could explain the deviations?}
+    coup_de_pouce:
+      - titre: "Piste {\\color{blue}(Hint)}"
+        texte: |
+          Relire la remarque du cahier sur le vibreur : nœud exact ou quasi fixe ? Quelle longueur est réellement concernée ?
+
+          {\color{blue}Reread the notebook note on the vibrator: exact or quasi-fixed node? Which length is really involved?}
+    correction:
+      - titre: "Réponse attendue {\\color{blue}(Expected answer)}"
+        texte: |
+          Oui, à l'incertitude près ($\Delta\lambda\approx0{,}01$ m pour $n=1$). Écart le plus visible pour $n=1$ : le vibreur est un nœud quasi fixe, donc la longueur effective est un peu plus grande que $55$ cm, et la corde n'est pas strictement fixée à ses extrémités. Autres hypothèses : corde idéale sans raideur ni amortissement, tension uniforme.
+
+          {\color{blue}Yes, within uncertainty ($\Delta\lambda\approx0.01$ m for $n=1$). The most visible deviation is for $n=1$: the vibrator is a quasi-fixed node, so the effective length is slightly larger than 55 cm and the string is not strictly fixed at its ends. Other assumptions: ideal string without stiffness or damping, uniform tension.}
+    solution:
+      - titre: "Pour l'encadrant {\\color{blue}(For the supervisor)}"
+        texte: |
+          Si un groupe trouve un écart important pour un seul mode, vérifier qu'il n'a pas relevé un mode voisin ou un pic secondaire. Le test est circulaire à moitié ($c$ vient lui-même des $f_n$) : le faire remarquer aux meilleurs groupes.
+
+          {\color{blue}If a group finds a large deviation for a single mode, check they did not record a neighboring mode or a secondary peak. The test is partly circular ($c$ itself comes from the $f_n$): point this out to the best groups.}
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Longueur effective {\\color{blue}(Effective length)}"
+    texte: |
+      Ajuster $f_n=nc/(2L_{\text{eff}})$ : estimer $L_{\text{eff}}-L$ et le relier à l'amplitude du vibreur et à la masse de l'attache (TD1 ex. 15).
+
+      {\color{blue}Fit $f_n=nc/(2L_{\text{eff}})$: estimate $L_{\text{eff}}-L$ and relate it to the vibrator amplitude and the mass at the attachment (TD1 ex. 15).}

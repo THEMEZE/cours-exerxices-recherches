@@ -1,0 +1,197 @@
+id: td5
+titre: "Travail et énergie"
+chapitre_cours: "Chap. 3 — Travail, énergie cinétique, énergie potentielle, énergie mécanique"
+seance: 5
+niveau_public: [cpge, licence]
+exercices_ordre:
+  - ex1_travail_force_constante
+  - ex2_theoreme_energie_cinetique
+  - ex3_force_de_rappel
+  - ex4_looping_vertical
+  - ex5_bille_sur_sphere
+  - ex6_chaine_sur_table
+  - ex7_puits_de_potentiel
+
+enonce_intro: |
+  {\bf Conventions valables pour tout le TD (sauf mention contraire).} On étudie le mouvement d'un {\bf point matériel} dans le référentiel terrestre, supposé galiléen, avec $g=9{,}81~\mathrm{m\,s^{-2}}$. Les frottements sont négligés sauf mention contraire. Les exercices marqués {\it (facultatif)} sont des approfondissements ; ceux qui portent une étoile $(*)$ sont des questions d'entraînement. Pour chaque exercice, {\bf rédiger dans l'ordre} : système et référentiel, schéma, bilan des forces, {\bf quelles forces travaillent}, théorème utilisé (énergie cinétique ou énergie mécanique), résolution littérale, application numérique, vérification (homogénéité, cas limites, signe).
+
+prerequis:
+  - titre: "Les lois de Newton et la méthode du TD4"
+    texte: |
+      $\sum\vec F=m\vec a$, bilan de forces exhaustif, projection sur des axes adaptés (cartésiens, polaires, base de Frenet). Le TD5 donne une {\bf seconde méthode} : au lieu de projeter la loi de Newton, on intègre une fois pour obtenir un bilan d'énergie.
+  - titre: "Produit scalaire et intégrale"
+    texte: |
+      $\vec A\cdot\vec B=A_xB_x+A_yB_y+A_zB_z=\|\vec A\|\|\vec B\|\cos\varphi$ ; intégrale d'une fonction d'une variable, primitive de $x^n$ ; différentielle $\mathrm d(x^2)=2x\,\mathrm dx$.
+  - titre: "Cinématique du TD1 et accélération dans la base de Frenet"
+    texte: |
+      $\vec a=\dfrac{\mathrm dv}{\mathrm dt}\,\vec t+\dfrac{v^2}{\rho}\,\vec n$ ($\rho$ rayon de courbure) ; en coordonnées polaires, $\vec v=\dot r\vec e_r+r\dot\theta\vec e_\theta$ ; $\vec v=\dfrac{\mathrm d\overrightarrow{OM}}{\mathrm dt}$, donc $\mathrm d\overrightarrow{OM}=\vec v\,\mathrm dt$.
+  - titre: "Forces usuelles du TD4"
+    texte: |
+      Poids, réaction normale ($N\ge0$), tension d'un fil, rappel élastique $-k(\ell-\ell_0)\vec u$, frottement solide de Coulomb. Il faut savoir dire {\bf lesquelles travaillent}.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Calculer un travail"
+    texte: |
+      Savoir écrire $\delta W=\vec F\cdot\mathrm d\overrightarrow{OM}$, l'intégrer sur un chemin (force constante, force de rappel, force dépendant de la position), reconnaître le signe (moteur, résistant, nul) et calculer une puissance $P=\vec F\cdot\vec v$.
+  - titre: "Utiliser le théorème de l'énergie cinétique et de l'énergie mécanique"
+    texte: |
+      Savoir choisir entre $\Delta E_c=\sum W$ et $\Delta E_m=W_{\rm nc}$, justifier la conservation de $E_m$ (forces conservatives ou ne travaillant pas) et obtenir une vitesse sans calculer l'accélération.
+  - titre: "Exploiter un diagramme d'énergie potentielle"
+    texte: |
+      Savoir lire un graphe $E_p(x)$ : positions d'équilibre, stabilité, états liés et libres, points de rebroussement, période des petites oscillations par $k_{\rm eff}=E_p''(x_{\rm eq})$.
+  - titre: "Articuler énergie et dynamique"
+    texte: |
+      Savoir utiliser l'énergie pour la vitesse, puis la loi de Newton projetée (radialement) pour la réaction, et en déduire des conditions de décollage ($N=0$), de passage ou de glissement.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Positionnement du TD"
+    texte: |
+      Le TD4 traitait tout par $\sum\vec F=m\vec a$. Le TD5 montre que {\bf l'énergie est un intégrale première} : elle évite la résolution d'une équation différentielle quand on ne cherche que la vitesse en fonction de la position. Le message à faire passer : {\bf énergie pour la vitesse, Newton pour les forces de liaison}. Les exercices 5 (bille sur sphère) et 7 (puits de potentiel) servent de pont vers le formalisme de Lagrange (multiplicateur de Lagrange $=$ réaction ; $E_p''$ $=$ raideur effective).
+  - titre: "Trois parcours selon le temps disponible"
+    texte: |
+      {\bf Parcours essentiel} (environ 2 h 30) : exercices 1, 2, 3, 4.
+
+      {\bf Parcours renforcé} (environ $+1$ h) : exercice 5 (bille sur sphère, questions (a) à (e)) et exercice 6 (chaîne sur table).
+
+      {\bf Parcours approfondi} (CPGE/licence) : exercice 5 complet (Lagrange, roulement) et exercice 7 (Lennard-Jones, petites oscillations).
+  - titre: "Compétences évaluables"
+    texte: |
+      {\bf S'approprier} : identifier système, état initial et état final. {\bf Analyser} : choisir le théorème (énergie cinétique, mécanique, Newton radial) et dire quelles forces travaillent. {\bf Réaliser} : calculs littéraux, intégrales, développements limités. {\bf Valider} : cas limites, dimension, ordre de grandeur. {\bf Communiquer} : tableau d'énergie « état initial / état final ».
+  - titre: "Erreurs de rédaction à sanctionner"
+    texte: |
+      Écrire $E_m$ conservée sans dire pourquoi ; oublier de nommer les forces qui ne travaillent pas ; mélanger l'énergie potentielle $E_p$ et le travail ($W=-\Delta E_p$) ; donner un travail sans préciser le chemin et le signe ; calculer une force de réaction avec l'énergie seule (elle ne s'en déduit pas).
+
+point_cours:
+  - titre: "Travail d'une force"
+    texte: |
+      Travail élémentaire : $\delta W=\vec F\cdot\mathrm d\overrightarrow{OM}=\vec F\cdot\vec v\,\mathrm dt$. Travail le long d'un chemin $\Gamma$ de $A$ à $B$ : $W_{A\to B}=\displaystyle\int_\Gamma\vec F\cdot\mathrm d\overrightarrow{OM}$. Force constante : $W=\vec F\cdot\overrightarrow{AB}$ (le chemin ne compte pas). Signe : $W>0$ (force motrice, $\varphi<90^\circ$), $W<0$ (résistante), $W=0$ (force perpendiculaire au déplacement : réaction d'un support lisse, tension d'un pendule, force magnétique). Unité : le joule, $1~\mathrm J=1~\mathrm N\,\mathrm m=1~\mathrm{kg\,m^2\,s^{-2}}$.
+  - titre: "Puissance"
+    texte: |
+      $P=\dfrac{\delta W}{\mathrm dt}=\vec F\cdot\vec v$ (en watts). Puissance moyenne : $\bar P=W/\Delta t$. Un moteur de puissance $P$ qui tire à vitesse $v$ exerce $F=P/v$ : à puissance fixée, la force diminue quand la vitesse augmente.
+  - titre: "Théorème de l'énergie cinétique (TEC)"
+    texte: |
+      {\bf Démonstration.} $m\vec a=\sum\vec F$ ; on multiplie scalairement par $\vec v\,\mathrm dt=\mathrm d\overrightarrow{OM}$ : $m\,\dfrac{\mathrm d\vec v}{\mathrm dt}\cdot\vec v\,\mathrm dt=\mathrm d\Big(\tfrac12mv^2\Big)=\sum\delta W$. D'où, avec $E_c=\tfrac12mv^2$ :
+      $$\mathrm dE_c=\sum\delta W,\qquad \Delta E_c=E_c(B)-E_c(A)=\sum W_{A\to B}.$$
+      Forme valable pour {\bf toutes} les forces (conservatives ou non), dans un référentiel galiléen. Le TEC est une conséquence de la 2\textsuperscript{e} loi (projection sur la tangente) : il ne contient pas l'information normale à la trajectoire.
+  - titre: "Force conservative et énergie potentielle"
+    texte: |
+      Une force est {\bf conservative} si son travail ne dépend pas du chemin suivi, c'est-à-dire s'il existe $E_p$ telle que $\delta W=-\mathrm dE_p$, soit $\vec F=-\overrightarrow{\mathrm{grad}}\,E_p$ ; en 1D, $F_x=-\dfrac{\mathrm dE_p}{\mathrm dx}$. Critère : $\overrightarrow{\mathrm{rot}}\,\vec F=\vec0$. $E_p$ est définie à une {\bf constante près}. Exemples : poids $E_p=mgz$ ($Oz$ vertical ascendant) ; rappel élastique $E_p=\tfrac12k(\ell-\ell_0)^2$ ; gravitation $E_p=-\dfrac{GMm}{r}$ ; force de Coulomb $E_p=\dfrac{qq'}{4\pi\varepsilon_0r}$. Non conservatives : frottement de glissement $\vec f=-\mu N\,\vec v/\|\vec v\|$, frottement fluide $-\lambda\vec v$ (travail toujours négatif).
+  - titre: "Énergie mécanique et sa variation"
+    texte: |
+      $E_m=E_c+E_p$. En séparant les forces conservatives (dans $E_p$) et les autres : $\boxed{\Delta E_m=W_{\rm nc}}$. Si $W_{\rm nc}=0$ ({\bf forces non conservatives absentes ou ne travaillant pas}), $E_m=\text{cte}$. {\bf Attention} : la réaction normale d'un support lisse et la tension d'un fil de pendule sont non conservatives (elles ne dérivent pas d'une $E_p$) mais {\bf ne travaillent pas}, donc $E_m$ est conservée.
+  - titre: "Énergie et dynamique : que donne chaque méthode ?"
+    texte: |
+      Énergie : $v(\text{position})$ directement, pas de dépendance au temps, pas d'information sur les forces de liaison. Newton projeté : $\vec a$, donc $t$, et les forces de liaison ($N$, $T$). Stratégie classique : {\bf énergie pour $v$, puis Newton sur la direction normale pour $N$ ou $T$}, puis étude du signe de $N$ ou $T$ (contact, tension, décollage).
+  - titre: "Diagramme d'énergie potentielle (mouvement à 1 degré de liberté)"
+    texte: |
+      $E_m=\tfrac12m\dot x^2+E_p(x)$ constante : le mouvement n'est possible que dans la zone $E_p(x)\le E_m$. {\bf Points d'équilibre} : $E_p'(x_{\rm eq})=0$ ; {\bf stable} si $E_p''(x_{\rm eq})>0$ (minimum), instable si $<0$. {\bf Points de rebroussement} (vitesse nulle) : $E_p(x)=E_m$. Si la zone permise est bornée par deux rebroussements : {\bf état lié} (oscillation) ; si elle est non bornée : {\bf état de diffusion}. Petites oscillations : $E_p(x)\approx E_p(x_{\rm eq})+\tfrac12E_p''(x_{\rm eq})(x-x_{\rm eq})^2$, soit $\omega_0=\sqrt{E_p''(x_{\rm eq})/m}$ et $T_0=2\pi\sqrt{m/E_p''(x_{\rm eq})}$ ; on retrouve $k_{\rm eff}=E_p''(x_{\rm eq})$.
+  - titre: "Mouvement le long d'une courbe lisse : réaction normale"
+    texte: |
+      Pour un point sur un rail lisse ou une sphère lisse : $E_m$ conservée ; projection de $m\vec a=m\vec g+\vec N$ sur la normale $\vec n$ (vers le centre de courbure) : $m\dfrac{v^2}{\rho}=N_n+mg_n$ (composantes algébriques selon $\vec n$). Le contact est maintenu tant que $N\ge0$ : {\bf le décollage a lieu à l'instant où $N$ s'annule}.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Confondre travail et énergie potentielle"
+    texte: |
+      $W_{\rm poids}=-mg\Delta z$ est le travail ; $E_p=mgz$ est l'énergie potentielle. Le premier est un échange entre deux états, la seconde une fonction d'état définie à une constante près. On écrit $W=-\Delta E_p$, jamais $W=E_p$.
+  - titre: "Penser que « la tension ne travaille pas » signifie « conservative »"
+    texte: |
+      La tension d'un fil de pendule est perpendiculaire à $\vec v$ : $\vec T\cdot\vec v=0$, donc $W=0$. On peut alors écrire $E_m$ conservée, mais $\vec T$ n'a pas d'énergie potentielle associée.
+  - titre: "Appliquer $E_m$ conservée en présence de frottement"
+    texte: |
+      Avec un frottement de glissement : $\Delta E_m=W_f<0$, avec $W_f=-\mu N\ell$ ($\ell$ longueur parcourue, et non déplacement net). L'énergie dissipée est convertie en chaleur.
+  - titre: "Déduire une réaction de l'énergie seule"
+    texte: |
+      Les forces de liaison ne travaillent pas : l'énergie ne les « voit » pas. Pour $N$ ou $T$ il faut projeter la loi de Newton sur la normale.
+  - titre: "Oublier la constante dans $E_p$"
+    texte: |
+      Seules les {\bf différences} $E_p(B)-E_p(A)$ ont un sens physique. Choisir une origine commode ($E_p(0)=0$), mais ne pas en changer au milieu du raisonnement.
+  - titre: "Mauvaise lecture de la distance dans le TEC"
+    texte: |
+      Pour une force constante parallèle au mouvement : $W=F\,d$ avec $d$ distance parcourue. Pour arrêter un mobile de $E_c=\tfrac12mv^2$ avec $F$ : $d=\dfrac{mv^2}{2F}$, {\bf proportionnelle à $v^2$} (distance de freinage $\times4$ quand $v$ double).
+  - titre: "Résultats contre-intuitifs dans le looping et la sphère"
+    texte: |
+      Le point le plus critique n'est pas toujours le sommet : pour un contact unilatéral ($N\ge0$), on cherche le {\bf pire cas} sur tout le trajet (cf. TD4, voiture sur une bosse).
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Un tableau d'énergie avant tout calcul"
+    texte: |
+      Faire remplir « état initial / état final » avec $E_c$, $E_p$, travaux des forces non conservatives. Beaucoup d'erreurs de signe disparaissent quand le tableau est écrit.
+  - titre: "Expérience flash : bille sur un rail avec looping"
+    texte: |
+      Lâcher une bille de différentes hauteurs sur un rail à looping : mesurer $H_{\min}$ et comparer à $\tfrac52R$ (la valeur mesurée est plus grande car la bille roule ; voir exercice 5, version « roulement »).
+  - titre: "Prédire avant de calculer"
+    texte: |
+      Bille sur sphère : à quelle hauteur décolle-t-elle (à $\tfrac12R$, $\tfrac23R$, au sol) ? Demander un vote avant le calcul ; la valeur $\cos\theta_d=2/3$ surprend et frappe les esprits.
+  - titre: "Python pour les diagrammes d'énergie"
+    texte: |
+      Tracer $E_p(x)$ de Lennard-Jones et la droite $E_m$ pour différentes valeurs ; résoudre numériquement l'équation du mouvement et comparer la période à $2\pi\sqrt{m/E_p''}$.
+  - titre: "Gestion de l'hétérogénéité"
+    texte: |
+      Les étudiants rapides abordent les exercices 5, 6, 7. Les autres consolident sur 1 à 4. Réserver cinq minutes en fin de séance pour « énergie ou Newton ? : comment choisir ».
+
+bilan:
+  - titre: "Ce qu'il faut savoir faire à la fin du TD"
+    texte: |
+      Calculer un travail et une puissance ; écrire le TEC et en tirer une distance ou une vitesse ; justifier la conservation de $E_m$ ; reconnaître une force conservative et trouver son $E_p$ ; lire un diagramme d'énergie ; combiner énergie (pour $v$) et Newton (pour $N$) afin d'obtenir une condition de décollage.
+  - titre: "Résultats marquants du TD"
+    texte: |
+      Force constante : $W=\vec F\cdot\overrightarrow{AB}$ ; TEC : $\Delta E_c=\sum W$ ; ressort : $E_p=\tfrac12kx^2$, $v_O=\sqrt{v_A^2+ka^2/m}$ ; looping : $v_{\min}=\sqrt{gR}$ en haut, $H_{\min}=\tfrac52R$, $N_{\rm bas}=6mg$ ; bille sur sphère : $\cos\theta_d=\tfrac23$, $v_d=\sqrt{2gR/3}$ ; chaîne sur table : $x(t)=x_0\cosh\sqrt{g/L}\,t$ ; Lennard-Jones : $r_{\rm eq}=2^{1/6}\sigma$, $k_{\rm eff}=72\varepsilon/(2^{1/3}\sigma^2)$.
+  - titre: "Ce qui sera réutilisé dans la suite"
+    texte: |
+      Les états liés et le diagramme d'énergie reviennent pour les forces centrales (potentiel effectif de Kepler). L'énergie comme intégrale première prépare le formalisme de Lagrange et de Hamilton. Les chocs du TD6 sont l'inverse : l'énergie n'y est {\bf pas} conservée, la quantité de mouvement oui.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Portrait de phase d'un oscillateur"
+    texte: |
+      Tracer dans le plan $(x,\dot x)$ les courbes à $E_m$ constante pour l'oscillateur harmonique (ellipses) et pour le pendule simple (ellipses déformées, séparatrice, mouvement de rotation). Relier la séparatrice à l'énergie $E_m=2mgL$.
+  - niveau: licence
+    titre: "Formalisme de Lagrange"
+    texte: |
+      Pour un système à une coordonnée généralisée $q$ : $L=T-V$, équation d'Euler--Lagrange $\dfrac{\mathrm d}{\mathrm dt}\dfrac{\partial L}{\partial\dot q}-\dfrac{\partial L}{\partial q}=0$. Retrouver le pendule simple ($L=\tfrac12mR^2\dot\theta^2+mgR\cos\theta$) et le ressort. Avec une liaison $f(q)=0$ ajouter un multiplicateur $\lambda$ : $\lambda$ s'identifie à la réaction (voir exercice 5).
+  - niveau: master
+    titre: "Énergie et invariance par translation du temps"
+    texte: |
+      L'énergie $H=\sum p\dot q-L$ est conservée quand $L$ ne dépend pas explicitement du temps (théorème de Noether). Discuter pourquoi l'énergie d'un oscillateur dont la raideur dépend du temps n'est pas conservée.
+
+accroche_point_cours_essentiel:
+  - titre: "Sans calculer l'accélération : la hauteur d'une montagne russe"
+    duree_introduction: "5 min"
+    question_d_accroche: |
+      Un wagon est lâché sans vitesse du haut d'une descente. {\bf Quelle est sa vitesse en bas ?} Dépend-elle de la forme de la descente ? Et de la masse ? Existe-t-il {\bf une hauteur minimale} pour passer le looping ?
+    texte: |
+      {\bf Idée clé : $E_c+E_p=\text{cte}$ quand les seules forces qui travaillent sont conservatives.} Le travail d'une force de liaison est nul ; le travail du poids ne dépend que de la différence d'altitude. D'où $v=\sqrt{2g\,\Delta h}$ quelle que soit la forme du rail, indépendamment de la masse.
+
+outils_mathematiques:
+  - titre: "Produit scalaire et intégrale curviligne"
+    texte: |
+      $\displaystyle\int_A^B\vec F\cdot\mathrm d\vec\ell$ ; pour $F$ constante, $\vec F\cdot\overrightarrow{AB}$ ; pour $F(x)\vec u_x$, $\displaystyle\int F(x)\,\mathrm dx$.
+  - titre: "Primitives usuelles"
+    texte: |
+      $\displaystyle\int x\,\mathrm dx=\tfrac{x^2}2$, $\displaystyle\int x^n\mathrm dx=\tfrac{x^{n+1}}{n+1}$ ; $\displaystyle\int\dfrac{\mathrm dx}{x^2}=-\dfrac1x$ ; $\displaystyle\int\dfrac{\mathrm dx}{\sqrt{x^2-a^2}}=\operatorname{arcosh}\dfrac xa$.
+  - titre: "Dérivée de $E_p$ et gradient en 1D"
+    texte: |
+      $F_x=-\dfrac{\mathrm dE_p}{\mathrm dx}$ ; équilibre $\dfrac{\mathrm dE_p}{\mathrm dx}=0$ ; stabilité par le signe de $\dfrac{\mathrm d^2E_p}{\mathrm dx^2}$.
+  - titre: "Développement de Taylor à l'ordre 2"
+    texte: |
+      $E_p(x)\approx E_p(x_0)+\tfrac12E_p''(x_0)(x-x_0)^2$ autour d'un minimum ; $\cos\theta\approx1-\tfrac{\theta^2}2$.
+  - titre: "Fonctions hyperboliques"
+    texte: |
+      $\cosh u=\dfrac{\mathrm e^u+\mathrm e^{-u}}2$, $\sinh u=\dfrac{\mathrm e^u-\mathrm e^{-u}}2$, $\cosh^2-\sinh^2=1$ ; $\ddot x=\kappa^2x\Rightarrow x=A\cosh\kappa t+B\sinh\kappa t$.
+  - titre: "Conversion d'unités de vitesse et d'énergie"
+    texte: |
+      $1~\mathrm{km/h}=\dfrac1{3{,}6}~\mathrm{m/s}$ ; $1~\mathrm{kWh}=3{,}6~\mathrm{MJ}$ ; $1~\mathrm{eV}=1{,}6\times10^{-19}~\mathrm J$.
+
+liens_autres_disciplines:
+  - discipline: "Génie mécanique"
+    texte: |
+      Puissance et couple moteur, rendement ; freinage : l'énergie cinétique est dissipée en chaleur dans les disques ($d\propto v^2$).
+  - discipline: "Chimie et physique moléculaire"
+    texte: |
+      Potentiel de Lennard-Jones : modèle des liaisons faibles entre atomes de gaz rares ; énergie de liaison, longueur de liaison, vibration.
+  - discipline: "Parcs d'attractions et sécurité"
+    texte: |
+      Dimensionnement d'un looping non circulaire (clothoïde) pour limiter l'accélération verticale ; hauteur minimale de la première descente.
+  - discipline: "Énergétique"
+    texte: |
+      Énergie hydraulique : $E=mgh$ ; puissance d'un barrage $P=\rho\,Q\,g\,h\,\eta$.

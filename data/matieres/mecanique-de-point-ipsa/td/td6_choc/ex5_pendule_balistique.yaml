@@ -1,0 +1,185 @@
+id: td6_ex5
+intitule: "(*) Pendule balistique"
+td: td6
+facultatif: true
+seance: 1
+
+cours_rattache:
+  - collisions.choc_parfaitement_mou
+  - energie.conservation_energie_mecanique
+  - dynamique.tension_d_un_fil
+  - collisions.perte_energie
+
+metadonnees:
+  duree_estimee: "55 min"
+  difficulte: 4
+  type_exercice: "Exercice non guidé / Mesure d'une vitesse"
+  indispensable: false
+
+enonce_intro: |
+  Un {\bf pendule balistique} sert à mesurer la vitesse d'une balle. Un bloc de masse $M=2{,}0$ kg est suspendu à un fil inextensible de longueur $L=1{,}00$ m. Une balle de masse $m=10$ g, tirée horizontalement à la vitesse $v$, s'y {\bf incruste}. Le pendule s'écarte alors d'un angle maximal $\theta_{\max}=30^\circ$. On prendra $g=9{,}81~\mathrm{m\,s^{-2}}$ ; le choc est considéré comme instantané.
+
+prerequis:
+  - titre: "Les trois phases"
+    texte: |
+      Avant : balle seule. Choc : quantité de mouvement horizontale conservée (la tension est verticale). Après : énergie mécanique conservée (tension qui ne travaille pas).
+  - titre: "Énergie d'un pendule"
+    texte: |
+      Montée de la hauteur $h=L(1-\cos\theta)$ ; $\tfrac12(m+M)V^2=(m+M)gh$.
+  - titre: "Mouvement circulaire"
+    texte: |
+      Newton selon $\vec n$ : $T-(m+M)g\cos\theta=(m+M)\dfrac{V^2}L$ pour un pendule d'angle $\theta$ (pendule simple, fil tendu).
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Mesurer indirectement une grandeur par une chaîne de lois"
+    texte: |
+      Savoir traduire un angle mesuré en vitesse initiale en enchaînant énergie, choc mou, énergie ; savoir calculer l'énergie dissipée ; savoir étudier une variante (balle qui traverse, tour complet).
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Le résultat contre-intuitif"
+    texte: |
+      Presque {\bf toute} l'énergie de la balle est dissipée ($99{,}5~\%$) : il serait absurde d'écrire $\tfrac12mv^2=(m+M)gh$ ; la quantité de mouvement est la bonne loi pour le choc. La mesure est très sensible à $m/M$ : l'angle de $30^\circ$ correspond à une balle de $326$ m/s (fusil). Intérêt d'insister sur les trois phases et sur le fait que le pendule est un {\bf amplificateur} : une vitesse de balle de plusieurs centaines de m/s devient un angle mesurable. Les variantes (tour complet, balle qui traverse) sont de bons sujets de concours.
+
+point_cours:
+  - titre: "Formule du pendule balistique"
+    texte: |
+      $mv=(m+M)V$ ; $V=\sqrt{2gL(1-\cos\theta)}$ ; $v=\dfrac{m+M}{m}\sqrt{2gL(1-\cos\theta)}$. Fraction d'énergie dissipée dans le choc : $\dfrac{M}{m+M}$.
+  - titre: "Petits angles"
+    texte: |
+      $1-\cos\theta\approx\tfrac{\theta^2}2$ : $v\approx\dfrac{m+M}m\theta\sqrt{gL}$ (l'angle est proportionnel à la vitesse).
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Conserver l'énergie à travers le choc"
+    texte: |
+      $\tfrac12mv^2\ne(m+M)gh$ : choc mou. L'énergie de la balle est transformée en chaleur et en déformation.
+  - titre: "Oublier la masse de la balle après le choc"
+    texte: |
+      Après l'incrustation, la masse en mouvement est $m+M$ (même si $m\ll M$, on la garde dans la formule exacte).
+  - titre: "Appliquer $p$ pendant la montée"
+    texte: |
+      Pendant la montée, la tension et le poids sont extérieurs : $p$ n'est pas conservée (seule $E_m$ l'est).
+  - titre: "Mal lire l'angle"
+    texte: |
+      $h=L(1-\cos\theta)$, pas $L\sin\theta$ : $h=0{,}134$ m pour $30^\circ$, alors que $L\sin30^\circ=0{,}5$ m n'est pas la hauteur.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Démonstration en cours"
+    texte: |
+      Avec une balle de fléchette ou de pâte à modeler lancée sur un bloc suspendu à une ficelle, mesurer l'angle avec un rapporteur ; comparer à la vitesse de lancement mesurée à la caméra.
+  - titre: "Erreurs de mesure"
+    texte: |
+      Faire discuter : quelle incertitude sur $v$ si $\theta$ est mesuré à $\pm1^\circ$ ? (Environ $\pm3~\%$ à $30^\circ$.)
+
+bilan:
+  - titre: "Résultats"
+    texte: |
+      $V=\sqrt{2gL(1-\cos\theta)}=1{,}62$ m/s ; $v=\dfrac{m+M}mV=326$ m/s ; énergie dissipée $99{,}5~\%$ ; tension juste après le choc $T=(m+M)\Big(g+\dfrac{V^2}L\Big)=25{,}0$ N ; balle qui traverse (sortie à $v/2$) : $V_{\rm bloc}=\dfrac{m(v-v_s)}M$ ; tour complet : fil $V\ge\sqrt{5gL}$, soit $v\ge1408$ m/s ; tige rigide $V\ge2\sqrt{gL}$, soit $v\ge1259$ m/s.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Tension juste après le choc"
+    texte: |
+      Calculer la tension du fil juste après le choc ($\theta=0$ et $V=1{,}62$ m/s) et comparer à la tension d'équilibre $(m+M)g$ : la tension est plus grande à cause de l'accélération centripète $V^2/L$. Pour quelle vitesse la tension double-t-elle ?
+  - niveau: licence
+    titre: "Choc avec la tension impulsive"
+    texte: |
+      Si la balle arrive avec un angle $\alpha$ au-dessus de l'horizontale, le fil est tendu verticalement : il exerce une force impulsive qui s'oppose à la composante verticale de $\vec p$. Montrer que seule la composante horizontale $mv\cos\alpha$ se conserve et que $v=\dfrac{m+M}{m\cos\alpha}V$.
+  - niveau: master
+    titre: "Pendule balistique avec bloc de moment d'inertie"
+    texte: |
+      Pour un pendule rigide de moment d'inertie $J$ et de distance $d$ de l'axe au centre de masse, la conservation du {\bf moment cinétique} par rapport à l'axe donne $mvL=J\omega$ et l'angle maximal vérifie $\tfrac12J\omega^2=(m+M)g\,d\,(1-\cos\theta)$. Comparer au point matériel.
+
+accroche_point_cours_essentiel:
+  - titre: "Mesurer une balle de fusil avec un bloc et un rapporteur"
+    duree_introduction: "3 min"
+    question_d_accroche: |
+      Une balle de $10$ g a une vitesse de plusieurs centaines de m/s : comment la mesurer sans chronomètre rapide ? {\bf En l'arrêtant dans un gros bloc suspendu} et en lisant l'angle : $30^\circ$ suffisent. {\bf Quelle fraction de l'énergie de la balle sert à soulever le bloc ?}
+    texte: |
+      {\bf Idée clé : quantité de mouvement pendant le choc, énergie après.} Seule $\vec p$ est conservée dans le choc mou ; $99{,}5~\%$ de l'énergie est dissipée.
+
+outils_mathematiques:
+  - titre: "Résolution en chaîne"
+    texte: |
+      $v\to V\ (p)\to h\ (E_m)\to\theta$ ; on inverse la chaîne pour remonter de $\theta$ à $v$.
+  - titre: "Lien angle et hauteur"
+    texte: |
+      $\cos\theta=1-h/L$ ; $h=L(1-\cos\theta)$ ; petits angles $h\approx L\theta^2/2$.
+
+liens_autres_disciplines:
+  - discipline: "Histoire des sciences"
+    texte: |
+      Pendule balistique de Robins (1742) puis de Hutton, premières mesures de la vitesse d'un projectile.
+  - discipline: "Armement et sécurité"
+    texte: |
+      Mesure de la vitesse initiale et de l'impulsion d'un projectile ; la quantité de mouvement transmise est plus informative que l'énergie.
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{itemize}
+        \item[(a)] Découper le phénomène en trois phases. Pour chacune, dire quel théorème (ou quelle loi de conservation) s'applique et pourquoi.
+        \item[(b)] Exprimer la vitesse $V$ du système \{bloc $+$ balle\} juste après le choc en fonction de $m$, $M$ et $v$.
+        \item[(c)] Exprimer $V$ en fonction de $L$, $g$ et de l'angle maximal $\theta_{\max}$.
+        \item[(d)] En déduire $v$ en fonction de $m$, $M$, $L$, $g$ et $\theta_{\max}$. Application numérique.
+      \end{itemize}
+    coup_de_pouce: |
+      Pendant le choc, la tension et le poids sont verticaux et le choc est horizontal : $p_x$ conservée. Après le choc, seule la tension (qui ne travaille pas) et le poids interviennent : $E_m$ conservée.
+    correction: |
+      $mv=(m+M)V$ ; $V=\sqrt{2gL(1-\cos\theta_{\max})}$ ; $v=\dfrac{m+M}m\sqrt{2gL(1-\cos\theta_{\max})}\approx326$ m/s.
+    solution:
+      - titre: "(a) Trois phases"
+        texte: |
+          (1) {\bf Avant} : la balle seule, mouvement uniforme (on ne s'y intéresse pas). (2) {\bf Choc mou} (incrustation, durée très courte) : système $\{$balle, bloc$\}$ pseudo-isolé selon l'horizontale ; $p_x$ conservée ; $E_c$ non conservée. (3) {\bf Montée} : le pendule oscille ; forces : poids (conservatif) et tension (perpendiculaire à la vitesse, ne travaille pas) : $E_m$ conservée.
+      - titre: "(b) Choc"
+        texte: |
+          $$mv=(m+M)V\ \Rightarrow\ \boxed{V=\frac{m}{m+M}\,v}.$$
+      - titre: "(c) Montée"
+        texte: |
+          $\tfrac12(m+M)V^2=(m+M)g\,L(1-\cos\theta_{\max})$ (la hauteur gagnée est $h=L-L\cos\theta_{\max}$) :
+          $$\boxed{V=\sqrt{2gL(1-\cos\theta_{\max})}}.$$
+      - titre: "(d) Vitesse de la balle"
+        texte: |
+          $$\boxed{v=\frac{m+M}{m}\sqrt{2gL\,(1-\cos\theta_{\max})}}.$$
+          Numériquement : $1-\cos30^\circ=0{,}1340$, $V=\sqrt{2\times9{,}81\times1{,}00\times0{,}1340}=1{,}62$ m/s, $v=\dfrac{2{,}01}{0{,}010}\times1{,}62\approx\boxed{326~\mathrm{m/s}}\ (\approx1\,170~\mathrm{km/h})$ : ordre de grandeur d'une balle de fusil. Petits angles : $v\approx\dfrac{m+M}m\theta\sqrt{gL}$ ; pour $\theta=30^\circ=0{,}524$ rad on aurait $330$ m/s (écart $1~\%$).
+
+  - id: q2
+    enonce: |
+      \begin{itemize}
+        \item[(e)] Calculer l'énergie cinétique de la balle avant le choc, l'énergie du système après le choc et la fraction d'énergie dissipée. Montrer que cette fraction vaut $\dfrac M{m+M}$ et commenter.
+        \item[(f)] Calculer la tension du fil juste après le choc. La comparer à $(m+M)g$.
+        \item[(g)] La balle {\bf traverse} maintenant le bloc et ressort à $v_s=v/2$ (sans changer de direction) ; le bloc de masse $M$ s'élève alors de $\theta'$. Exprimer $\theta'$ et calculer-le (avec $v=326$ m/s).
+      \end{itemize}
+    coup_de_pouce: |
+      (e) $E_{c,i}=\tfrac12mv^2$, $E_{c,f}=\tfrac12(m+M)V^2=\dfrac{m}{m+M}E_{c,i}$. (f) Newton selon la verticale en $\theta=0$ : $T-(m+M)g=(m+M)V^2/L$. (g) Conservation de $p$ : $mv=mv_s+MV'$.
+    correction: |
+      (e) $E_{c,i}=532$ J, $E_{c,f}=2{,}6$ J, perte $99{,}5~\%=\dfrac M{m+M}$ ; (f) $T=25{,}0$ N $>(m+M)g=19{,}7$ N ; (g) $V'=\dfrac{m(v-v_s)}M=0{,}815$ m/s, $\theta'=14{,}9^\circ$.
+    solution:
+      - titre: "(e) Bilan d'énergie du choc"
+        texte: |
+          $E_{c,i}=\tfrac12mv^2=\tfrac12\times0{,}010\times326^2=532~\mathrm J$. Après : $E_{c,f}=\tfrac12(m+M)V^2=\tfrac12\times2{,}01\times1{,}62^2\approx2{,}64~\mathrm J$. Avec $V=\dfrac m{m+M}v$ :
+          $$E_{c,f}=\tfrac12(m+M)\frac{m^2}{(m+M)^2}v^2=\frac m{m+M}\,E_{c,i}\ \Rightarrow\ \frac{E_{c,i}-E_{c,f}}{E_{c,i}}=\boxed{\frac M{m+M}}=0{,}995.$$
+          {\bf Commentaire} : $99{,}5~\%$ de l'énergie est dissipée (échauffement, déformation). La plus grande partie de l'énergie de la balle ne sert pas à faire monter le bloc ; c'est la quantité de mouvement qui « passe ».
+      - titre: "(f) Tension juste après le choc"
+        texte: |
+          Juste après le choc, le fil est vertical, la vitesse horizontale $V$ : mouvement circulaire, $\vec n$ vers le haut (vers le point de suspension). Newton :
+          $$T-(m+M)g=(m+M)\frac{V^2}L\ \Rightarrow\ T=(m+M)\Big(g+\frac{V^2}L\Big)=2{,}01\times(9{,}81+2{,}62)\approx\boxed{25{,}0~\mathrm N},$$
+          contre $(m+M)g=19{,}7$ N à l'équilibre : $27~\%$ de plus.
+      - titre: "(g) Balle qui traverse"
+        texte: |
+          $p_x$ : $mv=mv_s+MV'$, d'où $V'=\dfrac{m(v-v_s)}M=\dfrac{0{,}010\times163}{2{,}0}=0{,}815$ m/s. Montée : $\tfrac12MV'^2=MgL(1-\cos\theta')$, soit $\cos\theta'=1-\dfrac{V'^2}{2gL}=1-0{,}0339$, $\theta'=\boxed{14{,}9^\circ}$. {\bf Piège} : si l'on utilisait la formule du choc mou, on sous-estimerait $v$ ; il faut connaître $v_s$ pour remonter à $v$.
+
+  - id: q3
+    enonce: |
+      \begin{itemize}
+        \item[(h)] Le bloc peut-il faire un tour complet ? Quelle vitesse minimale $v_{\min}$ de la balle faut-il pour que le pendule (fil) fasse un tour complet ? Comparer avec le cas d'une {\bf tige rigide} sans masse. Applications numériques.
+      \end{itemize}
+    coup_de_pouce: |
+      Fil : il faut $T\ge0$ au sommet : $V_{\rm haut}^2\ge gL$, puis conservation de $E_m$ jusqu'au bas ($\Delta z=2L$). Tige : $V_{\rm haut}\ge0$ suffit.
+    correction: |
+      Fil : $V_{\min}=\sqrt{5gL}=7{,}00$ m/s, $v_{\min}=\dfrac{m+M}mV_{\min}\approx1{,}41\times10^3$ m/s ; tige : $V_{\min}=2\sqrt{gL}=6{,}26$ m/s, $v_{\min}\approx1{,}26\times10^3$ m/s.
+    solution:
+      - titre: "(h) Tour complet"
+        texte: |
+          {\bf Fil.} Au sommet, Newton selon $\vec n$ (vers le bas) : $T+(m+M)g=(m+M)\dfrac{V_h^2}L$ ; il faut $T\ge0$, donc $V_h^2\ge gL$. Énergie du bas au sommet : $\tfrac12V^2=\tfrac12V_h^2+2gL\ge\tfrac12gL+2gL$ : $V_{\min}^2=5gL$,
+          $$V_{\min}=\sqrt{5gL}=7{,}00~\mathrm{m/s},\qquad v_{\min}=\frac{m+M}mV_{\min}=201\times7{,}00\approx\boxed{1{,}41\times10^3~\mathrm{m/s}}.$$
+          {\bf Tige rigide} : la tige peut aussi {\bf pousser} : il suffit d'arriver au sommet avec $V_h\ge0$ : $\tfrac12V^2\ge2gL$, soit $V_{\min}=2\sqrt{gL}=6{,}26$ m/s et $v_{\min}=201\times6{,}26\approx\boxed{1{,}26\times10^3~\mathrm{m/s}}$. L'écart ($12~\%$) vient de la condition $T\ge0$ propre au fil. Ces vitesses sont plus de trois fois supérieures à la vitesse du son : un tour complet est irréaliste avec une balle de $10$ g sur un bloc de $2$ kg.

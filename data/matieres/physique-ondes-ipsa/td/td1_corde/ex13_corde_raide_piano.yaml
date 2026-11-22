@@ -1,0 +1,176 @@
+id: td1_ex13
+intitule: "Corde de piano raide : dispersion et inharmonicité"
+td: td1
+facultatif: true
+seance: 1
+cours_rattache:
+  - chap1.equation_dalembert
+  - chap1.modes_propres
+  - chap1.dispersion
+  - chap1.vitesse_phase_groupe
+
+metadonnees:
+  duree_estimee: "50 min"
+  difficulte: 5 # Sur une échelle de 1 à 5
+  priorite: 2
+  type_exercice: "Approfondissement / Problème de synthèse"
+  indispensable: false
+
+enonce_intro: |
+  Une corde de piano en acier (diamètre $d_c=1{,}0$ mm, masse volumique $\rho=7800$ kg/m$^3$, module d'Young
+  $E=2{,}0\times10^{11}$ Pa) de longueur $L=0{,}63$ m est tendue par la force $F$ de façon que sa fréquence fondamentale
+  {\bf idéale} soit $f_0=c/(2L)=261{,}6$ Hz (note $do_3$), avec $c=\sqrt{F/\mu}$. Contrairement à la corde idéale
+  de d'Alembert, une corde métallique épaisse {\bf résiste à la flexion} : en plus de la tension, la corde exerce une force
+  élastique de rappel de flexion. Pour de petits mouvements transversaux, on admet l'équation
+  $$\mu\,\frac{\partial^2y}{\partial t^2}=F\,\frac{\partial^2y}{\partial x^2}-EI\,\frac{\partial^4y}{\partial x^4},\qquad I=\frac{\pi d_c^4}{64},$$
+  où $I$ est le moment quadratique de la section. Les deux extrémités sont {\bf appuyées} : $y=0$ et $\partial_x^2y=0$ en $x=0$ et $x=L$.
+
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi les pianos sont-ils accordés « faux » ?"
+    duree_introduction: "5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Les accordeurs de piano « étirent » volontairement l'accord : les notes aiguës sont accordées un peu plus haut que ce que donnerait le calcul exact par octaves, et les notes graves un peu plus bas. Pourquoi ? Une corde idéale de longueur $L$ a pour fréquences propres $f_n=nf_1$ (tous les harmoniques sont des multiples exacts du fondamental). Une vraie corde de piano a-t-elle le même spectre ? Si les harmoniques d'une note sont décalés vers le haut, que doit faire l'accordeur pour que les octaves « battent » le moins possible ?
+    texte: |
+      {\bf Idée clé : la raideur rend la corde dispersive.} Une onde plane $y=a\cos(\omega t-kx)$ est solution à condition de vérifier une {\bf relation de dispersion} $\omega(k)$ qui n'est plus $\omega=ck$ : ici $\omega^2=c^2k^2\left(1+\dfrac{EI}Fk^2\right)$. La célérité de phase $\omega/k$ dépend de $k$ (les petites longueurs d'onde vont plus vite) et les fréquences propres $f_n$ ne sont plus des multiples exacts de $f_0$ : on parle d'{\bf inharmonicité}. L'écart augmente avec le rang $n$ de l'harmonique ; il est de l'ordre de $\tfrac12Bn^2$, où $B$ est le coefficient d'inharmonicité, d'où les accords « étirés ».
+
+outils_mathematiques:
+  - titre: "Onde plane et relation de dispersion"
+    texte: |
+      Pour une équation linéaire à coefficients constants, injecter $y=\Re\,[\,a\,\mathrm e^{j(\omega t-kx)}]$ transforme $\partial_t\to j\omega$ et $\partial_x\to-jk$ : $\partial_x^2\to-k^2$, $\partial_x^4\to+k^4$, $\partial_t^2\to-\omega^2$. On obtient une équation algébrique $\omega(k)$.
+  - titre: "Vitesses de phase et de groupe"
+    texte: |
+      $v_\varphi=\dfrac\omega k$ (vitesse d'une phase) ; $v_g=\dfrac{\mathrm d\omega}{\mathrm dk}$ (vitesse de propagation de l'énergie et de l'enveloppe d'un paquet d'ondes). Si $\omega=ck$ (non dispersif), $v_\varphi=v_g=c$.
+  - titre: "Développement limité"
+    texte: |
+      $\sqrt{1+\varepsilon}\simeq1+\dfrac\varepsilon2$ pour $\varepsilon\ll1$. Ici $\varepsilon=Bn^2$ avec $B\sim10^{-4}$.
+  - titre: "Cents (musique)"
+    texte: |
+      L'écart entre deux fréquences $f$ et $f'$ en {\bf cents} est $1200\log_2(f'/f)$ ; $100$ cents $=1$ demi-ton ; $\lesssim5$ cents est imperceptible, $\gtrsim10$ cents donne des battements audibles.
+  - titre: "Analyse dimensionnelle"
+    texte: |
+      $[EI]=\mathrm{N\,m^2}$, $[EI/F]=\mathrm m^2$ : $\ell_c=\sqrt{EI/F}$ est une {\bf longueur caractéristique} au-delà de laquelle la raideur est négligeable.
+  - titre: "Moment quadratique d'une section circulaire"
+    texte: |
+      $I=\dfrac{\pi d_c^4}{64}$ : forte dépendance en $d_c^4$ : une corde deux fois plus épaisse est $16$ fois plus raide en flexion.
+
+liens_autres_disciplines:
+  - discipline: "Musique et lutherie"
+    texte: |
+      L'inharmonicité de la corde de piano est responsable de l'accord « étiré » (courbe de Railsback) et d'une partie du timbre caractéristique du piano ; sur une guitare à cordes nylon, elle est beaucoup plus faible.
+  - discipline: "Résistance des matériaux"
+    texte: |
+      Une poutre fléchie obéit à $EI\,\partial_x^4y=q$ ; sa vibration libre ($EI\,\partial_x^4y=-\mu\ddot y$) est dispersive, avec $\omega\propto k^2$. La corde raide est un intermédiaire entre la corde idéale ($\omega\propto k$) et la poutre ($\omega\propto k^2$).
+  - discipline: "Optique et ondes dispersives"
+    texte: |
+      Dans un prisme ou une fibre optique, l'indice dépend de la longueur d'onde : la lumière blanche s'étale. Ici, la vitesse dépend de $k$ : une impulsion se déforme (précurseurs aigus, « chirp »), comme dans les ondes de surface de l'eau.
+  - discipline: "Acoustique musicale et traitement du signal"
+    texte: |
+      Les logiciels d'accordage et de synthèse corrigent l'inharmonicité en décalant la fréquence des partiels : $f_n=nf_0\sqrt{1+Bn^2}$.
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{enumerate}[label=(\alph*)]
+        \item Vérifier l'homogénéité de l'équation donnée. Que devient-elle pour $EI\to0$ ? Pour quelles longueurs d'onde le terme de raideur est-il négligeable ?
+        \item Déterminer la relation de dispersion $\omega(k)$ pour une onde plane $y=\Re\,[a\,\mathrm e^{j(\omega t-kx)}]$. Exprimer la vitesse de phase $v_\varphi(k)$.
+      \end{enumerate}
+    coup_de_pouce:
+      - titre: "Dimensions"
+        texte: |
+          $[\mu\,\partial_t^2y]=\mathrm{kg\,m^{-1}\cdot m\,s^{-2}}=\mathrm{N\,m^{-1}}$ : toutes les densités de force linéique doivent avoir cette dimension.
+      - titre: "Dispersion"
+        texte: |
+          Remplacez $\partial_t^2\to-\omega^2$, $\partial_x^2\to-k^2$, $\partial_x^4\to k^4$ et factorisez par $\mu$.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $\omega^2=c^2k^2\left(1+\dfrac{EI}Fk^2\right)$, $v_\varphi=c\sqrt{1+\dfrac{EI}Fk^2}$. La raideur est négligeable pour $\lambda\gg\lambda_c=2\pi\sqrt{EI/F}$.
+    solution:
+      - titre: "(a) Homogénéité et limite"
+        texte: |
+          $[F\,\partial_x^2y]=\mathrm N\,\mathrm m^{-1}$ $\surd$ ; $[EI\,\partial_x^4y]=\mathrm{N\,m^2}\cdot\mathrm m\cdot\mathrm m^{-4}=\mathrm N\,\mathrm m^{-1}$ $\surd$. Pour $EI\to0$ on retrouve $\mu\ddot y=F\,y''$, l'équation de d'Alembert. Le rapport des deux termes spatiaux est $\dfrac{EI\,k^4}{F\,k^2}=\dfrac{EI}Fk^2$ : la raideur est négligeable pour $k\ll\sqrt{F/(EI)}$, soit $\lambda\gg\lambda_c=2\pi\sqrt{EI/F}$.
+      - titre: "(b) Relation de dispersion"
+        texte: |
+          $-\mu\omega^2=-Fk^2-EI\,k^4$, soit
+          $$\boxed{\omega^2=\frac F\mu k^2\left(1+\frac{EI}Fk^2\right)=c^2k^2\left(1+\frac{EI}Fk^2\right)},\qquad v_\varphi=\frac\omega k=\boxed{c\sqrt{1+\frac{EI}Fk^2}}.$$
+          La vitesse de phase {\bf croît avec $k$} : les composantes de petite longueur d'onde se propagent plus vite que $c$.
+
+  - id: q2
+    enonce: |
+      \begin{enumerate}[label=(\alph*),start=3]
+        \item Montrer que les modes propres s'écrivent $y_n\propto\sin\dfrac{n\pi x}L\cos(\omega_nt+\phi_n)$ et que les fréquences propres sont $f_n=nf_0\sqrt{1+Bn^2}$ avec $B=\dfrac{\pi^2EI}{FL^2}$.
+        \item Établir $f_n\simeq nf_0\left(1+\dfrac{Bn^2}2\right)$ et exprimer l'écart $\Delta_n=1200\log_2\dfrac{f_n}{nf_0}$ en cents.
+      \end{enumerate}
+    coup_de_pouce:
+      - titre: "Conditions aux limites appuyées"
+        texte: |
+          $y=0$ et $y''=0$ en $x=0$ et $x=L$ : essayez $Y(x)=\sin(kx)$ ; $Y''=-k^2Y$ s'annule avec $Y$.
+      - titre: "Valeur de $k_n$"
+        texte: |
+          $\sin(kL)=0\Rightarrow k_n=n\pi/L$. Reportez dans $\omega(k)$ ; $\dfrac{EI}Fk_n^2=Bn^2$.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $k_n=\dfrac{n\pi}L$ ; $f_n=nf_0\sqrt{1+Bn^2}$ avec $B=\dfrac{\pi^2EI}{FL^2}$ ; $\Delta_n\simeq\dfrac{1200}{\ln2}\cdot\dfrac{Bn^2}2\approx866\,Bn^2$ cents.
+    solution:
+      - titre: "(c) Modes propres"
+        texte: |
+          On cherche $y=Y(x)\cos(\omega t+\phi)$ : $Y''''$ et $Y''$ sont proportionnelles à $Y$ si $Y=\sin(kx)$. Les conditions $Y(0)=Y''(0)=0$ sont vérifiées, $Y(L)=Y''(L)=0$ imposent $\sin kL=0$, d'où $k_n=\dfrac{n\pi}L$. La relation de dispersion donne
+          $$\omega_n=c\,k_n\sqrt{1+\frac{EI}Fk_n^2},\qquad f_n=\frac{\omega_n}{2\pi}=\frac{nc}{2L}\sqrt{1+\frac{EI}F\frac{n^2\pi^2}{L^2}}=\boxed{nf_0\sqrt{1+Bn^2}},\quad B=\frac{\pi^2EI}{FL^2}.$$
+          Le fondamental n'est pas modifié à l'ordre $B$ ($f_1=f_0\sqrt{1+B}$), mais les harmoniques s'écartent de plus en plus des multiples de $f_0$ : le spectre n'est plus harmonique.
+      - titre: "(d) Développement et cents"
+        texte: |
+          Pour $Bn^2\ll1$ : $f_n\simeq nf_0\left(1+\dfrac{Bn^2}2\right)$. En cents,
+          $$\Delta_n=1200\log_2\!\left(\frac{f_n}{nf_0}\right)=\frac{1200}{\ln2}\ln\sqrt{1+Bn^2}\simeq\frac{1200}{\ln2}\cdot\frac{Bn^2}2\approx\boxed{866\,B\,n^2\ \text{cents}}.$$
+          L'écart croît comme le {\bf carré du rang} : il est négligeable pour le fondamental, mais audible pour les harmoniques élevés.
+
+  - id: q3
+    enonce: |
+      \begin{enumerate}[label=(\alph*),start=5]
+        \item Calculer $c$, $\mu$, $F$, $I$, $EI$, le coefficient $B$ et la longueur d'onde critique $\lambda_c$. À partir de quel rang $n$ le terme de raideur domine-t-il ($Bn^2\sim1$) ?
+        \item Calculer $f_1$, $f_2$, $f_5$, $f_{10}$ et les écarts correspondants en cents.
+        \item Montrer que la vitesse de groupe est $v_g=c\,\dfrac{1+2\kappa k^2}{\sqrt{1+\kappa k^2}}$ avec $\kappa=EI/F$. La calculer pour $n=10$ et la comparer à $c$ et à $v_\varphi$.
+        \item Expliquer pourquoi l'accordeur doit « étirer » l'accord : quelle note doit-il choisir pour la note située une octave au-dessus de $do_3$ si la $2^{\text{e}}$ harmonique de $do_3$ est à $f_2$ ?
+      \end{enumerate}
+    coup_de_pouce:
+      - titre: "Chaîne de calculs"
+        texte: |
+          $c=2Lf_0$ ; $\mu=\rho\pi d_c^2/4$ ; $F=\mu c^2$ ; $I=\pi d_c^4/64$ ; $B=\pi^2EI/(FL^2)$ ; $n_B=1/\sqrt B$.
+      - titre: "Vitesse de groupe"
+        texte: |
+          $\omega=ck\sqrt{1+\kappa k^2}$ : dérivez par rapport à $k$ (dérivée d'un produit).
+    correction:
+      - titre: "Résultats"
+        texte: |
+          $c\approx330$ m/s, $\mu\approx6{,}13$ g/m, $F\approx666$ N, $EI\approx9{,}8\times10^{-3}$ N·m², $B\approx3{,}7\times10^{-4}$, $\lambda_c\approx2{,}4$ cm, $n_B\approx52$. $\Delta_2\approx1{,}3$, $\Delta_5\approx8$, $\Delta_{10}\approx31$ cents. $v_g(n=10)\approx1{,}054\,c$.
+    solution:
+      - titre: "(e) Données et coefficient d'inharmonicité"
+        texte: |
+          $c=2Lf_0=2\times0{,}63\times261{,}6\approx330$ m/s. $\mu=\rho\dfrac{\pi d_c^2}4=7800\times7{,}85\times10^{-7}\approx6{,}13\times10^{-3}$ kg/m. $F=\mu c^2\approx666$ N (valeur réaliste : une corde de piano supporte $\sim700$ N). $I=\dfrac{\pi(10^{-3})^4}{64}\approx4{,}9\times10^{-14}$ m$^4$, $EI\approx9{,}8\times10^{-3}$ N·m$^2$.
+          $$B=\frac{\pi^2EI}{FL^2}=\frac{9{,}87\times9{,}8\times10^{-3}}{666\times0{,}397}\approx3{,}7\times10^{-4}.$$
+          $\lambda_c=2\pi\sqrt{EI/F}=2\pi\sqrt{1{,}47\times10^{-5}}\approx2{,}4$ cm. $Bn^2\sim1$ pour $n\approx1/\sqrt B\approx52$ ; ce rang correspond à $\lambda_n=2L/n=2{,}4$ cm : cohérent avec $\lambda_c$.
+      - titre: "(f) Fréquences et écarts"
+        texte: |
+          $f_n=nf_0\sqrt{1+3{,}7\times10^{-4}\,n^2}$. $n=1$ : $261{,}6\times1{,}00018=261{,}7$ Hz ($0{,}3$ cent). $n=2$ : $523{,}2\times1{,}00073=523{,}6$ Hz ($1{,}3$ cent). $n=5$ : $1308\times1{,}0046=1314$ Hz ($7{,}9$ cents). $n=10$ : $2616\times1{,}0182=2664$ Hz ($31$ cents). Les écarts valent $866Bn^2$ cents ($0{,}3$, $1{,}3$, $8$, $32$ cents) : le $10^{\text{e}}$ harmonique est environ un {\bf tiers de demi-ton plus haut} que le multiple idéal : parfaitement audible.
+      - titre: "(g) Vitesse de groupe"
+        texte: |
+          $\omega=ck\sqrt{1+\kappa k^2}$ avec $\kappa=EI/F$ :
+          $$v_g=\frac{\mathrm d\omega}{\mathrm dk}=c\left[\sqrt{1+\kappa k^2}+\frac{\kappa k^2}{\sqrt{1+\kappa k^2}}\right]=\boxed{c\,\frac{1+2\kappa k^2}{\sqrt{1+\kappa k^2}}}.$$
+          Pour $n=10$, $\kappa k^2=Bn^2=0{,}0367$ : $v_\varphi=c\sqrt{1,0367}\approx1{,}018\,c$ et $v_g=c\,\dfrac{1{,}0734}{1{,}0182}\approx1{,}054\,c$. Les deux dépassent $c$ ; $v_g\simeq c(1+\tfrac32\kappa k^2)>v_\varphi\simeq c(1+\tfrac12\kappa k^2)$. Une impulsion frappée par le marteau se disperse : les aigus arrivent en avance (« précurseur » aigu).
+      - titre: "(h) Conséquence pour l'accord"
+        texte: |
+          Le $2^{\text{e}}$ partiel de $do_3$ est à $f_2=523{,}6$ Hz, un peu plus haut que $2f_0=523{,}2$ Hz, fréquence « idéale » de $do_4$. Si l'accordeur accorde $do_4$ sur $2f_0$, le battement entre le partiel de $do_3$ et le fondamental de $do_4$ est $\Delta f\approx0{,}4$ Hz ; pour l'annuler, il {\bf monte} $do_4$ à $f_2$. De proche en proche, chaque octave est élargie : par rapport au milieu du clavier, les notes aiguës sont accordées de plus en plus haut et les graves de plus en plus bas. C'est l'{\bf accord étiré} : l'accordeur préfère des octaves légèrement « fausses » mais sans battements.
+
+    aller_plus_loin:
+      - niveau: prepa
+        titre: "Effet de l'épaisseur"
+        texte: |
+          Pour une même note, $B\propto d_c^4/(FL^2)$. Pourquoi les pianos droits (cordes plus courtes, $L$ plus petit) sont-ils plus inharmoniques que les pianos à queue ? Pourquoi les cordes graves sont-elles {\bf filées} (un fil central fin entouré d'un enroulement de cuivre) au lieu d'être simplement plus épaisses ?
+      - niveau: licence
+        titre: "Conditions aux limites encastrées"
+        texte: |
+          Pour une corde {\bf encastrée} ($y=0$, $y'=0$), les modes ne sont plus des sinus purs : ils présentent une couche limite de largeur $\sqrt{EI/F}$ près des extrémités. Montrer qu'à l'ordre un, $f_n\simeq nf_0\left(1+\dfrac2{\pi}\dfrac{\ell_c}{L}+\dots\right)\sqrt{1+Bn^2}$ avec $\ell_c=\sqrt{EI/F}$.
+      - niveau: master
+        titre: "Propagation d'une impulsion dispersive"
+        texte: |
+          Pour une impulsion de largeur spectrale $\Delta k$, la distance $z$ au bout de laquelle elle s'élargit significativement est $z\sim\dfrac{1}{\Delta k^2\,|\omega''(k)|}$ avec $\omega''=\mathrm d^2\omega/\mathrm dk^2$. Calculer $\omega''(k)$ pour la corde raide, discuter la forme du « chirp » entendu après un impact (son aigu qui précède le grave) et comparer avec les ondes de surface de l'eau ($\omega^2=gk$).

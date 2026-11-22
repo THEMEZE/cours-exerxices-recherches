@@ -1,0 +1,129 @@
+id: td7_ex1
+intitule: "Vitesse d'entraînement"
+td: td7
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - cinematique.composition_des_vitesses
+  - cinematique.composition_des_accelerations
+  - referentiels.referentiel_galileen
+
+metadonnees:
+  duree_estimee: "20 min"
+  difficulte: 2
+  type_exercice: "Cours actif / Application directe"
+  indispensable: true
+
+enonce_intro: |
+  Les coordonnées d'une particule $M$ dans un référentiel $\mathcal R$ muni du repère $(O,\vec i,\vec j,\vec k)$ sont $x(t)=t^2-4t+1$, $y(t)=-2t^4$, $z(t)=3t^2$. Dans un second référentiel $\mathcal R'$ muni du repère $(O',\vec i,\vec j,\vec k)$ (mêmes vecteurs de base), elles valent $x'(t)=t^2+t+2$, $y'(t)=-2t^4+5$, $z'(t)=3t^2-7$ (unités SI).
+
+prerequis:
+  - titre: "Relation de Chasles"
+    texte: |
+      $\overrightarrow{OM}=\overrightarrow{OO'}+\overrightarrow{O'M}$.
+  - titre: "Dérivée d'un vecteur"
+    texte: |
+      Si la base $(\vec i,\vec j,\vec k)$ est la même (et fixe dans $\mathcal R$) pour les deux repères, la dérivation se fait composante par composante : $\vec v=\dot x\,\vec i+\dot y\,\vec j+\dot z\,\vec k$.
+  - titre: "Composition des vitesses et accélérations"
+    texte: |
+      $\vec v_a=\vec v_r+\vec v_e$ ; $\vec a_a=\vec a_r+\vec a_e+\vec a_c$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Déterminer le mouvement de $\\mathcal R'$ par rapport à $\\mathcal R$"
+    texte: |
+      Savoir retrouver $\overrightarrow{OO'}(t)$ à partir de deux jeux de coordonnées d'un même point, en déduire $\vec v_e$, et conclure sur la nature du référentiel (translation rectiligne uniforme).
+  - titre: "Comparer accélérations dans deux référentiels"
+    texte: |
+      Savoir que l'accélération est la même dans deux référentiels en translation rectiligne uniforme l'un par rapport à l'autre (invariance galiléenne).
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Un exercice « d'échauffement » qui pose le vocabulaire"
+    texte: |
+      Premier contact avec $\vec v_e$ (vitesse d'entraînement) et $\vec a_e$. Insister sur le fait que $\mathcal R'$ ne tourne pas ($\vec i,\vec j,\vec k$ communs) : le mouvement de $\mathcal R'$ se réduit à celui de l'origine $O'$. On met en évidence l'{\bf invariance galiléenne} de l'accélération, qui sera perdue dès qu'il y aura une rotation (ex. 3 et 4).
+
+point_cours:
+  - titre: "Translation de $\\mathcal R'$ par rapport à $\\mathcal R$"
+    texte: |
+      Si $\mathcal R'$ garde les mêmes directions d'axes, $\vec\Omega=\vec0$ : $\vec v_e=\vec v_{O'/\mathcal R}=\dfrac{\mathrm d\overrightarrow{OO'}}{\mathrm dt}$, $\vec a_e=\vec a_{O'/\mathcal R}$, $\vec a_c=\vec0$. Si de plus $\vec v_{O'}$ est constante, $\mathcal R'$ est galiléen quand $\mathcal R$ l'est.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Chercher $\\vec v_e$ en dérivant $\\overrightarrow{O'M}$"
+    texte: |
+      Le terme à dériver est $\overrightarrow{OO'}$ (mouvement de l'origine), pas $\overrightarrow{O'M}$ (qui donne $\vec v_r$).
+  - titre: "Se tromper de signe sur $\\overrightarrow{OO'}$"
+    texte: |
+      $\overrightarrow{OO'}=\overrightarrow{OM}-\overrightarrow{O'M}$ : différence {\bf (non primée) $-$ (primée)}. Les coordonnées de $\overrightarrow{OO'}$ sont donc $x-x'$, etc.
+  - titre: "Oublier de conclure"
+    texte: |
+      La question (b) demande une {\bf conclusion} : l'accélération est la même dans $\mathcal R$ et $\mathcal R'$ parce que $\vec v_e$ est constante.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Relier au vécu"
+    texte: |
+      Un train qui roule à vitesse constante : une balle lâchée tombe verticalement dans le train comme dans un ascenseur à l'arrêt. C'est le principe de relativité de Galilée.
+  - titre: "Variante"
+    texte: |
+      Demander ce qui change si $x'(t)=t^2+t^2+2$ (accélération de $\mathcal R'$).
+
+bilan:
+  - titre: "Résultat"
+    texte: |
+      $\overrightarrow{OO'}=(-5t-1)\vec i-5\,\vec j+7\,\vec k$, $\vec v_e=-5\,\vec i$ (constante), $\vec a_e=\vec0$ : $\mathcal R'$ est en translation rectiligne uniforme par rapport à $\mathcal R$ ; $\vec a_a=\vec a_r=2\vec i-24t^2\vec j+6\vec k$.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Principe de relativité"
+    texte: |
+      Vérifier que le principe fondamental $m\vec a=\vec F$ a la même forme dans $\mathcal R$ et $\mathcal R'$ ; que devient la quantité de mouvement ? l'énergie cinétique ($E_c'=E_c+\ldots$) ?
+  - niveau: licence
+    titre: "Transformation de Galilée"
+    texte: |
+      Écrire la transformation $x'=x-Vt$, $t'=t$ et vérifier que les lois de la mécanique newtonienne sont invariantes ; discuter pourquoi elle est incompatible avec l'électromagnétisme (Lorentz).
+  - niveau: master
+    titre: "Groupe de Galilée"
+    texte: |
+      Dénombrer les 10 paramètres du groupe de Galilée (3 translations d'espace, 1 de temps, 3 rotations, 3 boosts) et lien avec les lois de conservation (Noether).
+
+accroche_point_cours_essentiel:
+  - titre: "Une balle lâchée dans un train qui roule"
+    duree_introduction: "3 min"
+    question_d_accroche: |
+      Dans un train qui roule à vitesse constante, une balle tombe-t-elle au pied du lanceur ? Et si le train freine ?
+    texte: |
+      {\bf Idée clé : deux référentiels en translation rectiligne uniforme sont équivalents} pour la mécanique newtonienne.
+
+outils_mathematiques:
+  - titre: "Dérivation de polynômes"
+    texte: |
+      $\dfrac{\mathrm d}{\mathrm dt}(t^n)=nt^{n-1}$.
+
+liens_autres_disciplines:
+  - discipline: "Relativité"
+    texte: |
+      Transformation de Galilée vs de Lorentz ; principe de relativité d'Einstein.
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{itemize}
+        \item[(a)] Déterminer la vitesse d'entraînement de $\mathcal R'$ par rapport à $\mathcal R$.
+        \item[(b)] Déterminer les accélérations dans les deux repères. Conclusion.
+      \end{itemize}
+    coup_de_pouce: |
+      Utiliser $\overrightarrow{OM}=\overrightarrow{OO'}+\overrightarrow{O'M}$ pour exprimer $\overrightarrow{OO'}$, puis dériver. Pour (b), dériver deux fois chaque jeu de coordonnées.
+    correction: |
+      (a) $\overrightarrow{OO'}=(-5t-1)\vec i-5\vec j+7\vec k$ ; $\vec v_e=-5\vec i$ (constante). (b) $\vec a=\vec a'=2\vec i-24t^2\vec j+6\vec k$ ; $\mathcal R'$ est en translation rectiligne uniforme : l'accélération est invariante.
+    solution:
+      - titre: "(a) Vitesse d'entraînement"
+        texte: |
+          Les deux repères ont les mêmes vecteurs de base : $\mathcal R'$ est en {\bf translation} par rapport à $\mathcal R$ ($\vec\Omega=\vec0$), donc $\vec v_e=\dfrac{\mathrm d\overrightarrow{OO'}}{\mathrm dt}$. Or
+          $$\overrightarrow{OO'}=\overrightarrow{OM}-\overrightarrow{O'M}=(x-x')\vec i+(y-y')\vec j+(z-z')\vec k,$$
+          avec $x-x'=(t^2-4t+1)-(t^2+t+2)=-5t-1$, $y-y'=-2t^4-(-2t^4+5)=-5$, $z-z'=3t^2-(3t^2-7)=7$. Donc
+          $$\overrightarrow{OO'}=(-5t-1)\vec i-5\vec j+7\vec k\ \Rightarrow\ \boxed{\vec v_e=-5\,\vec i}\ \ ({\rm m\cdot s^{-1}}).$$
+          Vérification par composition : $\vec v_a=(2t-4)\vec i-8t^3\vec j+6t\vec k$, $\vec v_r=(2t+1)\vec i-8t^3\vec j+6t\vec k$ ; $\vec v_a-\vec v_r=-5\vec i$ $\surd$.
+      - titre: "(b) Accélérations et conclusion"
+        texte: |
+          $\vec a_a=\ddot x\,\vec i+\ddot y\,\vec j+\ddot z\,\vec k=2\vec i-24t^2\vec j+6\vec k$ et $\vec a_r=\ddot x'\vec i+\ddot y'\vec j+\ddot z'\vec k=2\vec i-24t^2\vec j+6\vec k$.
+          Donc $\vec a_a=\vec a_r$ : en effet $\vec a_e=\dfrac{\mathrm d\vec v_e}{\mathrm dt}=\vec0$ et $\vec a_c=\vec0$ ($\vec\Omega=\vec0$).
+          {\bf Conclusion} : $\mathcal R'$ est en {\bf translation rectiligne uniforme} (vitesse $-5\vec i$) par rapport à $\mathcal R$ ; si $\mathcal R$ est galiléen, $\mathcal R'$ l'est aussi, et l'accélération (donc le principe fondamental) est {\bf invariante}.

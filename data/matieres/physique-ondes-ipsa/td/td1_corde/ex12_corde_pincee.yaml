@@ -1,0 +1,179 @@
+id: td1_ex12
+intitule: "Corde pincée : timbre, harmoniques absents et énergie des modes"
+td: td1
+facultatif: true
+seance: 1
+cours_rattache:
+  - chap1.modes_propres
+  - chap1.conditions_initiales
+  - chap1.solution_dalembert
+  - chap1.energie_corde
+
+metadonnees:
+  duree_estimee: "55 min"
+  difficulte: 5 # Sur une échelle de 1 à 5
+  priorite: 2
+  type_exercice: "Approfondissement / Problème de synthèse"
+  indispensable: false
+
+enonce_intro: |
+  Une corde de guitare de longueur $L$, de masse linéique $\mu$, tendue avec la force $F$ ($c=\sqrt{F/\mu}$), est
+  fixée à ses deux extrémités $y(0,t)=y(L,t)=0$. À $t=0$, on la pince en $x=d$ ($0<d<L$) en l'écartant d'une hauteur $h\ll L$
+  de sorte que son profil est formé de deux segments de droite, puis on la lâche {\bf sans vitesse initiale} :
+  $$y(x,0)=\begin{cases}h\,\dfrac xd & 0\le x\le d\\[2mm] h\,\dfrac{L-x}{L-d} & d\le x\le L\end{cases},\qquad\partial_ty(x,0)=0.$$
+  On note $\beta=d/L$, $\omega_n=n\pi c/L$ et $f_1=c/(2L)$.
+
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi une guitare pincée près du chevalet sonne-t-elle plus « métallique » ?"
+    duree_introduction: "5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Un guitariste peut pincer la même corde près de la rosace (au milieu) ou tout près du chevalet. La {\bf hauteur} de la note est la même, mais le {\bf timbre} change nettement : plus rond au milieu, plus brillant et nasillard près du chevalet. Que change-t-on exactement dans la vibration ? Existe-t-il des endroits où l'on peut pincer pour « supprimer » un harmonique ?
+    texte: |
+      {\bf Idée clé : la forme initiale fixe le poids de chaque mode propre.} La solution générale d'une corde fixée aux deux bouts est la superposition de ses modes,
+      $$y(x,t)=\sum_{n\ge1}\big(A_n\cos\omega_nt+B_n\sin\omega_nt\big)\sin\frac{n\pi x}L,\qquad\omega_n=n\omega_1,$$
+      et les conditions initiales ($y(x,0)$ et $\partial_ty(x,0)$) déterminent les $A_n$ et $B_n$ par {\bf projection} sur les modes (orthogonalité des $\sin$). La hauteur de la note est donnée par $f_1$ ; le {\bf timbre} par les amplitudes relatives des harmoniques. Comme tous les $\omega_n$ sont multiples de $\omega_1$, le mouvement est {\bf périodique} de période $T=2L/c$.
+
+outils_mathematiques:
+  - titre: "Orthogonalité des modes"
+    texte: |
+      $\displaystyle\int_0^L\sin\frac{n\pi x}L\sin\frac{m\pi x}L\,\mathrm dx=\frac L2\,\delta_{nm}$. Si $y(x,0)=\sum_nA_n\sin\frac{n\pi x}L$, alors $A_n=\dfrac2L\displaystyle\int_0^Ly(x,0)\sin\frac{n\pi x}L\,\mathrm dx$.
+  - titre: "Intégration par parties répétée et dérivée seconde au sens des distributions"
+    texte: |
+      Si $g(0)=g(L)=0$, alors $\displaystyle\int_0^Lg(x)\sin(ax)\,\mathrm dx=-\frac1{a^2}\int_0^Lg''(x)\sin(ax)\,\mathrm dx$ (deux intégrations par parties, avec $\sin''=-a^2\sin$). Pour un profil triangulaire, $g''$ n'est nulle qu'en $x=d$ : c'est une impulsion $-\dfrac{hL}{d(L-d)}\,\delta(x-d)$, dont l'effet est lu directement sur la valeur du sinus en $d$.
+  - titre: "Somme de série utile"
+    texte: |
+      $\displaystyle\sum_{n=1}^{\infty}\frac{\sin^2(n\theta)}{n^2}=\frac{\theta(\pi-\theta)}2$ pour $0\le\theta\le\pi$. Permet de vérifier que la somme des énergies modales redonne l'énergie initiale.
+  - titre: "Énergie d'un mode"
+    texte: |
+      Pour $y=b\sin(kx)\cos(\omega t)$, l'énergie cinétique maximale est $\tfrac12\mu\omega^2b^2\int_0^L\sin^2=\tfrac14\mu L\omega^2b^2$, égale à l'énergie totale du mode : $E_n=\tfrac14\mu L\,\omega_n^2b_n^2$.
+  - titre: "Énergie potentielle d'une corde déformée"
+    texte: |
+      $E_p=\dfrac F2\displaystyle\int_0^L\left(\frac{\partial y}{\partial x}\right)^2\mathrm dx$ pour de petits écarts. À $t=0$ la corde est immobile : toute l'énergie est potentielle.
+  - titre: "Valeurs remarquables de $\\sin(n\\pi\\beta)$"
+    texte: |
+      Si $\beta=1/m$ ($m$ entier), $\sin(n\pi/m)=0$ pour $n$ multiple de $m$ : les harmoniques de rang $m,2m,\dots$ sont absents.
+
+liens_autres_disciplines:
+  - discipline: "Musique et lutherie"
+    texte: |
+      Le point de pincement (ou de frappe pour un piano, de passage de l'archet pour un violon) est choisi pour favoriser ou éliminer certains harmoniques : un marteau de piano frappe à environ $1/8$ de la longueur pour atténuer le $7^{\text{e}}$ harmonique, dissonant.
+  - discipline: "Traitement du signal"
+    texte: |
+      Les coefficients $b_n$ sont les coefficients de Fourier (série en sinus) du profil initial ; le spectre de raies d'un signal périodique de période $T$ a pour fréquences $nf_1$. Un profil à pente discontinue donne des coefficients en $1/n^2$.
+  - discipline: "Synthèse sonore"
+    texte: |
+      Synthèse additive : on construit un son en sommant des sinusoïdes de fréquences $nf_1$ et d'amplitudes $b_n$ ; le modèle de la corde pincée (algorithme de Karplus-Strong) est à la base de la synthèse de sons de guitare en temps réel.
+  - discipline: "Mathématiques"
+    texte: |
+      Séries de Fourier, problème de Sturm-Liouville, phénomène de Gibbs, distributions (dérivée seconde d'une fonction affine par morceaux).
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{enumerate}[label=(\alph*)]
+        \item Justifier la forme $y(x,t)=\sum_n(A_n\cos\omega_nt+B_n\sin\omega_nt)\sin\dfrac{n\pi x}L$ et montrer que la condition $\partial_ty(x,0)=0$ impose $B_n=0$ pour tout $n$.
+        \item Établir l'expression de $A_n=b_n$ en fonction de $h$, $L$, $\beta$ et $n$ (on pourra dériver deux fois le profil initial).
+      \end{enumerate}
+    coup_de_pouce:
+      - titre: "Séparation des variables"
+        texte: |
+          Cherchez $y=X(x)\,\Theta(t)$ dans l'équation de d'Alembert ; les conditions $X(0)=X(L)=0$ imposent $X\propto\sin(n\pi x/L)$.
+      - titre: "Dérivée seconde du profil"
+        texte: |
+          La pente passe de $h/d$ à $-h/(L-d)$ en $x=d$ : $y''(x,0)=-\dfrac{hL}{d(L-d)}\,\delta(x-d)$. Utilisez $\int g\sin(ax)=-\dfrac1{a^2}\int g''\sin(ax)$ avec $a=n\pi/L$.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $B_n=0$ et $\boxed{b_n=\dfrac{2h}{\pi^2\beta(1-\beta)}\,\dfrac{\sin(n\pi\beta)}{n^2}}$.
+    solution:
+      - titre: "(a) Modes et conditions initiales"
+        texte: |
+          La séparation $y=X(x)\Theta(t)$ conduit à $X''+k^2X=0$ et $\Theta''+\omega^2\Theta=0$ avec $\omega=ck$ ; avec $X(0)=X(L)=0$, on trouve $X_n=\sin(k_nx)$, $k_n=n\pi/L$, $\omega_n=n\pi c/L$. L'équation étant linéaire, la solution générale est la somme sur $n$ avec $\Theta_n=A_n\cos\omega_nt+B_n\sin\omega_nt$. Alors $\partial_ty(x,0)=\sum_nB_n\omega_n\sin\frac{n\pi x}L=0$ pour tout $x$, et par orthogonalité des sinus, $B_n\omega_n=0$ donc $B_n=0$.
+      - titre: "(b) Coefficients $b_n$"
+        texte: |
+          $y(x,0)=\sum_nb_n\sin(a x)$ avec $a=n\pi/L$ donne $b_n=\dfrac2L\displaystyle\int_0^Ly_0(x)\sin(ax)\,\mathrm dx$. Comme $y_0(0)=y_0(L)=0$, deux intégrations par parties donnent
+          $$b_n=-\frac2{La^2}\int_0^Ly_0''(x)\sin(ax)\,\mathrm dx=\frac2{La^2}\cdot\frac{hL}{d(L-d)}\sin(ad)=\frac{2h\,\sin(n\pi d/L)}{a^2\,d\,(L-d)}.$$
+          Avec $a^2=n^2\pi^2/L^2$ et $d(L-d)=L^2\beta(1-\beta)$ :
+          $$\boxed{b_n=\frac{2h}{\pi^2\beta(1-\beta)}\,\frac{\sin(n\pi\beta)}{n^2}}.$$
+          {\bf Vérification} : pour $\beta=\tfrac12$ et $n=1$, $b_1=\dfrac{8h}{\pi^2}\approx0{,}81\,h$, valeur classique du mode fondamental d'une corde pincée en son milieu.
+
+  - id: q2
+    enonce: |
+      \begin{enumerate}[label=(\alph*),start=3]
+        \item Pincement au milieu ($\beta=1/2$) : quels harmoniques sont présents ? Comment décroissent leurs amplitudes ? Que se passe-t-il pour $\beta=1/3$ ? Pour $\beta=1/5$ ?
+        \item Pincement près du chevalet ($\beta\ll1$) : montrer que $|b_n|\simeq\dfrac{2h}{\pi n}$ tant que $n\beta\ll1$. Interpréter qualitativement le timbre « brillant ».
+        \item Montrer que la corde est périodique, de période $T=2L/c$, et que $y(x,T/2)=-y(L-x,0)$. Décrire le mouvement avec la solution de d'Alembert : à $t=0^+$, de quoi est composé le signal ?
+      \end{enumerate}
+    coup_de_pouce:
+      - titre: "Harmoniques absents"
+        texte: |
+          $b_n=0$ si $\sin(n\pi\beta)=0$, c'est-à-dire si $n\beta$ est entier.
+      - titre: "Petits $\\beta$"
+        texte: |
+          Pour $n\beta\ll1$, $\sin(n\pi\beta)\simeq n\pi\beta$ et $1-\beta\simeq1$.
+      - titre: "Solution de d'Alembert"
+        texte: |
+          Prolongez $y_0$ à $\mathbb R$ de façon impaire et $2L$-périodique : $y(x,t)=\tfrac12\big[f(x-ct)+f(x+ct)\big]$. Chaque morceau de profil se divise en deux demi-profils qui se propagent en sens opposés.
+    correction:
+      - titre: "Résumé"
+        texte: |
+          $\beta=\tfrac12$ : seuls les harmoniques impairs, $b_n=\dfrac{8h}{\pi^2}\dfrac{(-1)^{(n-1)/2}}{n^2}$ ; $\beta=\tfrac13$ : $n=3,6,9,\dots$ absents ; $\beta=\tfrac15$ : $n=5,10,\dots$ absents. Près du chevalet, $|b_n|\simeq2h/(\pi n)$ décroît lentement : spectre riche. $y(x,T/2)=-y_0(L-x)$.
+    solution:
+      - titre: "(c) Milieu, tiers et cinquième"
+        texte: |
+          Pour $\beta=\tfrac12$ : $\sin(n\pi/2)=0$ si $n$ pair, $=(-1)^{(n-1)/2}$ si $n$ impair, donc $b_n=\dfrac{8h}{\pi^2}\dfrac{(-1)^{(n-1)/2}}{n^2}$ (n impair) : les harmoniques de rang pair sont {\bf absents} et les impairs décroissent en $1/n^2$ : son « rond ». Le fait que le milieu soit un ventre pour les modes impairs et un nœud pour les modes pairs l'explique : on ne peut pas exciter un mode en pinçant en l'un de ses {\bf nœuds}. Pour $\beta=\tfrac13$, le point de pincement est un nœud des modes $n=3,6,9,\dots$ qui sont donc absents ; pour $\beta=\tfrac15$, ceux de rang $5,10,\dots$.
+      - titre: "(d) Pincement près du chevalet"
+        texte: |
+          Pour $n\beta\ll1$ : $b_n\simeq\dfrac{2h}{\pi^2\beta}\dfrac{n\pi\beta}{n^2}=\dfrac{2h}{\pi n}$. Les amplitudes décroissent {\bf seulement en $1/n$} jusqu'à $n\sim1/\beta$, puis en $1/n^2$ : beaucoup d'harmoniques élevés sont présents. À l'oreille, un spectre riche en aigus donne un son « brillant, nasillard » ; pincer au milieu, un spectre dominé par le fondamental, un son « rond ».
+      - titre: "(e) Périodicité et solution de d'Alembert"
+        texte: |
+          Comme $\omega_n=n\omega_1$, $y(x,t+T)=y(x,t)$ avec $T=2\pi/\omega_1=2L/c$. À $t=T/2$, $\cos(n\omega_1T/2)=\cos(n\pi)=(-1)^n$ et $(-1)^n\sin\frac{n\pi x}L=-\sin\frac{n\pi(L-x)}L$, donc $y(x,T/2)=-y_0(L-x)$ : le triangle est {\bf renversé et retourné} (image en miroir par rapport à $x=L/2$ et par rapport à l'axe). Avec d'Alembert, $y(x,t)=\tfrac12[f(x-ct)+f(x+ct)]$ où $f$ est le prolongement impair $2L$-périodique de $y_0$ : à $t=0^+$, le triangle de hauteur $h$ se scinde en deux triangles de hauteur $h/2$, qui s'écartent à la vitesse $c$ ; ils se réfléchissent aux extrémités fixes (avec changement de signe) et se recombinent.
+
+  - id: q3
+    enonce: |
+      \begin{enumerate}[label=(\alph*),start=6]
+        \item Calculer l'énergie initiale $E_0$ de la corde en fonction de $F$, $h$, $L$ et $\beta$.
+        \item Exprimer l'énergie $E_n$ du mode $n$. Montrer que $\sum_nE_n=E_0$. Quelle est la proportion d'énergie dans chaque mode ?
+        \item Application : $L=0{,}65$ m, $f_1=110$ Hz, $\mu=5{,}0$ g/m, $h=3{,}0$ mm, $\beta=1/5$. Calculer $c$, $F$, $T$, $E_0$, les amplitudes $b_1,\dots,b_5$ et la part d'énergie dans les quatre premiers modes. Comparer avec le pincement au milieu.
+      \end{enumerate}
+    coup_de_pouce:
+      - titre: "Énergie initiale"
+        texte: |
+          $E_0=\dfrac F2\displaystyle\int_0^L(y_0')^2\mathrm dx$ avec deux pentes constantes : $h/d$ sur $[0,d]$ et $-h/(L-d)$ sur $[d,L]$.
+      - titre: "Énergie modale"
+        texte: |
+          $E_n=\tfrac14\mu L\omega_n^2b_n^2$ avec $\mu\omega_1^2=F\pi^2/L^2$. La somme $\sum\sin^2(n\pi\beta)/n^2=\pi^2\beta(1-\beta)/2$ permet de conclure.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $E_0=\dfrac{F h^2L}{2d(L-d)}=\dfrac{Fh^2}{2L\beta(1-\beta)}$ ; $\dfrac{E_n}{E_0}=\dfrac{2\sin^2(n\pi\beta)}{\pi^2\beta(1-\beta)\,n^2}$. AN : $c=143$ m/s, $F\approx102$ N, $T=9{,}1$ ms, $E_0\approx4{,}4$ mJ ; $b_1\dots b_5\approx2{,}23;\ 0{,}90;\ 0{,}40;\ 0{,}14;\ 0$ mm ; $\approx88\,\%$ de l'énergie dans les 4 premiers modes.
+    solution:
+      - titre: "(f) Énergie initiale"
+        texte: |
+          $$E_0=\dfrac F2\left[\left(\dfrac hd\right)^2d+\left(\dfrac h{L-d}\right)^2(L-d)\right]=\dfrac{Fh^2}2\left(\dfrac1d+\dfrac1{L-d}\right)=\boxed{\dfrac{Fh^2L}{2\,d\,(L-d)}}.$$
+          En fonction de $\beta$ : $E_0=\dfrac{Fh^2}{2L\beta(1-\beta)}$. Pour $h$ fixé, l'énergie est minimale au milieu ($\beta=\tfrac12$) et croît quand on s'approche du chevalet : il faut plus d'énergie pour déplacer de $h$ un point proche d'un point fixe.
+      - titre: "(g) Énergie des modes et conservation"
+        texte: |
+          $E_n=\tfrac14\mu L\,n^2\omega_1^2b_n^2=\dfrac{\pi^2Fn^2}{4L}\,b_n^2$ car $\mu\omega_1^2=F\pi^2/L^2$. Avec $b_n$ de la question (b) :
+          $$E_n=\frac{F\,h^2L^3}{\pi^2\,d^2(L-d)^2}\,\frac{\sin^2(n\pi\beta)}{n^2}\ \Longrightarrow\ \frac{E_n}{E_0}=\boxed{\frac{2\,\sin^2(n\pi\beta)}{\pi^2\beta(1-\beta)\,n^2}}.$$
+          En sommant avec $\sum_n\dfrac{\sin^2(n\pi\beta)}{n^2}=\dfrac{\pi^2\beta(1-\beta)}2$ : $\sum_nE_n=E_0$ $\surd$. Chaque mode conserve son énergie au cours du temps (les modes sont indépendants), ce qui n'est pas le cas des énergies cinétique et potentielle totales, qui s'échangent à la fréquence $2f_1$.
+      - titre: "(h) Application numérique"
+        texte: |
+          $c=2Lf_1=2\times0{,}65\times110=143$ m/s ; $F=\mu c^2=5{,}0\times10^{-3}\times143^2\approx102$ N ; $T=1/f_1=9{,}1$ ms ; $E_0=\dfrac{102\times(3\times10^{-3})^2\times0{,}65}{2\times0{,}13\times0{,}52}\approx4{,}4$ mJ.
+          Pour $\beta=\tfrac15$, $\dfrac{2h}{\pi^2\beta(1-\beta)}=\dfrac{6{,}0\ \text{mm}}{1{,}579}\approx3{,}80$ mm, d'où
+          $$b_1\approx2{,}23,\ \ b_2\approx0{,}90,\ \ b_3\approx0{,}40,\ \ b_4\approx0{,}14,\ \ b_5=0\ \ (\text{mm}).$$
+          Parts d'énergie : $E_1/E_0\approx44\,\%$, $E_2/E_0\approx29\,\%$, $E_3/E_0\approx13\,\%$, $E_4/E_0\approx3\,\%$, $E_5=0$ : environ $88\,\%$ dans les quatre premiers modes. Pour $\beta=\tfrac12$ (même $h$) : $b_1=8h/\pi^2\approx2{,}43$ mm, $b_2=0$, $b_3\approx-0{,}27$ mm : le fondamental domine ($81\,\%$ de l'énergie) et le deuxième harmonique est absent. {\bf Validation} : le fondamental est un peu plus fort au milieu (même $h$), mais le spectre est nettement plus pauvre.
+
+    aller_plus_loin:
+      - niveau: prepa
+        titre: "Corde frappée (piano)"
+        texte: |
+          Un marteau de largeur négligeable frappe la corde en $x=d$ avec la vitesse $v_0$ : $y(x,0)=0$ et $\partial_ty(x,0)=v_0\delta(x-d)$. Montrer que $A_n=0$, $B_n=\dfrac{2v_0}{L\omega_n}\sin\dfrac{n\pi d}L$ et que les amplitudes décroissent en $1/n$ (et non $1/n^2$) : spectre plus riche que pour la corde pincée.
+      - niveau: licence
+        titre: "Pincement par une pointe finie : filtrage"
+        texte: |
+          Si le doigt a une largeur $w$, le profil initial est arrondi sur $w$ : le coefficient $b_n$ est multiplié par $\dfrac{\sin(n\pi w/(2L))}{n\pi w/(2L)}$, un {\bf sinus cardinal}. Montrer que cela atténue les harmoniques de rang $n\gtrsim2L/w$ et expliquer pourquoi le jeu au doigt est plus doux qu'au médiator.
+      - niveau: master
+        titre: "Mouvement de Helmholtz (violon)"
+        texte: |
+          Pour une corde frottée par un archet à vitesse constante, le mouvement observé est un {\bf coude unique} qui parcourt le trajet aller-retour de la corde en $T=2L/c$, avec un profil en dents de scie à la position de l'archet. Écrire ce mouvement avec la solution de d'Alembert et montrer que le spectre décroît en $1/n$.

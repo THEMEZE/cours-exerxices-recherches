@@ -1,0 +1,149 @@
+id: mp_ext1_choc_2d
+intitule: "Extension -- Choc élastique oblique : angle maximal de déviation et transfert d'énergie"
+td: mp_phv111
+facultatif: true
+seance: 1
+
+cours_rattache:
+  - dynamique.quantite_de_mouvement
+  - dynamique.chocs
+  - energie.energie_cinetique
+
+metadonnees:
+  duree_estimee: "45 min"
+  difficulte: 5
+  type_exercice: "Approfondissement / Démonstration"
+  indispensable: false
+
+enonce_intro: |
+  Un mobile $1$ de masse $m_1$, de vitesse $\vec v_0$, heurte de façon {\bf élastique} un mobile $2$ de masse $m_2$ initialement au repos, sur une table à coussin d'air (système isolé). Le choc n'est pas forcément frontal : après le choc, le mobile 1 a la vitesse $\vec v_1'$ faisant l'angle $\theta_1$ avec $\vec v_0$, et le mobile 2 la vitesse $\vec v_2'$ faisant l'angle $\theta_2$ avec $\vec v_0$ (de l'autre côté). On pourra prendre pour application numérique $m_1=1{,}50$ kg et $m_2=1{,}00$ kg (masses de l'annexe).
+
+prerequis:
+  - titre: "Conservation de $\\vec p$ et de $E_c$"
+    texte: |
+      Choc élastique d'un système isolé : $m_1\vec v_0=m_1\vec v_1'+m_2\vec v_2'$ et $\tfrac12m_1v_0^2=\tfrac12m_1v_1'^2+\tfrac12m_2v_2'^2$.
+  - titre: "Produit scalaire"
+    texte: |
+      $\vec a\cdot\vec b=ab\cos\theta$ ; $\|\vec a+\vec b\|^2=a^2+b^2+2\,\vec a\cdot\vec b$ ; $\vec a\perp\vec b\iff\vec a\cdot\vec b=0$.
+  - titre: "Centre de masse"
+    texte: |
+      $\vec v_G=\dfrac{m_1\vec v_1+m_2\vec v_2}{m_1+m_2}$ est constante pour un système isolé ; dans le référentiel $\mathcal R^*$ du centre de masse, $\vec p^*_{\rm tot}=\vec0$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Résoudre un choc 2D élastique par la géométrie des vecteurs"
+    texte: |
+      Savoir déduire de la conservation de $\vec p$ et $E_c$ des résultats généraux : règle des $90^\circ$ pour des masses égales, angle de déviation maximal $\theta_{\max}$ pour $m_1>m_2$, transfert d'énergie maximal, et utiliser le référentiel du centre de masse.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Un exercice de synthèse : des résultats puissants à partir de deux équations"
+    texte: |
+      Les résultats sont élégants et {\bf contre-intuitifs} : le mobile le plus lourd ne peut pas dévier de plus de $\theta_{\max}$ ; le transfert d'énergie est maximal pour des masses égales (billard, modérateurs de neutrons). La question (c) utilise le référentiel du centre de masse : la vitesse finale du mobile 1 se trouve sur un cercle de rayon $m_2v_0/(m_1+m_2)$ centré en $\vec v_G$, et $\theta_{\max}$ est l'angle de la tangente issue de l'origine. Exercice à réserver aux étudiants rapides (CPGE/licence).
+
+point_cours:
+  - titre: "Cercle de Thalès des vitesses"
+    texte: |
+      Dans $\mathcal R^*$, un choc élastique ne change que la direction des vitesses. Dans $\mathcal R$ : $\vec v_1'=\vec v_G+\vec u_1'$ avec $\|\vec u_1'\|=\dfrac{m_2}{m_1+m_2}v_0$ fixée, $\|\vec v_G\|=\dfrac{m_1}{m_1+m_2}v_0$ : l'extrémité de $\vec v_1'$ décrit un cercle.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Utiliser seulement la conservation de $\\vec p$"
+    texte: |
+      Pour un choc 2D, $\vec p_{\rm tot}$ donne $2$ équations (composantes) et $E_c$ une troisième pour $4$ inconnues ($v_1',v_2',\theta_1,\theta_2$) : il manque une donnée (par exemple $\theta_1$). Le choc n'est donc {\bf pas} déterminé sans paramètre d'impact.
+  - titre: "Appliquer la règle de $90^{\\circ}$ à des masses différentes"
+    texte: |
+      $\theta_1+\theta_2=90^\circ$ n'est vrai que pour $m_1=m_2$ ; pour $m_1\ne m_2$, l'angle entre $\vec v_1'$ et $\vec v_2'$ est différent de $90^\circ$.
+  - titre: "Oublier la condition $m_1>m_2$ pour $\\theta_{\\max}$"
+    texte: |
+      $\sin\theta_{\max}=m_2/m_1$ n'existe que pour $m_1>m_2$. Si $m_1<m_2$, le mobile 1 peut rebondir en arrière ($\theta_1$ jusqu'à $180^\circ$).
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Vérifier sur l'annexe"
+    texte: |
+      Faire calculer $\theta_{\max}$ pour $m_A=1{,}5$ kg et $m_B=1{,}0$ kg ($41{,}8^\circ$) et comparer avec la déviation mesurée de $A$ sur la chronophotographie (quelques degrés seulement : le choc est peu oblique).
+  - titre: "Visualisation"
+    texte: |
+      Tracer le cercle de $\vec v_1'$ avec GeoGebra et faire varier $m_2/m_1$ : l'origine est intérieure au cercle pour $m_1<m_2$, extérieure pour $m_1>m_2$.
+
+bilan:
+  - titre: "Résultats"
+    texte: |
+      (i) $m_1=m_2$ : $\vec v_1'\perp\vec v_2'$. (ii) $m_1>m_2$ : $\sin\theta_{1,\max}=m_2/m_1$. (iii) Transfert maximal d'énergie à $m_2$ (choc frontal) : $\dfrac{E_{c2}'}{E_{c1}}=\dfrac{4m_1m_2}{(m_1+m_2)^2}$, égal à $1$ si $m_1=m_2$ ; $0{,}96$ pour $m_1/m_2=1{,}5$.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Choc frontal : formules"
+    texte: |
+      Montrer que, pour un choc frontal ($\theta_1=0$ ou $\pi$), $v_1'=\dfrac{m_1-m_2}{m_1+m_2}v_0$ et $v_2'=\dfrac{2m_1}{m_1+m_2}v_0$. Discuter les cas $m_1\ll m_2$ (rebond) et $m_1\gg m_2$.
+  - niveau: licence
+    titre: "Cas général dans le référentiel du centre de masse"
+    texte: |
+      Établir $v_1'^2=v_0^2\Big[1-\dfrac{2m_2}{m_1+m_2}(1-\cos\chi)\dfrac{m_1}{m_1+m_2}\Big]$ avec $\chi$ l'angle de déviation dans $\mathcal R^*$, puis la section efficace différentielle pour des sphères dures.
+  - niveau: master
+    titre: "Choc relativiste"
+    texte: |
+      Pour des masses égales et relativistes, l'angle entre les deux particules finales est inférieur à $90^\circ$ ; le montrer à partir de $E^2=p^2c^2+m^2c^4$.
+
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi les boules de billard partent-elles à angle droit ?"
+    duree_introduction: "3 min"
+    question_d_accroche: |
+      Au billard, une boule heurte de côté une boule immobile identique : les deux partent presque exactement à $90^\circ$ l'une de l'autre. Coïncidence ? Et si la boule immobile est plus lourde ou plus légère ?
+    texte: |
+      {\bf Idée clé : conservation de $\vec p$ et de $E_c$ dessinent un triangle de vecteurs.} Pour des masses égales, $\vec v_0=\vec v_1'+\vec v_2'$ et $v_0^2=v_1'^2+v_2'^2$ : c'est le théorème de Pythagore, donc $\vec v_1'\perp\vec v_2'$.
+
+outils_mathematiques:
+  - titre: "Théorème de Pythagore et réciproque"
+    texte: |
+      $\|\vec a+\vec b\|^2=\|\vec a\|^2+\|\vec b\|^2\iff\vec a\perp\vec b$.
+  - titre: "Cercle et tangente depuis un point extérieur"
+    texte: |
+      Un cercle de centre $C$ et de rayon $r$, vu depuis $O$ avec $OC=d>r$, est sous-tendu par l'angle $\alpha$ tel que $\sin\alpha=r/d$.
+  - titre: "Trigonométrie : loi des sinus et des cosinus"
+    texte: |
+      Dans un triangle de côtés $a,b,c$ : $c^2=a^2+b^2-2ab\cos\gamma$.
+
+liens_autres_disciplines:
+  - discipline: "Physique nucléaire"
+    texte: |
+      Le ralentissement des neutrons par le modérateur (eau, graphite) : transfert maximal par collision avec l'hydrogène ($m\approx m_n$) : $E$ divisé en moyenne par $2$ par choc.
+  - discipline: "Sport"
+    texte: |
+      Billard et pétanque : la règle des $90^\circ$ et la direction de la boule visée.
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{itemize}
+        \item[(a)] Écrire les lois de conservation. Dans le cas $m_1=m_2$, montrer que $\vec v_1'\perp\vec v_2'$ (si le choc est oblique).
+        \item[(b)] Dans le cas général, montrer que $\vec v_1'=\vec v_G+\vec u_1'$ avec $\|\vec u_1'\|=\dfrac{m_2}{m_1+m_2}v_0$ et $\|\vec v_G\|=\dfrac{m_1}{m_1+m_2}v_0$.
+      \end{itemize}
+    coup_de_pouce: |
+      (a) Élevez au carré la conservation de $\vec p$ et comparez avec la conservation de $E_c$. (b) Dans $\mathcal R^*$ la norme des vitesses se conserve pour un choc élastique : $\|\vec u_1'\|=\|\vec u_1\|$.
+    correction: |
+      (a) $\vec v_0=\vec v_1'+\vec v_2'$ et $v_0^2=v_1'^2+v_2'^2$ donc $\vec v_1'\cdot\vec v_2'=0$. (b) $\vec v_G=\dfrac{m_1}{m_1+m_2}\vec v_0$ ; $\vec u_1=\vec v_0-\vec v_G$ de norme $\dfrac{m_2}{m_1+m_2}v_0$, conservée.
+    solution:
+      - titre: "(a) Règle des $90^\\circ$"
+        texte: |
+          $m_1=m_2=m$ : $\vec v_0=\vec v_1'+\vec v_2'$ donc $v_0^2=v_1'^2+v_2'^2+2\,\vec v_1'\cdot\vec v_2'$. La conservation de $E_c$ donne $v_0^2=v_1'^2+v_2'^2$. Par différence : $\vec v_1'\cdot\vec v_2'=0$, donc $\boxed{\vec v_1'\perp\vec v_2'}$ (ou l'un des deux est nul : choc frontal), soit $\theta_1+\theta_2=90^\circ$.
+      - titre: "(b) Référentiel du centre de masse"
+        texte: |
+          $\vec v_G=\dfrac{m_1\vec v_0}{m_1+m_2}$ constante. Dans $\mathcal R^*$ (translation à $\vec v_G$) : $\vec u_1=\vec v_0-\vec v_G=\dfrac{m_2}{m_1+m_2}\vec v_0$ et $\vec u_2=-\vec v_G$ avec $\vec p^*_{\rm tot}=\vec0$. Un choc élastique avec $\vec p^*_{\rm tot}=\vec0$ conserve $E_c^*$ et donc, par $m_1u_1=m_2u_2$, les {\bf normes} de $\vec u_1,\vec u_2$ : seule leur direction change. Ainsi $\vec v_1'=\vec v_G+\vec u_1'$ avec $\|\vec u_1'\|=\dfrac{m_2}{m_1+m_2}v_0$ de direction quelconque : l'extrémité de $\vec v_1'$ est sur un {\bf cercle} de centre $\vec v_G$ et de rayon $r=\dfrac{m_2v_0}{m_1+m_2}$.
+
+  - id: q2
+    enonce: |
+      \begin{itemize}
+        \item[(c)] Pour $m_1>m_2$, montrer que l'angle de déviation $\theta_1$ du mobile 1 est limité : $\sin\theta_{1,\max}=\dfrac{m_2}{m_1}$. Application numérique pour $m_1=1{,}50$ kg, $m_2=1{,}00$ kg. Que se passe-t-il pour $m_1<m_2$ ?
+        \item[(d)] Choc frontal : calculer la fraction de l'énergie cinétique initiale transférée au mobile 2. Pour quelle valeur de $m_2/m_1$ est-elle maximale ? Application numérique.
+      \end{itemize}
+    coup_de_pouce: |
+      (c) Cercle de rayon $r=m_2v_0/(m_1+m_2)$ centré à la distance $d=m_1v_0/(m_1+m_2)$ de l'origine ; l'origine est à l'extérieur si $d>r$. Trouvez l'angle maximal sous lequel on voit le cercle. (d) Transférée à 2 : $\dfrac{\tfrac12m_2v_2'^2}{\tfrac12m_1v_0^2}$ avec $v_2'=\dfrac{2m_1}{m_1+m_2}v_0$.
+    correction: |
+      $\sin\theta_{\max}=r/d=m_2/m_1$ ; $\theta_{\max}=\arcsin(2/3)=41{,}8^\circ$ ; pour $m_1<m_2$ l'origine est dans le cercle : toutes les directions (rebond) sont possibles. $f=\dfrac{4m_1m_2}{(m_1+m_2)^2}$, maximale ($=1$) pour $m_1=m_2$ ; $0{,}96$ pour $m_2/m_1=2/3$.
+    solution:
+      - titre: "(c) Angle de déviation maximal"
+        texte: |
+          Dans le plan des vitesses, le cercle a pour centre $C$ tel que $OC=d=\dfrac{m_1v_0}{m_1+m_2}$ et pour rayon $r=\dfrac{m_2v_0}{m_1+m_2}$. Si $m_1>m_2$, $d>r$ : l'origine $O$ est à l'extérieur du cercle, qui est vu sous un angle limité par les tangentes issues de $O$ : $\sin\theta_{1,\max}=\dfrac{r}{d}=\boxed{\dfrac{m_2}{m_1}}$. Application : $\theta_{1,\max}=\arcsin\dfrac{1}{1{,}5}=\boxed{41{,}8^\circ}$. Si $m_1<m_2$ (ou $=$), $O$ est dans (sur) le cercle : $\theta_1$ peut atteindre $180^\circ$ (rebond). Avec $m_1=m_2$ : $O$ est sur le cercle, $\theta_1\le90^\circ$ (cohérent avec (a)).
+      - titre: "(d) Transfert d'énergie en choc frontal"
+        texte: |
+          Choc frontal : $v_2'=\dfrac{2m_1}{m_1+m_2}v_0$. Alors
+          $$f=\frac{\tfrac12m_2v_2'^2}{\tfrac12m_1v_0^2}=\frac{m_2}{m_1}\frac{4m_1^2}{(m_1+m_2)^2}=\boxed{\frac{4m_1m_2}{(m_1+m_2)^2}}.$$
+          Avec $x=m_2/m_1$ : $f=\dfrac{4x}{(1+x)^2}\le1$, maximale pour $x=1$ ($f=1$ : tout est transféré, le mobile 1 s'arrête). Application : $m_1=1{,}5$, $m_2=1{,}0$ : $f=\dfrac{4\times1{,}5}{6{,}25}=\boxed{0{,}96}$. Pour $m_2\gg m_1$ ou $m_2\ll m_1$, $f\to0$ (ping-pong contre un mur, ou camion contre une mouche).

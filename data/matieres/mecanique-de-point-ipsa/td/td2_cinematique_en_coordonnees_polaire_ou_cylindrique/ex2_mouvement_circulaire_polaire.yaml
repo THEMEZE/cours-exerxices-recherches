@@ -14,6 +14,7 @@ cours_rattache:
 metadonnees:
   duree_estimee: "40 min"
   difficulte: 3
+  priorite: 5
   type_exercice: "Cours actif / Application"
   indispensable: true
 

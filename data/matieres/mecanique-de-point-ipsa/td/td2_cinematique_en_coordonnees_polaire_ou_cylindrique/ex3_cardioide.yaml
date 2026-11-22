@@ -12,6 +12,7 @@ cours_rattache:
 metadonnees:
   duree_estimee: "35 min"
   difficulte: 4
+  priorite: 4
   type_exercice: "Entraînement / Approfondissement"
   indispensable: false
 

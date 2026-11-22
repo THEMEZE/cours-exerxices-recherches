@@ -1,0 +1,92 @@
+\#{ QCM imprimable. Variables : titre_document, qcm (chapitres et questions), opts (cible de config.yaml), auteur, matiere_meta. Le texte des questions passe par le filtre qcm_tex : les maths en dollars sont conserves, les caracteres speciaux echappes, le gras et litalique markdown convertis. }
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[french]{babel}
+\usepackage[margin=2cm,top=2.4cm,bottom=2.2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\IfFileExists{animate.sty}{\usepackage{animate}
+\newcommand{\qcmanim}[4]{\animategraphics[autoplay,loop,width=0.6\linewidth,poster=first]{##1}{##2}{##3}{##4}}}{%
+\newcommand{\qcmanim}[4]{\includegraphics[width=0.6\linewidth]{##2##3}}}
+
+\definecolor{qcmgreen}{HTML}{2E7D62}
+\definecolor{qcmgrey}{HTML}{5A6770}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlength{\headheight}{14pt}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\fancyhead[L]{\small \VAR{auteur.nom|default('')|qcm_tex}\BLOCK{if opts.etablissement} --- \VAR{opts.etablissement|qcm_tex}\BLOCK{endif}}
+\fancyhead[R]{\small \VAR{matiere_meta.nom|default(qcm.matiere)|qcm_tex}\BLOCK{if opts.promo} --- \VAR{opts.promo|qcm_tex}\BLOCK{endif}\BLOCK{if opts.annee} --- \VAR{opts.annee|qcm_tex}\BLOCK{endif}}
+\fancyfoot[C]{\small \thepage}
+
+\newcommand{\caseqcm}{$\square$}
+\newcommand{\casebonne}{\textcolor{qcmgreen}{$\blacksquare$}}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries \VAR{titre_document|qcm_tex}}\\[4pt]
+  {\small\color{qcmgrey} \VAR{qcm.total} question\BLOCK{if qcm.total > 1}s\BLOCK{endif}\BLOCK{if opts.show_solution} --- corrigé\BLOCK{endif}}
+\end{center}
+
+\BLOCK{if not opts.show_solution}
+\noindent Nom : \dotfill\ Prénom : \dotfill\ Date : \hspace{2.5cm}
+
+\smallskip
+\BLOCK{endif}
+\noindent{\small\color{qcmgrey} Une seule réponse correcte par question.\BLOCK{if opts.show_solution} Bonne réponse en \textcolor{qcmgreen}{vert}.\BLOCK{endif}}
+
+\BLOCK{for g in qcm.chapitres}
+\BLOCK{if qcm.chapitres|length > 1}
+\section*{\VAR{g.titre|qcm_tex}}
+\BLOCK{endif}
+\BLOCK{for q in g.questions}
+\begin{samepage}
+\textbf{\VAR{q.numero}.}\ \VAR{q.question|qcm_tex}\BLOCK{if q.difficulte}\ {\footnotesize\color{qcmgrey}[\VAR{q.difficulte|qcm_tex}]}\BLOCK{endif}
+\BLOCK{if q.media_pdf.figures or q.media_pdf.animation}
+
+\begin{center}
+\BLOCK{for f in q.media_pdf.figures}
+\includegraphics[width=0.6\linewidth,height=5cm,keepaspectratio]{\VAR{f.path}}\BLOCK{if loop.last and not q.media_pdf.animation}\BLOCK{else}\\[6pt]\BLOCK{endif}
+\BLOCK{endfor}
+\BLOCK{if q.media_pdf.animation}
+\qcmanim{\VAR{q.media_pdf.animation.fps}}{\VAR{q.media_pdf.animation.prefix}}{\VAR{q.media_pdf.animation.first}}{\VAR{q.media_pdf.animation.last}}\\[-2pt]{\scriptsize\color{qcmgrey}(animation : lisible dans Adobe Reader, sinon voir la version en ligne)}
+\BLOCK{endif}
+\end{center}
+\BLOCK{endif}
+
+\begin{itemize}[label={},leftmargin=1.2em,itemsep=1pt,topsep=2pt]
+\BLOCK{for c in q.choix_pdf}
+\BLOCK{if opts.show_solution and c.correct}
+  \item[\casebonne] \textbf{\textcolor{qcmgreen}{\VAR{"ABCDEFGHIJ"[loop.index0]}.\ \VAR{c.texte|qcm_tex}}}
+\BLOCK{else}
+  \item[\caseqcm] \VAR{"ABCDEFGHIJ"[loop.index0]}.\ \VAR{c.texte|qcm_tex}
+\BLOCK{endif}
+\BLOCK{endfor}
+\end{itemize}
+\BLOCK{if opts.show_solution and q.explication}
+{\small\color{qcmgrey}\hspace{1.2em}\emph{\VAR{q.explication|qcm_tex}}}
+\BLOCK{endif}
+\end{samepage}
+
+\BLOCK{endfor}
+\BLOCK{endfor}
+
+\BLOCK{if opts.show_solution}
+\bigskip
+\section*{Grille de réponses}
+\BLOCK{for g in qcm.chapitres}
+\BLOCK{for q in g.questions}
+\BLOCK{for c in q.choix_pdf}\BLOCK{if c.correct}\textbf{\VAR{q.numero}}\,:\,\VAR{"ABCDEFGHIJ"[loop.index0]}\\[6pt]\BLOCK{endif}\BLOCK{endfor}
+\BLOCK{endfor}
+\BLOCK{endfor}
+\BLOCK{endif}
+
+\end{document}

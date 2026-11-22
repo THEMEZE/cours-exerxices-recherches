@@ -1,0 +1,191 @@
+id: td4_ex7
+intitule: "Chute avec frottement fluide : vitesse limite"
+td: td4
+facultatif: true
+seance: 1
+
+cours_rattache:
+  - dynamique.deuxieme_loi
+  - dynamique.frottement_fluide_lineaire
+  - dynamique.equation_differentielle_ordre_1
+  - dynamique.vitesse_limite
+
+metadonnees:
+  duree_estimee: "50 min"
+  difficulte: 4
+  type_exercice: "Approfondissement / Exercice non guidé"
+  indispensable: false
+
+enonce_intro: |
+  Une bille de masse $m=50$ g est lâchée sans vitesse initiale dans un fluide visqueux (huile). En plus de son poids, elle subit une force de frottement fluide $\vec f=-\lambda\,\vec v$ avec $\lambda=0{,}50~\mathrm{kg\,s^{-1}}$. On néglige la poussée d'Archimède. On prendra $g=9{,}81~\mathrm{m\,s^{-2}}$. L'axe $Oz$ est vertical {\bf descendant}, l'origine $O$ est le point de lâcher, et $t=0$ est l'instant du lâcher.
+
+prerequis:
+  - titre: "Équation différentielle linéaire du premier ordre"
+    texte: |
+      $\dfrac{\mathrm dv}{\mathrm dt}+\dfrac v\tau=\dfrac{v_\ell}\tau$ a pour solution générale $v(t)=v_\ell+C\,\mathrm e^{-t/\tau}$ ; la constante $C$ est fixée par la condition initiale. Le temps $\tau$ est le temps caractéristique de relaxation.
+  - titre: "Primitive de l'exponentielle"
+    texte: |
+      $\displaystyle\int\mathrm e^{-t/\tau}\,\mathrm dt=-\tau\,\mathrm e^{-t/\tau}$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Résoudre un mouvement à accélération non constante"
+    texte: |
+      Savoir établir l'équation différentielle de la vitesse, la résoudre avec la condition initiale, identifier la vitesse limite et le temps caractéristique, intégrer pour obtenir la position, et vérifier les cas limites (temps courts : chute libre ; temps longs : vitesse limite).
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Premier mouvement non uniformément accéléré du cours"
+    texte: |
+      Jusqu'ici l'accélération était constante : ici elle décroît de $g$ à $0$. L'exercice introduit l'équation différentielle, le temps caractéristique $\tau=m/\lambda$ et la vitesse limite $v_\ell=mg/\lambda$ (que l'on peut obtenir {\bf sans résoudre l'équation} en posant $\mathrm dv/\mathrm dt=0$). La question (g) (lancer vers le haut) rend l'exercice difficile : la hauteur maximale se calcule exactement et on vérifie que la limite $\lambda\to0$ redonne $v_0^2/(2g)$ — un bon exemple de test par cas limite.
+
+point_cours:
+  - titre: "Chute avec frottement linéaire"
+    texte: |
+      $m\dot v=mg-\lambda v\Rightarrow v(t)=v_\ell\big(1-\mathrm e^{-t/\tau}\big)$ avec $\tau=\dfrac m\lambda$, $v_\ell=\dfrac{mg}\lambda=g\tau$. Position : $z(t)=v_\ell\big[t-\tau(1-\mathrm e^{-t/\tau})\big]$. À $t\ll\tau$ : $v\approx gt$ (chute libre) ; à $t\gg\tau$ : $v\approx v_\ell$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Prendre $a=g$ tout au long"
+    texte: |
+      L'accélération $a=g\,\mathrm e^{-t/\tau}$ décroît et tend vers $0$ : la vitesse limite est atteinte asymptotiquement, jamais exactement.
+  - titre: "Se tromper de signe du frottement"
+    texte: |
+      Axe descendant : poids $+mg$, frottement $-\lambda v$ (opposé à la vitesse). Axe ascendant : poids $-mg$, frottement $-\lambda v_z$ ; dans les deux cas le frottement s'oppose à la vitesse.
+  - titre: "Chercher la vitesse limite en intégrant"
+    texte: |
+      Plus rapide : à la vitesse limite $\dot v=0$, donc $mg=\lambda v_\ell$. Garder les deux méthodes pour le contrôle.
+  - titre: "Confondre $\\tau$ et le temps pour atteindre $v_\\ell$"
+    texte: |
+      À $t=\tau$, $v=63\%$ de $v_\ell$ ; $99\%$ à $t=\tau\ln100\approx4{,}6\tau$. Il n'existe pas de temps fini pour atteindre exactement $v_\ell$.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Manipulation : bille dans le glycérol"
+    texte: |
+      Filmer une bille qui tombe dans une éprouvette de glycérol, pointer les positions (Tracker) et tracer $z(t)$ : au bout de quelques $\tau$ la courbe est une droite de pente $v_\ell$. Estimer $\lambda$.
+  - titre: "Linéaire ou quadratique ?"
+    texte: |
+      Le frottement linéaire est valable aux faibles vitesses (nombre de Reynolds petit : fluide visqueux, bille petite). Pour un parachutiste, le frottement est en $v^2$ (voir « aller plus loin »).
+
+bilan:
+  - titre: "Relaxation vers une vitesse limite"
+    texte: |
+      $\tau=m/\lambda=0{,}10$ s ; $v_\ell=mg/\lambda=0{,}98$ m/s ; $v(t)=v_\ell(1-\mathrm e^{-t/\tau})$ ; $z(t)=v_\ell[t-\tau(1-\mathrm e^{-t/\tau})]$ ; pour un lancer vers le haut à $v_0$, hauteur maximale $h=v_0\tau-v_\ell\tau\ln(1+v_0/v_\ell)\xrightarrow[\lambda\to0]{}\dfrac{v_0^2}{2g}$.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Frottement quadratique"
+    texte: |
+      Avec $\vec f=-k\,v\,\vec v$ (parachutiste), montrer que $v_\ell=\sqrt{mg/k}$ et que $v(t)=v_\ell\tanh(gt/v_\ell)$. Comparer la montée vers la vitesse limite avec le cas linéaire.
+  - niveau: licence
+    titre: "Poussée d'Archimède"
+    texte: |
+      Tenir compte de la poussée d'Archimède $\rho_fV g$ : le poids apparent devient $(m-\rho_fV)g$ ; réexprimer $v_\ell$ en fonction des masses volumiques. Pour une bille d'acier ($7800~\mathrm{kg/m^3}$) dans de l'huile ($900~\mathrm{kg/m^3}$), estimer la correction relative sur $v_\ell$.
+  - niveau: master
+    titre: "Loi de Stokes et viscosimètre"
+    texte: |
+      Pour une sphère de rayon $r$ en régime laminaire, $\lambda=6\pi\eta r$ (loi de Stokes). En déduire la viscosité $\eta$ à partir de la mesure de $v_\ell$, et la limite de validité (nombre de Reynolds $Re=\rho_fv_\ell\,2r/\eta\ll1$).
+
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi une bille ne tombe-t-elle pas de plus en plus vite dans l'huile ?"
+    duree_introduction: "4 min"
+    question_d_accroche: |
+      Dans le vide, une bille tombe de plus en plus vite sans limite. Dans l'huile, après un court instant, {\bf sa vitesse ne change presque plus}. Pourquoi ? {\bf Comment calculer cette vitesse limite} sans résoudre aucune équation ? Au bout de combien de temps y est-on ?
+    texte: |
+      {\bf Idée clé : le frottement croît avec la vitesse jusqu'à compenser le poids.} $m\dot v=mg-\lambda v$. À la vitesse limite, $\dot v=0$ donc $v_\ell=mg/\lambda$. La solution $v=v_\ell(1-\mathrm e^{-t/\tau})$ approche $v_\ell$ avec le temps caractéristique $\tau=m/\lambda$.
+
+outils_mathematiques:
+  - titre: "Équation différentielle $\\dot v+v/\\tau=g$"
+    texte: |
+      Solution particulière : $v=g\tau=v_\ell$ ; solution de l'équation homogène : $C\,\mathrm e^{-t/\tau}$ ; condition $v(0)=0\Rightarrow C=-v_\ell$.
+  - titre: "Développement limité de l'exponentielle"
+    texte: |
+      $\mathrm e^{-x}\approx1-x+\tfrac{x^2}2$ pour $x\ll1$ : $v\approx v_\ell\,\dfrac t\tau=gt$ ; $z\approx\tfrac12gt^2$ (retrouve la chute libre).
+  - titre: "Logarithme et exponentielle"
+    texte: |
+      $\mathrm e^{-t/\tau}=0{,}01\iff t=\tau\ln100\approx4{,}6\,\tau$ ; et $\ln(1+x)\approx x-\tfrac{x^2}2+\tfrac{x^3}3$ pour le développement du lancer vers le haut.
+  - titre: "Vérification d'une EDO numériquement"
+    texte: |
+      Méthode d'Euler : $v_{n+1}=v_n+\big(g-v_n/\tau\big)\Delta t$ avec $\Delta t\ll\tau$ ; à comparer à la solution analytique.
+
+liens_autres_disciplines:
+  - discipline: "Mécanique des fluides"
+    texte: |
+      Loi de Stokes, nombre de Reynolds, viscosimètre à chute de bille.
+  - discipline: "Électricité"
+    texte: |
+      Même équation que la charge d'un condensateur $\tau=RC$ ou d'une bobine $\tau=L/R$ : relaxation exponentielle.
+  - discipline: "Biologie et environnement"
+    texte: |
+      Sédimentation de particules, de planctons, des poussières dans l'air : $v_\ell\propto r^2$ en régime de Stokes.
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{itemize}
+        \item[(a)] Établir l'équation différentielle vérifiée par la vitesse $v(t)=\dot z$ de la bille.
+        \item[(b)] Sans résoudre l'équation, déterminer la vitesse limite $v_\ell$ et le temps caractéristique $\tau$. Applications numériques.
+        \item[(c)] Résoudre l'équation avec la condition initiale. Tracer $v(t)$.
+      \end{itemize}
+    coup_de_pouce: |
+      Avec $Oz$ descendant : poids $+mg$, frottement $-\lambda v$. La vitesse limite correspond à $\mathrm dv/\mathrm dt=0$. Solution de la forme $v=v_\ell+C\mathrm e^{-t/\tau}$.
+    correction: |
+      $m\dot v+\lambda v=mg$ ; $v_\ell=mg/\lambda\approx0{,}98$ m/s, $\tau=m/\lambda=0{,}10$ s ; $v=v_\ell(1-\mathrm e^{-t/\tau})$.
+    solution:
+      - titre: "(a) Équation différentielle"
+        texte: |
+          Système : la bille. Forces : poids $mg\,\vec u_z$, frottement $-\lambda v\,\vec u_z$. Projection de $m\vec a=\sum\vec F$ sur $Oz$ :
+          $$\boxed{m\,\dot v=mg-\lambda v}\iff\dot v+\frac v\tau=g\quad\text{avec}\quad\tau=\frac m\lambda .$$
+      - titre: "(b) Vitesse limite et temps caractéristique"
+        texte: |
+          Vitesse limite : $\dot v=0\Rightarrow\boxed{v_\ell=\dfrac{mg}\lambda}=\dfrac{0{,}050\times9{,}81}{0{,}50}\approx\boxed{0{,}98~\mathrm{m/s}}$. Temps caractéristique : $\boxed{\tau=\dfrac m\lambda}=\dfrac{0{,}050}{0{,}50}=\boxed{0{,}10~\text{s}}$. On a $v_\ell=g\tau$ : la bille atteindrait $v_\ell$ en $\tau$ si l'accélération restait égale à $g$.
+      - titre: "(c) Résolution"
+        texte: |
+          Solution : $v(t)=v_\ell+C\,\mathrm e^{-t/\tau}$. Condition $v(0)=0\Rightarrow C=-v_\ell$ :
+          $$\boxed{v(t)=v_\ell\big(1-\mathrm e^{-t/\tau}\big)}.$$
+          Courbe : part de $0$ avec la pente $g$ (tangente $v=gt$), croît en concavité vers le bas, tend vers l'asymptote horizontale $v_\ell$. À $t=\tau$ : $63\%$ de $v_\ell$ ($0{,}62$ m/s) ; à $t=0{,}2$ s : $0{,}85$ m/s.
+
+  - id: q2
+    enonce: |
+      \begin{itemize}
+        \item[(d)] Déterminer $z(t)$. Quelle distance la bille a-t-elle parcourue au bout de $0{,}50$ s ?
+        \item[(e)] À quel instant la vitesse atteint-elle $99\%$ de $v_\ell$ ? Quelle distance a été parcourue alors ?
+        \item[(f)] Montrer que pour $t\ll\tau$ on retrouve la chute libre.
+      \end{itemize}
+    coup_de_pouce: |
+      Intégrez $v(t)$ avec $z(0)=0$. Pour (e), résolvez $\mathrm e^{-t/\tau}=0{,}01$. Pour (f), développez l'exponentielle à l'ordre $2$.
+    correction: |
+      $z(t)=v_\ell\big[t-\tau(1-\mathrm e^{-t/\tau})\big]$ ; $z(0{,}5)\approx0{,}39$ m ; $t_{99}=\tau\ln100\approx0{,}46$ s, $z\approx0{,}35$ m ; $z\approx\tfrac12gt^2$ pour $t\ll\tau$.
+    solution:
+      - titre: "(d) Position"
+        texte: |
+          $$z(t)=\int_0^tv\,\mathrm dt'=\boxed{v_\ell\Big[t-\tau\big(1-\mathrm e^{-t/\tau}\big)\Big]}.$$
+          À $t=0{,}50$ s : $z=0{,}981\times[0{,}50-0{,}10\times(1-\mathrm e^{-5})]\approx0{,}981\times0{,}4007\approx\boxed{0{,}39~\text{m}}$ (contre $1{,}2$ m en chute libre).
+      - titre: "(e) Temps pour atteindre 99 \\% de $v_\\ell$"
+        texte: |
+          $1-\mathrm e^{-t/\tau}=0{,}99\Rightarrow t_{99}=\tau\ln100\approx\boxed{0{,}46~\text{s}}$. Distance : $z=v_\ell[t_{99}-0{,}99\tau]=0{,}981\times(0{,}4605-0{,}099)\approx\boxed{0{,}35~\text{m}}$. Au-delà, le mouvement est quasi uniforme : environ $v_\ell\Delta t$ de plus par seconde.
+      - titre: "(f) Temps courts : chute libre"
+        texte: |
+          Pour $x=t/\tau\ll1$ : $\mathrm e^{-x}\approx1-x+\dfrac{x^2}2$, d'où $v\approx v_\ell\Big(\dfrac t\tau-\dfrac{t^2}{2\tau^2}\Big)\approx gt$ (car $v_\ell/\tau=g$) et $z\approx v_\ell\dfrac{t^2}{2\tau}=\tfrac12gt^2$. Le frottement est négligeable tant que $t\ll\tau$ : c'est le régime de chute libre.
+
+  - id: q3
+    enonce: |
+      \begin{itemize}
+        \item[(g)] La bille est maintenant lancée {\bf vers le haut} avec la vitesse $v_0=2{,}0~\mathrm{m/s}$ dans le même fluide (axe $Oz$ désormais ascendant). Établir la vitesse $v_z(t)$, l'instant $t_s$ du sommet et la hauteur maximale $h$. Application numérique.
+        \item[(h)] Vérifier que le résultat redonne $h=v_0^2/(2g)$ quand le frottement tend vers $0$ ($\lambda\to0$). Comparer à la valeur numérique sans frottement.
+      \end{itemize}
+    coup_de_pouce: |
+      Avec $Oz$ ascendant : $m\dot v_z=-mg-\lambda v_z$. Posez $v_\ell=mg/\lambda$ : la solution est $v_z=-v_\ell+(v_0+v_\ell)\mathrm e^{-t/\tau}$. Le sommet est atteint quand $v_z=0$. Pour (h), développez $\ln(1+x)$ à l'ordre $2$.
+    correction: |
+      $t_s=\tau\ln\Big(1+\dfrac{v_0}{v_\ell}\Big)\approx0{,}111$ s ; $h=v_0\tau-v_\ell\tau\ln\Big(1+\dfrac{v_0}{v_\ell}\Big)\approx9{,}1$ cm (contre $20{,}4$ cm sans frottement) ; limite $\lambda\to0$ : $v_0^2/(2g)$.
+    solution:
+      - titre: "(g) Lancer vers le haut"
+        texte: |
+          Axe ascendant : $m\dot v_z=-mg-\lambda v_z\Rightarrow\dot v_z+\dfrac{v_z}\tau=-g$, solution $v_z=-v_\ell+C\,\mathrm e^{-t/\tau}$ avec $v_z(0)=v_0\Rightarrow C=v_0+v_\ell$ :
+          $$v_z(t)=-v_\ell+(v_0+v_\ell)\,\mathrm e^{-t/\tau}.$$
+          Sommet : $v_z=0\Rightarrow\mathrm e^{-t_s/\tau}=\dfrac{v_\ell}{v_0+v_\ell}$, soit
+          $$\boxed{t_s=\tau\ln\Big(1+\frac{v_0}{v_\ell}\Big)}=0{,}10\times\ln(3{,}04)\approx0{,}111~\text{s}.$$
+          Hauteur : $z(t)=-v_\ell t+(v_0+v_\ell)\tau\big(1-\mathrm e^{-t/\tau}\big)$, et en $t_s$, $1-\mathrm e^{-t_s/\tau}=\dfrac{v_0}{v_0+v_\ell}$ :
+          $$\boxed{h=v_0\tau-v_\ell\tau\ln\Big(1+\frac{v_0}{v_\ell}\Big)}=0{,}200-0{,}0981\times1{,}112\approx\boxed{0{,}091~\text{m}}.$$
+      - titre: "(h) Limite sans frottement"
+        texte: |
+          Quand $\lambda\to0$, $v_\ell\to\infty$ avec $v_\ell/\tau=g$ fixé, donc $x=v_0/v_\ell\to0$. Avec $\ln(1+x)\approx x-\dfrac{x^2}2$ :
+          $$h\approx v_0\tau-v_\ell\tau\Big(\frac{v_0}{v_\ell}-\frac{v_0^2}{2v_\ell^2}\Big)=\frac{v_0^2\tau}{2v_\ell}=\frac{v_0^2}{2g}.\ \surd$$
+          Numériquement, sans frottement : $h_0=\dfrac{4}{2\times9{,}81}\approx0{,}204$ m : le frottement visqueux divise la hauteur atteinte par $\approx2{,}2$.

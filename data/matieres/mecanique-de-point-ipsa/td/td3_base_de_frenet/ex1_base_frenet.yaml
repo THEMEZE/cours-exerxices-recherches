@@ -1,0 +1,310 @@
+id: td3_ex1
+intitule: "Base de Frenet : démonstrations de cours et applications"
+td: td3
+facultatif: false
+seance: 3
+
+cours_rattache:
+  - cinematique.abscisse_curviligne
+  - cinematique.base_frenet
+  - cinematique.rayon_courbure
+  - cinematique.acceleration_tangentielle_normale
+
+metadonnees:
+  duree_estimee: "50 min"
+  difficulte: 3
+  priorite: 5
+  type_exercice: "Cours actif / Fondamental"
+  indispensable: true
+
+enonce_intro: |
+  La figure 1 représente la trajectoire d'un point matériel $M$ dans le plan $Oxy$. En $M$, la tangente à la
+  courbe fait l'angle $\alpha$ avec l'axe $Ox$ (cet angle est noté $\theta$ dans certains énoncés ; on le note $\alpha$
+  ici pour ne pas le confondre avec l'angle polaire du TD2). Le point $M'$ de la trajectoire est voisin de $M$, et la
+  tangente en $M'$ fait l'angle $\alpha+\mathrm d\alpha$ avec $Ox$. On note $\mathrm ds$ la longueur de l'arc $MM'$.
+
+prerequis:
+  - titre: "Dérivée d'un vecteur unitaire tournant"
+    texte: |
+      $\vec e(\alpha)=\cos\alpha\,\vec u_x+\sin\alpha\,\vec u_y$ a pour dérivée $\dfrac{\mathrm d\vec e}{\mathrm d\alpha}=-\sin\alpha\,\vec u_x+\cos\alpha\,\vec u_y$, vecteur unitaire obtenu par rotation de $+\pi/2$.
+  - titre: "Produit vectoriel plan"
+    texte: |
+      $(A_x,A_y)\wedge(B_x,B_y)=(A_xB_y-A_yB_x)\,\vec k$. Pour une base orthonormée directe $(\vec\tau,\vec n)$ : $\vec\tau\wedge\vec n=\vec k$ et $\vec n\wedge\vec\tau=-\vec k$.
+  - titre: "Cinématique cartésienne et polaire"
+    texte: |
+      $\vec v=\dot x\,\vec u_x+\dot y\,\vec u_y$, $\vec a=\ddot x\,\vec u_x+\ddot y\,\vec u_y$ ; en polaire $\vec v=\dot r\,\vec u_r+r\dot\theta\,\vec u_\theta$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Démontrer et utiliser $\\vec a=\\dot v\\,\\vec\\tau+\\dfrac{v^2}R\\,\\vec n$"
+    texte: |
+      Savoir construire la base de Frenet, établir pas à pas les expressions de $\vec v$ et de $\vec a$, en déduire une formule du rayon de courbure indépendante du système de coordonnées et l'appliquer à des courbes données en cartésien, en $y(x)$, en polaire ou en paramétrique.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Un exercice de démonstrations guidées, à ne pas sauter"
+    texte: |
+      Cet exercice reprend les démonstrations du cours : il vaut mieux les faire refaire par les étudiants que les leur présenter. Le point sensible est le passage de $\dfrac{\mathrm d\vec\tau}{\mathrm dt}$ à $\dfrac vR\,\vec n$ (dérivée composée par $\alpha$, puis par $s$). Les formules de $R$ de la partie 2 sont des outils à connaître pour les exercices suivants. La question 2(e) (polaire) est difficile : la traiter en autonomie par les groupes avancés.
+
+point_cours:
+  - titre: "Base de Frenet et accélération"
+    texte: |
+      $$\vec\tau=\frac{\mathrm d\overrightarrow{OM}}{\mathrm ds},\quad\frac{\mathrm d\vec\tau}{\mathrm ds}=\frac{\vec n}R,\quad\vec v=v\,\vec\tau,\quad\vec a=\frac{\mathrm dv}{\mathrm dt}\,\vec\tau+\frac{v^2}R\,\vec n,\quad R=\frac{v^3}{\|\vec v\wedge\vec a\|}.$$
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Oublier que $\\vec n$ est orienté vers le centre de courbure"
+    texte: |
+      En dérivant $\vec\tau=(\cos\alpha,\sin\alpha)$ on obtient $\dfrac{\mathrm d\vec\tau}{\mathrm d\alpha}=(-\sin\alpha,\cos\alpha)$ : ce vecteur pointe vers la concavité si $\mathrm d\alpha>0$ mais vers l'extérieur si $\mathrm d\alpha<0$. On pose donc $\vec n=\pm(-\sin\alpha,\cos\alpha)$ selon le signe de $\mathrm d\alpha$, de sorte que $\vec n$ pointe toujours vers le centre de courbure.
+  - titre: "Écrire $R=\\mathrm d\\alpha/\\mathrm ds$ au lieu de $1/R=|\\mathrm d\\alpha/\\mathrm ds|$"
+    texte: |
+      La courbure est $\dfrac1R=\left|\dfrac{\mathrm d\alpha}{\mathrm ds}\right|$ : c'est l'inverse du rayon. Un virage plus serré a un $R$ plus petit et un $\dfrac{\mathrm d\alpha}{\mathrm ds}$ plus grand.
+  - titre: "Oublier l'exposant $3/2$ et la valeur absolue"
+    texte: |
+      $R=\dfrac{(1+y'^2)^{3/2}}{|y''|}$. Une erreur fréquente est $R=\dfrac{1+y'^2}{y''}$, ou la même formule sans valeur absolue (rayon négatif).
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Faire refaire la figure par les étudiants"
+    texte: |
+      Avant de commencer, distribuer la figure 1 sans les repères et demander de tracer $\vec\tau$, $\vec n$, le centre de courbure $C$ à l'intersection des normales en $M$ et $M'$, puis d'en déduire $\mathrm ds=R\,\mathrm d\alpha$ géométriquement.
+  - titre: "Valider avec le cercle"
+    texte: |
+      Pour chaque formule de $R$ de la partie 2, faire vérifier qu'elle redonne $R_0$ pour un cercle de rayon $R_0$ (par exemple $x=R_0\cos\omega t$, $y=R_0\sin\omega t$) : un excellent test de cohérence.
+
+bilan:
+  - titre: "Formules de la base de Frenet"
+    texte: |
+      $\vec\tau=\cos\alpha\,\vec u_x+\sin\alpha\,\vec u_y$, $\vec n=-\sin\alpha\,\vec u_x+\cos\alpha\,\vec u_y$ ($\mathrm d\alpha>0$) ; $\mathrm d\overrightarrow{OM}=\mathrm ds\,\vec\tau$ ; $\vec v=\dot s\,\vec\tau$ ; $\vec a=\dot v\,\vec\tau+\dfrac{v^2}R\,\vec n$ ; $R=\dfrac{v^3}{\|\vec v\wedge\vec a\|}$ ; $a_T=\dfrac{\vec a\cdot\vec v}v$ ; $a_N=\dfrac{\|\vec a\wedge\vec v\|}v$ ; en $y(x)$ : $R=\dfrac{(1+y'^2)^{3/2}}{|y''|}$ ; en polaire : $R=\dfrac{(r^2+r'^2)^{3/2}}{|r^2+2r'^2-rr''|}$.
+  - titre: "Rayons de courbure des applications"
+    texte: |
+      $\mathrm e^x$ en $0$ : $2\sqrt2$ ; $r=a(1-\cos\theta)$ en $\theta=\pi$ : $\tfrac43a$ ; ellipse $x=a\cos\omega t$, $y=b\sin\omega t$ en $t=0$ : $\dfrac{b^2}a$ ; $r=\dfrac p{1+e\cos\theta}$ en $\theta=0$ : $p$.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Centre de courbure et développée"
+    texte: |
+      Le centre de courbure est $C=M+R\,\vec n$. Pour la parabole $y=x^2$, montrer que $C=(-4x^3,\ \tfrac12+3x^2)$ : la développée est la parabole semi-cubique $y=\tfrac12+3\left(\tfrac{-x_C}4\right)^{2/3}$. Vérifier en $x=0$ et $x=1$ (exercice 2).
+  - niveau: master
+    titre: "Formule de $R$ en 3D"
+    texte: |
+      Montrer que $\|\vec v\wedge\vec a\|=v^3\kappa$ en 3D également ($\kappa=1/R$ est la courbure) et que $\vec v\cdot(\vec a\wedge\dot{\vec a})/\|\vec v\wedge\vec a\|^2$ est la torsion de la trajectoire. Calculer pour l'hélice $\overrightarrow{OM}=(a\cos\omega t,a\sin\omega t,h\omega t)$ : $\kappa=\dfrac a{a^2+h^2}$.
+
+accroche_point_cours_essentiel:
+  - titre: "Un repère qui suit le mobile"
+    duree_introduction: "3 à 5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Un coureur dans un virage ressent deux choses : il {\bf accélère} ou ralentit {\bf dans le sens de la course}, et il est {\bf poussé vers l'extérieur} du virage. Peut-on {\bf démontrer} qu'il n'y a que deux composantes, l'une le long de la trajectoire et l'autre perpendiculaire, et que la seconde vaut $v^2/R$ ?
+    texte: |
+      {\bf Idée clé : on dérive $\vec v=v\,\vec\tau$ en tenant compte du fait que $\vec\tau$ tourne.} Quand le mobile avance de $\mathrm ds$, la tangente tourne de $\mathrm d\alpha$ et $\mathrm d\vec\tau=\mathrm d\alpha\,\vec n$, c'est-à-dire $\dfrac{\mathrm d\vec\tau}{\mathrm dt}=\dot\alpha\,\vec n=\dfrac vR\,\vec n$. D'où l'accélération en deux termes.
+
+outils_mathematiques:
+  - titre: "Dérivée composée à deux niveaux"
+    texte: |
+      $\dfrac{\mathrm d\vec\tau}{\mathrm dt}=\dfrac{\mathrm d\vec\tau}{\mathrm d\alpha}\dfrac{\mathrm d\alpha}{\mathrm ds}\dfrac{\mathrm ds}{\mathrm dt}$ : on passe de $t$ à $s$ puis à $\alpha$, chaque facteur ayant un sens géométrique.
+  - titre: "Rayon de courbure en polaire : paramétrisation par $\\theta$"
+    texte: |
+      Pour une courbe $r(\theta)$, on prend $\theta$ comme paramètre (avec $\dot\theta=1$) : $\vec v=r'\,\vec u_r+r\,\vec u_\theta$ et $\vec a=(r''-r)\,\vec u_r+2r'\,\vec u_\theta$. Le rayon de courbure ne dépend pas du paramétrage, donc $R=\dfrac{\|\vec v\|^3}{|v_ra_\theta-v_\theta a_r|}$ avec ces composantes.
+  - titre: "Dérivées de $\\mathrm e^x$ et formule de $R$"
+    texte: |
+      $y=\mathrm e^x$ : $y'=y''=\mathrm e^x$, donc $R=\dfrac{(1+\mathrm e^{2x})^{3/2}}{\mathrm e^x}$.
+
+liens_autres_disciplines:
+  - discipline: "Mathématiques"
+    texte: |
+      Courbure d'une courbe plane, cercle osculateur (cercle tangent d'ordre 2), formules de Frenet, longueur d'arc.
+  - discipline: "Navigation"
+    texte: |
+      La trajectoire d'un navire ou d'un avion est décrite par son cap (angle $\alpha$ de la tangente) et sa vitesse : $\dot\alpha=v/R$ est le {\bf taux de virage}, grandeur directement mesurée par un gyromètre.
+
+schemas_proposes:
+  - titre: "Figure 1 : arc $MM'$ avec la base de Frenet"
+    description: |
+      Dessiner une courbe plane, deux points voisins $M$ et $M'$ ; les tangentes en $M$ et $M'$ (angles $\alpha$ et $\alpha+\mathrm d\alpha$ avec $Ox$) ; $\vec\tau$ (tangent, sens du mouvement) et $\vec n$ (normal, vers l'intérieur de la courbure) en $M$ ; les normales en $M$ et $M'$ qui se coupent en $C$ ; l'arc $\mathrm ds$ et la distance $CM=R$ ; l'angle $\mathrm d\alpha$ entre les normales.
+    tikz: |
+      % nécessite \usetikzlibrary{calc}
+      \begin{tikzpicture}[>=stealth,scale=1.1]
+        \draw[->] (-1.5,0)--(6,0) node[right]{$x$};
+        \draw[->] (-1.2,-0.4)--(-1.2,5.5) node[above]{$y$};
+        \coordinate (C) at (2,4);
+        \draw[thick] ($(C)+(-150:3.2)$) arc (-150:-30:3.2);
+        \fill (C) circle (1.5pt) node[above]{$C$};
+        \coordinate (M) at ($(C)+(-100:3.2)$);
+        \coordinate (Mp) at ($(C)+(-75:3.2)$);
+        \fill (M) circle (1.5pt) node[below left]{$M$};
+        \fill (Mp) circle (1.5pt) node[below right]{$M'$};
+        \draw[dashed] (C)--(M) node[midway,left]{$R$};
+        \draw[dashed] (C)--(Mp);
+        \draw[->,very thick,red] (M)--++(0.98,-0.17) node[right]{$\vec\tau$};
+        \draw[->,very thick,blue] (M)--++(0.17,0.98) node[right]{$\vec n$};
+        \node at ($(C)+(-87.5:3.6)$) {$\mathrm ds$};
+        \node at ($(C)+(-87.5:1.6)$) {$\mathrm d\alpha$};
+      \end{tikzpicture}
+  - titre: "Repérage de l'angle $\\alpha$ de la tangente"
+    description: |
+      Sur une courbe quelconque, tracer trois points $P_1$, $P_2$, $P_3$ avec leurs tangentes, et pour chacun l'angle $\alpha$ mesuré depuis $Ox$ jusqu'à la tangente. Placer $\vec\tau=(\cos\alpha,\sin\alpha)$ et $\vec n=(-\sin\alpha,\cos\alpha)$ et faire constater que $\vec n$ est la rotation de $\vec\tau$ de $+90^\circ$.
+
+questions:
+  - id: q1
+    enonce: |
+      {\bf 1/ Vitesse et accélération en base de Frenet (partie 1).}
+      \begin{enumerate}[label=(\alph*)]
+          \item Représenter la base de Frenet $(\vec\tau,\vec n)$ associée au point $M$ sur la figure 1.
+          \item Exprimer les vecteurs $\vec\tau$ et $\vec n$ dans la base cartésienne $(\vec u_x,\vec u_y)$ en fonction de $\alpha$. Établir une relation entre $\dfrac{\mathrm d\vec\tau}{\mathrm d\alpha}$ et $\vec n$, et entre $\dfrac{\mathrm d\vec n}{\mathrm d\alpha}$ et $\vec\tau$.
+          \item Donner la définition de l'abscisse curviligne $s$.
+          \item Donner l'expression du déplacement élémentaire $\mathrm d\overrightarrow{OM}$ dans la base de Frenet.
+      \end{enumerate}
+    coup_de_pouce: |
+      $\vec\tau$ est tangent à la courbe et dirigé dans le sens du mouvement : il fait l'angle $\alpha$ avec $Ox$. $\vec n$ lui est perpendiculaire, vers l'intérieur du virage. Pour (c), pensez à la longueur d'un petit segment $\|\mathrm d\overrightarrow{OM}\|$.
+    correction: |
+      (b) $\vec\tau=\cos\alpha\,\vec u_x+\sin\alpha\,\vec u_y$, $\vec n=-\sin\alpha\,\vec u_x+\cos\alpha\,\vec u_y$, $\dfrac{\mathrm d\vec\tau}{\mathrm d\alpha}=\vec n$, $\dfrac{\mathrm d\vec n}{\mathrm d\alpha}=-\vec\tau$. (c) $\mathrm ds=\|\mathrm d\overrightarrow{OM}\|$, $s=\int\|\vec v\|\,\mathrm dt$. (d) $\mathrm d\overrightarrow{OM}=\mathrm ds\,\vec\tau$.
+    solution:
+      - titre: "(a) Construction de la base"
+        texte: |
+          On trace en $M$ la tangente à la courbe ; $\vec\tau$ est le vecteur unitaire porté par cette tangente, orienté dans le {\bf sens du mouvement}. Le vecteur $\vec n$ est le vecteur unitaire perpendiculaire à $\vec\tau$ obtenu par rotation de $+\pi/2$, c'est-à-dire dirigé vers le {\bf côté concave} de la courbe (vers le point d'intersection $C$ des normales en $M$ et $M'$). On vérifie sur la figure que $\vec n$ est du même côté que $C$.
+      - titre: "(b) Composantes cartésiennes"
+        texte: |
+          $\vec\tau$ fait l'angle $\alpha$ avec $Ox$ :
+          $$\boxed{\vec\tau=\cos\alpha\,\vec u_x+\sin\alpha\,\vec u_y},\qquad\boxed{\vec n=-\sin\alpha\,\vec u_x+\cos\alpha\,\vec u_y}$$
+          (pour $\mathrm d\alpha>0$, c'est-à-dire courbe qui tourne vers la gauche ; pour $\mathrm d\alpha<0$ on prend $\vec n$ de signe opposé afin qu'il pointe toujours vers le centre de courbure). On vérifie $\|\vec\tau\|=\|\vec n\|=1$ et $\vec\tau\cdot\vec n=-\cos\alpha\sin\alpha+\sin\alpha\cos\alpha=0$. En dérivant par rapport à $\alpha$ :
+          $$\boxed{\frac{\mathrm d\vec\tau}{\mathrm d\alpha}=\vec n},\qquad\boxed{\frac{\mathrm d\vec n}{\mathrm d\alpha}=-\vec\tau}.$$
+          La dérivée de chaque vecteur est l'autre, à un signe près : propriété identique à celle de $(\vec u_r,\vec u_\theta)$ avec $\theta\to\alpha$.
+      - titre: "(c) Abscisse curviligne"
+        texte: |
+          L'{\bf abscisse curviligne} $s$ est la longueur de l'arc de trajectoire parcourue, comptée à partir d'une origine choisie sur la courbe et dans le sens du mouvement : $\mathrm ds=\|\mathrm d\overrightarrow{OM}\|=\|\vec v\|\,\mathrm dt$, donc
+          $$s(t)=\int_{t_0}^t\|\vec v(t')\|\,\mathrm dt'.$$
+          Elle est croissante si l'on parcourt la courbe toujours dans le même sens ($\dot s=\|\vec v\|>0$).
+      - titre: "(d) Déplacement élémentaire"
+        texte: |
+          Pour un déplacement infinitésimal, la corde $MM'$ se confond avec l'arc et avec la tangente :
+          $$\boxed{\mathrm d\overrightarrow{OM}=\mathrm ds\,\vec\tau}.$$
+          Seul le terme tangent subsiste : il n'y a pas de composante selon $\vec n$ au premier ordre. (Comparer à la base polaire : $\mathrm d\overrightarrow{OM}=\mathrm dr\,\vec u_r+r\,\mathrm d\theta\,\vec u_\theta$.)
+
+  - id: q2
+    enonce: |
+      \begin{enumerate}[label=(\alph*),start=5]
+          \item Écrire le vecteur vitesse $\vec v$ dans la base de Frenet.
+          \item Le rayon $R$ du cercle osculateur en $M$ est donné par $\dfrac1R=\left|\dfrac{\mathrm d\alpha}{\mathrm ds}\right|$. Démontrer que, dans la base de Frenet, l'accélération s'écrit
+          $$\vec a=\frac{\mathrm dv}{\mathrm dt}\,\vec\tau+\frac{v^2}R\,\vec n.$$
+          \item Si le mouvement est uniforme, comment s'écrit l'accélération dans la base de Frenet ? Que dire de l'angle entre $\vec a$ et $\vec v$ ?
+      \end{enumerate}
+    coup_de_pouce: |
+      Pour (f), dérivez $\vec v=v\,\vec\tau$ par rapport au temps (dérivée d'un produit), puis écrivez $\dfrac{\mathrm d\vec\tau}{\mathrm dt}=\dfrac{\mathrm d\vec\tau}{\mathrm d\alpha}\dfrac{\mathrm d\alpha}{\mathrm ds}\dfrac{\mathrm ds}{\mathrm dt}$ et utilisez (b) et la définition de $R$.
+    correction: |
+      (e) $\vec v=\dot s\,\vec\tau=v\,\vec\tau$. (f) $\dfrac{\mathrm d\vec\tau}{\mathrm dt}=\dfrac vR\,\vec n$ donc $\vec a=\dot v\,\vec\tau+\dfrac{v^2}R\,\vec n$. (g) $v=$ cte : $\vec a=\dfrac{v^2}R\,\vec n\perp\vec v$.
+    solution:
+      - titre: "(e) Vecteur vitesse"
+        texte: |
+          $\vec v=\dfrac{\mathrm d\overrightarrow{OM}}{\mathrm dt}=\dfrac{\mathrm ds}{\mathrm dt}\,\vec\tau$, soit
+          $$\boxed{\vec v=\dot s\,\vec\tau=v\,\vec\tau},\qquad v=\|\vec v\|=\dot s.$$
+          La vitesse est {\bf toujours tangente} à la trajectoire : elle n'a aucune composante selon $\vec n$.
+      - titre: "(f) Accélération"
+        texte: |
+          On dérive $\vec v=v\,\vec\tau$ :
+          $$\vec a=\frac{\mathrm dv}{\mathrm dt}\,\vec\tau+v\,\frac{\mathrm d\vec\tau}{\mathrm dt}.$$
+          Le vecteur $\vec\tau$ dépend du temps par l'intermédiaire de $\alpha(s(t))$ :
+          $$\frac{\mathrm d\vec\tau}{\mathrm dt}=\frac{\mathrm d\vec\tau}{\mathrm d\alpha}\,\frac{\mathrm d\alpha}{\mathrm ds}\,\frac{\mathrm ds}{\mathrm dt}=\frac{\mathrm d\vec\tau}{\mathrm d\alpha}\,\frac{\mathrm d\alpha}{\mathrm ds}\,v.$$
+          On oriente $\vec n$ vers le centre de courbure : alors $\dfrac{\mathrm d\alpha}{\mathrm ds}\,\dfrac{\mathrm d\vec\tau}{\mathrm d\alpha}=\dfrac1R\,\vec n$ (le signe éventuel de $\mathrm d\alpha$ est absorbé dans l'orientation de $\vec n$, et $\left|\dfrac{\mathrm d\alpha}{\mathrm ds}\right|=\dfrac1R$). Donc $\dfrac{\mathrm d\vec\tau}{\mathrm dt}=\dfrac vR\,\vec n$ et
+          $$\boxed{\vec a=\frac{\mathrm dv}{\mathrm dt}\,\vec\tau+\frac{v^2}R\,\vec n}.$$
+          {\bf Interprétation :} $a_T=\dot v$ traduit la variation de la {\bf norme} de la vitesse ; $a_N=v^2/R$ traduit la rotation du {\bf vecteur vitesse}, toujours dirigée vers le centre de courbure. Vérification dimensionnelle : $[v^2/R]=\mathrm{L^2T^{-2}/L}=\mathrm{LT^{-2}}$.
+      - titre: "(g) Mouvement uniforme"
+        texte: |
+          Si $v=$ cte, $\dot v=0$ :
+          $$\boxed{\vec a=\frac{v^2}R\,\vec n}.$$
+          L'accélération est purement {\bf normale}, dirigée vers le centre de courbure, donc {\bf perpendiculaire à $\vec v$} : $\vec a\cdot\vec v=0$. Elle est nulle seulement pour $R=\infty$ (trajectoire rectiligne). Pour un cercle de rayon $R_0$, on retrouve $a=v^2/R_0=R_0\omega^2$.
+
+  - id: q3
+    enonce: |
+      {\bf 2/ Expression du rayon de courbure $R$.}
+      \begin{enumerate}[label=(\alph*)]
+          \item Calculer $\|\vec a\wedge\vec v\|$ à partir des expressions de $\vec v$ et de $\vec a$ dans la base de Frenet.
+          \item En déduire une formule pour le rayon $R$ du cercle osculateur, indépendante du système de coordonnées.
+          \item Donner l'expression du rayon $R$, appelé rayon de courbure, en coordonnées cartésiennes (mouvement plan).
+          \item Que devient $R$ pour une trajectoire plane d'équation $y=y(x)$ ?
+      \end{enumerate}
+    coup_de_pouce: |
+      $\vec\tau\wedge\vec\tau=\vec0$ et $\vec n\wedge\vec\tau=-\vec k$. Pour (c), écrivez $\vec v=(\dot x,\dot y)$ et $\vec a=(\ddot x,\ddot y)$. Pour (d), prenez $x$ comme paramètre : $\dot x=1$, $\ddot x=0$.
+    correction: |
+      (a) $\|\vec a\wedge\vec v\|=\dfrac{v^3}R$. (b) $R=\dfrac{v^3}{\|\vec a\wedge\vec v\|}$. (c) $R=\dfrac{(\dot x^2+\dot y^2)^{3/2}}{|\dot x\ddot y-\dot y\ddot x|}$. (d) $R=\dfrac{(1+y'^2)^{3/2}}{|y''|}$.
+    solution:
+      - titre: "(a) Produit vectoriel"
+        texte: |
+          $\vec a\wedge\vec v=\left(a_T\,\vec\tau+a_N\,\vec n\right)\wedge v\,\vec\tau=a_Nv\,\vec n\wedge\vec\tau=-a_Nv\,\vec k$ puisque $\vec\tau\wedge\vec\tau=\vec0$. Donc
+          $$\|\vec a\wedge\vec v\|=a_Nv=\frac{v^3}R.$$
+      - titre: "(b) Formule intrinsèque"
+        texte: |
+          $$\boxed{R=\frac{\|\vec v\|^3}{\|\vec a\wedge\vec v\|}}.$$
+          Cette formule ne fait intervenir que $\vec v$ et $\vec a$ : elle est valable en 2D comme en 3D, dans n'importe quel système de coordonnées. On en déduit aussi $\boxed{a_N=\dfrac{\|\vec a\wedge\vec v\|}v}$.
+      - titre: "(c) En coordonnées cartésiennes (plan)"
+        texte: |
+          $\vec a\wedge\vec v=(\ddot x\,\dot y-\ddot y\,\dot x)\,\vec k$ et $v=\sqrt{\dot x^2+\dot y^2}$ :
+          $$\boxed{R=\frac{\left(\dot x^2+\dot y^2\right)^{3/2}}{\left|\dot x\,\ddot y-\dot y\,\ddot x\right|}}.$$
+          En 3D : $R=\dfrac{(\dot x^2+\dot y^2+\dot z^2)^{3/2}}{\|\vec v\wedge\vec a\|}$ avec les trois composantes du produit vectoriel.
+      - titre: "(d) Courbe $y=y(x)$"
+        texte: |
+          En prenant $x$ comme paramètre ($R$ ne dépend pas de la paramétrisation) : $\dot x=1$, $\ddot x=0$, $\dot y=y'$, $\ddot y=y''$ :
+          $$\boxed{R=\frac{\left(1+y'^2\right)^{3/2}}{|y''|}}.$$
+          Cas limites : $y''=0$ (droite, point d'inflexion) donne $R=\infty$ ; en un extremum de $y$ ($y'=0$) : $R=1/|y''|$.
+
+  - id: q4
+    enonce: |
+      \begin{enumerate}[label=(\alph*),start=5]
+          \item (*) Même question pour une courbe plane en coordonnées polaires $r=r(\theta)$.
+          \item {\bf Application.} Déterminer le rayon de courbure des courbes suivantes :
+          \begin{itemize}
+              \item $y(x)=\exp(x)$ pour $x=0$ ;
+              \item $r(\theta)=a\,(1-\cos\theta)$ pour $\theta=\pi$ ;
+              \item $x(t)=a\cos\omega t$, $y(t)=b\sin\omega t$ pour $t=0$ ;
+              \item $r(\theta)=\dfrac p{1+e\cos\theta}$ (ellipse) pour $\theta=0$.
+          \end{itemize}
+      \end{enumerate}
+    coup_de_pouce: |
+      Pour (e), prenez $\theta$ comme paramètre : $\dot\theta=1$, $\ddot\theta=0$, donc $\vec v=r'\,\vec u_r+r\,\vec u_\theta$ et $\vec a=(r''-r)\,\vec u_r+2r'\,\vec u_\theta$, puis utilisez $R=v^3/|v_ra_\theta-v_\theta a_r|$. Pour (f), choisissez la formule adaptée à chaque courbe.
+    correction: |
+      (e) $R=\dfrac{(r^2+r'^2)^{3/2}}{|r^2+2r'^2-r\,r''|}$. (f) $2\sqrt2$ ; $\dfrac43a$ ; $\dfrac{b^2}a$ ; $p$.
+    solution:
+      - titre: "(e) Rayon de courbure en polaire"
+        texte: |
+          On paramètre la courbe par $\theta$ lui-même ($\dot\theta=1$, $\ddot\theta=0$, $\dot r=r'$, $\ddot r=r''$). Avec les formules du TD2 :
+          $$\vec v=r'\,\vec u_r+r\,\vec u_\theta,\qquad\vec a=(r''-r)\,\vec u_r+2r'\,\vec u_\theta.$$
+          Dans la base orthonormée $(\vec u_r,\vec u_\theta)$ : $v_ra_\theta-v_\theta a_r=2r'^2-r(r''-r)=r^2+2r'^2-r\,r''$ et $v^2=r^2+r'^2$ :
+          $$\boxed{R=\frac{\left(r^2+r'^2\right)^{3/2}}{\left|r^2+2r'^2-r\,r''\right|}}.$$
+          Vérification : cercle $r=R_0$, $r'=r''=0$ : $R=R_0^3/R_0^2=R_0$.
+      - titre: "(f) $y=\\mathrm e^x$ en $x=0$"
+        texte: |
+          $y'=y''=\mathrm e^x$, donc $y'(0)=y''(0)=1$ et $R=\dfrac{(1+1)^{3/2}}{1}=\boxed{2\sqrt2\approx2{,}83}$ (en unités de longueur).
+      - titre: "(f) Cardioïde $r=a(1-\\cos\\theta)$ en $\\theta=\\pi$"
+        texte: |
+          $r'=a\sin\theta$, $r''=a\cos\theta$. En $\theta=\pi$ : $r=2a$, $r'=0$, $r''=-a$. Numérateur : $(4a^2)^{3/2}=8a^3$ ; dénominateur : $4a^2+0-2a\cdot(-a)=6a^2$. Donc
+          $$R=\frac{8a^3}{6a^2}=\boxed{\tfrac43\,a}.$$
+          Plus généralement $R=\tfrac43a\left|\sin\tfrac\theta2\right|$ : $R\to0$ au point de rebroussement $\theta=0$.
+      - titre: "(f) Ellipse paramétrique en $t=0$"
+        texte: |
+          $\vec v=(-a\omega\sin\omega t,\ b\omega\cos\omega t)$ et $\vec a=-\omega^2(a\cos\omega t,\ b\sin\omega t)$. En $t=0$ : $\vec v=(0,b\omega)$ et $\vec a=(-a\omega^2,0)$, donc $v=b\omega$ et $\|\vec v\wedge\vec a\|=|0\cdot0-b\omega\cdot(-a\omega^2)|=ab\omega^3$ :
+          $$R=\frac{b^3\omega^3}{ab\omega^3}=\boxed{\frac{b^2}a}.$$
+          Par symétrie, en $t=\pi/2$ (extrémité du petit axe) : $R=a^2/b$. Pour $a=b$ : $R=a$ (cercle).
+      - titre: "(f) Ellipse polaire $r=p/(1+e\\cos\\theta)$ en $\\theta=0$"
+        texte: |
+          $r'=\dfrac{p\,e\sin\theta}{(1+e\cos\theta)^2}$ ; en $\theta=0$ : $r=\dfrac p{1+e}$, $r'=0$ et $r''=\dfrac{p\,e\cos\theta}{(1+e\cos\theta)^2}+\dots=\dfrac{p\,e}{(1+e)^2}$ (les autres termes contiennent $\sin\theta$). Alors $R=\dfrac{r^3}{r^2-r\,r''}=\dfrac{r^2}{r-r''}$ avec $r-r''=\dfrac p{1+e}-\dfrac{p\,e}{(1+e)^2}=\dfrac p{(1+e)^2}$ et $r^2=\dfrac{p^2}{(1+e)^2}$ :
+          $$R=\boxed{p}.$$
+          Le rayon de courbure au périhélie est le {\bf paramètre} de l'ellipse. Cohérence avec l'ellipse paramétrique : $R=\dfrac{b^2}a=p$ (car $b^2=ap$).
+
+  - id: q5
+    enonce: |
+      {\bf 3/ Accélération tangentielle $a_T$ et accélération normale $a_N$.}
+      \begin{enumerate}[label=(\alph*)]
+          \item Montrer que dans un mouvement curviligne quelconque on a $a_T=\dfrac{\vec a\cdot\vec v}v$ et $a_N=\dfrac{\|\vec a\wedge\vec v\|}v$.
+          \item Déterminer l'expression de $a_T$ pour un mobile de coordonnées $x(t)$, $y(t)$ et $z(t)$.
+          \item Même question pour $a_N$.
+      \end{enumerate}
+    coup_de_pouce: |
+      $\vec a\cdot\vec v=(a_T\,\vec\tau+a_N\,\vec n)\cdot v\,\vec\tau$. Pour (c), $a^2=a_T^2+a_N^2$ évite de calculer le produit vectoriel à 3 composantes.
+    correction: |
+      (a) $\vec a\cdot\vec v=a_Tv$ et $\|\vec a\wedge\vec v\|=a_Nv$. (b) $a_T=\dfrac{\dot x\ddot x+\dot y\ddot y+\dot z\ddot z}{\sqrt{\dot x^2+\dot y^2+\dot z^2}}$. (c) $a_N=\sqrt{\ddot x^2+\ddot y^2+\ddot z^2-a_T^2}$.
+    solution:
+      - titre: "(a) Les deux composantes"
+        texte: |
+          $\vec a\cdot\vec v=(a_T\,\vec\tau+a_N\,\vec n)\cdot v\,\vec\tau=a_Tv$ car $\vec\tau\cdot\vec\tau=1$ et $\vec n\cdot\vec\tau=0$ : $\boxed{a_T=\dfrac{\vec a\cdot\vec v}v}$ (projection de $\vec a$ sur $\vec\tau$). Le calcul du 2(a) donne $\|\vec a\wedge\vec v\|=a_Nv$ : $\boxed{a_N=\dfrac{\|\vec a\wedge\vec v\|}v}$. On retrouve que $a_T=\dot v$ : $\dfrac{\mathrm d(v^2)}{\mathrm dt}=2\vec v\cdot\vec a$ donne $v\dot v=\vec a\cdot\vec v$.
+      - titre: "(b) $a_T$ en cartésien"
+        texte: |
+          $$\boxed{a_T=\frac{\dot x\ddot x+\dot y\ddot y+\dot z\ddot z}{\sqrt{\dot x^2+\dot y^2+\dot z^2}}}.$$
+      - titre: "(c) $a_N$ en cartésien"
+        texte: |
+          $$\boxed{a_N=\frac{\sqrt{(\dot y\ddot z-\dot z\ddot y)^2+(\dot z\ddot x-\dot x\ddot z)^2+(\dot x\ddot y-\dot y\ddot x)^2}}{\sqrt{\dot x^2+\dot y^2+\dot z^2}}}.$$
+          Alternative plus rapide : $a_N=\sqrt{\ddot x^2+\ddot y^2+\ddot z^2-a_T^2}$. {\bf Vérification} (obligatoire) : $a_T^2+a_N^2=\|\vec a\|^2$.

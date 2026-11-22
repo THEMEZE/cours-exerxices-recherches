@@ -13,6 +13,7 @@ cours_rattache:
 metadonnees:
   duree_estimee: "35 min"
   difficulte: 2
+  priorite: 5
   type_exercice: "Cours actif / Application"
   indispensable: true
 
@@ -147,6 +148,16 @@ questions:
           %| $y$ (m) | 0 | -0,0008 | -0,0032 | -0,0072 | -0,0128 | -0,020 | -0,080 |
 
           On reporte ces points sur le graphique $y(x)$ : ils s'accumulent près de l'origine puis s'écartent de plus en plus vite, la vitesse suivant $Oy$ augmentant avec $t$ (voir (f)).
+      
+        figure:
+          - ref: td1_ex1_q1_PhV111
+            legende: |
+              $ $
+            #scale: 1.7
+            width: 0.5
+            # height: 4cm       # les deux ensemble : la figure est étirée pour tenir exactement dans ce cadre
+            label: fig.td1_ex1_q1_PhV111
+      
       - titre: "(f) Nature du mouvement sur chaque axe"
         texte: |
           Suivant $Ox$ : $x(t)=at$ est {\bf linéaire en $t$}, le mouvement est donc {\bf rectiligne uniforme} de vitesse constante $a$.
@@ -177,6 +188,15 @@ questions:
         texte: |
           À chaque instant du tableau précédent, on trace en $M(t)$ le vecteur $\vec v(t)$ (composante $Ox$ constante $=a$, composante $Oy$ de plus en plus négative) et le vecteur $\vec a$ (toujours vertical, vers le bas, de norme constante $2b$). On observera que $\vec v$ devient de plus en plus incliné vers le bas au cours du temps, alors que $\vec a$ garde une direction et une norme fixes — cohérent avec un mouvement uniforme suivant $Ox$ et uniformément accéléré suivant $Oy$.
 
+        figure:
+          - ref: td1_ex1_q2_PhV111
+            legende: |
+              $ $
+            #scale: 1.7
+            width: 0.5
+            # height: 4cm       # les deux ensemble : la figure est étirée pour tenir exactement dans ce cadre
+            label: fig.td1_ex1_q2_PhV111
+
   - id: q3
     enonce: |
       Application : une mouette vole à une hauteur de 20 m au-dessus de la mer, en vol horizontal, à la vitesse de 36 km/h, lorsqu'elle laisse tomber un poisson.
@@ -192,6 +212,16 @@ questions:
       - titre: "(a) Choix du repère"
         texte: |
           On choisit l'origine $O$ au point où le poisson est lâché, avec $\vec u_x$ horizontal dans le sens du vol, et $\vec u_y$ vertical ascendant. La surface de la mer correspond alors à l'ordonnée $y=-20$ m.
+
+        figure:
+          - ref: td1_ex1_q3_PhV111
+            legende: |
+              $ $
+            scale: 0.2
+            #width: 0.5
+            # height: 4cm       # les deux ensemble : la figure est étirée pour tenir exactement dans ce cadre
+            label: fig.td1_ex1_q3_PhV111
+      
       - titre: "(b) Temps de chute"
         texte: |
           La vitesse horizontale $v_0 = 36~\text{km/h} = 10~\text{m/s}$ reste constante (pas de force horizontale), et le poisson est en chute libre verticale à partir d'une vitesse verticale nulle. On a donc, comme en question 1 mais avec $a=v_0=10$ m/s et $b=g/2$ :

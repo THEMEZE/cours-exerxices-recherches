@@ -1,0 +1,200 @@
+id: td5_ex2
+intitule: "Théorème de l'énergie cinétique"
+td: td5
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - energie.theoreme_energie_cinetique
+  - energie.force_conservative
+  - energie.energie_potentielle_pesanteur
+
+metadonnees:
+  duree_estimee: "45 min"
+  difficulte: 2
+  type_exercice: "Application / Cours actif"
+  indispensable: true
+
+enonce_intro: |
+  Le théorème de l'énergie cinétique (TEC) $\Delta E_c=\sum W$ est l'outil central du TD. On l'utilise d'abord pour des distances de freinage, puis pour confronter le calcul à une expérience (balle lancée vers le haut), enfin pour justifier la conservation de l'énergie mécanique (kangourou). On prendra $g=9{,}81~\mathrm{m\,s^{-2}}$.
+
+prerequis:
+  - titre: "Théorème de l'énergie cinétique"
+    texte: |
+      $E_c(B)-E_c(A)=\sum W_{A\to B}(\vec F)$ avec $E_c=\tfrac12mv^2$ ; valable pour toutes les forces, dans un référentiel galiléen.
+  - titre: "Forces conservatives"
+    texte: |
+      $\delta W=-\mathrm dE_p$ ; poids : $E_p=mgz$ ($Oz$ vertical ascendant), à une constante près.
+  - titre: "Conversion km/h $\\to$ m/s"
+    texte: |
+      Diviser par $3{,}6$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Appliquer le TEC et le justifier"
+    texte: |
+      Savoir identifier les forces qui travaillent, calculer leurs travaux, en déduire une distance, une vitesse ou le travail d'une force inconnue (frottement) ; savoir démontrer qu'une force est conservative et que $E_m$ se conserve.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Une même loi, trois usages"
+    texte: |
+      (1) {\bf Distance d'arrêt} : $d=\dfrac{mv^2}{2F}$, quadratique en $v$ (insister sur le résultat pour les voitures). (2) {\bf Écart modèle/mesure} : $\Delta E_c=-40$ J mais $W_{\rm poids}=-35{,}3$ J, la différence $-4{,}7$ J est le travail des frottements de l'air (esprit critique, comme la navette du TD4). (3) {\bf Démonstration de la conservation de $E_m$} à partir du TEC, étape à connaître par c{\oe}ur.
+
+point_cours:
+  - titre: "Théorème de l'énergie cinétique"
+    texte: |
+      $\Delta E_c=\sum W$. Pour une force constante colinéaire au mouvement : $-F\,d=0-\tfrac12mv^2$, donc $d=\dfrac{mv^2}{2F}$.
+  - titre: "Du TEC à la conservation de $E_m$"
+    texte: |
+      Si toutes les forces qui travaillent sont conservatives, $\sum W=-\Delta E_p$ ; le TEC donne $\Delta E_c+\Delta E_p=0$, soit $\Delta E_m=0$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Confondre force et énergie : $d\\propto v^2$"
+    texte: |
+      Doubler la vitesse multiplie la distance d'arrêt par $4$ à force de freinage donnée. C'est un résultat de sécurité routière à connaître.
+  - titre: "Oublier de convertir la masse"
+    texte: |
+      $450$ g $=0{,}450$ kg ; $12$ t $=1{,}2\times10^4$ kg. Les unités SI avant tout calcul.
+  - titre: "Comparer $\\Delta E_c$ et $W_{\\rm poids}$ sans réfléchir"
+    texte: |
+      Les deux valeurs sont égales {\bf seulement} si le poids est la seule force qui travaille. Un écart signale une force non conservative (frottement de l'air).
+  - titre: "Utiliser $E_m$ conservée sans le justifier"
+    texte: |
+      Une réponse complète écrit : « les seules forces sont le poids (conservatif) donc $\Delta E_m=0$ » ; dans le cas du kangourou, on néglige l'air et on étudie la phase de vol.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Distance de freinage en voiture"
+    texte: |
+      Demander l'ordre de grandeur de la distance pour s'arrêter à $50$ puis $100$ km/h avec $a\approx8~\mathrm{m\,s^{-2}}$ ($12$ m et $48$ m) : même méthode.
+  - titre: "Compléter l'expérience avec un smartphone"
+    texte: |
+      Lancer une balle vers le haut et mesurer la hauteur et le temps de vol : comparer $h_{\max}$ à $v_0^2/(2g)$ pour estimer les frottements.
+
+bilan:
+  - titre: "Résultats"
+    texte: |
+      1/ $d=\dfrac{mv^2}{2F}$ : penalty $0{,}59$ m ; luge $2{,}5$ m ; camion $7{,}0$ km ; Ferrari $5{,}3$ km. 2/ $\Delta E_c=-40$ J ; $W_{\rm poids}=-35{,}3$ J ; frottements $-4{,}7$ J. 3/ $E_p=mgz$ ; $v_0=\sqrt{2gh}\approx11{,}7~\mathrm{m/s}\approx42$ km/h.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Estimation de la force de frottement moyenne"
+    texte: |
+      Dans la question 2, en supposant la force de frottement de l'air constante $f$ et opposée au mouvement, déduire $f$ de $W_f=-f\,h$ (montée seule). Comparer à $f=\tfrac12\rho SC_xv^2$ pour une balle de rayon $3$ cm.
+  - niveau: licence
+    titre: "Frottement quadratique et hauteur maximale"
+    texte: |
+      Avec $\vec f=-\lambda v\vec v$, établir $v\,\dfrac{\mathrm dv}{\mathrm dz}=-g-\dfrac\lambda mv^2$ en montée, l'intégrer et trouver $h_{\max}=\dfrac m{2\lambda}\ln\Big(1+\dfrac{\lambda v_0^2}{mg}\Big)$. Vérifier que $h_{\max}\to\dfrac{v_0^2}{2g}$ quand $\lambda\to0$.
+
+accroche_point_cours_essentiel:
+  - titre: "Freiner de $50$ à $100$ km/h : combien de mètres de plus ?"
+    duree_introduction: "3 min"
+    question_d_accroche: |
+      Une voiture roule à $50$ km/h et s'arrête en $12$ m. {\bf Quelle distance lui faut-il à $100$ km/h} avec le même freinage : $24$ m, $36$ m ou $48$ m ?
+    texte: |
+      {\bf Idée clé : le travail de la force de freinage doit annuler toute l'énergie cinétique.} $-F\,d=-\tfrac12mv^2$, donc $d=\dfrac{mv^2}{2F}$ : $d\propto v^2$, soit $4\times12=48$ m.
+
+outils_mathematiques:
+  - titre: "Résolution d'une équation du premier degré"
+    texte: |
+      Isoler $d$ dans $Fd=\tfrac12mv^2$ ; isoler $v_0$ dans $\tfrac12mv_0^2=mgh$.
+  - titre: "Racines carrées"
+    texte: |
+      $v=\sqrt{2gh}$ ; estimer $\sqrt{2\times9{,}81\times7}=\sqrt{137{,}3}\approx11{,}7$.
+
+liens_autres_disciplines:
+  - discipline: "Sécurité routière"
+    texte: |
+      Distance d'arrêt $=$ distance de réaction ($v\,t_r$) $+$ distance de freinage ($v^2/2a$).
+  - discipline: "Biomécanique"
+    texte: |
+      Saut du kangourou : stockage d'énergie élastique dans les tendons, rendement mécanique élevé. L'estimation $v_0=\sqrt{2gh}$ ignore l'énergie fournie pendant la phase d'appui.
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{itemize}
+        \item[1/] En utilisant le théorème de l'énergie cinétique, calculer la distance sur laquelle doit agir une force de $800$ N pour arrêter :
+          \begin{itemize}
+            \item[(a)] un tir de penalty arrivant à $165~\mathrm{km/h}$, la balle ayant une masse de $450$ g ;
+            \item[(b)] un enfant sur une luge de $36$ kg glissant à $38~\mathrm{km/h}$ ;
+            \item[(c)] un camion de $12$ t roulant à $110~\mathrm{km/h}$ ;
+            \item[(d)] une Ferrari de $1400$ kg roulant à $280~\mathrm{km/h}$.
+          \end{itemize}
+      \end{itemize}
+    coup_de_pouce: |
+      Le travail de la force d'arrêt (opposée au déplacement) vaut $-F\,d$. Le mobile s'arrête : $E_c$ final $=0$.
+    correction: |
+      $d=\dfrac{mv^2}{2F}$ : (a) $0{,}591$ m ; (b) $2{,}51$ m ; (c) $7{,}00$ km ; (d) $5{,}29$ km.
+    solution:
+      - titre: "1/ Distance d'arrêt"
+        texte: |
+          TEC entre l'instant initial ($v$) et l'arrêt ($v=0$), la force d'arrêt $\vec F$ étant opposée au déplacement : $W=-F\,d$.
+          $$-F\,d=0-\tfrac12mv^2\ \Rightarrow\ \boxed{d=\frac{mv^2}{2F}}.$$
+          (a) $v=165/3{,}6=45{,}8$ m/s : $d=\dfrac{0{,}450\times45{,}83^2}{2\times800}\approx\boxed{0{,}59~\mathrm m}$.
+
+          (b) $v=38/3{,}6=10{,}56$ m/s : $d=\dfrac{36\times10{,}56^2}{1600}\approx\boxed{2{,}5~\mathrm m}$.
+
+          (c) $v=110/3{,}6=30{,}56$ m/s, $m=1{,}2\times10^4$ kg : $d=\dfrac{1{,}2\times10^4\times30{,}56^2}{1600}\approx\boxed{7{,}0~\mathrm{km}}$.
+
+          (d) $v=280/3{,}6=77{,}78$ m/s : $d=\dfrac{1400\times77{,}78^2}{1600}\approx\boxed{5{,}3~\mathrm{km}}$.
+
+          Commentaire : $800$ N est une force de freinage très faible pour un véhicule (une vraie voiture freine avec $\approx m\times8$ N, soit $\approx11$ kN pour la Ferrari). L'exercice montre surtout que $d\propto mv^2$.
+
+  - id: q2
+    enonce: |
+      \begin{itemize}
+        \item[2/] Une balle de $200$ g lancée verticalement vers le haut avec une vitesse initiale de $20~\mathrm{m/s}$ atteint la hauteur maximale de $18$ m. Déterminer :
+          \begin{itemize}
+            \item[(a)] sa variation d'énergie cinétique ;
+            \item[(b)] le travail effectué par le poids ;
+            \item[(c)] les valeurs calculées sont-elles égales ? Justifier et en déduire le travail des frottements.
+          \end{itemize}
+      \end{itemize}
+    coup_de_pouce: |
+      Au sommet la vitesse est nulle. Le travail du poids ne dépend que de la différence d'altitude. S'il y a un écart, quelle force n'a pas été prise en compte ?
+    correction: |
+      (a) $\Delta E_c=-\tfrac12mv_0^2=-40$ J ; (b) $W_{\rm poids}=-mgh=-35{,}3$ J ; (c) non : l'écart $-4{,}7$ J est le travail des frottements de l'air.
+    solution:
+      - titre: "2/ (a) Variation d'énergie cinétique"
+        texte: |
+          $$\Delta E_c=0-\tfrac12mv_0^2=-\tfrac12\times0{,}200\times20^2=\boxed{-40~\mathrm J}.$$
+      - titre: "2/ (b) Travail du poids"
+        texte: |
+          Le poids est constant, le déplacement est $h=18$ m vers le haut :
+          $$W_P=\vec P\cdot\overrightarrow{AB}=-mgh=-0{,}200\times9{,}81\times18\approx\boxed{-35{,}3~\mathrm J}.$$
+      - titre: "2/ (c) Comparaison et frottements"
+        texte: |
+          Les valeurs ne sont {\bf pas égales} : $-40\neq-35{,}3$ J. Le TEC dit $\Delta E_c=\sum W$ ; si le poids était la seule force qui travaille on aurait $\Delta E_c=W_P$. Il existe donc une autre force qui travaille : {\bf les frottements de l'air},
+          $$W_f=\Delta E_c-W_P=-40+35{,}3\approx\boxed{-4{,}7~\mathrm J}\quad(<0:\ \text{résistant}).$$
+          Cohérence : sans frottement, la hauteur serait $h_0=\dfrac{v_0^2}{2g}=20{,}4$ m $>18$ m. L'énergie mécanique n'est pas conservée : $\Delta E_m=\Delta E_c+\Delta E_p=-40+35{,}3=W_f$.
+
+  - id: q3
+    enonce: |
+      \begin{itemize}
+        \item[3/] Un kangourou peut sauter à une hauteur de $7$ m.
+          \begin{itemize}
+            \item[(a)] Montrer que le poids est une force conservative et en déduire l'énergie potentielle associée.
+            \item[(b)] Dans quel cas peut-on supposer que l'énergie mécanique du kangourou est conservée ? Le démontrer à partir du théorème de l'énergie cinétique.
+            \item[(c)] Déterminer, dans ce cas, la vitesse du kangourou au départ du saut.
+          \end{itemize}
+      \end{itemize}
+    coup_de_pouce: |
+      Conservative : le travail élémentaire s'écrit comme $-\mathrm d(\ldots)$. Pour (b), écrire le TEC et remplacer $W_P$ par $-\Delta E_p$.
+    correction: |
+      (a) $\delta W=-mg\,\mathrm dz=-\mathrm d(mgz)$, donc $E_p=mgz+C$. (b) Si le poids est la seule force qui travaille (air négligé, phase de vol) : $\Delta E_c=-\Delta E_p\Rightarrow\Delta E_m=0$. (c) $v_0=\sqrt{2gh}\approx11{,}7$ m/s $\approx42$ km/h.
+    solution:
+      - titre: "3/ (a) Le poids est conservatif"
+        texte: |
+          Avec $Oz$ vertical ascendant : $\vec P=-mg\,\vec u_z$ et $\mathrm d\overrightarrow{OM}=\mathrm dx\,\vec u_x+\mathrm dy\,\vec u_y+\mathrm dz\,\vec u_z$, d'où
+          $$\delta W=\vec P\cdot\mathrm d\overrightarrow{OM}=-mg\,\mathrm dz=-\mathrm d(mgz).$$
+          Le travail élémentaire est une différentielle exacte : le travail $W_{A\to B}=-mg(z_B-z_A)$ ne dépend que des extrémités et non du chemin. {\bf Le poids est conservatif}, et
+          $$\boxed{E_p(z)=mgz+C}\qquad(C\text{ constante arbitraire, souvent }E_p(0)=0).$$
+      - titre: "3/ (b) Conservation de $E_m$"
+        texte: |
+          Pendant le vol, si les frottements de l'air sont négligés, le poids est la seule force. Le TEC entre $A$ et $B$ donne
+          $$E_c(B)-E_c(A)=W_P=-\big[E_p(B)-E_p(A)\big]\ \Rightarrow\ \big[E_c+E_p\big]_B=\big[E_c+E_p\big]_A,$$
+          soit $\boxed{E_m=\text{cte}}$. Plus généralement, $\Delta E_m=W_{\rm nc}$ : $E_m$ est conservée si les forces non conservatives sont absentes ou ne travaillent pas. Ici cela impose de se placer {\bf après le décollage} (pendant l'appui, les muscles fournissent du travail) et de négliger l'air.
+      - titre: "3/ (c) Vitesse au départ du saut"
+        texte: |
+          Départ ($z=0$, $v_0$) et sommet ($z=h$, $v=0$) :
+          $$\tfrac12mv_0^2+0=0+mgh\ \Rightarrow\ v_0=\sqrt{2gh}=\sqrt{2\times9{,}81\times7}\approx\boxed{11{,}7~\mathrm{m/s}}\approx42~\mathrm{km/h}.$$
+          La masse n'intervient pas ; la composante horizontale n'est pas nulle en réalité (saut en longueur), ce qui donne un minimum pour $v_0$.

@@ -1,0 +1,232 @@
+id: td3_ex5
+intitule: "Cycloïde : point d'une roue qui roule sans glisser"
+td: td3
+facultatif: true
+seance: 3
+
+cours_rattache:
+  - cinematique.base_frenet
+  - cinematique.rayon_courbure
+  - cinematique.acceleration_tangentielle_normale
+  - cinematique.abscisse_curviligne
+
+metadonnees:
+  duree_estimee: "45 min"
+  difficulte: 4
+  priorite: 4
+  type_exercice: "Entraînement / Problème de synthèse"
+  indispensable: false
+
+enonce_intro: |
+  Une roue de rayon $R_0$ roule {\bf sans glisser} sur l'axe horizontal $Ox$. Son centre $C$ se déplace à
+  la vitesse constante $\vec V=R_0\omega\,\vec u_x$ ; la roue tourne (dans le sens horaire) à la vitesse angulaire
+  constante $\omega>0$. On étudie le mouvement d'un point $M$ de la jante (par exemple une valve ou un caillou
+  coincé dans la bande de roulement). À $t=0$, $M$ est en contact avec le sol, en $O$. On note $\varphi=\omega t$ l'angle
+  dont la roue a tourné. La trajectoire de $M$ est appelée {\bf cycloïde}.
+
+prerequis:
+  - titre: "Roulement sans glissement"
+    texte: |
+      Le point de la roue en contact avec le sol a une vitesse nulle (dans le référentiel du sol) : le centre avance de $R_0\varphi$ quand la roue tourne de $\varphi$ ($x_C=R_0\omega t$).
+  - titre: "Base de Frenet"
+    texte: |
+      $\vec a=a_T\,\vec\tau+a_N\,\vec n$, $a_T=\dfrac{\vec a\cdot\vec v}v$, $a_N=\sqrt{a^2-a_T^2}$, $R=\dfrac{v^2}{a_N}$.
+  - titre: "Formules d'angle moitié"
+    texte: |
+      $1-\cos\varphi=2\sin^2\dfrac\varphi2$, $1+\cos\varphi=2\cos^2\dfrac\varphi2$, $\sin\varphi=2\sin\dfrac\varphi2\cos\dfrac\varphi2$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Étudier une courbe non triviale avec toute la machinerie de Frenet"
+    texte: |
+      Établir les équations paramétriques de la cycloïde, calculer $\vec v$, $\vec a$, $a_T$, $a_N$, $R$ et la longueur d'une arche, interpréter le point de rebroussement, et relier le résultat à la géométrie du roulement (centre instantané de rotation).
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Un exemple où $a_N\\to0$ et $R\\to0$ au même point : le rebroussement"
+    texte: |
+      Contrairement à un cercle ou à une parabole, la cycloïde a des points de rebroussement où la vitesse s'annule et où $R\to0$ : la formule $R=v^3/\|\vec v\wedge\vec a\|$ devient indéterminée ($0/0$ résolu par le développement). L'accélération a une norme {\bf constante} $R_0\omega^2$ malgré tout, dirigée vers le centre de la roue. C'est un exercice de synthèse qui illustre à la fois la polaire du TD2 (longueur de la cardioïde $8a$, ici $8R_0$) et le présent TD. La partie 3 (vélo) donne des ordres de grandeur marquants.
+
+point_cours:
+  - titre: "Cycloïde"
+    texte: |
+      $$x=R_0(\varphi-\sin\varphi),\qquad y=R_0(1-\cos\varphi),\qquad\varphi=\omega t.$$
+      La vitesse du point de contact est nulle ; le point du haut de la roue va à $2R_0\omega$. La roue tourne à chaque instant autour du point de contact $I$ (centre instantané de rotation) : $\|\vec v\|=\omega\,IM$ et $\vec v\perp\overrightarrow{IM}$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Croire que la vitesse de $M$ est $R_0\\omega$"
+    texte: |
+      $R_0\omega$ est la vitesse de $M$ {\bf par rapport au centre} de la roue (rotation pure). Dans le référentiel du sol, il faut ajouter la vitesse $V=R_0\omega$ du centre : $\vec v=\vec V+\vec v_{rel}$ et $v=2R_0\omega\left|\sin\tfrac\varphi2\right|$.
+  - titre: "Oublier la valeur absolue dans $\\sqrt{\\sin^2(\\varphi/2)}$"
+    texte: |
+      Sur une arche $\varphi\in[0,2\pi]$, $\sin\frac\varphi2\ge0$ : pas de problème. Mais sur plusieurs arches, il faut conserver la valeur absolue.
+  - titre: "Croire que $R=0$ signifie « pas de trajectoire »"
+    texte: |
+      Au rebroussement ($\varphi=0$ mod $2\pi$), $R\to0$ car la tangente est verticale et tourne brusquement de $180^\circ$ : la trajectoire fait un « demi-tour » en pointe. La vitesse y est nulle ({\bf instantanément}).
+  - titre: "Confondre le rayon de courbure $4R_0\\sin\\frac\\varphi2$ et le rayon de la roue"
+    texte: |
+      Au sommet, $R=4R_0$ : le cercle osculateur est quatre fois plus grand que la roue. La courbure de la trajectoire est {\bf plus faible} que celle de la jante.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Expérience : une pièce qui roule"
+    texte: |
+      Coller un point coloré (ou une LED) sur la jante d'une roue de vélo roulant sur un banc de fond sombre ; une photo en pose longue donne la cycloïde. Demander de prévoir la vitesse en haut ($2V$) et en bas ($0$) avant de calculer.
+  - titre: "Python"
+    texte: |
+      Tracer la cycloïde et le cercle osculateur de centre $M+R\,\vec n$ pour plusieurs valeurs de $\varphi$ ; ajouter la développée (une cycloïde translatée, voir « aller plus loin »).
+
+bilan:
+  - titre: "Résultats de la cycloïde"
+    texte: |
+      $\vec v=R_0\omega(1-\cos\varphi\ ;\ \sin\varphi)$, $v=2R_0\omega\sin\frac\varphi2$, $\vec\tau=\left(\sin\frac\varphi2\ ;\ \cos\frac\varphi2\right)$ ; $\vec a=R_0\omega^2(\sin\varphi\ ;\ \cos\varphi)$, $a=R_0\omega^2$ ; $a_T=R_0\omega^2\cos\frac\varphi2$, $a_N=R_0\omega^2\sin\frac\varphi2$ ; $R=4R_0\sin\frac\varphi2$ ; longueur d'une arche $8R_0$. Sommet : $v=2R_0\omega$, $R=4R_0$. Contact : $v=0$, $\vec a=R_0\omega^2\,\vec u_y$.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Développée de la cycloïde (Huygens)"
+    texte: |
+      Le centre de courbure est $C_c=M+R\,\vec n$ avec $\vec n=\left(\cos\frac\varphi2\ ;\ -\sin\frac\varphi2\right)$. Montrer que $C_c=\left(R_0(\varphi+\sin\varphi)\ ;\ -R_0(1-\cos\varphi)\right)$ : c'est la même cycloïde, translatée du vecteur $(-\pi R_0\ ;\ -2R_0)$ (poser $\psi=\varphi+\pi$). Cette propriété permet de construire un pendule {\bf isochrone} (Huygens).
+  - niveau: licence
+    titre: "Aire sous une arche et brachistochrone"
+    texte: |
+      L'aire sous une arche vaut $\int_0^{2\pi R_0}y\,\mathrm dx=3\pi R_0^2$, soit trois fois l'aire de la roue (Roberval, Galilée). La cycloïde est aussi la courbe de plus courte durée ({\bf brachistochrone}) et la courbe tautochrone : une bille lâchée sans vitesse d'un point quelconque d'une cycloïde inversée arrive en bas au même instant.
+  - niveau: master
+    titre: "Trochoïdes"
+    texte: |
+      Un point à la distance $d\neq R_0$ du centre décrit une trochoïde : $x=R_0\varphi-d\sin\varphi$, $y=R_0-d\cos\varphi$. Pour $d<R_0$ (point intérieur) la courbe est sans rebroussement ; pour $d>R_0$ (point extérieur, ex. : boudin d'une roue de train) elle présente des boucles qui font {\bf reculer} le point au bas de la roue. Montrer que la vitesse du point bas du boudin est dirigée vers l'arrière.
+
+accroche_point_cours_essentiel:
+  - titre: "Un point de la roue est immobile"
+    duree_introduction: "3 à 5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Un cycliste roule à $36$ km/h. Quelle est la vitesse, par rapport au sol, du point de la roue qui touche le sol ? Et du point tout en haut ? Quelle est la forme de la trajectoire d'une valve de chambre à air ? Y a-t-il un moment où elle revient en arrière ?
+    texte: |
+      {\bf Idée clé : composer translation et rotation.} Dans le référentiel du sol, la position de $M$ est $\overrightarrow{OC}+\overrightarrow{CM}$ : le centre avance, la jante tourne autour du centre. Résultat : la cycloïde. À chaque instant, la roue tourne autour du point de contact $I$ qui est immobile : la vitesse de $M$ est perpendiculaire à $IM$.
+
+outils_mathematiques:
+  - titre: "Composition de mouvements"
+    texte: |
+      $\overrightarrow{OM}=\overrightarrow{OC}+\overrightarrow{CM}$ avec $\overrightarrow{OC}=(R_0\omega t,R_0)$ et $\overrightarrow{CM}=R_0(-\sin\varphi,-\cos\varphi)$ pour une roue qui tourne dans le sens horaire avec $M$ au bas à $t=0$.
+  - titre: "Angle moitié"
+    texte: |
+      $\sqrt{2(1-\cos\varphi)}=2\sin\dfrac\varphi2$ (pour $\varphi\in[0,2\pi]$) ; $\sin\varphi=2\sin\dfrac\varphi2\cos\dfrac\varphi2$.
+  - titre: "Intégrale de $\\sin(\\varphi/2)$"
+    texte: |
+      $\displaystyle\int_0^{2\pi}\sin\dfrac\varphi2\,\mathrm d\varphi=\left[-2\cos\dfrac\varphi2\right]_0^{2\pi}=4$.
+  - titre: "Centre instantané de rotation"
+    texte: |
+      Pour un solide plan en mouvement, il existe en général un point $I$ de vitesse nulle (à l'instant considéré) : la vitesse de tout autre point est $\vec v=\vec\Omega\wedge\overrightarrow{IM}$, de norme $\Omega\,IM$, perpendiculaire à $IM$.
+
+liens_autres_disciplines:
+  - discipline: "Mécanique, ingénierie"
+    texte: |
+      Roues, engrenages (dents en développante de cercle ou en cycloïde dans les horloges), bielle-manivelle, trains (boudin de roue qui dépasse le contact : trochoïde allongée).
+  - discipline: "Histoire des sciences"
+    texte: |
+      La cycloïde est la « Hélène des géomètres » (XVIIe siècle) : Galilée, Mersenne, Roberval, Pascal, Huygens, Bernoulli ont étudié sa longueur, son aire, sa tautochronie et sa brachistochronie.
+  - discipline: "Physique des vélos et véhicules"
+    texte: |
+      La boue projetée par la roue part tangentiellement à la trajectoire de la roue avec la vitesse $v=2V\sin(\varphi/2)$ : les garde-boue sont placés pour intercepter ces projections.
+
+schemas_proposes:
+  - titre: "Une arche de cycloïde avec roue en 4 positions"
+    description: |
+      Axe $Ox$, roue de rayon $R_0$ (prendre $R_0=2\ \mathrm{cm}$) en quatre positions $\varphi=0,\ \pi/2,\ \pi,\ 3\pi/2$. Pour chaque position : centre $C$, point $M$, point de contact $I$, la vitesse $\vec v$ perpendiculaire à $IM$, et le trait $IM$. Faire passer le prolongement de $\vec v$ par le point le plus haut de la roue. Placer $\vec\tau$ et $\vec n$ en deux positions.
+    tikz: |
+      \begin{tikzpicture}[>=stealth,scale=0.8]
+        \draw[->] (-0.5,0)--(7.5,0) node[right]{$x$};
+        \draw[->] (0,-0.3)--(0,2.6) node[above]{$y$};
+        \draw[thick,domain=0:6.2832,samples=100,variable=\t]
+          plot ({\t-sin(\t r)},{1-cos(\t r)});
+        % roue au sommet (phi = pi)
+        \draw[dashed] (3.1416,1) circle (1);
+        \fill (3.1416,1) circle (1.5pt) node[below]{$C$};
+        \fill (3.1416,2) circle (1.5pt) node[above]{$M$};
+        \fill (3.1416,0) circle (1.5pt) node[below]{$I$};
+        \draw[->,very thick,red] (3.1416,2)--(4.6,2) node[right]{$\vec v$};
+        \draw[->,very thick,blue] (3.1416,2)--(3.1416,1.1) node[left]{$\vec a$};
+      \end{tikzpicture}
+  - titre: "Tracé des cercles osculateurs"
+    description: |
+      Sur la même arche, tracer le cercle osculateur au sommet ($R=4R_0$, centre à $2R_0$ sous le sol : $y=-2R_0$) et près d'un rebroussement ($R$ petit). Montrer que le centre de courbure est toujours sur la droite $MI$ à une distance $MI$ au-delà de $I$ ($R=2\,IM$).
+
+questions:
+  - id: q1
+    enonce: |
+      {\bf 1/ Équations de la trajectoire.}
+      \begin{enumerate}[label=(\alph*)]
+          \item Justifier que $x_C(t)=R_0\omega t$ pour le centre de la roue. Établir les équations horaires $x(t)$ et $y(t)$ de $M$.
+          \item Tracer l'arche de cycloïde ($0\le\varphi\le2\pi$) en plaçant les points $\varphi=0,\ \frac\pi2,\ \pi,\ \frac{3\pi}2,\ 2\pi$.
+      \end{enumerate}
+    coup_de_pouce: |
+      $\overrightarrow{OM}=\overrightarrow{OC}+\overrightarrow{CM}$ avec $\overrightarrow{CM}=R_0(-\sin\varphi,-\cos\varphi)$ : à $t=0$ le point est en bas de la roue ($\overrightarrow{CM}=-R_0\vec u_y$) et la roue tourne dans le sens horaire.
+    correction: |
+      $x=R_0(\omega t-\sin\omega t)$, $y=R_0(1-\cos\omega t)$. Points : $(0,0)$, $(0{,}57R_0,R_0)$, $(\pi R_0,2R_0)$, $(5{,}71R_0,R_0)$, $(2\pi R_0,0)$.
+    solution:
+      - titre: "(a) Équations paramétriques"
+        texte: |
+          Roulement sans glissement : la roue ne glisse pas, donc l'arc de jante qui a touché le sol, de longueur $R_0\varphi$, est égal à la distance parcourue par le centre : $x_C=R_0\varphi=R_0\omega t$ (la vitesse du centre est $V=R_0\omega$). L'altitude du centre est $R_0$. Avec $\overrightarrow{CM}=R_0(-\sin\varphi,\,-\cos\varphi)$ (angle $\varphi$ depuis la verticale descendante, sens horaire) :
+          $$\boxed{x(t)=R_0\left(\omega t-\sin\omega t\right)},\qquad\boxed{y(t)=R_0\left(1-\cos\omega t\right)}.$$
+          Vérification : $\varphi=0$ donne $(0,0)$ (contact) ; $\varphi=\pi$ donne $(\pi R_0,2R_0)$ (sommet).
+      - titre: "(b) Points de l'arche"
+        texte: |
+          $$\begin{array}{c|ccccc}\varphi&0&\pi/2&\pi&3\pi/2&2\pi\\\hline x/R_0&0&\pi/2-1\approx0{,}57&\pi\approx3{,}14&3\pi/2+1\approx5{,}71&2\pi\approx6{,}28\\y/R_0&0&1&2&1&0\end{array}$$
+          L'arche est {\bf symétrique} par rapport à la verticale $x=\pi R_0$, de hauteur $2R_0$ et de largeur $2\pi R_0$ (le périmètre de la roue). Aux extrémités ($\varphi=0,2\pi$), la tangente est {\bf verticale} : points de rebroussement.
+
+  - id: q2
+    enonce: |
+      {\bf 2/ Cinématique.}
+      \begin{enumerate}[label=(\alph*),start=3]
+          \item Calculer $\vec v$ et sa norme. Montrer que $v=2R_0\omega\left|\sin\frac\varphi2\right|$ et que le vecteur tangent est $\vec\tau=\left(\sin\frac\varphi2\ ;\ \cos\frac\varphi2\right)$. Montrer que la droite d'action de $\vec v$ passe par le point le plus haut de la roue.
+          \item Calculer $\vec a$ et sa norme. Que remarque-t-on ? Où est dirigée l'accélération ?
+          \item Calculer $a_T$, $a_N$ et le rayon de courbure $R$. Vérifier que la normale passe par le point de contact $I$ et que $R=2\,IM$.
+          \item Valeurs particulières : sommet ($\varphi=\pi$) et contact ($\varphi\to0$). Commenter.
+      \end{enumerate}
+    coup_de_pouce: |
+      Dérivez $x(t)$ et $y(t)$. Utilisez les angles moitié : $1-\cos\varphi=2\sin^2\frac\varphi2$. Pour (e), $a_T=\vec a\cdot\vec v/v$ puis $a_N=\sqrt{a^2-a_T^2}$ et $R=v^2/a_N$.
+    correction: |
+      $\vec v=R_0\omega(1-\cos\varphi\ ;\ \sin\varphi)$, $v=2R_0\omega\sin\frac\varphi2$ ; $\vec a=R_0\omega^2(\sin\varphi\ ;\ \cos\varphi)$, $a=R_0\omega^2$ constante, dirigée vers $C$ ; $a_T=R_0\omega^2\cos\frac\varphi2$, $a_N=R_0\omega^2\sin\frac\varphi2$ ; $R=4R_0\sin\frac\varphi2$.
+    solution:
+      - titre: "(c) Vitesse"
+        texte: |
+          $\dot x=R_0\omega(1-\cos\varphi)$, $\dot y=R_0\omega\sin\varphi$ :
+          $$\boxed{\vec v=R_0\omega\,(1-\cos\varphi\ ;\ \sin\varphi)}.$$
+          Avec $1-\cos\varphi=2\sin^2\frac\varphi2$ et $\sin\varphi=2\sin\frac\varphi2\cos\frac\varphi2$ : $\vec v=2R_0\omega\sin\frac\varphi2\left(\sin\frac\varphi2\ ;\ \cos\frac\varphi2\right)$. D'où
+          $$\boxed{v=2R_0\omega\left|\sin\frac\varphi2\right|},\qquad\vec\tau=\left(\sin\frac\varphi2\ ;\ \cos\frac\varphi2\right).$$
+          Au sommet ($\varphi=\pi$) : $v=2R_0\omega=2V$ ; au contact ($\varphi=0$) : $v=0$. Le point $T=(R_0\varphi,2R_0)$, point le plus haut de la roue, vérifie $\overrightarrow{MT}=R_0(\sin\varphi,\,1+\cos\varphi)=2R_0\cos\frac\varphi2\left(\sin\frac\varphi2,\cos\frac\varphi2\right)\parallel\vec\tau$ : la tangente à la cycloïde passe par le point haut de la roue. Autrement dit $\vec v\perp\overrightarrow{IM}$ : la roue tourne autour de $I$.
+      - titre: "(d) Accélération"
+        texte: |
+          $\ddot x=R_0\omega^2\sin\varphi$, $\ddot y=R_0\omega^2\cos\varphi$ :
+          $$\boxed{\vec a=R_0\omega^2\,(\sin\varphi\ ;\ \cos\varphi)},\qquad\boxed{a=R_0\omega^2=\text{cte}}.$$
+          On remarque que $\overrightarrow{MC}=R_0(\sin\varphi,\cos\varphi)$ : $\vec a=\omega^2\,\overrightarrow{MC}$ est dirigée vers le {\bf centre de la roue}. Explication : le centre de la roue est en translation uniforme, donc le mouvement de $M$ par rapport à $C$ est un cercle uniforme dont l'accélération (centripète) est la même dans le référentiel du sol, car le référentiel du centre est en translation rectiligne uniforme (galiléen).
+      - titre: "(e) Composantes et rayon de courbure"
+        texte: |
+          $\vec a\cdot\vec v=R_0^2\omega^3\left[(1-\cos\varphi)\sin\varphi+\sin\varphi\cos\varphi\right]=R_0^2\omega^3\sin\varphi$, donc
+          $$a_T=\frac{R_0^2\omega^3\sin\varphi}{2R_0\omega\sin\frac\varphi2}=\boxed{R_0\omega^2\cos\frac\varphi2}.$$
+          Alors $a_N=\sqrt{a^2-a_T^2}=\boxed{R_0\omega^2\sin\frac\varphi2}$ et
+          $$R=\frac{v^2}{a_N}=\frac{4R_0^2\omega^2\sin^2\frac\varphi2}{R_0\omega^2\sin\frac\varphi2}=\boxed{4R_0\sin\frac\varphi2}.$$
+          {\bf Vérification géométrique :} le point de contact $I=(R_0\varphi,0)$ vérifie $\overrightarrow{MI}=R_0(\sin\varphi,-(1-\cos\varphi))=2R_0\sin\frac\varphi2\left(\cos\frac\varphi2,-\sin\frac\varphi2\right)$, vecteur unitaire $\vec n=\left(\cos\frac\varphi2,-\sin\frac\varphi2\right)\perp\vec\tau$. La normale à la trajectoire passe donc par $I$, et $IM=2R_0\sin\frac\varphi2$ ; ainsi $R=2\,IM$ et $v=\omega\,IM$ $\surd$.
+      - titre: "(f) Cas particuliers"
+        texte: |
+          {\bf Sommet} ($\varphi=\pi$) : $v=2R_0\omega$, $a_T=0$ (vitesse maximale), $a_N=R_0\omega^2$, $R=4R_0$ ; $\vec a$ pointe vers le bas, vers $C$. Le cercle osculateur est quatre fois plus grand que la roue et son centre est à $2R_0$ sous le sol (à l'altitude $-2R_0$).
+
+          {\bf Contact} ($\varphi\to0^+$) : $v\to0$, $a_T\to R_0\omega^2$ (la vitesse croît à partir de zéro), $a_N\to0$ et $R\to0$ ; $\vec a\to R_0\omega^2\,\vec u_y$ est {\bf verticale} vers le haut. Le point arrive vertical, s'arrête une fraction d'instant puis repart verticalement : c'est un {\bf point de rebroussement} ; $R=0$ ne signifie pas que le mouvement s'interrompt, mais que la tangente tourne de $180^\circ$ en un temps infiniment bref.
+
+  - id: q3
+    enonce: |
+      {\bf 3/ Longueur et application numérique.}
+      \begin{enumerate}[label=(\alph*),start=7]
+          \item Calculer la longueur $L$ d'une arche. Vérifier $R=\left|\dfrac{\mathrm ds}{\mathrm d\alpha}\right|$ avec $\alpha$ l'angle de la tangente avec $Ox$.
+          \item Application. Une roue de vélo de rayon $R_0=0{,}35\ \mathrm m$ roule à $36\ \mathrm{km/h}$. Calculer $\omega$, la vitesse et l'accélération du point haut, la période de rotation, la longueur d'une arche et l'accélération (en unités de $g$) d'un caillou sur la jante.
+      \end{enumerate}
+    coup_de_pouce: |
+      $L=\int_0^{2\pi/\omega}v\,\mathrm dt$ avec $v=2R_0\omega\sin\frac{\omega t}2$. Pour $\alpha$ : $\vec\tau=(\sin\frac\varphi2,\cos\frac\varphi2)=(\cos\alpha,\sin\alpha)$ donne $\alpha=\frac\pi2-\frac\varphi2$.
+    correction: |
+      $L=8R_0$ ; $\alpha=\frac\pi2-\frac\varphi2$, $\mathrm ds=2R_0\sin\frac\varphi2\,\mathrm d\varphi$, $\left|\dfrac{\mathrm d\alpha}{\mathrm ds}\right|=\dfrac1{4R_0\sin(\varphi/2)}$ $\surd$. AN : $\omega\approx28{,}6$ rad/s, $v_{haut}=72$ km/h, $a=R_0\omega^2\approx286\ \mathrm{m\,s^{-2}}\approx29\,g$, $T\approx0{,}22$ s, $L=2{,}8$ m.
+    solution:
+      - titre: "(g) Longueur d'une arche et vérification"
+        texte: |
+          $L=\displaystyle\int_0^{2\pi/\omega}2R_0\omega\sin\frac{\omega t}2\,\mathrm dt=2R_0\int_0^{2\pi}\sin\frac\varphi2\,\mathrm d\varphi=2R_0\cdot4=\boxed{8R_0}$ : quatre fois le diamètre, résultat indépendant de $\omega$ (propriété géométrique de la courbe), comparable au résultat $8a$ de la cardioïde (TD2).
+
+          Vérification de $R$ : $\vec\tau=(\cos\alpha,\sin\alpha)=(\sin\frac\varphi2,\cos\frac\varphi2)$ donne $\alpha=\frac\pi2-\frac\varphi2$ donc $\mathrm d\alpha=-\frac12\mathrm d\varphi$ ; $\mathrm ds=v\,\mathrm dt=2R_0\sin\frac\varphi2\,\mathrm d\varphi$. Ainsi
+          $$\frac1R=\left|\frac{\mathrm d\alpha}{\mathrm ds}\right|=\frac{1/2}{2R_0\sin\frac\varphi2}\ \Longrightarrow\ R=4R_0\sin\frac\varphi2\ \checkmark.$$
+      - titre: "(h) Application numérique"
+        texte: |
+          $V=36\ \mathrm{km/h}=10\ \mathrm{m/s}$ ; $\omega=\dfrac V{R_0}=\dfrac{10}{0{,}35}\approx28{,}6\ \mathrm{rad/s}$ (environ $4{,}5$ tours par seconde). Période de rotation : $T=\dfrac{2\pi}\omega\approx0{,}22\ \mathrm s$. {\bf Point haut} : $v=2V=20\ \mathrm{m/s}=72\ \mathrm{km/h}$ ; $a=R_0\omega^2=\dfrac{V^2}{R_0}\approx286\ \mathrm{m\,s^{-2}}$ ; $R=4R_0=1{,}4\ \mathrm m$. {\bf Point bas} : $v=0$ (au contact). {\bf Longueur d'une arche} : $L=8R_0=2{,}8\ \mathrm m$ (alors que $2\pi R_0=2{,}2\ \mathrm m$ est la distance parcourue par le centre). Le caillou sur la jante subit en permanence $a=R_0\omega^2\approx286\ \mathrm{m\,s^{-2}}\approx29\,g$ : c'est pourquoi il faut un collage solide et pourquoi les gouttes d'eau se détachent de la roue (dont $a_N$ est trop grande pour la tension superficielle).

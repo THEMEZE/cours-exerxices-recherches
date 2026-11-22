@@ -1,0 +1,7 @@
+id: piscines-de-sciences-et-methodologie
+nom: "Piscine de sciences et méthodologie"
+niveau: [lycee, cpge]
+description: >
+  Grandeurs physiques, dérivation/différentielle, intégrales, vecteurs.
+quartz_namespace: physique/IPSA/ipsa-piscines-sciences-methodologie
+sujets: [grandeurs-physiques]

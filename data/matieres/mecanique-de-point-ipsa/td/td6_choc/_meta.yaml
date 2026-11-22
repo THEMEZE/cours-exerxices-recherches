@@ -1,0 +1,199 @@
+id: td6
+titre: "Étude des chocs"
+chapitre_cours: "Chap. 4 — Quantité de mouvement, systèmes de points, collisions"
+seance: 6
+niveau_public: [cpge, licence]
+exercices_ordre:
+  - ex1_choc_frontal_elastique
+  - ex2_choc_et_perte_energie
+  - ex3_choc_mou_voitures
+  - ex4_pendule_bloc
+  - ex5_pendule_balistique
+  - ex6_balle_rebondissante
+  - ex7_moderation_neutrons
+
+enonce_intro: |
+  {\bf Conventions valables pour tout le TD (sauf mention contraire).} On étudie des collisions entre points matériels ou solides assimilés à des points, dans un référentiel galiléen. Un choc est {\bf bref} : pendant sa durée $\Delta t\to0$, les forces d'interaction (impulsives) sont très grandes devant les forces extérieures finies (poids, réaction, frottement), qui sont alors négligées : {\bf le système est pseudo-isolé pendant le choc}. $g=9{,}81~\mathrm{m\,s^{-2}}$. Pour chaque exercice, {\bf rédiger dans l'ordre} : système, avant/après, grandeurs conservées et {\bf justification}, projections, résolution littérale, application numérique, vérification (bilan d'énergie, cas limites).
+
+prerequis:
+  - titre: "Les lois de Newton et la quantité de mouvement"
+    texte: |
+      $\vec p=m\vec v$ ; $\dfrac{\mathrm d\vec p}{\mathrm dt}=\sum\vec F_{\rm ext}$ ; pour un système de points $\vec P=\sum m_i\vec v_i=M\vec v_G$.
+  - titre: "Travail et énergie (TD5)"
+    texte: |
+      $E_c=\tfrac12mv^2$, théorème de l'énergie cinétique, $\Delta E_m=W_{\rm nc}$ ; utile pour la phase {\bf avant et après le choc} (descente du pendule, glissement du bloc).
+  - titre: "Projection des vecteurs"
+    texte: |
+      Composantes cartésiennes, angles remarquables ($30^\circ,45^\circ,60^\circ$), norme $\sqrt{v_x^2+v_y^2}$, angle $\arctan(v_y/v_x)$.
+  - titre: "Système d'équations"
+    texte: |
+      Système $2\times2$ linéaire (substitution, combinaison) ; identité remarquable $a^2-b^2=(a-b)(a+b)$ ; développement limité $(1+\epsilon)^n\approx1+n\epsilon$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Savoir ce qui se conserve dans un choc"
+    texte: |
+      Savoir justifier la conservation de la quantité de mouvement (système pseudo-isolé), distinguer choc élastique ($E_c$ conservée), partiellement élastique et parfaitement mou, calculer l'énergie dissipée, utiliser un coefficient de restitution.
+  - titre: "Résoudre une collision 1D ou 2D"
+    texte: |
+      Savoir écrire les relations de conservation, les projeter, résoudre en vitesses finales ; savoir traiter un choc entre deux billes, une voiture et un mur, un projectile et un pendule.
+  - titre: "Enchaîner mouvement, choc, mouvement"
+    texte: |
+      Savoir découper un problème en phases : (1) avant le choc (énergie), (2) choc (quantité de mouvement), (3) après le choc (énergie ou Newton). Utiliser les bons outils à chaque phase.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Positionnement du TD"
+    texte: |
+      Après les théorèmes énergétiques (TD5), le TD6 introduit le {\bf deuxième intégrale première} de la mécanique : la quantité de mouvement. Le message clé : {\bf pendant un choc, la quantité de mouvement se conserve (pseudo-isolé), l'énergie cinétique ne se conserve que si le choc est élastique}. Le TD prépare le référentiel du centre de masse, le théorème du moment cinétique, la mécanique des systèmes de points et la physique nucléaire (modération des neutrons).
+  - titre: "Trois parcours selon le temps disponible"
+    texte: |
+      {\bf Parcours essentiel} (environ 2 h 30) : exercices 1, 2, 3 et 4.
+
+      {\bf Parcours renforcé} (environ $+1$ h) : exercice 5 (pendule balistique) et exercice 6 (balle rebondissante, coefficient de restitution).
+
+      {\bf Parcours approfondi} (CPGE/licence) : exercice 7 (modération des neutrons, empilement de billes) et variantes de l'exercice 1 dans le référentiel du centre de masse.
+  - titre: "Compétences évaluables"
+    texte: |
+      {\bf S'approprier} : repérer les phases (avant, choc, après). {\bf Analyser} : choisir la bonne loi de conservation pour chaque phase. {\bf Réaliser} : systèmes linéaires, projections, racines, développements limités. {\bf Valider} : $\Delta E_c\le0$, cas limites ($m_1=m_2$, $m_1\gg m_2$, $e=0$, $e=1$), ordre de grandeur. {\bf Communiquer} : schéma avant/après avec les angles et les vitesses.
+  - titre: "Points de vigilance sur la gestion de séance"
+    texte: |
+      Les exercices 2 et 3 s'appuient sur une {\bf figure} (angles de diffusion, orientation des vitesses) : vérifier qu'elle est distribuée. Dans l'exercice 4, la tension du fil n'est pas impulsive pendant le choc (fil vertical, choc horizontal) : point à discuter. L'exercice 5 est la version {\bf mesure} du choc mou ; l'exercice 6 introduit $e$ ; le 7 est un problème de physique nucléaire.
+
+point_cours:
+  - titre: "Quantité de mouvement et système pseudo-isolé"
+    texte: |
+      $\vec p=m\vec v$. Pour un système de points : $\vec P=\sum_im_i\vec v_i=M\vec v_G$ et $\dfrac{\mathrm d\vec P}{\mathrm dt}=\sum\vec F_{\rm ext}$. Si $\sum\vec F_{\rm ext}=\vec0$ (système isolé) ou si elles sont négligeables devant les forces impulsives (pseudo-isolé), $\vec P$ est conservée : $\vec P_{\rm avant}=\vec P_{\rm après}$. La conservation est {\bf vectorielle} : une équation par composante.
+  - titre: "Impulsion"
+    texte: |
+      $\vec J=\displaystyle\int_{t_1}^{t_2}\vec F\,\mathrm dt=\Delta\vec p$. Un choc de durée $\Delta t$ avec une force moyenne $\bar F$ : $\bar F\,\Delta t=\Delta p$. Réduire $\Delta t$ (mur rigide) augmente $\bar F$ ; allonger $\Delta t$ (airbag, zone de déformation) la réduit : lien avec la sécurité routière.
+  - titre: "Classification des chocs"
+    texte: |
+      {\bf Élastique} : $E_c$ conservée. {\bf Parfaitement mou} : les corps restent liés après le choc, $\vec v_1'=\vec v_2'$, perte maximale. {\bf Partiellement élastique} : intermédiaire. L'énergie perdue est transformée en déformation, chaleur, son. Toujours $\Delta E_c\le0$.
+  - titre: "Coefficient de restitution"
+    texte: |
+      Choc frontal 1D : $e=-\dfrac{v_2'-v_1'}{v_2-v_1}$ (rapport des vitesses relatives après/avant), $0\le e\le1$ : $e=1$ élastique, $e=0$ parfaitement mou. Combiné avec la conservation de $p$ : $v_1'=\dfrac{(m_1-em_2)v_1+(1+e)m_2v_2}{m_1+m_2}$, $v_2'=\dfrac{(m_2-em_1)v_2+(1+e)m_1v_1}{m_1+m_2}$. Perte d'énergie : $\Delta E_c=-\tfrac12\mu_r(1-e^2)(v_1-v_2)^2$ avec $\mu_r=\dfrac{m_1m_2}{m_1+m_2}$.
+  - titre: "Choc frontal élastique entre deux billes"
+    texte: |
+      $v_1'=\dfrac{(m_1-m_2)v_1+2m_2v_2}{m_1+m_2}$, $v_2'=\dfrac{(m_2-m_1)v_2+2m_1v_1}{m_1+m_2}$ ; la vitesse relative s'inverse : $v_2'-v_1'=-(v_2-v_1)$. Cas $m_2$ au repos : $v_1'=\dfrac{m_1-m_2}{m_1+m_2}v_1$, $v_2'=\dfrac{2m_1}{m_1+m_2}v_1$. Cas limites : $m_1=m_2$ échange des vitesses ; $m_1\gg m_2$ : $v_1'\approx v_1$, $v_2'\approx2v_1$ ; $m_1\ll m_2$ : $v_1'\approx-v_1$, $v_2'\approx0$ (rebond sur un mur).
+  - titre: "Référentiel du centre de masse"
+    texte: |
+      $\vec v_G=\dfrac{m_1\vec v_1+m_2\vec v_2}{m_1+m_2}$ ; dans $\mathcal R^*$ (de vitesse $\vec v_G$), la quantité de mouvement totale est nulle : $\vec p_1^*=-\vec p_2^*$. Pour un choc élastique, les vitesses {\bf pivotent} sans changer de norme (en 1D : inversion de signe). Énergie cinétique relative : $E_c^*=\tfrac12\mu_rv_{\rm rel}^2$, la seule énergie qui peut être dissipée ; $\tfrac12(m_1+m_2)v_G^2$ est conservée dans tous les cas.
+  - titre: "Choc dans le plan : conservation vectorielle"
+    texte: |
+      Deux équations scalaires (projections sur $Ox$ et $Oy$) pour quatre inconnues (deux normes et deux angles de diffusion) : il faut {\bf deux} données (un angle, un coefficient de restitution, la conservation de $E_c$). Deux billes identiques, choc élastique, l'une au repos : les vitesses finales sont {\bf perpendiculaires} ($\theta_1+\theta_2=90^\circ$) ; si $\theta_1+\theta_2<90^\circ$ le choc est inélastique (cas de l'exercice 2).
+  - titre: "Choc parfaitement mou"
+    texte: |
+      $\vec V=\dfrac{m_1\vec v_1+m_2\vec v_2}{m_1+m_2}=\vec v_G$ ; énergie perdue $\Delta E_c=-\tfrac12\mu_rv_{\rm rel}^2$ avec $v_{\rm rel}=\|\vec v_1-\vec v_2\|$ : {\bf elle ne dépend que de la vitesse relative}. Exemple : deux voitures identiques (masse $m$) qui se percutent de plein fouet à la vitesse $v$ chacune : $v_{\rm rel}=2v$, $\mu_r=m/2$, énergie dissipée $mv^2$ au total, soit $\tfrac12mv^2$ par voiture : {\bf chaque voiture subit la même dissipation que contre un mur rigide à $v$} (et non à $2v$).
+  - titre: "Les trois phases : avant, choc, après"
+    texte: |
+      Pendule balistique, boule qui frappe un bloc : (1) {\bf avant} : énergie mécanique (chute sans frottement), (2) {\bf choc} : quantité de mouvement (et énergie si élastique), (3) {\bf après} : énergie ou Newton (remontée, frottement). Ne jamais appliquer la conservation de $E_m$ à travers le choc sauf choc élastique, ni la conservation de $p$ à travers la phase de glissement (frottement extérieur non négligeable).
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Conserver l'énergie cinétique dans un choc mou"
+    texte: |
+      Dans un choc parfaitement mou, $E_c$ est perdue (déformation, chaleur). Seule la quantité de mouvement se conserve. C'est le piège principal de l'exercice 3 (voitures) et de l'exercice 5 (pendule balistique).
+  - titre: "Oublier le caractère vectoriel de $\\vec p$"
+    texte: |
+      Dans le choc à $90^\circ$, on ne peut pas additionner les normes : $V\ne\dfrac{m_1v_1+m_2v_2}{m_1+m_2}$. Il faut projeter : $V_x=\dfrac{m_1v_1}{m_1+m_2}$, $V_y=\dfrac{m_2v_2}{m_1+m_2}$.
+  - titre: "Se tromper de signe des vitesses"
+    texte: |
+      Les composantes sont {\bf algébriques} : $v_2<0$ si la bille 2 va vers la gauche. Pour un mur ($m_2\to\infty$), $v_1'=-v_1$ : changement de signe, pas de vitesse nulle.
+  - titre: "Utiliser $\\epsilon=m_2/m_1$ sans vérifier $\\epsilon\\ll1$"
+    texte: |
+      L'approximation $(1+\epsilon)^n\approx1+n\epsilon$ n'est valable que pour $|\epsilon|\ll1$. Dans la correction, il faut bien écrire que $m_2/m_1\ll1$ (et non $m_1\gg m_2$ mal écrit).
+  - titre: "Appliquer la conservation de $p$ pendant le glissement"
+    texte: |
+      Pendant que le bloc glisse sur un plan rugueux, la force de frottement est extérieure et non négligeable : $p$ n'est plus conservée. Utiliser le théorème de l'énergie cinétique.
+  - titre: "Confondre énergie perdue et énergie restante"
+    texte: |
+      Dans l'exercice 3 : énergie cinétique perdue $\approx80$ kJ (55 \% de l'énergie initiale), pas $64$ kJ (c'est l'énergie restante).
+  - titre: "Tension du fil impulsive ?"
+    texte: |
+      Pendant le choc d'un pendule vertical, la tension est verticale et le choc horizontal : la composante horizontale de $p$ se conserve. Si le choc avait une composante verticale, la tension du fil interviendrait (impulsion).
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Expérience : pendule de Newton"
+    texte: |
+      Montrer le pendule de Newton : $m_1=m_2$, choc élastique, échange de vitesse ; lever deux billes et en observer deux se détacher (conservation de $p$ ET de $E_c$ simultanément : une seule solution). Demander pourquoi une seule bille ne repart pas à vitesse double.
+  - titre: "Billes sur coussin d'air et vidéo"
+    texte: |
+      Filmer un choc sur table à coussin d'air ou sur un plan lisse (Tracker), mesurer $e$ et comparer l'énergie avant/après. Les étudiants constatent une perte de quelques \%.
+  - titre: "Prédire avant de calculer"
+    texte: |
+      Exercice 3 : « de quel côté part l'ensemble ? À quelle vitesse ? Quelle fraction de l'énergie est perdue ? » Faire voter. Exercice 5 : « quelle fraction de l'énergie de la balle passe en chaleur ? » (99,5 \%).
+  - titre: "Expérience : balle de tennis sur ballon de basket"
+    texte: |
+      Lâcher ensemble une balle de tennis posée sur un ballon de basket : la balle repart à une hauteur environ $9$ fois supérieure (exercice 7, dernière question).
+  - titre: "Gestion de l'hétérogénéité"
+    texte: |
+      Les étudiants rapides abordent les exercices 5, 6, 7. Les autres consolident les trois phases sur les exercices 1 à 4. Réserver cinq minutes pour « quels théorèmes à quelle phase ? ».
+
+bilan:
+  - titre: "Ce qu'il faut savoir faire à la fin du TD"
+    texte: |
+      Justifier la conservation de $\vec p$ dans un choc ; écrire les relations pour un choc élastique ou mou ; résoudre un choc 1D (formules, cas limites) et 2D (projections) ; calculer l'énergie perdue ; enchaîner énergie, choc et énergie pour un pendule ou un bloc ; utiliser le coefficient de restitution.
+  - titre: "Résultats marquants du TD"
+    texte: |
+      Choc élastique ($m_2$ au repos) : $v_1'=\dfrac{m_1-m_2}{m_1+m_2}v_1$, $v_2'=\dfrac{2m_1}{m_1+m_2}v_1$ ; choc 2D ($30^\circ/45^\circ$) : $v_A'=\dfrac{2v_A}{1+\sqrt3}=2{,}93$ m/s, $v_B'=\dfrac{\sqrt2v_A}{1+\sqrt3}=2{,}07$ m/s, $80{,}4$ \% de l'énergie conservée ; voitures à $90^\circ$ : $V=9{,}61$ m/s, $42^\circ$ de $Ox$, perte de $55$ \% ; pendule+bloc : $v=\sqrt{2gR}$, $v'=-\tfrac12v$, $w'=\tfrac12v$, $h=R/4$, $d=R/(4\mu_c)=4{,}5$ m ; pendule balistique : $v=\dfrac{m+M}m\sqrt{2gL(1-\cos\theta)}$ ; rebonds : $h_n=e^{2n}h_0$, $t_{\rm tot}=t_0\dfrac{1+e}{1-e}$ ; neutrons : $n=\ln(E_0/E_f)/\xi$.
+  - titre: "Ce qui sera réutilisé dans la suite"
+    texte: |
+      Le référentiel du centre de masse et la masse réduite reviennent pour le problème à deux corps (forces centrales, Kepler). La conservation de $p$ s'étend au moment cinétique $\vec L$ (TD suivants). Le coefficient de restitution et les pertes d'énergie annoncent la thermodynamique (dissipation, irréversibilité).
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Choc dans le référentiel du centre de masse"
+    texte: |
+      Refaire l'exercice 1 dans $\mathcal R^*$ : montrer que $v_1^{*\prime}=-v_1^*$ et $v_2^{*\prime}=-v_2^*$ (inversion de signe, en 1D), puis revenir à $\mathcal R$ pour retrouver $v_1',v_2'$. Comparer à la méthode algébrique : laquelle est la plus rapide ?
+  - niveau: cpge
+    titre: "Choc élastique 2D de deux billes identiques"
+    texte: |
+      Démontrer que les angles de diffusion vérifient $\theta_1+\theta_2=90^\circ$ et exprimer $v_1'=v\cos\theta_1$, $v_2'=v\sin\theta_1$ (billard). Que devient ce résultat si les masses sont différentes ?
+  - niveau: licence
+    titre: "Section efficace de diffusion"
+    texte: |
+      Pour la diffusion élastique d'une sphère dure sur une sphère fixe, de distance de contact $\mathcal R$ (somme des deux rayons), montrer que le paramètre d'impact $b$ et l'angle de déviation $\chi$ sont liés par $b=\mathcal R\cos(\chi/2)$, que la section efficace différentielle vaut $\dfrac{\mathrm d\sigma}{\mathrm d\Omega}=\dfrac{\mathcal R^2}4$ (isotrope) et que la section efficace totale vaut $\pi\mathcal R^2$.
+  - niveau: master
+    titre: "Collisions relativistes"
+    texte: |
+      Pour des particules relativistes, $\vec p=\gamma m\vec v$ et $E=\gamma mc^2$ ; la conservation du quadrivecteur énergie-impulsion remplace les deux lois. Montrer que dans un choc élastique de deux particules identiques (une au repos), l'angle entre les trajectoires est inférieur à $90^\circ$ (contrairement au cas non relativiste).
+
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi un airbag sauve-t-il des vies ?"
+    duree_introduction: "5 min"
+    question_d_accroche: |
+      Une voiture s'arrête contre un mur en $0{,}1$ s ; avec un airbag, la tête s'arrête en $0{,}2$ s. {\bf La variation de quantité de mouvement est la même : pourquoi la force est-elle différente ?} Et que se passe-t-il quand deux voitures identiques se percutent de plein fouet à $50$ km/h chacune ?
+    texte: |
+      {\bf Idée clé : pendant un choc, $\vec p$ se conserve (pseudo-isolé) ; l'énergie cinétique, elle, est en général dissipée.} $\bar F=\Delta p/\Delta t$ : allonger la durée du choc réduit la force. L'énergie perdue vaut $\tfrac12\mu_rv_{\rm rel}^2(1-e^2)$.
+
+outils_mathematiques:
+  - titre: "Résolution d'un système linéaire $2\\times2$"
+    texte: |
+      Deux équations de conservation (projections) $\to$ deux inconnues ; élimination par combinaison linéaire.
+  - titre: "Identité remarquable"
+    texte: |
+      $a^2-b^2=(a-b)(a+b)$ : transforme la conservation de $E_c$ ($m_1(v_1^2-v_1'^2)=m_2(v_2'^2-v_2^2)$) en $v_1+v_1'=v_2+v_2'$ après division par l'équation de $p$.
+  - titre: "Développement limité"
+    texte: |
+      $(1+\epsilon)^n\approx1+n\epsilon$, $\dfrac1{1+\epsilon}\approx1-\epsilon$, $\sqrt{1+\epsilon}\approx1+\tfrac\epsilon2$ pour $|\epsilon|\ll1$.
+  - titre: "Suite géométrique"
+    texte: |
+      $\displaystyle\sum_{n=0}^\infty q^n=\dfrac1{1-q}$ pour $|q|<1$ (rebonds successifs, exercice 6).
+  - titre: "Trigonométrie"
+    texte: |
+      $\sin(\alpha+\beta)=\sin\alpha\cos\beta+\cos\alpha\sin\beta$ ; $\cos30^\circ=\tfrac{\sqrt3}2$, $\sin45^\circ=\tfrac{\sqrt2}2$.
+
+liens_autres_disciplines:
+  - discipline: "Sécurité routière et biomécanique"
+    texte: |
+      Zones de déformation, airbags, ceintures : allonger $\Delta t$ pour réduire la force $\bar F=\Delta p/\Delta t$ ; énergie dissipée dans la déformation de la carrosserie.
+  - discipline: "Physique nucléaire"
+    texte: |
+      Modération des neutrons dans un réacteur (eau, graphite) par chocs élastiques successifs avec des noyaux légers (exercice 7).
+  - discipline: "Sport"
+    texte: |
+      Tennis, golf, billard, pétanque : coefficient de restitution de la balle, transfert d'énergie entre raquette et balle.
+  - discipline: "Astrophysique"
+    texte: |
+      Assistance gravitationnelle : « choc élastique » entre une sonde et une planète dans le référentiel du Soleil ; gain de vitesse jusqu'à $2V_{\rm planète}$.
+  - discipline: "Thermodynamique"
+    texte: |
+      Théorie cinétique des gaz : pression comme conséquence des chocs élastiques des molécules sur les parois.

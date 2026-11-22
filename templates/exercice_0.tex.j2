@@ -47,7 +47,7 @@
 
 \BLOCK{macro render_animation(q)}
     \BLOCK{if opts.show_animation_note and q.animation}
-        \BLOCK{set anim_list = [q.animation] if ex.animation is mapping else q.animation}
+        \BLOCK{set anim_list = [q.animation] if q.animation is mapping else q.animation}
         \BLOCK{for anim in anim_list}
             \par\smallskip\textit{(Animation disponible : \texttt{\VAR{anim.ref|texid}})}
         \BLOCK{endfor}
@@ -105,6 +105,65 @@
             \BLOCK{endfor}
         \BLOCK{endif}
     \BLOCK{endif}
+\BLOCK{endmacro}
+
+%{# ============================================================================== #}
+%{# MACROS NOUVELLES : accroche / outils mathématiques / liens autres disciplines   #}
+%{# Champs YAML spécifiques (différents de titre/texte) :                           #}
+%{#   accroche_point_cours_essentiel : titre, duree_introduction,                  #}
+%{#                                    question_d_accroche, texte                  #}
+%{#   outils_mathematiques           : titre, texte                                #}
+%{#   liens_autres_disciplines       : discipline, texte                           #}
+%{# ============================================================================== #}
+\BLOCK{macro render_accroche(show_flag, data, show_duree=true)}
+    \BLOCK{if show_flag and data}
+        \BLOCK{for item in data}
+            \begin{accrochecours}\BLOCK{if item.titre}[\VAR{item.titre}]\BLOCK{endif}
+                \BLOCK{if show_duree and item.duree_introduction}
+                    {\small\itshape\color{grayBrume}Durée de l'introduction : \VAR{item.duree_introduction}\par}
+                    \smallskip
+                \BLOCK{endif}
+                \BLOCK{if item.question_d_accroche}
+                    \textbf{\textsf{Question d'accroche.}}\par\smallskip
+                    {\itshape \VAR{item.question_d_accroche}\par}
+                    \medskip
+                \BLOCK{endif}
+                \VAR{item.texte if item.texte is defined else item}
+            \end{accrochecours}
+        \BLOCK{endfor}
+    \BLOCK{endif}
+\BLOCK{endmacro}
+
+\BLOCK{macro render_outils_maths(show_flag, data)}
+    \BLOCK{if show_flag and data}
+        \begin{outilsmathematiques}
+            \begin{itemize}\setlength{\itemsep}{4pt}
+            \BLOCK{for item in data}
+                \item \BLOCK{if item.titre}\textbf{\VAR{item.titre}}\par\BLOCK{endif}
+                    \VAR{item.texte if item.texte is defined else item}
+            \BLOCK{endfor}
+            \end{itemize}
+        \end{outilsmathematiques}
+    \BLOCK{endif}
+\BLOCK{endmacro}
+
+\BLOCK{macro render_liens_disciplines(show_flag, data)}
+    \BLOCK{if show_flag and data}
+        \begin{liensautresdisciplines}
+            \begin{itemize}\setlength{\itemsep}{4pt}
+            \BLOCK{for item in data}
+                \item \BLOCK{if item.discipline}\textbf{\VAR{item.discipline}}\ --- \ \BLOCK{endif}\VAR{item.texte if item.texte is defined else item}
+            \BLOCK{endfor}
+            \end{itemize}
+        \end{liensautresdisciplines}
+    \BLOCK{endif}
+\BLOCK{endmacro}
+
+%{# ============================================================================== #}
+%{# MACRO : titre de partie au niveau TD (utilisé uniquement en phase 'fin')         #}
+%{# ============================================================================== #}
+\BLOCK{macro render_titre_td(txt)}
+    \par\medskip\noindent{\large\bfseries\sffamily \VAR{txt}}\par\nopagebreak\smallskip
 \BLOCK{endmacro}
 
 %{# ============================================================================== #}
@@ -169,6 +228,15 @@
 \BLOCK{else}
 \TitreNiveauUn{Exercice \VAR{ex.numero}. \VAR{ex.intitule}\BLOCK{if ex.facultatif} \textit{(facultatif)}\BLOCK{endif}}
 \BLOCK{endif}
+
+\phantomsection
+\addcontentsline{toc}{subsection}{Exercice \VAR{ex.numero}. \VAR{ex.intitule}}
+\label{\VAR{ex.id}}
+
+\hyperref[plandelaseance]{\large\bfseries\sffamily $\triangleleft$ Plan de la séance}
+\hyperref[plandelaseance]{\large\bfseries\sffamily \ding{115}\; Plan de la séance}
+
+\bigskip
 
 
 \BLOCK{if false}
@@ -287,7 +355,23 @@
 \BLOCK{endif}
 
 
+%{# ============================================================================== #}
+%{# PHASES DE RENDU                                                                 #}
+%{#   td_phase non défini ou 'all' : exercice complet (comportement historique)    #}
+%{#   td_phase = 'debut'  : ouverture du TD (cadrage, prérequis, objectifs, cours)  #}
+%{#   td_phase = 'fin'    : clôture du TD (écueils, animation, bilan, liens, APL)   #}
+%{# ============================================================================== #}
+\BLOCK{set _phase = td_phase if td_phase is defined else 'all'}
+\BLOCK{set _head = _phase in ['all', 'debut']}
+\BLOCK{set _tail = _phase in ['all', 'fin']}
+
+\BLOCK{if _head}
+%{# Accroche + point de cours essentiel : introduit en tout début d'exercice (avant l'énoncé) #}
+\VAR{render_accroche(opts.show_accroche_point_cours_essentiel is not defined or opts.show_accroche_point_cours_essentiel, ex.accroche_point_cours_essentiel, opts.show_duree_introduction is not defined or opts.show_duree_introduction)}
+
+\BLOCK{if ex.enonce_intro}
 \VAR{ex.enonce_intro}
+\BLOCK{endif}
 
 \VAR{render_figure(ex)}
 \VAR{render_animation(ex)}
@@ -296,10 +380,12 @@
 \VAR{render_section(opts.show_objectifs_pedagogiques_etudiants, ex.objectifs_pedagogiques_etudiants, 'objectifspedagogiquesetudiants')}
 \VAR{render_section(opts.show_objectifs_pedagogiques_enseignants, ex.objectifs_pedagogiques_enseignants, 'objectifspedagogiquesenseignants')}
 \VAR{render_section(opts.show_point_cours, ex.point_cours, 'pointcours')}
+\VAR{render_outils_maths(opts.show_outils_mathematiques is not defined or opts.show_outils_mathematiques, ex.outils_mathematiques)}
 \VAR{render_section(opts.show_coup_de_pouce, ex.coup_de_pouce, 'coupdepouce')}
 \VAR{render_section(opts.show_attention, ex.attention, 'attention')}
+\BLOCK{endif}
 
-\BLOCK{if ex.questions}
+\BLOCK{if _phase == 'all' and ex.questions}
 \begin{enumerate}[label=\arabic*.]
 \BLOCK{for item in ex.contenu}
     \BLOCK{if item.kind == 'intro'}
@@ -322,10 +408,16 @@
 \end{enumerate}
 \BLOCK{endif}
 
+\BLOCK{if _tail}
+\BLOCK{if _phase == 'fin'}
+\VAR{render_titre_td(opts.titre_cloture_td if opts.titre_cloture_td is defined else "Bilan et prolongements du TD")}
+\BLOCK{endif}
 \VAR{render_section(opts.show_remarques_pedagogiques_ecueils_classiques, ex.remarques_pedagogiques_ecueils_classiques, 'remarquespedagogiquesecueilsclassiques')}
 \VAR{render_section(opts.show_remarques_pedagogiques_conseils_animation, ex.remarques_pedagogiques_conseils_animation, 'remarquespedagogiquesconseilsanimation')}
 \VAR{render_section(opts.show_bilan, ex.bilan, 'bilan')}
+\VAR{render_liens_disciplines(opts.show_liens_autres_disciplines is not defined or opts.show_liens_autres_disciplines, ex.liens_autres_disciplines)}
 \VAR{render_section(opts.aller_plus_loin_niveaux, ex.aller_plus_loin, 'allerplusloin', is_apl=true)}
+\BLOCK{endif}
 
 \BLOCK{if ex.overlay_tikz and opts.show_solution}
     \begin{tikzpicture}[remember picture, overlay]

@@ -1,0 +1,270 @@
+id: td5_ex5
+intitule: "(*) Bille sur une sphère : angle de décollage"
+td: td5
+facultatif: true
+seance: 1
+
+cours_rattache:
+  - energie.conservation_energie_mecanique
+  - dynamique.condition_de_decollage
+  - cinematique.coordonnees_polaires
+  - energie.energie_cinetique_de_rotation
+  - mecanique_analytique.multiplicateur_de_lagrange
+
+metadonnees:
+  duree_estimee: "75 min"
+  difficulte: 5
+  type_exercice: "Exercice non guidé / Synthèse énergie, Newton, Lagrange"
+  indispensable: false
+
+enonce_intro: |
+  Une petite bille de masse $m$, assimilée à un point matériel, est posée au sommet $S$ d'une sphère {\bf fixe} de rayon $R$, posée sur le sol, et légèrement écartée de la verticale : elle part avec une vitesse initiale pratiquement nulle et glisse sans frottement sur la sphère. On repère sa position par l'angle $\theta$ entre la verticale ascendante $Oz$ (axe passant par le centre $O$) et le rayon $\overrightarrow{OM}$ ($\theta=0$ au sommet). On prendra $g=9{,}81~\mathrm{m\,s^{-2}}$ et, pour les applications numériques, $R=2{,}0$ m. {\bf Question centrale : à quel angle la bille quitte-t-elle la sphère ?}
+
+prerequis:
+  - titre: "Énergie mécanique et réaction normale"
+    texte: |
+      Sur une surface lisse, $\vec N$ est perpendiculaire à la vitesse et ne travaille pas : $E_m=\text{cte}$ ; $\vec N$ s'obtient par projection de la loi de Newton sur la normale ; le contact cesse quand $N=0$.
+  - titre: "Base polaire"
+    texte: |
+      Pour un mouvement sur le cercle $r=R$ : $\vec v=R\dot\theta\,\vec e_\theta$, $\vec a=-R\dot\theta^2\,\vec e_r+R\ddot\theta\,\vec e_\theta$.
+  - titre: "Mouvement de projectile"
+    texte: |
+      Après le décollage seul le poids agit : $x(t)=x_0+v_{0x}t$, $z(t)=z_0+v_{0z}t-\tfrac12gt^2$.
+  - titre: "Énergie de rotation d'un solide"
+    texte: |
+      $E_c=\tfrac12mv^2+\tfrac12J\omega^2$ ; pour une bille pleine de rayon $r$, $J=\tfrac25mr^2$ ; roulement sans glissement : $v=r\omega$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Trouver une condition de décollage à partir d'un bilan d'énergie"
+    texte: |
+      Savoir obtenir $v(\theta)$ par l'énergie, $N(\theta)$ par Newton (projection radiale), poser $N=0$, résoudre ; savoir poursuivre par un calcul de projectile ; savoir modifier le modèle (vitesse initiale, bille qui roule, adhérence limitée).
+  - titre: "Aborder le formalisme de Lagrange (niveau licence)"
+    texte: |
+      Savoir écrire $L=T-V$ en coordonnées polaires, imposer la liaison $r=R$ avec un multiplicateur, et reconnaître que le multiplicateur est la réaction normale.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Un résultat qui frappe : $\\cos\\theta_d=2/3$"
+    texte: |
+      Le décollage a lieu à la hauteur $\tfrac23R$ au-dessus du centre, soit à $\tfrac13R$ sous le sommet, {\bf quelle que soit la masse et quel que soit le rayon}. Le résultat est un classique de concours. L'exercice reprend le schéma de l'exercice 4 (énergie pour $v$, Newton pour $N$) avec un contact sur la face {\bf extérieure} : le poids tend à décoller la bille de la sphère (contrairement au looping). Trois niveaux : (i) questions (a)--(d) glissement pur ; (ii) (e)--(g) variantes (vitesse initiale, trajectoire après décollage) ; (iii) (h)--(k) roulement et adhérence limitée, Lagrange. Question (j) : {\bf avec adhérence finie, la bille qui roule glisse avant de décoller} (le rapport $f/N$ diverge quand $N\to0$), résultat contre-intuitif que peu d'étudiants anticipent.
+  - titre: "Pont vers la mécanique analytique"
+    texte: |
+      Avec $L=\tfrac12m(\dot r^2+r^2\dot\theta^2)-mgr\cos\theta$ et la liaison $f=r-R=0$, l'équation radiale d'Euler--Lagrange avec multiplicateur donne $\lambda=N$ : les {\bf forces de liaison} apparaissent explicitement. Les étudiants de CPGE peuvent sauter la question (k).
+
+point_cours:
+  - titre: "Méthode"
+    texte: |
+      (1) Conservation de $E_m$ : $v^2(\theta)$. (2) Loi de Newton projetée sur $\vec e_r$ : $N(\theta)$. (3) $N=0$ définit $\theta_d$. (4) Après $\theta_d$ : projectile avec les conditions initiales du décollage.
+  - titre: "Condition $N\\ge0$ unilatérale (contact extérieur)"
+    texte: |
+      Sphère par l'extérieur : la réaction est dirigée vers l'extérieur ($+\vec e_r$), le poids a une composante vers le centre $mg\cos\theta$ ; l'équation radiale donne $mg\cos\theta-N=\dfrac{mv^2}R$.
+  - titre: "Roulement sans glissement : énergie et adhérence"
+    texte: |
+      Énergie : $\tfrac12m v^2(1+\tfrac25)=mgR(1-\cos\theta)$. Dynamique : $m\dot v=mg\sin\theta-f$, $J\dot\omega=f\,r$, $v=r\omega$, d'où $f=\tfrac27mg\sin\theta$. Condition d'adhérence : $f\le\mu N$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Confondre « sommet » et « décollage »"
+    texte: |
+      La bille ne quitte pas la sphère au sommet : elle n'y a pas de vitesse. Le décollage est à $\theta_d\approx48{,}2^\circ$.
+  - titre: "Mauvais signe dans l'équation radiale"
+    texte: |
+      Contact extérieur : $mg\cos\theta-N=mv^2/R$ (le poids {\bf aide} le centripète). À l'intérieur d'un cercle (looping) c'est $N-mg\cos\theta=mv^2/R$. Vérifier avec $\theta=0$ au repos : $N=mg$.
+  - titre: "Prendre la hauteur de chute depuis le centre"
+    texte: |
+      La dénivelée entre le sommet et le point $\theta$ est $R(1-\cos\theta)$, et non $R\cos\theta$.
+  - titre: "Oublier que la trajectoire après décollage est une parabole"
+    texte: |
+      Après $\theta_d$ le mouvement n'est plus circulaire ; la vitesse initiale est tangente au cercle ($v\,\vec e_\theta$), pas horizontale.
+  - titre: "Roulement : ajouter $\\tfrac12J\\omega^2$ et garder $\\cos\\theta=2/3$"
+    texte: |
+      L'énergie de rotation change la relation $v(\theta)$ : $\cos\theta_d=10/17$ pour une bille pleine qui roule.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Prédire avant de calculer"
+    texte: |
+      Demander à main levée : décolle-t-elle à $15^\circ$, $30^\circ$, $45^\circ$, $60^\circ$, $90^\circ$ ? La plupart des étudiants citent $60^\circ$ ou $90^\circ$.
+  - titre: "Expérience : bille sur un ballon de basket"
+    texte: |
+      Poser une bille sur un ballon, filmer, mesurer l'angle de décollage (il est plus faible que $48^\circ$ car la bille roule ou glisse avec frottement). Comparer avec $\arccos(2/3)$ et $\arccos(10/17)$.
+  - titre: "Lien avec le looping"
+    texte: |
+      Même équation, mais un {\bf contact unilatéral extérieur}. Demander : « dans quel cas $N$ augmente-t-elle avec la vitesse ? » (intérieur du cercle : $N$ augmente ; extérieur : $N$ diminue).
+
+bilan:
+  - titre: "Résultats"
+    texte: |
+      $v^2=2gR(1-\cos\theta)$ ; $N=mg(3\cos\theta-2)$ ; $\cos\theta_d=\tfrac23$, $\theta_d=48{,}19^\circ$, $z_d=\tfrac23R$, $v_d=\sqrt{2gR/3}=3{,}62$ m/s pour $R=2$ m ; avec $v_0$ au sommet : $\cos\theta_d=\tfrac23+\dfrac{v_0^2}{3gR}$ (décollage immédiat si $v_0^2\ge gR$) ; impact au sol à $x\approx1{,}46R$ de l'axe avec $v=\sqrt{4gR}=8{,}86$ m/s ; bille qui roule : $\cos\theta_d=\tfrac{10}{17}$, $\theta_d=53{,}97^\circ$ ; $f/N=\dfrac{2\sin\theta}{17\cos\theta-10}$.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Bille qui roule et arrive à un rebord"
+    texte: |
+      Pour un solide de moment d'inertie $J=\beta mr^2$ qui roule sans glisser, montrer que $\cos\theta_d=\dfrac{2}{3+\beta}$ : on retrouve $\tfrac23$ pour $\beta=0$ (glissement) et $\tfrac{10}{17}$ pour la bille pleine ($\beta=\tfrac25$). Calculer $\theta_d$ pour la bille creuse ($\beta=\tfrac23$) et pour le cylindre plein ($\beta=\tfrac12$).
+  - niveau: licence
+    titre: "Lagrangien avec multiplicateur et branches"
+    texte: |
+      Montrer que les équations $m(\ddot r-r\dot\theta^2)+mg\cos\theta=\lambda$ et $mR^2\ddot\theta=mgR\sin\theta$ redonnent le résultat ; tracer $\lambda(t)$ et montrer qu'il s'annule au décollage. Discuter pourquoi le multiplicateur de Lagrange ne peut pas devenir négatif dans un problème de contact unilatéral.
+  - niveau: master
+    titre: "Perturbation initiale : le temps de décollage"
+    texte: |
+      Avec $\theta(0)=\theta_0\ll1$ et $\dot\theta(0)=0$, linéariser $\ddot\theta=\tfrac gR\sin\theta\approx\tfrac gR\theta$ : $\theta(t)=\theta_0\cosh\sqrt{g/R}\,t$. Montrer que le temps avant le décollage diverge comme $\ln(1/\theta_0)$ : la durée n'est pas universelle même si l'angle l'est.
+
+accroche_point_cours_essentiel:
+  - titre: "À quelle hauteur la bille quitte-t-elle la sphère ?"
+    duree_introduction: "4 min"
+    question_d_accroche: |
+      Une bille posée au sommet d'une grosse sphère glisse sans frottement. {\bf Quitte-t-elle la sphère au sommet, à mi-hauteur, juste avant de toucher le sol ?} Et si l'on triple le rayon ou la masse ?
+    texte: |
+      {\bf Idée clé : la vitesse croît (énergie), mais la composante du poids qui plaque la bille diminue ($mg\cos\theta$) ; il y a un moment où elle ne suffit plus à fournir l'accélération centripète.} Résultat universel : $\cos\theta_d=2/3$.
+
+outils_mathematiques:
+  - titre: "Résolution de $3\\cos\\theta-2=0$"
+    texte: |
+      $\cos\theta_d=\tfrac23$ ; $\theta_d=\arccos(2/3)=48{,}19^\circ=0{,}841$ rad ; $\sin\theta_d=\sqrt5/3$.
+  - titre: "Équation du second degré (impact au sol)"
+    texte: |
+      $-\tfrac g2t^2+v_{0z}t+(z_d+R)=0$ ; on retient la racine positive.
+  - titre: "Fonction hyperbolique (perturbation)"
+    texte: |
+      $\ddot\theta=\kappa^2\theta\Rightarrow\theta=\theta_0\cosh\kappa t$ ; $\cosh u=\dfrac{\mathrm e^u+\mathrm e^{-u}}2$.
+  - titre: "Rapport $f/N$ et limite"
+    texte: |
+      $\dfrac fN=\dfrac{2\sin\theta}{17\cos\theta-10}\to+\infty$ quand $\cos\theta\to10/17$ par valeurs supérieures.
+
+liens_autres_disciplines:
+  - discipline: "Géologie et génie civil"
+    texte: |
+      Glissement de terrain sur un dôme : la rupture de contact ou de frottement intervient avant le sol.
+  - discipline: "Sport"
+    texte: |
+      Skieur sur une bosse arrondie : décollage lorsque $v^2\ge gR\cos\theta$ (voir TD4, exercice 5).
+  - discipline: "Astrophysique"
+    texte: |
+      Détachement d'une particule de la surface d'un corps en rotation rapide (équateur : $\omega^2R=g$).
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{itemize}
+        \item[(a)] Faire un schéma, dresser le bilan des forces sur la bille et dire lesquelles travaillent. Justifier que l'énergie mécanique est conservée.
+        \item[(b)] Établir la vitesse $v(\theta)$ de la bille en fonction de $g$, $R$ et $\theta$.
+      \end{itemize}
+    coup_de_pouce: |
+      Deux forces : le poids et la réaction normale (pas de frottement). La réaction est perpendiculaire à $\vec v$. L'altitude de la bille est $z=R\cos\theta$ au-dessus de $O$.
+    correction: |
+      $\vec N\perp\vec v$ ne travaille pas, $E_m=\tfrac12mv^2+mgR\cos\theta=mgR$ ; $v^2=2gR(1-\cos\theta)$.
+    solution:
+      - titre: "(a) Forces et énergie"
+        texte: |
+          Système : la bille. Référentiel terrestre galiléen. Forces : le poids $m\vec g=-mg\,\vec u_z$ (conservatif) et la réaction de la sphère $\vec N=N\,\vec e_r$ (normale, sans frottement ; $N\ge0$). {\bf Seul le poids travaille} : $\vec N\cdot\vec v=0$ puisque $\vec v=R\dot\theta\,\vec e_\theta\perp\vec e_r$. Donc $E_m=\text{cte}$.
+      - titre: "(b) Vitesse en fonction de l'angle"
+        texte: |
+          $E_p=mgz=mgR\cos\theta$ (origine en $O$). Au départ $v\simeq0$ et $\theta\simeq0$ : $E_m=mgR$. En $\theta$ :
+          $$\tfrac12mv^2+mgR\cos\theta=mgR\ \Rightarrow\ \boxed{v^2(\theta)=2gR\,(1-\cos\theta)}.$$
+          Contrôle : $v=0$ en $\theta=0$ ; $v^2=2gR$ en $\theta=\pi/2$ (chute de $R$) $\sird$.
+
+  - id: q2
+    enonce: |
+      \begin{itemize}
+        \item[(c)] Appliquer la loi de Newton à la bille et la projeter sur $\vec e_r$. En déduire la réaction $N(\theta)$.
+        \item[(d)] Quelle est la condition physique de décollage ? Déterminer l'angle $\theta_d$, la hauteur $z_d$ et la vitesse $v_d$ du décollage. Application numérique pour $R=2{,}0$ m. L'angle dépend-il de $m$ ? de $R$ ?
+      \end{itemize}
+    coup_de_pouce: |
+      $\vec a=-R\dot\theta^2\,\vec e_r+R\ddot\theta\,\vec e_\theta$. Le poids a pour composante radiale $-mg\cos\theta$ (vers le centre) : attention au signe de $N$.
+    correction: |
+      $-mR\dot\theta^2=N-mg\cos\theta$, donc $N=mg(3\cos\theta-2)$ ; $N=0\iff\cos\theta_d=\tfrac23$, $\theta_d=48{,}19^\circ$, $z_d=\tfrac23R=1{,}33$ m, $v_d=\sqrt{2gR/3}=3{,}62$ m/s ; indépendant de $m$ et de $R$.
+    solution:
+      - titre: "(c) Réaction normale"
+        texte: |
+          Projection de $m\vec a=m\vec g+\vec N$ sur $\vec e_r$ (avec $\vec u_z=\cos\theta\,\vec e_r-\sin\theta\,\vec e_\theta$) :
+          $$-mR\dot\theta^2=-mg\cos\theta+N\ \Rightarrow\ N=mg\cos\theta-m\frac{v^2}R.$$
+          On remplace $v^2=2gR(1-\cos\theta)$ :
+          $$\boxed{N(\theta)=mg\,(3\cos\theta-2)}.$$
+          Vérifications : $\theta=0$, $N=mg$ $\sird$ (équilibre au sommet) ; $N$ décroît quand $\theta$ augmente, car $v$ croît tandis que la composante normale du poids diminue.
+      - titre: "(d) Décollage"
+        texte: |
+          La sphère ne peut que pousser : $N\ge0$. La bille quitte la sphère quand $N$ s'annule :
+          $$3\cos\theta_d-2=0\ \Rightarrow\ \boxed{\cos\theta_d=\tfrac23},\quad\theta_d=\arccos\tfrac23\approx\boxed{48{,}2^\circ}.$$
+          Hauteur au-dessus du centre : $z_d=R\cos\theta_d=\boxed{\tfrac23R}$ (soit $\tfrac13R$ sous le sommet) ; vitesse :
+          $$v_d^2=2gR\Big(1-\tfrac23\Big)=\tfrac23gR\ \Rightarrow\ \boxed{v_d=\sqrt{\tfrac{2gR}3}}=\sqrt{\tfrac{2\times9{,}81\times2}{3}}\approx\boxed{3{,}62~\mathrm{m/s}}.$$
+          {\bf L'angle est universel} : il ne dépend ni de $m$ ni de $R$ (seule la vitesse de décollage dépend de $R$). Pour $\theta>\theta_d$ la solution donnerait $N<0$ (la sphère devrait « tirer ») : impossible, le mouvement n'est plus circulaire.
+
+  - id: q3
+    enonce: |
+      \begin{itemize}
+        \item[(e)] La bille part maintenant du sommet avec une vitesse horizontale $v_0$ non nulle. Établir $\cos\theta_d$ en fonction de $v_0$, $g$ et $R$. À partir de quelle valeur de $v_0$ la bille décolle-t-elle immédiatement ?
+        \item[(f)] Pour $v_0=0$, la sphère étant posée sur le sol, étudier la suite du mouvement : déterminer l'instant et le point d'impact (distance horizontale à l'axe de la sphère) et la vitesse à l'impact (application numérique). Vérifier la vitesse d'impact par l'énergie.
+      \end{itemize}
+    coup_de_pouce: |
+      (e) $E_m=\tfrac12mv_0^2+mgR$. Poser $N=0$. (f) Après $\theta_d$ : projectile ; $\vec v_d$ est tangent au cercle, dirigé vers le bas. Le sol est à $z=-R$ si l'origine est en $O$.
+    correction: |
+      (e) $v^2=v_0^2+2gR(1-\cos\theta)$ ; $N=0\iff\cos\theta_d=\tfrac23+\dfrac{v_0^2}{3gR}$ ; décollage immédiat si $v_0^2\ge gR$. (f) $t\approx0{,}594$ s ; impact à $x\approx2{,}92$ m ($\approx1{,}46R$) de l'axe ; $v_{\rm imp}=\sqrt{4gR}\approx8{,}86$ m/s.
+    solution:
+      - titre: "(e) Avec vitesse initiale $v_0$"
+        texte: |
+          $E_m=\tfrac12mv_0^2+mgR$ donc $v^2=v_0^2+2gR(1-\cos\theta)$ et
+          $$N=mg\cos\theta-m\frac{v^2}R=mg(3\cos\theta-2)-m\frac{v_0^2}R.$$
+          $N=0$ :
+          $$\boxed{\cos\theta_d=\frac23+\frac{v_0^2}{3gR}}.$$
+          Cet angle existe si $\cos\theta_d\le1$ : $v_0^2\le gR$. Pour $v_0^2\ge gR$, $N(0)=mg-mv_0^2/R\le0$ : la bille décolle {\bf dès le sommet} (c'est la condition de la bosse : $v^2\le gR$ au sommet, TD4 exercice 5). Application : pour $R=2$ m, $v_0\ge\sqrt{gR}=4{,}43$ m/s.
+      - titre: "(f) Trajectoire après décollage et impact au sol"
+        texte: |
+          Origine en $O$ ; au décollage : position $(R\sin\theta_d,\ R\cos\theta_d)=(1{,}49~\text{m},\ 1{,}33~\text{m})$, vitesse $v_d=3{,}62$ m/s tangente au cercle, soit
+          $$v_x=v_d\cos\theta_d=2{,}41~\mathrm{m/s},\qquad v_z=-v_d\sin\theta_d=-2{,}70~\mathrm{m/s}.$$
+          Puis $z(t)=z_d+v_zt-\tfrac12gt^2$. Le sol est à $z=-R=-2{,}0$ m :
+          $$-\tfrac g2t^2-2{,}70\,t+3{,}33=0\ \Rightarrow\ t\approx\boxed{0{,}594~\mathrm s}.$$
+          Abscisse d'impact : $x=R\sin\theta_d+v_xt=1{,}49+2{,}41\times0{,}594\approx\boxed{2{,}92~\mathrm m}\ (\approx1{,}46R)$, soit {\bf au-delà} de la sphère (rayon $R=2$ m). Vitesse à l'impact : $v^2=v_x^2+(v_z-gt)^2$ ou, par l'énergie entre le sommet ($z=R$) et le sol ($z=-R$) : $\tfrac12mv^2=mg\,(2R)$, soit
+          $$v_{\rm imp}=\sqrt{4gR}=\sqrt{4\times9{,}81\times2}\approx\boxed{8{,}86~\mathrm{m/s}}.$$
+          Les deux méthodes concordent ($8{,}859$ m/s), ce qui valide le calcul. La trajectoire reste à l'extérieur de la sphère puisque, juste après $\theta_d$, la courbure de la parabole est plus faible que celle du cercle ($g\cos\theta<v^2/R$ pour $\theta>\theta_d$).
+
+  - id: q4
+    enonce: |
+      {\bf Bille qui roule.} La bille est maintenant une bille pleine de rayon $r\ll R$, qui roule {\bf sans glisser} sur la sphère (on assimile son centre à un point du cercle de rayon $R$, $J=\tfrac25mr^2$).
+      \begin{itemize}
+        \item[(g)] Établir par l'énergie $v^2(\theta)$, puis $N(\theta)$ et l'angle de décollage $\theta_d$ ($\cos\theta_d=10/17$ attendu). Comparer au cas du glissement.
+        \item[(h)] Écrire le théorème du moment cinétique pour la bille et en déduire la force de frottement $f(\theta)$ (adhérence). Exprimer $f/N$.
+        \item[(i)] Le coefficient d'adhérence est $\mu$. Montrer qu'il existe un angle $\theta_g<\theta_d$ à partir duquel la bille glisse. Calculer $\theta_g$ pour $\mu=0{,}3$ ; $0{,}5$ ; $0{,}8$. Conclure : la bille quitte-t-elle la sphère en roulant ?
+      \end{itemize}
+    coup_de_pouce: |
+      (g) $E_c=\tfrac12mv^2+\tfrac12J\omega^2$ avec $\omega=v/r$. (h) $J\dot\omega=fr$ et $m\dot v=mg\sin\theta-f$ avec $\dot\omega=\dot v/r$. (i) Condition d'adhérence : $f\le\mu N$.
+    correction: |
+      (g) $v^2=\tfrac{10}7gR(1-\cos\theta)$, $N=\tfrac{mg}7(17\cos\theta-10)$, $\cos\theta_d=\tfrac{10}{17}$, $\theta_d=53{,}97^\circ$. (h) $f=\tfrac27mg\sin\theta$, $\dfrac fN=\dfrac{2\sin\theta}{17\cos\theta-10}$. (i) Glissement dès que $2\sin\theta=\mu(17\cos\theta-10)$ : $\theta_g=35{,}4^\circ$ ; $41{,}8^\circ$ ; $46{,}0^\circ$ pour $\mu=0{,}3$ ; $0{,}5$ ; $0{,}8$.
+    solution:
+      - titre: "(g) Énergie, réaction et décollage (roulement)"
+        texte: |
+          Avec $\omega=v/r$ : $E_c=\tfrac12mv^2+\tfrac12\cdot\tfrac25mr^2\cdot\dfrac{v^2}{r^2}=\tfrac7{10}mv^2$. Le frottement statique sur un roulement sans glissement ne dissipe rien ($W=0$) : $E_m$ conservée,
+          $$\tfrac7{10}mv^2=mgR(1-\cos\theta)\ \Rightarrow\ v^2=\tfrac{10}7gR(1-\cos\theta).$$
+          Équation radiale (inchangée, $f$ est tangentielle) : $N=mg\cos\theta-\dfrac{mv^2}R=\dfrac{mg}7(17\cos\theta-10)$. $N=0$ :
+          $$\boxed{\cos\theta_d=\tfrac{10}{17}},\qquad\theta_d\approx\boxed{53{,}97^\circ}\ (>48{,}19^\circ).$$
+          La bille qui roule décolle {\bf plus bas} ($z_d=0{,}588R$ contre $0{,}667R$) car une partie de l'énergie est stockée en rotation et la vitesse de translation est plus faible.
+      - titre: "(h) Frottement requis"
+        texte: |
+          Théorème du moment cinétique sur l'axe de la bille : $J\dot\omega=f\,r$, avec $\dot\omega=\dot v/r$ : $f=\dfrac J{r^2}\dot v=\tfrac25m\dot v$. Projection tangentielle (selon $\vec e_\theta$, la composante du poids est $+mg\sin\theta$, $f$ est dirigé vers le sommet) : $m\dot v=mg\sin\theta-f$. D'où $\tfrac75m\dot v=mg\sin\theta$ et
+          $$\dot v=\tfrac57g\sin\theta,\qquad\boxed{f=\tfrac27mg\sin\theta},\qquad\boxed{\frac fN=\frac{2\sin\theta}{17\cos\theta-10}}.$$
+      - titre: "(i) Glissement avant le décollage"
+        texte: |
+          Sans glissement il faut $f/N\le\mu$. Or $\dfrac fN\to+\infty$ quand $N\to0^+$ (c'est-à-dire $\theta\to\theta_d$) tandis que $f\to\tfrac27mg\sin\theta_d\ne0$. Quel que soit $\mu$ fini, il existe $\theta_g<\theta_d$ tel que $\dfrac{2\sin\theta_g}{17\cos\theta_g-10}=\mu$ : {\bf la bille se met à glisser avant de décoller}. Résolution numérique de $2\sin\theta=\mu(17\cos\theta-10)$ :
+          $$\begin{array}{c|ccc}\mu&0{,}3&0{,}5&0{,}8\\\hline\theta_g&35{,}4^\circ&41{,}8^\circ&46{,}0^\circ\end{array}$$
+          Au-delà de $\theta_g$ la bille glisse et roule à la fois, son mouvement se complique (frottement cinétique $\mu N$) ; le décollage a lieu alors entre $48{,}2^\circ$ (glissement pur, $\mu=0$) et $54{,}0^\circ$ (roulement parfait). {\bf Conclusion} : le résultat $10/17$ n'est qu'une borne idéale ($\mu=\infty$), jamais observée expérimentalement.
+
+  - id: q5
+    enonce: |
+      {\bf Approche de Lagrange (niveau licence/master).} On revient à la bille qui glisse sans frottement. On utilise les coordonnées polaires $(r,\theta)$ et la liaison $f(r)=r-R=0$.
+      \begin{itemize}
+        \item[(j)] Écrire le lagrangien $L(r,\theta,\dot r,\dot\theta)=T-V$.
+        \item[(k)] Écrire les équations d'Euler--Lagrange avec un multiplicateur $\lambda$ pour la liaison : $\dfrac{\mathrm d}{\mathrm dt}\dfrac{\partial L}{\partial\dot q}-\dfrac{\partial L}{\partial q}=\lambda\dfrac{\partial f}{\partial q}$. Montrer que $\lambda=N$ et retrouver $N(\theta)$ et $\theta_d$.
+      \end{itemize}
+    coup_de_pouce: |
+      $T=\tfrac12m(\dot r^2+r^2\dot\theta^2)$ et $V=mgr\cos\theta$. Écrire l'équation en $r$ puis imposer $r=R$, $\dot r=\ddot r=0$. L'équation en $\theta$ donne $\ddot\theta$ ; l'intégrer par $\dot\theta\ddot\theta$.
+    correction: |
+      $L=\tfrac12m(\dot r^2+r^2\dot\theta^2)-mgr\cos\theta$ ; $\lambda=mg\cos\theta-mR\dot\theta^2=N$ ; $mR^2\ddot\theta=mgR\sin\theta\Rightarrow\dot\theta^2=\tfrac{2g}R(1-\cos\theta)$ ; $N=mg(3\cos\theta-2)$.
+    solution:
+      - titre: "(j) Lagrangien"
+        texte: |
+          $$L=\tfrac12m\big(\dot r^2+r^2\dot\theta^2\big)-mg\,r\cos\theta.$$
+      - titre: "(k) Équations avec multiplicateur"
+        texte: |
+          Selon $r$ ($\partial f/\partial r=1$) : $\dfrac{\mathrm d}{\mathrm dt}(m\dot r)-\big(mr\dot\theta^2-mg\cos\theta\big)=\lambda$. Sur la liaison $r=R$ ($\dot r=\ddot r=0$) :
+          $$\lambda=mg\cos\theta-mR\dot\theta^2.$$
+          Comparée à l'équation radiale de Newton $N=mg\cos\theta-mR\dot\theta^2$, on lit $\boxed{\lambda=N}$ : le multiplicateur est la {\bf force de liaison} radiale. Selon $\theta$ ($\partial f/\partial\theta=0$) : $\dfrac{\mathrm d}{\mathrm dt}(mR^2\dot\theta)-mgR\sin\theta=0$, soit $\ddot\theta=\dfrac gR\sin\theta$. On multiplie par $\dot\theta$ et on intègre ($\dot\theta(0)=0$) :
+          $$\dot\theta^2=\frac{2g}R(1-\cos\theta)\ \Rightarrow\ \lambda=N=mg\cos\theta-2mg(1-\cos\theta)=mg(3\cos\theta-2).$$
+          On retrouve $\cos\theta_d=\tfrac23$. {\bf Remarque} : tant que $\lambda\ge0$ la liaison est « active » ; dès que $\lambda$ s'annule, la liaison unilatérale $r\ge R$ cesse d'être saturée et le problème est un problème libre à deux degrés de liberté ($r$ et $\theta$).

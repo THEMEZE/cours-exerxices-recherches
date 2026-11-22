@@ -1,0 +1,213 @@
+id: td7_ex6
+intitule: "Perle sur un cerceau tournant"
+td: td7
+facultatif: true
+seance: 6
+
+cours_rattache:
+  - dynamique.referentiel_non_galileen
+  - dynamique.force_centrifuge
+  - dynamique.equilibre_et_stabilite
+  - energie.potentiel_effectif
+
+metadonnees:
+  duree_estimee: "1 h"
+  difficulte: 5
+  type_exercice: "Complément original / Équilibres relatifs et bifurcation"
+  indispensable: false
+
+enonce_intro: |
+  Une perle $M$ de masse $m=50$ g, assimilée à un point, peut glisser {\bf sans frottement} sur un cerceau circulaire de rayon $R=20$ cm. Le cerceau, dans un plan vertical, tourne à vitesse angulaire {\bf constante} $\omega$ autour de son diamètre vertical $Oz$ (ascendant). On repère la perle par l'angle $\theta=(-\vec e_z,\overrightarrow{OM})$ avec la verticale descendante ; $g=9{,}81\ {\rm m\cdot s^{-2}}$. On étudie le mouvement dans le référentiel $\mathcal R'$ du cerceau (tournant), $\mathcal R$ étant le laboratoire (galiléen).
+
+prerequis:
+  - titre: "Forces d'inertie en rotation uniforme"
+    texte: |
+      $\vec F_{ie}=m\omega^2\,\overrightarrow{HM}$ (centrifuge, $H$ projeté de $M$ sur l'axe), $\vec F_{ic}=-2m\vec\Omega\wedge\vec v_r$.
+  - titre: "Base sphérique"
+    texte: |
+      $\overrightarrow{OM}=R\,\vec e_r$, $\vec e_r=\sin\theta\,\vec e_\rho-\cos\theta\,\vec e_z$, $\vec e_\theta=\cos\theta\,\vec e_\rho+\sin\theta\,\vec e_z$ ; $\vec e_\varphi=\vec e_z\wedge\vec e_\rho$.
+  - titre: "Énergie potentielle effective"
+    texte: |
+      $E_{p,\rm eff}=E_p-\tfrac12m\omega^2\rho^2$ avec $\rho=R\sin\theta$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Équation du mouvement dans $\\mathcal R'$"
+    texte: |
+      Savoir projeter le PFD sur $\vec e_\theta$ : les forces de liaison ($\perp$ tangente) disparaissent.
+  - titre: "Équilibres et bifurcation"
+    texte: |
+      Savoir déterminer les équilibres relatifs, leur stabilité, la pulsation critique $\omega_c=\sqrt{g/R}$ et la pulsation des petites oscillations.
+  - titre: "Réaction de la liaison"
+    texte: |
+      Savoir que la réaction a deux composantes : dans le plan du cerceau (normale) et perpendiculairement (Coriolis).
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Exercice d'approfondissement : bifurcation"
+    texte: |
+      C'est l'exercice le plus riche du TD : une {\bf bifurcation fourche} (pitchfork). Pour $\omega<\omega_c$ : un seul équilibre stable (bas) ; pour $\omega>\omega_c$ : le bas devient instable, deux nouveaux équilibres symétriques stables apparaissent à $\cos\theta_0=g/(R\omega^2)$. L'énergie $E_m'=\tfrac12mv_r^2+E_p-\tfrac12m\omega^2\rho^2$ se conserve (Coriolis ne travaille pas ; la réaction normale non plus dans $\mathcal R'$ ; mais la composante $\perp$ est perpendiculaire à $\vec v_r$).
+  - titre: "Deux traitements possibles"
+    texte: |
+      (1) PFD projeté sur $\vec e_\theta$ ; (2) conservation de l'énergie $E_m'$ puis dérivation. Les deux conduisent à la même équation du mouvement. L'approche de Lagrange ($\mathcal L=\tfrac12mR^2(\dot\theta^2+\omega^2\sin^2\theta)+mgR\cos\theta$) est donnée en aller plus loin.
+
+point_cours:
+  - titre: "Équation du mouvement"
+    texte: |
+      $R\ddot\theta=-g\sin\theta+R\omega^2\sin\theta\cos\theta=\sin\theta\,(R\omega^2\cos\theta-g)$.
+  - titre: "Énergie potentielle effective"
+    texte: |
+      $E_{p,\rm eff}(\theta)=-mgR\cos\theta-\tfrac12mR^2\omega^2\sin^2\theta$ ; $\dfrac{\mathrm dE_{p,\rm eff}}{\mathrm d\theta}=mgR\sin\theta-mR^2\omega^2\sin\theta\cos\theta=-mR\sin\theta\,(R\omega^2\cos\theta-g)$.
+  - titre: "Équilibres et stabilité"
+    texte: |
+      Équilibres : $\theta=0$ (bas), $\theta=\pi$ (haut), et si $\omega>\omega_c=\sqrt{g/R}$, $\cos\theta_0=\dfrac{g}{R\omega^2}$. Stabilité : $\omega_{\rm osc}^2=\dfrac{E_{p,\rm eff}''}{mR^2}$.
+  - titre: "Réaction"
+    texte: |
+      $\vec N=N_r\vec e_r+N_\varphi\vec e_\varphi$ avec $N_\varphi=2m\omega R\dot\theta\cos\theta$ (compense Coriolis) et $N_r$ donnée par la projection sur $\vec e_r$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Oublier la force centrifuge"
+    texte: |
+      Dans $\mathcal R'$, le poids ne suffit pas : $\vec F_{ie}=m\omega^2R\sin\theta\,\vec e_\rho$ est essentielle (c'est elle qui sépare le bas du cerceau).
+  - titre: "Distance à l'axe $\\rho=R\\sin\\theta$"
+    texte: |
+      La force centrifuge est proportionnelle à $\rho=R\sin\theta$, pas à $R$.
+  - titre: "Projeter sur la mauvaise direction"
+    texte: |
+      L'équation du mouvement se projette sur $\vec e_\theta$ (tangente). Les réactions $N_r$, $N_\varphi$ ne s'y trouvent pas.
+  - titre: "Confondre énergie de $\\mathcal R'$ et énergie de $\\mathcal R$"
+    texte: |
+      $E_m'=\tfrac12mR^2\dot\theta^2-mgR\cos\theta-\tfrac12mR^2\omega^2\sin^2\theta$ est conservée dans $\mathcal R'$ ; l'énergie dans $\mathcal R$ ne l'est pas (le moteur fournit du travail via $N_\varphi$).
+  - titre: "Stabilité du point haut"
+    texte: |
+      $\theta=\pi$ est instable pour tout $\omega$.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Manip : perle sur cerceau"
+    texte: |
+      Cerceau monté sur moteur à vitesse variable : observer la position de la perle en augmentant $\omega$ ; le seuil apparaît clairement. Mesurer $\cos\theta_0$ en fonction de $1/\omega^2$.
+  - titre: "Analogie avec une transition de phase"
+    texte: |
+      Comparer au modèle de Landau (transition du second ordre) : $\theta_0\propto\sqrt{\omega-\omega_c}$ juste au-dessus du seuil.
+
+bilan:
+  - titre: "Résultats"
+    texte: |
+      $R\ddot\theta=\sin\theta(R\omega^2\cos\theta-g)$ ; $\omega_c=\sqrt{g/R}=7{,}00\ {\rm rad\cdot s^{-1}}$ ; pour $\omega=10\ {\rm rad\cdot s^{-1}}$ : $\theta_0=60{,}6^\circ$, $\omega_{\rm osc}=\omega\sin\theta_0=8{,}71\ {\rm rad\cdot s^{-1}}$, $N_r=mR\omega^2=1{,}00$ N ; bas instable avec taux $\sqrt{\omega^2-\omega_c^2}=7{,}14\ {\rm s^{-1}}$ ; $\omega<\omega_c$ : bas stable, $\omega_{\rm osc}^2=g/R-\omega^2$.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Perle lâchée du bas"
+    texte: |
+      Pour $\omega=10$ rad/s, la perle est lâchée avec une vitesse relative quasi nulle près du bas ($\theta\approx0^+$). Montrer qu'elle monte jusqu'à $\theta_m=\arccos(2\cos\theta_0-1)\approx91{,}1^\circ$ puis redescend (oscillation autour de $\theta_0$ ; le bas est instable).
+  - niveau: licence
+    titre: "Lagrangien"
+    texte: |
+      $\mathcal L=\tfrac12mR^2(\dot\theta^2+\omega^2\sin^2\theta)+mgR\cos\theta$. Retrouver l'équation du mouvement ; l'énergie généralisée $h=\dot\theta\,\partial\mathcal L/\partial\dot\theta-\mathcal L=\tfrac12mR^2\dot\theta^2-\tfrac12mR^2\omega^2\sin^2\theta-mgR\cos\theta$ est conservée ($\mathcal L$ ne dépend pas explicitement du temps) mais $h\ne E_m$.
+  - niveau: master
+    titre: "Bifurcation et développement au seuil"
+    texte: |
+      Poser $\omega=\omega_c(1+\varepsilon)$ avec $\varepsilon\ll1$ : montrer que $\theta_0\approx\sqrt{4\varepsilon}$, donc $\theta_0\propto(\omega-\omega_c)^{1/2}$ (exposant critique $\beta=1/2$) ; étudier l'amortissement critique et la dynamique lente (équation de Landau).
+
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi la perle monte-t-elle sur le cerceau quand on tourne vite ?"
+    duree_introduction: "3 min"
+    question_d_accroche: |
+      Une perle repose en bas d'un cerceau vertical que l'on met en rotation. À partir de quelle vitesse quitte-t-elle le bas ? Où se stabilise-t-elle ?
+    texte: |
+      {\bf Idée clé : la force centrifuge crée un potentiel effectif à deux puits.} Le bas change de nature à la vitesse critique $\omega_c=\sqrt{g/R}$.
+
+outils_mathematiques:
+  - titre: "Dérivée seconde et stabilité"
+    texte: |
+      Équilibre $\theta_0$ stable $\Leftrightarrow E_{p,\rm eff}''(\theta_0)>0$.
+  - titre: "Petites oscillations"
+    texte: |
+      $\ddot\delta=-\omega_{\rm osc}^2\delta$ pour $\theta=\theta_0+\delta$.
+  - titre: "Développement limité"
+    texte: |
+      $\sin(\theta_0+\delta)\approx\sin\theta_0+\delta\cos\theta_0$.
+
+liens_autres_disciplines:
+  - discipline: "Physique statistique"
+    texte: |
+      Brisure spontanée de symétrie, transition de Landau, paramètre d'ordre.
+  - discipline: "Ingénierie"
+    texte: |
+      Régulateur à boules de Watt (équilibre d'un pendule conique), centrifugeuses, vitesses critiques de rotors.
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{itemize}
+        \item[(a)] Faire le bilan des forces dans $\mathcal R'$ sur la perle. Exprimer $\vec F_{ie}$ et $\vec F_{ic}$ en fonction de $\theta$ et $\dot\theta$.
+        \item[(b)] Établir l'équation du mouvement $R\ddot\theta=\sin\theta\,(R\omega^2\cos\theta-g)$.
+        \item[(c)] Retrouver cette équation par l'énergie : écrire l'énergie potentielle effective $E_{p,\rm eff}(\theta)$ et l'intégrale première.
+      \end{itemize}
+    coup_de_pouce: |
+      (a) $\vec F_{ie}=m\omega^2\rho\vec e_\rho$ avec $\rho=R\sin\theta$. $\vec v_r=R\dot\theta\vec e_\theta$. (b) Projeter sur $\vec e_\theta=\cos\theta\vec e_\rho+\sin\theta\vec e_z$. (c) $E_m'=\tfrac12mv_r^2+E_p-\tfrac12m\omega^2\rho^2$.
+    correction: |
+      (a) $m\vec g$, $\vec N$, $\vec F_{ie}=m\omega^2R\sin\theta\,\vec e_\rho$, $\vec F_{ic}=-2m\omega R\dot\theta\cos\theta\,\vec e_\varphi$ ; (b) $R\ddot\theta=\sin\theta(R\omega^2\cos\theta-g)$ ; (c) $E_{p,\rm eff}=-mgR\cos\theta-\tfrac12mR^2\omega^2\sin^2\theta$, $E_m'=\tfrac12mR^2\dot\theta^2+E_{p,\rm eff}$ conservée.
+    solution:
+      - titre: "(a) Bilan des forces"
+        texte: |
+          Forces vraies : poids $m\vec g=-mg\vec e_z$ ; réaction $\vec N$ du cerceau (sans frottement : $\vec N\perp\vec e_\theta$, donc $\vec N=N_r\vec e_r+N_\varphi\vec e_\varphi$). Forces d'inertie :
+          $$\vec F_{ie}=m\omega^2\,\overrightarrow{HM}=m\omega^2R\sin\theta\,\vec e_\rho,$$
+          $$\vec F_{ic}=-2m\,\omega\vec e_z\wedge R\dot\theta\vec e_\theta=-2m\omega R\dot\theta\cos\theta\,\vec e_\varphi\quad(\vec e_z\wedge\vec e_\theta=\cos\theta\,\vec e_\varphi).$$
+      - titre: "(b) Équation du mouvement"
+        texte: |
+          Dans $\mathcal R'$, $\vec a_r=R\ddot\theta\,\vec e_\theta-R\dot\theta^2\vec e_r$. Projection de $m\vec a_r=m\vec g+\vec N+\vec F_{ie}+\vec F_{ic}$ sur $\vec e_\theta$ ($\vec N\cdot\vec e_\theta=0$, $\vec F_{ic}\cdot\vec e_\theta=0$) :
+          $$mR\ddot\theta=-mg\,\vec e_z\cdot\vec e_\theta+m\omega^2R\sin\theta\,\vec e_\rho\cdot\vec e_\theta=-mg\sin\theta+m\omega^2R\sin\theta\cos\theta,$$
+          soit $\boxed{R\ddot\theta=\sin\theta\,(R\omega^2\cos\theta-g)}$.
+      - titre: "(c) Méthode énergétique"
+        texte: |
+          Dans $\mathcal R'$, la force d'inertie d'entraînement dérive de $E_{p,ie}=-\tfrac12m\omega^2\rho^2$ ; Coriolis et $\vec N$ ne travaillent pas ($\perp\vec v_r$). Donc
+          $$E_m'=\tfrac12mR^2\dot\theta^2+E_{p,\rm eff}(\theta)={\rm cte},\qquad E_{p,\rm eff}=-mgR\cos\theta-\tfrac12mR^2\omega^2\sin^2\theta.$$
+          Dériver : $mR^2\dot\theta\ddot\theta+\dfrac{\mathrm dE_{p,\rm eff}}{\mathrm d\theta}\dot\theta=0$ avec $\dfrac{\mathrm dE_{p,\rm eff}}{\mathrm d\theta}=mgR\sin\theta-mR^2\omega^2\sin\theta\cos\theta$, d'où l'équation de (b) $\surd$.
+
+  - id: q2
+    enonce: |
+      \begin{itemize}
+        \item[(d)] Déterminer les positions d'équilibre relatif. Montrer qu'il existe une vitesse critique $\omega_c$ à exprimer et calculer.
+        \item[(e)] Étudier la stabilité de $\theta=0$ selon $\omega$. Calculer la pulsation des petites oscillations pour $\omega=5$ rad/s, puis le taux de croissance de l'instabilité pour $\omega=10$ rad/s.
+        \item[(f)] Pour $\omega=10$ rad/s, calculer $\theta_0$ et la pulsation des petites oscillations autour de $\theta_0$.
+      \end{itemize}
+    coup_de_pouce: |
+      (d) $\ddot\theta=0$ : $\sin\theta=0$ ou $\cos\theta=g/(R\omega^2)$ (nécessite $g/(R\omega^2)\le1$). (e), (f) Poser $\theta=\theta_0+\delta$ et linéariser : $\ddot\delta=f'(\theta_0)\delta$ avec $f=\dfrac1R\sin\theta(R\omega^2\cos\theta-g)$.
+    correction: |
+      (d) $\theta=0$, $\pi$ et, si $\omega>\omega_c=\sqrt{g/R}=7{,}00$ rad/s, $\cos\theta_0=g/(R\omega^2)$ ; (e) $\omega_{\rm osc}^2=g/R-\omega^2$ : $\omega=5$ : $4{,}90\ {\rm s^{-1}}$ ; instable si $\omega>\omega_c$, taux $\sqrt{\omega^2-\omega_c^2}=7{,}14\ {\rm s^{-1}}$ ; (f) $\theta_0=60{,}6^\circ$, $\omega_{\rm osc}=\omega\sin\theta_0=8{,}71$ rad/s.
+    solution:
+      - titre: "(d) Équilibres et vitesse critique"
+        texte: |
+          $\ddot\theta=0\Leftrightarrow\sin\theta\,(R\omega^2\cos\theta-g)=0$. Solutions : $\theta=0$ (bas), $\theta=\pi$ (haut), et $\cos\theta_0=\dfrac{g}{R\omega^2}$ possible ssi $\dfrac{g}{R\omega^2}\le1$ :
+          $$\boxed{\omega>\omega_c=\sqrt{\frac gR}=\sqrt{\frac{9{,}81}{0{,}20}}=7{,}00\ {\rm rad\cdot s^{-1}}\ (\approx1{,}11\ {\rm tr/s})}.$$
+          Les deux solutions $\pm\theta_0$ sont symétriques par rapport à l'axe.
+      - titre: "(e) Stabilité du bas"
+        texte: |
+          Pour $\theta=\delta\ll1$ : $R\ddot\delta\approx\delta(R\omega^2-g)$, soit $\ddot\delta=-\left(\dfrac gR-\omega^2\right)\delta$.
+          $\omega<\omega_c$ : $\omega_{\rm osc}^2=\dfrac gR-\omega^2>0$ : stable. Pour $\omega=5$ : $\omega_{\rm osc}=\sqrt{49{,}05-25}=4{,}90\ {\rm rad\cdot s^{-1}}$.
+          $\omega>\omega_c$ : $\ddot\delta=+(\omega^2-\omega_c^2)\delta$ : {\bf instable}, croissance en $\mathrm e^{\lambda t}$, $\lambda=\sqrt{\omega^2-\omega_c^2}=\sqrt{100-49{,}05}=7{,}14\ {\rm s^{-1}}$ pour $\omega=10$ rad/s.
+      - titre: "(f) Nouvelles positions d'équilibre"
+        texte: |
+          $\cos\theta_0=\dfrac{9{,}81}{0{,}20\times100}=0{,}4905\Rightarrow\boxed{\theta_0=60{,}6^\circ}$. Linéarisation autour de $\theta_0$ avec $f(\theta)=\dfrac1R\sin\theta(R\omega^2\cos\theta-g)$ :
+          $$f'(\theta_0)=\frac1R\Big[\cos\theta_0\cdot0+\sin\theta_0\,(-R\omega^2\sin\theta_0)\Big]=-\omega^2\sin^2\theta_0<0$$
+          donc stable, avec $\boxed{\omega_{\rm osc}=\omega\sin\theta_0=8{,}71\ {\rm rad\cdot s^{-1}}}$ ($T=0{,}72$ s). On remarque $\omega_{\rm osc}^2=\omega^2-\dfrac{g^2}{R^2\omega^2}$.
+
+  - id: q3
+    enonce: |
+      \begin{itemize}
+        \item[(g)] Exprimer les composantes $N_r$ et $N_\varphi$ de la réaction. Calculer $N_r$ à l'équilibre en $\theta_0$ ($\omega=10$ rad/s) et à l'équilibre en $\theta=0$ ($\omega<\omega_c$).
+        \item[(h)] La perle, lâchée sans vitesse relative juste après le bas ($\theta\approx0^+$) pour $\omega=10$ rad/s, atteint un angle maximal $\theta_m$. Calculer $\theta_m$.
+      \end{itemize}
+    coup_de_pouce: |
+      (g) Projeter sur $\vec e_r$ et $\vec e_\varphi$ ; $\vec e_\rho\cdot\vec e_r=\sin\theta$, $\vec e_z\cdot\vec e_r=-\cos\theta$. (h) Conservation de $E_m'$ avec $E_m'(\theta\approx0)=-mgR$.
+    correction: |
+      (g) $N_\varphi=2m\omega R\dot\theta\cos\theta$ ; $N_r=-m(g\cos\theta+R\omega^2\sin^2\theta+R\dot\theta^2)$ (dirigée vers le centre) ; en $\theta_0$ : $|N_r|=mR\omega^2=1{,}00$ N ; en $0$ : $|N_r|=mg=0{,}49$ N ; (h) $\theta_m=\arccos(2\cos\theta_0-1)=91{,}1^\circ$.
+    solution:
+      - titre: "(g) Réaction de la liaison"
+        texte: |
+          Projection sur $\vec e_\varphi$ ($\vec a_r\cdot\vec e_\varphi=0$) : $0=N_\varphi-2m\omega R\dot\theta\cos\theta$, donc $\boxed{N_\varphi=2m\omega R\dot\theta\cos\theta}$ (la liaison empêche la perle de sortir du plan du cerceau).
+          Projection sur $\vec e_r$ ($\vec a_r\cdot\vec e_r=-R\dot\theta^2$) :
+          $$-mR\dot\theta^2=N_r+mg\cos\theta+m\omega^2R\sin^2\theta\ \Rightarrow\ N_r=-m\left(g\cos\theta+R\omega^2\sin^2\theta+R\dot\theta^2\right)<0$$
+          (réaction vers le centre). À l'équilibre ($\dot\theta=0$) en $\theta_0$ : $N_r=-m(g\cos\theta_0+R\omega^2\sin^2\theta_0)$, avec $g\cos\theta_0=R\omega^2\cos^2\theta_0$ : $N_r=-mR\omega^2$, d'où $\boxed{|N_r|=mR\omega^2=0{,}05\times0{,}2\times100=1{,}00\ {\rm N}}$ (indépendant de $\theta_0$). En $\theta=0$ : $|N_r|=mg=0{,}49$ N.
+      - titre: "(h) Angle maximal atteint"
+        texte: |
+          $E_m'$ est conservée : $\tfrac12R\dot\theta^2-g\cos\theta-\tfrac12R\omega^2\sin^2\theta=-g$ (départ du bas à vitesse nulle). Au point d'arrêt $\dot\theta=0$, avec $u=\cos\theta$ : $\tfrac12R\omega^2u^2-gu+g-\tfrac12R\omega^2=0$, de racines $u=1$ et $u=\dfrac{2g}{R\omega^2}-1=2\cos\theta_0-1=-0{,}019$. Donc $\boxed{\theta_m=\arccos(2\cos\theta_0-1)=91{,}1^\circ}$ : la perle dépasse l'horizontale et oscille entre $-\theta_m$ et $+\theta_m$ en passant par le bas.

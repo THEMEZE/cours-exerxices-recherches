@@ -1,0 +1,240 @@
+id: td4
+titre: "Lois de Newton"
+chapitre_cours: "Chap. 2 — Dynamique du point matériel : lois de Newton"
+seance: 4
+niveau_public: [cpge, licence]
+exercices_ordre:
+  - ex1_elementaires
+  - ex2_decollage_corps
+  - ex4_machine_atwood
+  - ex6_deux_blocs
+  - ex5_voiture_bosse
+  - ex3_navette_columbia
+  - ex7_chute_frottement_lineaire
+  - ex8_pendule_conique
+  - ex9_virage_releve
+
+enonce_intro: |
+  {\bf Conventions valables pour tout le TD (sauf mention contraire).} On étudie le mouvement d'un {\bf point matériel} (ou de solides assimilés à des points) dans le référentiel terrestre, supposé galiléen. L'intensité de la pesanteur est $g=9{,}81~\mathrm{m\,s^{-2}}$ (ou $10~\mathrm{m\,s^{-2}}$ si l'énoncé le précise). Les fils sont idéaux (inextensibles, de masse négligeable), les poulies sans masse ni frottement, et les frottements sont négligés sauf mention contraire. Les exercices marqués {\it (facultatif)} sont des approfondissements ; ceux qui portent une étoile $(*)$ sont des questions d'entraînement. Pour chaque exercice, {\bf rédiger dans l'ordre} : système et référentiel, schéma avec repère, bilan des forces, loi de Newton, projections, résolution littérale, application numérique, vérification (homogénéité, cas limites).
+
+prerequis:
+  - titre: "Cinématique du point (TD1)"
+    texte: |
+      Vecteurs position, vitesse, accélération en cartésien ; intégration avec conditions initiales ; mouvement à accélération constante ; mouvement circulaire uniforme, base polaire et dérivées $\dfrac{\mathrm d\vec e_r}{\mathrm d\theta}=\vec e_\theta$, $\dfrac{\mathrm d\vec e_\theta}{\mathrm d\theta}=-\vec e_r$.
+  - titre: "Notions de force et de masse"
+    texte: |
+      Une force est une action mécanique exercée par un objet identifiable sur le système ; elle s'exprime en newton ($1~\mathrm N=1~\mathrm{kg\,m\,s^{-2}}$). La masse $m$ mesure l'inertie ; le poids $\vec P=m\vec g$ est une force.
+  - titre: "Forces usuelles"
+    texte: |
+      Poids $m\vec g$ ; réaction normale $\vec N$ d'un support (perpendiculaire au support, $N\ge0$) ; frottement solide de Coulomb ($\|\vec f\|\le\mu\|\vec N\|$ sans glissement, $=\mu\|\vec N\|$ avec glissement) ; tension d'un fil ; rappel élastique $-k(\ell-\ell_0)\vec u$ ; frottement fluide $-\lambda\vec v$ ; poussée d'Archimède.
+  - titre: "Résolution d'équations et de systèmes"
+    texte: |
+      Systèmes linéaires de deux ou trois équations (élimination d'une inconnue), équation du second degré, équation différentielle du premier ordre à coefficients constants $\dot v+v/\tau=g$ (solution $v_\ell+C\mathrm e^{-t/\tau}$).
+  - titre: "Trigonométrie et projection de vecteurs"
+    texte: |
+      Projection d'une force sur des axes inclinés (plan incliné : $mg\sin\varphi$ le long de la pente, $mg\cos\varphi$ perpendiculairement), valeurs remarquables ($30^\circ,45^\circ,60^\circ$), $\tan\varphi=\sin\varphi/\cos\varphi$, formule d'addition de la tangente.
+  - titre: "Notion de référentiel galiléen"
+    texte: |
+      Un référentiel galiléen est un référentiel dans lequel le principe d'inertie est vérifié. Le référentiel terrestre est galiléen avec une très bonne approximation pour les mouvements de courte durée et de faible étendue.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Appliquer la méthode générale de la dynamique"
+    texte: |
+      Savoir définir le système, le référentiel et le repère, faire un schéma, dresser le bilan {\bf complet} des forces, écrire la 2\textsuperscript{e} loi, la projeter sur des axes adaptés, résoudre pour l'accélération, une force inconnue (tension, réaction) ou une condition (décollage, rupture).
+  - titre: "Utiliser la 1\\textsuperscript{re} loi et la 3\\textsuperscript{e} loi"
+    texte: |
+      Savoir reconnaître une situation d'équilibre ($\sum\vec F=\vec0$, y compris à vitesse constante), appliquer l'action--réaction pour des solides en contact ou reliés par un fil, et traduire l'inextensibilité d'un fil par une relation entre accélérations.
+  - titre: "Exploiter les conditions de contact et d'adhérence"
+    texte: |
+      Savoir traduire « le contact est maintenu » par $N\ge0$ (décollage : $N=0$), « il y a glissement » par $\|\vec f\|=\mu N$ et obtenir des {\bf conditions de seuil} sur une vitesse, un angle ou un instant.
+  - titre: "Lier dynamique et cinématique"
+    texte: |
+      Savoir passer de $\sum\vec F$ à $\vec a$, puis à $\vec v(t)$ et $\overrightarrow{OM}(t)$ par intégration, y compris quand la force dépend du temps ($F=kt$) ou de la vitesse ($-\lambda v$, équation différentielle), et utiliser les coordonnées polaires et cylindriques pour un mouvement circulaire.
+  - titre: "Valider et discuter un résultat"
+    texte: |
+      Savoir vérifier l'homogénéité, tester des cas limites (masses égales, $\lambda\to0$, $\beta\to0$), comparer à un ordre de grandeur, et confronter un modèle à une mesure en identifiant ses limites (navette Columbia).
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Positionnement du TD"
+    texte: |
+      Ce TD fait la jonction entre la cinématique (TD1) et les théorèmes énergétiques ou le moment cinétique : la {\bf 2\textsuperscript{e} loi} y est l'outil unique, appliqué à des situations de complexité croissante (équilibre, accélération constante, systèmes liés, mouvement circulaire, frottements). Il installe la {\bf méthode} (schéma, bilan, projection) et les {\bf réflexes de contrôle} (cas limites, ordres de grandeur) pour toute la mécanique.
+  - titre: "Trois parcours selon le temps disponible"
+    texte: |
+      {\bf Parcours essentiel} (environ 3 h) : exercices indispensables — élémentaires (1), décollage d'un corps (2), machine d'Atwood (4), deux blocs (6), voiture sur une bosse (5).
+
+      {\bf Parcours renforcé} (environ $+1$ h) : ajouter la navette Columbia (3, esprit critique) et la chute avec frottement fluide (7, première équation différentielle).
+
+      {\bf Parcours approfondi} (CPGE/licence, séance supplémentaire ou travail personnel) : pendule conique (8) et virage relevé avec frottement (9), très proches de sujets de concours.
+  - titre: "Compétences évaluables"
+    texte: |
+      {\bf S'approprier} : lire l'énoncé, repérer le système, les données, les conditions initiales. {\bf Analyser} : choisir repère et projections, traduire une condition physique en équation. {\bf Réaliser} : calculs littéraux et numériques, résolution de systèmes et d'EDO. {\bf Valider} : homogénéité, cas limites, comparaison à une mesure. {\bf Communiquer} : schéma clair avec toutes les forces, rédaction ordonnée.
+  - titre: "Points de vigilance sur la gestion de séance"
+    texte: |
+      Plusieurs exercices s'appuient sur une {\bf figure} (angles de l'exercice 1, géométrie des exercices 4, 5 et 6) : vérifier qu'elle est distribuée. Imposer un schéma de forces avant toute équation et le valider par le voisin. Les exercices 5 et 9 demandent une maîtrise de la base polaire (rappel de 5 min sur $\dot{\vec e}_r=\dot\theta\vec e_\theta$ en début de séance).
+
+point_cours:
+  - titre: "Les trois lois de Newton"
+    texte: |
+      {\bf Principe d'inertie} : dans un référentiel galiléen, si $\sum\vec F=\vec0$ le mouvement est rectiligne uniforme (ou le repos), et réciproquement. {\bf Principe fondamental} : $\sum\vec F=m\vec a=\dfrac{\mathrm d\vec p}{\mathrm dt}$ avec $\vec p=m\vec v$. {\bf Action--réaction} : $\vec F_{A\to B}=-\vec F_{B\to A}$ (mêmes norme et droite d'action, sens opposés).
+  - titre: "Méthode pour résoudre un problème de dynamique"
+    texte: |
+      (1) Système et référentiel galiléen. (2) Schéma avec repère adapté. (3) Bilan {\bf exhaustif} des forces (contact : réaction, tension, frottement ; à distance : poids). (4) $\sum\vec F=m\vec a$, écrite avec $\vec a$ dans le repère choisi. (5) Projection sur les axes et résolution. (6) Intégrations pour $\vec v$ et $\overrightarrow{OM}$ avec les conditions initiales. (7) Vérifications.
+  - titre: "Lois du frottement solide (Coulomb)"
+    texte: |
+      Sans glissement : $\|\vec f\|\le\mu_s\|\vec N\|$. Avec glissement : $\vec f$ opposé à la vitesse de glissement, $\|\vec f\|=\mu_d\|\vec N\|$. Angle de frottement $\varphi$ : $\tan\varphi=\mu$ ; la réaction totale reste dans un cône d'angle $\varphi$ autour de la normale.
+  - titre: "Conditions de contact et de liaison"
+    texte: |
+      Un support ne pousse que : $N\ge0$ ; le décollage correspond à $N=0$. Un fil ne tire que : $T\ge0$ ; il se détend si $T=0$. Un fil inextensible impose des relations de déplacement et donc d'accélération entre les points reliés ; une poulie idéale conserve la tension.
+  - titre: "Accélération en coordonnées polaires et cylindriques"
+    texte: |
+      $\vec a=(\ddot r-r\dot\theta^2)\,\vec e_r+(r\ddot\theta+2\dot r\dot\theta)\,\vec e_\theta+\ddot z\,\vec e_z$. Mouvement circulaire uniforme : $\vec a=-r\omega^2\vec e_r=-\dfrac{v^2}r\vec e_r$. La somme des forces est alors {\bf centripète}.
+  - titre: "Ordres de grandeur"
+    texte: |
+      Poids d'un kilogramme : $\approx10$ N ; accélération d'une voiture $2$ à $4~\mathrm{m\,s^{-2}}$ ; freinage d'urgence $\approx8~\mathrm{m\,s^{-2}}$ ; ascenseur $\approx1~\mathrm{m\,s^{-2}}$ ; adhérence pneu--route sèche $\mu\approx0{,}7$, mouillée $\approx0{,}3$, verglacée $\approx0{,}1$ ; poussée d'un lanceur $\approx1{,}2$ à $1{,}5$ fois son poids au décollage.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Bilan de forces incomplet ou avec une « force de mouvement »"
+    texte: |
+      Il n'existe pas de force « dans le sens du mouvement » : chaque force a un auteur identifiable. À l'inverse, oublier la réaction du support ou une composante de frottement est la première cause d'erreur. Toujours demander : « qui exerce cette force ? »
+  - titre: "Confondre vitesse et accélération"
+    texte: |
+      Un mobile en mouvement rectiligne uniforme est en équilibre ($\sum\vec F=\vec0$) ; une tension de câble de cabine d'ascenseur ne dépend que de $\vec a$ (et pas de la vitesse) ; au sommet d'une trajectoire, $\vec v\ne\vec0$ en général mais $\vec a\ne\vec0$ aussi.
+  - titre: "Erreur de projection et de repère"
+    texte: |
+      Composante du poids le long d'une pente : $mg\sin\varphi$ ; perpendiculairement : $mg\cos\varphi$. En coordonnées polaires, $\vec e_r$ n'est pas fixe : écrire $\vec a$ avant de projeter. Choisir un axe adapté (le long de la pente, vers le centre) simplifie le calcul.
+  - titre: "Négliger la contrainte cinématique d'un fil"
+    texte: |
+      Pour des solides liés par un fil inextensible, il faut {\bf trois} relations (deux lois de Newton et la contrainte $a_1=\pm a_2$) pour trois inconnues $(a_1,a_2,T)$ ; la contrainte oubliée conduit à un système sous-déterminé. Le signe dépend des axes choisis.
+  - titre: "Tension égale au poids"
+    texte: |
+      $T=mg$ n'est vrai que si $a=0$. Dans la machine d'Atwood, $m_1g<T<m_2g$ ; dans un ascenseur qui accélère, $T=m(g+a)$ ; dans un pendule conique, $T=m\omega^2L$.
+  - titre: "Masse variable ou force variable traitées comme constantes"
+    texte: |
+      $a=F/m-g$ suppose $F$ et $m$ constantes (la navette Columbia consomme plusieurs tonnes de carburant par seconde). Une force dépendant du temps donne $a(t)$ et non une accélération constante ; une force dépendant de la vitesse donne une équation différentielle.
+  - titre: "Mauvais sens du frottement ou de la tendance au glissement"
+    texte: |
+      Le frottement s'oppose à la vitesse de glissement (ou à la {\bf tendance} au glissement s'il n'y en a pas). Dans un virage relevé, le sens change selon que $v>v_0$ ou $v<v_0$. Au seuil seulement, $f=\mu N$.
+  - titre: "Résultat sans unité ni vérification"
+    texte: |
+      Toujours vérifier l'homogénéité ($[k]$ pour $F=kt$), le signe, un cas limite ($m_1=m_2$, $\lambda\to0$, $\beta\to0$) et l'ordre de grandeur (une voiture qui décolle à $7$ m/s, une masse de $88$ g).
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Expérience flash en ouverture"
+    texte: |
+      Lâcher une masse accrochée à un dynamomètre dans un ascenseur (ou simuler avec un smartphone et un capteur d'accéléromètre) : le « poids apparent » varie avec l'accélération. Cela donne un sens immédiat à $T=m(g+a)$.
+  - titre: "Schéma de forces en binômes"
+    texte: |
+      Pour chaque exercice, demander à deux binômes de dresser indépendamment le bilan et de comparer. Beaucoup d'erreurs se corrigent à ce stade, avant tout calcul. Faire annoncer à voix haute « qui exerce chaque force ».
+  - titre: "Prédire avant de calculer"
+    texte: |
+      Machine d'Atwood : que se passe-t-il si $m_1=m_2$ ? si $m_2\gg m_1$ ? Deux blocs : quel bloc descend ? Virage : existe-t-il une vitesse sans frottement ? Une prédiction qualitative suivie d'un calcul qui la confirme (ou la contredit) installe l'intuition.
+  - titre: "Exploiter Python pour les EDO"
+    texte: |
+      Pour l'exercice 7, faire intégrer $\dot v=g-v/\tau$ par la méthode d'Euler ($\Delta t\ll\tau$) et comparer à la solution exacte. De même pour la montée en vitesse de la navette avec masse variable (esprit critique).
+  - titre: "Gestion de l'hétérogénéité"
+    texte: |
+      Les étudiants rapides abordent les exercices 3, 7, 8, 9. Les autres consolident la méthode sur les exercices 1, 2, 4, 6. Réserver cinq minutes en fin de séance pour la comparaison des méthodes et des erreurs récurrentes.
+  - titre: "Insister sur la phase « Valider »"
+    texte: |
+      Après chaque exercice, poser : « Quel cas limite testez-vous ? Quel ordre de grandeur attendez-vous ? » Exemples : $m_2\to m_1$, $\lambda\to0$, $\beta\to0$, $\omega\to\sqrt{g/L}$.
+
+bilan:
+  - titre: "Ce qu'il faut savoir faire à la fin du TD"
+    texte: |
+      Faire un schéma de forces complet et projeter la 2\textsuperscript{e} loi dans un repère adapté ; retrouver $a$ à partir des forces puis $v(t)$ et $x(t)$ ; traiter un système lié par fil (deux lois plus contrainte) ; utiliser la condition de contact $N\ge0$ et la loi de Coulomb pour obtenir des seuils ; écrire $\vec a$ en polaires et cylindriques pour un mouvement circulaire.
+  - titre: "Résultats marquants du TD"
+    texte: |
+      Ascenseur : $T=m(g+a)$ ; plan incliné : $a=g\sin\alpha$ ; décollage avec $F=kt$ : $t_d=\dfrac{mg}{k\sin\alpha}$ ; Atwood : $a=\dfrac{m_2-m_1}{m_1+m_2}g$, $T=\dfrac{2m_1m_2}{m_1+m_2}g$ ; bosse : $v\le\sqrt{gR\cos\alpha}$ ; chute avec frottement linéaire : $v_\ell=mg/\lambda$, $\tau=m/\lambda$ ; pendule conique : $\cos\theta=\dfrac g{\omega^2L}$ ; virage relevé : $v_0=\sqrt{gR\tan\beta}$, $v_{\max,\min}=\sqrt{gR\tan(\beta\pm\varphi)}$.
+  - titre: "Ce qui sera réutilisé dans la suite"
+    texte: |
+      La méthode (système, bilan, projection) servira pour le travail et l'énergie (TD suivants), où on retrouvera les mêmes situations par une méthode énergétique plus rapide ; le pendule conique et le virage relevé préparent le moment cinétique et les forces centrales ; l'équation différentielle du premier ordre reviendra en électricité (circuit RC, RL).
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Référentiels non galiléens et forces d'inertie"
+    texte: |
+      Refaire l'exercice de l'ascenseur et celui du virage dans le référentiel du véhicule (non galiléen) en introduisant la force d'inertie d'entraînement $-m\vec a_e$ (force centrifuge dans le virage). Montrer que les résultats sont identiques et discuter le choix du référentiel le plus commode.
+  - niveau: cpge
+    titre: "Résolution numérique d'une équation de mouvement"
+    texte: |
+      Intégrer numériquement (Euler, puis \texttt{scipy.integrate.solve\_ivp}) le mouvement d'un projectile avec frottement quadratique $-k\,v\,\vec v$. Comparer à la parabole du modèle sans frottement et déterminer l'angle de portée maximale (inférieur à $45^\circ$).
+  - niveau: licence
+    titre: "Masse variable : équation de Tsiolkovski"
+    texte: |
+      Écrire $\dfrac{\mathrm d\vec p}{\mathrm dt}=\vec F_{\rm ext}$ pour une fusée qui éjecte des gaz à la vitesse relative $-u\vec u_z$ et établir $v(t)=-u\ln(1-Dt/m_0)-gt$. Appliquer à Columbia et expliquer l'écart du modèle à masse constante.
+  - niveau: licence
+    titre: "Frottement quadratique et vitesse limite"
+    texte: |
+      Chute avec $-kv^2$ : $m\dot v=mg-kv^2$, solution $v=v_\ell\tanh(gt/v_\ell)$ avec $v_\ell=\sqrt{mg/k}$. Estimer $v_\ell$ d'un parachutiste en chute libre (bras écartés : $\approx55$ m/s) et sous parachute ouvert ($\approx5$ m/s).
+  - niveau: master
+    titre: "Dynamique du solide : roulement sans glissement sur un plan incliné"
+    texte: |
+      Pour un cylindre de moment d'inertie $J=\tfrac12mr^2$ qui roule sans glisser, montrer que $a=\dfrac{g\sin\alpha}{1+J/(mr^2)}=\tfrac23g\sin\alpha$ et que la condition de non-glissement est $\mu\ge\tfrac13\tan\alpha$. Comparer à un bloc qui glisse sans frottement ($a=g\sin\alpha$).
+  - niveau: doctorat
+    titre: "Limites de la mécanique newtonienne"
+    texte: |
+      Pour une particule dont la vitesse approche $c$, la 2\textsuperscript{e} loi $\dfrac{\mathrm d\vec p}{\mathrm dt}=\vec F$ reste valable avec $\vec p=\gamma m\vec v$, mais $\vec a$ n'est plus parallèle à $\vec F$. Montrer que $\vec F=\gamma m\vec a+\gamma^3m\dfrac{(\vec v\cdot\vec a)}{c^2}\vec v$ et discuter les masses « longitudinale » $\gamma^3m$ et « transversale » $\gamma m$.
+
+accroche_point_cours_essentiel:
+  - titre: "Un seul principe, tous les mouvements : de l'ascenseur à la fusée"
+    duree_introduction: "5 à 8 min, avant les exercices"
+    question_d_accroche: |
+      Pourquoi vous sentez-vous plus lourd quand un ascenseur démarre vers le haut, {\bf mais pas} quand il roule à vitesse constante ? Comment une fusée de $2000$ tonnes peut-elle décoller ? Et pourquoi un virage relevé permet-il de rouler à une certaine vitesse {\bf sans aucun frottement} ? Existe-t-il {\bf un seul principe} qui répond à tout ?
+    texte: |
+      {\bf Idée clé : $\sum\vec F=m\vec a$, c'est l'accélération qui compte, pas la vitesse.}
+      \begin{itemize}
+        \item {\bf Système} : on isole l'objet étudié ; {\bf forces} : on dresse la liste de {\bf toutes} les actions extérieures ; {\bf projection} : on écrit la 2\textsuperscript{e} loi sur des axes bien choisis.
+        \item {\bf Équilibre ou mouvement uniforme} : $\sum\vec F=\vec0$ (ascenseur à vitesse constante, $T=mg$).
+        \item {\bf Contraintes} : contact ($N\ge0$, décollage $N=0$), fil inextensible (accélérations liées), adhérence ($\|\vec f\|\le\mu N$).
+        \item {\bf Accélération courbe} : centripète $-\dfrac{v^2}R\vec e_r$ (bosse, pendule conique, virage).
+      \end{itemize}
+      Les forces fixent $\vec a$ ; la cinématique du TD1 donne alors $\vec v(t)$ et $\overrightarrow{OM}(t)$.
+
+outils_mathematiques:
+  - titre: "Projection et trigonométrie des plans inclinés"
+    texte: |
+      Poids sur un plan d'angle $\varphi$ : $mg\sin\varphi$ (le long de la pente), $mg\cos\varphi$ (perpendiculaire). Valeurs : $\sin30^\circ=\tfrac12$, $\sin60^\circ=\tfrac{\sqrt3}2$, $\cos30^\circ=\tfrac{\sqrt3}2$, $\cos60^\circ=\tfrac12$.
+  - titre: "Systèmes linéaires et substitution"
+    texte: |
+      Deux équations de Newton + une contrainte : éliminer la tension par addition ou soustraction, puis isoler $a$. Contrôler en reportant dans l'autre équation (par exemple, $T$ doit être identique pour les deux blocs).
+  - titre: "Équation différentielle du premier ordre"
+    texte: |
+      $\dot v+\dfrac v\tau=g$ : solution $v=v_\ell+C\,\mathrm e^{-t/\tau}$ avec $v_\ell=g\tau$ ; $C$ par la condition initiale. $\tau$ est le temps caractéristique ($63\%$ à $t=\tau$, $99\%$ à $4{,}6\,\tau$).
+  - titre: "Développements limités"
+    texte: |
+      $\mathrm e^{-x}\approx1-x+\tfrac{x^2}2$, $\ln(1+x)\approx x-\tfrac{x^2}2$, $\cos\theta\approx1-\tfrac{\theta^2}2$ : pour tester une limite ($t\ll\tau$, $\lambda\to0$, petits angles).
+  - titre: "Division membre à membre pour éliminer une inconnue"
+    texte: |
+      Deux projections $N\sin\beta+\dots=\dfrac{mv^2}R$ et $N\cos\beta-\dots=mg$ : leur rapport élimine $N$ et $m$ ; $\tan\beta=\dfrac{v^2}{gR}$ sans frottement.
+  - titre: "Formule d'addition de la tangente et angle de frottement"
+    texte: |
+      $\tan(\beta\pm\varphi)=\dfrac{\tan\beta\pm\tan\varphi}{1\mp\tan\beta\tan\varphi}$ avec $\mu=\tan\varphi$ : écriture compacte des vitesses limites d'un virage relevé.
+  - titre: "Minimum d'une fonction sur un intervalle"
+    texte: |
+      Condition vraie pour tout $\theta\in[-\alpha,\alpha]$ : chercher le cas le plus contraignant (le minimum de $\cos\theta$ est en $\pm\alpha$).
+  - titre: "Analyse dimensionnelle"
+    texte: |
+      $[F]=\mathrm{kg\,m\,s^{-2}}$ ; $[k]=\mathrm{kg\,m\,s^{-3}}$ pour $F=kt$ ; $[\lambda]=\mathrm{kg\,s^{-1}}$ pour $-\lambda v$ ; $[\tau]=[m/\lambda]=\mathrm s$.
+
+liens_autres_disciplines:
+  - discipline: "Mathématiques"
+    texte: |
+      Systèmes linéaires, équations différentielles du premier ordre, trigonométrie, développements limités, inégalités et recherche de seuils.
+  - discipline: "Génie civil et transports"
+    texte: |
+      Dimensionnement de câbles et d'ascenseurs, ralentisseurs et profils de route (dos-d'âne), virages relevés et dévers ferroviaires, pistes de course.
+  - discipline: "Astronautique et aéronautique"
+    texte: |
+      Poussée d'un lanceur, rapport poussée/poids, équation de Tsiolkovski, facteur de charge d'un avion en virage.
+  - discipline: "Mécanique des fluides"
+    texte: |
+      Frottement visqueux (loi de Stokes), vitesse limite de sédimentation, viscosimètre à bille, nombre de Reynolds.
+  - discipline: "Électricité"
+    texte: |
+      L'équation $\dot v+v/\tau=g$ est la même que la charge d'un condensateur ($\tau=RC$) ou l'établissement du courant dans une bobine ($\tau=L/R$).
+  - discipline: "Histoire des sciences"
+    texte: |
+      Principia de Newton (1687) ; machine d'Atwood (1784) pour mesurer $g$ ; régulateur à boules de Watt (pendule conique).
+  - discipline: "Sport et biomécanique"
+    texte: |
+      Ski (pente et frottements), cyclisme et motocyclisme en virage (inclinaison $\tan\psi=v^2/(gR)$), saut, plongeon et parachutisme (vitesse limite).

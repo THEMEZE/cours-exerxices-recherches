@@ -12,6 +12,7 @@ cours_rattache:
 metadonnees:
   duree_estimee: "20 min"
   difficulte: 2
+  priorite: 2
   type_exercice: "Cours actif / Fondamental"
   indispensable: true
 
@@ -117,6 +118,14 @@ questions:
         texte: |
           On trace le repère $(O,\vec\imath,\vec\jmath)$ orthonormé, puis le vecteur unitaire $\vec u$ faisant l'angle $\theta$ (compté positivement dans le sens trigonométrique) avec $\vec\imath$. Le vecteur $\vec v$, unitaire et perpendiculaire à $\vec u$, est tracé de sorte que $(\vec u, \vec v)$ tourne dans le même sens que $(\vec\imath,\vec\jmath)$ (condition de trièdre direct) : $\vec v$ est donc obtenu en faisant tourner $\vec u$ de $+90°$, il fait l'angle $\theta+90°$ avec $\vec\imath$.
 
+        figure:
+          - ref: td1_ex4_PhV111
+            legende: |
+              $ $
+            #scale: 1.7
+            width: 0.8
+            # height: 4cm       # les deux ensemble : la figure est étirée pour tenir exactement dans ce cadre
+            label: fig.td1_ex4_PhV111
   - id: q2
     enonce: |
       \begin{enumerate}[label=(\alph*)]

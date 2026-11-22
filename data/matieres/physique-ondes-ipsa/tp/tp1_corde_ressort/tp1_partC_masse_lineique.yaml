@@ -1,0 +1,202 @@
+id: tp1_partC
+intitule: "Partie C — Masse linéique de la corde par deux méthodes {\\color{blue}(Part C — Linear mass density of the string by two methods)}"
+td: tp1
+facultatif: false
+seance: 1
+cours_rattache:
+  - chap1.celerite_corde
+  - chap1.masse_lineique
+
+metadonnees:
+  duree_estimee: "60 min"
+  difficulte: 4 # Sur une échelle de 1 à 5
+  priorite: 1
+  type_exercice: "Analyse de données et incertitudes"
+  indispensable: true
+
+enonce_intro: |
+  On détermine $\mu$ (1) à partir des célérités de la partie B via $c^2=F/\mu$, (2) par mesure directe $\mu=m/L_0$, puis on compare et on prédit $c_{\text{th}}$ pour les trois tensions. {\bf Question scientifique :} peut-on déterminer $\mu$ par deux méthodes indépendantes et cohérentes ?
+
+  {\color{blue}We determine $\mu$ (1) from the speeds of Part B through $c^2=F/\mu$, (2) by direct measurement $\mu=m/L_0$, then compare and predict $c_{\text{th}}$ for the three tensions. {\bf Scientific question:} can $\mu$ be determined by two independent, consistent methods?}
+
+accroche_point_cours_essentiel:
+  - titre: "Peser une corde sans la peser {\\color{blue}(Weighing a string without weighing it)}"
+    duree_introduction: "3 min, avant les calculs"
+    question_d_accroche: |
+      On a mesuré des fréquences et une tension, jamais la masse de la corde. Peut-on en déduire la masse par mètre ? Quelle droite faut-il tracer pour que la pente donne directement $\mu$ ou $1/\mu$ ?
+
+      {\color{blue}We measured frequencies and a tension, never the mass of the string. Can we deduce the mass per meter? Which line must be plotted so that the slope gives $\mu$ or $1/\mu$ directly?}
+    texte: |
+      {\bf Idée clé : linéariser.} $c^2=F/\mu$ est une droite de pente $1/\mu$ en variables $(F,c^2)$ ; la mesure directe $\mu=m/L_0$ donne une valeur indépendante pour comparer.
+
+      {\color{blue}{\bf Key idea: linearize.} $c^2=F/\mu$ is a line of slope $1/\mu$ in the variables $(F,c^2)$; the direct measurement $\mu=m/L_0$ gives an independent value to compare with.}
+
+outils_mathematiques:
+  - titre: "Différentielle logarithmique {\\color{blue}(Logarithmic differential)}"
+    texte: |
+      $\mu=m/L_0$ : $\dfrac{\Delta\mu}{\mu}=\dfrac{\Delta m}{m}+\dfrac{\Delta L_0}{L_0}$. $c=\sqrt{F/\mu}$ : $\dfrac{\Delta c}{c}=\dfrac12\left(\dfrac{\Delta F}{F}+\dfrac{\Delta\mu}{\mu}\right)$.
+
+      {\color{blue}$\mu=m/L_0$: $\dfrac{\Delta\mu}{\mu}=\dfrac{\Delta m}{m}+\dfrac{\Delta L_0}{L_0}$. $c=\sqrt{F/\mu}$: $\dfrac{\Delta c}{c}=\dfrac12\left(\dfrac{\Delta F}{F}+\dfrac{\Delta\mu}{\mu}\right)$.}
+  - titre: "Compatibilité de deux valeurs {\\color{blue}(Compatibility of two values)}"
+    texte: |
+      Deux valeurs $x_1\pm\Delta_1$ et $x_2\pm\Delta_2$ sont compatibles si $|x_1-x_2|\le\Delta_1+\Delta_2$.
+
+      {\color{blue}Two values $x_1\pm\Delta_1$ and $x_2\pm\Delta_2$ are compatible if $|x_1-x_2|\le\Delta_1+\Delta_2$.}
+  - titre: "Unités SI {\\color{blue}(SI units)}"
+    texte: |
+      $3{,}0$ g $=3{,}0\times10^{-3}$ kg ; vérifier $\mu\sim10^{-3}$ kg/m pour une ficelle fine.
+
+      {\color{blue}3.0 g $=3.0\times10^{-3}$ kg; check $\mu\sim10^{-3}$ kg/m for a thin string.}
+
+liens_autres_disciplines:
+  - discipline: "Métrologie {\\color{blue}(Metrology)}"
+    texte: |
+      Comparer deux méthodes indépendantes est la base de la validation expérimentale.
+
+      {\color{blue}Comparing two independent methods is the basis of experimental validation.}
+  - discipline: "Statistiques {\\color{blue}(Statistics)}"
+    texte: |
+      Régression linéaire, résidus, incertitude sur la pente.
+
+      {\color{blue}Linear regression, residuals, uncertainty on the slope.}
+
+questions:
+  - id: q1
+    enonce: |
+      C1–C2 — Calculer $c_{\exp}^2$ pour chaque tension et tracer $c^2=f(F)$ (graphique C.1). Relever l'équation de l'ajustement.
+
+      {\color{blue}C1–C2 — Compute $c_{\exp}^2$ for each tension and plot $c^2$ versus $F$ (graph C.1). Read the fit equation.}
+    coup_de_pouce:
+      - titre: "Données {\\color{blue}(Data)}"
+        texte: |
+          Reprendre les $c_{\exp}$ de la partie B et les élever au carré.
+
+          {\color{blue}Take the $c_{\exp}$ of Part B and square them.}
+    correction:
+      - titre: "Valeurs provisoires {\\color{blue}(Provisional values)}"
+        texte: |
+          \begin{center}
+          \begin{tabular}{|c|c|c|}
+          \hline
+          $F$ (N) & $c_{\exp}$ (m/s) & $c_{\exp}^2$ (m$^2$/s$^2$) \\ \hline
+          0,6 & 17,26 & 297,9 \\ \hline
+          0,8 & 19,92 & 396,8 \\ \hline
+          1,0 & 22,28 & 496,4 \\ \hline
+          \end{tabular}
+          \end{center}
+          Ajustement : $c^2=497\,F+0{,}3$ (pente $\approx497$ m$^2$s$^{-2}$N$^{-1}$).
+
+          {\color{blue}Table above. Fit: $c^2=497\,F+0.3$ (slope $\approx497$).}
+    solution:
+      - titre: "Contrôle {\\color{blue}(Check)}"
+        texte: |
+          L'ordonnée à l'origine doit être proche de $0$ ($c^2=F/\mu$ passe par l'origine). Trois points seulement : insister sur le caractère indicatif de l'incertitude sur la pente.
+
+          {\color{blue}The intercept should be close to $0$ ($c^2=F/\mu$ goes through the origin). Only three points: stress that the slope uncertainty is indicative.}
+
+  - id: q2
+    enonce: |
+      C3 — Déduire de la pente la masse linéique $\mu_{\text{ondes}}$.
+
+      {\color{blue}C3 — Deduce from the slope the linear mass density $\mu_{\text{waves}}$.}
+    coup_de_pouce:
+      - titre: "Pente {\\color{blue}(Slope)}"
+        texte: |
+          La pente vaut $1/\mu$.
+
+          {\color{blue}The slope equals $1/\mu$.}
+    correction:
+      - titre: "Valeur provisoire {\\color{blue}(Provisional value)}"
+        texte: |
+          $\mu_{\text{ondes}}=1/497\approx2{,}01\times10^{-3}$ kg/m.
+
+          {\color{blue}$\mu_{\text{waves}}=1/497\approx2.01\times10^{-3}$ kg/m.}
+    solution:
+      - titre: "Rédaction {\\color{blue}(Write-up)}"
+        texte: |
+          $c^2=\dfrac1\mu F$, donc la pente $p=1/\mu$ et $\mu_{\text{ondes}}=1/p=\dfrac{1}{497}=2{,}01\times10^{-3}$ kg/m. Incertitude indicative : $\Delta\mu/\mu\approx2\Delta c/c\approx2\,\%$, soit $\Delta\mu\approx0{,}04\times10^{-3}$ kg/m.
+
+          {\color{blue}$c^2=\dfrac1\mu F$, so the slope $p=1/\mu$ and $\mu_{\text{waves}}=1/p=\dfrac{1}{497}=2.01\times10^{-3}$ kg/m. Indicative uncertainty: $\Delta\mu/\mu\approx2\Delta c/c\approx2\,\%$, i.e. $\Delta\mu\approx0.04\times10^{-3}$ kg/m.}
+
+  - id: q3
+    enonce: |
+      C4–C5 — Calculer $\mu_{\text{direct}}=m/L_0$ et son incertitude.
+
+      {\color{blue}C4–C5 — Compute $\mu_{\text{direct}}=m/L_0$ and its uncertainty.}
+    coup_de_pouce:
+      - titre: "Incertitude {\\color{blue}(Uncertainty)}"
+        texte: |
+          Différentielle logarithmique du quotient : les incertitudes relatives s'ajoutent.
+
+          {\color{blue}Logarithmic differential of a quotient: relative uncertainties add up.}
+    correction:
+      - titre: "Valeurs provisoires {\\color{blue}(Provisional values)}"
+        texte: |
+          $\mu_{\text{direct}}=\dfrac{3{,}0\times10^{-3}}{1{,}500}=2{,}00\times10^{-3}$ kg/m ; $\Delta\mu=\mu\left(\dfrac{0{,}1}{3{,}0}+\dfrac{0{,}005}{1{,}500}\right)=2{,}00\times10^{-3}\times0{,}0367\approx7\times10^{-5}$ kg/m. Résultat : $\mu_{\text{direct}}=(2{,}00\pm0{,}07)\times10^{-3}$ kg/m.
+
+          {\color{blue}$\mu_{\text{direct}}=(2.00\pm0.07)\times10^{-3}$ kg/m, with $m=3.0$ g, $L_0=1.500$ m, $\Delta m=0.1$ g, $\Delta L_0=0.005$ m.}
+    solution:
+      - titre: "Remarque {\\color{blue}(Remark)}"
+        texte: |
+          L'incertitude est dominée par celle sur $m$ ($3{,}3\,\%$) ; la longueur apporte seulement $0{,}3\,\%$. Rappeler la conversion g $\to$ kg.
+
+          {\color{blue}The uncertainty is dominated by that on $m$ ($3.3\,\%$); the length contributes only $0.3\,\%$. Remind students of the g to kg conversion.}
+
+  - id: q4
+    enonce: |
+      C6 — Avec $\mu_{\text{direct}}$, calculer $c_{\text{th}}=\sqrt{F/\mu_{\text{direct}}}$ pour les trois tensions, $\Delta c_{\text{th}}$ et l'écart relatif avec $c_{\exp}$. Les valeurs sont-elles compatibles ?
+
+      {\color{blue}C6 — With $\mu_{\text{direct}}$, compute $c_{\text{th}}=\sqrt{F/\mu_{\text{direct}}}$ for the three tensions, $\Delta c_{\text{th}}$ and the relative deviation from $c_{\exp}$. Are the values compatible?}
+    coup_de_pouce:
+      - titre: "Propagation {\\color{blue}(Propagation)}"
+        texte: |
+          $\dfrac{\Delta c_{\text{th}}}{c_{\text{th}}}=\dfrac12\left(\dfrac{\Delta F}{F}+\dfrac{\Delta\mu}{\mu}\right)$ avec $\Delta F=0{,}03$ N.
+
+          {\color{blue}$\dfrac{\Delta c_{\text{th}}}{c_{\text{th}}}=\dfrac12\left(\dfrac{\Delta F}{F}+\dfrac{\Delta\mu}{\mu}\right)$ with $\Delta F=0.03$ N.}
+    correction:
+      - titre: "Valeurs provisoires {\\color{blue}(Provisional values)}"
+        texte: |
+          \begin{center}
+          \begin{tabular}{|c|c|c|c|c|}
+          \hline
+          $F$ (N) & $c_{\text{th}}$ (m/s) & $\Delta c_{\text{th}}$ (m/s) & $c_{\exp}$ (m/s) & écart (\%) \\ \hline
+          0,6 & 17,32 & 0,75 & 17,26 & $-0{,}3$ \\ \hline
+          0,8 & 20,00 & 0,74 & 19,92 & $-0{,}4$ \\ \hline
+          1,0 & 22,36 & 0,75 & 22,28 & $-0{,}4$ \\ \hline
+          \end{tabular}
+          \end{center}
+          Compatibles : $|c_{\text{th}}-c_{\exp}|\le0{,}1\ll\Delta c_{\text{th}}$.
+
+          {\color{blue}Table above. Compatible: $|c_{\text{th}}-c_{\exp}|\le0.1\ll\Delta c_{\text{th}}$.}
+    solution:
+      - titre: "Exemple de calcul {\\color{blue}(Worked example)}"
+        texte: |
+          Pour $F=0{,}6$ N : $c_{\text{th}}=\sqrt{0{,}6/2{,}00\times10^{-3}}=17{,}32$ m/s ; $\dfrac{\Delta c}{c}=\dfrac12(0{,}050+0{,}037)=0{,}043$, donc $\Delta c=0{,}75$ m/s ; écart relatif $=\dfrac{17{,}26-17{,}32}{17{,}32}=-0{,}3\ \%$.
+
+          {\color{blue}For $F=0.6$ N: $c_{\text{th}}=\sqrt{0.6/2.00\times10^{-3}}=17.32$ m/s; $\dfrac{\Delta c}{c}=\dfrac12(0.050+0.037)=0.043$, so $\Delta c=0.75$ m/s; relative deviation $=-0.3\,\%$.}
+
+  - id: q5
+    enonce: |
+      C7 — Les deux déterminations de $\mu$ et la comparaison $c_{\text{th}}/c_{\exp}$ donnent-elles une description cohérente de la corde ? Justifier quantitativement.
+
+      {\color{blue}C7 — Do the two determinations of $\mu$ and the comparison $c_{\text{th}}/c_{\exp}$ give a consistent description of the string? Justify quantitatively.}
+    correction:
+      - titre: "Réponse attendue {\\color{blue}(Expected answer)}"
+        texte: |
+          Oui : $\mu_{\text{ondes}}=2{,}01\times10^{-3}$ et $\mu_{\text{direct}}=(2{,}00\pm0{,}07)\times10^{-3}$ kg/m diffèrent de $0{,}5\ \%$, bien en dessous de l'incertitude ($3{,}7\ \%$). Les écarts sur $c$ sont inférieurs à $0{,}5\ \%$.
+
+          {\color{blue}Yes: $\mu_{\text{waves}}=2.01\times10^{-3}$ and $\mu_{\text{direct}}=(2.00\pm0.07)\times10^{-3}$ kg/m differ by $0.5\,\%$, well below the uncertainty ($3.7\,\%$). Deviations on $c$ are below $0.5\,\%$.}
+    solution:
+      - titre: "Conclusion type {\\color{blue}(Typical conclusion)}"
+        texte: |
+          Le modèle $c=\sqrt{F/\mu}$ est validé à l'incertitude près ; la mesure par ondes est plus précise que la pesée ($\Delta m/m\approx3\ \%$). L'accord est un peu trop bon pour être sûr : ne pas surinterpréter avec seulement trois tensions.
+
+          {\color{blue}The model $c=\sqrt{F/\mu}$ is validated within uncertainty; the wave method is more precise than weighing ($\Delta m/m\approx3\,\%$). The agreement is almost too good: do not over-interpret with only three tensions.}
+
+aller_plus_loin:
+  - niveau: prepa
+    titre: "Pondération des points {\\color{blue}(Weighting the points)}"
+    texte: |
+      Les trois points n'ont pas la même incertitude relative sur $F$ ($5\ \%$, $3{,}8\ \%$, $3\ \%$) : discuter une régression pondérée.
+
+      {\color{blue}The three points do not have the same relative uncertainty on $F$ (5%, 3.8%, 3%): discuss a weighted regression.}

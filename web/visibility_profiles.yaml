@@ -10,18 +10,30 @@
 #   (Automatisable avec une tâche cron qui change de profil à une heure fixe,
 #   ou à la main juste après le cours -- voir web/README.md.)
 
+# --- PDF hébergés (nouveau) ---------------------------------------------
+# `pdf_publies` = types de PDF servis sur /pdfs/ pour ce profil. Le type est
+# déduit du suffixe du nom de cible dans build/config.yaml :
+#     *_enonce / *_enonces -> enonce      *_aides -> aides
+#     *_corrige            -> corrige     *_fiche -> fiche (fiche enseignant : publiée SEULEMENT par le profil `all`)
+#     autre nom            -> autre
+# Avant, nginx servait TOUT build/output/*.pdf quel que soit le profil :
+# un corrigé était téléchargeable même en profil `avant_seance`.
+# Pour forcer un PDF précis : `publier: true|false` dans sa cible de config.yaml.
+
 profiles:
 
   avant_seance:
+    pdf_publies: [enonce]
     show_figure: true
     show_animation_note: true
-    show_coup_de_pouce: true
+    show_coup_de_pouce: false      # énoncés seulement : les aides arrivent avec pendant_seance_avec_indices
     show_correction: false
     show_solution: false
     aller_plus_loin_niveaux: []
     pdf_suffix: enonce   # -> /pdfs/<td_id>_enonce.pdf (voir build/config.yaml)
 
   pendant_seance_avec_indices:
+    pdf_publies: [enonce, aides]
     show_figure: true
     show_animation_note: true
     show_coup_de_pouce: true
@@ -31,6 +43,7 @@ profiles:
     pdf_suffix: enonce
 
   corrige_resultats_seuls:
+    pdf_publies: [enonce, aides, corrige]
     show_figure: true
     show_animation_note: true
     show_coup_de_pouce: true
@@ -40,6 +53,19 @@ profiles:
     pdf_suffix: corrige
 
   corrige_complet:
+    pdf_publies: [enonce, aides, corrige, autre]
+    show_figure: true
+    show_animation_note: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    aller_plus_loin_niveaux: [lycee, cpge, licence, master, doctorat]
+    pdf_suffix: corrige
+
+  # TOUT, fiches enseignant comprises (PDF *_fiche). Pour un usage perso / local :
+  # sur le Pi, ces fiches seraient téléchargeables par n'importe qui ayant l'URL.
+  all:
+    pdf_publies: [enonce, aides, corrige, autre, fiche]
     show_figure: true
     show_animation_note: true
     show_coup_de_pouce: true

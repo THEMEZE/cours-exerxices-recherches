@@ -20,13 +20,21 @@ TIKZ_DIR = ROOT / "figures" / "tikz"
 OUT_DIR = ROOT / "web" / "public" / "figures"
 TMP_DIR = ROOT / "figures" / ".render_tmp"
 
-STANDALONE_TEMPLATE = r"""\documentclass[tikz,border=3pt]{standalone}
+# Le même style TikZ que dans les PDF (templates/styles/monstyletikz.tex : couleurs
+# colorOne..colorSix, \\drawgrid, bibliothèque hobby, style « every picture »).
+# SANS lui, toute figure qui cite colorOne/colorThree/\\drawgrid échouait à la
+# compilation, et les rares qui passaient sortaient sans les couleurs du thème.
+# Le chemin est relatif à la racine du projet (pdflatex est lancé avec cwd=ROOT).
+STANDALONE_TEMPLATE = r"""\documentclass[tikz,border=%s]{standalone}
 \usepackage{amsmath, amssymb}
+\input{templates/styles/monstyletikz}
 \usetikzlibrary{calc, positioning, arrows.meta, decorations.pathmorphing}
 \begin{document}
 \input{%s}
 \end{document}
 """
+BORDER = "6pt"
+STYLE_FILE = ROOT / "templates" / "styles" / "monstyletikz.tex"
 
 
 def render_one(tex_path: Path, force: bool):
@@ -37,13 +45,16 @@ def render_one(tex_path: Path, force: bool):
                                     # silencieusement sur le site (bug réel trouvé
                                     # et corrigé pendant les tests).
     svg_path = OUT_DIR / f"{name}.svg"
-    if svg_path.exists() and not force and svg_path.stat().st_mtime > tex_path.stat().st_mtime:
+    # Une figure est périmée si son .tex, le style TikZ du thème (couleurs...) ou ce
+    # script ont changé depuis le SVG (avant : seul le .tex comptait).
+    newest = max(p.stat().st_mtime for p in (tex_path, STYLE_FILE, Path(__file__)) if p.exists())
+    if svg_path.exists() and not force and svg_path.stat().st_mtime > newest:
         print(f"-- {name}.svg à jour (skip)")
         return
 
     TMP_DIR.mkdir(parents=True, exist_ok=True)
     wrapper = TMP_DIR / f"{name}_standalone.tex"
-    wrapper.write_text(STANDALONE_TEMPLATE % str(tex_path.resolve()), encoding="utf-8")
+    wrapper.write_text(STANDALONE_TEMPLATE % (BORDER, str(tex_path.resolve())), encoding="utf-8")
 
     result = subprocess.run(
         ["pdflatex", "-interaction=nonstopmode", "-output-directory", str(TMP_DIR), str(wrapper)],

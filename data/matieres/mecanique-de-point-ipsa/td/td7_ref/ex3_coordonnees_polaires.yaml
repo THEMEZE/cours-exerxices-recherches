@@ -1,0 +1,147 @@
+id: td7_ex3
+intitule: "Vitesse et accélération en coordonnées polaires"
+td: td7
+facultatif: false
+seance: 3
+
+cours_rattache:
+  - cinematique.composition_des_vitesses
+  - cinematique.composition_des_accelerations
+  - cinematique.coordonnees_polaires
+
+metadonnees:
+  duree_estimee: "40 min"
+  difficulte: 4
+  type_exercice: "Démonstration générale"
+  indispensable: true
+
+enonce_intro: |
+  Dans un plan fixe $Oxy$, on considère un système d'axes mobiles $OXY$, de même origine $O$, tel que $OX$ fasse avec $Ox$ un angle variable $\theta(t)$. Un point $M$ mobile sur l'axe $OX$ est repéré par $\overrightarrow{OM}=X\,\vec e_X$. Le mouvement {\bf relatif} de $M$ est son mouvement par rapport à $OXY$, le mouvement {\bf absolu} son mouvement par rapport à $Oxy$.
+
+prerequis:
+  - titre: "Dérivée des vecteurs de base mobiles"
+    texte: |
+      $\dot{\vec e}_X=\dot\theta\,\vec e_Y$, $\dot{\vec e}_Y=-\dot\theta\,\vec e_X$. Vecteur rotation $\vec\Omega=\dot\theta\,\vec e_z$.
+  - titre: "Composition des vitesses et accélérations"
+    texte: |
+      $\vec v_a=\vec v_r+\vec v_e$ ; $\vec a_a=\vec a_r+\vec a_e+\vec a_c$ avec $\vec a_c=2\vec\Omega\wedge\vec v_r$.
+  - titre: "Coordonnées polaires"
+    texte: |
+      $\vec v=\dot r\,\vec e_r+r\dot\theta\,\vec e_\theta$ ; $\vec a=(\ddot r-r\dot\theta^2)\vec e_r+(r\ddot\theta+2\dot r\dot\theta)\vec e_\theta$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Calculer $\\vec v_r,\\vec a_r,\\vec v_e,\\vec a_e,\\vec a_c$ dans un cas général"
+    texte: |
+      Savoir appliquer méthodiquement les formules de composition pour un point sur un axe tournant, et retrouver l'accélération en coordonnées polaires.
+  - titre: "Reconnaître les termes de l'accélération polaire"
+    texte: |
+      Identifier $-r\dot\theta^2$ (centripète d'entraînement), $r\ddot\theta$ (tangentielle d'entraînement), $2\dot r\dot\theta$ (Coriolis), $\ddot r$ (relative).
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Le cas général dont l'exercice 4 est un cas particulier"
+    texte: |
+      Cet exercice {\bf démontre} les formules polaires que les étudiants utilisent sans les justifier ; chaque terme de $\vec a$ en polaire a ici une origine physique : relative, d'entraînement (2 termes), Coriolis. Il prépare les exercices 4 et 6.
+  - titre: "Méthode en quatre étapes"
+    texte: |
+      (1) Fixer $M$ dans $OXY$ (point coïncidant) $\Rightarrow$ $\vec v_e$, $\vec a_e$ ; (2) libérer $X$ $\Rightarrow$ $\vec v_r,\vec a_r$ ; (3) $\vec a_c$ ; (4) sommer et comparer au calcul direct.
+
+point_cours:
+  - titre: "Rotation d'axe fixe non uniforme"
+    texte: |
+      $\vec\Omega=\dot\theta\vec e_z$, $\dfrac{\mathrm d\vec\Omega}{\mathrm dt}=\ddot\theta\vec e_z$. $\vec a_e=\ddot\theta\,\vec e_z\wedge\overrightarrow{OM}+\vec\Omega\wedge(\vec\Omega\wedge\overrightarrow{OM})=X\ddot\theta\,\vec e_Y-X\dot\theta^2\,\vec e_X$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Oublier $X\\ddot\\theta$ dans $\\vec a_e$"
+    texte: |
+      Si $\dot\theta$ n'est pas constant, il y a un terme d'accélération tangentielle d'entraînement $X\ddot\theta\vec e_Y$.
+  - titre: "Oublier Coriolis"
+    texte: |
+      $\vec a_c=2\dot\theta\dot X\,\vec e_Y\ne\vec0$ dès que $M$ se déplace sur $OX$ ($\dot X\ne0$) et que $\mathcal R'$ tourne.
+  - titre: "Oublier que $\\vec e_X$ dépend du temps"
+    texte: |
+      Dériver $X\vec e_X$ comme si $\vec e_X$ était constant donne $\dot X\vec e_X$ seulement : faux dans $Oxy$.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Calcul direct pour vérifier"
+    texte: |
+      Demander à la classe de dériver $\overrightarrow{OM}=X\cos\theta\,\vec e_x+X\sin\theta\,\vec e_y$ deux fois dans $Oxy$ : on retrouve $\vec a_a$ (lourd mais instructif).
+  - titre: "Interprétation physique"
+    texte: |
+      Pour un point immobile sur l'axe ($\dot X=0$) tournant à $\dot\theta$ constant : accélération centripète pure $-X\dot\theta^2\vec e_X$. Pour un point sur un rayon qui s'éloigne à $\dot X=v_0$ avec $\dot\theta=\omega$ : le terme $2v_0\omega$ est Coriolis.
+
+bilan:
+  - titre: "Résultats"
+    texte: |
+      $\vec v_r=\dot X\vec e_X$, $\vec a_r=\ddot X\vec e_X$ ; $\vec v_e=X\dot\theta\vec e_Y$, $\vec a_e=-X\dot\theta^2\vec e_X+X\ddot\theta\vec e_Y$ ; $\vec a_c=2\dot X\dot\theta\vec e_Y$ ; $\vec v_a=\dot X\vec e_X+X\dot\theta\vec e_Y$ ; $\vec a_a=(\ddot X-X\dot\theta^2)\vec e_X+(X\ddot\theta+2\dot X\dot\theta)\vec e_Y$ (formule polaire).
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Mouvement à force centrale"
+    texte: |
+      Pour une force centrale ($a_Y=0$), montrer que $X^2\dot\theta=C$ (loi des aires) : $\dfrac{1}{X}\dfrac{\mathrm d}{\mathrm dt}(X^2\dot\theta)=X\ddot\theta+2\dot X\dot\theta=0$. Interpréter chaque terme.
+  - niveau: licence
+    titre: "Passage à la base de Frenet"
+    texte: |
+      Relier les composantes polaires aux composantes tangentielle et normale ($a_t=\dot v$, $a_n=v^2/\rho$) pour une spirale d'Archimède $X=v_0t$, $\theta=\omega t$ ; calculer le rayon de courbure.
+  - niveau: master
+    titre: "Dérivation covariante et symboles de Christoffel"
+    texte: |
+      Retrouver $\vec a$ en polaire par la dérivation covariante et les symboles de Christoffel $\Gamma^r_{\theta\theta}=-r$, $\Gamma^\theta_{r\theta}=1/r$.
+
+accroche_point_cours_essentiel:
+  - titre: "D'où vient le terme $2\\dot r\\dot\\theta$ ?"
+    duree_introduction: "3 min"
+    question_d_accroche: |
+      Un écureuil court sur le rayon d'une roue qui tourne. Combien de termes dans son accélération absolue et d'où viennent-ils ?
+    texte: |
+      {\bf Idée clé : l'accélération polaire est la somme de l'accélération relative, de l'accélération d'entraînement (deux termes) et de Coriolis.}
+
+outils_mathematiques:
+  - titre: "Dérivée de $\\vec e_X$ et $\\vec e_Y$"
+    texte: |
+      $\vec e_X=\cos\theta\,\vec e_x+\sin\theta\,\vec e_y$, $\vec e_Y=-\sin\theta\,\vec e_x+\cos\theta\,\vec e_y$, donc $\dot{\vec e}_X=\dot\theta\vec e_Y$, $\dot{\vec e}_Y=-\dot\theta\vec e_X$.
+  - titre: "Produit vectoriel"
+    texte: |
+      $\vec e_z\wedge\vec e_X=\vec e_Y$, $\vec e_z\wedge\vec e_Y=-\vec e_X$.
+
+liens_autres_disciplines:
+  - discipline: "Astronomie"
+    texte: |
+      Mouvement orbital en coordonnées polaires, loi des aires (Kepler).
+  - discipline: "Robotique"
+    texte: |
+      Bras articulés (coordonnées cylindriques/polaires), effet Coriolis sur le bras.
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{itemize}
+        \item[(a)] Établir l'expression de la vitesse et de l'accélération {\bf relatives} de $M$ selon les axes $OXY$.
+        \item[(b)] Déterminer la vitesse et l'accélération d'{\bf entraînement} selon les axes $OXY$.
+        \item[(c)] Déterminer l'accélération complémentaire (de Coriolis).
+        \item[(d)] En déduire $\vec v_a$ et $\vec a_a$ ; vérifier avec la formule polaire.
+      \end{itemize}
+    coup_de_pouce: |
+      (a) $\vec e_X$ est constant dans $OXY$. (b) Fixer $M$ dans $OXY$ : mouvement circulaire de rayon $X$, de vitesse angulaire $\dot\theta$ non constante. (c) $\vec a_c=2\vec\Omega\wedge\vec v_r$ avec $\vec\Omega=\dot\theta\vec e_z$.
+    correction: |
+      (a) $\vec v_r=\dot X\vec e_X$, $\vec a_r=\ddot X\vec e_X$ ; (b) $\vec v_e=X\dot\theta\vec e_Y$, $\vec a_e=-X\dot\theta^2\vec e_X+X\ddot\theta\vec e_Y$ ; (c) $\vec a_c=2\dot\theta\dot X\vec e_Y$ ; (d) $\vec v_a=\dot X\vec e_X+X\dot\theta\vec e_Y$, $\vec a_a=(\ddot X-X\dot\theta^2)\vec e_X+(X\ddot\theta+2\dot X\dot\theta)\vec e_Y$.
+    solution:
+      - titre: "(a) Mouvement relatif"
+        texte: |
+          Dans $OXY$ (repère fixe pour l'observateur relatif), $\vec e_X$ est constant : $\overrightarrow{OM}=X\vec e_X$ donne
+          $$\boxed{\vec v_r=\dot X\,\vec e_X},\qquad\boxed{\vec a_r=\ddot X\,\vec e_X}.$$
+      - titre: "(b) Mouvement d'entraînement"
+        texte: |
+          Le repère $OXY$ tourne autour de $Oz$ avec $\vec\Omega=\dot\theta\,\vec e_z$ ; $O'=O$ donc $\vec v_{O'}=\vec0$. Pour $M$ pris fixe dans $OXY$ :
+          $$\boxed{\vec v_e=\vec\Omega\wedge\overrightarrow{OM}=\dot\theta X\,\vec e_z\wedge\vec e_X=X\dot\theta\,\vec e_Y}.$$
+          $$\vec a_e=\frac{\mathrm d\vec\Omega}{\mathrm dt}\wedge\overrightarrow{OM}+\vec\Omega\wedge(\vec\Omega\wedge\overrightarrow{OM})=X\ddot\theta\,\vec e_Y+\dot\theta\vec e_z\wedge(X\dot\theta\vec e_Y)=\boxed{X\ddot\theta\,\vec e_Y-X\dot\theta^2\,\vec e_X}.$$
+          Interprétation : composante tangentielle $X\ddot\theta$ (accélération angulaire), composante centripète $-X\dot\theta^2$.
+      - titre: "(c) Accélération de Coriolis"
+        texte: |
+          $$\vec a_c=2\vec\Omega\wedge\vec v_r=2\dot\theta\vec e_z\wedge\dot X\vec e_X=\boxed{2\dot\theta\dot X\,\vec e_Y}.$$
+          Elle est perpendiculaire à $\vec v_r$ (donc ne travaille pas) et n'existe que si $M$ {\bf se déplace} dans un repère qui {\bf tourne}.
+      - titre: "(d) Résultats absolus et vérification"
+        texte: |
+          $$\vec v_a=\vec v_r+\vec v_e=\dot X\vec e_X+X\dot\theta\vec e_Y,$$
+          $$\vec a_a=\vec a_r+\vec a_e+\vec a_c=(\ddot X-X\dot\theta^2)\vec e_X+(X\ddot\theta+2\dot X\dot\theta)\vec e_Y.$$
+          C'est exactement la formule polaire avec $r=X$ : {\bf les termes de l'accélération polaire ont chacun un sens physique}. Calcul direct de contrôle : $\overrightarrow{OM}=X\vec e_X$, $\vec v=\dot X\vec e_X+X\dot\theta\vec e_Y$ (en utilisant $\dot{\vec e}_X=\dot\theta\vec e_Y$), $\vec a=\ddot X\vec e_X+\dot X\dot\theta\vec e_Y+\dot X\dot\theta\vec e_Y+X\ddot\theta\vec e_Y-X\dot\theta^2\vec e_X$ $\surd$.

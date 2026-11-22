@@ -1,0 +1,254 @@
+id: td4_ex8
+intitule: "Complément (niveau 3, ENS) : modes non linéaires de deux pendules couplés, stabilité et instabilité paramétrique"
+td: td4
+facultatif: true
+seance: 5
+
+cours_rattache:
+  - chap4.oscillateurs_couples
+  - chap4.petits_angles_et_developpements_limites
+  - chap4.modes_propres
+  - chap4.equations_differentielles_ordre_n
+
+metadonnees:
+  duree_estimee: "120 min"
+  difficulte: 5 # Sur une échelle de 1 à 5
+  priorite: 4
+  type_exercice: "Complément original, problème de type ENS"
+  indispensable: false
+
+enonce_intro: |
+  \textbf{Exercice complémentaire original (niveau 3, type ENS).} Deux pendules simples identiques (longueur $\ell=1{,}00$ m, masse $m$, $\omega_0^2=g/\ell$, $g=9{,}81\ \mathrm{m\cdot s^{-2}}$) sont suspendus à la même hauteur, à la distance $d$ l'un de l'autre, et couplés par un ressort de raideur $k$, de longueur à vide $d$, accroché aux deux masses. On note $\kappa=k/m$ et $\alpha_1,\alpha_2$ les angles des fils avec la verticale (positifs vers la droite). \emph{On ne fait aucune approximation des petits angles dans les questions 1 à 3.}
+
+  Les équations exactes établies à l'exercice 1 sont, avec $u=d+\ell(\sin\alpha_2-\sin\alpha_1)$, $v=\ell(\cos\alpha_1-\cos\alpha_2)$ et $\ell_s=\sqrt{u^2+v^2}$ (longueur du ressort) :
+  $$\ddot\alpha_1=-\omega_0^2\sin\alpha_1+\frac\kappa\ell\,\frac{\ell_s-d}{\ell_s}(u\cos\alpha_1+v\sin\alpha_1),\qquad\ddot\alpha_2=-\omega_0^2\sin\alpha_2-\frac\kappa\ell\,\frac{\ell_s-d}{\ell_s}(u\cos\alpha_2+v\sin\alpha_2).$$
+  Dans la théorie linéaire, il y a deux modes : en phase ($\omega_s=\omega_0$) et en opposition de phase ($\omega_a=\sqrt{\omega_0^2+2\kappa}$). La question est : \emph{que deviennent ces modes à amplitude finie, et restent-ils stables ?}
+
+# figure:
+#   - ref: td4_ex8_pendules_couples_nl
+#     legende: "Deux pendules identiques couplés par un ressort de longueur à vide $d$ ; mouvements en phase et en opposition de phase à amplitude finie."
+#     width: 0.7
+#     label: "fig:pendules_nl"
+#   - ref: td4_ex8_seuil
+#     legende: |
+#       Suggestion : module maximal $|\mu|$ des multiplicateurs de Floquet du mode en phase en fonction de l'amplitude $A$ : égal à $1$ (stable) pour $A<A_c$, supérieur à $1$ (instable) au-delà, avec $A_c=\sqrt{8\kappa/(\omega_0^2+6\kappa)}$.
+#     width: 0.8
+#     label:
+
+prerequis:
+  - titre: "Exercice 1 du TD4"
+    texte: |
+      Équations exactes des pendules couplés, modes en phase et en opposition, linéarisation.
+  - titre: "Méthode de Poincaré--Lindstedt"
+    texte: |
+      Pour $\ddot x+\omega^2x+\varepsilon x^3=0$, la pulsation à l'amplitude $A$ est $\omega_A=\omega+\dfrac{3\varepsilon A^2}{8\omega}$.
+  - titre: "Équation de Hill et de Mathieu"
+    texte: |
+      $\ddot q+[\omega^2+h\cos(2\omega_pt)]q=0$ : instabilité si $|\omega^2-\omega_p^2|<|h|/2$ (première zone, $\omega_p$ pulsation de modulation $/2$).
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Reconnaître une variété invariante"
+    texte: |
+      Montrer que les conditions $\alpha_1=\alpha_2$ et $\alpha_1=-\alpha_2$ sont préservées exactement par la dynamique non linéaire, et ramener le problème à une équation à une dimension.
+  - titre: "Calculer la dépendance de la fréquence en amplitude"
+    texte: |
+      Utiliser un développement en série ou Poincaré--Lindstedt pour obtenir la correction cubique de la pulsation.
+  - titre: "Étudier la stabilité d'un mouvement périodique"
+    texte: |
+      Linéariser autour d'une solution périodique, obtenir une équation de Hill, la réduire à une équation de Mathieu et trouver le seuil d'instabilité paramétrique.
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Montrer que la notion de mode est subtile hors du régime linéaire"
+    texte: |
+      Les modes (symétrique, antisymétrique) subsistent comme solutions exactes grâce à la symétrie, mais leur \emph{stabilité} dépend de l'amplitude : au-delà d'un seuil, une perturbation transverse croît exponentiellement et l'énergie quitte le mode (instabilité paramétrique, Floquet).
+  - titre: "Relier DL, linéarisation et validité"
+    texte: |
+      Le seuil $A_c\sim2\sqrt2\,\omega_c/\omega_0$ montre qu'un couplage faible rend le régime « petits angles » étroit : la validité de la linéarisation dépend du \emph{couplage}, pas seulement de l'amplitude.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Confondre invariance de la variété et stabilité"
+    texte: |
+      Le mouvement $\alpha_1=\alpha_2$ est solution exacte pour toute amplitude, mais il peut être instable : une petite perturbation transverse $q=\alpha_1-\alpha_2$ peut croître.
+  - titre: "Oublier que la période du pendule dépend de l'amplitude"
+    texte: |
+      Pour le mode en phase, $T=T_0\dfrac2\pi K(\sin\tfrac A2)=T_0\Big(1+\dfrac{A^2}{16}+\dfrac{11A^4}{3072}+\dots\Big)$ ; le coefficient $1/16$ est celui de la correction du « petit angle ».
+  - titre: "Linéariser l'équation de $q$ à amplitude nulle"
+    texte: |
+      L'équation de $q$ a des coefficients périodiques ($\cos\alpha(t)$), donc ce n'est pas une équation à coefficients constants : on ne peut pas chercher $q\propto e^{\lambda t}$, il faut le théorème de Floquet.
+  - titre: "Négliger le fait que la fréquence du mode en phase change aussi"
+    texte: |
+      Le seuil dépend de $\omega_s(A)=\omega_0(1-A^2/16)$ \emph{et} de la modulation : les deux effets entrent dans $A_c$.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Visualiser l'instabilité"
+    texte: |
+      Faire intégrer numériquement les équations exactes avec $A=0{,}5$ et un très petit écart initial entre les angles : l'énergie passe lentement du mode en phase au mode en opposition.
+  - titre: "Pistes de discussion"
+    texte: |
+      Pourquoi ce phénomène ne se voit-il pas dans le cadre linéaire ? (Linéarité : les modes sont indépendants ; l'instabilité naît du couplage non linéaire entre modes.)
+
+bilan:
+  - titre: "Résultats à retenir"
+    texte: |
+      Mode en phase exact : $\ddot\alpha+\omega_0^2\sin\alpha=0$, $T=T_0\big(1+\tfrac{A^2}{16}+\dots\big)$.
+      Mode en opposition exact : $\ddot\beta+\omega_0^2\sin\beta+\kappa\sin2\beta=0$ ; $\omega(A)\simeq\omega_a-\dfrac{(\omega_0^2+8\kappa)A^2}{16\,\omega_a}$ avec $\omega_a^2=\omega_0^2+2\kappa$.
+      Stabilité du mode en phase : $\ddot q+\cos\alpha(t)\,[\omega_0^2+2\kappa\cos\alpha(t)]\,q=0$ ; seuil $A_c^2\simeq\dfrac{8\kappa}{\omega_0^2+6\kappa}$ ($A_c=0{,}38$ rad pour $\kappa/\omega_0^2=0{,}02$).
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Dessiner les portraits de phase"
+    texte: |
+      Tracer le portrait de phase $(\beta,\dot\beta)$ du mode en opposition : l'énergie potentielle $\omega_0^2(1-\cos\beta)+\tfrac\kappa2(1-\cos2\beta)$ est à un seul puits. Le mode en phase correspond à celui du pendule simple.
+  - niveau: master
+    titre: "Perturbations dans le mode en opposition"
+    texte: |
+      Étudier de la même façon la stabilité du mode en opposition : montrer que l'équation de $q$ est $\ddot q+\dots$ et trouver s'il existe un seuil.
+  - niveau: master
+    titre: "Chaos"
+    texte: |
+      Au-delà du seuil, le mouvement devient irrégulier pour des énergies élevées : étudier numériquement les sections de Poincaré.
+
+accroche_point_cours_essentiel:
+  - titre: "Un mode propre est-il toujours stable ?"
+    duree_introduction: "5 min"
+    question_d_accroche: |
+      Les deux pendules couplés oscillent en phase avec une grande amplitude. Le mouvement est-il stable si on introduit une toute petite différence entre les deux angles ?
+    texte: |
+      {\bf Idée clé : en régime linéaire les modes sont indépendants ; en régime non linéaire ils sont couplés.} À grande amplitude, le mode en phase peut transférer son énergie vers le mode en opposition : c'est l'instabilité paramétrique, due à la dépendance de la fréquence en l'amplitude.
+
+outils_mathematiques:
+  - titre: "Intégrale elliptique"
+    texte: |
+      $T(A)=\dfrac{4}{\omega_0}K\big(\sin\tfrac A2\big)$ avec $K(\varkappa)=\displaystyle\int_0^{\pi/2}\dfrac{\mathrm d\phi}{\sqrt{1-\varkappa^2\sin^2\phi}}=\dfrac\pi2\Big(1+\dfrac{\varkappa^2}4+\dfrac{9\varkappa^4}{64}+\dots\Big)$.
+  - titre: "Théorème de Floquet"
+    texte: |
+      Pour $\ddot q+p(t)q=0$ avec $p$ de période $T$, les solutions vérifient $q(t+T)=\mu\,q(t)$ ; les multiplicateurs $\mu$ sont les valeurs propres de la matrice de monodromie, de produit $1$ ; stabilité $\Leftrightarrow|\mu|=1$.
+  - titre: "Développement en $A$"
+    texte: |
+      $\sin\beta=\beta-\beta^3/6$, $\sin2\beta=2\beta-4\beta^3/3$, $\cos\alpha=1-\alpha^2/2$, $\cos^2\alpha=1-\alpha^2$.
+
+liens_autres_disciplines:
+  - discipline: "Physique des plasmas et optique non linéaire"
+    texte: |
+      Instabilité paramétrique : un mode de grande amplitude (onde pompe) amplifie une paire de modes de fréquences moitiés ; même mathématique que le seuil de Mathieu.
+  - discipline: "Mécanique"
+    texte: |
+      Le pendule de Faraday et l'instabilité paramétrique d'une balançoire : on excite une oscillation en modulant à deux fois la fréquence propre.
+
+questions:
+  - id: q1
+    enonce: |
+      \textbf{Question 1.} \emph{Mode en phase.} Montrer que la condition $\alpha_1=\alpha_2=\alpha$ est compatible avec les équations exactes pour toute amplitude (variété invariante) et que $\alpha$ vérifie l'équation du pendule simple. Donner la période en fonction de l'amplitude $A$ jusqu'à l'ordre $A^2$.
+    coup_de_pouce:
+      - titre: "Longueur du ressort"
+        texte: |
+          Que valent $u$ et $v$ si $\alpha_1=\alpha_2$ ? Que vaut alors $\ell_s-d$ ?
+      - titre: "Période du pendule"
+        texte: |
+          $T=T_0\dfrac2\pi K(\sin\tfrac A2)$ avec $K(\varkappa)\simeq\dfrac\pi2(1+\varkappa^2/4)$ ; $\sin^2\frac A2\simeq\frac{A^2}4$.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $u=d$, $v=0$, $\ell_s=d$ : le ressort n'est jamais déformé ; $\ddot\alpha+\omega_0^2\sin\alpha=0$ ; $T=T_0\big(1+\dfrac{A^2}{16}+\dfrac{11A^4}{3072}+\dots\big)$.
+    solution:
+      - titre: "Invariance"
+        texte: |
+          Si $\alpha_1=\alpha_2$ à un instant et $\dot\alpha_1=\dot\alpha_2$, alors $u=d$, $v=0$, $\ell_s=d$ : le facteur $\ell_s-d$ s'annule, donc les termes de ressort sont nuls dans les deux équations, qui deviennent la même : $\ddot\alpha=-\omega_0^2\sin\alpha$. Les deux angles restent égaux à tout instant (unicité des solutions). C'est exact, à toute amplitude, grâce à la symétrie $1\leftrightarrow2$ : le ressort ne sert à rien dans ce mouvement.
+      - titre: "Période"
+        texte: |
+          Le pendule simple a pour période $T=\dfrac4{\omega_0}K\big(\sin\tfrac A2\big)$ ; avec $\sin^2\tfrac A2=\tfrac{A^2}4-\tfrac{A^4}{48}+\dots$ on trouve $T=T_0\Big(1+\dfrac{A^2}{16}+\dfrac{11A^4}{3072}+\dots\Big)$, $T_0=2\pi/\omega_0=2{,}006$ s. Ici : $A=0{,}6$ rad $\Rightarrow T=2{,}052$ s ($+2{,}3\,\%$) ; $A=1{,}0$ $\Rightarrow T=2{,}139$ s ($+6{,}7\,\%$). La pulsation \emph{diminue} avec l'amplitude : le pendule est « mou » ($\sin\alpha<\alpha$).
+      - titre: "Ce que le DL a justifié"
+        texte: |
+          Le développement $T=T_0(1+A^2/16)$ est le premier ordre au-delà du petit angle : le terme en $A^2$ est le premier qui n'est pas pris en compte par la linéarisation, et son coefficient mesure l'erreur : $<1\,\%$ si $A<0{,}4$ rad ($23^\circ$).
+
+  - id: q2
+    enonce: |
+      \textbf{Question 2.} \emph{Mode en opposition.} Montrer que $\alpha_1=-\alpha_2=\beta$ est invariant et que $\beta$ vérifie $\ddot\beta=-\omega_0^2\sin\beta-\kappa\sin2\beta$. Par la méthode de Poincaré--Lindstedt ou le développement de l'équation, montrer que la pulsation à l'amplitude $A$ est $\omega(A)\simeq\omega_a-\dfrac{(\omega_0^2+8\kappa)A^2}{16\,\omega_a}$.
+    coup_de_pouce:
+      - titre: "Longueur du ressort"
+        texte: |
+          Si $\alpha_2=-\alpha_1=-\beta$, calculez $v$ et $u=d-2\ell\sin\beta$. Le ressort reste-t-il horizontal ? Que valent $\ell_s-d$ et $\cos\alpha_1$ ?
+      - titre: "Développement"
+        texte: |
+          $\sin\beta\simeq\beta-\beta^3/6$ et $\sin2\beta\simeq2\beta-4\beta^3/3$ : réécrivez l'équation sous la forme $\ddot\beta+\omega_a^2\beta-\gamma\beta^3=0$ et identifiez $\gamma$.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $v=0$, $u=d-2\ell\sin\beta$, $\ell_s-d=-2\ell\sin\beta$ (si $u>0$) : $\ddot\beta=-\omega_0^2\sin\beta-\kappa\sin2\beta$ ; $\gamma=\dfrac{\omega_0^2+8\kappa}6$ et $\omega(A)\simeq\omega_a-\dfrac{3\gamma A^2}{8\omega_a}$.
+    solution:
+      - titre: "Invariance et équation"
+        texte: |
+          Avec $\alpha_1=\beta$, $\alpha_2=-\beta$ : $v=\ell(\cos\beta-\cos\beta)=0$ et $u=d-2\ell\sin\beta$ : le ressort reste horizontal (exactement), avec l'allongement $\ell_s-d=u-d=-2\ell\sin\beta$ (si $u>0$, c'est-à-dire si les masses ne se touchent pas). La première équation donne $\ddot\beta=-\omega_0^2\sin\beta+\dfrac\kappa\ell(-2\ell\sin\beta)\cos\beta=-\omega_0^2\sin\beta-2\kappa\sin\beta\cos\beta=-\omega_0^2\sin\beta-\kappa\sin2\beta$ ; la seconde donne la même équation pour $-\beta$ (cohérent). L'équation est \emph{exacte}, à une dimension.
+      - titre: "Limite linéaire"
+        texte: |
+          $\ddot\beta+(\omega_0^2+2\kappa)\beta=0$ : $\omega_a^2=\omega_0^2+2\kappa$ : on retrouve la théorie linéaire.
+      - titre: "Terme cubique"
+        texte: |
+          $\ddot\beta+\omega_0^2\Big(\beta-\dfrac{\beta^3}6\Big)+\kappa\Big(2\beta-\dfrac{4\beta^3}3\Big)=\ddot\beta+\omega_a^2\beta-\gamma\beta^3=0$ avec $\gamma=\dfrac{\omega_0^2}6+\dfrac{4\kappa}3=\dfrac{\omega_0^2+8\kappa}6$. C'est l'équation de Duffing « molle » ($\varepsilon=-\gamma<0$). L'absence de terme quadratique tient à la symétrie $\beta\to-\beta$ (l'énergie potentielle est paire).
+      - titre: "Poincaré--Lindstedt"
+        texte: |
+          On cherche $\beta=A\cos\omega t+O(A^3)$ avec $\omega=\omega_a+\omega_2A^2$ ; l'élimination de la résonance (terme séculaire) à l'ordre $A^3$ impose $\omega_2=-\dfrac{3\gamma}{8\omega_a}$ (car $\cos^3\phi=\tfrac34\cos\phi+\tfrac14\cos3\phi$ : le terme en $\cos\phi$ doit être annulé). Donc
+          $$\omega(A)\simeq\omega_a-\frac{(\omega_0^2+8\kappa)A^2}{16\,\omega_a}.$$
+          Pour $\kappa=2\ \mathrm{s^{-2}}$, $\omega_a=\sqrt{13{,}81}=3{,}716$ rad/s : $A=0{,}3$ donne $T=1{,}709$ s (numérique : $1{,}7086$ s) ; $A=0{,}1$ donne $T=1{,}6927$ s. Dans le cas $\kappa=0$, on retrouve $-A^2\omega_0/16$ (pendule simple).
+      - titre: "Comparaison des deux modes"
+        texte: |
+          Les deux modes « durcissent » ou « s'amollissent » différemment avec $A$ : $\Delta\omega/\omega=-A^2/16$ pour le mode en phase, $-\dfrac{(\omega_0^2+8\kappa)A^2}{16(\omega_0^2+2\kappa)}$ pour le mode en opposition : si $\kappa$ est grand, ce second coefficient tend vers $-A^2/4$, quatre fois plus grand. Le rapport $\omega_a/\omega_s$ change donc avec l'amplitude : les modes se rapprochent ou s'éloignent selon l'amplitude.
+
+  - id: q3
+    enonce: |
+      \textbf{Question 3.} \emph{Stabilité du mode en phase.} On perturbe le mode en phase : $\alpha_{1,2}=\alpha(t)\pm q/2$ avec $q$ petit. Montrer que $q$ vérifie, à l'ordre $1$ en $q$, $\ddot q+\cos\alpha(t)\,[\omega_0^2+2\kappa\cos\alpha(t)]\,q=0$. Pour $\alpha=A\cos\omega_st$ avec $A$ petit, ramener cette équation à une équation de Mathieu et trouver le seuil $A_c$ de l'instabilité. Application numérique pour $\kappa/\omega_0^2=0{,}02$.
+    coup_de_pouce:
+      - titre: "Linéariser les équations exactes en $q$"
+        texte: |
+          Écrivez l'équation de $q=\alpha_1-\alpha_2$ en soustrayant les deux équations exactes puis développez au premier ordre en $q$ autour de $q=0$ (dérivée par rapport à $q$ en $q=0$). Le ressort contribue par $-2\kappa\cos^2\alpha\,q$.
+      - titre: "Mathieu"
+        texte: |
+          Développez $\cos\alpha\simeq1-\alpha^2/2$, $\cos^2\alpha\simeq1-\alpha^2$, puis $\cos^2\omega_st=\tfrac12(1+\cos2\omega_st)$ ; sans oublier le décalage de fréquence $\omega_s=\omega_0(1-A^2/16)$.
+      - titre: "Zone d'instabilité"
+        texte: |
+          $\ddot q+[\Omega_e^2+h\cos2\omega_st]q=0$ est instable si $|\Omega_e^2-\omega_s^2|<|h|/2$.
+    correction:
+      - titre: "Résultat"
+        texte: |
+          $\Omega_e^2-\omega_s^2=2\kappa-A^2\Big(\dfrac{\omega_0^2}8+\kappa\Big)$, $|h|=A^2\Big(\dfrac{\omega_0^2}4+\kappa\Big)$ ; instabilité si $A>A_c$, $A_c^2=\dfrac{8\kappa}{\omega_0^2+6\kappa}$. Pour $\kappa=0{,}02\omega_0^2$ : $A_c=0{,}378$ rad $=21{,}7^\circ$.
+    solution:
+      - titre: "Équation de la perturbation"
+        texte: |
+          Soustraire les deux équations exactes donne $\ddot q=-\omega_0^2(\sin\alpha_1-\sin\alpha_2)+\dfrac\kappa\ell\dfrac{\ell_s-d}{\ell_s}\big[u(\cos\alpha_1+\cos\alpha_2)+v(\sin\alpha_1+\sin\alpha_2)\big]$. À l'ordre $1$ en $q$ : $\sin\alpha_1-\sin\alpha_2\simeq q\cos\alpha$ ; $v=O(q\cdot\alpha\,q)$ est d'ordre $2$ en $q$ ; $u-d=\ell(\sin\alpha_2-\sin\alpha_1)\simeq-\ell q\cos\alpha$ ; $\ell_s\simeq u\simeq d$ et $\cos\alpha_1+\cos\alpha_2\simeq2\cos\alpha$. D'où $\ddot q=-\omega_0^2\cos\alpha\,q-2\kappa\cos^2\alpha\,q$, soit
+          $$\ddot q+\cos\alpha(t)\,[\omega_0^2+2\kappa\cos\alpha(t)]\,q=0.$$
+          (Confirmé par un calcul symbolique de $\partial(\ddot\alpha_1-\ddot\alpha_2)/\partial q$ sur les équations exactes.) C'est une équation de Hill : coefficient périodique (période $T_s/2$ puisque $\cos\alpha(t)$ est périodique de période $T_s$ et le coefficient est pair en $\alpha$).
+      - titre: "Réduction à l'équation de Mathieu"
+        texte: |
+          Avec $\alpha=A\cos\omega_st$, $\cos\alpha\simeq1-\dfrac{A^2}2\cos^2\omega_st$ et $\cos^2\alpha\simeq1-A^2\cos^2\omega_st$ : le coefficient de $q$ est $\omega_a^2-\Big(\dfrac{\omega_0^2}2+2\kappa\Big)A^2\cos^2\omega_st=\omega_a^2-\Big(\dfrac{\omega_0^2}4+\kappa\Big)A^2-\Big(\dfrac{\omega_0^2}4+\kappa\Big)A^2\cos2\omega_st$. D'où $\Omega_e^2=\omega_a^2-\Big(\dfrac{\omega_0^2}4+\kappa\Big)A^2$ et $|h|=\Big(\dfrac{\omega_0^2}4+\kappa\Big)A^2$ (modulation à la pulsation $2\omega_s$).
+          La pulsation de la modulation est elle-même décalée par l'amplitude : $\omega_s=\omega_0(1-A^2/16)$, $\omega_s^2\simeq\omega_0^2\Big(1-\dfrac{A^2}8\Big)$. Donc
+          $$\Omega_e^2-\omega_s^2=2\kappa-A^2\Big(\dfrac{\omega_0^2}8+\kappa\Big).$$
+      - titre: "Seuil"
+        texte: |
+          Instabilité : $|\Omega_e^2-\omega_s^2|<|h|/2$. Branche utile : $2\kappa-A^2\Big(\dfrac{\omega_0^2}8+\kappa\Big)<A^2\Big(\dfrac{\omega_0^2}8+\dfrac\kappa2\Big)$, soit $2\kappa<A^2\Big(\dfrac{\omega_0^2}4+\dfrac{3\kappa}2\Big)$, c'est-à-dire
+          $$A^2>A_c^2=\frac{8\kappa}{\omega_0^2+6\kappa}.$$
+          Pour $\kappa=0{,}02\,\omega_0^2$ : $A_c^2=\dfrac{0{,}16}{1{,}12}$, $A_c=0{,}378$ rad $=21{,}7^\circ$ (valeur approchée à petit $\kappa$ : $2\sqrt2\sqrt{\kappa}/\omega_0=0{,}40$). L'intégration numérique de l'équation de Hill avec la matrice de monodromie donne $A_c=0{,}381$ : accord à $1\,\%$.
+      - titre: "Interprétation physique"
+        texte: |
+          Pour $A<A_c$ les multiplicateurs de Floquet sont de module $1$ : le mode en phase est stable. Au-delà, un multiplicateur $|\mu|>1$ : l'écart $q$ croît exponentiellement (numériquement $|\mu|_{\max}=1{,}11$ à $A=1{,}3A_c$) et l'énergie passe du mode en phase au mode en opposition. Mécanisme : le mode en phase module à la pulsation $2\omega_s$ la raideur effective « vue » par $q$ ; quand cette fréquence est voisine de $2\Omega_e$, on a résonance paramétrique. À petite amplitude, $\Omega_e=\omega_a=\sqrt{\omega_0^2+2\kappa}>\omega_s=\omega_0$ : le décalage $2\kappa$ empêche la résonance ; il est compensé quand $A$ augmente car les fréquences \emph{diminuent} avec $A$.
+
+  - id: q4
+    enonce: |
+      \textbf{Question 4.} \emph{Discussion.} Que dit le résultat de la question 3 de la notion de « mode propre » ? Pourquoi la théorie linéaire ne peut-elle pas le prévoir ? Quelle condition sur $A$ et $\kappa$ garantit que la linéarisation est valable ?
+    coup_de_pouce:
+      - titre: "Ce qui est conservé et ce qui change"
+        texte: |
+          Les deux mouvements sont des solutions exactes ; que dire de leur stabilité ? Que se passe-t-il pour le couplage entre modes dans un système linéaire ?
+    correction:
+      - titre: "Éléments de réponse"
+        texte: |
+          En régime linéaire les modes sont indépendants : l'énergie de chacun est constante. À amplitude finie, la symétrie préserve l'existence des deux mouvements, mais pas leur stabilité : le seuil $A_c\simeq2\sqrt{2\kappa}/\omega_0$ montre que la linéarisation est valable pour $A\ll A_c$ \emph{et non seulement $A\ll1$}.
+    solution:
+      - titre: "Modes non linéaires"
+        texte: |
+          Les deux variétés $\alpha_1=\pm\alpha_2$ sont les « modes non linéaires normaux » (Rosenberg) : des solutions exactes périodiques qui se réduisent aux modes propres linéaires à petite amplitude. Elles existent ici par symétrie ; la dépendance de la période en l'amplitude en est la signature non linéaire.
+      - titre: "Pourquoi la théorie linéaire ne voit rien"
+        texte: |
+          Dans $M\ddot X+KX=0$ les modes sont découplés par construction : aucune énergie ne passe de l'un à l'autre. L'instabilité vient du terme cubique (le décalage de fréquence $-A^2/16$ et le terme de couplage de $q$ à $\alpha^2$) : c'est un phénomène d'ordre $A^2$ qui joue sur un temps long $\sim1/(\text{croissance})\sim\omega_0/(A^2\omega_0^2)$.
+      - titre: "Condition de validité"
+        texte: |
+          Pour que le mode en phase soit stable il faut $A<A_c=\sqrt{8\kappa/(\omega_0^2+6\kappa)}$ ; avec un couplage faible ($\kappa\ll\omega_0^2$), $A_c\simeq2\sqrt2\,\omega_c/\omega_0\ll1$ : \emph{plus le couplage est faible, plus la région de validité des petits angles est étroite.} Pour $\kappa=0{,}02\omega_0^2$, $A_c=22^\circ$ : de plus petits angles que ceux où l'erreur sur la période ($A^2/16$) devient gênante ($\sim1\,\%$ à $0{,}4$ rad). C'est une illustration que « petit » n'a de sens que relativement à une échelle physique qu'il faut identifier : ici le rapport $\omega_c/\omega_0$.

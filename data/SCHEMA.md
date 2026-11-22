@@ -206,17 +206,13 @@ lien — voir la discussion complète dans le README).
 
 ## Profils de visibilité (`web/visibility_profiles.yaml`)
 
-Contrôlent ce qui est montré/caché à la génération (PDF, JSON, Markdown
-Quartz, notebooks) — jamais dans les données elles-mêmes :
+Contrôlent ce qui est montré/caché à la génération (JSON, Markdown Quartz,
+notebooks) et quels PDF sont mis en ligne — jamais dans les données elles-mêmes.
+Chaque profil définit : `show_figure`, `show_animation_note`, `show_coup_de_pouce`,
+`show_correction`, `show_solution`, `aller_plus_loin_niveaux`, `pdf_publies`
+(types de PDF hébergés : enonce, aides, corrige, autre, fiche) et `pdf_suffix`.
 
-```yaml
-profiles:
-  avant_seance:
-    show_figure: true
-    show_animation_note: true
-    show_coup_de_pouce: true
-    show_correction: false
-    show_solution: false
-    aller_plus_loin_niveaux: []
-    pdf_suffix: enonce            # -> /pdfs/<id>_enonce.pdf
-```
+Le profil appliqué à chaque cours / TP / TD (et, au besoin, à chaque exercice) se
+règle dans `build/config.yaml` (bloc `publication:`), puis `./web/publish_profile.sh auto`.
+Tableau complet des profils et ordre de résolution : voir `README.md`,
+section « Profils de visibilité ».

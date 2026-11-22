@@ -11,6 +11,7 @@ cours_rattache:
 metadonnees:
   duree_estimee: "55 min"
   difficulte: 5 # Sur une échelle de 1 à 5
+  priorite: 2
   type_exercice: "Approfondissement, problème guidé"
   indispensable: false
 

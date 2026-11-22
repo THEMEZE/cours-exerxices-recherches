@@ -1,0 +1,178 @@
+id: td6_ex1
+intitule: "Choc frontal élastique"
+td: td6
+facultatif: false
+seance: 1
+
+cours_rattache:
+  - collisions.conservation_quantite_de_mouvement
+  - collisions.choc_elastique
+  - collisions.referentiel_centre_de_masse
+
+metadonnees:
+  duree_estimee: "45 min"
+  difficulte: 3
+  type_exercice: "Cours actif / Application fondamentale"
+  indispensable: true
+
+enonce_intro: |
+  Collision frontale {\bf élastique} entre deux billes de masses $m_1$ et $m_2$, assimilées à deux points matériels. Toutes les vitesses sont colinéaires, suivant un axe $(Ox)$ ; on note $v_1,v_2$ les composantes algébriques avant le choc et $v_1',v_2'$ après le choc. Les frottements sont négligés.
+
+prerequis:
+  - titre: "Système pseudo-isolé"
+    texte: |
+      Pendant le choc (durée très brève), les forces extérieures (poids, réaction) sont négligeables devant les forces d'interaction impulsives : $\vec p_{\rm tot}=\text{cte}$.
+  - titre: "Choc élastique"
+    texte: |
+      $E_c$ totale conservée : $\tfrac12m_1v_1^2+\tfrac12m_2v_2^2=\tfrac12m_1v_1'^2+\tfrac12m_2v_2'^2$.
+  - titre: "Identité remarquable"
+    texte: |
+      $a^2-b^2=(a-b)(a+b)$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Établir les vitesses après un choc élastique frontal"
+    texte: |
+      Savoir écrire les deux lois de conservation, les combiner (identité remarquable) pour obtenir $v_1+v_1'=v_2+v_2'$, résoudre le système et discuter les cas limites ($m_1=m_2$, $m_1\gg m_2$, $m_1\ll m_2$).
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Le résultat de référence"
+    texte: |
+      Établir et retenir $v_1'=\dfrac{(m_1-m_2)v_1+2m_2v_2}{m_1+m_2}$, $v_2'=\dfrac{(m_2-m_1)v_2+2m_1v_1}{m_1+m_2}$. La {\bf astuce clé} : diviser l'équation de $E_c$ par celle de $p$ pour obtenir {\bf une équation linéaire} $v_1+v_1'=v_2+v_2'$ (conservation de la vitesse relative au signe près). Les cas limites ont chacun un nom : « pétanque » ($m_1=m_2$), « service au tennis » ($m_1\gg m_2$), « rebond sur un mur » ($m_1\ll m_2$). Dans l'énoncé du poly, il faut lire $m_2/m_1\ll1$ pour l'approximation de la question (f) (la correction signale cette coquille).
+
+point_cours:
+  - titre: "Résultats généraux"
+    texte: |
+      $v_1'=\dfrac{(m_1-m_2)v_1+2m_2v_2}{m_1+m_2}$ ; $v_2'=\dfrac{(m_2-m_1)v_2+2m_1v_1}{m_1+m_2}$ ; $v_2'-v_1'=-(v_2-v_1)$.
+  - titre: "Transfert d'énergie"
+    texte: |
+      Avec $m_2$ au repos, la fraction d'énergie transférée à la bille 2 est $\dfrac{\Delta E_{c,2}}{E_{c,1}}=\dfrac{4m_1m_2}{(m_1+m_2)^2}\le1$, maximale pour $m_1=m_2$.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Résoudre sans l'astuce : calcul quadratique"
+    texte: |
+      Résoudre le système $p+E_c$ directement conduit à une équation du second degré avec la solution triviale $v_1'=v_1$ (pas de choc). L'identité remarquable évite ce piège.
+  - titre: "Signes des vitesses"
+    texte: |
+      Les composantes sont {\bf algébriques} : si les billes se rapprochent l'une de l'autre, $v_1>0$ et $v_2<0$ (axe orienté vers la droite).
+  - titre: "Confondre « $m_1\\gg m_2$ » avec « $m_2/m_1\\gg1$ »"
+    texte: |
+      Poser $\epsilon=m_2/m_1$ pour $m_1\gg m_2$, et $\epsilon=m_1/m_2$ pour $m_1\ll m_2$ : le petit paramètre est toujours le rapport masse légère / masse lourde.
+  - titre: "Bille légère qui rebondit « sans perdre de vitesse »"
+    texte: |
+      Pour $m_1\ll m_2$, $v_1'\approx-v_1$ : la vitesse est inversée en norme conservée, mais l'impulsion transmise au mur vaut $2m_1v_1\ne0$.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Pendule de Newton"
+    texte: |
+      Deux billes lancées contre trois : pourquoi deux billes repartent plutôt qu'une bille à vitesse double ? (Il faut {\bf à la fois} $p$ et $E_c$ conservées.)
+  - titre: "Prédire avant de calculer"
+    texte: |
+      Une balle de ping-pong frappe une boule de bowling immobile : que fait-elle ? Une boule de bowling frappe une balle de ping-pong immobile ?
+
+bilan:
+  - titre: "Résultats"
+    texte: |
+      $m_2$ au repos : $v_1'=\dfrac{m_1-m_2}{m_1+m_2}v_1$, $v_2'=\dfrac{2m_1}{m_1+m_2}v_1$. $m_1=m_2$ : $v_1'=0$, $v_2'=v_1$. $m_1\gg m_2$ : $v_1'\approx v_1$, $v_2'\approx2v_1$. $m_1\ll m_2$ : $v_1'\approx-v_1$, $v_2'\approx0$.
+
+aller_plus_loin:
+  - niveau: cpge
+    titre: "Dans le référentiel du centre de masse"
+    texte: |
+      Calculer $v_G=\dfrac{m_1v_1+m_2v_2}{m_1+m_2}$, les vitesses $v_i^*=v_i-v_G$ avant le choc ; montrer qu'après le choc $v_i^{*\prime}=-v_i^*$ (inversion). Retrouver $v_1'=2v_G-v_1$ et $v_2'=2v_G-v_2$ : méthode la plus rapide.
+  - niveau: licence
+    titre: "Chocs successifs et transfert maximal"
+    texte: |
+      Montrer que la fraction de l'énergie transmise vaut $\dfrac{4m_1m_2}{(m_1+m_2)^2}$ et qu'elle est maximale pour $m_1=m_2$. Application : pourquoi un neutron est-il le mieux ralenti par un noyau d'hydrogène (exercice 7) ?
+  - niveau: master
+    titre: "Choc élastique non frontal"
+    texte: |
+      Pour des billes de masses quelconques avec la bille 2 au repos, montrer que l'angle de diffusion maximal de la bille 1 vaut $\arcsin(m_2/m_1)$ si $m_2<m_1$ ; pas de limite si $m_1\le m_2$.
+
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi une boule de pétanque en plein dans la cible reste-t-elle sur place ?"
+    duree_introduction: "3 min"
+    question_d_accroche: |
+      Au billard ou à la pétanque, une boule qui en frappe une autre {\bf de plein fouet}, de même masse, s'arrête net. Que se passe-t-il si la boule frappée est beaucoup plus lourde ? beaucoup plus légère ?
+    texte: |
+      {\bf Idée clé : deux lois de conservation ($p$ et $E_c$) pour deux inconnues.} Le calcul donne $v_1'=\dfrac{m_1-m_2}{m_1+m_2}v_1$ : nul si $m_1=m_2$, négatif (rebond) si $m_1<m_2$.
+
+outils_mathematiques:
+  - titre: "Identité remarquable et simplification"
+    texte: |
+      $m_1(v_1-v_1')(v_1+v_1')=m_2(v_2'-v_2)(v_2'+v_2)$ divisé par $m_1(v_1-v_1')=m_2(v_2'-v_2)$.
+  - titre: "Développement limité"
+    texte: |
+      Pour $\epsilon\ll1$ : $\dfrac1{1+\epsilon}\approx1-\epsilon$ ; $\dfrac{1-\epsilon}{1+\epsilon}\approx1-2\epsilon$.
+
+liens_autres_disciplines:
+  - discipline: "Sport"
+    texte: |
+      Tennis (raquette lourde, balle légère : $v_{\rm balle}\approx2v_{\rm raquette}$), golf, pétanque (échange de vitesse), billard.
+  - discipline: "Physique des gaz"
+    texte: |
+      Collisions élastiques entre molécules : équilibre thermique, distribution de Maxwell, libre parcours moyen.
+
+questions:
+  - id: q1
+    enonce: |
+      \begin{itemize}
+        \item[(a)] Faire un schéma représentant les vitesses avant et après le choc.
+        \item[(b)] Citer les grandeurs conservées lors de ce choc et écrire les relations qui en découlent.
+        \item[(c)] En déduire les composantes algébriques $v_1'$ et $v_2'$ en fonction de $v_1$, $v_2$, $m_1$, $m_2$.
+      \end{itemize}
+    coup_de_pouce: |
+      Deux lois de conservation : $p$ et $E_c$. Écrire $m_1(v_1-v_1')=m_2(v_2'-v_2)$ et $m_1(v_1^2-v_1'^2)=m_2(v_2'^2-v_2^2)$, puis diviser membre à membre.
+    correction: |
+      $m_1v_1+m_2v_2=m_1v_1'+m_2v_2'$ ; $\tfrac12m_1v_1^2+\tfrac12m_2v_2^2=\tfrac12m_1v_1'^2+\tfrac12m_2v_2'^2$ ; $v_1+v_1'=v_2+v_2'$ ; $v_1'=\dfrac{(m_1-m_2)v_1+2m_2v_2}{m_1+m_2}$, $v_2'=\dfrac{(m_2-m_1)v_2+2m_1v_1}{m_1+m_2}$.
+    solution:
+      - titre: "(a) Schéma"
+        texte: |
+          Avant : $\vec v_1=v_1\,\vec u_x$ et $\vec v_2=v_2\,\vec u_x$ avec $v_1>v_2$ (la bille 1, derrière, rattrape la bille 2, ou bien les billes vont à la rencontre l'une de l'autre avec $v_1>0>v_2$). Après : $\vec v_1'=v_1'\,\vec u_x$, $\vec v_2'=v_2'\,\vec u_x$ avec $v_2'>v_1'$ (elles s'éloignent).
+      - titre: "(b) Grandeurs conservées"
+        texte: |
+          Le système $\{1,2\}$ est pseudo-isolé pendant le choc : {\bf quantité de mouvement conservée}. Le choc est élastique : {\bf énergie cinétique conservée} (les forces d'interaction conservatives ne dissipent pas d'énergie).
+          $$m_1v_1+m_2v_2=m_1v_1'+m_2v_2'\quad(\text{i}),\qquad\tfrac12m_1v_1^2+\tfrac12m_2v_2^2=\tfrac12m_1v_1'^2+\tfrac12m_2v_2'^2\quad(\text{ii}).$$
+      - titre: "(c) Résolution"
+        texte: |
+          (i) $\Leftrightarrow m_1(v_1-v_1')=m_2(v_2'-v_2)$ (i'). (ii) $\Leftrightarrow m_1(v_1^2-v_1'^2)=m_2(v_2'^2-v_2^2)$, soit avec $a^2-b^2=(a-b)(a+b)$ :
+          $$m_1(v_1-v_1')(v_1+v_1')=m_2(v_2'-v_2)(v_2'+v_2).$$
+          On divise par (i') (cas où le choc a lieu, $v_1\ne v_1'$) :
+          $$v_1+v_1'=v_2+v_2'\quad(\text{ii}')\ :\ \text{la vitesse relative s'inverse}.$$
+          Système linéaire (i') et (ii') : de (ii') $v_1'=v_2+v_2'-v_1$, qu'on reporte dans (i') : $m_1(2v_1-v_2-v_2')=m_2(v_2'-v_2)$, d'où
+          $$\boxed{v_2'=\frac{(m_2-m_1)v_2+2m_1v_1}{m_1+m_2}},\qquad\boxed{v_1'=\frac{(m_1-m_2)v_1+2m_2v_2}{m_1+m_2}}.$$
+          Vérification : $m_1=m_2$ donne un échange $v_1'=v_2$, $v_2'=v_1$ $\surd$ ; $v_2=0$, $m_2\to\infty$ donne $v_1'=-v_1$ $\surd$.
+
+  - id: q2
+    enonce: |
+      On suppose désormais que la masse $m_2$ est {\bf immobile} avant le choc ($v_2=0$).
+      \begin{itemize}
+        \item[(d)] Donner $v_1'$ et $v_2'$.
+        \item[(e)] Que se passe-t-il si $m_1=m_2$ ?
+        \item[(f)] Que deviennent $v_1'$ et $v_2'$ si $m_1\gg m_2$ ? Interpréter. On pourra poser $\epsilon=m_2/m_1\ll1$ et utiliser $(1+\epsilon)^n\approx1+n\epsilon$.
+        \item[(g)] Inversement, si $m_1\ll m_2$ ? Interpréter.
+        \item[(h)] Calculer la fraction de l'énergie cinétique transférée à la bille 2. Pour quelle valeur du rapport $m_1/m_2$ est-elle maximale ? Application à $m_1/m_2=10$ et $m_1/m_2=\tfrac1{10}$.
+      \end{itemize}
+    coup_de_pouce: |
+      (d) Poser $v_2=0$ dans (c). (f) Mettre $m_1$ en facteur au numérateur et au dénominateur. (h) $\dfrac12m_2v_2'^2/\big(\dfrac12m_1v_1^2\big)$.
+    correction: |
+      (d) $v_1'=\dfrac{m_1-m_2}{m_1+m_2}v_1$, $v_2'=\dfrac{2m_1}{m_1+m_2}v_1$ ; (e) $v_1'=0$, $v_2'=v_1$ ; (f) $v_1'\approx v_1$, $v_2'\approx2v_1$ ; (g) $v_1'\approx-v_1$, $v_2'\approx0$ ; (h) $\dfrac{4m_1m_2}{(m_1+m_2)^2}$, maximale ($=1$) pour $m_1=m_2$ ; $0{,}33$ pour $m_1/m_2=10$ ou $\tfrac1{10}$.
+    solution:
+      - titre: "(d) Cible au repos"
+        texte: |
+          $$\boxed{v_1'=\frac{m_1-m_2}{m_1+m_2}\,v_1},\qquad\boxed{v_2'=\frac{2m_1}{m_1+m_2}\,v_1}.$$
+          Vérification de $p$ : $m_1v_1'+m_2v_2'=\dfrac{m_1(m_1-m_2)+2m_1m_2}{m_1+m_2}v_1=m_1v_1$ $\surd$.
+      - titre: "(e) Masses égales"
+        texte: |
+          $m_1=m_2$ : $\boxed{v_1'=0,\ v_2'=v_1}$. Il y a {\bf transfert total de la vitesse} (et de l'énergie) : c'est le « carreau » à la pétanque et le pendule de Newton.
+      - titre: "(f) Bille incidente très lourde"
+        texte: |
+          Avec $\epsilon=m_2/m_1\ll1$ :
+          $$v_1'=\frac{1-\epsilon}{1+\epsilon}v_1\approx(1-\epsilon)(1-\epsilon)v_1\approx(1-2\epsilon)v_1\approx v_1,\qquad v_2'=\frac2{1+\epsilon}v_1\approx2(1-\epsilon)v_1\approx2v_1.$$
+          La bille lourde est {\bf à peine ralentie} ; la bille légère est éjectée à {\bf vitesse double} : c'est le service au tennis (raquette lourde, balle légère). Interprétation en vitesse relative : la vitesse relative $v_1-0$ est inversée, $v_2'-v_1'=v_1$, donc la bille légère part à $v_1+v_1=2v_1$.
+      - titre: "(g) Bille incidente très légère"
+        texte: |
+          Avec $\epsilon=m_1/m_2\ll1$ : $v_1'=\dfrac{\epsilon-1}{\epsilon+1}v_1\approx-(1-2\epsilon)v_1\approx\boxed{-v_1}$ et $v_2'=\dfrac{2\epsilon}{1+\epsilon}v_1\approx\boxed{2\epsilon v_1\to0}$. La bille {\bf rebondit} avec la vitesse opposée ; la cible lourde reste quasi immobile (balle sur un mur ; la quantité de mouvement transmise $2m_1v_1$ est petite devant $m_2$).
+      - titre: "(h) Fraction d'énergie transférée"
+        texte: |
+          $$\frac{\Delta E_{c,2}}{E_{c,1}}=\frac{\tfrac12m_2v_2'^2}{\tfrac12m_1v_1^2}=\frac{m_2}{m_1}\cdot\frac{4m_1^2}{(m_1+m_2)^2}=\boxed{\frac{4m_1m_2}{(m_1+m_2)^2}}.$$
+          Avec $r=m_1/m_2$ : $\dfrac{4r}{(1+r)^2}\le1$ (car $(1-r)^2\ge0$), égal à $1$ pour $r=1$ : {\bf transfert maximal à masses égales}. Pour $r=10$ ou $\tfrac1{10}$ : $\dfrac{40}{121}=0{,}33$ (symétrique $r\leftrightarrow1/r$). Conclusion : un modérateur efficace doit avoir une masse proche de celle de la particule à ralentir (exercice 7).

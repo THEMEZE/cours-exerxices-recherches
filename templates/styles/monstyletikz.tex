@@ -501,3 +501,55 @@
 
     \end{center}%
 }
+
+% Une petite horloge pour représenter la durée
+\newcommand{\petitehorloge}{%
+  \tikz[baseline=-0.55ex, x=1ex, y=1ex]{
+    \draw[line width=0.35pt] (0,0) circle (0.8);
+    \draw[line width=0.35pt] (0,0) -- (0,0.48);
+    \draw[line width=0.35pt] (0,0) -- (0.38,0);
+  }%
+}
+
+% ==============================================================================
+% PICTOGRAMMES DU PLAN DE SÉANCE
+% ==============================================================================
+
+% Horloge
+% \newcommand{\logoHorloge}{%
+%   \tikz[baseline=-0.6ex, x=1ex, y=1ex]{
+%     \draw[line width=0.35pt] (0,0) circle (0.75);
+%     \draw[line width=0.35pt] (0,0) -- (0,0.43);
+%     \draw[line width=0.35pt] (0,0) -- (0.34,0);
+%   }%
+% }
+
+% Essentiel
+\newcommand{\logoEssentiel}{%
+  \tikz[baseline=-0.6ex, x=1ex, y=1ex]{
+    \draw[line width=0.35pt] (0,0) circle (0.75);
+    \fill (0,0) circle (0.22);
+  }%
+}
+
+% Facultatif
+\newcommand{\logoFacultatif}{%
+  \tikz[baseline=-0.6ex, x=1ex, y=1ex]{
+    \draw[line width=0.35pt] (0,0) circle (0.75);
+  }%
+}
+
+% Priorité
+% \newcommand{\logoPriorite}{%
+%   \tikz[baseline=-0.6ex, x=1ex, y=1ex]{
+%     \fill (0,0) circle (0.55);
+%   }%
+% }
+
+\newcommand{\logoPriorite}{%
+  \tikz[baseline=-0.6ex, x=1ex, y=1ex]{
+    \draw[line width=0.35pt]
+      (0,0) -- (0,0.9)
+      (0,0.85) -- (0.65,0.7) -- (0,0.55) -- cycle;
+  }%
+}

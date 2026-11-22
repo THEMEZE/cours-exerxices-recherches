@@ -11,6 +11,7 @@ cours_rattache:
 metadonnees:
   duree_estimee: "20 min"
   difficulte: 2
+  priorite: 2
   type_exercice: "Application numérique"
   indispensable: true
 

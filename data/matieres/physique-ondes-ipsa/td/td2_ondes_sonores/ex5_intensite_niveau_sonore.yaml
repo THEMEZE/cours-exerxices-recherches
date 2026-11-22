@@ -1,0 +1,285 @@
+id: td2_ex5
+intitule: "Énergie, intensité acoustique et niveau sonore : de l'oreille humaine à l'onde stationnaire"
+td: td2
+facultatif: true
+seance: 3
+
+cours_rattache:
+  - chap2.energie_acoustique
+  - chap2.intensite_decibel
+  - chap2.impedance_acoustique
+  - chap2.ondes_stationnaires_acoustiques
+
+metadonnees:
+  duree_estimee: "50 min"
+  difficulte: 4
+  priorite: 2
+  type_exercice: "Approfondissement"
+  indispensable: false
+
+enonce_intro: |
+  L'air est modélisé comme un fluide parfait, de masse volumique au repos
+  $\rho_0=1{,}2~\text{kg}\cdot\text{m}^{-3}$, de célérité $c=340~\text{m}\cdot\text{s}^{-1}$
+  (impédance $Z=\rho_0c=408~\text{kg}\cdot\text{m}^{-2}\cdot\text{s}^{-1}$) et de pression moyenne
+  $P_0=10^5$ Pa. On note $\chi=1/(\rho_0c^2)$ son coefficient de compressibilité isentropique.
+
+  On rappelle les équations de l'acoustique linéaire à une dimension :
+  $$\rho_0\frac{\partial v}{\partial t}=-\frac{\partial p}{\partial x},\qquad \frac{\partial\rho'}{\partial t}+\rho_0\frac{\partial v}{\partial x}=0,\qquad \rho'=\rho_0\chi\,p.$$
+
+  L'\emph{intensité acoustique} est la moyenne temporelle de la puissance transportée par unité de surface, $I=\langle p\,v\rangle$. Le \emph{niveau sonore} est $L=10\log_{10}(I/I_0)$ avec $I_0=10^{-12}~\text{W}\cdot\text{m}^{-2}$ (seuil d'audition à 1 kHz), exprimé en décibels (dB).
+
+# figure:
+#   - ref: td2_ex5_echelle_db
+#     legende: |
+#       Suggestion : échelle verticale logarithmique de $0$ à $140$ dB, avec en regard l'intensité $I$ (W/m$^2$), la pression efficace $p_{\mathrm{eff}}$ (Pa) et des situations familières (seuil d'audition, bibliothèque, conversation, rue, concert, seuil de douleur, réacteur d'avion).
+#     width: 0.5
+#     label:
+#   - ref: td2_ex5_energie_stationnaire
+#     legende: |
+#       Suggestion : pour le mode $n=1$ du tube ouvert-ouvert, tracer en fonction de $x$ les densités d'énergie cinétique et potentielle moyennes ($\cos^2$ et $\sin^2$) et leur somme constante, puis, à $t$ fixé, la même construction pour $\varphi=0$ et $\varphi=\pi/2$.
+#     width: 0.7
+#     label:
+
+prerequis:
+  - titre: "Équations de l'acoustique linéaire et impédance"
+    texte: |
+      Connaître l'équation d'Euler linéarisée, l'équation de conservation de la masse linéarisée et l'équation d'état linéarisée $\rho'=\rho_0\chi p$ (cf. exercice 1), ainsi que la relation $\tilde p=\pm Z\tilde v$ pour une onde plane progressive (cf. exercice 4).
+  - titre: "Produit de deux grandeurs réelles et notation complexe"
+    texte: |
+      Une grandeur énergétique est quadratique : on ne peut \textbf{pas} la calculer à partir des représentations complexes $\tilde p$, $\tilde v$ en les multipliant directement. Il faut revenir aux parties réelles, ou utiliser $\langle ab\rangle=\tfrac12\operatorname{Re}(\tilde a\,\tilde b^{*})$.
+  - titre: "Résultats de l'exercice 2"
+    texte: |
+      La question 6 réutilise l'onde stationnaire du tube ouvert-ouvert : $\Psi=2A_I\cos(k(L-x))\cos(\omega t-kL)$ et $p=-2A_I\rho_0c\,\omega\sin(k(L-x))\cos(\omega t-kL)$, avec $kL=n\pi$.
+
+objectifs_pedagogiques_etudiants:
+  - titre: "Manipuler une grandeur énergétique et une échelle logarithmique"
+    texte: |
+      Établir un bilan d'énergie local à partir des équations linéarisées, relier l'intensité à la pression efficace et à l'impédance, passer de l'intensité au niveau en dB et inversement, et additionner correctement des niveaux sonores selon que les sources sont cohérentes ou non.
+
+      Savoir juger, à partir d'ordres de grandeur, de la validité de l'approximation acoustique, y compris pour des sons extrêmes (seuil de douleur).
+
+objectifs_pedagogiques_enseignants:
+  - titre: "Donner un contenu physique au décibel et à l'énergie d'une onde stationnaire"
+    texte: |
+      L'exercice fait passer les étudiants de la formule au chiffre : les amplitudes de déplacement au seuil d'audition (un dixième de taille d'atome) frappent systématiquement les esprits et justifient l'approximation linéaire.
+
+      La dernière question est la plus riche : elle montre qu'une onde stationnaire \emph{ne transporte aucune énergie en moyenne} mais la \emph{stocke}, en la faisant osciller entre forme cinétique et forme potentielle, ce qui prépare la notion de facteur de qualité.
+
+point_cours:
+  - titre: "Énergie et intensité d'une onde acoustique"
+    texte: |
+      Les équations linéarisées conduisent à une loi de conservation locale de l'énergie,
+      $$\frac{\partial e}{\partial t}+\frac{\partial\Pi}{\partial x}=0,\qquad e=\frac12\rho_0v^2+\frac12\chi p^2,\qquad \Pi=p\,v,$$
+      où $e$ est la densité volumique d'énergie (cinétique + potentielle élastique) et $\Pi$ le flux d'énergie (analogue du vecteur de Poynting). Pour une onde plane progressive, $I=\langle p v\rangle=p_{\mathrm{eff}}^2/Z$ et $I=c\,\langle e\rangle$ : l'énergie voyage à la célérité $c$.
+
+      \textbf{Niveau sonore} : $L=10\log_{10}(I/I_0)$. À $I_0=10^{-12}$ W/m$^2$ correspond $p_{\mathrm{ref}}=2\times10^{-5}$ Pa. Pour des sources \emph{incohérentes}, les intensités s'ajoutent ; pour des sources \emph{cohérentes}, ce sont les amplitudes qui s'ajoutent.
+
+remarques_pedagogiques_ecueils_classiques:
+  - titre: "Utiliser les amplitudes complexes dans un produit"
+    texte: |
+      Calculer $I=\tfrac12 p_0v_0$ en oubliant le facteur $\tfrac12$ de la moyenne temporelle, ou écrire $I=|\tilde p||\tilde v|$ pour une onde stationnaire alors que $p$ et $v$ sont en quadrature et que $\langle pv\rangle=0$. Faire écrire systématiquement les grandeurs réelles avant de les multiplier.
+  - titre: "Additionner des décibels"
+    texte: |
+      $60~\text{dB}+60~\text{dB}\neq120~\text{dB}$. Les étudiants additionnent les niveaux au lieu des intensités ; insister sur $L_1+L_2=10\log_{10}(10^{L_1/10}+10^{L_2/10})$ et sur la différence entre cohérent et incohérent.
+  - titre: "Croire que le décibel est une unité absolue"
+    texte: |
+      Le décibel est un rapport : 0 dB ne signifie pas « absence de son », mais $I=I_0$. Un niveau négatif en dB est parfaitement possible.
+
+remarques_pedagogiques_conseils_animation:
+  - titre: "Mesure au sonomètre (application de smartphone)"
+    texte: |
+      Faire mesurer le niveau de la salle, d'une voix à 1 m, puis à 2 m, et vérifier la décroissance de $6$ dB par doublement de distance. Le résultat numérique de la question 5 devient immédiatement concret.
+
+bilan:
+  - titre: "Ce qu'il faut retenir"
+    texte: |
+      $$I=\langle pv\rangle=\frac{p_{\mathrm{eff}}^2}{Z}=c\langle e\rangle,\qquad L=10\log_{10}\frac{I}{I_0}.$$
+      Une onde progressive \emph{transporte} l'énergie ; une onde stationnaire la \emph{stocke} ($\langle\Pi\rangle=0$) : à la résonance, l'énergie totale est constante et oscille entre cinétique et potentielle. Le doublement de la distance à une source ponctuelle coûte $6$ dB ; le doublement de sources incohérentes coûte $+3$ dB seulement.
+
+aller_plus_loin:
+  - niveau: licence
+    titre: "Pondération A et sonie"
+    texte: |
+      L'oreille n'est pas également sensible à toutes les fréquences (maximum vers 3 à 4 kHz, cf. exercice 3). Le niveau en dB(A) pondère le spectre par la courbe de sensibilité de l'oreille. On pourra comparer deux sons de même $L$ en dB mais de fréquences différentes et discuter la différence entre grandeur physique (intensité) et perception (sonie).
+  - niveau: master
+    titre: "Contrôle actif du bruit"
+    texte: |
+      Un casque antibruit émet une onde de même amplitude et en opposition de phase : $I\to0$ par interférence destructive. On pourra montrer que la zone de silence est limitée à environ $\lambda/10$ autour du microphone d'erreur, ce qui explique que le contrôle actif ne fonctionne bien qu'aux basses fréquences.
+
+accroche_point_cours_essentiel:
+  - titre: "Pourquoi deux haut-parleurs ne sonnent-ils pas deux fois plus fort ?"
+    duree_introduction: "5 min, avant de lire l'énoncé"
+    question_d_accroche: |
+      Un haut-parleur émet à $70$ dB. On en ajoute un second, identique. Quel est le nouveau niveau ? Et si les deux émettent {\bf exactement} le même signal en phase ? Et en opposition de phase ?
+    texte: |
+      {\bf Idée clé : l'énergie est quadratique en l'amplitude, et le décibel est logarithmique.} Deux sources incohérentes : $I\to2I$, soit $+3$ dB. Deux sources cohérentes en phase : $p\to2p$, $I\to4I$, soit $+6$ dB. En opposition de phase : $I\to0$.
+
+outils_mathematiques:
+  - titre: "Moyenne temporelle de $\\cos^2$ et de $\\sin\\cdot\\cos$"
+    texte: |
+      $\langle\cos^2\omega t\rangle=\langle\sin^2\omega t\rangle=\tfrac12$ et $\langle\sin\omega t\cos\omega t\rangle=\tfrac12\langle\sin2\omega t\rangle=0$.
+  - titre: "Logarithme décimal et décibels"
+    texte: |
+      $10\log_{10}2\approx3{,}0$ ; $20\log_{10}2\approx6{,}0$ ; $10\log_{10}10=10$. Multiplier $I$ par $10^n$ revient à ajouter $10n$ dB.
+  - titre: "Produit scalaire de deux fonctions en quadrature"
+    texte: |
+      Si $a=a_0\cos\omega t$ et $b=b_0\sin\omega t$, alors $\langle ab\rangle=0$ : pas de transport net d'énergie. Si $b=b_0\cos\omega t$ (en phase), $\langle ab\rangle=\tfrac12a_0b_0$.
+  - titre: "Intégrale de $\\cos^2$ sur un nombre entier de demi-périodes"
+    texte: |
+      $\int_0^L\cos^2\big(k(L-x)\big)\,\mathrm dx=L/2$ lorsque $kL=n\pi$ : c'est la condition de résonance du tube qui rend l'énergie totale indépendante du temps.
+
+liens_autres_disciplines:
+  - discipline: "Électromagnétisme"
+    texte: |
+      $e=\tfrac12\epsilon_0E^2+\tfrac1{2\mu_0}B^2$ et $\vec\Pi=\vec E\wedge\vec B/\mu_0$ jouent le rôle de $e$ et de $pv$ ; pour une onde plane, $\langle\Pi\rangle=c\langle e\rangle$ dans les deux cas.
+  - discipline: "Physiologie de l'audition"
+    texte: |
+      L'oreille couvre un rapport $10^{12}$ en intensité. La loi de Weber-Fechner (la sensation est proportionnelle au logarithme de l'excitation) justifie l'échelle logarithmique.
+  - discipline: "Santé et sécurité au travail"
+    texte: |
+      Les réglementations sur l'exposition au bruit sont exprimées en dB(A) sur une durée de référence de 8 h, avec un seuil d'action autour de 80 à 85 dB(A). Chaque $+3$ dB double l'énergie reçue.
+  - discipline: "Traitement du signal et télécommunications"
+    texte: |
+      Le décibel est l'unité universelle des rapports de puissance ($10\log$) et d'amplitude ($20\log$) : rapport signal sur bruit, gain d'un amplificateur, atténuation d'un câble.
+
+questions:
+  - id: q1
+    enonce: |
+      À partir des équations linéarisées de l'énoncé, établir la loi de conservation
+      $\dfrac{\partial e}{\partial t}+\dfrac{\partial \Pi}{\partial x}=0$ avec
+      $e=\tfrac12\rho_0v^2+\tfrac12\chi p^2$ et $\Pi=pv$. Interpréter chaque terme.
+    coup_de_pouce: |
+      Multipliez l'équation d'Euler par $v$ et la conservation de la masse (après élimination de $\rho'$) par $p$, puis additionnez.
+    solution:
+      - titre: "Deux équations multipliées"
+        texte: |
+          En éliminant $\rho'$ grâce à $\rho'=\rho_0\chi p$, la conservation de la masse devient $\chi\,\partial_tp=-\partial_xv$. On multiplie l'équation d'Euler par $v$ et cette dernière par $p$ :
+          $$\frac{\partial}{\partial t}\left(\frac12\rho_0v^2\right)=-v\frac{\partial p}{\partial x},\qquad \frac{\partial}{\partial t}\left(\frac12\chi p^2\right)=-p\frac{\partial v}{\partial x}.$$
+      - titre: "Somme et interprétation"
+        texte: |
+          En additionnant, on reconnaît la dérivée d'un produit :
+          $$\frac{\partial}{\partial t}\left(\frac12\rho_0v^2+\frac12\chi p^2\right)=-\frac{\partial(pv)}{\partial x}.$$
+          Le premier terme est l'énergie cinétique volumique du fluide, le second l'énergie potentielle élastique stockée dans la compression ($\chi p^2/2$ est l'analogue de $Kx^2/2$ pour un ressort). Le terme $pv$ est la puissance surfacique transmise par la pression du fluide en amont à celui en aval : c'est le flux d'énergie. L'énergie ne peut que se déplacer ou changer de forme, jamais disparaître.
+
+  - id: q2
+    enonce: |
+      Pour une onde plane progressive harmonique $p=p_0\cos(\omega t-kx)$ se propageant vers $+x$, montrer que les
+      énergies cinétique et potentielle volumiques sont égales à chaque instant, puis que
+      $\langle I\rangle=\dfrac{p_0^2}{2Z}=\dfrac{p_{\mathrm{eff}}^2}{Z}=c\,\langle e\rangle$.
+    coup_de_pouce: |
+      Utilisez $v=p/Z$ et $\chi=1/(\rho_0c^2)$ ; remarquez que $\rho_0/Z^2=\chi$.
+    correction: "$e_c=e_p=\\chi p^2/2$ ; $e=\\chi p^2$ ; $\\langle I\\rangle=p_0^2/(2Z)=c\\langle e\\rangle$."
+    solution:
+      - titre: "Équipartition de l'énergie"
+        texte: |
+          Pour une onde progressive vers $+x$, $v=p/Z$ donc $e_c=\tfrac12\rho_0v^2=\tfrac12\dfrac{\rho_0}{Z^2}p^2=\tfrac12\dfrac{1}{\rho_0c^2}p^2=\tfrac12\chi p^2=e_p$. Les deux formes d'énergie sont égales en tout point et à tout instant, et $e=\chi p^2=p_0^2\cos^2(\omega t-kx)/(\rho_0c^2)$.
+      - titre: "Intensité"
+        texte: |
+          $$I=p\,v=\frac{p^2}{Z}\quad\Longrightarrow\quad\langle I\rangle=\frac{p_0^2}{Z}\langle\cos^2\rangle=\frac{p_0^2}{2Z}=\frac{p_{\mathrm{eff}}^2}{Z},\qquad p_{\mathrm{eff}}=\frac{p_0}{\sqrt2}.$$
+          Par ailleurs $\langle e\rangle=\dfrac{p_0^2}{2\rho_0c^2}$, donc $\langle I\rangle=\dfrac{p_0^2}{2\rho_0c}=c\langle e\rangle$ : l'énergie est transportée à la célérité $c$, comme toute grandeur portée par une onde non dispersive.
+
+  - id: q3
+    enonce: |
+      Vérifier que la pression de référence $p_{\mathrm{ref}}=2\times10^{-5}$ Pa (valeur efficace) correspond bien à
+      $I_0$. Pour un son pur de $1$ kHz au seuil d'audition ($0$ dB), calculer les amplitudes
+      de pression $p_0$, de vitesse $v_0$ et de déplacement $\xi_0$ des particules de fluide.
+      Comparer $\xi_0$ à la taille d'un atome ($\sim10^{-10}$ m).
+    coup_de_pouce: |
+      $\xi_0=v_0/\omega$ pour une grandeur harmonique. Attention : $p_{\mathrm{ref}}$ est une valeur efficace.
+    correction: "$I=p_{\\mathrm{ref}}^2/Z\\approx9{,}8\\times10^{-13}$ W/m$^2\\approx I_0$ ; $p_0\\approx2{,}8\\times10^{-5}$ Pa ; $v_0\\approx7\\times10^{-8}$ m/s ; $\\xi_0\\approx1\\times10^{-11}$ m."
+    solution:
+      - titre: "Cohérence des deux seuils"
+        texte: |
+          $$\frac{p_{\mathrm{ref}}^2}{Z}=\frac{(2\times10^{-5})^2}{408}=\frac{4\times10^{-10}}{408}\approx9{,}8\times10^{-13}~\text{W}\cdot\text{m}^{-2}\approx I_0.$$
+      - titre: "Amplitudes au seuil d'audition"
+        texte: |
+          $$p_0=\sqrt2\,p_{\mathrm{ref}}\approx2{,}8\times10^{-5}~\text{Pa},\qquad v_0=\frac{p_0}{Z}\approx\frac{2{,}8\times10^{-5}}{408}\approx6{,}9\times10^{-8}~\text{m}\cdot\text{s}^{-1},$$
+          $$\xi_0=\frac{v_0}{\omega}=\frac{6{,}9\times10^{-8}}{2\pi\times10^3}\approx1{,}1\times10^{-11}~\text{m}.$$
+          Le déplacement des particules d'air au seuil d'audition est environ dix fois plus petit que la taille d'un atome : ce que l'oreille détecte est un mouvement collectif de très nombreuses molécules, bien inférieur au mouvement d'agitation thermique individuel. L'oreille humaine est un détecteur d'une sensibilité extraordinaire.
+
+  - id: q4
+    enonce: |
+      Même question pour le seuil de douleur, $120$ dB. Justifier que l'approximation acoustique
+      (linéarisation) reste valable même à ce niveau.
+    coup_de_pouce: |
+      Calculez les rapports adimensionnés $p_0/P_0$ et $v_0/c$ du point cours d'ouverture de l'exercice 1.
+    correction: "$I=1$ W/m$^2$ ; $p_0\\approx29$ Pa ; $v_0\\approx7\\times10^{-2}$ m/s ; $\\xi_0\\approx11~\\mu$m ; $p_0/P_0\\approx3\\times10^{-4}\\ll1$."
+    solution:
+      - titre: "Amplitudes à 120 dB"
+        texte: |
+          $120$ dB correspond à $I=I_0\times10^{12}=1~\text{W}\cdot\text{m}^{-2}$. D'où $p_{\mathrm{eff}}=\sqrt{IZ}=\sqrt{408}\approx20~\text{Pa}$, puis
+          $$p_0=\sqrt2\,p_{\mathrm{eff}}\approx29~\text{Pa},\qquad v_0=\frac{p_0}{Z}\approx7{,}0\times10^{-2}~\text{m}\cdot\text{s}^{-1},\qquad\xi_0=\frac{v_0}{\omega}\approx1{,}1\times10^{-5}~\text{m}.$$
+          Un rapport de $10^{12}$ en intensité correspond à un rapport de $10^6$ en pression et en déplacement : c'est ce qui justifie l'échelle logarithmique.
+      - titre: "Validité de la linéarisation"
+        texte: |
+          $$\frac{p_0}{P_0}\approx\frac{29}{10^5}\approx3\times10^{-4},\qquad\frac{v_0}{c}\approx\frac{7\times10^{-2}}{340}\approx2\times10^{-4}.$$
+          Ces rapports sont très petits devant $1$ : même au seuil de douleur, les termes d'ordre 2 (convectif, $\rho'v$, etc.) sont négligeables devant les termes d'ordre 1. L'acoustique linéaire est donc excellente pour tous les sons de la vie courante (les effets non linéaires n'apparaissent qu'au-delà de $\sim150$ dB, ou à très longue distance).
+
+  - id: q5
+    enonce: |
+      Une personne qui parle normalement est entendue à $60$ dB à $1$ m. On la modélise comme une source
+      ponctuelle isotrope rayonnant une puissance acoustique $\mathcal P$ en champ libre
+      (onde sphérique : $I(r)=\mathcal P/(4\pi r^2)$). Calculer $\mathcal P$. À quelle distance
+      le niveau est-il de $40$ dB ? Combien de personnes faut-il pour émettre $1$ W acoustique ?
+    coup_de_pouce: |
+      La puissance se conserve à travers toute sphère centrée sur la source ; passez par $I(1~\text{m})$ puis exprimez $L(r)-L(r_0)$.
+    correction: "$\\mathcal P\\approx1{,}3\\times10^{-5}$ W ; $r=10$ m ; environ $8\\times10^4$ personnes pour $1$ W."
+    solution:
+      - titre: "Puissance rayonnée"
+        texte: |
+          $60$ dB $\Rightarrow I(1~\text{m})=10^{-12}\times10^6=10^{-6}~\text{W}\cdot\text{m}^{-2}$, donc
+          $$\mathcal P=4\pi r^2I=4\pi\times10^{-6}\approx1{,}3\times10^{-5}~\text{W}=13~\mu\text{W}.$$
+          La parole est un phénomène d'une puissance dérisoire : il faudrait environ $8\times10^4$ personnes parlant en même temps pour produire $1$ W acoustique.
+      - titre: "Décroissance avec la distance"
+        texte: |
+          $$L(r)-L(r_0)=10\log_{10}\frac{I(r)}{I(r_0)}=10\log_{10}\frac{r_0^2}{r^2}=-20\log_{10}\frac r{r_0}.$$
+          Chaque doublement de distance coûte donc $20\log_{10}2\approx6$ dB. Pour passer de $60$ à $40$ dB, il faut $20\log_{10}(r/1)=20$ soit $r=10$ m, en champ libre et sans absorption de l'air ni bruit ambiant.
+
+  - id: q6
+    enonce: |
+      Deux sources produisent chacune $70$ dB au point d'écoute. Quel est le niveau total si :
+      (a) elles sont incohérentes ; (b) elles émettent le même signal, en phase en ce point ;
+      (c) elles sont en opposition de phase ? Que devient (a) pour $N=100$ sources identiques ?
+      Calculer enfin $70$ dB $+$ $60$ dB (incohérentes) et commenter.
+    correction: "(a) $73$ dB ; (b) $76$ dB ; (c) silence ; $N=100$ : $+20$ dB ; $70+60$ dB $\\approx70{,}4$ dB."
+    solution:
+      - titre: "Sources incohérentes, cohérentes en phase, en opposition"
+        texte: |
+          \begin{itemize}[label = $\bullet$]
+            \item (a) Incohérentes : les intensités s'ajoutent, $I=2I_1$, soit $L=70+10\log_{10}2\approx73$ dB. Pour $N$ sources, $L=L_1+10\log_{10}N$ : $+20$ dB pour $N=100$.
+            \item (b) Cohérentes en phase : les \emph{amplitudes} s'ajoutent, $p_0=2p_1$ donc $I=4I_1$ : $L=70+20\log_{10}2\approx76$ dB. Pour $N$ sources, $+20\log_{10}N$.
+            \item (c) En opposition de phase : $p=0$, donc $I=0$ en ce point : c'est le principe du contrôle actif du bruit (la compensation n'est vraie qu'au voisinage d'un point, sur une distance de l'ordre de $\lambda/10$).
+          \end{itemize}
+      - titre: "Niveaux différents"
+        texte: |
+          $$L=10\log_{10}\big(10^{7}+10^{6}\big)=10\log_{10}(1{,}1\times10^7)\approx70{,}4~\text{dB}.$$
+          Une source $10$ dB plus faible n'ajoute presque rien : le bruit le plus fort domine. En pratique, on ne peut pas « cacher » un bruit fort en ajoutant des bruits faibles.
+
+  - id: q7
+    enonce: |
+      On reprend l'onde stationnaire du tube ouvert-ouvert de l'exercice 2, de section $S$, au mode propre $n$
+      ($kL=n\pi$) : avec $x'=L-x$ et $\varphi=\omega t-kL$,
+      $\Psi=2A_I\cos(kx')\cos\varphi$ et $p=-2A_I\rho_0c\,\omega\sin(kx')\cos\varphi$ ($A_I$ réel).
+      \begin{enumerate}
+        \item Calculer $v$, puis le flux d'énergie instantané $\Pi=pv$. Montrer que $\langle\Pi\rangle=0$.
+        \item Calculer les densités d'énergie cinétique $e_c$ et potentielle $e_p$, puis leurs moyennes temporelles. Où chacune est-elle maximale ?
+        \item Calculer l'énergie totale $E(t)$ contenue dans le tube. Commenter.
+      \end{enumerate}
+    coup_de_pouce: |
+      Utilisez $\sin2a=2\sin a\cos a$. Pour la dernière question, $\int_0^L\cos^2(k(L-x))\,\mathrm dx=\int_0^L\sin^2(k(L-x))\,\mathrm dx=L/2$ lorsque $kL=n\pi$.
+    correction: "$\\langle\\Pi\\rangle=0$ ; $\\langle e\\rangle=\\rho_0A_I^2\\omega^2$ uniforme ; $E=\\rho_0A_I^2\\omega^2SL$ indépendante du temps."
+    solution:
+      - titre: "Flux d'énergie : nul en moyenne"
+        texte: |
+          $v=\partial_t\Psi=-2A_I\omega\cos(kx')\sin\varphi$. On en déduit
+          $$\Pi=p\,v=\rho_0cA_I^2\omega^2\,\sin(2kx')\,\sin(2\varphi).$$
+          $\Pi$ n'est pas nul instantanément (l'énergie circule entre les nœuds et les ventres), mais $\langle\sin2\varphi\rangle=0$, donc $\boxed{\langle\Pi\rangle=0}$ en tout point : $p$ et $v$ sont en quadrature temporelle, aucune énergie n'est transportée en moyenne.
+      - titre: "Densités d'énergie"
+        texte: |
+          $$e_c=\tfrac12\rho_0v^2=2\rho_0A_I^2\omega^2\cos^2(kx')\sin^2\varphi,\qquad e_p=\tfrac12\chi p^2=2\rho_0A_I^2\omega^2\sin^2(kx')\cos^2\varphi.$$
+          Moyennes : $\langle e_c\rangle=\rho_0A_I^2\omega^2\cos^2(kx')$, maximale aux ventres de déplacement (nœuds de pression) ; $\langle e_p\rangle=\rho_0A_I^2\omega^2\sin^2(kx')$, maximale aux ventres de pression. Leur somme est \emph{uniforme} : $\langle e\rangle=\rho_0A_I^2\omega^2$. On vérifie que $\partial_te=2\rho_0A_I^2\omega^3\sin2\varphi\cos2kx'$ et $\partial_x\Pi=-2\rho_0A_I^2\omega^3\sin2\varphi\cos2kx'$ s'annulent bien en somme.
+      - titre: "Énergie totale et interprétation"
+        texte: |
+          Avec $\int_0^L\cos^2(kx')\mathrm dx=\int_0^L\sin^2(kx')\mathrm dx=L/2$ (car $kL=n\pi$) :
+          $$E(t)=S\int_0^Le\,\mathrm dx=\rho_0A_I^2\omega^2SL\,(\sin^2\varphi+\cos^2\varphi)=\rho_0A_I^2\omega^2SL=\text{cste}.$$
+          L'énergie totale est constante, mais sa forme oscille : tout cinétique quand $\varphi=\pi/2$ (fluide en mouvement, pression uniforme), tout potentielle quand $\varphi=0$ (fluide immobile, comprimé). C'est exactement le comportement d'un oscillateur harmonique, d'où la notion de facteur de qualité d'un résonateur : l'énergie stockée est entretenue par un apport très faible, nécessaire seulement pour compenser les pertes.
