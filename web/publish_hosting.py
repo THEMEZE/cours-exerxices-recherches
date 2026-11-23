@@ -36,10 +36,12 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "build"))
 import pdf_status  # noqa: E402
 from common_data import (  # noqa: E402
+    expand_profile,
     list_matieres, load_matiere_meta, load_sujets_graph, resolve_profile, load_visibility_profiles,
     title_parts, en_color_css,
 )
 from web.build_qcm_artifact import resolved_theme  # noqa: E402
+from web import fichiers_joints  # noqa: E402  (fichiers rattachés : build/config.yaml > fichiers)
 
 OUT_DIR = ROOT / "build" / "output"
 PUBLIC_DIR = ROOT / "build" / "public"
@@ -109,6 +111,15 @@ def sync_pdfs(rows: list, profiles: dict, forced):
         if r["pdf_exists"] and r["state"] != "cible_cassee" and pdf_status.is_published(r, allowed_for(r)):
             wanted[r["pdf"]] = r
 
+    # PDF construits RATTACHÉS à un autre document (build/config.yaml > fichiers > cible:) : hébergés
+    # aussi, sous la même règle de profil que leur lien (jamais un corrigé en avant_seance).
+    statics, pdf_targets, conflicts = fichiers_joints.hosting_needs(forced, profiles)
+    by_name = {r["name"]: r for r in rows}
+    for cible, allowed in pdf_targets:
+        r = by_name.get(cible)
+        if r and r["pdf_exists"] and r["state"] != "cible_cassee" and pdf_status.is_published(r, allowed):
+            wanted[r["pdf"]] = r
+
     removed = []
     for f in pdf_dir.glob("*.pdf"):
         if f.name not in wanted:
@@ -116,6 +127,23 @@ def sync_pdfs(rows: list, profiles: dict, forced):
             removed.append(f.name)
     for name in wanted:
         link_or_copy(OUT_DIR / name, pdf_dir / name)
+
+    # Fichiers STATIQUES rattachés (xlsx, csv, zip...) : copiés ici (/pdfs/<nom>) ; ceux qui ne sont plus
+    # rattachés / visibles disparaissent (registre .fichiers.json : on ne supprime jamais que nos fichiers).
+    reg_path = pdf_dir / ".fichiers.json"
+    try:
+        previous = set(json.loads(reg_path.read_text(encoding="utf-8")))
+    except (OSError, json.JSONDecodeError):
+        previous = set()
+    for name in sorted(previous - set(statics)):
+        if (pdf_dir / name).is_file() and not name.endswith(".pdf"):
+            (pdf_dir / name).unlink()
+            removed.append(name)
+    for name, src in statics.items():
+        link_or_copy(src, pdf_dir / name)
+    reg_path.write_text(json.dumps(sorted(statics), ensure_ascii=False), encoding="utf-8")
+    for name in conflicts:
+        print(f"   ⚠️  deux fichiers rattachés s'appellent « {name} » : un seul est hébergé (renomme l'un des deux)")
 
     # À venir = cible de type autorisé par le profil mais PDF pas encore fait
     todo = [r for r in rows if not r["pdf_exists"] and r["state"] == "manquant" and pdf_status.is_published(r, allowed_for(r))]
@@ -126,6 +154,7 @@ def sync_pdfs(rows: list, profiles: dict, forced):
             for r in wanted.values()
         ],
         "a_venir": [{k: r[k] for k in ("name", "titre", "matiere", "doc", "kind")} for r in todo],
+        "fichiers": sorted(statics),
     }
     (pdf_dir / "index.json").write_text(json.dumps(index, ensure_ascii=False, indent=2), encoding="utf-8")
 
@@ -147,7 +176,7 @@ def sync_pdfs(rows: list, profiles: dict, forced):
                 body.append(f'<li>{tag}<span class="todo">{title_html(r["titre"])} — ⬜ à venir</span></li>')
         body.append("</ul>")
     (pdf_dir / "index.html").write_text(page("PDF", "".join(body) or "<p>Aucun PDF publié pour l'instant.</p>"), encoding="utf-8")
-    return wanted, todo, removed
+    return wanted, todo, removed, statics
 
 
 # ----------------------------------------------------------------------
@@ -204,7 +233,7 @@ def main():
     args = ap.parse_args()
 
     profiles = load_visibility_profiles()
-    forced = None if args.profile == "auto" else args.profile
+    forced = None if args.profile == "auto" else expand_profile(args.profile)
     if forced and forced not in profiles:
         print(f"!! profil inconnu : {args.profile} (disponibles : auto, {', '.join(profiles)})")
         return 1
@@ -221,9 +250,10 @@ def main():
         if f"{n}.pdf" in {r["pdf"] for r in status["targets"] if r["pdf_exists"]}:
             print(f"   ⚠️  {n} est un énoncé/aide avec show_solution/show_correction=true : "
                   f"les solutions sont dans ce PDF (config.yaml)")
-    wanted, todo, removed = sync_pdfs(status["targets"], profiles, forced)
+    wanted, todo, removed, statics = sync_pdfs(status["targets"], profiles, forced)
     print(f"-- Hébergement PDF (profil '{args.profile}'" + (" : par document" if not forced else "") + ") : "
-          f"{len(wanted)} publié(s), {len(todo)} à venir, {len(removed)} retiré(s)")
+          f"{len(wanted)} publié(s), {len(todo)} à venir, {len(removed)} retiré(s) ; "
+          f"{len(statics)} fichier(s) rattaché(s) ({', '.join(statics) or 'aucun'})")
     for n in removed:
         print(f"   🗑️  retiré de l'hébergement : {n}")
 

@@ -23,7 +23,7 @@ import yaml
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 from common_data import (  # noqa: E402
-    list_matieres, list_docs_td_like, load_td, load_all_qcm,
+    list_matieres, list_docs_td_like, load_td, load_all_qcm, exercise_types, expand_profile,
     apply_visibility_to_exercice, enrich_media_paths, clean_exercice_for_web,
     title_parts, en_color_css, resolve_profile,
 )
@@ -55,7 +55,7 @@ def export_profile(profile_name: str, profiles: dict, forced, matiere_filter: st
     td_ids = []
 
     for matiere in matieres:
-        for type_doc in ("td", "tp"):
+        for type_doc in exercise_types():
             for doc_slug in list_docs_td_like(matiere, type_doc):
                 meta, exercices = load_td(matiere, doc_slug, type_doc=type_doc)
                 td_ids.append(meta["id"])
@@ -100,6 +100,7 @@ def main():
     names = [args.profile] if args.profile else list(profiles.keys())
 
     for name in names:
+        name = expand_profile(name)                      # « termine » -> corrige_complet (config.yaml > publication > etats)
         if name != "auto" and name not in profiles:
             print(f"!! profil inconnu : {name} (disponibles : auto, {', '.join(profiles)})")
             continue

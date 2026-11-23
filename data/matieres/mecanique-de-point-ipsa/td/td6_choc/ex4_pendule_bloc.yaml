@@ -162,7 +162,7 @@ questions:
         texte: |
           D'après l'exercice 1 : $v'=\dfrac{m-M}{m+M}v$, $w'=\dfrac{2m}{m+M}v$. Avec $m=0{,}5$ kg et $M=1{,}5$ kg :
           $$v'=\frac{0{,}5-1{,}5}{2}\times5{,}94=\boxed{-2{,}97~\mathrm{m/s}},\qquad w'=\frac{2\times0{,}5}{2}\times5{,}94=\boxed{+2{,}97~\mathrm{m/s}}.$$
-          $v'<0$ : la boule {\bf rebondit} (la boule est plus légère que le bloc). Vérification : $p$ : $0{,}5\times5{,}94=2{,}97$ et $0{,}5\times(-2{,}97)+1{,}5\times2{,}97=2{,}97$ $\surd$ ; $E_c$ : $8{,}83$ J avant, $\tfrac12\cdot0{,}5\cdot8{,}83+\tfrac12\cdot1{,}5\cdot8{,}83=2{,}21+6{,}62=8{,}83$ J ✓.
+          $v'<0$ : la boule {\bf rebondit} (la boule est plus légère que le bloc). Vérification : $p$ : $0{,}5\times5{,}94=2{,}97$ et $0{,}5\times(-2{,}97)+1{,}5\times2{,}97=2{,}97$ $\surd$ ; $E_c$ : $8{,}83$ J avant, $\tfrac12\cdot0{,}5\cdot8{,}83+\tfrac12\cdot1{,}5\cdot8{,}83=2{,}21+6{,}62=8{,}83$ J $\surd$.
 
   - id: q3
     enonce: |

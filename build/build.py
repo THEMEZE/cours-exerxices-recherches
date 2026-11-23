@@ -39,7 +39,7 @@ import time
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 from common_data import (  # noqa: E402
-    load_td, load_cours, niveau_label, normalize_en_color, en_color_latex_definition,
+    load_td, load_cours, niveau_label, normalize_en_color, en_color_latex_definition, apply_visibility_to_target,
 )  # noqa: E402  (source de vérité partagée)
 import qcm_data  # noqa: E402  (QCM : chargement, validation, to_latex)
 sys.path.insert(0, str(ROOT / "build"))
@@ -108,6 +108,7 @@ def render_target(env, target: dict, config: dict):
     """Un target peut être de type 'td'/'tp' (exercices) ou 'cours' (sections
     de lecture) -- voir data/SCHEMA.md. Le champ `doc` remplace l'ancien `td`."""
     
+    target = apply_visibility_to_target(target)     # `visibilite: <profil|état>` : show_* repris d'un profil du site
     type_doc = target.get("type_doc", "td")
     matiere = target["matiere"]
     doc_slug = target.get("doc", target.get("td"))

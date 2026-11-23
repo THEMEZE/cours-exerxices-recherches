@@ -3,18 +3,23 @@
 Exporte data/matieres/**/* en Markdown pour Quartz (callouts façon Obsidian),
 avec le système de PROFIL DE VISIBILITÉ (web/visibility_profiles.yaml).
 
-Généralisé à N matières et 2 formes de documents :
-  - "td"/"tp"  : dossier d'exercices (questions groupables a/b/c, corrections)
-  - "cours"    : fichier unique de sections de lecture (pas de questions)
+Généralisé à N matières et 2 formes de documents (types déclarés dans build/config.yaml > types_documents) :
+  - forme "exercices" (td, tp, projet, ...) : dossier d'exercices (questions a/b/c, corrections)
+  - forme "sections"  (cours, ...)          : fichier unique de sections de lecture
 
 La structure Quartz générée MIROITE la structure des PDF, matière par
 matière, type de document par type de document :
 
     content/<quartz_namespace>/
-        index.md
+        index.md                                  (une section par type : TD, TP, Mini-Projet, Cours...)
         TD/<chapitre_slug>/<doc_slug>/{index.md, ex1-....md, ...}
         TP/<chapitre_slug>/<doc_slug>/{...}                      (même format que TD)
+        Mini-Projet/<chapitre_slug>/<doc_slug>/{...}             (même format que TD)
         Cours/<doc_slug>.md
+
+Chaque page peut afficher : les rubriques pédagogiques du profil (prérequis, objectifs, point de cours,
+bilan...), les fichiers rattachés (build/config.yaml > fichiers) et les liens + QR code des QCM
+(build/config.yaml > qcm > liens). Voir web/rubriques_md.py, web/fichiers_joints.py, GUIDE_EVOLUTIONS.md.
 
 Usage :
     python3 web/export_markdown.py --profile avant_seance --out ~/Quartz5/content
@@ -38,15 +43,18 @@ sys.path.insert(0, str(ROOT / "build"))
 import pdf_status  # noqa: E402
 from common_data import (  # noqa: E402
     list_matieres, load_matiere_meta, list_docs_td_like, load_td,
-    list_docs_cours, load_cours, load_all_qcm,
+    list_docs_cours, load_cours, load_all_qcm, clean_text_for_web,
     apply_visibility_to_exercice, apply_visibility_to_cours,
     niveau_label, enrich_media_paths, enrich_cours_media,
     clean_exercice_for_web, clean_cours_for_web,
     animation_format_web_path, load_sujets_graph,
     title_parts, en_span, resolve_profile, load_visibility_profiles, publication_config,
+    doc_types, exercise_types, section_types, type_label, type_quartz_dir, profile_audiences, expand_profile,
 )
 
 import qcm_data  # noqa: E402  (QCM : liens d'accès libre + QR code)
+from web import fichiers_joints  # noqa: E402  (fichiers rattachés : config.yaml > fichiers)
+from web.rubriques_md import render_rubriques, filter_apl  # noqa: E402  (rubriques pédagogiques)
 
 DEFAULT_OUT = ROOT / "web" / "public" / "quartz_content"
 PDF_OUT_DIR = ROOT / "build" / "output"
@@ -54,7 +62,7 @@ MANIFEST_PATH = PDF_OUT_DIR / "manifest.json"
 GENERATED_REGISTRY = ".coursondes-generated.json"   # écrit à côté de content/ (jamais dedans)
 KIND_LABEL = {"enonce": "Énoncé", "aides": "Aides", "corrige": "Corrigé", "autre": "PDF", "fiche": "Fiche enseignant"}
 
-TYPE_LABELS = {"td": "TD", "tp": "TP", "cours": "Cours"}
+TYPE_LABELS = {k: type_quartz_dir(k) for k in doc_types()}      # dossier Quartz de chaque type (config.yaml > types_documents)
 
 # États de repli des callouts (voir DEPLOY_RASPBERRY.md / SCHEMA.md pour la
 # justification) : '' fixe, '+' ouvert-repliable, '-' fermé-repliable.
@@ -223,8 +231,39 @@ def a_blank(label: str, url: str) -> str:
     return f'<a href="{url}" target="_blank" rel="noopener">{label}</a>'
 
 
+FILE_ICONS = {".xlsx": "📊", ".xlsm": "📊", ".xls": "📊", ".ods": "📊", ".csv": "📊", ".zip": "🗜️",
+              ".ipynb": "🐍", ".py": "🐍", ".docx": "📝", ".pptx": "🖼️"}
+
+
 def pdf_line(pdfs: list) -> str:
-    return " · ".join(a_blank(f"📄 {label}", url) for label, url in pdfs)
+    """PDF construits + fichiers rattachés : une icône par type de fichier (📄 par défaut)."""
+    return " · ".join(a_blank(f"{FILE_ICONS.get(Path(url).suffix.lower(), '📄')} {label}", url) for label, url in pdfs)
+
+
+def merge_links(*lists) -> list:
+    """Concatène des listes [(label, url)] sans doublon d'adresse (ordre conservé)."""
+    seen, out = set(), []
+    for lst in lists:
+        for label, url in lst:
+            if url not in seen:
+                seen.add(url)
+                out.append((label, url))
+    return out
+
+
+def qcm_links_block(matiere: str, chapitre_ids, intro: str = "**S'entraîner (QCM)**") -> str:
+    """Lien + QR code (accès libre, scannable à la maison) pour chaque chapitre en accès libre."""
+    chaps = {c["id"]: c for c in qcm_data.chapitres(matiere)}
+    liens = []
+    for cid in dict.fromkeys(chapitre_ids):
+        c = chaps.get(cid)
+        if not c:
+            print(f"   ⚠️  qcm.liens : chapitre « {cid} » inconnu dans la matière {matiere}")
+            continue
+        if qcm_data.is_libre(matiere, cid):
+            plur = "s" if c["n"] > 1 else ""
+            liens.append(qcm_data.qcm_link_html(matiere, cid, f"{c['titre']} — {c['n']} question{plur}"))
+    return "\n\n".join([intro] + liens) if liens else ""
 
 
 # ----------------------------------------------------------------------
@@ -239,12 +278,14 @@ def render_encadre_md(enc: dict) -> str:
     return callout("info", f"📦 {titre}", enc.get("contenu", ""), "encadre")
 
 
-def render_question_md(q: dict) -> str:
+def render_question_md(q: dict, opts: dict = None) -> str:
+    opts = opts or {}
     parts = [q["enonce"].strip()]
     if q.get("figure"):
         parts.append(figures_md(q["figure"]))
     if q.get("animation"):
         parts.append(render_animation_block(q["animation"]))
+    parts.extend(render_rubriques(q, opts, "debut"))          # prérequis, objectifs, point de cours...
     if q.get("coup_de_pouce"):
         parts.append(callout("tip", "💡 Coup de pouce", q["coup_de_pouce"], "coup_de_pouce"))
     parts.extend(apl_callouts(q.get("aller_plus_loin")))
@@ -252,31 +293,64 @@ def render_question_md(q: dict) -> str:
         parts.append(callout("success", "✅ Correction", q["correction"], "correction"))
     if q.get("solution"):
         parts.append(callout("example", "📝 Solution détaillée", q["solution"], "solution"))
+    parts.extend(render_rubriques(q, opts, "fin"))            # écueils, conseils d'animation, bilan...
     if q.get("encadre"):
         parts.append(render_encadre_md(q["encadre"]))
     return "\n\n".join(parts)
 
 
-def render_exercice_md(ex: dict, voir_aussi: list) -> str:
+def metadonnees_md(ex: dict) -> str:
+    """Ligne de repères d'un exercice (show_metadonnees) : indispensable, difficulté, durée, type -- comme dans le
+    titre des PDF. Chaîne vide si l'exercice n'a pas de `metadonnees:`."""
+    md = ex.get("metadonnees") or {}
+    bits = []
+    if md.get("indispensable") is True:
+        bits.append("⭐ Indispensable")
+    if md.get("difficulte"):
+        try:
+            n = max(0, min(5, int(md["difficulte"])))
+            bits.append(f"Difficulté {'●' * n}{'○' * (5 - n)}")
+        except (TypeError, ValueError):
+            bits.append(f"Difficulté {md['difficulte']}")
+    if md.get("duree_estimee"):
+        bits.append(f"⏱ {str(md['duree_estimee']).strip()}")
+    if md.get("type_exercice"):
+        bits.append(f"Type : {clean_text_for_web(str(md['type_exercice'])).strip()}")
+    return "*" + " · ".join(bits) + "*" if bits else ""
+
+
+def render_exercice_md(ex: dict, voir_aussi: list, opts: dict = None, extras_fin: list = None) -> str:
     t_fr, t_en = title_parts(ex["intitule"])
     out = [f"### Exercice {ex['numero']}. {t_fr}" + (f" {en_span(t_en)}" if t_en else "")
            + (" *(facultatif)*" if ex.get("facultatif") else "")]
+    opts = opts or {}
+    if opts.get("show_metadonnees") and metadonnees_md(ex):
+        out.append(metadonnees_md(ex))                            # repères : indispensable · difficulté · durée · type
     out.append(ex.get("enonce_intro", "").strip())
     if ex.get("figure"):
         out.append(figures_md(ex["figure"]))
     if ex.get("animation"):
         out.append(render_animation_block(ex["animation"]))
+    out.extend(render_rubriques(ex, opts, "debut"))           # rubriques de l'EXERCICE (avant les questions)
+    if opts.get("show_coup_de_pouce") and ex.get("coup_de_pouce"):
+        out.append(callout("tip", "💡 Coup de pouce", ex["coup_de_pouce"], "coup_de_pouce"))
 
     for item in ex.get("contenu", []):
         if item["kind"] == "intro":
             out.append(item["enonce"])
         elif item["kind"] == "single":
-            out.append(f"**{item.get('id','')}.** " + render_question_md(item))
+            out.append(f"**{item.get('id','')}.** " + render_question_md(item, opts))
         elif item["kind"] == "group":
             out.append(f"**{item['label']}.**")
             for i, sq in enumerate(item["subquestions"]):
                 letter = chr(ord("a") + i)
-                out.append(f"  **{letter})** " + render_question_md(sq))
+                out.append(f"  **{letter})** " + render_question_md(sq, opts))
+
+    out.extend(render_rubriques(ex, opts, "fin"))             # rubriques de l'EXERCICE (après les questions)
+    apl = filter_apl(ex.get("aller_plus_loin"), opts.get("aller_plus_loin_niveaux"))
+    if apl:
+        out.extend(apl_callouts(apl))
+    out.extend(extras_fin or [])                              # QCM liés à l'exercice
 
     if voir_aussi:
         links = " · ".join(f"[[{path}|{label}]]" for path, label in voir_aussi)
@@ -285,12 +359,12 @@ def render_exercice_md(ex: dict, voir_aussi: list) -> str:
     return "\n\n".join(p for p in out if p.strip())
 
 
-def render_qcm_md(qcm_list: list, exercice_paths: dict, matiere: str) -> str:
+def render_qcm_md(qcm_list: list, exercice_paths: dict, matiere: str, extra_chaps=()) -> str:
     """Questions « réveil » (debut/milieu/fin) détaillées ; toutes les autres (entraînement…)
     ne sont pas listées (un chapitre peut en avoir des dizaines) : lien + QR code d'accès libre."""
-    if not qcm_list:
+    if not qcm_list and not extra_chaps:
         return ""
-    blocks = ["## QCM de réveil liés à ce document\n"]
+    blocks = ["## QCM de réveil liés à ce document\n"] if qcm_list else ["## QCM liés à ce document\n"]
     moment_titles = {"debut": "🌅 Début de cours", "milieu": "🔄 Milieu de cours", "fin": "🌇 Fin de cours"}
     appli = a_blank("l'appli QCM", qcm_data.qcm_url(matiere, absolute=False))
     for q in [q for q in qcm_list if q.get("moment") in moment_titles]:
@@ -315,9 +389,16 @@ def render_qcm_md(qcm_list: list, exercice_paths: dict, matiere: str) -> str:
     for q in qcm_list:
         if q.get("chapitre"):
             titres.setdefault(q["chapitre"], q.get("chapitre_titre") or f"Chapitre {q['chapitre']}")
+    n_questions = len(qcm_list)
+    if extra_chaps:                                     # chapitres rattachés par config.yaml > qcm > liens
+        all_chaps = {c["id"]: c for c in qcm_data.chapitres(matiere)}
+        for cid in extra_chaps:
+            if cid in all_chaps and cid not in titres:
+                titres[cid] = all_chaps[cid]["titre"]
+                n_questions += all_chaps[cid]["n"]
     liens = [qcm_data.qcm_link_html(matiere, c, t) for c, t in titres.items() if qcm_data.is_libre(matiere, c)]
     if liens:       # rien du tout si ces chapitres ne sont pas en accès libre (config.yaml)
-        blocks.append("\n\n".join([f"**S'entraîner librement** ({len(qcm_list)} question(s) liées à ce document) :"] + liens))
+        blocks.append("\n\n".join([f"**S'entraîner librement** ({n_questions} question(s) liées à ce document) :"] + liens))
     return "\n\n".join(blocks)
 
 
@@ -415,7 +496,8 @@ def export_td_doc(ctx, matiere, type_doc, doc_slug, ns, matiere_meta):
         print(f"   ⚠️  titre déjà utilisé, dossier renommé : {base}")
     ctx["used_dirs"].add(base)
 
-    pdfs = pdfs_for_doc(manifest, allowed, matiere, type_doc, doc_slug)
+    pdfs = merge_links(pdfs_for_doc(manifest, allowed, matiere, type_doc, doc_slug),
+                       fichiers_joints.links_for(matiere, type_doc, doc_slug, None, opts, manifest, warn=ctx["warn"], pname=pname))
     sujet_ids = meta.get("sujets") or matiere_meta.get("sujets") or []
     own = ctx["registry"]
     ctx_sujets = sujets_line(sujet_ids, ctx["sujets"], ns)
@@ -432,6 +514,11 @@ def export_td_doc(ctx, matiere, type_doc, doc_slug, ns, matiere_meta):
         index_lines += [pdf_line(pdfs), ""]
     if ctx_sujets:
         index_lines += [ctx_sujets, ""]
+    debut = render_rubriques(meta, opts, "debut")               # rubriques du DOCUMENT (_meta.yaml)
+    if opts.get("show_coup_de_pouce") and meta.get("coup_de_pouce"):
+        debut.append(callout("tip", "💡 Coup de pouce", meta["coup_de_pouce"], "coup_de_pouce"))
+    if debut:
+        index_lines += ["\n".join(debut), "", "## Exercices", ""]
 
     overrides = []
     for ex in exercices:
@@ -442,13 +529,17 @@ def export_td_doc(ctx, matiere, type_doc, doc_slug, ns, matiere_meta):
         ex_filtered = clean_exercice_for_web(apply_visibility_to_exercice(enrich_media_paths(ex), ex_opts))
         self_key = (matiere, type_doc, base, ex["slug"])
         voir_aussi = voir_aussi_for(ex, ctx["tag_index"], self_key)
-        md_body = render_exercice_md(ex_filtered, voir_aussi)
+        ex_files = fichiers_joints.links_for(matiere, type_doc, doc_slug, ex["slug"], ex_opts, manifest, warn=ctx["warn"], pname=ex_pname)
+        ex_chaps = qcm_data.chapitres_lies(matiere, type_doc, doc_slug, ex["slug"]) + [
+            q["chapitre"] for q in ctx["qcm_all"](matiere) if q.get("lie_a") == f"{meta['id']}_ex{ex['numero']}"]
+        ex_qcm = qcm_links_block(matiere, ex_chaps, "**S'entraîner sur cet exercice (QCM)**") if ex_chaps else ""
+        md_body = render_exercice_md(ex_filtered, voir_aussi, ex_opts, [ex_qcm] if ex_qcm else None)
         e_fr, e_en = title_parts(ex["intitule"])
         fname = f"ex{ex['numero']}-{ex_slug_of(ex)}.md"
 
         breadcrumb = f"[[{base}/index|⬅ Retour]]"
-        if pdfs:
-            breadcrumb += " · " + pdf_line(pdfs)
+        if pdfs or ex_files:
+            breadcrumb += " · " + pdf_line(merge_links(pdfs, ex_files))
         ex_title = f"Exercice {ex['numero']} — {e_fr}"
         frontmatter = (
             "---\n" f"title: {fm_title(ex_title)}\n"
@@ -458,10 +549,17 @@ def export_td_doc(ctx, matiere, type_doc, doc_slug, ns, matiere_meta):
         own.write(matiere, f"{base}/{fname}", frontmatter + md_body + "\n")
         index_lines.append(f"- [[{base}/{fname[:-3]}|Exercice {ex['numero']} — {e_fr}]]" + (f" {en_span(e_en)}" if e_en else ""))
 
-    qcm_td = [q for q in load_all_qcm(matiere) if q.get("td") == meta["id"]]
-    qcm_md = render_qcm_md(qcm_td, ctx["exercice_paths"], matiere)
+    doc_keys = {meta["id"], doc_slug}                           # `td:` d'un QCM : id du document OU nom du dossier
+    qcm_td = [q for q in ctx["qcm_all"](matiere) if q.get("td") in doc_keys]
+    qcm_md = render_qcm_md(qcm_td, ctx["exercice_paths"], matiere, qcm_data.chapitres_lies(matiere, type_doc, doc_slug))
     if qcm_md:
         index_lines += ["", qcm_md]
+    fin = render_rubriques(meta, opts, "fin")                   # écueils, conseils d'animation, bilan, liens...
+    apl = filter_apl(meta.get("aller_plus_loin"), opts.get("aller_plus_loin_niveaux"))
+    if apl:
+        fin.extend(apl_callouts(apl))
+    if fin:
+        index_lines += ["", "\n".join(fin)]
 
     own.write(matiere, f"{base}/index.md", "\n".join(index_lines) + "\n")
     print(f"   -> {base}/ ({len(exercices)} exercices, {len(pdfs)} PDF publié(s)) [profil : {pname}"
@@ -473,28 +571,32 @@ def export_td_doc(ctx, matiere, type_doc, doc_slug, ns, matiere_meta):
 # Rendu cours-like (sections de lecture)
 # ----------------------------------------------------------------------
 
-def render_section_md(sec: dict) -> str:
+def render_section_md(sec: dict, opts: dict = None) -> str:
+    opts = opts or {}
     s_fr, s_en = title_parts(sec["titre"])
     parts = [f"## {sec['numero']}. {s_fr}" + (f" {en_span(s_en)}" if s_en else ""), sec.get("contenu", "").strip()]
     if sec.get("figure"):
         parts.append(figures_md(sec["figure"]))
     if sec.get("animation"):
         parts.append(render_animation_block(sec["animation"]))
+    parts.extend(render_rubriques(sec, opts, "debut"))
     if sec.get("remarque"):
         parts.append(callout("info", "💡 Remarque", sec["remarque"], "remarque"))
+    parts.extend(render_rubriques(sec, opts, "fin"))
     parts.extend(apl_callouts(sec.get("aller_plus_loin")))
     if sec.get("encadre"):
         parts.append(render_encadre_md(sec["encadre"]))
     return "\n\n".join(p for p in parts if p.strip())
 
 
-def export_cours_doc(ctx, matiere, doc_slug, ns, matiere_meta):
+def export_cours_doc(ctx, matiere, doc_slug, ns, matiere_meta, type_doc="cours"):
     manifest = ctx["manifest"]
-    pname, opts = doc_profile(ctx, matiere, "cours", doc_slug)
+    pname, opts = doc_profile(ctx, matiere, type_doc, doc_slug)
     allowed = set(opts.get("pdf_publies", ["enonce"]))
-    doc = load_cours(matiere, doc_slug)
+    doc = load_cours(matiere, doc_slug, type_doc=type_doc)
     doc_filtered = clean_cours_for_web(apply_visibility_to_cours(enrich_cours_media(doc), opts))
-    pdfs = pdfs_for_doc(manifest, allowed, matiere, "cours", doc_slug)
+    pdfs = merge_links(pdfs_for_doc(manifest, allowed, matiere, type_doc, doc_slug),
+                       fichiers_joints.links_for(matiere, type_doc, doc_slug, None, opts, manifest, warn=ctx["warn"], pname=pname))
     c_fr, c_en = title_parts(doc["titre"])
 
     body_parts = [f"[[{ns}/index|⬅ {matiere_meta['nom']}]]"]
@@ -507,14 +609,21 @@ def export_cours_doc(ctx, matiere, doc_slug, ns, matiere_meta):
     sl = sujets_line(doc.get("sujets") or matiere_meta.get("sujets"), ctx["sujets"], ns)
     if sl:
         body_parts.append(sl)
+    body_parts.extend(render_rubriques(doc, opts, "debut"))
     for sec in doc_filtered.get("sections", []):
-        body_parts.append(render_section_md(sec))
+        body_parts.append(render_section_md(sec, opts))
+    body_parts.extend(render_rubriques(doc, opts, "fin"))
+    chaps = qcm_data.chapitres_lies(matiere, type_doc, doc_slug) + [
+        q["chapitre"] for q in ctx["qcm_all"](matiere) if q.get("td") in {doc.get("id"), doc_slug}]
+    qb = qcm_links_block(matiere, chaps, "**S'entraîner sur ce cours (QCM)**") if chaps else ""
+    if qb:
+        body_parts.append(qb)
 
-    frontmatter = "\n".join(["---", f"title: {fm_title(c_fr)}", "tags:", "  - cours", "---"])
-    rel = f"{ns}/Cours/{doc_slug}.md"
+    frontmatter = "\n".join(["---", f"title: {fm_title(c_fr)}", "tags:", f"  - {type_doc}", "---"])
+    rel = f"{ns}/{TYPE_LABELS[type_doc]}/{doc_slug}.md"
     ctx["registry"].write(matiere, rel, frontmatter + "\n\n" + "\n\n".join(body_parts) + "\n")
-    print(f"   -> {rel} ({len(pdfs)} PDF publié(s)) [profil : {pname}]")
-    return doc
+    print(f"   -> {rel} ({len(pdfs)} PDF/fichier(s) publié(s)) [profil : {pname}]")
+    return doc, pdfs, rel[:-3]
 
 
 # ----------------------------------------------------------------------
@@ -527,27 +636,25 @@ def export_matiere(ctx, matiere):
     sections_index = ["---", f"title: {fm_title(meta['nom'])}", "tags:", "  - matiere", "---", "",
                       (meta.get("description") or "").strip(), ""]
 
-    for type_doc in ("td", "tp"):
-        docs = list_docs_td_like(matiere, type_doc)
+    for type_doc, spec in doc_types().items():                 # ordre = celui de config.yaml > types_documents
+        if spec["forme"] == "exercices":
+            docs = list_docs_td_like(matiere, type_doc)
+        else:
+            docs = list_docs_cours(matiere, type_doc)
         if not docs:
             continue
-        sections_index.append(f"## {TYPE_LABELS[type_doc]}\n")
+        sections_index.append(f"## {spec['label']}\n")
         for doc_slug in docs:
-            td_meta, pdfs, base = export_td_doc(ctx, matiere, type_doc, doc_slug, ns, meta)
-            l_fr, l_en = title_parts(td_meta["titre"])
-            line = f"- [[{base}/index|{l_fr}]]" + (f" {en_span(l_en)}" if l_en else "")
+            if spec["forme"] == "exercices":
+                d_meta, pdfs, base = export_td_doc(ctx, matiere, type_doc, doc_slug, ns, meta)
+                link_target = f"{base}/index"
+            else:
+                d_meta, pdfs, link_target = export_cours_doc(ctx, matiere, doc_slug, ns, meta, type_doc)
+            l_fr, l_en = title_parts(d_meta["titre"])
+            line = f"- [[{link_target}|{l_fr}]]" + (f" {en_span(l_en)}" if l_en else "")
             if pdfs:
                 line += " (" + ", ".join(a_blank(label, url) for label, url in pdfs) + ")"
             sections_index.append(line)
-        sections_index.append("")
-
-    cours_docs = list_docs_cours(matiere)
-    if cours_docs:
-        sections_index.append("## Cours\n")
-        for doc_slug in cours_docs:
-            doc = export_cours_doc(ctx, matiere, doc_slug, ns, meta)
-            l_fr, l_en = title_parts(doc["titre"])
-            sections_index.append(f"- [[{ns}/Cours/{doc_slug}|{l_fr}]]" + (f" {en_span(l_en)}" if l_en else ""))
         sections_index.append("")
 
     chaps = qcm_data.chapitres_libres(matiere)      # config.yaml > qcm > acces_libre
@@ -573,6 +680,17 @@ def export_matiere(ctx, matiere):
         print(f"   🗑️  page défaite supprimée : {rel}")
 
 
+def _qcm_loader():
+    """Questions QCM d'une matière, chargées une seule fois par export (utilisées par chaque page)."""
+    cache = {}
+
+    def get(matiere):
+        if matiere not in cache:
+            cache[matiere] = load_all_qcm(matiere)
+        return cache[matiere]
+    return get
+
+
 def _profiles_in_publication() -> set:
     """Tous les noms de profils cités dans publication: (défauts, documents, exercices)."""
     pub, names = publication_config(), set()
@@ -581,15 +699,15 @@ def _profiles_in_publication() -> set:
     for m in (pub.get("matieres") or {}).values():
         if m.get("defaut"):
             names.add(m["defaut"])
-        for ty in ("td", "tp", "cours"):
+        for ty in doc_types():
             for entry in (m.get(ty) or {}).values():
                 if isinstance(entry, str):
                     names.add(entry)
                 elif isinstance(entry, dict):
-                    if entry.get("profil"):
-                        names.add(entry["profil"])
+                    if entry.get("profil") or entry.get("etat"):
+                        names.add(entry.get("profil") or entry.get("etat"))
                     names.update((entry.get("exercices") or {}).values())
-    return names
+    return {expand_profile(n) for n in names}              # un état compte pour son profil
 
 
 def main():
@@ -601,7 +719,7 @@ def main():
     args = p.parse_args()
 
     profiles = load_visibility_profiles()
-    forced = None if args.profile == "auto" else args.profile
+    forced = None if args.profile == "auto" else expand_profile(args.profile)
     if forced and forced not in profiles:
         print(f"!! profil inconnu : {args.profile} (disponibles : auto, {', '.join(profiles)})")
         return 1
@@ -629,7 +747,7 @@ def main():
     all_exercices, exercice_paths, used = [], {}, set()
     for matiere in matieres:
         ns = load_matiere_meta(matiere)["quartz_namespace"]
-        for type_doc in ("td", "tp"):
+        for type_doc in exercise_types():
             for doc_slug in list_docs_td_like(matiere, type_doc):
                 td_meta, exercices = load_td(matiere, doc_slug, type_doc=type_doc)
                 base = td_base(ns, type_doc, td_meta)
@@ -642,7 +760,15 @@ def main():
         "manifest": load_pdf_manifest(), "registry": Registry(out_dir),
         "sujets": sujets, "tag_index": build_tag_index(all_exercices),
         "exercice_paths": exercice_paths, "used_dirs": used,
+        "warn": lambda m: print(f"   ⚠️  {m}"),
+        "qcm_all": _qcm_loader(),
     }
+    prof_names = {forced} if forced else _profiles_in_publication()
+    teacher = sorted(n for n in prof_names if n in profiles and "prof" in profile_audiences(profiles[n]))
+    if teacher:
+        print(f"   ⚠️  profil(s) {', '.join(teacher)} : ce site affichera le contenu ENSEIGNANT (objectifs, écueils, "
+              "conseils d'animation, bilan, fiches, fichiers `public: prof`). À réserver à un site privé / local ; "
+              "pour un site public, utilise all_eleve.")
 
     print(f"-- Export Markdown, profil '{args.profile}'"
           + (" (par document, d'après config.yaml)" if not forced else " (forcé pour tous les documents)") + f" -> {out_dir}")

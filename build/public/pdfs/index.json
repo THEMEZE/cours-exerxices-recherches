@@ -6,29 +6,9 @@
       "matiere": "mecanique-de-point-ipsa",
       "doc": "td1_cinematique_cartesiennes",
       "kind": "autre",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 545371,
       "pdf": "test.pdf"
-    },
-    {
-      "name": "TP_IPSA_Generale_fiche",
-      "titre": "Traveaux pratiques Général (Moi) -- Test",
-      "matiere": "traveaux_pratiques-ipsa",
-      "doc": "general",
-      "kind": "fiche",
-      "state": "ok",
-      "size": 574719,
-      "pdf": "TP_IPSA_Generale_fiche.pdf"
-    },
-    {
-      "name": "TP_IPSA_Astrophysique_fiche",
-      "titre": "Traveaux pratiques Astrophysique (Moi) -- Test",
-      "matiere": "traveaux_pratiques-ipsa",
-      "doc": "astrophysique",
-      "kind": "fiche",
-      "state": "ok",
-      "size": 610752,
-      "pdf": "TP_IPSA_Astrophysique_fiche.pdf"
     },
     {
       "name": "td1_PhV110_enonce",
@@ -36,7 +16,7 @@
       "matiere": "piscines-de-sciences-et-methodologie",
       "doc": "td1_grandeurs_physiques",
       "kind": "enonce",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 881541,
       "pdf": "td1_PhV110_enonce.pdf"
     },
@@ -46,19 +26,9 @@
       "matiere": "piscines-de-sciences-et-methodologie",
       "doc": "td1_grandeurs_physiques",
       "kind": "corrige",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 881541,
       "pdf": "td1_PhV110_corrige.pdf"
-    },
-    {
-      "name": "td1_PhV110_fiche",
-      "titre": "TD 1 -- GRANDEURS PHYSIQUES  Dimensions, unités et analyse dimensionnelle -- Test",
-      "matiere": "piscines-de-sciences-et-methodologie",
-      "doc": "td1_grandeurs_physiques",
-      "kind": "fiche",
-      "state": "ok",
-      "size": 1387996,
-      "pdf": "td1_PhV110_fiche.pdf"
     },
     {
       "name": "td2_PhV110_enonce",
@@ -66,7 +36,7 @@
       "matiere": "piscines-de-sciences-et-methodologie",
       "doc": "td2_derivation_et_differentielle",
       "kind": "enonce",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 768164,
       "pdf": "td2_PhV110_enonce.pdf"
     },
@@ -76,19 +46,9 @@
       "matiere": "piscines-de-sciences-et-methodologie",
       "doc": "td2_derivation_et_differentielle",
       "kind": "corrige",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 768164,
       "pdf": "td2_PhV110_corrige.pdf"
-    },
-    {
-      "name": "td2_PhV110_fiche",
-      "titre": "TD 2 -- DÉRIVATION ET DIFFÉRENTIELLE (4h) Interprétation en Physique -- Test",
-      "matiere": "piscines-de-sciences-et-methodologie",
-      "doc": "td2_derivation_et_differentielle",
-      "kind": "fiche",
-      "state": "ok",
-      "size": 824392,
-      "pdf": "td2_PhV110_fiche.pdf"
     },
     {
       "name": "td3_PhV110",
@@ -96,7 +56,7 @@
       "matiere": "piscines-de-sciences-et-methodologie",
       "doc": "td3_fonctions_derives_integrale",
       "kind": "autre",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 539303,
       "pdf": "td3_PhV110.pdf"
     },
@@ -106,19 +66,9 @@
       "matiere": "piscines-de-sciences-et-methodologie",
       "doc": "td3_fonctions_derives_integrale",
       "kind": "corrige",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 506651,
       "pdf": "td3_PhV110_corrige.pdf"
-    },
-    {
-      "name": "td3_PhV110_fiche",
-      "titre": "TD 3 -- FONCTIONS, DERIVES, INTEGRALE (4h) Description mathématique du mouvement à 1D -- Fiche",
-      "matiere": "piscines-de-sciences-et-methodologie",
-      "doc": "td3_fonctions_derives_integrale",
-      "kind": "fiche",
-      "state": "ok",
-      "size": 539355,
-      "pdf": "td3_PhV110_fiche.pdf"
     },
     {
       "name": "td4_PhV110_corrige",
@@ -126,19 +76,9 @@
       "matiere": "piscines-de-sciences-et-methodologie",
       "doc": "td4_vecteurs_en_physique",
       "kind": "corrige",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 666712,
       "pdf": "td4_PhV110_corrige.pdf"
-    },
-    {
-      "name": "td4_PhV110_fiche",
-      "titre": "TD 4 -- VECTEURS EN PHYSIQUE (4h)",
-      "matiere": "piscines-de-sciences-et-methodologie",
-      "doc": "td4_vecteurs_en_physique",
-      "kind": "fiche",
-      "state": "ok",
-      "size": 680452,
-      "pdf": "td4_PhV110_fiche.pdf"
     },
     {
       "name": "td1_PhV111_enonces",
@@ -146,7 +86,7 @@
       "matiere": "mecanique-de-point-ipsa",
       "doc": "td1_cinematique_cartesiennes",
       "kind": "enonce",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 460883,
       "pdf": "td1_PhV111_enonces.pdf"
     },
@@ -156,7 +96,7 @@
       "matiere": "mecanique-de-point-ipsa",
       "doc": "td1_cinematique_cartesiennes",
       "kind": "aides",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 708896,
       "pdf": "td1_PhV111_aides.pdf"
     },
@@ -166,7 +106,7 @@
       "matiere": "mecanique-de-point-ipsa",
       "doc": "td1_cinematique_cartesiennes",
       "kind": "corrige",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 1080675,
       "pdf": "td1_PhV111_corrige.pdf"
     },
@@ -176,7 +116,7 @@
       "matiere": "mecanique-de-point-ipsa",
       "doc": "td1_cinematique_cartesiennes",
       "kind": "fiche",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 1224963,
       "pdf": "td1_PhV111_fiche.pdf"
     },
@@ -186,7 +126,7 @@
       "matiere": "mecanique-de-point-ipsa",
       "doc": "td2_cinematique_en_coordonnees_polaire_ou_cylindrique",
       "kind": "enonce",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 440769,
       "pdf": "td2_PhV111_enonces.pdf"
     },
@@ -196,7 +136,7 @@
       "matiere": "mecanique-de-point-ipsa",
       "doc": "td2_cinematique_en_coordonnees_polaire_ou_cylindrique",
       "kind": "aides",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 644350,
       "pdf": "td2_PhV111_aides.pdf"
     },
@@ -206,19 +146,9 @@
       "matiere": "mecanique-de-point-ipsa",
       "doc": "td2_cinematique_en_coordonnees_polaire_ou_cylindrique",
       "kind": "corrige",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 772601,
       "pdf": "td2_PhV111_corrige.pdf"
-    },
-    {
-      "name": "td2_PhV111_fiche",
-      "titre": "TD 2 -- Cinématique en coordonnées polaires (2D) et Cylindriques (3D) -- Détailles",
-      "matiere": "mecanique-de-point-ipsa",
-      "doc": "td2_cinematique_en_coordonnees_polaire_ou_cylindrique",
-      "kind": "fiche",
-      "state": "ok",
-      "size": 891389,
-      "pdf": "td2_PhV111_fiche.pdf"
     },
     {
       "name": "td3_PhV111_enonces",
@@ -226,7 +156,7 @@
       "matiere": "mecanique-de-point-ipsa",
       "doc": "td3_base_de_frenet",
       "kind": "enonce",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 483288,
       "pdf": "td3_PhV111_enonces.pdf"
     },
@@ -236,7 +166,7 @@
       "matiere": "mecanique-de-point-ipsa",
       "doc": "td3_base_de_frenet",
       "kind": "aides",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 654506,
       "pdf": "td3_PhV111_aides.pdf"
     },
@@ -246,19 +176,9 @@
       "matiere": "mecanique-de-point-ipsa",
       "doc": "td3_base_de_frenet",
       "kind": "corrige",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 831855,
       "pdf": "td3_PhV111_corrige.pdf"
-    },
-    {
-      "name": "td3_PhV111_fiche",
-      "titre": "TD 3 -- Base de Frenet, rayon de courbure et accélérations tangentielle et normale -- Détailles",
-      "matiere": "mecanique-de-point-ipsa",
-      "doc": "td3_base_de_frenet",
-      "kind": "fiche",
-      "state": "ok",
-      "size": 928590,
-      "pdf": "td3_PhV111_fiche.pdf"
     },
     {
       "name": "td4_PhV111_enonces",
@@ -267,7 +187,7 @@
       "doc": "td4_loi_de_newton",
       "kind": "enonce",
       "state": "ok",
-      "size": 438015,
+      "size": 437727,
       "pdf": "td4_PhV111_enonces.pdf"
     },
     {
@@ -277,8 +197,88 @@
       "doc": "td4_loi_de_newton",
       "kind": "aides",
       "state": "ok",
-      "size": 627864,
+      "size": 627837,
       "pdf": "td4_PhV111_aides.pdf"
+    },
+    {
+      "name": "td4_PhV111_corrige",
+      "titre": "TD 4 -- Loi de Newton -- Corrigé",
+      "matiere": "mecanique-de-point-ipsa",
+      "doc": "td4_loi_de_newton",
+      "kind": "corrige",
+      "state": "ok",
+      "size": 764752,
+      "pdf": "td4_PhV111_corrige.pdf"
+    },
+    {
+      "name": "td4_PhV111_fiche",
+      "titre": "TD 4 -- Loi de Newton -- Détailles",
+      "matiere": "mecanique-de-point-ipsa",
+      "doc": "td4_loi_de_newton",
+      "kind": "fiche",
+      "state": "ok",
+      "size": 845251,
+      "pdf": "td4_PhV111_fiche.pdf"
+    },
+    {
+      "name": "td5_PhV111_enonces",
+      "titre": "TD 5 -- Travail, énergie cinétique, énergie potentielle, énergie mécanique -- Énoncé",
+      "matiere": "mecanique-de-point-ipsa",
+      "doc": "td5_nrj",
+      "kind": "enonce",
+      "state": "ok",
+      "size": 436894,
+      "pdf": "td5_PhV111_enonces.pdf"
+    },
+    {
+      "name": "td5_PhV111_aides",
+      "titre": "TD 5 -- Travail, énergie cinétique, énergie potentielle, énergie mécanique -- Aides",
+      "matiere": "mecanique-de-point-ipsa",
+      "doc": "td5_nrj",
+      "kind": "aides",
+      "state": "ok",
+      "size": 648715,
+      "pdf": "td5_PhV111_aides.pdf"
+    },
+    {
+      "name": "td6_PhV111_enonces",
+      "titre": "TD 6 -- Étude des chocs -- Énoncé",
+      "matiere": "mecanique-de-point-ipsa",
+      "doc": "td6_choc",
+      "kind": "enonce",
+      "state": "ok",
+      "size": 408579,
+      "pdf": "td6_PhV111_enonces.pdf"
+    },
+    {
+      "name": "td6_PhV111_aides",
+      "titre": "TD 6 -- Étude des chocs -- Aides",
+      "matiere": "mecanique-de-point-ipsa",
+      "doc": "td6_choc",
+      "kind": "aides",
+      "state": "perime",
+      "size": 585156,
+      "pdf": "td6_PhV111_aides.pdf"
+    },
+    {
+      "name": "td7_PhV111_enonces",
+      "titre": "TD 7 -- Composition du mouvement et changement de référentiels -- Énoncé",
+      "matiere": "mecanique-de-point-ipsa",
+      "doc": "td7_ref",
+      "kind": "enonce",
+      "state": "ok",
+      "size": 407466,
+      "pdf": "td7_PhV111_enonces.pdf"
+    },
+    {
+      "name": "td7_PhV111_aides",
+      "titre": "TD 7 -- Composition du mouvement et changement de référentiels -- Aides",
+      "matiere": "mecanique-de-point-ipsa",
+      "doc": "td7_ref",
+      "kind": "aides",
+      "state": "ok",
+      "size": 587260,
+      "pdf": "td7_PhV111_aides.pdf"
     },
     {
       "name": "projet1_PhV111_enonces",
@@ -286,7 +286,7 @@
       "matiere": "mecanique-de-point-ipsa",
       "doc": "projet1_Tsiolkovski",
       "kind": "enonce",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 416946,
       "pdf": "projet1_PhV111_enonces.pdf"
     },
@@ -296,7 +296,7 @@
       "matiere": "mecanique-de-point-ipsa",
       "doc": "projet1_Tsiolkovski",
       "kind": "aides",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 621877,
       "pdf": "projet1_PhV111_aides.pdf"
     },
@@ -306,7 +306,7 @@
       "matiere": "piscines-de-sciences-et-methodologie",
       "doc": "td4_vecteurs_en_physique",
       "kind": "autre",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 685155,
       "pdf": "td1_test_Ph110_0.pdf"
     },
@@ -316,7 +316,7 @@
       "matiere": "physique-ondes-ipsa",
       "doc": "td1_corde",
       "kind": "enonce",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 837134,
       "pdf": "td1_PhV212_enonce.pdf"
     },
@@ -326,7 +326,7 @@
       "matiere": "physique-ondes-ipsa",
       "doc": "td1_corde",
       "kind": "aides",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 996661,
       "pdf": "td1_PhV212_aides.pdf"
     },
@@ -336,19 +336,9 @@
       "matiere": "physique-ondes-ipsa",
       "doc": "td1_corde",
       "kind": "corrige",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 1396208,
       "pdf": "td1_PhV212_corrige.pdf"
-    },
-    {
-      "name": "td1_PhV212_fiche",
-      "titre": "TD 1 -- Propagation des ondes mécaniques sur une corde -- Détaille",
-      "matiere": "physique-ondes-ipsa",
-      "doc": "td1_corde",
-      "kind": "fiche",
-      "state": "ok",
-      "size": 1464154,
-      "pdf": "td1_PhV212_fiche.pdf"
     },
     {
       "name": "td1_PhV212_exs_maison_aide",
@@ -356,7 +346,7 @@
       "matiere": "physique-ondes-ipsa",
       "doc": "td1_corde",
       "kind": "aides",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 723654,
       "pdf": "td1_PhV212_exs_maison_aide.pdf"
     },
@@ -366,7 +356,7 @@
       "matiere": "physique-ondes-ipsa",
       "doc": "tp1_corde_ressort",
       "kind": "enonce",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 498979,
       "pdf": "tp1_PhV212_enonce.pdf"
     },
@@ -376,7 +366,7 @@
       "matiere": "physique-ondes-ipsa",
       "doc": "tp1_corde_ressort",
       "kind": "aides",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 576324,
       "pdf": "tp1_PhV212_aides.pdf"
     },
@@ -386,7 +376,7 @@
       "matiere": "physique-ondes-ipsa",
       "doc": "td2_ondes_sonores",
       "kind": "enonce",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 583395,
       "pdf": "td2_PhV212_enonce.pdf"
     },
@@ -396,7 +386,7 @@
       "matiere": "physique-ondes-ipsa",
       "doc": "td2_ondes_sonores",
       "kind": "aides",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 679411,
       "pdf": "td2_PhV212_aides.pdf"
     },
@@ -406,19 +396,9 @@
       "matiere": "physique-ondes-ipsa",
       "doc": "td2_ondes_sonores",
       "kind": "corrige",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 854358,
       "pdf": "td2_PhV212_corrige.pdf"
-    },
-    {
-      "name": "td2_PhV212_fiche",
-      "titre": "TD 2 -- Propagation des ondes sonores dans un fluide -- Détaille",
-      "matiere": "physique-ondes-ipsa",
-      "doc": "td2_ondes_sonores",
-      "kind": "fiche",
-      "state": "ok",
-      "size": 1005730,
-      "pdf": "td2_PhV212_fiche.pdf"
     },
     {
       "name": "td2_PhV212_exs_maison_aide",
@@ -426,7 +406,7 @@
       "matiere": "physique-ondes-ipsa",
       "doc": "td2_ondes_sonores",
       "kind": "aides",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 537240,
       "pdf": "td2_PhV212_exs_maison_aide.pdf"
     },
@@ -436,7 +416,7 @@
       "matiere": "physique-ondes-ipsa",
       "doc": "td3_reflexion_transmission",
       "kind": "enonce",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 661662,
       "pdf": "td3_PhV212_enonce.pdf"
     },
@@ -446,7 +426,7 @@
       "matiere": "physique-ondes-ipsa",
       "doc": "td3_reflexion_transmission",
       "kind": "aides",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 747818,
       "pdf": "td3_PhV212_aides.pdf"
     },
@@ -456,69 +436,39 @@
       "matiere": "physique-ondes-ipsa",
       "doc": "td3_reflexion_transmission",
       "kind": "corrige",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 877321,
       "pdf": "td3_PhV212_corrige.pdf"
     },
     {
-      "name": "td3_PhV212_fiche",
-      "titre": "TD 3 -- Coefficients de réflexion et transmission, impédance -- Fiche",
+      "name": "td4_PhV212_enonce",
+      "titre": "TD 4 -- Coefficients de réflexion et transmission, impédance -- Énoncés",
       "matiere": "physique-ondes-ipsa",
-      "doc": "td3_reflexion_transmission",
-      "kind": "fiche",
+      "doc": "td4_oscillateurs_couples",
+      "kind": "enonce",
       "state": "ok",
-      "size": 958463,
-      "pdf": "td3_PhV212_fiche.pdf"
+      "size": 653153,
+      "pdf": "td4_PhV212_enonce.pdf"
     },
     {
-      "name": "td1_exs_maison_fiche",
-      "titre": "TD 3 -- Coefficients de réflexion et transmission, impédance -- Fiche",
+      "name": "td4_PhV212_aides",
+      "titre": "TD 4 -- Oscillateurs couplés : petites oscillations, modes propres et battements -- Aides",
       "matiere": "physique-ondes-ipsa",
-      "doc": "td1_corde",
-      "kind": "fiche",
+      "doc": "td4_oscillateurs_couples",
+      "kind": "aides",
       "state": "ok",
-      "size": 750069,
-      "pdf": "td1_exs_maison_fiche.pdf"
+      "size": 842869,
+      "pdf": "td4_PhV212_aides.pdf"
     },
     {
-      "name": "td1_ONIP1_fiche",
-      "titre": "TD 1 --  -- Fiche",
-      "matiere": "onip-iogs",
-      "doc": "td1_intro",
-      "kind": "fiche",
-      "state": "ok",
-      "size": 623732,
-      "pdf": "td1_ONIP1_fiche.pdf"
-    },
-    {
-      "name": "td2_ONIP1_fiche",
-      "titre": "TD 2 --  -- Fiche",
-      "matiere": "onip-iogs",
-      "doc": "td2_seance2",
-      "kind": "fiche",
-      "state": "ok",
-      "size": 620048,
-      "pdf": "td2_ONIP1_fiche.pdf"
-    },
-    {
-      "name": "td3_ONIP1_fiche",
-      "titre": "TD 3 --  -- Fiche",
-      "matiere": "onip-iogs",
-      "doc": "td3_seance3",
-      "kind": "fiche",
-      "state": "ok",
-      "size": 528658,
-      "pdf": "td3_ONIP1_fiche.pdf"
-    },
-    {
-      "name": "td1_ex1_fiche",
-      "titre": "Fiche -- Corde de nylon",
+      "name": "td4_PhV212_corrige",
+      "titre": "TD 4 -- Oscillateurs couplés : petites oscillations, modes propres et battements -- Corrigé",
       "matiere": "physique-ondes-ipsa",
-      "doc": "td1_corde",
-      "kind": "fiche",
+      "doc": "td4_oscillateurs_couples",
+      "kind": "corrige",
       "state": "ok",
-      "size": 564975,
-      "pdf": "td1_ex1_fiche.pdf"
+      "size": 1099878,
+      "pdf": "td4_PhV212_corrige.pdf"
     },
     {
       "name": "td1_ex1_coup_de_pouce",
@@ -526,7 +476,7 @@
       "matiere": "physique-ondes-ipsa",
       "doc": "td1_corde",
       "kind": "autre",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 534886,
       "pdf": "td1_ex1_coup_de_pouce.pdf"
     },
@@ -536,7 +486,7 @@
       "matiere": "physique-ondes-ipsa",
       "doc": "td1_corde",
       "kind": "autre",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 623177,
       "pdf": "td1_ex1_solution_detaillee.pdf"
     },
@@ -546,7 +496,7 @@
       "matiere": "physique-ondes-ipsa",
       "doc": "td2_ondes_sonores",
       "kind": "enonce",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 581499,
       "pdf": "td2_enonce.pdf"
     },
@@ -556,7 +506,7 @@
       "matiere": "physique-ondes-ipsa",
       "doc": "td2_ondes_sonores",
       "kind": "corrige",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 773187,
       "pdf": "td2_corrige.pdf"
     },
@@ -566,7 +516,7 @@
       "matiere": "physique-ondes-ipsa",
       "doc": "td3_reflexion_transmission",
       "kind": "enonce",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 660830,
       "pdf": "td3_enonce.pdf"
     },
@@ -576,7 +526,7 @@
       "matiere": "physique-ondes-ipsa",
       "doc": "td3_reflexion_transmission",
       "kind": "corrige",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 807288,
       "pdf": "td3_corrige.pdf"
     },
@@ -586,7 +536,7 @@
       "matiere": "physique-ondes-ipsa",
       "doc": "chap1_intro",
       "kind": "autre",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 294496,
       "pdf": "cours_chap1.pdf"
     },
@@ -596,7 +546,7 @@
       "matiere": "agregation-physique",
       "doc": "lecon_oscillateurs",
       "kind": "autre",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 160653,
       "pdf": "agregation_physique_lecon_oscillateurs.pdf"
     },
@@ -606,7 +556,7 @@
       "matiere": "agregation-mathematiques",
       "doc": "dev1_exemple",
       "kind": "autre",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 217685,
       "pdf": "agregation_maths_dev1.pdf"
     },
@@ -616,10 +566,13 @@
       "matiere": "recherche-integrabilite-quantique",
       "doc": "intro_bethe",
       "kind": "autre",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "size": 318963,
       "pdf": "recherche_intro_bethe.pdf"
     }
   ],
-  "a_venir": []
+  "a_venir": [],
+  "fichiers": [
+    "Phv111_MP_Falcon9_Launch.xlsx"
+  ]
 }

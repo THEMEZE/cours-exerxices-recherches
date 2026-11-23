@@ -25,7 +25,7 @@ import yaml
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 from common_data import (  # noqa: E402
-    list_matieres, list_docs_td_like, load_td, apply_visibility_to_exercice,
+    list_matieres, list_docs_td_like, load_td, apply_visibility_to_exercice, exercise_types, expand_profile,
     enrich_media_paths, clean_exercice_for_web, niveau_label, blocks_to_markdown,
     title_parts, en_span, resolve_profile,
 )
@@ -178,7 +178,7 @@ def main():
     args = p.parse_args()
 
     profiles = yaml.safe_load((ROOT / "web" / "visibility_profiles.yaml").read_text())["profiles"]
-    forced = None if args.profile == "auto" else args.profile
+    forced = None if args.profile == "auto" else expand_profile(args.profile)
     if forced and forced not in profiles:
         print(f"!! profil inconnu : {args.profile} (disponibles : auto, {', '.join(profiles)})")
         return
@@ -187,7 +187,7 @@ def main():
 
     print(f"-- Notebooks, profil '{args.profile}' -> {out_dir}")
     for matiere in matieres:
-        for type_doc in ("td", "tp"):
+        for type_doc in exercise_types():
             for doc_slug in list_docs_td_like(matiere, type_doc):
                 export_td(matiere, doc_slug, type_doc, profiles, forced, out_dir)
 

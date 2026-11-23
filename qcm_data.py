@@ -113,24 +113,83 @@ def load_qcm_config() -> dict:
     return _cfg_cache["val"]
 
 
-def is_libre(matiere: str, chapitre: str | None = None) -> bool:
-    """Chapitre ouvert à l'entraînement libre ? Réglé dans build/config.yaml > qcm > acces_libre :
-    chapitre explicite > défaut de la matière > défaut global (vrai si rien n'est écrit)."""
+def _as_date(v):
+    """Date YAML (2026-12-01) ou chaîne « 2026-12-01 » -> date."""
+    import datetime as _dt
+    if isinstance(v, _dt.datetime):
+        return v.date()
+    if isinstance(v, _dt.date):
+        return v
+    return _dt.date.fromisoformat(str(v).strip())
+
+
+def _flag(v, today):
+    """Réglage d'accès : None (non précisé) | bool | {libre: bool, du: date, au: date}.
+    `du` / `au` = fenêtre d'ouverture (incluses) : un chapitre ouvert « du 2026-12-01 au 2027-01-15 »
+    n'est accessible à la maison que pendant les révisions."""
+    if v is None:
+        return None
+    if isinstance(v, dict):
+        if not v.get("libre", True):
+            return False
+        if v.get("du") and today < _as_date(v["du"]):
+            return False
+        if v.get("au") and today > _as_date(v["au"]):
+            return False
+        return True
+    return bool(v)
+
+
+def is_libre(matiere: str, chapitre: str | None = None, today=None) -> bool:
+    """Chapitre ouvert à l'entraînement libre (à la maison, sans séance ni enseignant) ?
+    Réglé dans build/config.yaml > qcm > acces_libre : chapitre explicite > défaut de la matière >
+    défaut global (vrai si rien n'est écrit). Chaque réglage est un booléen OU un bloc
+    {libre: true, du: 2026-12-01, au: 2027-01-15} (fenêtre de dates)."""
+    import datetime as _dt
+    today = today or _dt.date.today()
     al = load_qcm_config().get("acces_libre")
-    if isinstance(al, bool):
-        return al
+    if isinstance(al, (bool, dict)) and not (isinstance(al, dict) and ("defaut" in al or "matieres" in al)):
+        return bool(_flag(al, today))            # acces_libre: true | false | {libre, du, au}
     al = al or {}
-    default = al.get("defaut", True)
+    default = _flag(al.get("defaut"), today)
+    default = True if default is None else default
     m = (al.get("matieres") or {}).get(matiere)
-    if isinstance(m, bool):
-        return m
+    if m is not None and not (isinstance(m, dict) and ("defaut" in m or "chapitres" in m)):
+        return bool(_flag(m, today))             # matière : raccourci true | false | {libre, du, au}
     m = m or {}
-    default = m.get("defaut", default)
+    d = _flag(m.get("defaut"), today)
+    default = default if d is None else d
     if chapitre:
-        ch = (m.get("chapitres") or {}).get(chapitre)
+        ch = _flag((m.get("chapitres") or {}).get(chapitre), today)
         if ch is not None:
-            return bool(ch)
+            return ch
     return bool(default)
+
+
+# ----------------------------------------------------------------------
+# Rattachement des chapitres de QCM à un document / exercice / cours (pages Quartz)
+# build/config.yaml > qcm > liens :
+#     liens:
+#       <matiere>:
+#         <chapitre>:                                   # = nom du fichier qcm/<chapitre>.yaml
+#           - {type: td,     doc: td1_cinematique_cartesiennes}
+#           - {type: td,     doc: td1_cinematique_cartesiennes, exercice: ex2_balle_golf}
+#           - {type: projet, doc: projet1_Tsiolkovski}
+#           - {type: tp,     doc: tp1_corde_ressort}
+#           - {type: cours,  doc: chap1_intro}
+# (le chapitre est alors proposé, avec lien + QR code, sur la page visée — s'il est en accès libre).
+# En plus, ce rattachement est AUTOMATIQUE pour les questions qui portent `td:` (document) ou `lie_a:` (exercice).
+# ----------------------------------------------------------------------
+
+def chapitres_lies(matiere: str, type_doc: str, doc_slug: str, ex_slug: str | None = None) -> list[str]:
+    """Chapitres rattachés par config à (type_doc, doc_slug[, exercice]) -- liste dédupliquée, ordre du fichier."""
+    out = []
+    for chap, targets in ((load_qcm_config().get("liens") or {}).get(matiere) or {}).items():
+        for t in targets or []:
+            if (isinstance(t, dict) and t.get("type") == type_doc and t.get("doc") == doc_slug
+                    and (t.get("exercice") or None) == ex_slug and chap not in out):
+                out.append(chap)
+    return out
 
 
 # ----------------------------------------------------------------------

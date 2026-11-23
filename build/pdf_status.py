@@ -36,7 +36,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from common_data import DATA_DIR, resolve_child  # noqa: E402
+from common_data import DATA_DIR, resolve_child, apply_visibility_to_target  # noqa: E402
 import qcm_data  # noqa: E402  (cibles type_doc: qcm)
 
 OUT_DIR = ROOT / "build" / "output"
@@ -76,7 +76,8 @@ def solution_leaks(config: dict = None) -> list:
     """Cibles de type énoncé/aides dont les options affichent correction ou
     solution (probable copier-coller depuis une cible « corrigé »)."""
     config = config or load_config()
-    return [t["name"] for t in config.get("targets", [])
+    merged = [apply_visibility_to_target(t) for t in config.get("targets", [])]      # tient compte de `visibilite:`
+    return [t["name"] for t in merged
             if kind_of(t["name"]) in ("enonce", "aides")
             and (t.get("show_solution") or t.get("show_correction"))]
 
@@ -138,7 +139,9 @@ def source_hash(target: dict, config: dict, include_templates: bool = True):
     if files is None:
         return None
     h = hashlib.sha256()
-    h.update(json.dumps(target, sort_keys=True, default=str).encode())
+    # `visibilite:` d'une cible = réglages repris d'un profil (web/visibility_profiles.yaml) : on hache la cible
+    # COMPLÈTE, pour qu'un changement de profil rende le PDF « périmé » (sans `visibilite:` : inchangé).
+    h.update(json.dumps(apply_visibility_to_target(target), sort_keys=True, default=str).encode())
     # profils auteur (en-têtes de PDF)
     h.update(json.dumps(config.get("profils", {}), sort_keys=True, default=str).encode())
     h.update(json.dumps(config.get("couleurs", {}), sort_keys=True, default=str).encode())   # couleur de l'anglais

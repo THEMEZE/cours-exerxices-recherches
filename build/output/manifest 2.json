@@ -1,0 +1,722 @@
+{
+  "test": {
+    "matiere": "mecanique-de-point-ipsa",
+    "type_doc": "td",
+    "doc": "td1_cinematique_cartesiennes",
+    "pdf": "test.pdf",
+    "kind": "autre",
+    "src_hash": "97bcbe0b9cb4ce1b",
+    "built_at": "2026-11-13T11:48:05",
+    "size": 545371
+  },
+  "TP_IPSA_Generale_fiche": {
+    "matiere": "traveaux_pratiques-ipsa",
+    "type_doc": "tp",
+    "doc": "general",
+    "pdf": "TP_IPSA_Generale_fiche.pdf",
+    "kind": "fiche",
+    "src_hash": "05dd6c5ac15a02fc",
+    "built_at": "2026-11-13T11:48:10",
+    "size": 574719
+  },
+  "TP_IPSA_Astrophysique_fiche": {
+    "matiere": "traveaux_pratiques-ipsa",
+    "type_doc": "tp",
+    "doc": "astrophysique",
+    "pdf": "TP_IPSA_Astrophysique_fiche.pdf",
+    "kind": "fiche",
+    "src_hash": "10b0cee390a35735",
+    "built_at": "2026-11-13T11:48:15",
+    "size": 610752
+  },
+  "td1_PhV110_enonce": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td1_grandeurs_physiques",
+    "pdf": "td1_PhV110_enonce.pdf",
+    "kind": "enonce",
+    "src_hash": "398926c8e1615445",
+    "built_at": "2026-11-13T11:48:22",
+    "size": 881541
+  },
+  "td1_PhV110_corrige": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td1_grandeurs_physiques",
+    "pdf": "td1_PhV110_corrige.pdf",
+    "kind": "corrige",
+    "src_hash": "e3f5b50a4a4ef714",
+    "built_at": "2026-11-13T11:48:30",
+    "size": 881541
+  },
+  "td1_PhV110_fiche": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td1_grandeurs_physiques",
+    "pdf": "td1_PhV110_fiche.pdf",
+    "kind": "fiche",
+    "src_hash": "34fc9fff204392dc",
+    "built_at": "2026-11-13T11:48:42",
+    "size": 1387996
+  },
+  "td2_PhV110_enonce": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td2_derivation_et_differentielle",
+    "pdf": "td2_PhV110_enonce.pdf",
+    "kind": "enonce",
+    "src_hash": "cda9b8daf2d6563a",
+    "built_at": "2026-11-13T11:48:49",
+    "size": 768164
+  },
+  "td2_PhV110_corrige": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td2_derivation_et_differentielle",
+    "pdf": "td2_PhV110_corrige.pdf",
+    "kind": "corrige",
+    "src_hash": "e9ce544013060efc",
+    "built_at": "2026-11-13T11:48:57",
+    "size": 768164
+  },
+  "td2_PhV110_fiche": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td2_derivation_et_differentielle",
+    "pdf": "td2_PhV110_fiche.pdf",
+    "kind": "fiche",
+    "src_hash": "38a5fa9820e59abb",
+    "built_at": "2026-11-13T11:49:06",
+    "size": 824392
+  },
+  "td3_PhV110": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td3_fonctions_derives_integrale",
+    "pdf": "td3_PhV110.pdf",
+    "kind": "autre",
+    "src_hash": "2b6801971d3ace9d",
+    "built_at": "2026-11-13T11:49:10",
+    "size": 539303
+  },
+  "td3_PhV110_corrige": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td3_fonctions_derives_integrale",
+    "pdf": "td3_PhV110_corrige.pdf",
+    "kind": "corrige",
+    "src_hash": "aa5c1f5e330f8512",
+    "built_at": "2026-11-13T11:49:13",
+    "size": 506651
+  },
+  "td3_PhV110_fiche": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td3_fonctions_derives_integrale",
+    "pdf": "td3_PhV110_fiche.pdf",
+    "kind": "fiche",
+    "src_hash": "ba9e4fb422309c41",
+    "built_at": "2026-11-13T11:49:17",
+    "size": 539355
+  },
+  "td4_PhV110_corrige": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td4_vecteurs_en_physique",
+    "pdf": "td4_PhV110_corrige.pdf",
+    "kind": "corrige",
+    "src_hash": "ccfe8eeeb0b40885",
+    "built_at": "2026-11-13T11:49:25",
+    "size": 666712
+  },
+  "td4_PhV110_fiche": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td4_vecteurs_en_physique",
+    "pdf": "td4_PhV110_fiche.pdf",
+    "kind": "fiche",
+    "src_hash": "b8fdf0caef2b0ef4",
+    "built_at": "2026-11-13T11:49:33",
+    "size": 680452
+  },
+  "td1_PhV111_enonces": {
+    "matiere": "mecanique-de-point-ipsa",
+    "type_doc": "td",
+    "doc": "td1_cinematique_cartesiennes",
+    "pdf": "td1_PhV111_enonces.pdf",
+    "kind": "enonce",
+    "src_hash": "ce93c47149502d0f",
+    "built_at": "2026-11-13T11:49:37",
+    "size": 460883
+  },
+  "td1_PhV111_aides": {
+    "matiere": "mecanique-de-point-ipsa",
+    "type_doc": "td",
+    "doc": "td1_cinematique_cartesiennes",
+    "pdf": "td1_PhV111_aides.pdf",
+    "kind": "aides",
+    "src_hash": "5082c1e365f959f1",
+    "built_at": "2026-11-13T11:49:43",
+    "size": 708896
+  },
+  "td1_PhV111_corrige": {
+    "matiere": "mecanique-de-point-ipsa",
+    "type_doc": "td",
+    "doc": "td1_cinematique_cartesiennes",
+    "pdf": "td1_PhV111_corrige.pdf",
+    "kind": "corrige",
+    "src_hash": "83deff5db6137916",
+    "built_at": "2026-11-13T11:49:55",
+    "size": 1080675
+  },
+  "td1_PhV111_fiche": {
+    "matiere": "mecanique-de-point-ipsa",
+    "type_doc": "td",
+    "doc": "td1_cinematique_cartesiennes",
+    "pdf": "td1_PhV111_fiche.pdf",
+    "kind": "fiche",
+    "src_hash": "76bf474cabb166b9",
+    "built_at": "2026-11-13T11:50:12",
+    "size": 1224963
+  },
+  "td2_PhV111_enonces": {
+    "matiere": "mecanique-de-point-ipsa",
+    "type_doc": "td",
+    "doc": "td2_cinematique_en_coordonnees_polaire_ou_cylindrique",
+    "pdf": "td2_PhV111_enonces.pdf",
+    "kind": "enonce",
+    "src_hash": "05872965f439231b",
+    "built_at": "2026-11-13T11:50:15",
+    "size": 440769
+  },
+  "td2_PhV111_aides": {
+    "matiere": "mecanique-de-point-ipsa",
+    "type_doc": "td",
+    "doc": "td2_cinematique_en_coordonnees_polaire_ou_cylindrique",
+    "pdf": "td2_PhV111_aides.pdf",
+    "kind": "aides",
+    "src_hash": "ca05c18d5f930192",
+    "built_at": "2026-11-13T11:50:19",
+    "size": 644350
+  },
+  "td2_PhV111_corrige": {
+    "matiere": "mecanique-de-point-ipsa",
+    "type_doc": "td",
+    "doc": "td2_cinematique_en_coordonnees_polaire_ou_cylindrique",
+    "pdf": "td2_PhV111_corrige.pdf",
+    "kind": "corrige",
+    "src_hash": "790219016fa5c521",
+    "built_at": "2026-11-13T11:50:27",
+    "size": 772601
+  },
+  "td2_PhV111_fiche": {
+    "matiere": "mecanique-de-point-ipsa",
+    "type_doc": "td",
+    "doc": "td2_cinematique_en_coordonnees_polaire_ou_cylindrique",
+    "pdf": "td2_PhV111_fiche.pdf",
+    "kind": "fiche",
+    "src_hash": "ccc5d96aa3a2f1eb",
+    "built_at": "2026-11-13T11:50:36",
+    "size": 891389
+  },
+  "td3_PhV111_enonces": {
+    "matiere": "mecanique-de-point-ipsa",
+    "type_doc": "td",
+    "doc": "td3_base_de_frenet",
+    "pdf": "td3_PhV111_enonces.pdf",
+    "kind": "enonce",
+    "src_hash": "2842190e02dd513c",
+    "built_at": "2026-11-13T11:50:40",
+    "size": 483288
+  },
+  "td3_PhV111_aides": {
+    "matiere": "mecanique-de-point-ipsa",
+    "type_doc": "td",
+    "doc": "td3_base_de_frenet",
+    "pdf": "td3_PhV111_aides.pdf",
+    "kind": "aides",
+    "src_hash": "7841e4403179c313",
+    "built_at": "2026-11-13T11:50:44",
+    "size": 654506
+  },
+  "td3_PhV111_corrige": {
+    "matiere": "mecanique-de-point-ipsa",
+    "type_doc": "td",
+    "doc": "td3_base_de_frenet",
+    "pdf": "td3_PhV111_corrige.pdf",
+    "kind": "corrige",
+    "src_hash": "5b66a189b2728f42",
+    "built_at": "2026-11-13T11:50:52",
+    "size": 831855
+  },
+  "td3_PhV111_fiche": {
+    "matiere": "mecanique-de-point-ipsa",
+    "type_doc": "td",
+    "doc": "td3_base_de_frenet",
+    "pdf": "td3_PhV111_fiche.pdf",
+    "kind": "fiche",
+    "src_hash": "88da65455bb264ae",
+    "built_at": "2026-11-13T11:51:02",
+    "size": 928590
+  },
+  "td4_PhV111_enonces": {
+    "matiere": "mecanique-de-point-ipsa",
+    "type_doc": "td",
+    "doc": "td4_loi_de_newton",
+    "pdf": "td4_PhV111_enonces.pdf",
+    "kind": "enonce",
+    "src_hash": "8507685bb8dbf3b0",
+    "built_at": "2026-11-13T11:51:05",
+    "size": 438015
+  },
+  "td4_PhV111_aides": {
+    "matiere": "mecanique-de-point-ipsa",
+    "type_doc": "td",
+    "doc": "td4_loi_de_newton",
+    "pdf": "td4_PhV111_aides.pdf",
+    "kind": "aides",
+    "src_hash": "bbe0d7cad07d60bd",
+    "built_at": "2026-11-13T11:51:10",
+    "size": 627864
+  },
+  "td4_PhV111_corrige": {
+    "matiere": "mecanique-de-point-ipsa",
+    "type_doc": "td",
+    "doc": "td4_loi_de_newton",
+    "pdf": "td4_PhV111_corrige.pdf",
+    "kind": "corrige",
+    "src_hash": "5a6742bbea1d3503",
+    "built_at": "2026-11-13T11:51:17",
+    "size": 764797
+  },
+  "td4_PhV111_fiche": {
+    "matiere": "mecanique-de-point-ipsa",
+    "type_doc": "td",
+    "doc": "td4_loi_de_newton",
+    "pdf": "td4_PhV111_fiche.pdf",
+    "kind": "fiche",
+    "src_hash": "e078d86756c4772b",
+    "built_at": "2026-11-13T11:51:27",
+    "size": 845308
+  },
+  "td5_PhV111_fiche": {
+    "matiere": "mecanique-de-point-ipsa",
+    "type_doc": "td",
+    "doc": "td5_nrj",
+    "pdf": "td5_PhV111_fiche.pdf",
+    "kind": "fiche",
+    "src_hash": "6c210a988ed98591",
+    "built_at": "2026-11-18T06:20:10",
+    "size": 827903
+  },
+  "td6_PhV111_fiche": {
+    "matiere": "mecanique-de-point-ipsa",
+    "type_doc": "td",
+    "doc": "td6_choc",
+    "pdf": "td6_PhV111_fiche.pdf",
+    "kind": "fiche",
+    "src_hash": null,
+    "built_at": null,
+    "size": 781179
+  },
+  "td7_PhV111_fiche": {
+    "matiere": "mecanique-de-point-ipsa",
+    "type_doc": "td",
+    "doc": "td7_ref",
+    "pdf": "td7_PhV111_fiche.pdf",
+    "kind": "fiche",
+    "src_hash": "9d38f97c4e415401",
+    "built_at": "2026-11-19T09:54:08",
+    "size": 746870
+  },
+  "projet1_PhV111_enonces": {
+    "matiere": "mecanique-de-point-ipsa",
+    "type_doc": "td",
+    "doc": "projet1_Tsiolkovski",
+    "pdf": "projet1_PhV111_enonces.pdf",
+    "kind": "enonce",
+    "src_hash": "f2d3597d08cacdf0",
+    "built_at": "2026-11-13T12:19:53",
+    "size": 416946
+  },
+  "projet1_PhV111_aides": {
+    "matiere": "mecanique-de-point-ipsa",
+    "type_doc": "td",
+    "doc": "projet1_Tsiolkovski",
+    "pdf": "projet1_PhV111_aides.pdf",
+    "kind": "aides",
+    "src_hash": "bc36e5327def7219",
+    "built_at": "2026-11-13T12:19:57",
+    "size": 621877
+  },
+  "projet1_PhV111_corrige": {
+    "matiere": "mecanique-de-point-ipsa",
+    "type_doc": "td",
+    "doc": "projet1_Tsiolkovski",
+    "pdf": "projet1_PhV111_corrige.pdf",
+    "kind": "corrige",
+    "src_hash": "708e02723cd1e3d4",
+    "built_at": "2026-11-13T12:20:04",
+    "size": 732564
+  },
+  "projet1_PhV111_fiche": {
+    "matiere": "mecanique-de-point-ipsa",
+    "type_doc": "td",
+    "doc": "projet1_Tsiolkovski",
+    "pdf": "projet1_PhV111_fiche.pdf",
+    "kind": "fiche",
+    "src_hash": "0a437879ce280373",
+    "built_at": "2026-11-13T12:20:12",
+    "size": 800069
+  },
+  "td1_test_Ph110_0": {
+    "matiere": "piscines-de-sciences-et-methodologie",
+    "type_doc": "td",
+    "doc": "td4_vecteurs_en_physique",
+    "pdf": "td1_test_Ph110_0.pdf",
+    "kind": "autre",
+    "src_hash": "9474cac017eae9eb",
+    "built_at": "2026-11-13T11:51:35",
+    "size": 685155
+  },
+  "td1_PhV212_enonce": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td1_corde",
+    "pdf": "td1_PhV212_enonce.pdf",
+    "kind": "enonce",
+    "src_hash": "b205ccb7ce1f0d14",
+    "built_at": "2026-11-13T11:51:40",
+    "size": 837134
+  },
+  "td1_PhV212_aides": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td1_corde",
+    "pdf": "td1_PhV212_aides.pdf",
+    "kind": "aides",
+    "src_hash": "0eaa6c84bd23c9e8",
+    "built_at": "2026-11-13T11:51:49",
+    "size": 996661
+  },
+  "td1_PhV212_corrige": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td1_corde",
+    "pdf": "td1_PhV212_corrige.pdf",
+    "kind": "corrige",
+    "src_hash": "b0fb059f8bd655d7",
+    "built_at": "2026-11-13T11:52:07",
+    "size": 1396208
+  },
+  "td1_PhV212_fiche": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td1_corde",
+    "pdf": "td1_PhV212_fiche.pdf",
+    "kind": "fiche",
+    "src_hash": "a0a11159bb22c80d",
+    "built_at": "2026-11-13T11:52:27",
+    "size": 1464154
+  },
+  "td1_PhV212_exs_maison_aide": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td1_corde",
+    "pdf": "td1_PhV212_exs_maison_aide.pdf",
+    "kind": "aides",
+    "src_hash": "c024ffc154a3004f",
+    "built_at": "2026-11-13T11:52:32",
+    "size": 723654
+  },
+  "tp1_PhV212_enonce": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "tp",
+    "doc": "tp1_corde_ressort",
+    "pdf": "tp1_PhV212_enonce.pdf",
+    "kind": "enonce",
+    "src_hash": "8f41d44e299a8050",
+    "built_at": "2026-11-13T11:52:34",
+    "size": 498979
+  },
+  "tp1_PhV212_aides": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "tp",
+    "doc": "tp1_corde_ressort",
+    "pdf": "tp1_PhV212_aides.pdf",
+    "kind": "aides",
+    "src_hash": "0f39e73b78fe676d",
+    "built_at": "2026-11-13T11:52:38",
+    "size": 576324
+  },
+  "tp1_PhV212_corrige": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "tp",
+    "doc": "tp1_corde_ressort",
+    "pdf": "tp1_PhV212_corrige.pdf",
+    "kind": "corrige",
+    "src_hash": "9f365c492cce70ab",
+    "built_at": "2026-11-13T11:52:43",
+    "size": 638540
+  },
+  "tp1_PhV212_fiche": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "tp",
+    "doc": "tp1_corde_ressort",
+    "pdf": "tp1_PhV212_fiche.pdf",
+    "kind": "fiche",
+    "src_hash": "58966e57c68e1419",
+    "built_at": "2026-11-13T11:52:47",
+    "size": 653165
+  },
+  "td2_PhV212_enonce": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td2_ondes_sonores",
+    "pdf": "td2_PhV212_enonce.pdf",
+    "kind": "enonce",
+    "src_hash": "254fde04ef92bb4f",
+    "built_at": "2026-11-13T11:52:50",
+    "size": 583395
+  },
+  "td2_PhV212_aides": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td2_ondes_sonores",
+    "pdf": "td2_PhV212_aides.pdf",
+    "kind": "aides",
+    "src_hash": "b8f10abed6cf96e7",
+    "built_at": "2026-11-13T11:52:55",
+    "size": 679411
+  },
+  "td2_PhV212_corrige": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td2_ondes_sonores",
+    "pdf": "td2_PhV212_corrige.pdf",
+    "kind": "corrige",
+    "src_hash": "9e8755964ebd2f61",
+    "built_at": "2026-11-13T11:53:04",
+    "size": 854358
+  },
+  "td2_PhV212_fiche": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td2_ondes_sonores",
+    "pdf": "td2_PhV212_fiche.pdf",
+    "kind": "fiche",
+    "src_hash": "88a49d9efa003e17",
+    "built_at": "2026-11-13T11:53:15",
+    "size": 1005730
+  },
+  "td2_PhV212_exs_maison_aide": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td2_ondes_sonores",
+    "pdf": "td2_PhV212_exs_maison_aide.pdf",
+    "kind": "aides",
+    "src_hash": "3f82f7184523b613",
+    "built_at": "2026-11-13T11:53:18",
+    "size": 537240
+  },
+  "td3_PhV212_enonce": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td3_reflexion_transmission",
+    "pdf": "td3_PhV212_enonce.pdf",
+    "kind": "enonce",
+    "src_hash": "cb5bcb70346472cc",
+    "built_at": "2026-11-13T11:53:21",
+    "size": 661662
+  },
+  "td3_PhV212_aides": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td3_reflexion_transmission",
+    "pdf": "td3_PhV212_aides.pdf",
+    "kind": "aides",
+    "src_hash": "44f47bcafb954567",
+    "built_at": "2026-11-13T11:53:26",
+    "size": 747818
+  },
+  "td3_PhV212_corrige": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td3_reflexion_transmission",
+    "pdf": "td3_PhV212_corrige.pdf",
+    "kind": "corrige",
+    "src_hash": "48aa65d571c8806c",
+    "built_at": "2026-11-13T11:53:33",
+    "size": 877321
+  },
+  "td3_PhV212_fiche": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td3_reflexion_transmission",
+    "pdf": "td3_PhV212_fiche.pdf",
+    "kind": "fiche",
+    "src_hash": "cdb96bacb900572f",
+    "built_at": "2026-11-13T11:53:43",
+    "size": 958463
+  },
+  "td1_exs_maison_fiche": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td1_corde",
+    "pdf": "td1_exs_maison_fiche.pdf",
+    "kind": "fiche",
+    "src_hash": "4c9a44c8295f70dd",
+    "built_at": "2026-11-13T11:53:49",
+    "size": 750069
+  },
+  "td4_PhV212_fiche": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td4_oscillateurs_couples",
+    "pdf": "td4_PhV212_fiche.pdf",
+    "kind": "fiche",
+    "src_hash": "df86ed3f3bba2f15",
+    "built_at": "2026-11-18T06:28:08",
+    "size": 1203966
+  },
+  "td1_ONIP1_fiche": {
+    "matiere": "onip-iogs",
+    "type_doc": "td",
+    "doc": "td1_intro",
+    "pdf": "td1_ONIP1_fiche.pdf",
+    "kind": "fiche",
+    "src_hash": "159282b4ebe06409",
+    "built_at": "2026-11-13T11:53:55",
+    "size": 623732
+  },
+  "td2_ONIP1_fiche": {
+    "matiere": "onip-iogs",
+    "type_doc": "td",
+    "doc": "td2_seance2",
+    "pdf": "td2_ONIP1_fiche.pdf",
+    "kind": "fiche",
+    "src_hash": "1a241aff614a3cfd",
+    "built_at": "2026-11-13T11:54:01",
+    "size": 620048
+  },
+  "td3_ONIP1_fiche": {
+    "matiere": "onip-iogs",
+    "type_doc": "td",
+    "doc": "td3_seance3",
+    "pdf": "td3_ONIP1_fiche.pdf",
+    "kind": "fiche",
+    "src_hash": "1b2cda4f689bbcef",
+    "built_at": "2026-11-13T11:54:06",
+    "size": 528658
+  },
+  "td1_ex1_fiche": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td1_corde",
+    "pdf": "td1_ex1_fiche.pdf",
+    "kind": "fiche",
+    "src_hash": "19438989bef23421",
+    "built_at": "2026-11-13T11:54:09",
+    "size": 564975
+  },
+  "td1_ex1_coup_de_pouce": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td1_corde",
+    "pdf": "td1_ex1_coup_de_pouce.pdf",
+    "kind": "autre",
+    "src_hash": "dcbe18fc64bf3892",
+    "built_at": "2026-11-13T11:54:12",
+    "size": 534886
+  },
+  "td1_ex1_solution_detaillee": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td1_corde",
+    "pdf": "td1_ex1_solution_detaillee.pdf",
+    "kind": "autre",
+    "src_hash": "fff1f139b6dd5dcd",
+    "built_at": "2026-11-13T11:54:17",
+    "size": 623177
+  },
+  "td2_enonce": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td2_ondes_sonores",
+    "pdf": "td2_enonce.pdf",
+    "kind": "enonce",
+    "src_hash": "26a9731134273aec",
+    "built_at": "2026-11-13T11:54:20",
+    "size": 581499
+  },
+  "td2_corrige": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td2_ondes_sonores",
+    "pdf": "td2_corrige.pdf",
+    "kind": "corrige",
+    "src_hash": "36769eecabcbfc9b",
+    "built_at": "2026-11-13T11:54:28",
+    "size": 773187
+  },
+  "td3_enonce": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td3_reflexion_transmission",
+    "pdf": "td3_enonce.pdf",
+    "kind": "enonce",
+    "src_hash": "1310071603b8e7bf",
+    "built_at": "2026-11-13T11:54:31",
+    "size": 660830
+  },
+  "td3_corrige": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "td",
+    "doc": "td3_reflexion_transmission",
+    "pdf": "td3_corrige.pdf",
+    "kind": "corrige",
+    "src_hash": "14eecd06e8aafc74",
+    "built_at": "2026-11-13T11:54:37",
+    "size": 807288
+  },
+  "cours_chap1": {
+    "matiere": "physique-ondes-ipsa",
+    "type_doc": "cours",
+    "doc": "chap1_intro",
+    "pdf": "cours_chap1.pdf",
+    "kind": "autre",
+    "src_hash": "7aafc19252e71623",
+    "built_at": "2026-11-13T11:54:40",
+    "size": 294496
+  },
+  "agregation_physique_lecon_oscillateurs": {
+    "matiere": "agregation-physique",
+    "type_doc": "cours",
+    "doc": "lecon_oscillateurs",
+    "pdf": "agregation_physique_lecon_oscillateurs.pdf",
+    "kind": "autre",
+    "src_hash": "6d4ed9977dcdf93b",
+    "built_at": "2026-11-13T11:54:42",
+    "size": 160653
+  },
+  "agregation_maths_dev1": {
+    "matiere": "agregation-mathematiques",
+    "type_doc": "td",
+    "doc": "dev1_exemple",
+    "pdf": "agregation_maths_dev1.pdf",
+    "kind": "autre",
+    "src_hash": "92040e5f532ec562",
+    "built_at": "2026-11-13T11:54:44",
+    "size": 217685
+  },
+  "recherche_intro_bethe": {
+    "matiere": "recherche-integrabilite-quantique",
+    "type_doc": "cours",
+    "doc": "intro_bethe",
+    "pdf": "recherche_intro_bethe.pdf",
+    "kind": "autre",
+    "src_hash": "c5f2ad7cde1bc5c2",
+    "built_at": "2026-11-13T11:54:46",
+    "size": 318963
+  }
+}

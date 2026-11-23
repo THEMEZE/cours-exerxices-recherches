@@ -21,7 +21,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-EXT = {".svg", ".png", ".jpg", ".jpeg", ".gif", ".webp", ".mp4", ".webm", ".pdf"}
+EXT = {".svg", ".png", ".jpg", ".jpeg", ".gif", ".webp", ".mp4", ".webm", ".pdf",
+       # fichiers rattachés (build/config.yaml > fichiers) : tableurs, archives, notebooks...
+       ".xlsx", ".xlsm", ".xls", ".ods", ".csv", ".zip", ".docx", ".pptx", ".ipynb", ".py", ".txt"}
 
 SOURCES = {
     "figures": ROOT / "web" / "public" / "figures",

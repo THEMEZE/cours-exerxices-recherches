@@ -89,7 +89,7 @@ def publication_block() -> str:
     out = [PUB_HEADER + "publication:", "  defaut: avant_seance", "  matieres:"]
     for m in cd.list_matieres():
         out += [f"    {m}:   # {cd.load_matiere_meta(m)['nom']}", "      defaut: avant_seance"]
-        for ty in ("cours", "td", "tp"):
+        for ty in (*cd.section_types(), *cd.exercise_types()):
             docs = docs_of(m, ty)
             if docs:
                 out.append(f"      {ty}:")
@@ -129,7 +129,7 @@ def main():
             if mcfg is None:
                 print(f"   ℹ️  matière {m} absente de publication: -> utilise `defaut` ; ajoute-la à la main si besoin")
                 continue
-            for ty in ("cours", "td", "tp"):
+            for ty in (*cd.section_types(), *cd.exercise_types()):
                 missing = [d for d in docs_of(m, ty) if d not in (mcfg.get(ty) or {})]
                 if missing:
                     print(f"   ℹ️  {m}/{ty} non listés (profil par défaut) : {', '.join(missing)}")

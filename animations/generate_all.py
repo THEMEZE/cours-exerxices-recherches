@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Parcourt data/**/*.yaml, repère tous les champs `animation:` (au niveau
-exercice ou question), et appelle le bon script animations/src/<ref>.py
+exercice ou question, dans les TD/TP/projets, les cours ET les QCM), et appelle le bon script animations/src/<ref>.py
 avec les `params` fournis dans la donnée.
 
 Convention : `animation.ref` = nom du fichier script SANS l'extension .py,
@@ -21,8 +21,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
+import qcm_data  # noqa: E402
 from common_data import (  # noqa: E402
-    list_matieres, list_docs_td_like, load_td, list_docs_cours, load_cours,
+    list_matieres, list_docs_td_like, load_td, list_docs_cours, load_cours, exercise_types,
 )
 
 SRC_DIR = ROOT / "animations" / "src"
@@ -39,7 +40,7 @@ def find_animation_refs():
     d'erreur)."""
     refs = []
     for matiere in list_matieres():
-        for type_doc in ("td", "tp"):
+        for type_doc in exercise_types():
             for doc_slug in list_docs_td_like(matiere, type_doc):
                 _, exercices = load_td(matiere, doc_slug, type_doc=type_doc)
                 for ex in exercices:
@@ -55,6 +56,11 @@ def find_animation_refs():
             for sec in doc.get("sections", []):
                 if sec.get("animation"):
                     refs.append((sec["animation"], f"{source}::section{sec.get('numero', '?')}"))
+        # QCM : une animation citée UNIQUEMENT dans un QCM n'était jamais générée (le serveur QCM la réclame
+        # pourtant : /animations/<ref>/animation.gif). Mêmes `ref` / `params` / `formats` que dans un TD.
+        for q in qcm_data.load_all_qcm(matiere):
+            if q.get("animation"):
+                refs.append((q["animation"], f"{matiere}/qcm/{q.get('id')}"))
     return refs
 
 

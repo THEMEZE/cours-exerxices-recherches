@@ -41,7 +41,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 from common_data import (  # noqa: E402
     list_matieres, load_matiere_meta, list_docs_td_like, load_td,
-    list_docs_cours,
+    list_docs_cours, exercise_types,
 )
 from web.export_markdown import slugify, TYPE_LABELS  # noqa: E402
 
@@ -108,7 +108,7 @@ def cmd_list(args):
     for matiere in list_matieres():
         meta = load_matiere_meta(matiere)
         print(f"\n  📚 {matiere} — {meta['nom']}")
-        for type_doc in ("td", "tp"):
+        for type_doc in exercise_types():
             docs = list_docs_td_like(matiere, type_doc)
             for d in docs:
                 print(f"     [{type_doc}]    {d}")
@@ -127,7 +127,7 @@ def expected_quartz_paths(quartz_content: Path):
     for matiere in list_matieres():
         meta = load_matiere_meta(matiere)
         ns = quartz_content / meta.get("quartz_namespace", matiere)
-        for type_doc in ("td", "tp"):
+        for type_doc in exercise_types():
             for doc_slug in list_docs_td_like(matiere, type_doc):
                 td_meta, exercices = load_td(matiere, doc_slug, type_doc=type_doc)
                 chap = slugify(td_meta["chapitre_cours"])

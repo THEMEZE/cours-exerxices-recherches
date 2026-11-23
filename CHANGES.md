@@ -89,3 +89,17 @@ publication:
 - Le profil d'un document règle le contenu Quartz / JSON / notebooks ET les PDF en ligne (`pdf_publies`).
 - `python3 tools/add_config_blocks.py` insère les deux blocs dans TON config.yaml sans toucher à tes cibles.
 - `avant_seance` n'affiche plus les coups de pouce sur le site (énoncés seulement, comme décrit) ; remets `show_coup_de_pouce: true` dans `web/visibility_profiles.yaml` si tu les voulais.
+
+---
+
+## Ajout : types de documents, rubriques, fichiers rattachés, profils all_eleve / all_prof, liens QCM
+Voir **GUIDE_EVOLUTIONS.md**. Nouveau : `web/rubriques_md.py`, `web/fichiers_joints.py`, `tools/check_evolutions.py`, `tools/qcm_stats.py`.
+Modifiés : `common_data.py`, `qcm_data.py`, `web/export_markdown.py`, `web/publish_hosting.py`, `web/sync_quartz_assets.py`, `web/visibility_profiles.yaml`,
+`web/publish_profile.sh`, `build/config.yaml`, + boucles `td/tp` → types déclarés (`export_json`, `build_notebooks`, `generate_all`, `manage`, `check_data`, `add_config_blocks`).
+Déplacé : `td/projet1_Tsiolkovski` → `projet/projet1_Tsiolkovski`.
+
+### Puis : états de chapitre, all_fast, QCM local
+`publication.etats` (a_venir / en_cours / termine / les tiens) accepté partout où un profil est attendu (`common_data.expand_profile`) ; profil `all_fast` ; `tools/qcm_local.sh` ; commentaires de `build/config.yaml` réécrits (mode d'emploi + tableau des profils) ; `segno` ajouté à `requirements.txt`.
+
+### Puis : fichiers par profil, show_* explicites, héritage `visibilite:`
+`fichiers:` accepte `profils` / `sauf` / `si` ; profils réécrits avec un `show_*` par élément (+ `show_metadonnees` sur le site) ; cibles PDF `visibilite: <profil|état>` (`common_data.apply_visibility_to_target`, empreinte `pdf_status`) ; nouveaux contrôles dans `tools/check_evolutions.py`.

@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-11-19T09:54:09",
+  "generated_at": "2026-11-24T01:46:43",
   "counts": {
-    "ok": 71,
-    "perime": 0,
-    "present_sans_empreinte": 1,
-    "manquant": 6,
+    "ok": 19,
+    "perime": 1,
+    "present_sans_empreinte": 64,
+    "manquant": 0,
     "cible_cassee": 0
   },
   "orphans": [],
@@ -18,12 +18,12 @@
       "kind": "autre",
       "publier": null,
       "pdf": "test.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 545371,
-      "mtime": "2026-11-13T11:48:05",
-      "src_hash": "97bcbe0b9cb4ce1b",
-      "built_hash": "97bcbe0b9cb4ce1b"
+      "mtime": "2026-11-13T18:48:05",
+      "src_hash": "2d99d619b85c9d40",
+      "built_hash": null
     },
     {
       "name": "TP_IPSA_Generale_fiche",
@@ -34,12 +34,12 @@
       "kind": "fiche",
       "publier": null,
       "pdf": "TP_IPSA_Generale_fiche.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 574719,
-      "mtime": "2026-11-13T11:48:10",
-      "src_hash": "05dd6c5ac15a02fc",
-      "built_hash": "05dd6c5ac15a02fc"
+      "mtime": "2026-11-13T18:48:10",
+      "src_hash": "3533cb0fa520ee0d",
+      "built_hash": null
     },
     {
       "name": "TP_IPSA_Astrophysique_fiche",
@@ -50,12 +50,12 @@
       "kind": "fiche",
       "publier": null,
       "pdf": "TP_IPSA_Astrophysique_fiche.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 610752,
-      "mtime": "2026-11-13T11:48:15",
-      "src_hash": "10b0cee390a35735",
-      "built_hash": "10b0cee390a35735"
+      "mtime": "2026-11-13T18:48:15",
+      "src_hash": "0ee58abd55867f20",
+      "built_hash": null
     },
     {
       "name": "td1_PhV110_enonce",
@@ -66,12 +66,12 @@
       "kind": "enonce",
       "publier": null,
       "pdf": "td1_PhV110_enonce.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 881541,
-      "mtime": "2026-11-13T11:48:22",
-      "src_hash": "398926c8e1615445",
-      "built_hash": "398926c8e1615445"
+      "mtime": "2026-11-13T18:48:22",
+      "src_hash": "53ca2ecec6802d01",
+      "built_hash": null
     },
     {
       "name": "td1_PhV110_corrige",
@@ -82,12 +82,12 @@
       "kind": "corrige",
       "publier": null,
       "pdf": "td1_PhV110_corrige.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 881541,
-      "mtime": "2026-11-13T11:48:30",
-      "src_hash": "e3f5b50a4a4ef714",
-      "built_hash": "e3f5b50a4a4ef714"
+      "mtime": "2026-11-13T18:48:30",
+      "src_hash": "c532b8149427d2fc",
+      "built_hash": null
     },
     {
       "name": "td1_PhV110_fiche",
@@ -98,12 +98,12 @@
       "kind": "fiche",
       "publier": null,
       "pdf": "td1_PhV110_fiche.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 1387996,
-      "mtime": "2026-11-13T11:48:42",
-      "src_hash": "34fc9fff204392dc",
-      "built_hash": "34fc9fff204392dc"
+      "mtime": "2026-11-13T18:48:42",
+      "src_hash": "be36896db4ff150c",
+      "built_hash": null
     },
     {
       "name": "td2_PhV110_enonce",
@@ -114,12 +114,12 @@
       "kind": "enonce",
       "publier": null,
       "pdf": "td2_PhV110_enonce.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 768164,
-      "mtime": "2026-11-13T11:48:49",
-      "src_hash": "cda9b8daf2d6563a",
-      "built_hash": "cda9b8daf2d6563a"
+      "mtime": "2026-11-13T18:48:49",
+      "src_hash": "209ebb75eb6e38fe",
+      "built_hash": null
     },
     {
       "name": "td2_PhV110_corrige",
@@ -130,12 +130,12 @@
       "kind": "corrige",
       "publier": null,
       "pdf": "td2_PhV110_corrige.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 768164,
-      "mtime": "2026-11-13T11:48:57",
-      "src_hash": "e9ce544013060efc",
-      "built_hash": "e9ce544013060efc"
+      "mtime": "2026-11-13T18:48:57",
+      "src_hash": "d5091fd8801cb08c",
+      "built_hash": null
     },
     {
       "name": "td2_PhV110_fiche",
@@ -146,12 +146,12 @@
       "kind": "fiche",
       "publier": null,
       "pdf": "td2_PhV110_fiche.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 824392,
-      "mtime": "2026-11-13T11:49:06",
-      "src_hash": "38a5fa9820e59abb",
-      "built_hash": "38a5fa9820e59abb"
+      "mtime": "2026-11-13T18:49:06",
+      "src_hash": "ac694cbd3d2b4464",
+      "built_hash": null
     },
     {
       "name": "td3_PhV110",
@@ -162,12 +162,12 @@
       "kind": "autre",
       "publier": null,
       "pdf": "td3_PhV110.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 539303,
-      "mtime": "2026-11-13T11:49:10",
-      "src_hash": "2b6801971d3ace9d",
-      "built_hash": "2b6801971d3ace9d"
+      "mtime": "2026-11-13T18:49:10",
+      "src_hash": "0b51261238d7888a",
+      "built_hash": null
     },
     {
       "name": "td3_PhV110_corrige",
@@ -178,12 +178,12 @@
       "kind": "corrige",
       "publier": null,
       "pdf": "td3_PhV110_corrige.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 506651,
-      "mtime": "2026-11-13T11:49:13",
-      "src_hash": "aa5c1f5e330f8512",
-      "built_hash": "aa5c1f5e330f8512"
+      "mtime": "2026-11-13T18:49:13",
+      "src_hash": "3a4203f627c14ce5",
+      "built_hash": null
     },
     {
       "name": "td3_PhV110_fiche",
@@ -194,12 +194,12 @@
       "kind": "fiche",
       "publier": null,
       "pdf": "td3_PhV110_fiche.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 539355,
-      "mtime": "2026-11-13T11:49:17",
-      "src_hash": "ba9e4fb422309c41",
-      "built_hash": "ba9e4fb422309c41"
+      "mtime": "2026-11-13T18:49:17",
+      "src_hash": "97fccc50906d533d",
+      "built_hash": null
     },
     {
       "name": "td4_PhV110_corrige",
@@ -210,12 +210,12 @@
       "kind": "corrige",
       "publier": null,
       "pdf": "td4_PhV110_corrige.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 666712,
-      "mtime": "2026-11-13T11:49:25",
-      "src_hash": "ccfe8eeeb0b40885",
-      "built_hash": "ccfe8eeeb0b40885"
+      "mtime": "2026-11-13T18:49:25",
+      "src_hash": "13e1d0cea4b85610",
+      "built_hash": null
     },
     {
       "name": "td4_PhV110_fiche",
@@ -226,12 +226,12 @@
       "kind": "fiche",
       "publier": null,
       "pdf": "td4_PhV110_fiche.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 680452,
-      "mtime": "2026-11-13T11:49:33",
-      "src_hash": "b8fdf0caef2b0ef4",
-      "built_hash": "b8fdf0caef2b0ef4"
+      "mtime": "2026-11-13T18:49:33",
+      "src_hash": "2178c18dc0cd9f6f",
+      "built_hash": null
     },
     {
       "name": "td1_PhV111_enonces",
@@ -242,12 +242,12 @@
       "kind": "enonce",
       "publier": null,
       "pdf": "td1_PhV111_enonces.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 460883,
-      "mtime": "2026-11-13T11:49:37",
-      "src_hash": "ce93c47149502d0f",
-      "built_hash": "ce93c47149502d0f"
+      "mtime": "2026-11-13T18:49:37",
+      "src_hash": "2ed516fe9aec3e14",
+      "built_hash": null
     },
     {
       "name": "td1_PhV111_aides",
@@ -258,12 +258,12 @@
       "kind": "aides",
       "publier": null,
       "pdf": "td1_PhV111_aides.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 708896,
-      "mtime": "2026-11-13T11:49:43",
-      "src_hash": "5082c1e365f959f1",
-      "built_hash": "5082c1e365f959f1"
+      "mtime": "2026-11-13T18:49:43",
+      "src_hash": "7a0508e67f0293e1",
+      "built_hash": null
     },
     {
       "name": "td1_PhV111_corrige",
@@ -274,12 +274,12 @@
       "kind": "corrige",
       "publier": null,
       "pdf": "td1_PhV111_corrige.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 1080675,
-      "mtime": "2026-11-13T11:49:55",
-      "src_hash": "83deff5db6137916",
-      "built_hash": "83deff5db6137916"
+      "mtime": "2026-11-13T18:49:55",
+      "src_hash": "44560976e3732ac7",
+      "built_hash": null
     },
     {
       "name": "td1_PhV111_fiche",
@@ -290,12 +290,12 @@
       "kind": "fiche",
       "publier": null,
       "pdf": "td1_PhV111_fiche.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 1224963,
-      "mtime": "2026-11-13T11:50:12",
-      "src_hash": "76bf474cabb166b9",
-      "built_hash": "76bf474cabb166b9"
+      "mtime": "2026-11-13T18:50:12",
+      "src_hash": "e07ab8b0795dd6b3",
+      "built_hash": null
     },
     {
       "name": "td2_PhV111_enonces",
@@ -306,12 +306,12 @@
       "kind": "enonce",
       "publier": null,
       "pdf": "td2_PhV111_enonces.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 440769,
-      "mtime": "2026-11-13T11:50:15",
-      "src_hash": "05872965f439231b",
-      "built_hash": "05872965f439231b"
+      "mtime": "2026-11-13T18:50:15",
+      "src_hash": "aaa89565621ae0e2",
+      "built_hash": null
     },
     {
       "name": "td2_PhV111_aides",
@@ -322,12 +322,12 @@
       "kind": "aides",
       "publier": null,
       "pdf": "td2_PhV111_aides.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 644350,
-      "mtime": "2026-11-13T11:50:19",
-      "src_hash": "ca05c18d5f930192",
-      "built_hash": "ca05c18d5f930192"
+      "mtime": "2026-11-13T18:50:19",
+      "src_hash": "9f8a11ed335728bc",
+      "built_hash": null
     },
     {
       "name": "td2_PhV111_corrige",
@@ -338,12 +338,12 @@
       "kind": "corrige",
       "publier": null,
       "pdf": "td2_PhV111_corrige.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 772601,
-      "mtime": "2026-11-13T11:50:27",
-      "src_hash": "790219016fa5c521",
-      "built_hash": "790219016fa5c521"
+      "mtime": "2026-11-13T18:50:27",
+      "src_hash": "90f0220fcda01f58",
+      "built_hash": null
     },
     {
       "name": "td2_PhV111_fiche",
@@ -354,12 +354,12 @@
       "kind": "fiche",
       "publier": null,
       "pdf": "td2_PhV111_fiche.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 891389,
-      "mtime": "2026-11-13T11:50:36",
-      "src_hash": "ccc5d96aa3a2f1eb",
-      "built_hash": "ccc5d96aa3a2f1eb"
+      "mtime": "2026-11-13T18:50:36",
+      "src_hash": "009365e869c6a2dd",
+      "built_hash": null
     },
     {
       "name": "td3_PhV111_enonces",
@@ -370,12 +370,12 @@
       "kind": "enonce",
       "publier": null,
       "pdf": "td3_PhV111_enonces.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 483288,
-      "mtime": "2026-11-13T11:50:40",
-      "src_hash": "2842190e02dd513c",
-      "built_hash": "2842190e02dd513c"
+      "mtime": "2026-11-13T18:50:40",
+      "src_hash": "024f815f14aaabc2",
+      "built_hash": null
     },
     {
       "name": "td3_PhV111_aides",
@@ -386,12 +386,12 @@
       "kind": "aides",
       "publier": null,
       "pdf": "td3_PhV111_aides.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 654506,
-      "mtime": "2026-11-13T11:50:44",
-      "src_hash": "7841e4403179c313",
-      "built_hash": "7841e4403179c313"
+      "mtime": "2026-11-13T18:50:44",
+      "src_hash": "4f83c769fa59c7e8",
+      "built_hash": null
     },
     {
       "name": "td3_PhV111_corrige",
@@ -402,12 +402,12 @@
       "kind": "corrige",
       "publier": null,
       "pdf": "td3_PhV111_corrige.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 831855,
-      "mtime": "2026-11-13T11:50:52",
-      "src_hash": "5b66a189b2728f42",
-      "built_hash": "5b66a189b2728f42"
+      "mtime": "2026-11-13T18:50:52",
+      "src_hash": "5f69b4028d6da328",
+      "built_hash": null
     },
     {
       "name": "td3_PhV111_fiche",
@@ -418,12 +418,12 @@
       "kind": "fiche",
       "publier": null,
       "pdf": "td3_PhV111_fiche.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 928590,
-      "mtime": "2026-11-13T11:51:02",
-      "src_hash": "88da65455bb264ae",
-      "built_hash": "88da65455bb264ae"
+      "mtime": "2026-11-13T18:51:02",
+      "src_hash": "a7380b0707ff1227",
+      "built_hash": null
     },
     {
       "name": "td4_PhV111_enonces",
@@ -436,10 +436,10 @@
       "pdf": "td4_PhV111_enonces.pdf",
       "state": "ok",
       "pdf_exists": true,
-      "size": 438015,
-      "mtime": "2026-11-13T11:51:05",
-      "src_hash": "8507685bb8dbf3b0",
-      "built_hash": "8507685bb8dbf3b0"
+      "size": 437727,
+      "mtime": "2026-11-24T01:19:15",
+      "src_hash": "6f84fb5706742c74",
+      "built_hash": "6f84fb5706742c74"
     },
     {
       "name": "td4_PhV111_aides",
@@ -452,10 +452,10 @@
       "pdf": "td4_PhV111_aides.pdf",
       "state": "ok",
       "pdf_exists": true,
-      "size": 627864,
-      "mtime": "2026-11-13T11:51:10",
-      "src_hash": "bbe0d7cad07d60bd",
-      "built_hash": "bbe0d7cad07d60bd"
+      "size": 627837,
+      "mtime": "2026-11-24T01:13:22",
+      "src_hash": "7669cc18dcda1098",
+      "built_hash": "7669cc18dcda1098"
     },
     {
       "name": "td4_PhV111_corrige",
@@ -468,10 +468,10 @@
       "pdf": "td4_PhV111_corrige.pdf",
       "state": "ok",
       "pdf_exists": true,
-      "size": 764797,
-      "mtime": "2026-11-13T11:51:17",
-      "src_hash": "5a6742bbea1d3503",
-      "built_hash": "5a6742bbea1d3503"
+      "size": 764752,
+      "mtime": "2026-11-24T01:13:30",
+      "src_hash": "82e082bb98239a81",
+      "built_hash": "82e082bb98239a81"
     },
     {
       "name": "td4_PhV111_fiche",
@@ -484,10 +484,10 @@
       "pdf": "td4_PhV111_fiche.pdf",
       "state": "ok",
       "pdf_exists": true,
-      "size": 845308,
-      "mtime": "2026-11-13T11:51:27",
-      "src_hash": "e078d86756c4772b",
-      "built_hash": "e078d86756c4772b"
+      "size": 845251,
+      "mtime": "2026-11-24T01:13:40",
+      "src_hash": "0c560c2bd08becb9",
+      "built_hash": "0c560c2bd08becb9"
     },
     {
       "name": "td5_PhV111_enonces",
@@ -498,12 +498,12 @@
       "kind": "enonce",
       "publier": null,
       "pdf": "td5_PhV111_enonces.pdf",
-      "state": "manquant",
-      "pdf_exists": false,
-      "size": null,
-      "mtime": null,
-      "src_hash": "18e226234839b16b",
-      "built_hash": null
+      "state": "ok",
+      "pdf_exists": true,
+      "size": 436894,
+      "mtime": "2026-11-24T01:19:18",
+      "src_hash": "6fa7c6963092c992",
+      "built_hash": "6fa7c6963092c992"
     },
     {
       "name": "td5_PhV111_aides",
@@ -514,12 +514,12 @@
       "kind": "aides",
       "publier": null,
       "pdf": "td5_PhV111_aides.pdf",
-      "state": "manquant",
-      "pdf_exists": false,
-      "size": null,
-      "mtime": null,
-      "src_hash": "9a4435ee911e25df",
-      "built_hash": null
+      "state": "ok",
+      "pdf_exists": true,
+      "size": 648715,
+      "mtime": "2026-11-24T01:13:44",
+      "src_hash": "b587e1a5d8dd2de3",
+      "built_hash": "b587e1a5d8dd2de3"
     },
     {
       "name": "td5_PhV111_corrige",
@@ -530,12 +530,12 @@
       "kind": "corrige",
       "publier": null,
       "pdf": "td5_PhV111_corrige.pdf",
-      "state": "manquant",
-      "pdf_exists": false,
-      "size": null,
-      "mtime": null,
-      "src_hash": "5b8b1405ece991d1",
-      "built_hash": null
+      "state": "ok",
+      "pdf_exists": true,
+      "size": 753329,
+      "mtime": "2026-11-24T01:13:51",
+      "src_hash": "298afcfc56ea9e49",
+      "built_hash": "298afcfc56ea9e49"
     },
     {
       "name": "td5_PhV111_fiche",
@@ -548,30 +548,126 @@
       "pdf": "td5_PhV111_fiche.pdf",
       "state": "ok",
       "pdf_exists": true,
-      "size": 827903,
-      "mtime": "2026-11-18T06:20:10",
-      "src_hash": "6c210a988ed98591",
-      "built_hash": "6c210a988ed98591"
+      "size": 828181,
+      "mtime": "2026-11-24T01:14:00",
+      "src_hash": "5bd073ca85e205dc",
+      "built_hash": "5bd073ca85e205dc"
+    },
+    {
+      "name": "td6_PhV111_enonces",
+      "titre": "TD 6 -- Étude des chocs -- Énoncé",
+      "matiere": "mecanique-de-point-ipsa",
+      "type_doc": "td",
+      "doc": "td6_choc",
+      "kind": "enonce",
+      "publier": null,
+      "pdf": "td6_PhV111_enonces.pdf",
+      "state": "ok",
+      "pdf_exists": true,
+      "size": 408579,
+      "mtime": "2026-11-24T01:19:21",
+      "src_hash": "cc465b602b46672e",
+      "built_hash": "cc465b602b46672e"
+    },
+    {
+      "name": "td6_PhV111_aides",
+      "titre": "TD 6 -- Étude des chocs -- Aides",
+      "matiere": "mecanique-de-point-ipsa",
+      "type_doc": "td",
+      "doc": "td6_choc",
+      "kind": "aides",
+      "publier": null,
+      "pdf": "td6_PhV111_aides.pdf",
+      "state": "perime",
+      "pdf_exists": true,
+      "size": 585156,
+      "mtime": "2026-11-24T01:14:04",
+      "src_hash": "ec91ee3c3609dd69",
+      "built_hash": "32f6a12bf661cebe"
+    },
+    {
+      "name": "td6_PhV111_corrige",
+      "titre": "TD 6 -- Étude des chocs -- Corrigé",
+      "matiere": "mecanique-de-point-ipsa",
+      "type_doc": "td",
+      "doc": "td6_choc",
+      "kind": "corrige",
+      "publier": null,
+      "pdf": "td6_PhV111_corrige.pdf",
+      "state": "ok",
+      "pdf_exists": true,
+      "size": 692249,
+      "mtime": "2026-11-24T01:19:28",
+      "src_hash": "e5a2a324d3a3f610",
+      "built_hash": "e5a2a324d3a3f610"
     },
     {
       "name": "td6_PhV111_fiche",
-      "titre": "TD 5 -- Travail, énergie cinétique, énergie potentielle, énergie mécanique -- Détailles",
+      "titre": "TD 6 -- Étude des chocs -- Détailles",
       "matiere": "mecanique-de-point-ipsa",
       "type_doc": "td",
       "doc": "td6_choc",
       "kind": "fiche",
       "publier": null,
       "pdf": "td6_PhV111_fiche.pdf",
-      "state": "present_sans_empreinte",
+      "state": "ok",
       "pdf_exists": true,
-      "size": 781179,
-      "mtime": "2026-11-19T09:53:59",
-      "src_hash": "464fefc92cb3fec9",
-      "built_hash": null
+      "size": 778117,
+      "mtime": "2026-11-24T01:19:37",
+      "src_hash": "2e1c1f929280599b",
+      "built_hash": "2e1c1f929280599b"
+    },
+    {
+      "name": "td7_PhV111_enonces",
+      "titre": "TD 7 -- Composition du mouvement et changement de référentiels -- Énoncé",
+      "matiere": "mecanique-de-point-ipsa",
+      "type_doc": "td",
+      "doc": "td7_ref",
+      "kind": "enonce",
+      "publier": null,
+      "pdf": "td7_PhV111_enonces.pdf",
+      "state": "ok",
+      "pdf_exists": true,
+      "size": 407466,
+      "mtime": "2026-11-24T01:19:40",
+      "src_hash": "c9a3f2f6fcca4349",
+      "built_hash": "c9a3f2f6fcca4349"
+    },
+    {
+      "name": "td7_PhV111_aides",
+      "titre": "TD 7 -- Composition du mouvement et changement de référentiels -- Aides",
+      "matiere": "mecanique-de-point-ipsa",
+      "type_doc": "td",
+      "doc": "td7_ref",
+      "kind": "aides",
+      "publier": null,
+      "pdf": "td7_PhV111_aides.pdf",
+      "state": "ok",
+      "pdf_exists": true,
+      "size": 587260,
+      "mtime": "2026-11-24T01:14:24",
+      "src_hash": "595c518606cacb3d",
+      "built_hash": "595c518606cacb3d"
+    },
+    {
+      "name": "td7_PhV111_corrige",
+      "titre": "TD 7 -- Composition du mouvement et changement de référentiels -- Corrigé",
+      "matiere": "mecanique-de-point-ipsa",
+      "type_doc": "td",
+      "doc": "td7_ref",
+      "kind": "corrige",
+      "publier": null,
+      "pdf": "td7_PhV111_corrige.pdf",
+      "state": "ok",
+      "pdf_exists": true,
+      "size": 680731,
+      "mtime": "2026-11-24T01:14:30",
+      "src_hash": "c9160ffc4f520431",
+      "built_hash": "c9160ffc4f520431"
     },
     {
       "name": "td7_PhV111_fiche",
-      "titre": "TD 5 -- Travail, énergie cinétique, énergie potentielle, énergie mécanique -- Détailles",
+      "titre": "TD 7 -- Composition du mouvement et changement de référentiels -- Détailles",
       "matiere": "mecanique-de-point-ipsa",
       "type_doc": "td",
       "doc": "td7_ref",
@@ -580,74 +676,74 @@
       "pdf": "td7_PhV111_fiche.pdf",
       "state": "ok",
       "pdf_exists": true,
-      "size": 746870,
-      "mtime": "2026-11-19T09:54:08",
-      "src_hash": "9d38f97c4e415401",
-      "built_hash": "9d38f97c4e415401"
+      "size": 746778,
+      "mtime": "2026-11-24T01:14:39",
+      "src_hash": "75ca10b457cf80a2",
+      "built_hash": "75ca10b457cf80a2"
     },
     {
       "name": "projet1_PhV111_enonces",
       "titre": "Projet 1 -- Conservation de la quantité de mouvement & équation de Tsiolkovski. -- Énoncé",
       "matiere": "mecanique-de-point-ipsa",
-      "type_doc": "td",
+      "type_doc": "projet",
       "doc": "projet1_Tsiolkovski",
       "kind": "enonce",
       "publier": null,
       "pdf": "projet1_PhV111_enonces.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 416946,
-      "mtime": "2026-11-13T12:19:53",
-      "src_hash": "f2d3597d08cacdf0",
-      "built_hash": "f2d3597d08cacdf0"
+      "mtime": "2026-11-13T19:19:53",
+      "src_hash": "f4fab89ee8eca930",
+      "built_hash": null
     },
     {
       "name": "projet1_PhV111_aides",
       "titre": "Projet 1 -- Conservation de la quantité de mouvement & équation de Tsiolkovski. -- Aides",
       "matiere": "mecanique-de-point-ipsa",
-      "type_doc": "td",
+      "type_doc": "projet",
       "doc": "projet1_Tsiolkovski",
       "kind": "aides",
       "publier": null,
       "pdf": "projet1_PhV111_aides.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 621877,
-      "mtime": "2026-11-13T12:19:57",
-      "src_hash": "bc36e5327def7219",
-      "built_hash": "bc36e5327def7219"
+      "mtime": "2026-11-13T19:19:57",
+      "src_hash": "abb31dcd2eb9e469",
+      "built_hash": null
     },
     {
       "name": "projet1_PhV111_corrige",
       "titre": "Projet 1 -- Conservation de la quantité de mouvement & équation de Tsiolkovski. -- Corrigé",
       "matiere": "mecanique-de-point-ipsa",
-      "type_doc": "td",
+      "type_doc": "projet",
       "doc": "projet1_Tsiolkovski",
       "kind": "corrige",
       "publier": null,
       "pdf": "projet1_PhV111_corrige.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 732564,
-      "mtime": "2026-11-13T12:20:04",
-      "src_hash": "708e02723cd1e3d4",
-      "built_hash": "708e02723cd1e3d4"
+      "mtime": "2026-11-13T19:20:04",
+      "src_hash": "2f1b158201718949",
+      "built_hash": null
     },
     {
       "name": "projet1_PhV111_fiche",
       "titre": "Projet 1 -- Conservation de la quantité de mouvement & équation de Tsiolkovski. -- Détailles",
       "matiere": "mecanique-de-point-ipsa",
-      "type_doc": "td",
+      "type_doc": "projet",
       "doc": "projet1_Tsiolkovski",
       "kind": "fiche",
       "publier": null,
       "pdf": "projet1_PhV111_fiche.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 800069,
-      "mtime": "2026-11-13T12:20:12",
-      "src_hash": "0a437879ce280373",
-      "built_hash": "0a437879ce280373"
+      "mtime": "2026-11-13T19:20:12",
+      "src_hash": "05ab084d1459ef7c",
+      "built_hash": null
     },
     {
       "name": "td1_test_Ph110_0",
@@ -658,12 +754,12 @@
       "kind": "autre",
       "publier": null,
       "pdf": "td1_test_Ph110_0.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 685155,
-      "mtime": "2026-11-13T11:51:35",
-      "src_hash": "9474cac017eae9eb",
-      "built_hash": "9474cac017eae9eb"
+      "mtime": "2026-11-13T18:51:35",
+      "src_hash": "4048b933211d8dc4",
+      "built_hash": null
     },
     {
       "name": "td1_PhV212_enonce",
@@ -674,12 +770,12 @@
       "kind": "enonce",
       "publier": null,
       "pdf": "td1_PhV212_enonce.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 837134,
-      "mtime": "2026-11-13T11:51:40",
-      "src_hash": "b205ccb7ce1f0d14",
-      "built_hash": "b205ccb7ce1f0d14"
+      "mtime": "2026-11-13T18:51:40",
+      "src_hash": "ac314cb356f07826",
+      "built_hash": null
     },
     {
       "name": "td1_PhV212_aides",
@@ -690,12 +786,12 @@
       "kind": "aides",
       "publier": null,
       "pdf": "td1_PhV212_aides.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 996661,
-      "mtime": "2026-11-13T11:51:49",
-      "src_hash": "0eaa6c84bd23c9e8",
-      "built_hash": "0eaa6c84bd23c9e8"
+      "mtime": "2026-11-13T18:51:49",
+      "src_hash": "93b0a1b9dc57ca9e",
+      "built_hash": null
     },
     {
       "name": "td1_PhV212_corrige",
@@ -706,12 +802,12 @@
       "kind": "corrige",
       "publier": null,
       "pdf": "td1_PhV212_corrige.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 1396208,
-      "mtime": "2026-11-13T11:52:07",
-      "src_hash": "b0fb059f8bd655d7",
-      "built_hash": "b0fb059f8bd655d7"
+      "mtime": "2026-11-13T18:52:07",
+      "src_hash": "c0163bc51b0d8f84",
+      "built_hash": null
     },
     {
       "name": "td1_PhV212_fiche",
@@ -722,12 +818,12 @@
       "kind": "fiche",
       "publier": null,
       "pdf": "td1_PhV212_fiche.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 1464154,
-      "mtime": "2026-11-13T11:52:27",
-      "src_hash": "a0a11159bb22c80d",
-      "built_hash": "a0a11159bb22c80d"
+      "mtime": "2026-11-13T18:52:27",
+      "src_hash": "b30449e18f32f0f2",
+      "built_hash": null
     },
     {
       "name": "td1_PhV212_exs_maison_aide",
@@ -738,12 +834,12 @@
       "kind": "aides",
       "publier": null,
       "pdf": "td1_PhV212_exs_maison_aide.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 723654,
-      "mtime": "2026-11-13T11:52:32",
-      "src_hash": "c024ffc154a3004f",
-      "built_hash": "c024ffc154a3004f"
+      "mtime": "2026-11-13T18:52:32",
+      "src_hash": "160630f2194ec938",
+      "built_hash": null
     },
     {
       "name": "tp1_PhV212_enonce",
@@ -754,12 +850,12 @@
       "kind": "enonce",
       "publier": null,
       "pdf": "tp1_PhV212_enonce.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 498979,
-      "mtime": "2026-11-13T11:52:34",
-      "src_hash": "8f41d44e299a8050",
-      "built_hash": "8f41d44e299a8050"
+      "mtime": "2026-11-13T18:52:34",
+      "src_hash": "2ed0c67989243642",
+      "built_hash": null
     },
     {
       "name": "tp1_PhV212_aides",
@@ -770,12 +866,12 @@
       "kind": "aides",
       "publier": null,
       "pdf": "tp1_PhV212_aides.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 576324,
-      "mtime": "2026-11-13T11:52:38",
-      "src_hash": "0f39e73b78fe676d",
-      "built_hash": "0f39e73b78fe676d"
+      "mtime": "2026-11-13T18:52:38",
+      "src_hash": "a58175a9dde4a6f5",
+      "built_hash": null
     },
     {
       "name": "tp1_PhV212_corrige",
@@ -786,12 +882,12 @@
       "kind": "corrige",
       "publier": null,
       "pdf": "tp1_PhV212_corrige.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 638540,
-      "mtime": "2026-11-13T11:52:43",
-      "src_hash": "9f365c492cce70ab",
-      "built_hash": "9f365c492cce70ab"
+      "mtime": "2026-11-13T18:52:43",
+      "src_hash": "0364dd051357ec3f",
+      "built_hash": null
     },
     {
       "name": "tp1_PhV212_fiche",
@@ -802,12 +898,12 @@
       "kind": "fiche",
       "publier": null,
       "pdf": "tp1_PhV212_fiche.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 653165,
-      "mtime": "2026-11-13T11:52:47",
-      "src_hash": "58966e57c68e1419",
-      "built_hash": "58966e57c68e1419"
+      "mtime": "2026-11-13T18:52:47",
+      "src_hash": "2dd668da0b506511",
+      "built_hash": null
     },
     {
       "name": "td2_PhV212_enonce",
@@ -818,12 +914,12 @@
       "kind": "enonce",
       "publier": null,
       "pdf": "td2_PhV212_enonce.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 583395,
-      "mtime": "2026-11-13T11:52:50",
-      "src_hash": "254fde04ef92bb4f",
-      "built_hash": "254fde04ef92bb4f"
+      "mtime": "2026-11-13T18:52:50",
+      "src_hash": "431852305f001caf",
+      "built_hash": null
     },
     {
       "name": "td2_PhV212_aides",
@@ -834,12 +930,12 @@
       "kind": "aides",
       "publier": null,
       "pdf": "td2_PhV212_aides.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 679411,
-      "mtime": "2026-11-13T11:52:55",
-      "src_hash": "b8f10abed6cf96e7",
-      "built_hash": "b8f10abed6cf96e7"
+      "mtime": "2026-11-13T18:52:55",
+      "src_hash": "cba606b15820a2fe",
+      "built_hash": null
     },
     {
       "name": "td2_PhV212_corrige",
@@ -850,12 +946,12 @@
       "kind": "corrige",
       "publier": null,
       "pdf": "td2_PhV212_corrige.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 854358,
-      "mtime": "2026-11-13T11:53:04",
-      "src_hash": "9e8755964ebd2f61",
-      "built_hash": "9e8755964ebd2f61"
+      "mtime": "2026-11-13T18:53:04",
+      "src_hash": "8727cf3a9cd94e13",
+      "built_hash": null
     },
     {
       "name": "td2_PhV212_fiche",
@@ -866,12 +962,12 @@
       "kind": "fiche",
       "publier": null,
       "pdf": "td2_PhV212_fiche.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 1005730,
-      "mtime": "2026-11-13T11:53:15",
-      "src_hash": "88a49d9efa003e17",
-      "built_hash": "88a49d9efa003e17"
+      "mtime": "2026-11-13T18:53:15",
+      "src_hash": "9f3d538aafcb03e2",
+      "built_hash": null
     },
     {
       "name": "td2_PhV212_exs_maison_aide",
@@ -882,12 +978,12 @@
       "kind": "aides",
       "publier": null,
       "pdf": "td2_PhV212_exs_maison_aide.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 537240,
-      "mtime": "2026-11-13T11:53:18",
-      "src_hash": "3f82f7184523b613",
-      "built_hash": "3f82f7184523b613"
+      "mtime": "2026-11-13T18:53:18",
+      "src_hash": "5375ebbd28acee0c",
+      "built_hash": null
     },
     {
       "name": "td3_PhV212_enonce",
@@ -898,12 +994,12 @@
       "kind": "enonce",
       "publier": null,
       "pdf": "td3_PhV212_enonce.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 661662,
-      "mtime": "2026-11-13T11:53:21",
-      "src_hash": "cb5bcb70346472cc",
-      "built_hash": "cb5bcb70346472cc"
+      "mtime": "2026-11-13T18:53:21",
+      "src_hash": "e3e1d9fc0aa0dbdd",
+      "built_hash": null
     },
     {
       "name": "td3_PhV212_aides",
@@ -914,12 +1010,12 @@
       "kind": "aides",
       "publier": null,
       "pdf": "td3_PhV212_aides.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 747818,
-      "mtime": "2026-11-13T11:53:26",
-      "src_hash": "44f47bcafb954567",
-      "built_hash": "44f47bcafb954567"
+      "mtime": "2026-11-13T18:53:26",
+      "src_hash": "dbacbe0498482682",
+      "built_hash": null
     },
     {
       "name": "td3_PhV212_corrige",
@@ -930,12 +1026,12 @@
       "kind": "corrige",
       "publier": null,
       "pdf": "td3_PhV212_corrige.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 877321,
-      "mtime": "2026-11-13T11:53:33",
-      "src_hash": "48aa65d571c8806c",
-      "built_hash": "48aa65d571c8806c"
+      "mtime": "2026-11-13T18:53:33",
+      "src_hash": "59c957ad8a22fe2e",
+      "built_hash": null
     },
     {
       "name": "td3_PhV212_fiche",
@@ -946,12 +1042,12 @@
       "kind": "fiche",
       "publier": null,
       "pdf": "td3_PhV212_fiche.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 958463,
-      "mtime": "2026-11-13T11:53:43",
-      "src_hash": "cdb96bacb900572f",
-      "built_hash": "cdb96bacb900572f"
+      "mtime": "2026-11-13T18:53:43",
+      "src_hash": "82552001dc91ae1f",
+      "built_hash": null
     },
     {
       "name": "td1_exs_maison_fiche",
@@ -962,12 +1058,12 @@
       "kind": "fiche",
       "publier": null,
       "pdf": "td1_exs_maison_fiche.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 750069,
-      "mtime": "2026-11-13T11:53:49",
-      "src_hash": "4c9a44c8295f70dd",
-      "built_hash": "4c9a44c8295f70dd"
+      "mtime": "2026-11-13T18:53:49",
+      "src_hash": "9e2b03c537233127",
+      "built_hash": null
     },
     {
       "name": "td4_PhV212_enonce",
@@ -978,12 +1074,12 @@
       "kind": "enonce",
       "publier": null,
       "pdf": "td4_PhV212_enonce.pdf",
-      "state": "manquant",
-      "pdf_exists": false,
-      "size": null,
-      "mtime": null,
-      "src_hash": "c2bcbd61046bc180",
-      "built_hash": null
+      "state": "ok",
+      "pdf_exists": true,
+      "size": 653153,
+      "mtime": "2026-11-24T01:14:42",
+      "src_hash": "5c89899ae79a0df0",
+      "built_hash": "5c89899ae79a0df0"
     },
     {
       "name": "td4_PhV212_aides",
@@ -994,12 +1090,12 @@
       "kind": "aides",
       "publier": null,
       "pdf": "td4_PhV212_aides.pdf",
-      "state": "manquant",
-      "pdf_exists": false,
-      "size": null,
-      "mtime": null,
-      "src_hash": "ad1001b4aac59c66",
-      "built_hash": null
+      "state": "ok",
+      "pdf_exists": true,
+      "size": 842869,
+      "mtime": "2026-11-24T01:14:49",
+      "src_hash": "79b835a96c065644",
+      "built_hash": "79b835a96c065644"
     },
     {
       "name": "td4_PhV212_corrige",
@@ -1010,12 +1106,12 @@
       "kind": "corrige",
       "publier": null,
       "pdf": "td4_PhV212_corrige.pdf",
-      "state": "manquant",
-      "pdf_exists": false,
-      "size": null,
-      "mtime": null,
-      "src_hash": "d193886bfb7a7dc9",
-      "built_hash": null
+      "state": "ok",
+      "pdf_exists": true,
+      "size": 1099878,
+      "mtime": "2026-11-24T01:15:01",
+      "src_hash": "8483aa415aaee3bb",
+      "built_hash": "8483aa415aaee3bb"
     },
     {
       "name": "td4_PhV212_fiche",
@@ -1028,10 +1124,10 @@
       "pdf": "td4_PhV212_fiche.pdf",
       "state": "ok",
       "pdf_exists": true,
-      "size": 1203966,
-      "mtime": "2026-11-18T06:28:08",
-      "src_hash": "df86ed3f3bba2f15",
-      "built_hash": "df86ed3f3bba2f15"
+      "size": 1203728,
+      "mtime": "2026-11-24T01:15:18",
+      "src_hash": "e1d7119501879079",
+      "built_hash": "e1d7119501879079"
     },
     {
       "name": "td1_ONIP1_fiche",
@@ -1042,12 +1138,12 @@
       "kind": "fiche",
       "publier": null,
       "pdf": "td1_ONIP1_fiche.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 623732,
-      "mtime": "2026-11-13T11:53:55",
-      "src_hash": "159282b4ebe06409",
-      "built_hash": "159282b4ebe06409"
+      "mtime": "2026-11-13T18:53:55",
+      "src_hash": "e753577a56da4ae9",
+      "built_hash": null
     },
     {
       "name": "td2_ONIP1_fiche",
@@ -1058,12 +1154,12 @@
       "kind": "fiche",
       "publier": null,
       "pdf": "td2_ONIP1_fiche.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 620048,
-      "mtime": "2026-11-13T11:54:01",
-      "src_hash": "1a241aff614a3cfd",
-      "built_hash": "1a241aff614a3cfd"
+      "mtime": "2026-11-13T18:54:01",
+      "src_hash": "8d087e960fb15ae6",
+      "built_hash": null
     },
     {
       "name": "td3_ONIP1_fiche",
@@ -1074,12 +1170,12 @@
       "kind": "fiche",
       "publier": null,
       "pdf": "td3_ONIP1_fiche.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 528658,
-      "mtime": "2026-11-13T11:54:06",
-      "src_hash": "1b2cda4f689bbcef",
-      "built_hash": "1b2cda4f689bbcef"
+      "mtime": "2026-11-13T18:54:06",
+      "src_hash": "263fb065416cd85c",
+      "built_hash": null
     },
     {
       "name": "td1_ex1_fiche",
@@ -1090,12 +1186,12 @@
       "kind": "fiche",
       "publier": null,
       "pdf": "td1_ex1_fiche.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 564975,
-      "mtime": "2026-11-13T11:54:09",
-      "src_hash": "19438989bef23421",
-      "built_hash": "19438989bef23421"
+      "mtime": "2026-11-13T18:54:09",
+      "src_hash": "c67a019afb0c2a31",
+      "built_hash": null
     },
     {
       "name": "td1_ex1_coup_de_pouce",
@@ -1106,12 +1202,12 @@
       "kind": "autre",
       "publier": null,
       "pdf": "td1_ex1_coup_de_pouce.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 534886,
-      "mtime": "2026-11-13T11:54:12",
-      "src_hash": "dcbe18fc64bf3892",
-      "built_hash": "dcbe18fc64bf3892"
+      "mtime": "2026-11-13T18:54:12",
+      "src_hash": "7df0338ab8bd0e34",
+      "built_hash": null
     },
     {
       "name": "td1_ex1_solution_detaillee",
@@ -1122,12 +1218,12 @@
       "kind": "autre",
       "publier": null,
       "pdf": "td1_ex1_solution_detaillee.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 623177,
-      "mtime": "2026-11-13T11:54:17",
-      "src_hash": "fff1f139b6dd5dcd",
-      "built_hash": "fff1f139b6dd5dcd"
+      "mtime": "2026-11-13T18:54:17",
+      "src_hash": "9c165ad6d3945fc0",
+      "built_hash": null
     },
     {
       "name": "td2_enonce",
@@ -1138,12 +1234,12 @@
       "kind": "enonce",
       "publier": null,
       "pdf": "td2_enonce.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 581499,
-      "mtime": "2026-11-13T11:54:20",
-      "src_hash": "26a9731134273aec",
-      "built_hash": "26a9731134273aec"
+      "mtime": "2026-11-13T18:54:20",
+      "src_hash": "a12d21860bc3c06a",
+      "built_hash": null
     },
     {
       "name": "td2_corrige",
@@ -1154,12 +1250,12 @@
       "kind": "corrige",
       "publier": null,
       "pdf": "td2_corrige.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 773187,
-      "mtime": "2026-11-13T11:54:28",
-      "src_hash": "36769eecabcbfc9b",
-      "built_hash": "36769eecabcbfc9b"
+      "mtime": "2026-11-13T18:54:28",
+      "src_hash": "131646d7d2122576",
+      "built_hash": null
     },
     {
       "name": "td3_enonce",
@@ -1170,12 +1266,12 @@
       "kind": "enonce",
       "publier": null,
       "pdf": "td3_enonce.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 660830,
-      "mtime": "2026-11-13T11:54:31",
-      "src_hash": "1310071603b8e7bf",
-      "built_hash": "1310071603b8e7bf"
+      "mtime": "2026-11-13T18:54:31",
+      "src_hash": "43fd6a2e1222d187",
+      "built_hash": null
     },
     {
       "name": "td3_corrige",
@@ -1186,12 +1282,12 @@
       "kind": "corrige",
       "publier": null,
       "pdf": "td3_corrige.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 807288,
-      "mtime": "2026-11-13T11:54:37",
-      "src_hash": "14eecd06e8aafc74",
-      "built_hash": "14eecd06e8aafc74"
+      "mtime": "2026-11-13T18:54:37",
+      "src_hash": "1ce2396263999ecc",
+      "built_hash": null
     },
     {
       "name": "cours_chap1",
@@ -1202,12 +1298,12 @@
       "kind": "autre",
       "publier": null,
       "pdf": "cours_chap1.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 294496,
-      "mtime": "2026-11-13T11:54:40",
-      "src_hash": "7aafc19252e71623",
-      "built_hash": "7aafc19252e71623"
+      "mtime": "2026-11-13T18:54:40",
+      "src_hash": "cf20b27f62cd85af",
+      "built_hash": null
     },
     {
       "name": "agregation_physique_lecon_oscillateurs",
@@ -1218,12 +1314,12 @@
       "kind": "autre",
       "publier": null,
       "pdf": "agregation_physique_lecon_oscillateurs.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 160653,
-      "mtime": "2026-11-13T11:54:42",
-      "src_hash": "6d4ed9977dcdf93b",
-      "built_hash": "6d4ed9977dcdf93b"
+      "mtime": "2026-11-13T18:54:42",
+      "src_hash": "7f1f7c29933621a2",
+      "built_hash": null
     },
     {
       "name": "agregation_maths_dev1",
@@ -1234,12 +1330,12 @@
       "kind": "autre",
       "publier": null,
       "pdf": "agregation_maths_dev1.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 217685,
-      "mtime": "2026-11-13T11:54:44",
-      "src_hash": "92040e5f532ec562",
-      "built_hash": "92040e5f532ec562"
+      "mtime": "2026-11-13T18:54:44",
+      "src_hash": "1d0e774cdd80f9d1",
+      "built_hash": null
     },
     {
       "name": "recherche_intro_bethe",
@@ -1250,12 +1346,12 @@
       "kind": "autre",
       "publier": null,
       "pdf": "recherche_intro_bethe.pdf",
-      "state": "ok",
+      "state": "present_sans_empreinte",
       "pdf_exists": true,
       "size": 318963,
-      "mtime": "2026-11-13T11:54:46",
-      "src_hash": "c5f2ad7cde1bc5c2",
-      "built_hash": "c5f2ad7cde1bc5c2"
+      "mtime": "2026-11-13T18:54:46",
+      "src_hash": "f581002388cfbc76",
+      "built_hash": null
     }
   ]
 }

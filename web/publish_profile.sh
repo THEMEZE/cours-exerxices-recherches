@@ -19,6 +19,10 @@
 # Usage :
 #   ./web/publish_profile.sh auto                 # profil de chaque cours/TP/TD d'après build/config.yaml (publication:)
 #   ./web/publish_profile.sh <profil> [--matiere <matiere_slug>]   # force UN profil partout
+#       profils : avant_seance | pendant_seance_avec_indices | corrige_resultats_seuls | corrige_complet
+#                 all_eleve (tout pour l'élève, SANS contenu enseignant) | all_fast (énoncé + coup de pouce + corrigé + solution, rien d'autre)
+#                 all_prof (TOUT, fiches comprises : site privé !)
+#       ou un ÉTAT de chapitre : a_venir | en_cours | termine (traduits en profil, voir config.yaml > publication > etats)
 #   CREATE_MISSING=1 ./web/publish_profile.sh <profil>   # crée aussi les pages-sujets absentes de Quartz
 # ============================================================
 set -e
@@ -39,14 +43,18 @@ fi
 # tout autre nom = ce profil est forcé pour tous les documents.
 if ! python3 - "$PROFILE" <<'PYCHECK'
 import sys, yaml
+sys.path.insert(0, ".")
+import common_data as cd
 p = yaml.safe_load(open("web/visibility_profiles.yaml"))["profiles"]
 name = sys.argv[1]
-if name != "auto" and name not in p:
+if name != "auto" and cd.expand_profile(name) not in p:
     print(f"Profil inconnu : {name}")
-    print("Usage: ./web/publish_profile.sh [auto | <profil>] [--matiere <matiere_slug>]")
+    print("Usage: ./web/publish_profile.sh [auto | <profil> | <état>] [--matiere <matiere_slug>]")
     print("  - auto   (profil de chaque document, d'après build/config.yaml)")
     for n in p:
         print(f"  - {n}")
+    for e, pr in cd.etats().items():
+        print(f"  - {e}  (état de chapitre -> {pr})")
     sys.exit(1)
 PYCHECK
 then
@@ -56,8 +64,13 @@ fi
 QUARTZ_CONTENT="${QUARTZ_CONTENT:-$ROOT/../Quartz5/content}"
 QUARTZ_DIR="$(dirname "$QUARTZ_CONTENT")"
 
+# Un ÉTAT de chapitre (a_venir / en_cours / termine...) est traduit en son profil (config.yaml > publication > etats).
+PROFILE="$(python3 -c "import sys; sys.path.insert(0, '.'); import common_data as cd; print(cd.expand_profile(sys.argv[1]))" "$PROFILE")"
 echo "🔄 Profil actif -> $PROFILE"
 echo "$PROFILE" > "$ROOT/web/.current_profile"
+
+echo "0) Contrôle des réglages (fichiers rattachés, liens QCM, rubriques, types, profils) ..."
+python3 tools/check_evolutions.py || echo "   ⚠️  réglages à corriger (voir ci-dessus) -- la publication continue."
 
 echo "1) Figures (SVG) ..."
 python3 figures/render_web.py

@@ -100,7 +100,7 @@ def main():
                 err(f"{m} : sujet « {s} » absent de data/graph/sujets.yaml")
 
         # TD / TP
-        for ty in ("td", "tp"):
+        for ty in cd.exercise_types():
             tdir = cd.DATA_DIR / m / ty
             if not tdir.is_dir():
                 continue
@@ -129,7 +129,7 @@ def main():
 
         # QCM
         ids = {}
-        for ty in ("td", "tp"):
+        for ty in cd.exercise_types():
             for doc in cd.list_docs_td_like(m, ty):
                 mt, exs = cd.load_td(m, doc, type_doc=ty)
                 ids[mt["id"]] = {f"{mt['id']}_ex{e['numero']}" for e in exs}
@@ -158,8 +158,9 @@ def main():
     pub = cd.publication_config()
 
     def check_profile(name, where):
-        if name not in profiles:
-            err(f"config.yaml publication : profil « {name} » inconnu ({where}) -- profils : {', '.join(profiles)}")
+        if cd.expand_profile(name) not in profiles:
+            err(f"config.yaml publication : profil / état « {name} » inconnu ({where}) -- profils : {', '.join(profiles)} ; "
+                f"états : {', '.join(cd.etats())}")
 
     check_profile(pub.get("defaut", "avant_seance"), "defaut")
     for m, mcfg in (pub.get("matieres") or {}).items():
@@ -168,13 +169,13 @@ def main():
             continue
         if mcfg.get("defaut"):
             check_profile(mcfg["defaut"], f"{m}.defaut")
-        for ty in ("cours", "td", "tp"):
-            docs = cd.list_docs_cours(m) if ty == "cours" else cd.list_docs_td_like(m, ty)
+        for ty in cd.doc_types():
+            docs = cd.list_docs_cours(m, ty) if cd.doc_types()[ty]["forme"] == "sections" else cd.list_docs_td_like(m, ty)
             for doc, entry in (mcfg.get(ty) or {}).items():
                 if doc not in docs:
                     err(f"config.yaml publication : {m}/{ty}/{doc} n'existe pas")
                     continue
-                prof = entry if isinstance(entry, str) else (entry or {}).get("profil")
+                prof = entry if isinstance(entry, str) else (entry or {}).get("profil") or (entry or {}).get("etat")
                 if prof:
                     check_profile(prof, f"{m}/{ty}/{doc}")
                 if isinstance(entry, dict) and entry.get("exercices"):

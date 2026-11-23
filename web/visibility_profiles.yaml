@@ -20,56 +20,286 @@
 # un corrigé était téléchargeable même en profil `avant_seance`.
 # Pour forcer un PDF précis : `publier: true|false` dans sa cible de config.yaml.
 
+# --- Contenu du site : les INTERRUPTEURS d'un profil ----------------------------------
+# Même vocabulaire que `targets:` de build/config.yaml (PDF) : un `show_xxx: true|false` par élément.
+#
+#   show_metadonnees       repères de l'exercice : ⭐ indispensable · difficulté ●●●○○ · ⏱ durée · type
+#   show_figure            figures                 show_animation_note   animations
+#   show_coup_de_pouce     coups de pouce          show_correction       corrections
+#   show_solution          solutions détaillées
+#   show_<rubrique>        UN interrupteur par rubrique de config.yaml > rubriques :
+#                          show_prerequis, show_objectifs_pedagogiques_etudiants, show_objectifs_pedagogiques_enseignants,
+#                          show_point_cours, show_outils_mathematiques, show_attention, show_accroche_point_cours_essentiel,
+#                          show_remarques_pedagogiques_ecueils_classiques, show_remarques_pedagogiques_conseils_animation,
+#                          show_liens_autres_disciplines, show_bilan, show_organisation, show_materiel, ...
+#                          (une rubrique AJOUTÉE dans config.yaml obtient d'office son `show_<nom>`)
+#   aller_plus_loin_niveaux  niveaux du « pour aller plus loin » affichés : [lycee, cpge, prepa, licence, master,
+#                          doctorat, ecole, ing]  ([] = aucun)
+#
+#   rubriques              POLITIQUE PAR DÉFAUT pour les rubriques dont le `show_<nom>` n'est PAS écrit ici
+#                          (typiquement une rubrique que tu viens d'ajouter). Liste de :
+#                            cle (une rubrique) | @public (celles dont `public` est servi par ce profil) | @tous | -cle
+#                          Un `show_<nom>` écrit l'emporte toujours sur cette liste.
+#   public                 audiences servies : [eleve] ou [eleve, prof]. Sert aux rubriques (`public:` dans config.yaml >
+#                          rubriques), aux fichiers rattachés (config.yaml > fichiers) et à l'alerte « profil prof sur le site ».
+#   pdf_publies            types de PDF hébergés pour ce profil (voir plus haut).
+#
+# Les PDF peuvent HÉRITER de ces réglages : dans build/config.yaml, une cible `visibilite: all_fast` (ou un état :
+# `visibilite: termine`) reprend tous les show_* du profil ; ce que la cible écrit elle-même l'emporte.
+# Les PDF ne savent pas dessiner les rubriques que tu inventes (les gabarits LaTeX sont fixes) : pour eux, seules les
+# rubriques connues des gabarits comptent. `show_plan_seance` (plan de séance) ne concerne que les PDF.
+#
+# ÉTATS D'UN CHAPITRE (a_venir / en_cours / termine) : noms parlants pour trois de ces profils, réglés dans
+# build/config.yaml > publication > etats (avant_seance / pendant_seance_avec_indices / corrige_complet par défaut).
+#
+# TROIS « all » :
+#   all_fast  : énoncé + coup de pouce + correction + solution, SANS aucune rubrique (ni accroche, ni prérequis, ni cours).
+#               Le plus léger : « tout ce qui aide à faire l'exercice », rien d'autre.
+#   all_eleve : tout ce qu'un élève peut voir (coup de pouce, correction, solution, aller plus loin,
+#               rubriques élève) -- PAS de contenu enseignant, PAS de fiche enseignant. C'est le profil
+#               à mettre dans `publication:` d'un site public.
+#   all_prof  : absolument tout (rubriques enseignant : objectifs, écueils, conseils d'animation, bilan ;
+#               fiches enseignant PDF ; fichiers marqués `public: prof`). À réserver à un site local
+#               / privé : sur un site public, tout visiteur pourrait le lire.
+#   all       : ancien nom, conservé = all_prof (donc « tout »).
+
+
 profiles:
 
+  # AVANT la séance : énoncés seulement (les aides arrivent avec pendant_seance_avec_indices).
   avant_seance:
-    pdf_publies: [enonce]
+    # --- contenu de l'exercice
+    show_metadonnees: true
     show_figure: true
     show_animation_note: true
-    show_coup_de_pouce: false      # énoncés seulement : les aides arrivent avec pendant_seance_avec_indices
+    show_coup_de_pouce: false
     show_correction: false
     show_solution: false
     aller_plus_loin_niveaux: []
-    pdf_suffix: enonce   # -> /pdfs/<td_id>_enonce.pdf (voir build/config.yaml)
+    # --- encadrés pédagogiques (une ligne par rubrique de config.yaml > rubriques)
+    show_organisation: true   # Organisation
+    show_accroche_point_cours_essentiel: false  # Accroche
+    show_prerequis: true   # Prérequis
+    show_objectifs_pedagogiques_etudiants: true   # Objectifs
+    show_objectifs_pedagogiques_enseignants: false  # Objectifs pédagogiques (enseignant)  [enseignant]
+    show_point_cours: false  # Point de cours
+    show_outils_mathematiques: false  # Outils mathématiques
+    show_materiel: true   # Matériel
+    show_securite: true   # Sécurité
+    show_manipulation: true   # Manipulation
+    show_attention: true   # Attention
+    show_remarques_pedagogiques_ecueils_classiques: false  # Écueils classiques  [enseignant]
+    show_remarques_pedagogiques_conseils_animation: false  # Conseils d'animation  [enseignant]
+    show_liens_autres_disciplines: false  # Liens avec d'autres disciplines
+    show_lien_aviation: false  # Lien avec l'aviation
+    show_bilan: false  # Bilan  [enseignant]
+    rubriques: []      # politique pour les rubriques SANS show_<nom> ci-dessus (nouvelles rubriques)
+    # --- public et PDF
+    public: [eleve]
+    pdf_publies: [enonce]
+    pdf_suffix: enonce
 
+  # PENDANT la séance : énoncés + coups de pouce, pas de correction.
   pendant_seance_avec_indices:
-    pdf_publies: [enonce, aides]
+    # --- contenu de l'exercice
+    show_metadonnees: true
     show_figure: true
     show_animation_note: true
     show_coup_de_pouce: true
     show_correction: false
     show_solution: false
     aller_plus_loin_niveaux: [lycee]
+    # --- encadrés pédagogiques (une ligne par rubrique de config.yaml > rubriques)
+    show_organisation: true   # Organisation
+    show_accroche_point_cours_essentiel: true   # Accroche
+    show_prerequis: true   # Prérequis
+    show_objectifs_pedagogiques_etudiants: true   # Objectifs
+    show_objectifs_pedagogiques_enseignants: false  # Objectifs pédagogiques (enseignant)  [enseignant]
+    show_point_cours: true   # Point de cours
+    show_outils_mathematiques: true   # Outils mathématiques
+    show_materiel: true   # Matériel
+    show_securite: true   # Sécurité
+    show_manipulation: true   # Manipulation
+    show_attention: true   # Attention
+    show_remarques_pedagogiques_ecueils_classiques: false  # Écueils classiques  [enseignant]
+    show_remarques_pedagogiques_conseils_animation: false  # Conseils d'animation  [enseignant]
+    show_liens_autres_disciplines: false  # Liens avec d'autres disciplines
+    show_lien_aviation: false  # Lien avec l'aviation
+    show_bilan: false  # Bilan  [enseignant]
+    rubriques: []      # politique pour les rubriques SANS show_<nom> ci-dessus (nouvelles rubriques)
+    # --- public et PDF
+    public: [eleve]
+    pdf_publies: [enonce, aides]
     pdf_suffix: enonce
 
+  # CORRIGÉ « résultats » : + corrections (résultats), sans les solutions détaillées.
   corrige_resultats_seuls:
-    pdf_publies: [enonce, aides, corrige]
+    # --- contenu de l'exercice
+    show_metadonnees: true
     show_figure: true
     show_animation_note: true
     show_coup_de_pouce: true
     show_correction: true
     show_solution: false
     aller_plus_loin_niveaux: [lycee, cpge]
+    # --- encadrés pédagogiques (une ligne par rubrique de config.yaml > rubriques)
+    show_organisation: true   # Organisation
+    show_accroche_point_cours_essentiel: true   # Accroche
+    show_prerequis: true   # Prérequis
+    show_objectifs_pedagogiques_etudiants: true   # Objectifs
+    show_objectifs_pedagogiques_enseignants: false  # Objectifs pédagogiques (enseignant)  [enseignant]
+    show_point_cours: true   # Point de cours
+    show_outils_mathematiques: true   # Outils mathématiques
+    show_materiel: true   # Matériel
+    show_securite: true   # Sécurité
+    show_manipulation: true   # Manipulation
+    show_attention: true   # Attention
+    show_remarques_pedagogiques_ecueils_classiques: false  # Écueils classiques  [enseignant]
+    show_remarques_pedagogiques_conseils_animation: false  # Conseils d'animation  [enseignant]
+    show_liens_autres_disciplines: true   # Liens avec d'autres disciplines
+    show_lien_aviation: true   # Lien avec l'aviation
+    show_bilan: false  # Bilan  [enseignant]
+    rubriques: ["@public"]      # politique pour les rubriques SANS show_<nom> ci-dessus (nouvelles rubriques)
+    # --- public et PDF
+    public: [eleve]
+    pdf_publies: [enonce, aides, corrige]
     pdf_suffix: corrige
 
+  # CORRIGÉ complet : + solutions détaillées + aller plus loin.
   corrige_complet:
-    pdf_publies: [enonce, aides, corrige, autre]
+    # --- contenu de l'exercice
+    show_metadonnees: true
     show_figure: true
     show_animation_note: true
     show_coup_de_pouce: true
     show_correction: true
     show_solution: true
     aller_plus_loin_niveaux: [lycee, cpge, licence, master, doctorat]
+    # --- encadrés pédagogiques (une ligne par rubrique de config.yaml > rubriques)
+    show_organisation: true   # Organisation
+    show_accroche_point_cours_essentiel: true   # Accroche
+    show_prerequis: true   # Prérequis
+    show_objectifs_pedagogiques_etudiants: true   # Objectifs
+    show_objectifs_pedagogiques_enseignants: false  # Objectifs pédagogiques (enseignant)  [enseignant]
+    show_point_cours: true   # Point de cours
+    show_outils_mathematiques: true   # Outils mathématiques
+    show_materiel: true   # Matériel
+    show_securite: true   # Sécurité
+    show_manipulation: true   # Manipulation
+    show_attention: true   # Attention
+    show_remarques_pedagogiques_ecueils_classiques: false  # Écueils classiques  [enseignant]
+    show_remarques_pedagogiques_conseils_animation: false  # Conseils d'animation  [enseignant]
+    show_liens_autres_disciplines: true   # Liens avec d'autres disciplines
+    show_lien_aviation: true   # Lien avec l'aviation
+    show_bilan: false  # Bilan  [enseignant]
+    rubriques: ["@public"]      # politique pour les rubriques SANS show_<nom> ci-dessus (nouvelles rubriques)
+    # --- public et PDF
+    public: [eleve]
+    pdf_publies: [enonce, aides, corrige, autre]
     pdf_suffix: corrige
 
-  # TOUT, fiches enseignant comprises (PDF *_fiche). Pour un usage perso / local :
-  # sur le Pi, ces fiches seraient téléchargeables par n'importe qui ayant l'URL.
-  all:
-    pdf_publies: [enonce, aides, corrige, autre, fiche]
+  # ÉLÈVE : tout ce qui est destiné aux étudiants. Aucun contenu enseignant, aucune fiche enseignant.
+  # Profil à utiliser sur un site PUBLIC.
+  all_eleve:
+    # --- contenu de l'exercice
+    show_metadonnees: true
     show_figure: true
     show_animation_note: true
     show_coup_de_pouce: true
     show_correction: true
     show_solution: true
-    aller_plus_loin_niveaux: [lycee, cpge, licence, master, doctorat]
+    aller_plus_loin_niveaux: [lycee, cpge, prepa, licence, master, doctorat, ecole, ing]
+    # --- encadrés pédagogiques (une ligne par rubrique de config.yaml > rubriques)
+    show_organisation: true   # Organisation
+    show_accroche_point_cours_essentiel: true   # Accroche
+    show_prerequis: true   # Prérequis
+    show_objectifs_pedagogiques_etudiants: true   # Objectifs
+    show_objectifs_pedagogiques_enseignants: false  # Objectifs pédagogiques (enseignant)  [enseignant]
+    show_point_cours: true   # Point de cours
+    show_outils_mathematiques: true   # Outils mathématiques
+    show_materiel: true   # Matériel
+    show_securite: true   # Sécurité
+    show_manipulation: true   # Manipulation
+    show_attention: true   # Attention
+    show_remarques_pedagogiques_ecueils_classiques: false  # Écueils classiques  [enseignant]
+    show_remarques_pedagogiques_conseils_animation: false  # Conseils d'animation  [enseignant]
+    show_liens_autres_disciplines: true   # Liens avec d'autres disciplines
+    show_lien_aviation: true   # Lien avec l'aviation
+    show_bilan: false  # Bilan  [enseignant]
+    rubriques: ["@public"]      # politique pour les rubriques SANS show_<nom> ci-dessus (nouvelles rubriques)
+    # --- public et PDF
+    public: [eleve]
+    pdf_publies: [enonce, aides, corrige, autre]
     pdf_suffix: corrige
+
+  # RAPIDE : l'essentiel d'un exercice, sans habillage -- énoncé, coup de pouce, correction, solution détaillée.
+  # Aucune rubrique (ni accroche, ni prérequis, ni cours), pas de repères, pas d'« aller plus loin ».
+  # Pour réintroduire quelque chose : passer un show_xxx à true (ex. show_prerequis: true).
+  all_fast:
+    # --- contenu de l'exercice
+    show_metadonnees: false
+    show_figure: true
+    show_animation_note: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    aller_plus_loin_niveaux: []
+    # --- encadrés pédagogiques (une ligne par rubrique de config.yaml > rubriques)
+    show_organisation: false  # Organisation
+    show_accroche_point_cours_essentiel: false  # Accroche
+    show_prerequis: false  # Prérequis
+    show_objectifs_pedagogiques_etudiants: false  # Objectifs
+    show_objectifs_pedagogiques_enseignants: false  # Objectifs pédagogiques (enseignant)  [enseignant]
+    show_point_cours: false  # Point de cours
+    show_outils_mathematiques: false  # Outils mathématiques
+    show_materiel: false  # Matériel
+    show_securite: false  # Sécurité
+    show_manipulation: false  # Manipulation
+    show_attention: false  # Attention
+    show_remarques_pedagogiques_ecueils_classiques: false  # Écueils classiques  [enseignant]
+    show_remarques_pedagogiques_conseils_animation: false  # Conseils d'animation  [enseignant]
+    show_liens_autres_disciplines: false  # Liens avec d'autres disciplines
+    show_lien_aviation: false  # Lien avec l'aviation
+    show_bilan: false  # Bilan  [enseignant]
+    rubriques: []      # politique pour les rubriques SANS show_<nom> ci-dessus (nouvelles rubriques)
+    # --- public et PDF
+    public: [eleve]
+    pdf_publies: [enonce, aides, corrige, autre]
+    pdf_suffix: corrige
+
+  # PROFESSEUR : TOUT (élève + enseignant : objectifs enseignant, écueils, conseils d'animation, bilan, fiches
+  # enseignant PDF, fichiers `public: prof`). Site PRIVÉ / local seulement : sur un site public, tout visiteur le verrait.
+  all_prof: &all_prof
+    # --- contenu de l'exercice
+    show_metadonnees: true
+    show_figure: true
+    show_animation_note: true
+    show_coup_de_pouce: true
+    show_correction: true
+    show_solution: true
+    aller_plus_loin_niveaux: [lycee, cpge, prepa, licence, master, doctorat, ecole, ing]
+    # --- encadrés pédagogiques (une ligne par rubrique de config.yaml > rubriques)
+    show_organisation: true   # Organisation
+    show_accroche_point_cours_essentiel: true   # Accroche
+    show_prerequis: true   # Prérequis
+    show_objectifs_pedagogiques_etudiants: true   # Objectifs
+    show_objectifs_pedagogiques_enseignants: true   # Objectifs pédagogiques (enseignant)  [enseignant]
+    show_point_cours: true   # Point de cours
+    show_outils_mathematiques: true   # Outils mathématiques
+    show_materiel: true   # Matériel
+    show_securite: true   # Sécurité
+    show_manipulation: true   # Manipulation
+    show_attention: true   # Attention
+    show_remarques_pedagogiques_ecueils_classiques: true   # Écueils classiques  [enseignant]
+    show_remarques_pedagogiques_conseils_animation: true   # Conseils d'animation  [enseignant]
+    show_liens_autres_disciplines: true   # Liens avec d'autres disciplines
+    show_lien_aviation: true   # Lien avec l'aviation
+    show_bilan: true   # Bilan  [enseignant]
+    rubriques: ["@public"]      # politique pour les rubriques SANS show_<nom> ci-dessus (nouvelles rubriques)
+    # --- public et PDF
+    public: [eleve, prof]
+    pdf_publies: [enonce, aides, corrige, autre, fiche]
+    pdf_suffix: corrige
+
+  # Ancien nom, conservé pour ne rien casser : identique à all_prof.
+  all: *all_prof

@@ -5,3 +5,4 @@ flask
 gunicorn
 numpy
 matplotlib
+segno      # QR codes des QCM (optionnel : sans lui, les liens restent mais sans QR)

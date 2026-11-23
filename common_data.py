@@ -12,7 +12,10 @@ Structure générale (voir data/SCHEMA.md pour le détail) :
         _matiere.yaml
         td/<doc_slug>/_meta.yaml + ex*.yaml      (type "td" -- dossier de fichiers)
         tp/<doc_slug>/_meta.yaml + ex*.yaml       (type "tp" -- même format que "td")
+        projet/<doc_slug>/_meta.yaml + ex*.yaml   (type "projet" -- même format que "td")
         cours/<doc_slug>.yaml                     (type "cours" -- fichier unique, sections)
+        fichiers/...                              (fichiers statiques rattachables : xlsx, csv, zip...)
+        (autres types : à déclarer dans build/config.yaml > types_documents)
         qcm/*.yaml
 
     data/graph/sujets.yaml                        (graphe des sujets, transverse aux matières)
@@ -130,17 +133,219 @@ def publication_config() -> dict:
     return load_build_config().get("publication") or {}
 
 
+# ----------------------------------------------------------------------
+# TYPES DE DOCUMENTS (td, tp, projet, cours, ...) -- build/config.yaml > types_documents
+#
+# Un type = un sous-dossier de data/matieres/<matiere>/ ET une section de la page Quartz de la matière.
+#   forme: exercices  -> dossier <doc>/ avec _meta.yaml + ex*.yaml   (comme td / tp / projet)
+#   forme: sections   -> fichier <doc>.yaml avec `sections:`          (comme cours)
+# Pour AJOUTER un type (ex. « labo ») : un bloc dans config.yaml + un dossier data/matieres/<m>/labo/.
+# ----------------------------------------------------------------------
+
+DEFAULT_DOC_TYPES = {
+    "td": {"label": "TD", "forme": "exercices"},
+    "tp": {"label": "TP", "forme": "exercices"},
+    "projet": {"label": "Mini-Projet", "forme": "exercices"},
+    "cours": {"label": "Cours", "forme": "sections"},
+}
+
+
+def doc_types() -> dict:
+    """{type: {label, forme, [dossier_quartz]}} : défauts + build/config.yaml > types_documents.
+    L'ordre est celui d'affichage dans la page de la matière."""
+    out = {k: dict(v) for k, v in DEFAULT_DOC_TYPES.items()}
+    for k, v in (load_build_config().get("types_documents") or {}).items():
+        if isinstance(v, str):
+            v = {"label": v}
+        out[k] = {**out.get(k, {}), **(v or {})}
+    for k, v in out.items():
+        v.setdefault("label", k)
+        v.setdefault("forme", "exercices")
+    return out
+
+
+def exercise_types() -> list:
+    """Types « dossier d'exercices » (td, tp, projet, ...)."""
+    return [k for k, v in doc_types().items() if v["forme"] == "exercices"]
+
+
+def section_types() -> list:
+    """Types « fichier de sections » (cours, ...)."""
+    return [k for k, v in doc_types().items() if v["forme"] == "sections"]
+
+
+def type_label(type_doc: str) -> str:
+    return doc_types().get(type_doc, {}).get("label", type_doc)
+
+
+def type_quartz_dir(type_doc: str) -> str:
+    """Nom du dossier Quartz du type (par défaut : son label ; `dossier_quartz:` pour le changer)."""
+    t = doc_types().get(type_doc, {})
+    return t.get("dossier_quartz") or t.get("label", type_doc)
+
+
+# ----------------------------------------------------------------------
+# RUBRIQUES (prerequis, objectifs, point de cours, bilan...) -- build/config.yaml > rubriques
+#
+# Une rubrique = une clé YAML (dans _meta.yaml, un exercice ou une question) rendue en encadré
+# sur le site. Ajouter une rubrique = UN bloc dans config.yaml > rubriques (voir son commentaire) ;
+# le contenu peut être une chaîne, une liste de chaînes, ou une liste de {titre, texte[, discipline]}.
+#   public   : eleve | prof   (qui a le droit de la voir ; voir `public:` des profils)
+#   position : debut (avant les questions) | fin (après)
+#   repli    : "" fixe | "+" ouvert (repliable) | "-" fermé (repliable)
+# ----------------------------------------------------------------------
+
+DEFAULT_RUBRIQUES = {
+    "organisation": {"titre": "Organisation", "icone": "🗓️", "callout": "info", "public": "eleve", "position": "debut", "ordre": 10, "repli": "+"},
+    "accroche_point_cours_essentiel": {"titre": "Accroche", "icone": "🎣", "callout": "question", "public": "eleve", "position": "debut", "ordre": 15, "repli": "+"},
+    "prerequis": {"titre": "Prérequis", "icone": "📚", "callout": "abstract", "public": "eleve", "position": "debut", "ordre": 20, "repli": "+"},
+    "objectifs_pedagogiques_etudiants": {"titre": "Objectifs", "icone": "🎯", "callout": "info", "public": "eleve", "position": "debut", "ordre": 30, "repli": "+"},
+    "objectifs_pedagogiques_enseignants": {"titre": "Objectifs pédagogiques (enseignant)", "icone": "🧑‍🏫", "callout": "info", "public": "prof", "position": "debut", "ordre": 31, "repli": "-"},
+    "point_cours": {"titre": "Point de cours", "icone": "📖", "callout": "note", "public": "eleve", "position": "debut", "ordre": 40, "repli": "+"},
+    "outils_mathematiques": {"titre": "Outils mathématiques", "icone": "🧮", "callout": "note", "public": "eleve", "position": "debut", "ordre": 50, "repli": "-"},
+    "materiel": {"titre": "Matériel", "icone": "🧰", "callout": "note", "public": "eleve", "position": "debut", "ordre": 60, "repli": "+"},
+    "securite": {"titre": "Sécurité", "icone": "🦺", "callout": "danger", "public": "eleve", "position": "debut", "ordre": 61, "repli": ""},
+    "manipulation": {"titre": "Manipulation", "icone": "🔬", "callout": "note", "public": "eleve", "position": "debut", "ordre": 62, "repli": "+"},
+    "attention": {"titre": "Attention", "icone": "⚠️", "callout": "warning", "public": "eleve", "position": "debut", "ordre": 70, "repli": ""},
+    "remarques_pedagogiques_ecueils_classiques": {"titre": "Écueils classiques", "icone": "🪤", "callout": "warning", "public": "prof", "position": "fin", "ordre": 80, "repli": "-"},
+    "remarques_pedagogiques_conseils_animation": {"titre": "Conseils d'animation", "icone": "🎙️", "callout": "tip", "public": "prof", "position": "fin", "ordre": 81, "repli": "-"},
+    "liens_autres_disciplines": {"titre": "Liens avec d'autres disciplines", "icone": "🔗", "callout": "note", "public": "eleve", "position": "fin", "ordre": 85, "repli": "-"},
+    "lien_aviation": {"titre": "Lien avec l'aviation", "icone": "✈️", "callout": "note", "public": "eleve", "position": "fin", "ordre": 86, "repli": "-"},
+    "bilan": {"titre": "Bilan", "icone": "🏁", "callout": "success", "public": "prof", "position": "fin", "ordre": 90, "repli": "-"},
+}
+
+
+def rubriques_registry() -> dict:
+    """{cle: spec} triée par `ordre` : défauts + build/config.yaml > rubriques
+    (un bloc existant est complété champ par champ ; `actif: false` retire une rubrique)."""
+    reg = {k: dict(v) for k, v in DEFAULT_RUBRIQUES.items()}
+    for k, v in (load_build_config().get("rubriques") or {}).items():
+        v = v or {}
+        if v.get("actif") is False:
+            reg.pop(k, None)
+            continue
+        reg[k] = {**reg.get(k, {"titre": k.replace("_", " ").capitalize(), "icone": "📌", "callout": "note",
+                                "public": "eleve", "position": "fin", "ordre": 500, "repli": "-"}), **v}
+    return dict(sorted(reg.items(), key=lambda kv: (kv[1].get("ordre", 500), kv[0])))
+
+
+def profile_audiences(opts: dict) -> set:
+    """Audiences servies par un profil (`public:`) : {eleve}, {eleve, prof}... Défaut : {eleve}."""
+    pub = opts.get("public", ["eleve"])
+    return set([pub] if isinstance(pub, str) else pub)
+
+
+def visible_rubriques(opts: dict) -> set:
+    """Clés de rubriques affichées par un profil. `rubriques:` d'un profil est une liste de :
+         cle        une rubrique précise
+         @public    toutes les rubriques dont `public` ∈ `public:` du profil
+         @tous      absolument toutes
+         -cle       retire une rubrique (après les autres)
+       (une chaîne seule est acceptée : `rubriques: "@public"`)."""
+    reg = rubriques_registry()
+    sel = opts.get("rubriques") or []
+    if isinstance(sel, str):
+        sel = [sel]
+    auds = profile_audiences(opts)
+    keep = set()
+    for item in sel:
+        if item == "@tous":
+            keep |= set(reg)
+        elif item == "@public":
+            keep |= {k for k, v in reg.items() if v.get("public", "eleve") in auds}
+        elif not str(item).startswith("-") and item in reg:
+            keep.add(item)
+    for item in sel:
+        if str(item).startswith("-"):
+            keep.discard(str(item)[1:])
+    # Interrupteurs individuels `show_<rubrique>: true|false` (même vocabulaire que `targets:` de config.yaml) :
+    # ils l'emportent sur `rubriques:`, qui devient la POLITIQUE PAR DÉFAUT des rubriques non listées
+    # (typiquement celles que tu ajouteras plus tard dans config.yaml > rubriques).
+    for key in reg:
+        flag = opts.get(f"show_{key}")
+        if flag is True:
+            keep.add(key)
+        elif flag is False:
+            keep.discard(key)
+    return keep
+
+
+def flag_value(opts: dict, name: str) -> bool:
+    """Valeur d'un interrupteur de profil : `show_correction`, `show_metadonnees`, `show_prerequis`... (faux si absent)."""
+    if name.startswith("show_") and name[5:] in rubriques_registry():
+        return name[5:] in visible_rubriques(opts)
+    return bool(opts.get(name))
+
+
+# Interrupteurs « hors rubriques » que profils (web) et targets (PDF) partagent.
+SHARED_FLAGS = ("show_metadonnees", "show_figure", "show_animation_note",
+                "show_coup_de_pouce", "show_correction", "show_solution")
+
+
+def visibility_flags(opts: dict) -> dict:
+    """Interrupteurs d'un profil, au format `targets:` : show_* (un par rubrique de config.yaml > rubriques)
+    + aller_plus_loin_niveaux. Sert à faire HÉRITER une cible PDF d'un profil (`visibilite:`)."""
+    flags = {k: bool(opts[k]) for k in SHARED_FLAGS if k in opts}
+    vis = visible_rubriques(opts)
+    for key in rubriques_registry():
+        flags[f"show_{key}"] = key in vis
+    if "aller_plus_loin_niveaux" in opts:
+        flags["aller_plus_loin_niveaux"] = list(opts["aller_plus_loin_niveaux"] or [])
+    return flags
+
+
+def apply_visibility_to_target(target: dict) -> dict:
+    """Cible PDF avec `visibilite: <profil | état>` : les show_* que la cible NE précise PAS sont repris du profil
+    (web/visibility_profiles.yaml) -- une seule définition pour le site ET pour les PDF. Les clés écrites dans la
+    cible l'emportent toujours. Sans `visibilite:`, la cible est rendue telle quelle."""
+    name = target.get("visibilite")
+    if not name:
+        return target
+    prof = expand_profile(name)
+    profiles = load_visibility_profiles()
+    if prof not in profiles:
+        raise ValueError(f"cible « {target.get('name')} » : visibilite « {name} » inconnue (profils : {', '.join(profiles)} ; "
+                         f"états : {', '.join(etats())})")
+    return {**visibility_flags(profiles[prof]), **target}
+
+
+# ----------------------------------------------------------------------
+# ÉTATS D'UN CHAPITRE (a_venir / en_cours / termine / ...) -- build/config.yaml > publication > etats
+# Un état est un NOM PARLANT pour un profil : on écrit « td4: en_cours » au lieu de
+# « td4: pendant_seance_avec_indices ». Changer ce que signifie « en_cours » (ou « termine »)
+# se fait à UN seul endroit et vaut pour tous les chapitres. Partout où un profil est attendu
+# (publication:, ligne de commande de publish_profile.sh), un état est accepté.
+# ----------------------------------------------------------------------
+
+DEFAULT_ETATS = {
+    "a_venir": "avant_seance",                 # pas encore abordé  : énoncés seulement
+    "en_cours": "pendant_seance_avec_indices",  # en cours           : énoncés + aides
+    "termine": "corrige_complet",              # terminé            : corrections et solutions
+}
+
+
+def etats() -> dict:
+    """{etat: profil} : défauts + publication.etats de config.yaml (le fichier complète / remplace)."""
+    return {**DEFAULT_ETATS, **(publication_config().get("etats") or {})}
+
+
+def expand_profile(name):
+    """État de chapitre -> nom de profil ; un nom de profil (ou None) est rendu tel quel."""
+    return etats().get(name, name) if name else name
+
+
 def resolve_profile(matiere: str, type_doc: str, doc_slug: str, ex_slug: str = None, forced: str = None) -> str:
     """Profil de visibilité d'un document (ou d'un exercice) :
 
-      1. `forced` (argument en ligne de commande, ex. `all`) l'emporte, sauf « auto » ;
+      1. `forced` (argument en ligne de commande, ex. `all_prof` ou `termine`) l'emporte, sauf « auto » ;
       2. sinon publication: dans build/config.yaml :
-             publication.matieres.<matiere>.<td|tp|cours>.<doc>        -> profil du document
-             ... .<doc>.exercices.<ex>                                  -> surcharge d'un exercice
+             publication.matieres.<matiere>.<td|tp|projet|cours|...>.<doc>   -> profil OU état du document
+             ... .<doc>.exercices.<ex>                                        -> surcharge d'un exercice
       3. sinon le `defaut` de la matière, puis le `defaut` global, puis avant_seance.
+    Un ÉTAT (a_venir, en_cours, termine, ... -> publication.etats) est remplacé par son profil.
     """
     if forced and forced != "auto":
-        return forced
+        return expand_profile(forced)
     pub = publication_config()
     default = pub.get("defaut", "avant_seance")
     m = (pub.get("matieres") or {}).get(matiere) or {}
@@ -150,11 +355,11 @@ def resolve_profile(matiere: str, type_doc: str, doc_slug: str, ex_slug: str = N
     if isinstance(entry, str):
         prof = entry
     elif isinstance(entry, dict):
-        prof = entry.get("profil", prof)
+        prof = entry.get("profil", entry.get("etat", prof))
         exs = entry.get("exercices") or {}
     if ex_slug and ex_slug in exs:
         prof = exs[ex_slug]
-    return prof
+    return expand_profile(prof)
 
 
 def split_en_text(raw: str):
@@ -258,7 +463,7 @@ def list_matieres():
     for p in DATA_DIR.iterdir():
         if not p.is_dir() or is_ignored_name(p.name):
             continue
-        if (p / "_matiere.yaml").exists() or any((p / s).is_dir() for s in ("td", "tp", "cours", "qcm")):
+        if (p / "_matiere.yaml").exists() or any((p / s).is_dir() for s in (*doc_types(), "qcm")):
             out.append(p.name)
     return sorted(out)
 

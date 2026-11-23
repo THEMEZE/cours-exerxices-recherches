@@ -1,3 +1,31 @@
+# #####################################################################
+#  MODE D'EMPLOI de ce fichier  (build/config.yaml)
+# #####################################################################
+#  Tout ce qui se règle SANS toucher au code est ici. Les blocs, dans l'ordre :
+#
+#   profils          AUTEURS : nom / e-mail / bureau imprimés dans l'en-tête des PDF.
+#   couleurs         couleur de l'anglais (PDF et site).
+#   types_documents  ce qu'une matière peut contenir : td, tp, projet, cours... (+ les tiens).
+#   rubriques        les encadrés pédagogiques du site (prérequis, objectifs, bilan...) : titre, couleur, élève/prof.
+#   fichiers         fichiers rattachés à un dossier ou un exercice (Excel, PDF construit...).
+#   qcm              QCM : adresse du site, accès libre à la maison, rattachement aux pages (lien + QR).
+#   publication      QUEL CONTENU MONTRER, document par document (états « terminé / en cours / à venir »,
+#                    profils all_eleve / all_fast / all_prof...).   <-- le bloc que l'on change le plus souvent
+#   targets          la liste des PDF à construire (un bloc = un PDF).
+#
+#  Le QUI-VOIT-QUOI détaillé (quels encadrés, corrections, PDF) est dans web/visibility_profiles.yaml.
+#
+#  Commandes courantes :
+#     ./web/publish_profile.sh auto           applique `publication:` ci-dessous, document par document
+#     ./web/publish_profile.sh termine        FORCE un état (ou un profil) pour tous les documents
+#     python3 tools/check_evolutions.py       vérifie les réglages de ce fichier (fautes de frappe, fichiers absents...)
+#     python3 build/build.py <nom_du_pdf>     construit un PDF de `targets:`
+#  Guide complet : GUIDE_EVOLUTIONS.md
+# #####################################################################
+
+# ---------------------------------------------------------------------
+# AUTEURS (en-tête des PDF) : à ne pas confondre avec les « profils de visibilité » de `publication:`.
+# ---------------------------------------------------------------------
 profils:
   IPSA:
     nom: "Guillaume THÉMÈZE"
@@ -23,12 +51,25 @@ profils:
 
 # Chaque entrée = un PDF généré.
 #   matiere       : dossier dans data/matieres/<matiere>/
-#   type_doc      : "td" | "tp" | "cours" (défaut "td")
+#   type_doc      : un type de `types_documents:` -- "td" | "tp" | "projet" | "cours" | ... (défaut "td")
 #   doc           : nom du document
 #   auteur        : (optionnel) surcharge l'auteur du document
 #   etablissement : (optionnel) ex: IPSA, Sorbonne, etc.
 #   promo         : (optionnel) ex: A2, L3, M1
 #   annee         : (optionnel) ex: 2025-2026
+#   visibilite    : (optionnel) un profil de web/visibility_profiles.yaml (all_fast, corrige_complet...) ou un état
+#                   (termine, en_cours, a_venir) : la cible REPREND tous les show_* de ce profil (show_metadonnees,
+#                   show_correction, show_prerequis, aller_plus_loin_niveaux...). Une définition pour le site ET le PDF.
+#                   Ce que la cible écrit elle-même (show_solution: false...) l'emporte sur le profil.
+#   show_*        : les interrupteurs, un par élément : show_metadonnees, show_figure, show_animation_note,
+#                   show_coup_de_pouce, show_correction, show_solution, show_prerequis, show_objectifs_pedagogiques_etudiants,
+#                   show_objectifs_pedagogiques_enseignants, show_point_cours, show_outils_mathematiques, show_attention,
+#                   show_accroche_point_cours_essentiel, show_liens_autres_disciplines, show_remarques_pedagogiques_*,
+#                   show_bilan, show_plan_seance (PDF seulement). Mêmes noms que les profils du site.
+#                   Exemple :  - name: td1_PhV111_rapide
+#                                matiere: ...  type_doc: td  doc: ...
+#                                visibilite: all_fast        # tout vient du profil all_fast
+#                                show_metadonnees: true      # ... sauf ceci
 
 # =====================================================================
 # Couleur de l'ANGLAIS (titres et textes écrits {\color{blue} ...} dans les YAML)
@@ -41,6 +82,102 @@ profils:
 couleurs:
   anglais: "#1565C0"
   # anglais_web: "#4A90E2"
+
+# =====================================================================
+# TYPES DE DOCUMENTS : ce qu'une matière peut contenir (un type = un sous-dossier de
+# data/matieres/<matiere>/ ET une section de sa page Quartz). Déjà connus : td, tp, projet, cours.
+# AJOUTER UN TYPE (ex. des « labos ») : un bloc ci-dessous + le dossier data/matieres/<matiere>/labo/
+# (puis, si besoin, un profil dans `publication:` sous  <matiere>: labo: <doc>: <profil>).
+#   label          : titre de la section (et dossier Quartz)
+#   forme          : exercices (dossier <doc>/ avec _meta.yaml + ex*.yaml) | sections (fichier <doc>.yaml)
+#   dossier_quartz : (option) nom du dossier dans Quartz si différent du label
+# L'ordre ici = l'ordre des sections dans la page de la matière.
+# =====================================================================
+types_documents:
+  td:     {label: "TD",          forme: exercices}
+  tp:     {label: "TP",          forme: exercices}
+  projet: {label: "Mini-Projet", forme: exercices}
+  cours:  {label: "Cours",       forme: sections}
+  # labo:   {label: "Labo",       forme: exercices}      # <- exemple : décommenter pour un nouveau type
+  # devoir: {label: "Devoirs",    forme: exercices}
+
+# =====================================================================
+# RUBRIQUES pédagogiques affichées sur le site (clés YAML des _meta.yaml / exercices / questions).
+# Déjà connues (défauts dans common_data.py) : organisation, accroche_point_cours_essentiel, prerequis,
+# objectifs_pedagogiques_etudiants, objectifs_pedagogiques_enseignants, point_cours, outils_mathematiques,
+# materiel, securite, manipulation, attention, remarques_pedagogiques_ecueils_classiques,
+# remarques_pedagogiques_conseils_animation, liens_autres_disciplines, lien_aviation, bilan.
+# (coup_de_pouce, correction, solution et aller_plus_loin restent réglés par les profils : show_* / niveaux.)
+#
+# AJOUTER UNE RUBRIQUE : un bloc ci-dessous, puis écrire la même clé dans un YAML. C'est tout.
+#   titre / icone / callout : aspect (callout = note|info|tip|warning|danger|success|question|abstract|example)
+#   public   : eleve | prof      -> un profil `public: [eleve]` ne l'affiche jamais si prof
+#   position : debut | fin       -> avant ou après les questions
+#   repli    : "" fixe | "+" ouvert repliable | "-" fermé repliable
+#   ordre    : tri (plus petit = plus haut)      actif: false : retire une rubrique par défaut
+# Contenu accepté : texte, liste de textes, ou liste de {titre, texte} / {discipline, texte}.
+# Qui voit quoi : web/visibility_profiles.yaml (clé `rubriques:` de chaque profil ; all_eleve / all_prof).
+# =====================================================================
+rubriques:
+  # Exemple d'une rubrique ajoutée (décommente et écris `erreurs_frequentes:` dans un exercice) :
+  # erreurs_frequentes:
+  #   titre: "Erreurs fréquentes"
+  #   icone: "🚧"
+  #   callout: warning
+  #   public: eleve
+  #   position: fin
+  #   ordre: 82
+  #   repli: "-"
+  # bilan: {public: eleve}          # exemple : rendre le bilan visible aux élèves
+
+# =====================================================================
+# FICHIERS RATTACHÉS à un document ou à un exercice (affichés en lien sur sa page Quartz ET dans la liste
+# de la matière). Deux sortes d'entrées :
+#   cible:   un PDF CONSTRUIT par l'appli (nom d'une entrée de `targets:`) -- publié seulement s'il existe
+#            et si le profil du document autorise son type (énoncé/aides/corrigé/fiche)
+#   fichier: un fichier statique (xlsx, csv, zip, ipynb...) rangé dans data/matieres/<matiere>/  (dossier conseillé :
+#            fichiers/) ; il est hébergé sous /pdfs/<nom du fichier>
+# Champs communs : label (texte du lien) ; public: eleve (défaut) | prof.
+#
+# POUR QUELS PROFILS un fichier est-il visible ?  (3 clés facultatives ; si tu en mets plusieurs, TOUTES doivent
+# être vraies ; sans aucune : visible avec tous les profils)
+#   profils: [corrige_complet, all_eleve]   visible SEULEMENT avec ces profils (un état comme `termine` est accepté)
+#   sauf:    [avant_seance]                 visible avec tous les profils SAUF ceux-là
+#   si:      show_correction                visible seulement si ce réglage du profil est vrai (ou une liste) :
+#                                           il suit tout seul les profils que tu ajoutes plus tard.
+#                                           Réglages possibles : tous les show_* de web/visibility_profiles.yaml
+#                                           (show_correction, show_solution, show_prerequis, show_metadonnees...).
+# Le site (.md) ET l'hébergement (/pdfs/) suivent : hors des profils choisis, le fichier n'a NI lien NI copie publique.
+#
+# Structure : <matiere>: <type>: <document>: {document: [...], exercices: {<exercice>: [...]}}
+# (Les PDF d'un document sont déjà liés automatiquement ; `cible:` sert à en rattacher un AUTRE, p.ex. à un exercice.)
+# =====================================================================
+
+fichiers:
+  mecanique-de-point-ipsa:
+    projet:
+      projet1_Tsiolkovski:
+        document:
+          # Dépose les tableurs dans data/matieres/mecanique-de-point-ipsa/fichiers/ (absent = avertissement, pas d'erreur)
+
+          # Version « énoncé » : visible avec TOUS les profils (aucune condition).
+          - {label: "Fichier Excel – Falcon 9", fichier: "fichiers/Phv111_MP_Falcon9_Launch.xlsx"}
+
+          # Version « avec correction » : seulement les profils qui montrent la correction.
+          - label: "Fichier Excel – Falcon 9 (avec correction)"
+            fichier: "fichiers/Phv111_MP_Falcon9_Launch_avecCorrection.xlsx"
+            profils: [corrige_resultats_seuls, corrige_complet, all_eleve, all_fast, all_prof, all]
+            # Variante équivalente qui suit AUTOMATIQUEMENT les profils futurs (remplace la ligne `profils:`) :
+            # si: show_correction
+        exercices:
+          s2_falcon9:
+            - {label: "Fichier Excel – Falcon 9", fichier: "fichiers/Phv111_MP_Falcon9_Launch.xlsx"}
+            - {label: "Fichier Excel – Falcon 9 (avec correction)", fichier: "fichiers/Phv111_MP_Falcon9_Launch_avecCorrection.xlsx", si: show_correction}
+    td:
+      td1_cinematique_cartesiennes:
+        exercices:
+          ex1_mouvement_2d:
+            - {label: "PDF de l'exercice 1 (test)", cible: test}      # PDF construit par l'appli, rattaché à UN exercice
 
 # =====================================================================
 # QCM  (data/matieres/<matiere>/qcm/<chapitre>.yaml -- autant de questions que tu veux
@@ -67,6 +204,8 @@ qcm:
   # (relu automatiquement quand ce fichier change ; côté Quartz relance export_markdown.py)
   acces_libre:
     defaut: true                         # false = rien n'est libre sauf ce qui est listé ci-dessous
+    #   Chaque réglage (défaut, matière, chapitre) est true/false OU une fenêtre de dates (travail à la maison) :
+    #     chapitres: {td1_qcm: {libre: true, du: 2026-12-01, au: 2027-01-15}}   # ouvert seulement pendant les révisions
     # matieres:
     #   physique-ondes-ipsa:
     #     defaut: true
@@ -75,100 +214,151 @@ qcm:
     #     defaut: false                              # matière fermée…
     #     chapitres: {chap1_algebre: true}           # …sauf ce chapitre
 
+  # RATTACHER des QCM à une page Quartz (lien + QR code scannable par l'élève, sur la page visée) :
+  # un chapitre = un fichier data/matieres/<matiere>/qcm/<chapitre>.yaml. Cibles possibles : un TD / TP / projet
+  # (type: td|tp|projet), un exercice précis (+ exercice:), un cours (type: cours). La page de la matière liste
+  # déjà tous ses chapitres. Seuls les chapitres en accès libre (ci-dessus) reçoivent lien + QR.
+  # (Rattachement AUTOMATIQUE en plus : questions avec `td:` = document, `lie_a:` = exercice.)
+  liens:
+    physique-ondes-ipsa:
+      td1_qcm:                                              # = data/matieres/physique-ondes-ipsa/qcm/td1_qcm.yaml
+        - {type: cours, doc: chap1_intro}                   # lien + QR sur la page du cours
+        - {type: td, doc: td2_ondes_sonores}                # ... et sur la page d'un autre TD
+        - {type: td, doc: td1_corde, exercice: ex11_lame_quart_d_onde}   # ... ou d'UN exercice
+    # mecanique-de-point-ipsa:           # (qcm/td1_qcm.yaml est vide pour l'instant : à remplir d'abord)
+    #   td1_qcm:
+    #     - {type: projet, doc: projet1_Tsiolkovski}
+
 # =====================================================================
-# Publication : quel PROFIL de visibilité pour chaque cours, TP et TD
-# (voir web/visibility_profiles.yaml : avant_seance, pendant_seance_avec_indices,
-#  corrige_resultats_seuls, corrige_complet, all)
+# PUBLICATION : quel contenu montrer, DOCUMENT PAR DOCUMENT.
 #
-#   ./web/publish_profile.sh auto        -> applique CE bloc, document par document
-#   ./web/publish_profile.sh <profil>    -> force UN profil partout (ignore ce bloc)
+#   ./web/publish_profile.sh auto         -> applique CE bloc, document par document
+#   ./web/publish_profile.sh <nom>        -> FORCE un profil ou un état partout (ignore ce bloc)
+#                                            ex. ./web/publish_profile.sh termine
 #
-# Exemple d'usage en classe :
-#   chapitre terminé        -> corrige_complet   (tout : corrections et solutions)
-#   chapitre en cours       -> pendant_seance_avec_indices   (énoncés + aides)
-#   pas encore abordé       -> avant_seance      (énoncés seulement)
+# ---- 1. LES PROFILS : ce qu'on affiche (définis dans web/visibility_profiles.yaml) -------------
 #
-# Le profil d'un document règle À LA FOIS : le contenu des pages Quartz / JSON /
-# notebooks (corrections, solutions, coups de pouce) ET les PDF mis en ligne
-# (énoncé / aides / corrigé / fiche enseignant, via `pdf_publies` du profil).
+#   profil                       | énoncé | coup de pouce | correction | solution | encadrés (prérequis, cours...) | enseignant
+#   -----------------------------+--------+---------------+------------+----------+--------------------------------+-----------
+#   avant_seance                 |   oui  |      non      |    non     |   non    | avant la séance (prérequis...) |    non
+#   pendant_seance_avec_indices  |   oui  |      oui      |    non     |   non    | + accroche, point de cours     |    non
+#   corrige_resultats_seuls      |   oui  |      oui      |    oui     |   non    | tous ceux « élève »            |    non
+#   corrige_complet              |   oui  |      oui      |    oui     |   oui    | tous ceux « élève »            |    non
+#   all_eleve                    |   oui  |      oui      |    oui     |   oui    | tous ceux « élève »            |    non
+#   all_fast                     |   oui  |      oui      |    oui     |   oui    | AUCUN (ni accroche, ni prérequis, ni cours) |  non
+#   all_prof  (= all)            |   oui  |      oui      |    oui     |   oui    | tous, + objectifs prof, écueils, conseils, bilan | OUI (fiches)
 #
-# Forme courte :   <document>: <profil>
-# Forme détaillée (surcharger certains exercices) :
-#   <document>:
-#     profil: pendant_seance_avec_indices
-#     exercices:
-#       ex3_equation_ondes: corrige_complet     # cet exercice-là est déjà corrigé en classe
-# Un document non listé prend le `defaut` de sa matière, puis le `defaut` global.
+#   -> all_fast = « juste l'essentiel » : énoncé, coup de pouce, corrigé, solution détaillée.
+#   -> all_eleve = tout ce qu'un élève peut voir. all_prof = TOUT : à réserver à un site privé / local.
+#   -> Un profil règle À LA FOIS le contenu des pages (Quartz / JSON / notebooks) ET les PDF mis en ligne
+#      (énoncé / aides / corrigé / fiche enseignant, via `pdf_publies`).
+#   -> Créer son propre profil : copier un bloc de web/visibility_profiles.yaml et lui donner un nom.
+#
+# ---- 2. LES ÉTATS D'UN CHAPITRE : un nom parlant pour un profil ---------------------------------
+#
+#   Au lieu d'écrire un profil pour chaque document, on écrit où il en est en classe :
+#       a_venir   (pas encore abordé)   -> avant_seance                  énoncés seulement
+#       en_cours  (en cours)            -> pendant_seance_avec_indices   énoncés + aides
+#       termine   (chapitre terminé)    -> corrige_complet               corrections et solutions
+#   Les trois lignes `etats:` ci-dessous sont CES associations : change-les une fois et tous les chapitres
+#   concernés suivent. On peut AJOUTER ses états (ex. `revision: all_fast`) ou en remplacer un.
+#   En classe : passer un chapitre de en_cours à termine = changer UN mot dans `matieres:`.
+#
+# ---- 3. AFFECTER UN PROFIL OU UN ÉTAT À UN DOCUMENT -------------------------------------------
+#
+#   Forme courte :       <document>: termine            # ou un profil : <document>: all_fast
+#   Forme détaillée (surcharger certains exercices) :
+#     <document>:
+#       etat: en_cours                  # (ou  profil: all_fast )
+#       exercices:
+#         ex3_equation_ondes: termine   # cet exercice-là est déjà corrigé en classe
+#
+#   Un document non listé prend le `defaut` de sa matière, puis le `defaut` global (plus bas).
+#   Sous `<matiere>:` on range par TYPE : td: / tp: / projet: / cours: / ... (voir `types_documents:`).
+#   Les valeurs peuvent être indifféremment un état (termine...) ou un profil (all_fast...).
+#
+# ---- 4. ATTENTION ------------------------------------------------------------------------------
+#   Un site PUBLIC ne doit utiliser que des profils élève (all_eleve, all_fast, corrige_complet, ...).
+#   `all_prof` / `all` affichent le contenu enseignant : check_evolutions.py et l'export le signalent.
 # =====================================================================
 publication:
-  defaut: all
+  defaut: all_eleve                 # profil (ou état) des documents non listés ci-dessous
+
+  etats:                            # état d'un chapitre -> profil de visibilité (voir 2. ci-dessus)
+    a_venir:  avant_seance                  # pas encore abordé
+    en_cours: pendant_seance_avec_indices   # en cours
+    termine:  corrige_complet               # terminé
+    # revision: all_fast                    # <- exemple d'état ajouté : « révisions : énoncé + aides + corrigé, sans habillage »
+
   matieres:
     agregation-mathematiques:   # Préparation Agrégation de Mathématiques
-      defaut: all
+      defaut: all_eleve
       td:
-        dev1_exemple: all   # Développement — exemple (gabarit à compléter)
+        dev1_exemple: all_eleve   # Développement — exemple (gabarit à compléter)
     agregation-physique:   # Préparation Agrégation de Physique
-      defaut: all
+      defaut: all_eleve
       cours:
-        lecon_oscillateurs: all   # Leçon — Oscillateurs mécaniques, portrait de phase
+        lecon_oscillateurs: all_eleve   # Leçon — Oscillateurs mécaniques, portrait de phase
     mecanique-de-point-ipsa:   # Mécanique du point — IPSA
-      defaut: all
+      defaut: all_eleve
       cours:
-        chap1_intro: all   # Chapitre 1 — : introduction
+        chap1_intro: all_eleve   # Chapitre 1 — : introduction
       td:
-        td1_cinematique_cartesiennes: all  # Cinématique en coordonnées cartésiennes
-        td2_cinematique_en_coordonnees_polaire_ou_cylindrique: all   # Cinématique en coordonnées polaires (2D) et cylindriques (3D)
+        td1_cinematique_cartesiennes: all_prof  # Cinématique en coordonnées cartésiennes
+        td2_cinematique_en_coordonnees_polaire_ou_cylindrique: all_eleve   # Cinématique en coordonnées polaires (2D) et cylindriques (3D)
         td3_base_de_frenet: # avant_seance   # Base de Frenet, rayon de courbure et accélérations tangentielle et nor
-          profil: all
+          profil: all_fast
           exercices:
-            ex1_base_frenet: all
-            ex2_mouvement_curviligne_uniforme: all
-            ex3_circuit_monaco: all
-            ex4_abscisse_curviligne: all
-            ex5_cycloide: all
-            ex6_raccordement_clothoide: all
-            ex7_cercle_adherence: all
-            ex8_tir_parabolique_frenet: all
-        td4_loi_de_newton: pendant_seance_avec_indices
-        td5_nrj: pendant_seance_avec_indices
-        td6_choc: pendant_seance_avec_indices
-        td7_ref: pendant_seance_avec_indices
-        projet1_Tsiolkovski: pendant_seance_avec_indices
+            ex1_base_frenet: all_fast
+            ex2_mouvement_curviligne_uniforme: all_fast
+            ex3_circuit_monaco: all_fast
+            ex4_abscisse_curviligne: all_eleve
+            ex5_cycloide: all_eleve
+            ex6_raccordement_clothoide: all_eleve
+            ex7_cercle_adherence: all_eleve
+            ex8_tir_parabolique_frenet: all_prof
+        td4_loi_de_newton: all_prof
+        td5_nrj: en_cours
+        td6_choc: en_cours
+        td7_ref: en_cours
       projet:
-        projet1_Tsiolkovski: pendant_seance_avec_indices
+        projet1_Tsiolkovski: en_cours
     
     onip-iogs:   # Outils Numériques pour l'Ingénieur·e en Physique (ONIP)
-      defaut: all
+      defaut: all_eleve
       td:
-        td1_intro: all   # Intro — Prise en main de PyCharm, débogage et bonnes pratiques Python
-        td2_seance2: all   # Séance 2 — Listes, fonctions, Numpy et matplotlib
-        td3_seance3: all  # Séance 3 — FFT 1D/2D, meshgrid et tramage
+        td1_intro: all_eleve   # Intro — Prise en main de PyCharm, débogage et bonnes pratiques Python
+        td2_seance2: all_eleve   # Séance 2 — Listes, fonctions, Numpy et matplotlib
+        td3_seance3: all_eleve  # Séance 3 — FFT 1D/2D, meshgrid et tramage
     physique-ondes-ipsa:   # Physique des ondes
-      defaut: all
+      defaut: all_eleve
       cours:
-        chap1_intro: all   # Chapitre 1 — Ondes mécaniques : introduction
+        chap1_intro: all_eleve   # Chapitre 1 — Ondes mécaniques : introduction
       td:
-        td1_corde: all   # Propagation des ondes mécaniques sur une corde
-        td2_ondes_sonores: all   # Propagation des ondes sonores dans un fluide
-        td3_reflexion_transmission: all   # Coefficients de réflexion et transmission, impédance
+        td1_corde: all_eleve   # Propagation des ondes mécaniques sur une corde
+        td2_ondes_sonores: all_eleve   # Propagation des ondes sonores dans un fluide
+        td3_reflexion_transmission: all_eleve   # Coefficients de réflexion et transmission, impédance
+        td4_oscillateurs_couples: all_eleve
       tp:
-        tp1_corde_ressort: pendant_seance_avec_indices   # 
+        tp1_corde_ressort: en_cours   # 
     piscines-de-sciences-et-methodologie:   # Piscine de sciences et méthodologie
-      defaut: all 
+      defaut: all_eleve 
       td:
-        td1_grandeurs_physiques: all    # GRANDEURS PHYSIQUES Dimensions, unités et analyse dimensionnelle
-        td2_derivation_et_differentielle: all    # DÉRIVATION ET DIFFÉRENTIELLE (6h) Interprétation en Physique
-        td3_fonctions_derives_integrale: all    # FONCTIONS, DERIVES, INTEGRALE (4h) Description mathématique du mouveme
-        td4_vecteurs_en_physique: all    # VECTEURS EN PHYSIQUE (4h)
+        td1_grandeurs_physiques: all_eleve    # GRANDEURS PHYSIQUES Dimensions, unités et analyse dimensionnelle
+        td2_derivation_et_differentielle: all_eleve    # DÉRIVATION ET DIFFÉRENTIELLE (6h) Interprétation en Physique
+        td3_fonctions_derives_integrale: all_eleve    # FONCTIONS, DERIVES, INTEGRALE (4h) Description mathématique du mouveme
+        td4_vecteurs_en_physique: all_eleve    # VECTEURS EN PHYSIQUE (4h)
     recherche-integrabilite-quantique:   # Recherche personnelle — Intégrabilité quantique
-      defaut: all 
+      defaut: all_eleve 
       cours:
-        intro_bethe: all   # Notes — Introduction à l'ansatz de Bethe
+        intro_bethe: all_eleve   # Notes — Introduction à l'ansatz de Bethe
     traveaux_pratiques-ipsa:   # Travaux pratiques — IPSA
-      defaut: all 
+      defaut: all_eleve 
       tp:
-        astrophysique: all   # TP d'astrophysique : de la balance de Cavendish à la densité du Soleil
-        general: all    # TP sur les ondes : visuels, amusants, orientés aviation
+        astrophysique: all_eleve   # TP d'astrophysique : de la balance de Cavendish à la densité du Soleil
+        general: all_eleve    # TP sur les ondes : visuels, amusants, orientés aviation
+
+
 
 targets:
 
@@ -1092,9 +1282,93 @@ targets:
     show_remarques_pedagogiques_conseils_animation: true
     show_bilan: true
     aller_plus_loin_niveaux: [lycee, prepa, licence, master, doctorat]
-    
+
+  - name: td6_PhV111_enonces
+    titre: "TD 6 -- Étude des chocs -- Énoncé"
+    matiere: mecanique-de-point-ipsa
+    type_doc: td
+    doc: td6_choc
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: false
+    show_coup_de_pouce: false
+    show_accroche_point_cours_essentiel: false
+    show_outils_mathematiques: false
+    show_liens_autres_disciplines: false
+    show_correction: false
+    show_solution: false
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td6_PhV111_aides
+    titre: "TD 6 -- Étude des chocs -- Aides"
+    matiere: mecanique-de-point-ipsa
+    type_doc: td
+    doc: td6_choc
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_accroche_point_cours_essentiel: true
+    show_outils_mathematiques: true
+    show_liens_autres_disciplines: false
+    show_coup_de_pouce: true
+    show_correction: false
+    show_solution: false
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td6_PhV111_corrige
+    titre: "TD 6 -- Étude des chocs -- Corrigé"
+    matiere: mecanique-de-point-ipsa
+    type_doc: td
+    doc: td6_choc
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_accroche_point_cours_essentiel: true
+    show_outils_mathematiques: true
+    show_liens_autres_disciplines: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master]
+
   - name: td6_PhV111_fiche
-    titre: "TD 5 -- Travail, énergie cinétique, énergie potentielle, énergie mécanique -- Détailles"
+    titre: "TD 6 -- Étude des chocs -- Détailles"
     matiere: mecanique-de-point-ipsa
     type_doc: td
     doc: td6_choc
@@ -1103,7 +1377,7 @@ targets:
     annee: "2026-2027"
     auteur: "Guillaume THÉMÈZE"
     show_plan_seance: true
-    show_metadonnees: true
+    show_metadonnees: true 
     show_figure: true
     show_animation_note: true
     show_prerequis: true
@@ -1121,9 +1395,93 @@ targets:
     show_remarques_pedagogiques_conseils_animation: true
     show_bilan: true
     aller_plus_loin_niveaux: [lycee, prepa, licence, master, doctorat]
-    
+
+  - name: td7_PhV111_enonces
+    titre: "TD 7 -- Composition du mouvement et changement de référentiels -- Énoncé"
+    matiere: mecanique-de-point-ipsa
+    type_doc: td
+    doc: td7_ref
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: false
+    show_coup_de_pouce: false
+    show_accroche_point_cours_essentiel: false
+    show_outils_mathematiques: false
+    show_liens_autres_disciplines: false
+    show_correction: false
+    show_solution: false
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td7_PhV111_aides
+    titre: "TD 7 -- Composition du mouvement et changement de référentiels -- Aides"
+    matiere: mecanique-de-point-ipsa
+    type_doc: td
+    doc: td7_ref
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_accroche_point_cours_essentiel: true
+    show_outils_mathematiques: true
+    show_liens_autres_disciplines: false
+    show_coup_de_pouce: true
+    show_correction: false
+    show_solution: false
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: []
+
+  - name: td7_PhV111_corrige
+    titre: "TD 7 -- Composition du mouvement et changement de référentiels -- Corrigé"
+    matiere: mecanique-de-point-ipsa
+    type_doc: td
+    doc: td7_ref
+    etablissement: IPSA
+    promo: Ing Aero 1
+    annee: "2026-2027"
+    auteur: "Guillaume THÉMÈZE"
+    show_metadonnees: true 
+    show_figure: true
+    show_animation_note: true
+    show_prerequis: false
+    show_attention: true
+    show_objectifs_pedagogiques_etudiants: false
+    show_objectifs_pedagogiques_enseignants: false
+    show_point_cours: true
+    show_coup_de_pouce: true
+    show_accroche_point_cours_essentiel: true
+    show_outils_mathematiques: true
+    show_liens_autres_disciplines: true
+    show_correction: true
+    show_solution: true
+    show_remarques_pedagogiques_ecueils_classiques: false
+    show_remarques_pedagogiques_conseils_animation: false
+    show_bilan: false
+    aller_plus_loin_niveaux: [lycee, prepa, licence, master]
+
   - name: td7_PhV111_fiche
-    titre: "TD 5 -- Travail, énergie cinétique, énergie potentielle, énergie mécanique -- Détailles"
+    titre: "TD 7 -- Composition du mouvement et changement de référentiels -- Détailles"
     matiere: mecanique-de-point-ipsa
     type_doc: td
     doc: td7_ref
@@ -1132,7 +1490,7 @@ targets:
     annee: "2026-2027"
     auteur: "Guillaume THÉMÈZE"
     show_plan_seance: true
-    show_metadonnees: true
+    show_metadonnees: true 
     show_figure: true
     show_animation_note: true
     show_prerequis: true
@@ -1154,7 +1512,7 @@ targets:
   - name: projet1_PhV111_enonces
     titre: "Projet 1 -- Conservation de la quantité de mouvement & équation de Tsiolkovski. -- Énoncé"
     matiere: mecanique-de-point-ipsa
-    type_doc: td
+    type_doc: projet
     doc: projet1_Tsiolkovski
     etablissement: IPSA
     promo: Ing Aero 1
@@ -1182,7 +1540,7 @@ targets:
   - name: projet1_PhV111_aides
     titre: "Projet 1 -- Conservation de la quantité de mouvement & équation de Tsiolkovski. -- Aides"
     matiere: mecanique-de-point-ipsa
-    type_doc: td
+    type_doc: projet
     doc: projet1_Tsiolkovski
     etablissement: IPSA
     promo: Ing Aero 1
@@ -1210,7 +1568,7 @@ targets:
   - name: projet1_PhV111_corrige
     titre: "Projet 1 -- Conservation de la quantité de mouvement & équation de Tsiolkovski. -- Corrigé"
     matiere: mecanique-de-point-ipsa
-    type_doc: td
+    type_doc: projet
     doc: projet1_Tsiolkovski
     etablissement: IPSA
     promo: Ing Aero 1
@@ -1238,7 +1596,7 @@ targets:
   - name: projet1_PhV111_fiche
     titre: "Projet 1 -- Conservation de la quantité de mouvement & équation de Tsiolkovski. -- Détailles"
     matiere: mecanique-de-point-ipsa
-    type_doc: td
+    type_doc: projet
     doc: projet1_Tsiolkovski
     etablissement: IPSA
     promo: Ing Aero 1
